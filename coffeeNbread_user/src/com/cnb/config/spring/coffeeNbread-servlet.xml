@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		
+		
+	<!-- controller -->
+	
+	<mvc:view-controller path="index.do" view-name="index"/>
+
+	<!-- bean -->
+	
+
+			
+	<!-- TilesConfigurer 빈으로 등록 : Tiles설정파일을 등록하는 빈 -->
+	
+	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:com/cnb/config/tiles/tiles-config.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- ViewResolver -->
+	
+	<bean name="tilesViewResolver"
+		  class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
+		  p:order="1"/>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+			p:prefix="/WEB-INF/view/" p:suffix=".jsp" p:order="2"/>
+			
+	<!-- etc -->
+	
+	<context:component-scan base-package="com.cnb"/>
+	
+	<mvc:annotation-driven/>
+		
+	<!-- FileUpload -->
+	
+	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
+	
+	
+	<!-- DB -->
+	
+	<bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
+		<property name="username" value="CNB_manager"/>
+		<property name="password" value="manager"/>
+		<property name="maxTotal" value="50"/>
+	</bean>
+	
+	<bean name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:com/cnb/config/mybaits/mybatis-config.xml"/>
+	</bean>
+	
+	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		  p:dataSource-ref="dataSource"/>
+		  
+</beans>

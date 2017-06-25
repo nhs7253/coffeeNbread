@@ -13,17 +13,39 @@
 	
 	<mvc:view-controller path="index.do" view-name="index"/>
 
+	<!-- bean -->
 	
+
 			
+	<!-- TilesConfigurer 빈으로 등록 : Tiles설정파일을 등록하는 빈 -->
+	
+	<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:com/cnb/config/tiles/tiles-config.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- ViewResolver -->
+	
+	<bean name="tilesViewResolver"
+		  class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
+		  p:order="1"/>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+			p:prefix="/WEB-INF/view/" p:suffix=".jsp" p:order="2"/>
+			
+	<!-- etc -->
 	
 	<context:component-scan base-package="com.cnb"/>
 	
-			 
 	<mvc:annotation-driven/>
+		
+	<!-- FileUpload -->
 	
-	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
-			p:prefix="/WEB-INF/view/" p:suffix=".jsp"/>
+	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
 	
 	
 	<!-- DB -->
@@ -38,7 +60,7 @@
 	
 	<bean name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:com/cnb/config/mybatis-config.xml"/>
+		<property name="configLocation" value="classpath:com/cnb/config/mybaits/mybatis-config.xml"/>
 	</bean>
 	
 	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
