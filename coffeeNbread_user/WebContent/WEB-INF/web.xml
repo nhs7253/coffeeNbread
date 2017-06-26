@@ -10,6 +10,7 @@
   	<param-value>/coffeeNbread_user</param-value>
   </context-param>
   
+  <!-- DispatcherServlet 등록 - FrontController -->
   <servlet>
   	<servlet-name>coffeeNbread</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -24,6 +25,7 @@
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
+  <!-- EncodingFilter -->
   <filter>
   	<filter-name>encodingFilter</filter-name>
   	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -36,5 +38,19 @@
   	<filter-name>encodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+     <!-- 
+		Spring Security 에서 인증/권한 처리를 위한 Filter 추가.
+		filter-name은 반드시 springSecurityFilterChain 로 지정.
+	 
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	-->
   
 </web-app>
