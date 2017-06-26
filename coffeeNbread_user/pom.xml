@@ -36,6 +36,7 @@
   	<fileupload.version>1.3.3</fileupload.version>
   	<tiles.version>3.0.7</tiles.version>
   	<validator.version>5.4.1.Final</validator.version>
+  	<spring-security.version>4.1.4.RELEASE</spring-security.version>
   </properties>
   
   <dependencies>
@@ -113,6 +114,28 @@
 	    <artifactId>hibernate-validator</artifactId>
 	    <version>${validator.version}</version>
 	</dependency>
+	
+	<!-- 스프링 Security 관련 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
 	
   </dependencies>
 </project>

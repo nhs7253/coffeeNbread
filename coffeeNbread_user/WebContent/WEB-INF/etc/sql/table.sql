@@ -33,7 +33,8 @@ CREATE TABLE general_user (
 	user_gender VARCHAR2(50) NOT NULL, /* 성별 */
 	user_email VARCHAR2(50) NOT NULL, /* 이메일 */
 	user_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
-	user_address VARCHAR2(200) NOT NULL /* 주소 */
+	user_address VARCHAR2(200) NOT NULL, /* 주소 */
+	user_active_state CHAR(1) NOT NULL /* 활동 상태 */
 );
 
 /* 매장 */
@@ -47,7 +48,8 @@ CREATE TABLE store (
 	store_picture VARCHAR2(300), /* 매장사진 */
 	store_hits NUMBER NOT NULL, /* 조회수 */
 	store_open DATE NOT NULL, /* 여는 시간 */
-	store_close DATE NOT NULL /* 닫는 시간 */
+	store_close DATE NOT NULL, /* 닫는 시간 */
+	store_permission CHAR(1) NOT NULL  /* 매장 허가여부  */
 );
 
 /* 제품 */
@@ -79,6 +81,7 @@ CREATE TABLE store_event (
 	sale_rate NUMBER(3) NOT NULL, /* 할인률 */
 	new_menu_option CHAR(1) NOT NULL, /* 신메뉴여부 */
 	event_picture VARCHAR2(300) , /* 이벤트 사진 */
+    event_check   CHAR(1)  NOT NULL, /* 이벤트 알람여부  */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 CREATE SEQUENCE event_no_seq;
@@ -218,10 +221,13 @@ CREATE TABLE shopping_basket_product (
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
 	product_count NUMBER(4) NOT NULL, /* 제품개수 */
-	PRIMARY KEY(user_id, product_id, store_id),
+	store_product_id VARCHAR2(30) NOT NULL, /* 제품 매장 아이디 */
+	PRIMARY KEY(user_id, product_id, store_id,store_product_id),
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
 	FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
+	FOREIGN KEY(store_product_id) REFERENCES store(store_id) ON DELETE CASCADE
+
 );
 
 /* 매장 즐겨찾기 */
@@ -288,7 +294,7 @@ CREATE TABLE option_category (
    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 CREATE SEQUENCE option_id_seq;
-
+ 
 /* 옵션 상세 */
 CREATE TABLE option_detail (
    store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
@@ -299,6 +305,8 @@ CREATE TABLE option_detail (
    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
    FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
    FOREIGN KEY(option_id, store_id) REFERENCES option_category(option_id, store_id) ON DELETE CASCADE
+   
+
 );
 
 
