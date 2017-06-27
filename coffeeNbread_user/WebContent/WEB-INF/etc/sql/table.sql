@@ -56,7 +56,6 @@ CREATE TABLE product (
 	product_id VARCHAR2(30) PRIMARY KEY, /* 제품아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
 	product_name VARCHAR2(50) NOT NULL, /* 제품이름 */
-	product_picture VARCHAR2(300) NOT NULL, /* 제품사진 */
 	product_price NUMBER(6) NOT NULL, /* 제품가격 */
 	product_category VARCHAR2(50) NOT NULL, /* 제품종류 */
 	product_detail CLOB NOT NULL, /* 제품상세설명 */
@@ -193,7 +192,6 @@ CREATE TABLE reservation_details (
 	reservation_no NUMBER PRIMARY KEY, /* 예약번호 */
 	reservation_time DATE NOT NULL, /* 예약시간 */
 	reservation_count NUMBER(3) NOT NULL, /* 예약개수 */
-	reservation_requirement VARCHAR2(500), /* 요구사항 */
 	reservation_confirm DATE NOT NULL, /* 예약확인유무 */
 	product_hope_time DATE NULL,/*제품수령희망시간*/
 	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */

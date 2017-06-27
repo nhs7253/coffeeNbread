@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.StoreMapper">
 
-<mapper namespace="com.cnb.config.mybatis.mapper.StoreMapper"></mapper>
 
+ <!-- 
+ 	이진영
+ 	2017-06-26
+ 	초기 구현 
+ -->
+ <!-- 매장 resultMap -->
+ 	<resultMap type="com.cnb.vo.Store" id="store-resultmap">
+ 		<id column="store_id" property="storeId"/>
+ 		<result column="store_name" property="storeName"/>
+ 		<result column="store_intro" property="storeIntro"/>
+ 		<result column="store_phone" property="storePhone"/>
+ 		<result column="store_address" property="storeAddress"/>
+ 		<result column="store_email" property="storeEmail"/>
+ 		<result column="store_hits" property="storeHits"/>
+ 		<result column="store_open" property="storeOpen"/>
+ 		<result column="store_close" property="storeClose"/>
+ 		<result column="store_permission" property="storePermission"/>
+ 	
+ 	</resultMap>
+ 
+ 
+ <!--매장 등록 Store insert  -->
+	<insert id="insertStore" parameterType="com.cnb.vo.Store">
+		INSERT INTO store
+		values(
+			#{storeId},
+			#{storeName},
+			#{storeIntro},
+			#{storePhone},
+			#{storeAddress},
+			#{storeEmail},
+			#{storeHits},
+			#{storeOpen},
+			#{storeClose},
+			#{storePermission})
+	</insert> 
+
+ <!--매장 수정 Store update  -->
+ 	<update id="updateStore" parameterType="com.cnb.vo.Store">
+ 		UPDATE store
+ 		SET 
+ 			store_name = #{storeName},
+			store_intro = #{storeIntro},
+			store_phone = #{storePhone},
+			store_address = #{storeAddress},
+			store_email = #{storeEmail},
+			store_hits = #{storeHits},
+			store_open = #{storeOpen},
+			store_close = #{storeClose}
+ 		WHERE store_id = #{storeId}
+ 	</update>
+ <!-- 매장 조회 Store select  -->
+	<select id="selectStore" resultMap="store-resultmap">
+		SELECT * 
+		FROM store
+		WHERE store_id = #{storeId}
+	</select>
+</mapper>

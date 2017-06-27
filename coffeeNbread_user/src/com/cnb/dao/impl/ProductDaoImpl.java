@@ -26,31 +26,37 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	@Override
-	public int insertProduct(String storeId, Product product) {
+	public int insertProduct(Product product) {
 		return session.insert(makeSqlId("insertProduct"), product);
 	}
 
 	@Override
-	public int updateProduct(String storeId, Product product) {
+	public int updateProduct(Product product) {
 		return session.update(makeSqlId("updateProduct"), product);
 	}
 
 	@Override
 	public int deleteProductById(String storeId, String productId) {
-		Map<String, String> deleteInfo = new HashMap<>();
-		deleteInfo.put("storeId", storeId);
-		deleteInfo.put("productId", productId);
-		return session.delete(makeSqlId("deleteProductById"), deleteInfo);
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productId", productId);
+		return session.delete(makeSqlId("deleteProductById"), info);
 	}
 
 	@Override
 	public List<Product> selectProductByCategory(String storeId, String productCategory) {
-		return session.selectList(makeSqlId("selectProductByCategory"), productCategory);
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productCategory", productCategory);
+		return session.selectList(makeSqlId("selectProductByCategory"), info);
 	}
 
 	@Override
 	public Product selectProductByName(String storeId, String productName) {
-		return session.selectOne(makeSqlId("selectProductByName"), productName);
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productName", productName);
+		return session.selectOne(makeSqlId("selectProductByName"), info);
 	}
 
 }

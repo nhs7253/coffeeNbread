@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.ShoppingBasketProductMapper">
 
-<mapper namespace="com.cnb.config.mybatis.mapper.store_basket"></mapper>
 
+
+
+	<!--장바구니 타입 조회. -->
+	<resultMap type="ShoppingBasketProduct" id="ShoppingBasketProduct-basic-resultmap">
+		<id column="user_id" property="userId" />
+		<result column="store_id" property="storeId" />
+		<result column="product_id" property="productId" />
+		<result column="product_count" property="productCount"/>
+		<result column="product_store_id" property="productStoreId" />
+	</resultMap>
+
+<!--    <resultMap id="ShoppingBasketProduct-product-productPicture-store-resultmap" type="ShoppingBasketProduct">
+				 <id column="product_count" property="productCount"/>
+		          <association property="store" javaType="Store">
+		           <id column="store_id" property="storeId"/>
+		           </association>
+		         <id column="store_id" property="storeId"/>
+		        <association property="product" javaType="Product">    
+			      <id  column="product_category" property="productCategory"/>
+			      <result column="product_price" property="productPrice"/>
+			      <result column="product_name" property="productName"  />
+			      <result property="productId" column="product_id" />
+			  <collection property="productPictureList" javaType="ProductPicture">
+		       	    </collection>
+		       </association>
+	</resultMap> -->
+  
+<!-- 	 제품 ID로 제품 조회.
+  	 <select id="selectProductByProductId" parameterType="String" resultMap="ShoppingBasketProduct-product-productPicture-store-resultmap">
+	  select s.store_id,
+       p.product_category,
+       pp.product_picture,
+       p.product_name,
+       p.product_price,
+       sbp.product_count,  
+       p.product_id
+       from store s,product p, product_picture pp,shopping_basket_product sbp
+       where s.store_id=p.store_id 
+       and  pp.product_id=p.product_id
+       and sbp.product_id=p.product_id
+       and  p.product_id=#{value}  
+	</select>  
+	-->
+ 
+
+
+<!-- 장바구니 목록 삭제 - 유저 -->
+	<delete id="deleteProductByProductId" parameterType="String">
+		DELETE FROM shopping_basket_product WHERE product_id = #{value}
+	</delete>
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
