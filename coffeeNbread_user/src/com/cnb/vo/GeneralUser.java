@@ -6,7 +6,7 @@ import java.util.Date;
 /*
  * 노현식
  * 2017-06-27
- * userActiveState 추가
+ * String userActiveState 추가
  * 
  * 노현식 
  * 2017-06-23 생성
@@ -21,13 +21,13 @@ public class GeneralUser implements Serializable{
 	private String userEmail;
 	private String userPhone;
 	private String userAddress;
-	private char userActiveState;
+	private String userActiveState;
 	
 	public GeneralUser() {
 	}
 
 	public GeneralUser(String userId, String userPw, String userName, Date userBirth, String userGender,
-			String userEmail, String userPhone, String userAddress, char userActiveState) {
+			String userEmail, String userPhone, String userAddress, String userActiveState) {
 		this.userId = userId;
 		this.userPw = userPw;
 		this.userName = userName;
@@ -103,11 +103,11 @@ public class GeneralUser implements Serializable{
 		this.userAddress = userAddress;
 	}
 
-	public char getUserActiveState() {
+	public String getUserActiveState() {
 		return userActiveState;
 	}
 
-	public void setUserActiveState(char userActiveState) {
+	public void setUserActiveState(String userActiveState) {
 		this.userActiveState = userActiveState;
 	}
 
@@ -115,7 +115,7 @@ public class GeneralUser implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + userActiveState;
+		result = prime * result + ((userActiveState == null) ? 0 : userActiveState.hashCode());
 		result = prime * result + ((userAddress == null) ? 0 : userAddress.hashCode());
 		result = prime * result + ((userBirth == null) ? 0 : userBirth.hashCode());
 		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
@@ -136,7 +136,10 @@ public class GeneralUser implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		GeneralUser other = (GeneralUser) obj;
-		if (userActiveState != other.userActiveState)
+		if (userActiveState == null) {
+			if (other.userActiveState != null)
+				return false;
+		} else if (!userActiveState.equals(other.userActiveState))
 			return false;
 		if (userAddress == null) {
 			if (other.userAddress != null)
@@ -187,5 +190,4 @@ public class GeneralUser implements Serializable{
 				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userPhone=" + userPhone
 				+ ", userAddress=" + userAddress + ", userActiveState=" + userActiveState + "]";
 	}
-	
 }
