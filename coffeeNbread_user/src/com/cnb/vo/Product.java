@@ -8,8 +8,8 @@ import java.io.Serializable;
  * 초기 구현
  */
 public class Product implements Serializable {
-	private String productId;
-	private String storeId;
+	private String productId;	//PRIMARY KEY
+	private String storeId;		//PRIMARY KEY, FOREIGN KEY
 	private String productName;
 	private int productPrice;
 	private String productCategory;
