@@ -270,7 +270,7 @@ CREATE TABLE store_picture (
 CREATE TABLE product_picture (
 	product_picture VARCHAR2(300) PRIMARY KEY, /* 제품 사진 */
 	product_id NOT NULL, /* 제품 아이디 */
-	store_id NOT NULL,  /* 이벤트 상태  */
+	store_id NOT NULL,  /* 매장 아이디  */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
     FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE
 
