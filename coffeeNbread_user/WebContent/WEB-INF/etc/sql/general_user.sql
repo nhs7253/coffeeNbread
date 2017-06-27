@@ -17,3 +17,19 @@ INSERT INTO general_user VALUES('2', '2222', '유저2', '2000-02-21', '남자', 
 
 SELECT * FROM general_user;
 DELETE FROM general_user WHERE user_id = '1';
+DELETE FROM general_user;
+
+UPDATE general_user 
+SET user_pw = '3333',
+	user_name = '유저3',
+	user_birth = '2000-03-31',
+	user_gender = '남자',
+	user_email = 'm3@m.com',
+	user_phone = '010-3333-3333',
+	user_address = '경기',
+	user_active_state = 'N'
+WHERE user_id = '2';
+
+UPDATE general_user    
+SET user_active_state = 'N'  
+WHERE user_id = '1'

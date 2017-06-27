@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.cnb.config.mybatis.mapper.ProductMapper">
 	<!-- 
 		Product 테이블 관련 mapper
@@ -14,5 +15,4 @@
 	<delete id="deleteProductById" parameterType="map">
 		DELETE FROM product WHERE store_id = #{storeId} AND product_id = #{productId}
 	</delete>
-	
 </mapper>

@@ -1,6 +1,14 @@
 package com.cnb.vo;
 
 import java.io.Serializable;
+import java.util.List;
+
+/*
+ * 김형주
+ * 2017-06-27 변경
+ * 제품사진 List로 담는 컬럼 추가
+ * 
+ */
 
 /*
  * 최민희
@@ -17,7 +25,33 @@ public class Product implements Serializable {
 	private String sellingOption;
 	private int totalProductCount;
 	private int recommendProductCount;
+	private List<ProductPicture>productPictureList;
 	
+	
+	public List<ProductPicture> getProductPictureList() {
+		return productPictureList;
+	}
+
+	public void setProductPictureList(List<ProductPicture> productPictureList) {
+		this.productPictureList = productPictureList;
+	}
+
+	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
+			String productDetail, String sellingOption, int totalProductCount, int recommendProductCount,
+			List<ProductPicture> productPictureList) {
+		super();
+		this.productId = productId;
+		this.storeId = storeId;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.productDetail = productDetail;
+		this.sellingOption = sellingOption;
+		this.totalProductCount = totalProductCount;
+		this.recommendProductCount = recommendProductCount;
+		this.productPictureList = productPictureList;
+	}
+
 	public Product() {
 		super();
 	}

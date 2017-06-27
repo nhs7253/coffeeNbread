@@ -3,6 +3,12 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+/*
+ * 김형주
+ * 2017-06-27 수정
+ * 참조변수 추가 (여러개의 장바구니)
+ * 
+ */
 
 /* 이진영
  * 2017-06-27 수정
@@ -45,6 +51,7 @@ public class Store implements Serializable{
 	 * 옵션카테고리를 저정할 인스턴수변수 선언 
 	 ***************************************************/
 	private List<OptionCategory> OptionCategoryList;
+	
 	
 	public Store(){}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
