@@ -34,7 +34,7 @@
 	         <id column="product_count" property="productCount"/>
 	         <association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap"/>
 	         <association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>	
-		     <association property="productPicture"/>
+		     <association property="productPicture" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
 	</resultMap>
 	
 	
