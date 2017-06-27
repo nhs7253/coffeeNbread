@@ -302,8 +302,6 @@ CREATE TABLE option_detail (
    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
    FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
    FOREIGN KEY(option_id, store_id) REFERENCES option_category(option_id, store_id) ON DELETE CASCADE
-   
-
 );
 
 
