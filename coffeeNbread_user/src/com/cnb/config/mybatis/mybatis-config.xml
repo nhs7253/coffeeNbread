@@ -15,6 +15,7 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/ShoppingBasketProductMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/ReservationDetailsMapper.xml" />
 	</mappers>
 	 
 </configuration>

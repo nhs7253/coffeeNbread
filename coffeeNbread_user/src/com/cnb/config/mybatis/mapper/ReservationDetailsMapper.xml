@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.ReservationDetailsMapper">
+	<!-- 
+		ReservationDetails 테이블 관련 mapper
+		+ 예약정보 등록
+		+ 예약자로 예약정보 조회
+		+ 예약시간으로 예약정보 조회
+	 -->
+	 
+	<!-- insert -->
+	<insert id="insertReservationDetails" parameterType="reservationDetails">
+		<selectKey keyProperty="reservationNo" resultType="_int" order="BEFORE">
+			SELECT reservation_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO reservation_details VALUES (
+											#{reservationNo},
+											#{reservationTime},
+											#{reservationCount},
+											#{reservationConfirm},
+											#{productHopeTime},
+											#{productId},
+											#{storeId},
+											#{userId}	)
+	</insert>
+	
+	<!-- select -->
+
+	 
+	<!-- resultMap -->
+
+	 
+	<!-- selectReservationDetailsByUserId -->
+
+	 
+	<!-- selectReservationDetailsByReservationTime -->
+
+
+
+</mapper>

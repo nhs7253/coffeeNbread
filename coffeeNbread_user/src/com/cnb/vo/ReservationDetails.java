@@ -3,6 +3,8 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*
  * 최민희
  * 2017-06-27 생성
@@ -10,9 +12,12 @@ import java.util.Date;
  */
 public class ReservationDetails implements Serializable {
 	private int reservationNo;	//PRIMARY KEY
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date reservationTime;
 	private int reservationCount;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date reservationConfirm;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date productHopeTime;
 	private String productId;	//FORIEGN KEY
 	private String storeId;		//FORIEGN KEY
