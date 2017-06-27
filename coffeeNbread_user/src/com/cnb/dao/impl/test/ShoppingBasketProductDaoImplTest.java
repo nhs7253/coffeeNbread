@@ -35,8 +35,8 @@ public class ShoppingBasketProductDaoImplTest {
       System.out.println(dao.selectProductByProductId("p-2"));
       
        
-      /*System.out.println("장바구니 목록 삭제");
-       System.out.println(dao.deleteProductByProductId("p-1"));*/
+      System.out.println("장바구니 목록 삭제");
+       System.out.println(dao.deleteProductByProductId("p-1"));
     
       //System.out.println(dao.selectProductByProductId("p-1"));
       

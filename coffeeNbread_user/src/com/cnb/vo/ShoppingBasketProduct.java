@@ -19,6 +19,8 @@ public class ShoppingBasketProduct implements Serializable{
 	private Product product;
 	private ProductPicture productPicture;
 	
+	
+		
 	public GeneralUser getGeneralUser() {
 		return generalUser;
 	}
