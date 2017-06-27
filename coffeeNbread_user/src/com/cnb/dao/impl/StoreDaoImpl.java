@@ -17,21 +17,24 @@ public class StoreDaoImpl implements StoreDao{
 	@Autowired
 	private SqlSessionTemplate session;
 	
+	private String makeSqlId(String id){
+		return "com.cnb.config.mybatis.mapper.StoreMapper."+id;
+	}
 	@Override
 	public int insertStore(Store store) {
 							   
-		return session.insert("com.cnb.config.mybatis.mapper.StoreMapper.insertStore",store);
+		return session.insert(makeSqlId("insertStore"),store);
 	}
 
 	@Override
 	public int updateStore(Store store) {
 		
-		return session.update("com.cnb.config.mybatis.mapper.StoreMapper.updateStore",store);
+		return session.update(makeSqlId("updateStore"),store);
 	}
 
 	@Override
 	public Store selectStore(String storeId) {
-		return session.selectOne("com.cnb.config.mybatis.mapper.StoreMapper.selectStore",storeId);
+		return session.selectOne(makeSqlId("selectStore"),storeId);
 	}
 
 }

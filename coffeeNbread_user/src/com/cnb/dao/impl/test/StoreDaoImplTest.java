@@ -35,18 +35,18 @@ public class StoreDaoImplTest {
 		
 		System.out.println(dao.selectStore("id-1"));
 
-		dao.insertStore(new Store("id-3", "0000", "DOA테스트 소개", "000-0000-0000", "주소", "DaoTest-1@dao.com", 2,
+		dao.insertStore(new Store("id-5", "0000", "DOA테스트 소개", "000-0000-0000", "주소", "DaoTest-1@dao.com", 2,
 				new Date(), new Date(), "Y"));
 
 		System.out.println("insertStore 후 조회");
-		System.out.println(dao.selectStore("id-2"));
+		System.out.println(dao.selectStore("id-5"));
 
 		
 
-		dao.updateStore(new Store("id-3", "0001", "DOA테스트 소개수정", "000-0000-0000", "주소", "DaoTest-1@dao.com", 3,
+		dao.updateStore(new Store("id-5", "0001", "DOA테스트 소개수정", "000-0000-0000", "주소", "DaoTest-1@dao.com", 3,
 				new Date(), new Date(), "Y"));
 		System.out.println("updateStore 후 조회");
-		System.out.println(dao.selectStore("id-2"));
+		System.out.println(dao.selectStore("id-5"));
 
 	
 
