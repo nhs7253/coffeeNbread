@@ -11,6 +11,35 @@
 		+ 제품명으로 제품 조회
 	 -->
 	
+	<!-- insert -->
+	<insert id="insertProduct" parameterType="product">
+		INSERT INTO product VALUES (
+									#{productId},
+									#{storeId},
+									#{productName},
+									#{productPrice},
+									#{productCategory},
+									#{productDetail},
+									#{sellingOption},
+									#{todayProductCount},
+									#{recommendProductCount} )
+	</insert>
+	
+	<!-- update -->
+	<update id="updateProduct" parameterType="product">
+		UPDATE 	product
+		SET		product_name = #{productName},
+				product_price = #{productPrice},
+				product_category = #{productCategory},
+				product_detail = #{productDetail},
+				selling_option = #{sellingOption},
+				today_product_count = #{todayProductCount},
+				recommend_product_count = #{recommendProductCount} 
+		WHERE	product_id = #{productId} AND store_id = #{storeId}	
+	</update>	
+	
+	
+	
 	<!-- delete -->
 	<delete id="deleteProductById" parameterType="map">
 		DELETE FROM product WHERE store_id = #{storeId} AND product_id = #{productId}

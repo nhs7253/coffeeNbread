@@ -56,7 +56,6 @@ CREATE TABLE product (
 	product_id VARCHAR2(30) PRIMARY KEY, /* 제품아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
 	product_name VARCHAR2(50) NOT NULL, /* 제품이름 */
-	product_picture VARCHAR2(300) NOT NULL, /* 제품사진 */
 	product_price NUMBER(6) NOT NULL, /* 제품가격 */
 	product_category VARCHAR2(50) NOT NULL, /* 제품종류 */
 	product_detail CLOB NOT NULL, /* 제품상세설명 */

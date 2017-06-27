@@ -16,18 +16,18 @@ import com.cnb.vo.Product;
  */
 public interface ProductDao {
 	/**
-	 * 1개의 매장에 1개의 제품 정보 insert
+	 * 1개의 제품 정보 insert
 	 * @param product
 	 * @return 처리 개수
 	 */
-	int insertProduct(String storeId, Product product);
+	int insertProduct(Product product);
 	
 	/**
-	 * 1개의 매장에 있는 1개의 제품 정보 update
+	 * 1개의 제품 정보 update
 	 * @param product
 	 * @return 처리 개수
 	 */
-	int updateProduct(String storeId, Product product);
+	int updateProduct(Product product);
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 delete

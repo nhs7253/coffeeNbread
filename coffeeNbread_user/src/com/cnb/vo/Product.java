@@ -23,9 +23,9 @@ public class Product implements Serializable {
 	private String productCategory;
 	private String productDetail;
 	private String sellingOption;
-	private int totalProductCount;
+	private int todayProductCount;
 	private int recommendProductCount;
-	private List<ProductPicture>productPictureList;
+	private List<ProductPicture> productPictureList;
 	
 	
 	public List<ProductPicture> getProductPictureList() {
@@ -37,7 +37,7 @@ public class Product implements Serializable {
 	}
 
 	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
-			String productDetail, String sellingOption, int totalProductCount, int recommendProductCount,
+			String productDetail, String sellingOption, int todayProductCount, int recommendProductCount,
 			List<ProductPicture> productPictureList) {
 		super();
 		this.productId = productId;
@@ -47,7 +47,7 @@ public class Product implements Serializable {
 		this.productCategory = productCategory;
 		this.productDetail = productDetail;
 		this.sellingOption = sellingOption;
-		this.totalProductCount = totalProductCount;
+		this.todayProductCount = todayProductCount;
 		this.recommendProductCount = recommendProductCount;
 		this.productPictureList = productPictureList;
 	}
@@ -57,7 +57,7 @@ public class Product implements Serializable {
 	}
 
 	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
-			String productDetail, String sellingOption, int totalProductCount, int recommendProductCount) {
+			String productDetail, String sellingOption, int todayProductCount, int recommendProductCount) {
 		super();
 		this.productId = productId;
 		this.storeId = storeId;
@@ -66,7 +66,7 @@ public class Product implements Serializable {
 		this.productCategory = productCategory;
 		this.productDetail = productDetail;
 		this.sellingOption = sellingOption;
-		this.totalProductCount = totalProductCount;
+		this.todayProductCount = todayProductCount;
 		this.recommendProductCount = recommendProductCount;
 	}
 
@@ -126,12 +126,12 @@ public class Product implements Serializable {
 		this.sellingOption = sellingOption;
 	}
 
-	public int getTotalProductCount() {
-		return totalProductCount;
+	public int gettodayProductCount() {
+		return todayProductCount;
 	}
 
-	public void setTotalProductCount(int totalProductCount) {
-		this.totalProductCount = totalProductCount;
+	public void settodayProductCount(int todayProductCount) {
+		this.todayProductCount = todayProductCount;
 	}
 
 	public int getRecommendProductCount() {
@@ -146,7 +146,7 @@ public class Product implements Serializable {
 	public String toString() {
 		return "Product [productId=" + productId + ", storeId=" + storeId + ", productName=" + productName
 				+ ", productPrice=" + productPrice + ", productCategory=" + productCategory + ", productDetail="
-				+ productDetail + ", sellingOption=" + sellingOption + ", totalProductCount=" + totalProductCount
+				+ productDetail + ", sellingOption=" + sellingOption + ", todayProductCount=" + todayProductCount
 				+ ", recommendProductCount=" + recommendProductCount + "]";
 	}
 
@@ -162,7 +162,7 @@ public class Product implements Serializable {
 		result = prime * result + recommendProductCount;
 		result = prime * result + ((sellingOption == null) ? 0 : sellingOption.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
-		result = prime * result + totalProductCount;
+		result = prime * result + todayProductCount;
 		return result;
 	}
 
@@ -209,7 +209,7 @@ public class Product implements Serializable {
 				return false;
 		} else if (!storeId.equals(other.storeId))
 			return false;
-		if (totalProductCount != other.totalProductCount)
+		if (todayProductCount != other.todayProductCount)
 			return false;
 		return true;
 	}
