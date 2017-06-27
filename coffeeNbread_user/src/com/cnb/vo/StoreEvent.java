@@ -17,7 +17,7 @@ public class StoreEvent implements Serializable{
 	private String saleOption;
 	private int saleRate;
 	private String eventPicture;
-	private String newMenuoption;
+	private String newMenuOption;
 	private String eventCheck;
 	
 	/***************************************************
@@ -35,7 +35,7 @@ public class StoreEvent implements Serializable{
 
 
 	public StoreEvent(int eventNo, String eventTitle, Date eventStartDate, Date eventEndDate, String eventOption,
-			String eventDetails, String saleOption, int saleRate, String eventPicture, String newMenuoption,
+			String eventDetails, String saleOption, int saleRate, String eventPicture, String newMenuOption,
 			String eventCheck, String storeId, Store store) {
 		super();
 		this.eventNo = eventNo;
@@ -47,7 +47,7 @@ public class StoreEvent implements Serializable{
 		this.saleOption = saleOption;
 		this.saleRate = saleRate;
 		this.eventPicture = eventPicture;
-		this.newMenuoption = newMenuoption;
+		this.newMenuOption = newMenuOption;
 		this.eventCheck = eventCheck;
 		this.storeId = storeId;
 		this.store = store;
@@ -144,13 +144,13 @@ public class StoreEvent implements Serializable{
 	}
 
 
-	public String getNewMenuoption() {
-		return newMenuoption;
+	public String getNewMenuOption() {
+		return newMenuOption;
 	}
 
 
-	public void setNewMenuoption(String newMenuoption) {
-		this.newMenuoption = newMenuoption;
+	public void setNewMenuOption(String newMenuOption) {
+		this.newMenuOption = newMenuOption;
 	}
 
 
@@ -189,7 +189,7 @@ public class StoreEvent implements Serializable{
 		return "StoreEvent [eventNo=" + eventNo + ", eventTitle=" + eventTitle + ", eventStartDate=" + eventStartDate
 				+ ", eventEndDate=" + eventEndDate + ", eventOption=" + eventOption + ", eventDetails=" + eventDetails
 				+ ", saleOption=" + saleOption + ", saleRate=" + saleRate + ", eventPicture=" + eventPicture
-				+ ", newMenuoption=" + newMenuoption + ", eventCheck=" + eventCheck + ", storeId=" + storeId
+				+ ", newMenuOption=" + newMenuOption + ", eventCheck=" + eventCheck + ", storeId=" + storeId
 				+ ", store=" + store + "]";
 	}
 
@@ -206,7 +206,7 @@ public class StoreEvent implements Serializable{
 		result = prime * result + ((eventPicture == null) ? 0 : eventPicture.hashCode());
 		result = prime * result + ((eventStartDate == null) ? 0 : eventStartDate.hashCode());
 		result = prime * result + ((eventTitle == null) ? 0 : eventTitle.hashCode());
-		result = prime * result + ((newMenuoption == null) ? 0 : newMenuoption.hashCode());
+		result = prime * result + ((newMenuOption == null) ? 0 : newMenuOption.hashCode());
 		result = prime * result + ((saleOption == null) ? 0 : saleOption.hashCode());
 		result = prime * result + saleRate;
 		result = prime * result + ((store == null) ? 0 : store.hashCode());
@@ -261,10 +261,10 @@ public class StoreEvent implements Serializable{
 				return false;
 		} else if (!eventTitle.equals(other.eventTitle))
 			return false;
-		if (newMenuoption == null) {
-			if (other.newMenuoption != null)
+		if (newMenuOption == null) {
+			if (other.newMenuOption != null)
 				return false;
-		} else if (!newMenuoption.equals(other.newMenuoption))
+		} else if (!newMenuOption.equals(other.newMenuOption))
 			return false;
 		if (saleOption == null) {
 			if (other.saleOption != null)
