@@ -6,7 +6,7 @@
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="com/cnb/config/mybaits/mapper/GeneralUserMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/GeneralUserMapper.xml" />
 	</mappers>
 	 
 </configuration>

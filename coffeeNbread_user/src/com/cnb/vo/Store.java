@@ -18,9 +18,12 @@ public class Store implements Serializable{
 	private int storeHits;
 	private Date storeOpen;
 	private Date storeClose;
+	private String storePermission;
 	
+
+	public Store(){}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
-			String storeEmail, int storeHits, Date storeOpen, Date storeClose) {
+			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;
@@ -31,64 +34,119 @@ public class Store implements Serializable{
 		this.storeHits = storeHits;
 		this.storeOpen = storeOpen;
 		this.storeClose = storeClose;
+		this.storePermission = storePermission;
 	}
-	public Store() {
-		super();
-	}
+
+
 	public String getStoreId() {
 		return storeId;
 	}
+
+
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
+
+
 	public String getStoreName() {
 		return storeName;
 	}
+
+
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
+
+
 	public String getStoreIntro() {
 		return storeIntro;
 	}
+
+
 	public void setStoreIntro(String storeIntro) {
 		this.storeIntro = storeIntro;
 	}
+
+
 	public String getStorePhone() {
 		return storePhone;
 	}
+
+
 	public void setStorePhone(String storePhone) {
 		this.storePhone = storePhone;
 	}
+
+
 	public String getStoreAddress() {
 		return storeAddress;
 	}
+
+
 	public void setStoreAddress(String storeAddress) {
 		this.storeAddress = storeAddress;
 	}
+
+
 	public String getStoreEmail() {
 		return storeEmail;
 	}
+
+
 	public void setStoreEmail(String storeEmail) {
 		this.storeEmail = storeEmail;
 	}
+
+
 	public int getStoreHits() {
 		return storeHits;
 	}
+
+
 	public void setStoreHits(int storeHits) {
 		this.storeHits = storeHits;
 	}
+
+
 	public Date getStoreOpen() {
 		return storeOpen;
 	}
+
+
 	public void setStoreOpen(Date storeOpen) {
 		this.storeOpen = storeOpen;
 	}
+
+
 	public Date getStoreClose() {
 		return storeClose;
 	}
+
+
 	public void setStoreClose(Date storeClose) {
 		this.storeClose = storeClose;
 	}
+
+
+	public String getStorePermission() {
+		return storePermission;
+	}
+
+
+	public void setStorePermission(String storePermission) {
+		this.storePermission = storePermission;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
+				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeHits="
+				+ storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose + ", storePermission="
+				+ storePermission + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,9 +159,12 @@ public class Store implements Serializable{
 		result = prime * result + ((storeIntro == null) ? 0 : storeIntro.hashCode());
 		result = prime * result + ((storeName == null) ? 0 : storeName.hashCode());
 		result = prime * result + ((storeOpen == null) ? 0 : storeOpen.hashCode());
+		result = prime * result + ((storePermission == null) ? 0 : storePermission.hashCode());
 		result = prime * result + ((storePhone == null) ? 0 : storePhone.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -150,6 +211,11 @@ public class Store implements Serializable{
 				return false;
 		} else if (!storeOpen.equals(other.storeOpen))
 			return false;
+		if (storePermission == null) {
+			if (other.storePermission != null)
+				return false;
+		} else if (!storePermission.equals(other.storePermission))
+			return false;
 		if (storePhone == null) {
 			if (other.storePhone != null)
 				return false;
@@ -157,13 +223,8 @@ public class Store implements Serializable{
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
-				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeHits="
-				+ storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose + "]";
-	}
 
+	
 	
 
 }
