@@ -17,7 +17,7 @@ public class ShoppingBasketProductDaoImpl implements ShoppingBasketProductDao {
     	private SqlSessionTemplate session;
 
     private String makeSql(String tagId){
-		return "com.cnb.config.mybatis.mapper.ShoppingBasketProduct."+tagId;
+		return "com.cnb.config.mybatis.mapper.ShoppingBasketProductMapper."+tagId;
 	}
     
 	@Override
