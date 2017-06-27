@@ -29,8 +29,18 @@
 		       	    </collection>
 		       </association>
 	</resultMap> -->
+	
+	<resultMap id="ShoppingBasketProduct-product-productPicture-store-resultmap" type="ShoppingBasketProduct">
+	         <id column="product_count" property="productCount"/>
+	         <association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap"/>
+	         <association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>	
+		     <association property="productPicture"/>
+	</resultMap>
+	
+	
+	
   
-<!-- 	 제품 ID로 제품 조회.
+ 	 <!--제품 ID로 제품 조회.-->
   	 <select id="selectProductByProductId" parameterType="String" resultMap="ShoppingBasketProduct-product-productPicture-store-resultmap">
 	  select s.store_id,
        p.product_category,
@@ -39,13 +49,13 @@
        p.product_price,
        sbp.product_count,  
        p.product_id
-       from store s,product p, product_picture pp,shopping_basket_product sbp
+       from store s, product p, product_picture pp, shopping_basket_product sbp
        where s.store_id=p.store_id 
        and  pp.product_id=p.product_id
        and sbp.product_id=p.product_id
        and  p.product_id=#{value}  
 	</select>  
-	-->
+	
  
 
 

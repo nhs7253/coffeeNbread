@@ -69,6 +69,7 @@
 		<result column="product_detail" property="productDetail"/>
 		<result column="today_product_count" property="todayProductCount"/>
 		<result column="recommend_product_count" property="recommendProductCount"/>
+		<!-- <collection ofType=	"java.lang.String" 		property="productPicture" column="product"/> -->
 	</resultMap>
 	
 	<!-- selectProductByCategory -->

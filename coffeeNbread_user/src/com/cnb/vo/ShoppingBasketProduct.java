@@ -17,7 +17,45 @@ public class ShoppingBasketProduct implements Serializable{
 	private GeneralUser generalUser;
 	private Store store;
 	private Product product;
+	private ProductPicture productPicture;
 	
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
+	}
+	public Store getStore() {
+		return store;
+	}
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public ProductPicture getProductPicture() {
+		return productPicture;
+	}
+	public void setProductPicture(ProductPicture productPicture) {
+		this.productPicture = productPicture;
+	}
+	public ShoppingBasketProduct(String userId, String storeId, String productId, String productStoreId,
+			int productCount, GeneralUser generalUser, Store store, Product product, ProductPicture productPicture) {
+		super();
+		this.userId = userId;
+		this.storeId = storeId;
+		this.productId = productId;
+		this.productStoreId = productStoreId;
+		this.productCount = productCount;
+		this.generalUser = generalUser;
+		this.store = store;
+		this.product = product;
+		this.productPicture = productPicture;
+	}
 	public ShoppingBasketProduct(String userId, String storeId, String productId, String productStoreId,
 			int productCount, GeneralUser generalUser, Store store, Product product) {
 		super();
