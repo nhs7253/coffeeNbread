@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import com.cnb.dao.ShoppingBasketProductDao;
 
 /*
- * 노현식
+ * 김형주
  * 2017-06-27
- * 초기 구현
+ * 테스트 완료
  * 
- * 노현식 
- * 2017-06-23 
+ * 김형주
+ * 2017-06-27 
  * 생성
  */
 @Component
@@ -36,7 +36,7 @@ public class ShoppingBasketProductDaoImplTest {
       
        
       System.out.println("장바구니 목록 삭제");
-       System.out.println(dao.deleteProductByProductId("p-2"));
+       System.out.println(dao.deleteProductByProductId("p-1"));
     
       
       

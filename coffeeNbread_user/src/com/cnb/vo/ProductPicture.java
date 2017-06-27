@@ -14,6 +14,26 @@ public class ProductPicture implements Serializable{
 	private String productId;
 	private String storeId;
 	private Product product;
+	private Store store;
+	
+	
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public ProductPicture(String productPicture, String productId, String storeId, Product product, Store store) {
+		super();
+		this.productPicture = productPicture;
+		this.productId = productId;
+		this.storeId = storeId;
+		this.product = product;
+		this.store = store;
+	}
+
 	public String getProductPicture() {
 		return productPicture;
 	}
