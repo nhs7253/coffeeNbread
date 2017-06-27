@@ -7,6 +7,7 @@
 	
 	<mappers>
 		<mapper resource="com/cnb/config/mybatis/mapper/GeneralUserMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/ProductMapper.xml" />
 	</mappers>
 	 
 </configuration>
