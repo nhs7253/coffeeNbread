@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 import com.cnb.dao.ProductDao;
 import com.cnb.vo.Product;
 
+/*
+ * 최민희
+ * 2017-06-27 생성
+ */
 @Component
 public class ProductDaoImplTest {
 
@@ -36,5 +40,4 @@ public class ProductDaoImplTest {
 		ProductDaoImplTest pd = (ProductDaoImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("productDaoImplTest");
 		pd.examProductTest();
 	}
-	
 }
