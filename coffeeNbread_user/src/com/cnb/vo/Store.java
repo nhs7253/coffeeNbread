@@ -3,14 +3,12 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-/*
- * 김형주
- * 2017-06-27 수정
- * 참조변수 추가 (여러개의 장바구니)
- * 
- */
 
 /* 이진영
+ * 2017-06-28 수정
+ * 참조변수 추가
+ * 
+ * 이진영
  * 2017-06-27 수정
  * 참조변수 추가
  * 
@@ -39,11 +37,11 @@ public class Store implements Serializable{
 	private List<StorePicture> StorePictureList;
 	
 	/***************************************************
-	 * 부모테이블 : Store  자식 테이블 : StoreCategory
-	 * 하나의 매장은 여러개의 매장분류를 가지고있음
-	 * 매장분류를 저정할 인스턴수변수 선언 
+	 * 부모테이블 : Store  자식 테이블 : StoreEvent
+	 * 하나의 매장은 여러개의 이벤트를 가지고있음
+	 * 이벤트를 저정할 인스턴수변수 선언 
 	 ***************************************************/
-	private List<StoreCategory> StoreCategoryList;
+	private List<StoreEvent> StoreEventList;
 	
 	/***************************************************
 	 * 부모테이블 : Store  자식 테이블 : OptionCategory
@@ -52,6 +50,12 @@ public class Store implements Serializable{
 	 ***************************************************/
 	private List<OptionCategory> OptionCategoryList;
 	
+	/***************************************************
+	 * 부모테이블 : Store  자식 테이블 : StoreCategory
+	 * 하나의 매장은 한 매장카테고리를 가지고있음
+	 * 매장카테고리를 저정할 인스턴수변수 선언 
+	 ***************************************************/
+	private StoreCategory storeCategory;
 	
 	public Store(){}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
@@ -70,7 +74,7 @@ public class Store implements Serializable{
 	}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
 			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission,
-			List<StorePicture> storePictureList, List<StoreCategory> storeCategoryList,
+			List<StorePicture> storePictureList, List<StoreEvent> StoreEventList,
 			List<OptionCategory> optionCategoryList) {
 		super();
 		this.storeId = storeId;
@@ -84,8 +88,28 @@ public class Store implements Serializable{
 		this.storeClose = storeClose;
 		this.storePermission = storePermission;
 		StorePictureList = storePictureList;
-		StoreCategoryList = storeCategoryList;
+		StoreEventList = StoreEventList;
 		OptionCategoryList = optionCategoryList;
+	}
+	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
+			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission,
+			List<StorePicture> storePictureList, List<StoreEvent> StoreEventList,
+			List<OptionCategory> optionCategoryList, StoreCategory storeCategory) {
+		super();
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeIntro = storeIntro;
+		this.storePhone = storePhone;
+		this.storeAddress = storeAddress;
+		this.storeEmail = storeEmail;
+		this.storeHits = storeHits;
+		this.storeOpen = storeOpen;
+		this.storeClose = storeClose;
+		this.storePermission = storePermission;
+		StorePictureList = storePictureList;
+		StoreEventList = StoreEventList;
+		OptionCategoryList = optionCategoryList;
+		this.storeCategory = storeCategory;
 	}
 	public String getStoreId() {
 		return storeId;
@@ -153,11 +177,11 @@ public class Store implements Serializable{
 	public void setStorePictureList(List<StorePicture> storePictureList) {
 		StorePictureList = storePictureList;
 	}
-	public List<StoreCategory> getStoreCategoryList() {
-		return StoreCategoryList;
+	public List<StoreEvent> getStoreEventList() {
+		return StoreEventList;
 	}
-	public void setStoreCategoryList(List<StoreCategory> storeCategoryList) {
-		StoreCategoryList = storeCategoryList;
+	public void setStoreEventList(List<StoreEvent> StoreEventList) {
+		StoreEventList = StoreEventList;
 	}
 	public List<OptionCategory> getOptionCategoryList() {
 		return OptionCategoryList;
@@ -165,22 +189,30 @@ public class Store implements Serializable{
 	public void setOptionCategoryList(List<OptionCategory> optionCategoryList) {
 		OptionCategoryList = optionCategoryList;
 	}
+	public StoreCategory getStoreCategory() {
+		return storeCategory;
+	}
+	public void setStoreCategory(StoreCategory storeCategory) {
+		this.storeCategory = storeCategory;
+	}
 	@Override
 	public String toString() {
 		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
 				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeHits="
 				+ storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose + ", storePermission="
-				+ storePermission + ", StorePictureList=" + StorePictureList + ", StoreCategoryList="
-				+ StoreCategoryList + ", OptionCategoryList=" + OptionCategoryList + "]";
+				+ storePermission + ", StorePictureList=" + StorePictureList + ", StoreEventList="
+				+ StoreEventList + ", OptionCategoryList=" + OptionCategoryList + ", storeCategory=" + storeCategory
+				+ "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((OptionCategoryList == null) ? 0 : OptionCategoryList.hashCode());
-		result = prime * result + ((StoreCategoryList == null) ? 0 : StoreCategoryList.hashCode());
+		result = prime * result + ((StoreEventList == null) ? 0 : StoreEventList.hashCode());
 		result = prime * result + ((StorePictureList == null) ? 0 : StorePictureList.hashCode());
 		result = prime * result + ((storeAddress == null) ? 0 : storeAddress.hashCode());
+		result = prime * result + ((storeCategory == null) ? 0 : storeCategory.hashCode());
 		result = prime * result + ((storeClose == null) ? 0 : storeClose.hashCode());
 		result = prime * result + ((storeEmail == null) ? 0 : storeEmail.hashCode());
 		result = prime * result + storeHits;
@@ -206,10 +238,10 @@ public class Store implements Serializable{
 				return false;
 		} else if (!OptionCategoryList.equals(other.OptionCategoryList))
 			return false;
-		if (StoreCategoryList == null) {
-			if (other.StoreCategoryList != null)
+		if (StoreEventList == null) {
+			if (other.StoreEventList != null)
 				return false;
-		} else if (!StoreCategoryList.equals(other.StoreCategoryList))
+		} else if (!StoreEventList.equals(other.StoreEventList))
 			return false;
 		if (StorePictureList == null) {
 			if (other.StorePictureList != null)
@@ -220,6 +252,11 @@ public class Store implements Serializable{
 			if (other.storeAddress != null)
 				return false;
 		} else if (!storeAddress.equals(other.storeAddress))
+			return false;
+		if (storeCategory == null) {
+			if (other.storeCategory != null)
+				return false;
+		} else if (!storeCategory.equals(other.storeCategory))
 			return false;
 		if (storeClose == null) {
 			if (other.storeClose != null)
@@ -266,8 +303,4 @@ public class Store implements Serializable{
 		return true;
 	}
 	
-	
-
-	
-
 }
