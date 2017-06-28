@@ -13,6 +13,8 @@ public class StorePosition implements Serializable{
 	private String X;
 	private String Y;
 	
+	private Store store;
+	
 	public StorePosition() {
 	}
 
@@ -20,6 +22,13 @@ public class StorePosition implements Serializable{
 		this.storeId = storeId;
 		X = x;
 		Y = y;
+	}
+
+	public StorePosition(String storeId, String x, String y, Store store) {
+		this.storeId = storeId;
+		X = x;
+		Y = y;
+		this.store = store;
 	}
 
 	public String getStoreId() {
@@ -46,12 +55,21 @@ public class StorePosition implements Serializable{
 		Y = y;
 	}
 
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((X == null) ? 0 : X.hashCode());
 		result = prime * result + ((Y == null) ? 0 : Y.hashCode());
+		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		return result;
 	}
@@ -75,6 +93,11 @@ public class StorePosition implements Serializable{
 				return false;
 		} else if (!Y.equals(other.Y))
 			return false;
+		if (store == null) {
+			if (other.store != null)
+				return false;
+		} else if (!store.equals(other.store))
+			return false;
 		if (storeId == null) {
 			if (other.storeId != null)
 				return false;
@@ -85,6 +108,6 @@ public class StorePosition implements Serializable{
 
 	@Override
 	public String toString() {
-		return "StorePosition [storeId=" + storeId + ", X=" + X + ", Y=" + Y + "]";
+		return "StorePosition [storeId=" + storeId + ", X=" + X + ", Y=" + Y + ", store=" + store + "]";
 	}
 }
