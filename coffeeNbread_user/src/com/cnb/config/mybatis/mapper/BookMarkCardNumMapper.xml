@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.BookMarkCardNumMapper">
+
+	
+	<resultMap type="com.cnb.vo.BookMarkCardNum" id="BookMarkCardNum-resultmap">
+		<id column="card_num" property="cardNum"/>
+		<result column="user_id" property="userId"/>
+	
+	</resultMap>
+	
+	<insert id="insertCardNum" parameterType="BookMarkCardNum">
+		INSERT INTO bookmark_card_num VALUES(#{cardNum},
+										     #{userId} )
+							     
+	</insert>
+	
+	<delete id="deleteCardNumByCardNum" parameterType="string">
+		DELETE FROM bookmark_card_num WHERE card_num = #{value}
+	</delete>
+	
+	
+	<select id="selectCardNumListByUserId" parameterType="string" resultMap="BookMarkCardNum-resultmap">
+		select user_Id, card_Num from bookmark_card_num where user_id=#{value}
+	</select>
+	
+
+	
+	
+</mapper>
