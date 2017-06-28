@@ -1,88 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cnb.config.mybatis.mapper.ProductMapper">
+<mapper namespace="com.cnb.config.mybatis.mapper.PaymentDetailsMapper">
 	<!-- 
-		Product 테이블 관련 mapper
-		+ 제품 등록
-		+ 제품 수정
-		+ 제품 삭제
-		+ 제품 종류로 제품 조회
-		+ 제품명으로 제품 조회
+		PaymentDetailMapper 테이블 관련 mapper
+		+ 결제 내역 추가
+		+ 결제내역들 조회
 	 -->
 	
 	<!-- insert -->
-	<insert id="insertProduct" parameterType="product">
-		INSERT INTO product VALUES (
+	<insert id="insertPaymentDetails" parameterType="com.cnb.vo.PaymentDetails">
+		<selectKey keyProperty="paymentNo" resultType="_int" order="BEFORE">
+			SELECT payment_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO payment_details VALUES (
+									#{paymentNo},
+									#{paymentOption},
+									#{tradeDate},
+									#{sellMethod},
+									#{reservationOrderCount},
+									#{userId},
 									#{productId},
 									#{storeId},
-									#{productName},
-									#{productPrice},
-									#{productCategory},
-									#{productDetail},
-									#{sellingOption},
-									#{todayProductCount},
-									#{recommendProductCount} )
-	</insert>
+									#{productTradeCount} )
+	     </insert>
 	
 	
-	<!-- update -->
-	<update id="updateProduct" parameterType="product">
-		UPDATE 	product
-		SET		product_name = #{productName},
-				product_price = #{productPrice},
-				product_category = #{productCategory},
-				product_detail = #{productDetail},
-				selling_option = #{sellingOption},
-				today_product_count = #{todayProductCount},
-				recommend_product_count = #{recommendProductCount} 
-		WHERE	product_id = #{productId} AND store_id = #{storeId}	
-	</update>	
-	
-	
-	<!-- delete -->
-	<delete id="deleteProductById" parameterType="map">
-		DELETE FROM product WHERE store_id = #{storeId} AND product_id = #{productId}
-	</delete>
-	
-	
-	<!-- select -->
-	<sql id="select-product">
-		SELECT  product_id,
+		<sql id="select-paymentDetails">
+		SELECT  payment_no,
+				payment_option,
+				trade_date,
+				sell_method,
+				reservation_order_count,
+				user_id,
+				product_id,
 				store_id,
-				product_name,
-				product_price,
-				product_category,
-				product_detail,
-				today_product_count,
-				recommend_product_count
-		FROM	product
-	</sql>
+				product_trade_count
+		FROM	payment_details
+	    </sql>
 	
+
 	<!-- resultMap -->
-	<resultMap type="com.cnb.vo.Product" id="product-resultmap">
- 		<id column="product_id" property="productId"/>
- 		<result column="store_id" property="storeId"/>
- 		<result column="product_name" property="productName"/>
-		<result column="product_price" property="productPrice"/>
-		<result column="product_category" property="productCategory"/>
-		<result column="product_detail" property="productDetail"/>
-		<result column="today_product_count" property="todayProductCount"/>
-		<result column="recommend_product_count" property="recommendProductCount"/>
-		<!-- <collection ofType=	"java.lang.String" 		property="productPicture" column="product"/> -->
+	<resultMap type="com.cnb.vo.PaymentDetails" id="paymentDetails-resultmap">
+ 		<id column="payment_no" property="paymentNo"/>
+ 		<result column="payment_option" property="paymentOption"/>
+ 		<result column="trade_date" property="tradeDate"/>
+		<result column="sell_method" property="sellMethod"/>
+		<result column="reservation_order_count" property="reservationOrderCount"/>
+		<result column="user_id" property="userId"/>
+		<result column="product_id" property="productId"/>
+		<result column="store_id" property="storeId"/>
+		<result column="product_trade_count" property="productTradeCount"/>
 	</resultMap>
 	
-	<!-- selectProductByCategory -->
-	<select id="selectProductByCategory" resultMap="product-resultmap" parameterType="map">
-		<include refid="select-product"/>
-		WHERE store_id = #{storeId} AND product_category = #{productCategory}
+	<!-- 결제내역 조회 -->
+	<select id="selectPaymentDetailsByUserIdAndStoreIdAndProductId" resultMap="paymentDetails-resultmap" parameterType="map">
+		<include refid="select-paymentDetails"/>
+		WHERE store_id = #{storeId} AND product_id = #{productId} AND user_id=#{userId}
 	</select>
 	
-	<!-- selectProductByName -->
-	<select id="selectProductByName" resultMap="product-resultmap" parameterType="map">
-		<include refid="select-product"/>
-		WHERE store_id = #{storeId} AND product_name = #{productName}
-	</select>
+	
 	
 	
 </mapper>
