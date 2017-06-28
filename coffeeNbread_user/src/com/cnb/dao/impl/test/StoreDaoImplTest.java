@@ -33,8 +33,11 @@ public class StoreDaoImplTest {
 	public void Test() {
 		System.out.println("최초 조회");
 
+
+//		System.out.println(dao.selectStore("s-1"));
+
 		System.out.println(dao.selectStoreEventList("s-1"));
-		System.out.println(dao.selectStore("s-1"));
+		System.out.println(dao.selectStoreCategory("s-1"));
 /*
 		dao.insertStore(new Store("id-5", "0000", "DOA테스트 소개", "000-0000-0000", "주소", "DaoTest-1@dao.com", 2,
 				new Date(), new Date(), "Y"));

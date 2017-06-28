@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cnb.config.mybatis.mapper.StorePositionMapper">
+	
+	<sql id="all-column"> store_id, X, Y </sql>
+	
+	<resultMap type="StorePosition" id="StorePosition-resultmap">
+		<id column="store_id" property="storeId"/>
+		<result column="X" property="X"/>
+		<result column="Y" property="Y"/>
+	</resultMap>
+	
+	<resultMap type="StorePosition" id="StorePosition-Store-resultmap" extends="StorePosition-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+	</resultMap>
+	
+	<insert id="insertStorePosition" parameterType="StorePosition">
+		INSERT INTO store_position VALUES(#{storeId}, #{X}, #{Y})
+	</insert>
+	
+	<delete id="deleteStorePositionByStoreId" parameterType="string">
+		DELETE FROM store_position WHERE store_id = #{value}
+	</delete>
+	
+	<update id="updateStorePosition" parameterType="StoreBookmark">
+		UPDATE store_position 
+		SET X = #{X}, Y = #{Y}
+		WHERE store_id = #{storeId}
+	</update>
+	
+	<select id="selectStorePositionByStoreIdJoinStore" parameterType="string" resultMap="StorePosition-Store-resultmap">
+		SELECT s.store_id, X, Y, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+		FROM store_position sp, store s
+		WHERE sp.store_id = s.store_id AND sp.store_id = #{storeId}
+	</select>
+	
+	<select id="selectStorePositionJoinStoreList" resultMap="StorePosition-Store-resultmap">
+		SELECT s.store_id, X, Y, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+		FROM store_position sp, store s
+		WHERE sp.store_id = s.store_id
+	</select>
+	
+	
 </mapper>

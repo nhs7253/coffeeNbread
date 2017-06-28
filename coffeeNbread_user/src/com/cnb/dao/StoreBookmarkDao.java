@@ -58,4 +58,11 @@ public interface StoreBookmarkDao {
 	 * @return List<String> 매장 아이디 목록
 	 */
 	List<String> selectStoreBookmarkByUserId(String userId);
+	
+	/** 
+	 * 해당 유저가 즐겨찾기한 매장 목록 조회
+	 * @param userId 해당 목록을 찾을 유저 ID
+	 * @return List<StoreBookmark> - 유저가 즐겨 찾기한 매장 목록
+	 */
+	List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreList(String userId);
 }

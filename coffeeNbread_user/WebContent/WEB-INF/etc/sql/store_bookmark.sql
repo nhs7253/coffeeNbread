@@ -15,6 +15,10 @@ DELETE FROM user_authority WHERE user_id = '2' AND user_authority = 'CNB_ADMIN';
 DELETE FROM user_authority WHERE user_id = '1';
 DELETE FROM user_authority;
 
+DELETE FROM	store_bookmark
+WHERE user_id = '1' and 
+store_id = '1'
+
 SELECT * FROM user_authority;
 
 SELECT * 
@@ -34,6 +38,25 @@ DELETE FROM store_bookmark WHERE user_id = 'u-1';
 DELETE FROM store_bookmark WHERE user_id = 'u-3';
 DELETE FROM store_bookmark WHERE user_id = 'u-4';
 
+
+
+	store_id VARCHAR2(30) PRIMARY KEY, /* 매장아이디 */
+	store_name VARCHAR2(50) NOT NULL, /* 매장이름 */
+	store_intro CLOB, /* 매장소개 */
+	store_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
+	store_address VARCHAR2(200) NOT NULL, /* 주소 */
+	store_email VARCHAR2(50) NOT NULL, /* 이메일 */
+	store_hits NUMBER NOT NULL, /* 조회수 */
+	store_open DATE NOT NULL, /* 여는 시간 */
+	store_close DATE NOT NULL, /* 닫는 시간 */
+	store_permission CHAR(1) NOT NULL  /* 매장 허가여부  */
+
+
+
+SELECT user_id, s.store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+FROM store_bookmark sb, store s
+WHERE sb.store_id = s.store_id AND user_id = 'u-2'
+
 /* 유저 */
 SELECT *FROM GENERAL_USER
 DELETE FROM GENERAL_USER
@@ -45,6 +68,9 @@ INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-m
 INSERT INTO GENERAL_USER VALUES('u-5','$2a$10$8sqmTtoKTZ2/aWW06ZH6mOIZQ2mkdANEL.Emg25kxHGtziuV5.oP2','user5',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
 
 INSERT INTO user_authority VALUES('u-5', 'CNB_USER');
+
+
+
 
 /* 매장 */
 SELECT *FROM STORE

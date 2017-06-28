@@ -1,13 +1,11 @@
 package com.cnb.dao;
 
-import java.util.ArrayList;
-
-import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
- * 노현식
- * 2017-06-23 생성
+ * 김형주
+ * 2017-06-27
+ * 생성, 초기구현
  */
 
 

@@ -35,10 +35,12 @@
  
  
  <resultMap type="com.cnb.vo.Store" id="store-storeEvent-resultmap" extends="store-resultmap">
- 	<collection property="StoreCategoryList" resultMap="com.cnb.config.mybatis.mapper.StoreEventMapper.storeEvent-resultmap"/>
+ 	<collection property="StoreEventList" resultMap="com.cnb.config.mybatis.mapper.StoreEventMapper.storeEvent-resultmap"/>
  </resultMap>
  
- 
+ <resultMap type="com.cnb.vo.Store" id="store-storeCategory-resultmap" extends="store-resultmap">
+ 	<association property="storeCategory" resultMap="com.cnb.config.mybatis.mapper.StoreCategoryMapper.StoreCategory-resultmap"/>
+ </resultMap>
  <!--매장 등록 Store insert  -->
 	<insert id="insertStore" parameterType="com.cnb.vo.Store">
 		INSERT INTO store
@@ -108,4 +110,13 @@
 	
 	</select>
 	
+	<!-- 매장 분류 조회 StoreCategory select -->
+	<select id="selectStoreCategory" resultMap="store-storeCategory-resultmap" parameterType="String">
+		SELECT s.store_id,
+			   s.store_name,
+			   sc.store_category
+		FROM store s,store_category sc
+		WHERE s.store_id = sc.store_id
+		AND s.store_id=#{value}
+	</select>
 </mapper>
