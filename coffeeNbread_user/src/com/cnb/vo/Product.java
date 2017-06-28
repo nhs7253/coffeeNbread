@@ -48,6 +48,24 @@ public class Product implements Serializable {
 		this.productPictureList = productPictureList;
 	}
 
+	public Product() {
+		super();
+	}
+
+	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
+			String productDetail, String sellingOption, int todayProductCount, int recommendProductCount) {
+		super();
+		this.productId = productId;
+		this.storeId = storeId;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.productDetail = productDetail;
+		this.sellingOption = sellingOption;
+		this.todayProductCount = todayProductCount;
+		this.recommendProductCount = recommendProductCount;
+	}
+	
 	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
 			String productDetail, String sellingOption, int todayProductCount, int recommendProductCount,
 			List<ProductPicture> productPictureList) {
@@ -79,24 +97,6 @@ public class Product implements Serializable {
 		this.storeId = storeId;
 		this.store = store;
 		this.productPictureList = productPictureList;
-	}
-
-	public Product() {
-		super();
-	}
-
-	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
-			String productDetail, String sellingOption, int todayProductCount, int recommendProductCount) {
-		super();
-		this.productId = productId;
-		this.storeId = storeId;
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.productCategory = productCategory;
-		this.productDetail = productDetail;
-		this.sellingOption = sellingOption;
-		this.todayProductCount = todayProductCount;
-		this.recommendProductCount = recommendProductCount;
 	}
 
 	public String getProductId() {

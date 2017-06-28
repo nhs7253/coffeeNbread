@@ -66,6 +66,23 @@ public class ReservationDetails implements Serializable {
 		this.userId = userId;
 	}
 
+	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
+			Date productHopeTime, String userId, GeneralUser generalUser, String productId, List<Product> productList,
+			String storeId, Store store) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationTime = reservationTime;
+		this.reservationCount = reservationCount;
+		this.reservationConfirm = reservationConfirm;
+		this.productHopeTime = productHopeTime;
+		this.userId = userId;
+		this.generalUser = generalUser;
+		this.productId = productId;
+		this.productList = productList;
+		this.storeId = storeId;
+		this.store = store;
+	}
+
 	public int getReservationNo() {
 		return reservationNo;
 	}
