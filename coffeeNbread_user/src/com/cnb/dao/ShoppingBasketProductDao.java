@@ -3,6 +3,7 @@ package com.cnb.dao;
 import java.util.ArrayList;
 
 import com.cnb.vo.Product;
+import com.cnb.vo.ShoppingBasketProduct;
 
 /*
  * 노현식
@@ -17,7 +18,7 @@ public interface ShoppingBasketProductDao {
 	 * 
 	 */
 	
-	Product selectProductByProductId (String productId);
+	 ShoppingBasketProduct selectShoppingBasketProductByProductId (String productId);
 	
 	/**
 	 * 장바구니 목록 삭제
