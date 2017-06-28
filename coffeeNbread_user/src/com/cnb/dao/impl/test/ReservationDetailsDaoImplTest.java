@@ -40,15 +40,21 @@ public class ReservationDetailsDaoImplTest {
 	//  민희가 한부분 일단 주석 처리함.	
 		//SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
 		
+
 		/*try {
 			//dao.insertReservationDetails(new ReservationDetails(0, dt.parse("2017-06-27 08:00:00"), 10, dt.parse("2017-06-27 14:00:00"), dt.parse("2017-06-28 16:00:00"), "p-1", "m-1", "u-1"));
 			//dao.insertReservationDetails(new ReservationDetails(0, dt.parse("2017-06-28 08:00:00"), 20, dt.parse("2017-06-28 14:00:00"), dt.parse("2017-06-28 16:00:00"), "p-2", "m-1", "u-1"));
 			//dao.insertReservationDetails(new ReservationDetails(0, dt.parse("2017-06-29 08:00:00"), 20, dt.parse("2017-06-29 14:00:00"), dt.parse("2017-06-29 16:00:00"), "p-2", "m-1", "u-0"));
 			System.out.println(dao.selectReservationDetailsByReservationTime("m-1", dt.parse("2017-06-28 08:00:00")));
+=======
+		
+		try {
+			System.out.println(dao.selectReservationDetailsByReservationTime("s-1", dt.parse("2017-06-28 08:00:00")));
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 		} catch (ParseException e) {
 			System.out.println("이상발견");
 		}
-		//System.out.println(dao.selectReservationDetailsByUserId("m-1", "u-1"));
+		//System.out.println(dao.selectReservationDetailsByUserId("s-1", "u-1"));
 		System.out.println("이상없음");
 	}*/
 		System.out.println("매장에서 유저 예약시간으로 예약내역 조회");  /* new Date()로 해놨기떄문에 Test돌리는 시점에 예약한게 내역이없으므로 없게 나오는게 정상 */

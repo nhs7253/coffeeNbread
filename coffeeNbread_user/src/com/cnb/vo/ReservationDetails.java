@@ -151,8 +151,9 @@ public class ReservationDetails implements Serializable {
 	public String toString() {
 		return "ReservationDetails [reservationNo=" + reservationNo + ", reservationTime=" + reservationTime
 				+ ", reservationCount=" + reservationCount + ", reservationConfirm=" + reservationConfirm
-				+ ", productHopeTime=" + productHopeTime + ", productId=" + productId + ", storeId=" + storeId
-				+ ", userId=" + userId + "]";
+				+ ", productHopeTime=" + productHopeTime + ", userId=" + userId + ", generalUser=" + generalUser
+				+ ", productId=" + productId + ", productList=" + productList + ", storeId=" + storeId + ", store="
+				+ store + "]";
 	}
 
 	@Override
