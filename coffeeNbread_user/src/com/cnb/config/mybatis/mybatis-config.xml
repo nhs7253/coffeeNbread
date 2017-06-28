@@ -22,6 +22,7 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreVisitHistoryMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/UserPreferenceStoreMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductPictureMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/StoreEventMapper.xml" />
 	</mappers>
 	 
 </configuration>
