@@ -10,7 +10,7 @@ import com.cnb.dao.ShoppingBasketProductDao;
 
 /*
  * 김형주
- * 2017-06-27
+ * 2017-06-28
  * 테스트 완료
  * 
  * 김형주
@@ -31,14 +31,15 @@ public class ShoppingBasketProductDaoImplTest {
    }
 
    public void Test(){
+	   
       System.out.println("장바구니 목록 조회");
-      System.out.println(dao.selectProductByProductId("p-2"));
+      System.out.println(dao.selectShoppingBasketProductByProductId("p-2"));
       
        
-      System.out.println("장바구니 목록 삭제");
-       System.out.println(dao.deleteProductByProductId("p-1"));
+      /*System.out.println("장바구니 목록 삭제");
+       System.out.println(dao.deleteProductByProductId("p-1"));*/
     
-      //System.out.println(dao.selectProductByProductId("p-1"));
+     
       
       System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
    }

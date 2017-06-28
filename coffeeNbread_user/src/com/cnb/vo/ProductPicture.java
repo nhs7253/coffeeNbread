@@ -13,54 +13,41 @@ public class ProductPicture implements Serializable{
 	private String productPicture;
 	private String productId;
 	private String storeId;
-	private Product product;
-	private Store store;
 	
-	
-	public Store getStore() {
-		return store;
+	public ProductPicture() {
 	}
 
-	public void setStore(Store store) {
-		this.store = store;
-	}
-
-	public ProductPicture(String productPicture, String productId, String storeId, Product product, Store store) {
+	public ProductPicture(String productPicture, String productId, String storeId) {
 		super();
 		this.productPicture = productPicture;
 		this.productId = productId;
 		this.storeId = storeId;
-		this.product = product;
-		this.store = store;
 	}
 
 	public String getProductPicture() {
 		return productPicture;
 	}
-	
-	/* setter/getter */
+
 	public void setProductPicture(String productPicture) {
 		this.productPicture = productPicture;
 	}
+
 	public String getProductId() {
 		return productId;
 	}
+
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
+
 	public String getStoreId() {
 		return storeId;
 	}
+
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
-	public Product getProduct() {
-		return product;
-	}
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +57,7 @@ public class ProductPicture implements Serializable{
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,40 +84,10 @@ public class ProductPicture implements Serializable{
 			return false;
 		return true;
 	}
-	public ProductPicture(String productPicture, String productId, String storeId, Product product) {
-		super();
-		this.productPicture = productPicture;
-		this.productId = productId;
-		this.storeId = storeId;
-		this.product = product;
-	}
-	public ProductPicture() {
-		super();
-	}
 
 	@Override
 	public String toString() {
 		return "ProductPicture [productPicture=" + productPicture + ", productId=" + productId + ", storeId=" + storeId
 				+ "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
