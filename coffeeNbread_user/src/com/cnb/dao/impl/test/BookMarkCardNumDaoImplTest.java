@@ -38,7 +38,7 @@ public class BookMarkCardNumDaoImplTest {
 		
 	
 	    System.out.println("추가후조회");
-		int count=dao.insertCardNum(new BookMarkCardNum("card-7","u-1"));
+		int count=dao.insertCardNum(new BookMarkCardNum("card-9","u-1"));
        System.out.printf("%d행이 추가되었습니다.",count);
 		
 		System.out.println("insertCardNum 후 조회");
@@ -46,7 +46,7 @@ public class BookMarkCardNumDaoImplTest {
 		
 		
 		System.out.println("삭제후 조회");
-		dao.deleteCardNumByCardNum("card-5");
+		dao.deleteCardNumByCardNum("card-6");
 		System.out.println(dao.selectCardNumListByUserId("u-1"));
 		
 		

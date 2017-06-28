@@ -1,6 +1,7 @@
 /* 유저 */
 SELECT *FROM GENERAL_USER
 DELETE FROM GENERAL_USER
+
 INSERT INTO GENERAL_USER VALUES('u-1','pw-1','user1',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
 INSERT INTO GENERAL_USER VALUES('u-2','pw-2','user2',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
 INSERT INTO GENERAL_USER VALUES('u-3','pw-3','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
@@ -94,4 +95,45 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803'
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-8','s-3',0);                               
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-7','s-1',0);                               
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-2','p-20','s-1',0);                               
+
+
+
+
+/* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
+SELECT *FROM RESERVATION_DETAILS
+DELETE FROM RESERVATION_DETAILS
+
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-1','s-1','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-2','s-1','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-3','s-1','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-4','s-1','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-5','s-2','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-8','s-3','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-7','s-1','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-20','s-1','u-2');
+
+
+
+/*  즐겨 찾는 카드 번호  */
+SELECT *FROM BOOKMARK_CARD_NUM
+DELETE FROM BOOKMARK_CARD_NUM
+
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-1','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-2','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-3','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-4','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-5','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-6','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-7','u-1');
+INSERT INTO BOOKMARK_CARD_NUM VALUES('card-8','u-1');
+
+
+
+
+
+
+
+
+
+
 
