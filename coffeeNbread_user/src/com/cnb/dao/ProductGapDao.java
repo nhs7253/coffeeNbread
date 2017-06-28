@@ -40,7 +40,7 @@ public interface ProductGapDao {
 	/**
 	 * 제품 증감폭들 select
 	 * 모든 제품 증감폭과 해당 제품 정보들을 조회한다.
-	 * @param identifyCode
+	 * @param 
 	 * @return 조회된 제품 증감폭 정보들
 	 */
 	List<ProductGap> selectProductGap();

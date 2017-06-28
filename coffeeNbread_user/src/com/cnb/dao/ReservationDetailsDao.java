@@ -3,6 +3,7 @@ package com.cnb.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
 /*
@@ -28,12 +29,22 @@ public interface ReservationDetailsDao {
 	 * @param userId
 	 * @return 조회된 예약 정보들
 	 */
-	List<ReservationDetails> selectReservationDetailsByUserId(String storeId, String userId);
+	List<ReservationDetails> selectReservationDetailsListByUserIdAndStoreId(String storeId, String userId);
 	
 	/**
 	 * 예약시간으로 1개의 매장의 예약 정보 select
 	 * @param reservationTime
 	 * @return 조회된 예약 정보들
 	 */
-	List<ReservationDetails> selectReservationDetailsByReservationTime(String storeId, Date reservationTime);
+	List<ReservationDetails> selectReservationDetailsListByReservationTime(String storeId, Date reservationTime);
+	
+	
+	/*
+	 * 김형주- 유저입장에서 예약내역들 조회.
+	 */
+	/**
+	 * 유저입장에서 유저아이디로 예약내역 조회 //결제내역에 담긴 유저아이디를통해 유저가 예약한 예약내역들 조회.
+	 */
+	List<ReservationDetails> selectReservationDetailsListByUserId(String userId);
+
 }

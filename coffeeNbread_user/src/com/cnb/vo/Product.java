@@ -180,6 +180,15 @@ public class Product implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
+				+ ", productCategory=" + productCategory + ", productDetail=" + productDetail + ", sellingOption="
+				+ sellingOption + ", todayProductCount=" + todayProductCount + ", recommendProductCount="
+				+ recommendProductCount + ", storeId=" + storeId + ", store=" + store + ", productPictureList="
+				+ productPictureList + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

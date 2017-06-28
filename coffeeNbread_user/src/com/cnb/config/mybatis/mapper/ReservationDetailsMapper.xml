@@ -49,13 +49,22 @@
 	</resultMap>
 	 
 	<!-- selectReservationDetailsByUserId -->
-	<select id="selectReservationDetailsByUserId" resultMap="reservationDetails-resultmap" parameterType="map">
+	<select id="selectReservationDetailsListByUserIdAndStoreId" resultMap="reservationDetails-resultmap" parameterType="map">
 		<include refid="select-reservationDetails"/>
 		WHERE store_id = #{storeId} AND user_id = #{userId}
 	</select>
 	 
+	<!--6.29 김형주 기능 추가  --> 
+	<!-- selectReservationDetailsByUserId -->
+	<select id="selectReservationDetailsListByUserId" resultMap="reservationDetails-resultmap" parameterType="string">
+		<include refid="select-reservationDetails"/>
+		WHERE user_id = #{userId}
+	</select> 
+	 
+	 
+	 
 	<!-- selectReservationDetailsByReservationTime -->
-	<select id="selectReservationDetailsByReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
+	<select id="selectReservationDetailsListByReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
 		<include refid="select-reservationDetails"/>
 		WHERE store_id = #{storeId} AND reservation_time = #{reservationTime}
 	</select>

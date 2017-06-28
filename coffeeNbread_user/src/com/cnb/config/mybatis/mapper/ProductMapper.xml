@@ -47,16 +47,17 @@
 	
 	
 	<!-- select -->
-	<sql id="select-product">
-		SELECT  product_id,
-				store_id,
-				product_name,
-				product_price,
-				product_category,
-				product_detail,
-				today_product_count,
-				recommend_product_count
-		FROM	product
+	<sql id="select-product-productPicture">
+		SELECT  p.product_id,
+				p.store_id,
+				p.product_name,
+				p.product_price,
+				p.product_category,
+				p.product_detail,
+				p.today_product_count,
+				p.recommend_product_count,
+				pp.product_picture
+		FROM	product p, product_picture pp
 	</sql>
 	
 	<!-- resultMap -->
@@ -69,19 +70,28 @@
 		<result column="product_detail" property="productDetail"/>
 		<result column="today_product_count" property="todayProductCount"/>
 		<result column="recommend_product_count" property="recommendProductCount"/>
-		<!-- <collection ofType=	"java.lang.String" 		property="productPicture" column="product"/> -->
 	</resultMap>
 	
+	<resultMap type="product" id="product-productPicture-resultmap" extends="product-resultmap">
+ 		<collection property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
+ 	</resultMap>
+	
 	<!-- selectProductByCategory -->
-	<select id="selectProductByCategory" resultMap="product-resultmap" parameterType="map">
-		<include refid="select-product"/>
-		WHERE store_id = #{storeId} AND product_category = #{productCategory}
+	<select id="selectProductByCategory" resultMap="product-productPicture-resultmap" parameterType="map">
+		<include refid="select-product-productPicture"/>
+		WHERE store_id = #{storeId}
+		AND   product_category = #{productCategory}
+		AND	  p.store_id = pp.store_id
+		AND   p.product_id = pp.product_id
 	</select>
 	
 	<!-- selectProductByName -->
-	<select id="selectProductByName" resultMap="product-resultmap" parameterType="map">
-		<include refid="select-product"/>
-		WHERE store_id = #{storeId} AND product_name = #{productName}
+	<select id="selectProductByName" resultMap="product-productPicture-resultmap" parameterType="map">
+		<include refid="select-product-productPicture"/>
+		WHERE p.store_id = #{storeId} 
+		AND   product_name = #{productName}
+		AND	  p.store_id = pp.store_id
+		AND   p.product_id = pp.product_id
 	</select>
 	
 	
