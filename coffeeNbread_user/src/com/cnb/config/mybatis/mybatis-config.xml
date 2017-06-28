@@ -24,6 +24,7 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductPictureMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/BookMarkCardNumMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreEventMapper.xml" />
+				<mapper resource="com/cnb/config/mybatis/mapper/StorePictureMapper.xml" />
 
 	</mappers>
 	 
