@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class Product implements Serializable {
 	private String productId;	//PRIMARY KEY
-	private String storeId;		//PRIMARY KEY, FOREIGN KEY
 	private String productName;
 	private int productPrice;
 	private String productCategory;
@@ -25,9 +24,22 @@ public class Product implements Serializable {
 	private String sellingOption;
 	private int todayProductCount;
 	private int recommendProductCount;
-	private List<ProductPicture> productPictureList;
 	
+	/*********************************************************************
+	 * 부모 테이블 : Store, 자식 테이블 : Product
+	 * 제품 한 개는 한 매장에 소속되어있다.
+	 * 자신이 소속된 매장정보를 저장할 Instance 변수를 선언한다.
+	 *********************************************************************/
+	private String storeId;	 //PRODUCT 테이블의 STORE_ID 칼럼과 연결된 변수
+	private Store store;	//매장 정보를 담기 위함
 	
+	/*********************************************************************
+	 * 부모 테이블 : Product, 자식 테이블 : ProductPicture
+	 * 제품 한 개에 여러 개의 제품 사진들이 포함된다. 
+	 * 제품 사진들을 저장할 Instance 변수를 선언해야 한다.
+	 *********************************************************************/
+	private List<ProductPicture> productPictureList; 
+
 	public List<ProductPicture> getProductPictureList() {
 		return productPictureList;
 	}
@@ -49,6 +61,23 @@ public class Product implements Serializable {
 		this.sellingOption = sellingOption;
 		this.todayProductCount = todayProductCount;
 		this.recommendProductCount = recommendProductCount;
+		this.productPictureList = productPictureList;
+	}
+
+	public Product(String productId, String productName, int productPrice, String productCategory, String productDetail,
+			String sellingOption, int todayProductCount, int recommendProductCount, String storeId, Store store,
+			List<ProductPicture> productPictureList) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.productDetail = productDetail;
+		this.sellingOption = sellingOption;
+		this.todayProductCount = todayProductCount;
+		this.recommendProductCount = recommendProductCount;
+		this.storeId = storeId;
+		this.store = store;
 		this.productPictureList = productPictureList;
 	}
 
