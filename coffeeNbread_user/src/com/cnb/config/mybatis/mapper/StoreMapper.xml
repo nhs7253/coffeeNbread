@@ -5,6 +5,10 @@
 
  <!-- 
  	이진영
+ 	2017-06-28
+ 	StorePicture 조인
+ 
+ 	이진영
  	2017-06-26
  	초기 구현 
  -->
@@ -24,6 +28,19 @@
  	</resultMap>
  
  
+ 	
+ <resultMap type="com.cnb.vo.Store" id="store-storePicture-resultmap" extends="store-resultmap">
+ 	<collection property="StorePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>
+ </resultMap>
+ 
+ 
+ <resultMap type="com.cnb.vo.Store" id="store-storeEvent-resultmap" extends="store-resultmap">
+ 	<collection property="StoreEventList" resultMap="com.cnb.config.mybatis.mapper.StoreEventMapper.storeEvent-resultmap"/>
+ </resultMap>
+ 
+ <resultMap type="com.cnb.vo.Store" id="store-storeCategory-resultmap" extends="store-resultmap">
+ 	<association property="storeCategory" resultMap="com.cnb.config.mybatis.mapper.StoreCategoryMapper.StoreCategory-resultmap"/>
+ </resultMap>
  <!--매장 등록 Store insert  -->
 	<insert id="insertStore" parameterType="com.cnb.vo.Store">
 		INSERT INTO store
@@ -54,10 +71,51 @@
 			store_close = #{storeClose}
  		WHERE store_id = #{storeId}
  	</update>
- <!-- 매장 조회 Store select  -->
-	<select id="selectStore" resultMap="store-resultmap">
-		SELECT * 
-		FROM store
-		WHERE store_id = #{storeId}
+ <!-- 매장 사진 조회 Store select  -->
+	<select id="selectStore" resultMap="store-storePicture-resultmap" parameterType="string">
+		SELECT  s.store_id,
+				s.store_name,
+				s.store_intro,
+				s.store_phone,
+				s.store_address,
+				s.store_email,
+				s.store_hits,
+				s.store_open,
+				s.store_close,
+				sp.store_picture
+		FROM store s,store_picture sp
+		WHERE s.store_id = sp.store_id
+		AND s.store_id=#{value}
+	</select>
+	
+	<!-- 매장 이벤트 조회 StoreEvent Select -->
+	<select id="selectStoreEventList" resultMap="store-storeEvent-resultmap" parameterType="string">
+		SELECT s.store_id,
+			   s.store_name,
+			   sv.event_no,
+			   sv.event_title,
+			   sv.event_start_date,
+			   sv.event_end_date,
+			   sv.event_details,
+			   sv.sale_option,
+			   sv.sale_rate,
+			   sv.event_picture,
+			   sv.new_menu_option,
+			   sv.event_check
+		FROM store s,store_event sv
+		WHERE s.store_id = sv.store_id
+		AND s.store_id=#{value}
+			   
+	
+	</select>
+	
+	<!-- 매장 분류 조회 StoreCategory select -->
+	<select id="selectStoreCategory" resultMap="store-storeCategory-resultmap" parameterType="String">
+		SELECT s.store_id,
+			   s.store_name,
+			   sc.store_category
+		FROM store s,store_category sc
+		WHERE s.store_id = sc.store_id
+		AND s.store_id=#{value}
 	</select>
 </mapper>

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cnb.config.mybatis.mapper.StoreEventMapper">
-<!--  이진영
+
+
+<!--  
+	   
+
+	    이진영
 	  2017-06-27 생성
 	     초기 구현 
 -->
@@ -78,5 +83,4 @@
 	
 	
 	
-
 </mapper>

@@ -21,10 +21,14 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/StorePositionMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreVisitHistoryMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/UserPreferenceStoreMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/ProductGapMapper.xml"/>
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductPictureMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/BookMarkCardNumMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreEventMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/PaymentDetailsMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/StorePictureMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/StoreCategoryMapper.xml" />
+
 
 	</mappers>
 	 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cnb.config.mybatis.mapper.ProductGapMapper">
+	<!-- 
+		ProductGap 테이블 관련 mapper
+		+ 제품 증감폭 등록
+		+ 제품 증감폭 수정
+		+ 제품 증감폭과 제품들 모두 조회
+		+ 제품 증감 식별 코드로 제품 증감폭과 해당 제품들 조회
+	 -->
+	
+	<!-- insert -->
+	<insert id="insertProductGap" parameterType="productGap">
+		INSERT INTO product_gap VALUES (
+										#{identifyCode},
+										#{productGap},
+										#{productId},
+										#{storeId} )
+	</insert>
+	
+	<!-- update -->
+	<update id="updateProductGap" parameterType="productGap">
+		UPDATE product_gap
+		SET	   identify_code = #{identifyCode},   
+		 	   product_gap = #{productGap}
+		WHERE  store_id = #{storeId} AND product_id = #{productId}
+	</update>	
+	
+	
+	<!-- select -->
+	<!-- resultMap -->
+	<resultMap id="productGap-resultmap" type="productGap">
+		<result column="identify_code" property="identifyCode"/>
+		<result column="product_gap" property="productGap"/>
+		<result column="product_id" property="productId"/>
+		<result column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<resultMap id="productGap-product-resultmap" type="productGap" extends="productGap-resultmap">
+		<collection ofType="com.cnb.vo.Product" property="productList">
+			<result column="product_name" property="productName"/>
+			<result column="product_category" property="productCategory"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectProductGap" resultMap="productGap-product-resultmap">
+		SELECT g.identify_code, g.product_gap, g.product_id, g.store_id, p.product_name, p.product_category
+		FROM   product_gap g, product p
+		WHERE  g.store_id = p.store_id
+		AND	   g.product_id = p.product_id
+	</select>
+
+	<select id="selectProductGapByIdentifyCode" parameterType="string" resultMap="productGap-product-resultmap">
+		SELECT g.identify_code, g.product_gap, g.product_id, g.store_id, p.product_name, p.product_category
+		FROM   product_gap g, product p
+		WHERE  g.store_id = p.store_id
+		AND	   g.product_id = p.product_id	
+		AND	   g.identify_code = #{value}
+	</select>
+</mapper>
