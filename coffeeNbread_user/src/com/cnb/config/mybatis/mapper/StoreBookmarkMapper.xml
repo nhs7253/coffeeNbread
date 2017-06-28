@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cnb.config.mybatis.mapper.StoreBookmarkMapper">
+
+	<sql id="all-column"> user_id, store_id </sql>
+
+	<resultMap type="StoreBookmark" id="StoreBookmark-resultmap">
+		<id column="user_id" property="userId"/>
+		<id column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<insert id="insertStoreBookmark" parameterType="StoreBookmark">
+		INSERT INTO store_bookmark VALUES(#{userId}, #{storeId})
+	</insert>
+	
+	<delete id="deleteStoreBookmarkByUserId" parameterType="string">
+		DELETE FROM store_bookmark WHERE user_id = #{value}
+	</delete>
+	
+	<delete id="deleteStoreBookmarkByStoreBookmark" parameterType="StoreBookmark">
+		DELETE FROM store_bookmark WHERE user_id = #{userId} AND store_id = #{storeId}
+	</delete>
+	
+	<delete id="deleteStoreBookmarkByStoreBookmarkList" parameterType="map">
+	</delete>
+	
+	<update id="updateStoreBookmark" parameterType="StoreBookmark">
+		UPDATE store_bookmark 
+		SET store_id = #{storeId}
+		WHERE user_id = #{userId}
+	</update>
+	
+	<select id="selectStoreBookmarkList" resultMap="StoreBookmark-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM store_bookmark
+	</select>
+	
+	<select id="selectStoreBookmarkByUserId" resultType="string">
+		SELECT store_id
+		FROM store_bookmark
+		WHERE user_id = #{userId}
+	</select>
+
 </mapper>

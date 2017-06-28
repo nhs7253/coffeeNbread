@@ -1,5 +1,7 @@
 package com.cnb.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,8 +35,12 @@ public class StoreDaoImpl implements StoreDao{
 	}
 
 	@Override
-	public Store selectStore(String storeId) {
-		return session.selectOne(makeSqlId("selectStore"),storeId);
+	public List<Store> selectStore(String storeId) {
+		return session.selectList("com.cnb.config.mybatis.mapper.StoreMapper.selectStore",storeId);
 	}
 
+	@Override
+	public List<Store> selectStoreEventList(String storeId) {
+		return session.selectList("com.cnb.config.mybatis.mapper.StoreMapper.selectStoreEventList",storeId);
+	}
 }
