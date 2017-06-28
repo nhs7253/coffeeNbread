@@ -12,12 +12,20 @@ public class StoreBookmark implements Serializable{
 	private String userId; //PRIMARY KEY
 	private String storeId; //PRIMARY KEY
 	
+	private Store store;
+	
 	public StoreBookmark() {
 	}
 
 	public StoreBookmark(String userId, String storeId) {
 		this.userId = userId;
 		this.storeId = storeId;
+	}
+
+	public StoreBookmark(String userId, String storeId, Store store) {
+		this.userId = userId;
+		this.storeId = storeId;
+		this.store = store;
 	}
 
 	public String getUserId() {
@@ -36,10 +44,19 @@ public class StoreBookmark implements Serializable{
 		this.storeId = storeId;
 	}
 
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
@@ -54,6 +71,11 @@ public class StoreBookmark implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		StoreBookmark other = (StoreBookmark) obj;
+		if (store == null) {
+			if (other.store != null)
+				return false;
+		} else if (!store.equals(other.store))
+			return false;
 		if (storeId == null) {
 			if (other.storeId != null)
 				return false;
@@ -69,6 +91,6 @@ public class StoreBookmark implements Serializable{
 
 	@Override
 	public String toString() {
-		return "StoreBookmark [userId=" + userId + ", storeId=" + storeId + "]";
+		return "StoreBookmark [userId=" + userId + ", storeId=" + storeId + ", store=" + store + "]";
 	}
 }

@@ -9,6 +9,10 @@
 		<id column="store_id" property="storeId"/>
 	</resultMap>
 	
+	<resultMap type="StoreBookmark" id="StoreBookmark-Store-resultmap" extends="StoreBookmark-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+	</resultMap>
+	
 	<insert id="insertStoreBookmark" parameterType="StoreBookmark">
 		INSERT INTO store_bookmark VALUES(#{userId}, #{storeId})
 	</insert>
@@ -21,7 +25,21 @@
 		DELETE FROM store_bookmark WHERE user_id = #{userId} AND store_id = #{storeId}
 	</delete>
 	
-	<delete id="deleteStoreBookmarkByStoreBookmarkList" parameterType="map">
+	<delete id="deleteStoreBookmarkByStoreBookmarkList" parameterType="list">
+		DELETE FROM	store_bookmark
+        <where>
+			<choose>
+				<when test="storeIdList != null and storeIdList.size() > 0">
+	 		 		user_id = #{userId} AND store_id IN 
+	 		 		<foreach collection="storeIdList" open="(" close=")" separator="," item="storeIdList">
+	 		 			#{storeIdList}
+	 		 		</foreach>
+	 		 	</when>
+	 		 	<otherwise>
+					1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+				</otherwise>
+	 		 </choose>
+	 	</where>
 	</delete>
 	
 	<update id="updateStoreBookmark" parameterType="StoreBookmark">
@@ -39,6 +57,22 @@
 		SELECT store_id
 		FROM store_bookmark
 		WHERE user_id = #{userId}
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreList" parameterType="string" resultMap="StoreBookmark-Store-resultmap">
+		SELECT user_id, 
+			   s.store_id, 
+			   store_name, 
+			   store_intro, 
+			   store_phone, 
+			   store_address, 
+			   store_email, 
+			   store_hits, 
+			   store_open, 
+			   store_close, 
+			   store_permission
+		FROM store_bookmark sb, store s
+		WHERE sb.store_id = s.store_id AND user_id = #{value}
 	</select>
 
 </mapper>
