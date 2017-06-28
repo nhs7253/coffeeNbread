@@ -42,6 +42,9 @@ INSERT INTO GENERAL_USER VALUES('u-2','pw-2','user2',to_date('20160803', 'yyyy-m
 INSERT INTO GENERAL_USER VALUES('u-3','pw-3','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
 INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
 
+INSERT INTO GENERAL_USER VALUES('u-5','$2a$10$8sqmTtoKTZ2/aWW06ZH6mOIZQ2mkdANEL.Emg25kxHGtziuV5.oP2','user5',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
+
+INSERT INTO user_authority VALUES('u-5', 'CNB_USER');
 
 /* 매장 */
 SELECT *FROM STORE
