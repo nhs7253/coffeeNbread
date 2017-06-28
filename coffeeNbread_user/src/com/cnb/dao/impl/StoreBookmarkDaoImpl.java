@@ -63,4 +63,9 @@ public class StoreBookmarkDaoImpl implements StoreBookmarkDao{
 	public List<String> selectStoreBookmarkByUserId(String userId) {
 		return session.selectList(makeSqlId("selectStoreBookmarkByUserId"), userId);
 	}
+
+	@Override
+	public List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreList(String userId) {
+		return session.selectList(makeSqlId("selectStoreBookmarkByUserIdJoinStoreList"), userId);
+	}
 }

@@ -255,7 +255,9 @@ CREATE TABLE bookmark_card_num (
 CREATE TABLE product_gap(
     identify_code CHAR(1) NOT NULL,
     product_gap VARCHAR2(50) NOT NULL,
-    PRIMARY KEY(identify_code, product_gap)
+    product_id VARCHAR2(30) NOT NULL,
+    store_id VARCHAR2(30) NOT NULL,
+    PRIMARY KEY(identify_code, product_gap, product_id, store_id)
 );
 
 /* 매장 사진  */

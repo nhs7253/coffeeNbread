@@ -40,14 +40,6 @@ public class Product implements Serializable {
 	 *********************************************************************/
 	private List<ProductPicture> productPictureList; 
 
-	public List<ProductPicture> getProductPictureList() {
-		return productPictureList;
-	}
-
-	public void setProductPictureList(List<ProductPicture> productPictureList) {
-		this.productPictureList = productPictureList;
-	}
-
 	public Product() {
 		super();
 	}
@@ -155,14 +147,6 @@ public class Product implements Serializable {
 		this.sellingOption = sellingOption;
 	}
 
-	public int gettodayProductCount() {
-		return todayProductCount;
-	}
-
-	public void settodayProductCount(int todayProductCount) {
-		this.todayProductCount = todayProductCount;
-	}
-
 	public int getRecommendProductCount() {
 		return recommendProductCount;
 	}
@@ -170,13 +154,29 @@ public class Product implements Serializable {
 	public void setRecommendProductCount(int recommendProductCount) {
 		this.recommendProductCount = recommendProductCount;
 	}
+	
+	public List<ProductPicture> getProductPictureList() {
+		return productPictureList;
+	}
 
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", storeId=" + storeId + ", productName=" + productName
-				+ ", productPrice=" + productPrice + ", productCategory=" + productCategory + ", productDetail="
-				+ productDetail + ", sellingOption=" + sellingOption + ", todayProductCount=" + todayProductCount
-				+ ", recommendProductCount=" + recommendProductCount + "]";
+	public void setProductPictureList(List<ProductPicture> productPictureList) {
+		this.productPictureList = productPictureList;
+	}
+	
+	public int getTodayProductCount() {
+		return todayProductCount;
+	}
+
+	public void setTodayProductCount(int todayProductCount) {
+		this.todayProductCount = todayProductCount;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
 	}
 
 	@Override
