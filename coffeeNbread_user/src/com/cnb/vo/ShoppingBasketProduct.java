@@ -39,6 +39,9 @@ public class ShoppingBasketProduct implements Serializable{
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+
+
+	
 	public ProductPicture getProductPicture() {
 		return productPicture;
 	}
@@ -57,6 +60,13 @@ public class ShoppingBasketProduct implements Serializable{
 		this.store = store;
 		this.product = product;
 		this.productPicture = productPicture;
+	}
+	@Override
+	public String toString() {
+		return "ShoppingBasketProduct [userId=" + userId + ", storeId=" + storeId + ", productId=" + productId
+				+ ", productStoreId=" + productStoreId + ", productCount=" + productCount + ", generalUser="
+				+ generalUser + ", store=" + store + ", product=" + product + ", productPicture=" + productPicture
+				+ "]";
 	}
 	public ShoppingBasketProduct(String userId, String storeId, String productId, String productStoreId,
 			int productCount, GeneralUser generalUser, Store store, Product product) {
@@ -112,11 +122,7 @@ public class ShoppingBasketProduct implements Serializable{
 	public void setProductCount(int productCount) {
 		this.productCount = productCount;
 	}
-	@Override
-	public String toString() {
-		return "ShoppingBasketProduct [userId=" + userId + ", storeId=" + storeId + ", productId=" + productId
-				+ ", productStoreId=" + productStoreId + ", productCount=" + productCount + "]";
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

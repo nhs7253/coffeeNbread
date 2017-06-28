@@ -6,8 +6,8 @@ import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
- *김형주
- * 2017-06-26 생성
+ * 노현식
+ * 2017-06-23 생성
  */
 
 
