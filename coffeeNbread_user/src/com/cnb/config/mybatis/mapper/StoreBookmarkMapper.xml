@@ -74,5 +74,97 @@
 		FROM store_bookmark sb, store s
 		WHERE sb.store_id = s.store_id AND user_id = #{value}
 	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreListCount" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM store_bookmark sb, store s
+		WHERE sb.store_id = s.store_id AND user_id = #{value}
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreListPagingCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM(
+					SELECT rownum rnum, 
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_bookmark sb, store s 
+						WHERE s.store_id = sb.store_id AND user_id = #{userId}
+						ORDER BY store_name
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreListPaging" parameterType="map" resultMap="StoreBookmark-Store-resultmap">
+		<![CDATA[
+			SELECT user_id, 
+				   store_id, 
+				   store_name, 
+				   store_intro, 
+				   store_phone, 
+				   store_address, 
+				   store_email, 
+				   store_hits, 
+				   store_open, 
+				   store_close, 
+				   store_permission
+			FROM(
+					SELECT rownum rnum, 
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_bookmark sb, store s 
+						WHERE s.store_id = sb.store_id AND user_id = #{userId}
+						ORDER BY store_name
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
 
 </mapper>

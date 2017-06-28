@@ -6,6 +6,13 @@ import com.cnb.vo.StoreBookmark;
 
 /*
  * 노현식
+ * 2017-06-29
+ * 페이징을 위한 추가
+ * selectStoreBookmarkByUserIdJoinStoreListCount
+ * selectStoreBookmarkByUserIdJoinStoreListPagingCount
+ * selectStoreBookmarkByUserIdJoinStoreListPaging
+ * 
+ * 노현식
  * 2017-06-28
  * 생성, 초기구현
  */
@@ -65,4 +72,29 @@ public interface StoreBookmarkDao {
 	 * @return List<StoreBookmark> - 유저가 즐겨 찾기한 매장 목록
 	 */
 	List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreList(String userId);
+	
+	/** 
+	 * 해당 유저가 즐겨찾기한 매장 목록 수 (Paging 용 count - 전체 조회 수)
+	 * @param userId 해당 목록을 찾을 유저 ID
+	 * @return int - 유저가 즐겨 찾기한 매장 목록 수
+	 */
+	int selectStoreBookmarkByUserIdJoinStoreListCount(String userId);
+	
+	/**
+	 * 해당 유저가 즐겨찾기한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬)
+	 * @param userId 해당 목록을 찾을 유저 ID
+	 * @param startIndex 페이징 시작 컬럼
+	 * @param endIndex 페이징 끝 컬럼
+	 * @return int - 유저가 즐겨 찾기한 매장 목록의 일정 조회 수 수
+	 */
+	int selectStoreBookmarkByUserIdJoinStoreListPagingCount(String userId, int startIndex, int endIndex);
+	
+	/**
+	 * 해당 유저가 즐겨찾기한 매장 목록 수를 일정 크기만큼 조회 (Paging)
+	 * @param userId 해당 목록을 찾을 유저 ID
+	 * @param startIndex 페이징 시작 컬럼
+	 * @param endIndex 페이징 끝 컬럼
+	 * @return List<StoreBookmark> - 유저가 즐겨 찾기한 매장 목록 일정량
+	 */
+	List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreListPaging(String userId, int startIndex, int endIndex);
 }
