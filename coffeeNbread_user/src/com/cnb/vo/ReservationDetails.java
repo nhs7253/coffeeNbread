@@ -2,9 +2,14 @@ package com.cnb.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+/*
+ * 최민희
+ * 2017-06-28 수정
+ * 초기 구현
+ */
 /*
  * 최민희
  * 2017-06-27 생성
@@ -19,9 +24,30 @@ public class ReservationDetails implements Serializable {
 	private Date reservationConfirm;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date productHopeTime;
-	private String productId;	//FORIEGN KEY
-	private String storeId;		//FORIEGN KEY
+	
+	/*********************************************************************
+	 * 부모 테이블 : ReservationDetails, 자식 테이블 : GeneralUser
+	 * 1개의 예약 정보는 한 명의 사용자에 소속되어있다.
+	 * 예약자 정보를 저장할 Instance 변수를 선언해야 한다.
+	 *********************************************************************/
 	private String userId;		//FORIEGN KEY
+	private GeneralUser generalUser;
+	
+	/*********************************************************************
+	 * 부모 테이블 : ReservationDetails, 자식 테이블 : Product
+ 	 * 1개의 예약 정보에 여러개의 제품들이 포함된다.
+	 * 제품들 정보를 저장할 Instance 변수를 선언해야 한다.
+	 *********************************************************************/
+	private String productId;	//FORIEGN KEY
+	private List<Product> productList;
+	
+	/*********************************************************************
+	 * 부모 테이블 : ReservationDetails, 자식 테이블 : Store 
+	 * 1개의 예약 정보는 한 매장에 소속되어있다.
+	 * 매장 정보를 저장할 Instance 변수를 선언해야 한다.
+	 *********************************************************************/
+	private String storeId;		//FORIEGN KEY
+	private Store store;
 	
 	public ReservationDetails() {
 		super();
@@ -38,6 +64,23 @@ public class ReservationDetails implements Serializable {
 		this.productId = productId;
 		this.storeId = storeId;
 		this.userId = userId;
+	}
+
+	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
+			Date productHopeTime, String userId, GeneralUser generalUser, String productId, List<Product> productList,
+			String storeId, Store store) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationTime = reservationTime;
+		this.reservationCount = reservationCount;
+		this.reservationConfirm = reservationConfirm;
+		this.productHopeTime = productHopeTime;
+		this.userId = userId;
+		this.generalUser = generalUser;
+		this.productId = productId;
+		this.productList = productList;
+		this.storeId = storeId;
+		this.store = store;
 	}
 
 	public int getReservationNo() {

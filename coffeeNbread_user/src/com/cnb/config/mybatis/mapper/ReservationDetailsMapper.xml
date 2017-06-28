@@ -25,16 +25,40 @@
 	</insert>
 	
 	<!-- select -->
-
+	<sql id="select-reservationDetails">
+		SELECT  reservation_no,
+				reservation_time,
+				reservation_count,
+				reservation_confirm,
+				product_hope_time,
+				product_id,
+				store_id,
+				user_id
+		FROM	reservation_details
+	</sql>
 	 
 	<!-- resultMap -->
-
+	<resultMap type="com.cnb.vo.ReservationDetails" id="reservationDetails-resultmap">
+		<id column="reservation_no" property="reservationNo"/>
+		<result column="reservation_time" property="reservationTime"/>
+		<result column="reservation_count" property="reservationCount"/>
+		<result column="product_hope_time" property="productHopeTime"/>
+		<result column="product_id" property="productId"/>
+		<result column="store_id" property="storeId"/>
+		<result column="user_id" property="userId"/>
+	</resultMap>
 	 
 	<!-- selectReservationDetailsByUserId -->
-
+	<select id="selectReservationDetailsByUserId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<include refid="select-reservationDetails"/>
+		WHERE store_id = #{storeId} AND user_id = #{userId}
+	</select>
 	 
 	<!-- selectReservationDetailsByReservationTime -->
-
+	<select id="selectReservationDetailsByReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
+		<include refid="select-reservationDetails"/>
+		WHERE store_id = #{storeId} AND reservation_time = #{reservationTime}
+	</select>
 
 
 </mapper>
