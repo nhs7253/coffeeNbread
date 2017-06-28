@@ -3,6 +3,10 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.util.Date;
 /*
+ * 이진영
+* 2017-06-28 
+* 생성자 수정
+* 
 * 이진영
 * 2017-06-27 생성
 * 초기 구현
@@ -32,6 +36,31 @@ public class StoreEvent implements Serializable{
 	public StoreEvent() {
 		super();
 	}
+
+	
+	
+
+
+	public StoreEvent(int eventNo, String eventTitle, Date eventStartDate, Date eventEndDate, String eventOption,
+			String eventDetails, String saleOption, int saleRate, String eventPicture, String newMenuOption,
+			String eventCheck, String storeId) {
+		super();
+		this.eventNo = eventNo;
+		this.eventTitle = eventTitle;
+		this.eventStartDate = eventStartDate;
+		this.eventEndDate = eventEndDate;
+		this.eventOption = eventOption;
+		this.eventDetails = eventDetails;
+		this.saleOption = saleOption;
+		this.saleRate = saleRate;
+		this.eventPicture = eventPicture;
+		this.newMenuOption = newMenuOption;
+		this.eventCheck = eventCheck;
+		this.storeId = storeId;
+	}
+
+
+
 
 
 	public StoreEvent(int eventNo, String eventTitle, Date eventStartDate, Date eventEndDate, String eventOption,
