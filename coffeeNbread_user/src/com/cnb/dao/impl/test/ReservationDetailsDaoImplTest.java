@@ -36,14 +36,11 @@ public class ReservationDetailsDaoImplTest {
 		
 		
 		try {
-			//dao.insertReservationDetails(new ReservationDetails(0, dt.parse("2017-06-27 08:00:00"), 10, dt.parse("2017-06-27 14:00:00"), dt.parse("2017-06-28 16:00:00"), "p-1", "m-1", "u-1"));
-			//dao.insertReservationDetails(new ReservationDetails(0, dt.parse("2017-06-28 08:00:00"), 20, dt.parse("2017-06-28 14:00:00"), dt.parse("2017-06-28 16:00:00"), "p-2", "m-1", "u-1"));
-			//dao.insertReservationDetails(new ReservationDetails(0, dt.parse("2017-06-29 08:00:00"), 20, dt.parse("2017-06-29 14:00:00"), dt.parse("2017-06-29 16:00:00"), "p-2", "m-1", "u-0"));
-			System.out.println(dao.selectReservationDetailsByReservationTime("m-1", dt.parse("2017-06-28 08:00:00")));
+			System.out.println(dao.selectReservationDetailsByReservationTime("s-1", dt.parse("2017-06-28 08:00:00")));
 		} catch (ParseException e) {
 			System.out.println("이상발견");
 		}
-		//System.out.println(dao.selectReservationDetailsByUserId("m-1", "u-1"));
+		//System.out.println(dao.selectReservationDetailsByUserId("s-1", "u-1"));
 		System.out.println("이상없음");
 	}
      

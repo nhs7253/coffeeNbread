@@ -69,7 +69,8 @@
 			store_close = #{storeClose}
  		WHERE store_id = #{storeId}
  	</update>
- <!-- 매장 사진 조회 Store select  -->
+ 	
+ 	<!-- 매장 사진 조회 Store select  -->
 	<select id="selectStore" resultMap="store-storePicture-resultmap" parameterType="string">
 		SELECT  s.store_id,
 				s.store_name,
