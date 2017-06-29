@@ -5,6 +5,10 @@ import java.io.Serializable;
 /*
  * 노현식
  * 2017-06-29
+ * storeVisitHistoryNo 추가 
+ * 
+ * 노현식
+ * 2017-06-29
  * Store 추가 
  * 
  * 노현식
@@ -13,14 +17,15 @@ import java.io.Serializable;
  */
 public class StoreVisitHistory implements Serializable{
 	
-	private String userId; //PRIMARY KEY
-	private String storeId; //PRIMARY KEY
+	private int storeVisitHistoryNo; //PRIMARY KEY
+	private String userId; 
+	private String storeId; 
 	
 	private Store store;
 	
 	public StoreVisitHistory() {
 	}
-	
+
 	public StoreVisitHistory(String userId, String storeId) {
 		this.userId = userId;
 		this.storeId = storeId;
@@ -30,6 +35,21 @@ public class StoreVisitHistory implements Serializable{
 		this.userId = userId;
 		this.storeId = storeId;
 		this.store = store;
+	}
+
+	public StoreVisitHistory(int storeVisitHistoryNo, String userId, String storeId, Store store) {
+		this.storeVisitHistoryNo = storeVisitHistoryNo;
+		this.userId = userId;
+		this.storeId = storeId;
+		this.store = store;
+	}
+
+	public int getStoreVisitHistoryNo() {
+		return storeVisitHistoryNo;
+	}
+
+	public void setStoreVisitHistoryNo(int storeVisitHistoryNo) {
+		this.storeVisitHistoryNo = storeVisitHistoryNo;
 	}
 
 	public String getUserId() {
@@ -62,6 +82,7 @@ public class StoreVisitHistory implements Serializable{
 		int result = 1;
 		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
+		result = prime * result + storeVisitHistoryNo;
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
@@ -85,6 +106,8 @@ public class StoreVisitHistory implements Serializable{
 				return false;
 		} else if (!storeId.equals(other.storeId))
 			return false;
+		if (storeVisitHistoryNo != other.storeVisitHistoryNo)
+			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
@@ -95,6 +118,7 @@ public class StoreVisitHistory implements Serializable{
 
 	@Override
 	public String toString() {
-		return "StoreVisitHistory [userId=" + userId + ", storeId=" + storeId + ", store=" + store + "]";
+		return "StoreVisitHistory [storeVisitHistoryNo=" + storeVisitHistoryNo + ", userId=" + userId + ", storeId="
+				+ storeId + ", store=" + store + "]";
 	}
 }

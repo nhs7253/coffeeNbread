@@ -43,8 +43,13 @@ public class StoreDaoImpl implements StoreDao{
 	}
 
 	@Override
-	public Store selectStoreCategory(String storeId) {
+	public List<Store> selectStoreCategoryList(String storeId) {
 		
 		return session.selectOne("com.cnb.config.mybatis.mapper.StoreMapper.selectStoreCategory",storeId);
+	}
+
+	@Override
+	public int deleteStoreById(String storeId) {
+		return session.delete("com.cnb.config.mybatis.mapper.StoreMapper.deleteStoreById",storeId);
 	}
 }
