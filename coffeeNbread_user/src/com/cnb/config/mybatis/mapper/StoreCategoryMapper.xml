@@ -5,8 +5,7 @@
 	<resultMap type="com.cnb.vo.StoreCategory" id="StoreCategory-resultmap">
 		<id column="store_category_no" property="storeCategoryNo"/>
  		<result column="store_category" property="storeCategory"/>
- 		<result column="store_id" property="storeId"/>
-	
+ 		<result column="store_id" property="storeId"/>	
 	</resultMap>
 
 </mapper>
