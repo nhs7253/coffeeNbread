@@ -29,6 +29,7 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreVisitHistoryMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreCategoryMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreEventMapper.xml" />
+		
 
 		<!-- 장바구니, 결제, 예약 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/ShoppingBasketProductMapper.xml" />

@@ -5,7 +5,37 @@
 	<resultMap type="com.cnb.vo.StoreCategory" id="StoreCategory-resultmap">
 		<id column="store_category_no" property="storeCategoryNo"/>
  		<result column="store_category" property="storeCategory"/>
- 		<result column="store_id" property="storeId"/>	
+ 		<result column="store_id" property="storeId"/>
 	</resultMap>
+	
+	<!-- 매장 카테고리 insert -->
+	<insert id="insertStoreCategory" parameterType="com.cnb.vo.StoreCategory">
+		<selectKey resultType="_int" keyProperty="storeCategoryNo" >
+			select store_category_no_seq.nextval from dual
+		</selectKey>
+		INSERT INTO store_category
+		VALUES(
+			#{storeCategoryNo},
+			#{storeCategory},
+			#{storeId}
+			
+		)
+		
+	</insert>
+	
+	<!-- 매장 카테고리 update -->
+	<update id="updateStoreCategory" parameterType="com.cnb.vo.StoreCategory">
+		UPDATE store_category
+ 		SET store_category = #{storeCategory}
+ 		WHERE store_category_no = #{storeCategoryNo}
+ 	
+	</update>
+	
+	
+	<!-- 매장 카테고리 delete -->
+	<delete id="deleteStoreCategoryById" parameterType="com.cnb.vo.StoreCategory">
+		DELETE FROM store_category
+		WHERE store_category_no=#{storeCategoryNo}
 
+	</delete>
 </mapper>
