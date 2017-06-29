@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cnb.config.mybatis.mapper.PaymentOptionListMapper">
+	<!--
+	  결제 종류 리스트 테이블을 관리하는 mapper
+	 payment_optionList
+	
+	  -->
+	
+	<!-- insert -->
+	<insert id="insertPaymentOptionList" parameterType="PaymentOptionList">
+		INSERT INTO payment_optionList VALUES (
+										#{paymentId},
+										#{paymentMethod} 		
+										 )
+	</insert>
+	
+		   
+	<delete id="deletePaymentOptionListByPaymentId" parameterType="string">
+		DELETE FROM payment_optionlist WHERE payment_id = #{value}
+	</delete>
+	
+	
+	<!-- resultMap -->
+	<resultMap id="paymentOptionList-resultmap" type="PaymentOptionList">
+		<result column="payment_id" property="paymentId"/>
+		<result column="payment_method" property="paymentMethod"/>
+	</resultMap>
+	
+	
+	
+</mapper>

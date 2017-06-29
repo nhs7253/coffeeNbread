@@ -2,8 +2,8 @@
 	CREATE USER CNB_manager IDENTIFIED BY manager;
 	GRANT ALL PRIVILEGES TO CNB_manager; 
 */
-/* 테이블 : 27, 시퀀스 : 10 - 총합 : 37 */
 
+--테이블 : 28, 시퀀스 : 10 - 총합 : 38 */     --테이블 추가된거 하나 추가 해서 반영  -6.29
 /* 테이블 및 시퀀스 생성 */
 
 /* 관리자 */
@@ -312,7 +312,14 @@ CREATE TABLE option_detail (
    FOREIGN KEY(option_id, store_id) REFERENCES option_category(option_id, store_id) ON DELETE CASCADE
 );
 
-
+/* 매장 결제 종류 */
+CREATE TABLE store_payment_optionlist (
+	store_id VARCHAR2(30) NOT NULL, /* 매장아이디  */
+	payment_id CHAR(1) NOT NULL, /* 결제아이디 */
+	PRIMARY KEY(store_id, payment_id),
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
+	FOREIGN KEY(payment_id) REFERENCES payment_OptionList(payment_id) ON DELETE CASCADE
+);
 /* 생성후 이상 확인 */
 
 /* 관리자 */
@@ -369,7 +376,8 @@ SELECT * FROM event_product;
 SELECT * FROM option_category;
 /* 옵션 상세 */
 SELECT * FROM option_detail;
-
+/* 제품 결제 내역 */
+SELECT * FROM store_payment_optionlist;
 
 /* 공지사항 게시글 시퀀스 */
 SELECT notice_board_no_seq.nextval FROM dual;
@@ -394,6 +402,9 @@ SELECT store_visit_history_no_seq.nextval FROM dual;
 
 /* 삭제 */
 
+
+/* 매장 결제 종류 */
+DROP TABLE store_payment_optionlist;
 /* 옵션 상세 */
 DROP TABLE option_detail;
 /* 옵션카테고리 */
