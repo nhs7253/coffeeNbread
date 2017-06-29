@@ -86,7 +86,7 @@ CREATE SEQUENCE event_no_seq;
 
 /* 매장 방문 기록 */
 CREATE TABLE store_visit_history (
-	store_visit_history_no NUMBER PRIMARY KEY /* 매장 방문 기록 번호 */
+	store_visit_history_no NUMBER PRIMARY KEY, /* 매장 방문 기록 번호 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
