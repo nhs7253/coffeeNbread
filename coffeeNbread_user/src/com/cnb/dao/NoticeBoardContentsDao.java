@@ -35,40 +35,40 @@ public interface NoticeBoardContentsDao {
 	 * @param noticeBoardNo
 	 * @return 처리 개수
 	 */
-	int deleteNoticeBoardContents(String noticeBoardNo);
+	int deleteNoticeBoardContentsByNoticeBoardNo(String noticeBoardNo);
 	
 	/**
 	 * 내용으로 공지글들 select
 	 * @param noticeBoardContent
 	 * @return 조회된 공지글들
 	 */
-	List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardContent(String noticeBoardContent);
+	List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardContent(String noticeBoardContent);
 	
 	/**
 	 * 제목으로 공지글들 select
 	 * @param noticeBoardTitle
 	 * @return 조회된 공지글들
 	 */
-	List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardTitle(String noticeBoardTitle);
+	List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardTitle(String noticeBoardTitle);
 	
 	/**
 	 * 작성일로 공지글들 select
 	 * @param noticeBoardDate
 	 * @return 조회된 공지글들
 	 */
-	List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardDate(Date noticeBoardDate);
+	List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardDate(Date noticeBoardDate);
 	
 	/**
 	 * 조회수로 공지글들 select
 	 * @param noticeBoardHits
 	 * @return 조회된 공지글들
 	 */
-	List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardHits(int noticeBoardHits);
+	List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardHits(int noticeBoardHits);
 	
 	/**
 	 * 모든 공지글 select
 	 * @param 
 	 * @return 처리 개수
 	 */
-	List<NoticeBoardContents> selectAllNoticeBoardContents();
+	List<NoticeBoardContents> selectNoticeBoardContentsList();
 }

@@ -2,10 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cnb.config.mybatis.mapper.ProductPictureMapper">
 
-	<resultMap id="productPicture-resultmap" type="productPicture">
+	<!-- 
+		ProductPicture 테이블 관련 mapper
+		+ 제품 사진 등록
+		+ 제품 사진 수정
+		+ 제품 사진 삭제
+		+ 매장아이디, 제품아이디로 제품 사진 조회
+	 -->
+
+	<!-- insert -->
+	<insert id="insertProductPicture" parameterType="productPicture">
+		INSERT INTO product_picture VALUES (
+											#{productPicture},
+											#{productId},
+											#{storeId}	)
+		
+	</insert>
+	
+	
+	<!-- update -->
+	<update id="updateProductPictureByProductPicture" parameterType="map">
+		UPDATE product_picture
+		SET	   product_picture = #{productPictureByVO}
+		WHERE  product_id = #{productIdByVO}
+		AND    store_id = #{storeIdByVO}
+		AND	   product_picture = #{productPicture}
+	</update>
+	
+	
+	<!-- delete -->
+	<delete id="deleteProductPictureByProductIdAndStoreId" parameterType="productPicture">
+		DELETE FROM product_picture
+		WHERE  product_picture = #{productPicture}
+		AND    product_id = #{productId}
+		AND	   store_id = #{storeId}
+	</delete>
+	
+	
+	<!-- select -->
+	<sql id="select-productPicture">
+		SELECT product_picture,
+			   product_id,
+			   store_id
+		FROM   product_picture
+	</sql>
+	
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.ProductPicture" id="productPicture-resultmap">
 		<id column="product_picture" property="productPicture"/>
 		<result column="picture_id" property="productId"/>
 		<result column="store_id" property="storeId"/>
 	</resultMap>
 
+	<!-- selectProductPictureListByProductIdAndStoreId -->
+	<select id="selectProductPictureListByProductIdAndStoreId" resultMap="productPicture-resultmap" parameterType="map">
+		<include refid="select-productPicture"/>
+		WHERE product_id = #{productId} AND store_id = #{storeId}
+	</select>
 </mapper>

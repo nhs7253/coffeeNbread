@@ -28,16 +28,69 @@
 	
 	<!-- update -->
 	<update id="updateNoticeBoardContents" parameterType="noticeBoardContents">
-	
+		UPDATE notice_board_contents
+		SET	   notice_board_content = #{noticeBoardContent},
+			   notice_board_title = #{noticeBoardTitle},
+			   notice_board_date = #{noticeBoardDate}
+		WHERE  notice_board_no = #{noticeBoardNo}
 	</update>
 	
 	
 	<!-- delete -->
-	<delete id="deleteNoticeBoardContents" parameterType="string">
-	
+	<delete id="deleteNoticeBoardContentsByNoticeBoardNo" parameterType="string">
+		DELETE FROM notice_board_contents
+		WHERE notice_board_no = #{value}
 	</delete>
 	
 	
 	<!-- select -->
+	<sql id="select-noticeBoardContents">
+		SELECT  notice_board_no,
+				notice_board_content,
+				notice_board_title,
+				notice_board_date,
+				notice_board_hits
+		FROM	notice_board_contents
+	</sql>
+	
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.NoticeBoardContents" id="noticeBoardContents-resultmap">
+		<id column="notice_board_no" property="noticeBoardNo"/>
+		<result column="notice_board_content" property="noticeBoardContent"/>
+		<result column="notice_board_title" property="noticeBoardTitle"/>
+		<result column="notice_board_date" property="noticeBoardDate"/>
+		<result column="notice_board_hits" property="noticeBoardHits"/>
+	</resultMap>
+	
+	<!-- selectNoticeBoardContentsListByNoticeBoardContent -->
+	<select id="selectNoticeBoardContentsListByNoticeBoardContent" resultMap="noticeBoardContents-resultmap" parameterType="string">
+		<include refid="select-noticeBoardContents"/>
+		<!-- CLOB타입으로 SELECT시 -->
+		WHERE dbms_lob.instr(notice_board_content, #{noticeBoardContent}) > 0
+	</select>
+	
+	<!-- selectNoticeBoardContentsListByNoticeBoardTitle -->
+	<select id="selectNoticeBoardContentsListByNoticeBoardTitle" resultMap="noticeBoardContents-resultmap" parameterType="string">
+		<include refid="select-noticeBoardContents"/>
+		WHERE notice_board_title = #{noticeBoardTitle}
+	</select>
+	
+	<!-- selectNoticeBoardContentsListByNoticeBoardDate -->
+	<select id="selectNoticeBoardContentsListByNoticeBoardDate" resultMap="noticeBoardContents-resultmap" parameterType="java.util.Date">
+		<include refid="select-noticeBoardContents"/>
+		WHERE notice_board_date = #{noticeBoardDate}
+	</select>
+	
+	<!-- selectNoticeBoardContentsListByNoticeBoardHits -->
+	<select id="selectNoticeBoardContentsListByNoticeBoardHits" resultMap="noticeBoardContents-resultmap" parameterType="_int">
+		<include refid="select-noticeBoardContents"/>
+		WHERE notice_board_hits = #{noticeBoardHits}
+	</select>
+	
+	<!-- selectNoticeBoardContentsList -->
+	<select id="selectNoticeBoardContentsList" resultMap="noticeBoardContents-resultmap">
+		<include refid="select-noticeBoardContents"/>
+		ORDER BY notice_board_no ASC
+	</select>
 	
 </mapper>

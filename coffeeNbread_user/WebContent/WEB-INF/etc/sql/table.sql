@@ -20,7 +20,7 @@ CREATE TABLE user_authority (
 
 /* 결제 종류 */
 CREATE TABLE payment_optionlist (
-	payment_id VARCHAR2(30) PRIMARY KEY, /* 결제아이디 */
+	payment_id CHAR(1) PRIMARY KEY, /* 결제아이디 */
 	payment_method VARCHAR2(50) NOT NULL /* 결제방법 */
 );
 
@@ -263,7 +263,7 @@ CREATE TABLE product_gap(
 /* 매장 사진  */
 CREATE TABLE store_picture (
 	store_picture VARCHAR2(300) PRIMARY KEY,  /* 매장 사진 */
-	store_id NOT NULL,  /* 이벤트 상태  */
+	store_id NOT NULL,  /* 매장 아이디  */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 

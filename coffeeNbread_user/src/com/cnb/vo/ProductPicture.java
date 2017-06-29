@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class ProductPicture implements Serializable{
 
-	private String productPicture;
+	private String productPicture;	//PRIMARY KEY
 	private String productId;
 	private String storeId;
 	

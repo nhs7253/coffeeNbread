@@ -76,20 +76,20 @@
  		<collection property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
  	</resultMap>
 	
-	<!-- selectProductByCategory -->
-	<select id="selectProductByCategory" resultMap="product-productPicture-resultmap" parameterType="map">
+	<!-- selectProductListByCategory -->
+	<select id="selectProductListByCategory" resultMap="product-productPicture-resultmap" parameterType="map">
 		<include refid="select-product-productPicture"/>
-		WHERE store_id = #{storeId}
-		AND   product_category = #{productCategory}
+		WHERE p.store_id = #{storeId}
+		AND   p.product_category = #{productCategory}
 		AND	  p.store_id = pp.store_id
 		AND   p.product_id = pp.product_id
 	</select>
 	
-	<!-- selectProductByName -->
-	<select id="selectProductByName" resultMap="product-productPicture-resultmap" parameterType="map">
+	<!-- selectProductListByName -->
+	<select id="selectProductListByName" resultMap="product-productPicture-resultmap" parameterType="map">
 		<include refid="select-product-productPicture"/>
 		WHERE p.store_id = #{storeId} 
-		AND   product_name = #{productName}
+		AND   p.product_name = #{productName}
 		AND	  p.store_id = pp.store_id
 		AND   p.product_id = pp.product_id
 	</select>
