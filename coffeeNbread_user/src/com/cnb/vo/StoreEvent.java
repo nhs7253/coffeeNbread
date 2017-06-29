@@ -2,15 +2,21 @@ package com.cnb.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+/*
+ * 최민희
+ * 2017-06-30
+ * 수정
+ */
 /*
  * 이진영
-* 2017-06-28 
-* 생성자 수정
-* 
-* 이진영
-* 2017-06-27 생성
-* 초기 구현
-*/
+ * 2017-06-28 
+ * 생성자 수정
+ */
+/* 이진영
+ * 2017-06-27 생성
+ * 초기 구현
+ */
 public class StoreEvent implements Serializable{
 	private int eventNo;
 	private String eventTitle;
@@ -31,15 +37,18 @@ public class StoreEvent implements Serializable{
 	 ***************************************************/
 	private String storeId;
 	private Store store;
-	
+
+	/*********************************************************************
+	 * 부모 테이블 : StoreEvent, 자식 테이블 : EventProduct
+	 * 이벤트 한 개에 여러 개의 제품들이 포함된다. 
+	 * 제품들을 저장할 Instance 변수를 선언해야 한다.
+	 *********************************************************************/
+	private List<EventProduct> eventProductList; 
+
 	
 	public StoreEvent() {
 		super();
 	}
-
-	
-	
-
 
 	public StoreEvent(int eventNo, String eventTitle, Date eventStartDate, Date eventEndDate, String eventOption,
 			String eventDetails, String saleOption, int saleRate, String eventPicture, String newMenuOption,
@@ -58,10 +67,6 @@ public class StoreEvent implements Serializable{
 		this.eventCheck = eventCheck;
 		this.storeId = storeId;
 	}
-
-
-
-
 
 	public StoreEvent(int eventNo, String eventTitle, Date eventStartDate, Date eventEndDate, String eventOption,
 			String eventDetails, String saleOption, int saleRate, String eventPicture, String newMenuOption,
@@ -82,6 +87,25 @@ public class StoreEvent implements Serializable{
 		this.store = store;
 	}
 
+	public StoreEvent(int eventNo, String eventTitle, Date eventStartDate, Date eventEndDate, String eventOption,
+			String eventDetails, String saleOption, int saleRate, String eventPicture, String newMenuOption,
+			String eventCheck, String storeId, Store store, List<EventProduct> eventProductList) {
+		super();
+		this.eventNo = eventNo;
+		this.eventTitle = eventTitle;
+		this.eventStartDate = eventStartDate;
+		this.eventEndDate = eventEndDate;
+		this.eventOption = eventOption;
+		this.eventDetails = eventDetails;
+		this.saleOption = saleOption;
+		this.saleRate = saleRate;
+		this.eventPicture = eventPicture;
+		this.newMenuOption = newMenuOption;
+		this.eventCheck = eventCheck;
+		this.storeId = storeId;
+		this.store = store;
+		this.eventProductList = eventProductList;
+	}
 
 	public int getEventNo() {
 		return eventNo;
@@ -213,15 +237,22 @@ public class StoreEvent implements Serializable{
 	}
 
 
+	public List<EventProduct> getEventProductList() {
+		return eventProductList;
+	}
+
+	public void setEventProductList(List<EventProduct> eventProductList) {
+		this.eventProductList = eventProductList;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreEvent [eventNo=" + eventNo + ", eventTitle=" + eventTitle + ", eventStartDate=" + eventStartDate
 				+ ", eventEndDate=" + eventEndDate + ", eventOption=" + eventOption + ", eventDetails=" + eventDetails
 				+ ", saleOption=" + saleOption + ", saleRate=" + saleRate + ", eventPicture=" + eventPicture
 				+ ", newMenuOption=" + newMenuOption + ", eventCheck=" + eventCheck + ", storeId=" + storeId
-				+ ", store=" + store + "]";
+				+ ", store=" + store + ", eventProductList=" + eventProductList + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -233,6 +264,7 @@ public class StoreEvent implements Serializable{
 		result = prime * result + eventNo;
 		result = prime * result + ((eventOption == null) ? 0 : eventOption.hashCode());
 		result = prime * result + ((eventPicture == null) ? 0 : eventPicture.hashCode());
+		result = prime * result + ((eventProductList == null) ? 0 : eventProductList.hashCode());
 		result = prime * result + ((eventStartDate == null) ? 0 : eventStartDate.hashCode());
 		result = prime * result + ((eventTitle == null) ? 0 : eventTitle.hashCode());
 		result = prime * result + ((newMenuOption == null) ? 0 : newMenuOption.hashCode());
@@ -242,7 +274,6 @@ public class StoreEvent implements Serializable{
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -280,6 +311,11 @@ public class StoreEvent implements Serializable{
 				return false;
 		} else if (!eventPicture.equals(other.eventPicture))
 			return false;
+		if (eventProductList == null) {
+			if (other.eventProductList != null)
+				return false;
+		} else if (!eventProductList.equals(other.eventProductList))
+			return false;
 		if (eventStartDate == null) {
 			if (other.eventStartDate != null)
 				return false;
@@ -314,7 +350,4 @@ public class StoreEvent implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-
 }
