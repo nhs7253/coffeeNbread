@@ -11,6 +11,12 @@ import org.springframework.stereotype.Repository;
 import com.cnb.dao.ProductGapDao;
 import com.cnb.vo.Product;
 import com.cnb.vo.ProductGap;
+
+/*
+ * 최민희
+ * 2017-06-29
+ * 수정
+ */
 /*
  * 최민희
  * 2017-06-28 수정
@@ -40,12 +46,12 @@ public class ProductGapDaoImpl implements ProductGapDao {
 	}
 
 	@Override
-	public List<ProductGap> selectProductGap() {
-		return session.selectList(makeSqlId("selectProductGap"));
+	public List<ProductGap> selectProductGapList() {
+		return session.selectList(makeSqlId("selectProductGapList"));
 	}
 
 	@Override
-	public List<ProductGap> selectProductGapByIdentifyCode(String identifyCode) {
-		return session.selectList(makeSqlId("selectProductGapByIdentifyCode"), identifyCode);
+	public List<ProductGap> selectProductGapListByIdentifyCode(String identifyCode) {
+		return session.selectList(makeSqlId("selectProductGapListByIdentifyCode"), identifyCode);
 	}
 }

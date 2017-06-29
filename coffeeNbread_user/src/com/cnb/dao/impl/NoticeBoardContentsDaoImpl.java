@@ -35,33 +35,33 @@ public class NoticeBoardContentsDaoImpl implements NoticeBoardContentsDao {
 	}
 
 	@Override
-	public int deleteNoticeBoardContents(String noticeBoardNo) {
-		return session.delete(makeSqlId("deleteNoticeBoardContents"), noticeBoardNo);
+	public int deleteNoticeBoardContentsByNoticeBoardNo(String noticeBoardNo) {
+		return session.delete(makeSqlId("deleteNoticeBoardContentsByNoticeBoardNo"), noticeBoardNo);
 	}
 
 	@Override
-	public List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardContent(String noticeBoardContent) {
-		return session.selectList(makeSqlId("selectNoticeBoardContentsByNoticeBoardContent"), noticeBoardContent);
+	public List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardContent(String noticeBoardContent) {
+		return session.selectList(makeSqlId("selectNoticeBoardContentsListByNoticeBoardContent"), noticeBoardContent);
 	}
 
 	@Override
-	public List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardTitle(String noticeBoardTitle) {
-		return session.selectList(makeSqlId("selectNoticeBoardContentsByNoticeBoardTitle"), noticeBoardTitle);
+	public List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardTitle(String noticeBoardTitle) {
+		return session.selectList(makeSqlId("selectNoticeBoardContentsListByNoticeBoardTitle"), noticeBoardTitle);
 	}
 
 	@Override
-	public List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardDate(Date noticeBoardDate) {
-		return session.selectList(makeSqlId("selectNoticeBoardContentsByNoticeBoardDate"), noticeBoardDate);
+	public List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardDate(Date noticeBoardDate) {
+		return session.selectList(makeSqlId("selectNoticeBoardContentsListByNoticeBoardDate"), noticeBoardDate);
 	}
 
 	@Override
-	public List<NoticeBoardContents> selectNoticeBoardContentsByNoticeBoardHits(int noticeBoardHits) {
-		return session.selectList(makeSqlId("selectNoticeBoardContentsByNoticeBoardHits"), noticeBoardHits);
+	public List<NoticeBoardContents> selectNoticeBoardContentsListByNoticeBoardHits(int noticeBoardHits) {
+		return session.selectList(makeSqlId("selectNoticeBoardContentsListByNoticeBoardHits"), noticeBoardHits);
 	}
 
 	@Override
-	public List<NoticeBoardContents> selectAllNoticeBoardContents() {
-		return session.selectList(makeSqlId("insertNoticeBoardContents"));
+	public List<NoticeBoardContents> selectNoticeBoardContentsList() {
+		return session.selectList(makeSqlId("selectNoticeBoardContentsList"));
 	}
 
 }

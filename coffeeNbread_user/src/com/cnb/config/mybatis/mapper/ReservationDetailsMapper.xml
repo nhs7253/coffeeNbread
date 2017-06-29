@@ -6,6 +6,9 @@
 		+ 예약정보 등록
 		+ 예약자로 예약정보 조회
 		+ 예약시간으로 예약정보 조회
+		+ 유저아이디로 예약정보 조회
+		+ 매장아이디로 예약정보 조회
+		+ 제품수령희망시간으로 예약정보 조회
 	 -->
 	 
 	<!-- insert -->
@@ -48,26 +51,36 @@
 		<result column="user_id" property="userId"/>
 	</resultMap>
 	 
-	<!-- selectReservationDetailsByUserId -->
+	<!-- selectReservationDetailsListByUserIdAndStoreId -->
 	<select id="selectReservationDetailsListByUserIdAndStoreId" resultMap="reservationDetails-resultmap" parameterType="map">
 		<include refid="select-reservationDetails"/>
 		WHERE store_id = #{storeId} AND user_id = #{userId}
 	</select>
 	 
 	<!--6.29 김형주 기능 추가  --> 
-	<!-- selectReservationDetailsByUserId -->
+	<!-- selectReservationDetailsListByUserId -->
 	<select id="selectReservationDetailsListByUserId" resultMap="reservationDetails-resultmap" parameterType="string">
 		<include refid="select-reservationDetails"/>
 		WHERE user_id = #{userId}
 	</select> 
 	 
 	 
-	 
-	<!-- selectReservationDetailsByReservationTime -->
-	<select id="selectReservationDetailsListByReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
+	<!-- selectReservationDetailsListByStoreIdAndReservationTime -->
+	<select id="selectReservationDetailsListByStoreIdAndReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
 		<include refid="select-reservationDetails"/>
 		WHERE store_id = #{storeId} AND reservation_time = #{reservationTime}
 	</select>
 
-
+	<!-- selectReservationDetailsListByStoreId -->
+	<select id="selectReservationDetailsListByStoreId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<include refid="select-reservationDetails"/>
+		WHERE store_id = #{storeId}
+		ORDER BY reservation_time ASC
+	</select>
+	
+	<!-- selectReservationDetailsListByStoreIdAndProductHopeTime -->
+	<select id="selectReservationDetailsListByStoreIdAndProductHopeTime" resultMap="reservationDetails-resultmap" parameterType="map">
+		<include refid="select-reservationDetails"/>
+		WHERE store_id = #{storeId} AND product_hope_time = #{productHopeTime}
+	</select>
 </mapper>

@@ -17,12 +17,12 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class ReservationDetails implements Serializable {
 	private int reservationNo;	//PRIMARY KEY
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date reservationTime;
 	private int reservationCount;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date reservationConfirm;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date productHopeTime;
 	
 	/*********************************************************************
