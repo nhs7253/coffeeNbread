@@ -2,7 +2,7 @@
 	CREATE USER CNB_manager IDENTIFIED BY manager;
 	GRANT ALL PRIVILEGES TO CNB_manager; 
 */
-/* 테이블 : 27, 시퀀스 : 9 - 총합 : 36 */
+/* 테이블 : 27, 시퀀스 : 10 - 총합 : 37 */
 
 /* 테이블 및 시퀀스 생성 */
 
@@ -86,12 +86,13 @@ CREATE SEQUENCE event_no_seq;
 
 /* 매장 방문 기록 */
 CREATE TABLE store_visit_history (
+	store_visit_history_no NUMBER PRIMARY KEY /* 매장 방문 기록 번호 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	PRIMARY KEY(user_id, store_id),
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE
 );
+CREATE SEQUENCE store_visit_history_no_seq;
 
 /* 사용자 선호 매장 */
 CREATE TABLE user_preference_store (
@@ -281,7 +282,11 @@ CREATE TABLE product_picture (
 CREATE TABLE event_product(
     product_id  VARCHAR2(30) NOT NULL, /* 제품 아이디  */
     store_id  VARCHAR2(30) NOT NULL, /* 매장 아이디  */
-    event_no NUMBER  NOT NULL /* 이벤트 번호 */
+    event_no NUMBER  NOT NULL, /* 이벤트 번호 */
+    PRIMARY KEY(product_id, store_id, event_no),
+    FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
+    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
+    FOREIGN KEY(event_no) REFERENCES store_event(event_no) ON DELETE CASCADE
 );
 
 /* 옵션카테고리 */
@@ -383,7 +388,8 @@ SELECT store_category_no_seq.nextval FROM dual;
 SELECT event_no_seq.nextval FROM dual;
 /* 옵션카테고리 */
 SELECT option_id_seq.nextval FROM dual;
-
+/* 매장 방문 기록 */
+SELECT store_visit_history_no_seq.nextval FROM dual;
 
 /* 삭제 */
 
@@ -460,4 +466,5 @@ DROP SEQUENCE store_category_no_seq;
 DROP SEQUENCE event_no_seq;
 /* 옵션카테고리 */
 DROP SEQUENCE option_id_seq;
-
+/* 매장 방문 기록 */
+DROP SEQUENCE store_visit_history_no_seq;
