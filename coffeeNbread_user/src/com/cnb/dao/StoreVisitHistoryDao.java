@@ -52,13 +52,13 @@ public interface StoreVisitHistoryDao {
 	List<StoreVisitHistory> selectStoreVisitHistoryList();
 	
 	/**
-	 * 해당 유저가 방문한 매장 아이디들 조회
+	 * 해당 유저가 방문한 매장 아이디들 조회 (가장 마지막에 방문한 매장 부터 조회)
 	 * @return List<String> 매장 아이디 목록
 	 */
 	List<String> selectStoreVisitHistoryByUserId(String userId);
 	
 	/** 
-	 * 해당 유저가 방문한 매장 목록 조회
+	 * 해당 유저가 방문한 매장 목록 조회  (가장 마지막에 방문한 매장 부터 조회)
 	 * @param userId 해당 목록을 찾을 유저 ID
 	 * @return List<StoreVisitHistory> - 유저가 방문한 매장 목록
 	 */
@@ -72,7 +72,7 @@ public interface StoreVisitHistoryDao {
 	int selectStoreVisitHistoryByUserIdJoinStoreListCount(String userId);
 	
 	/**
-	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬)
+	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬) - (가장 마지막에 방문한 매장 부터 조회)
 	 * @param userId 해당 목록을 찾을 유저 ID
 	 * @param startIndex 페이징 시작 컬럼
 	 * @param endIndex 페이징 끝 컬럼
@@ -81,7 +81,7 @@ public interface StoreVisitHistoryDao {
 	int selectStoreVisitHistoryByUserIdJoinStoreListPagingCount(String userId, int startIndex, int endIndex);
 	
 	/**
-	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging)
+	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging) -  (가장 마지막에 방문한 매장 부터 조회)
 	 * @param userId 해당 목록을 찾을 유저 ID
 	 * @param startIndex 페이징 시작 컬럼
 	 * @param endIndex 페이징 끝 컬럼
