@@ -13,6 +13,13 @@ import com.cnb.vo.StoreBookmark;
 
 /*
  * 노현식
+ * 2017-06-29
+ * 페이징을 위한 추가
+ * selectStoreBookmarkByUserIdJoinStoreListCount
+ * selectStoreBookmarkByUserIdJoinStoreListPagingCount
+ * selectStoreBookmarkByUserIdJoinStoreListPaging
+ * 
+ * 노현식
  * 2017-06-28
  * 생성, 초기구현
  */
@@ -68,4 +75,27 @@ public class StoreBookmarkDaoImpl implements StoreBookmarkDao{
 	public List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreList(String userId) {
 		return session.selectList(makeSqlId("selectStoreBookmarkByUserIdJoinStoreList"), userId);
 	}
+
+	@Override
+	public int selectStoreBookmarkByUserIdJoinStoreListCount(String userId) {
+		return session.selectOne(makeSqlId("selectStoreBookmarkByUserIdJoinStoreListCount"), userId);
+	}
+	
+	@Override
+	public int selectStoreBookmarkByUserIdJoinStoreListPagingCount(String userId, int startIndex, int endIndex) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("userId", userId);
+		input.put("startIndex", String.valueOf(startIndex));
+		input.put("endIndex", String.valueOf(endIndex));
+		return session.selectOne(makeSqlId("selectStoreBookmarkByUserIdJoinStoreListPagingCount"), input);
+	}
+
+	@Override
+	public List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreListPaging(String userId, int startIndex, int endIndex) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("userId", userId);
+		input.put("startIndex", String.valueOf(startIndex));
+		input.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectStoreBookmarkByUserIdJoinStoreListPaging"), input);
+	}	
 }

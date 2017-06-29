@@ -31,7 +31,14 @@ WHERE user_id = 'u-2';
 
 INSERT INTO store_bookmark VALUES('u-1', 's-1');
 INSERT INTO store_bookmark VALUES('u-1', 's-2');
+INSERT INTO store_bookmark VALUES('u-1', 's-3');
+INSERT INTO store_bookmark VALUES('u-1', 's-4');
+INSERT INTO store_bookmark VALUES('u-1', 's-5');
 INSERT INTO store_bookmark VALUES('u-2', 's-1');
+
+
+
+
 
 DELETE FROM store_bookmark WHERE user_id = 'u-1';
 
@@ -50,12 +57,116 @@ DELETE FROM store_bookmark WHERE user_id = 'u-4';
 	store_open DATE NOT NULL, /* 여는 시간 */
 	store_close DATE NOT NULL, /* 닫는 시간 */
 	store_permission CHAR(1) NOT NULL  /* 매장 허가여부  */
+	
+	
+SELECT COUNT(*)
+FROM store_bookmark sb, store s
+WHERE sb.store_id = s.store_id AND user_id = 'u-1'
 
+
+
+
+	select user_id, store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+		from(
+			select rownum rnum, user_id, store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+			from(
+				select 	user_id, s.store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+				from store_bookmark sb, store s
+				WHERE sb.store_id = sb.store_id
+			) 
+			where rownum <= '5' AND user_id = 'u-1')
+	where rnum >= '2'
+	
+	
 
 
 SELECT user_id, s.store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
 FROM store_bookmark sb, store s
-WHERE sb.store_id = s.store_id AND user_id = 'u-2'
+WHERE sb.store_id = s.store_id AND user_id = 'u-1'
+
+
+SELECT user_id, store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+	FROM(
+			SELECT rownum rnum, user_id, store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+			FROM(
+				SELECT 	user_id, s.store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+				FROM store_bookmark sb, store s 
+				WHERE s.store_id = sb.store_id AND user_id = 'u-1'
+				ORDER BY store_name
+			) 
+			WHERE rownum <= '5' 
+	)
+	WHERE rnum >= '2'
+	
+	SELECT COUNT(*)
+	FROM(
+			SELECT rownum rnum, user_id, store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+			FROM(
+				SELECT 	user_id, s.store_id, store_name, store_intro, store_phone, store_address, store_email, store_hits, store_open, store_close, store_permission
+				FROM store_bookmark sb, store s 
+				WHERE s.store_id = sb.store_id AND user_id = 'u-1'
+				ORDER BY store_name
+			) 
+			WHERE rownum <= '5' 
+	)
+	WHERE rnum >= '2'
+	
+	
+	
+	
+	SELECT user_id, 
+				   store_id, 
+				   store_name, 
+				   store_intro, 
+				   store_phone, 
+				   store_address, 
+				   store_email, 
+				   store_hits, 
+				   store_open, 
+				   store_close, 
+				   store_permission
+			FROM(
+					SELECT rownum rnum, 
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_bookmark sb, store s 
+						WHERE s.store_id = sb.store_id AND user_id = 'u-1'
+						ORDER BY store_name
+					) 
+					WHERE rownum <= '5'
+			)
+			WHERE rnum >= '2'
+			
+			
+			
+		
+			
+			
+			
+			
+
+
 
 /* 유저 */
 SELECT *FROM GENERAL_USER

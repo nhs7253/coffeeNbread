@@ -6,6 +6,11 @@ import com.cnb.vo.Product;
 
 /*
  * 최민희
+ * 2017-06-29
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-27
  * 생성
  */
@@ -41,14 +46,14 @@ public interface ProductDao {
 	 * @param storeId, productCategory
 	 * @return 조회된 제품 정보들
 	 */
-	List<Product> selectProductByCategory(String storeId, String productCategory);
+	List<Product> selectProductListByCategory(String storeId, String productCategory);
 	
 	/**
 	 * 제품 이름으로 1개의 매장에 있는 제품 정보 select
 	 * @param storeId, productName
 	 * @return 조회된 제품 정보
 	 */
-	Product selectProductByName(String storeId, String productName);
+	Product selectProductListByName(String storeId, String productName);
 	
 	
 }

@@ -44,14 +44,14 @@
 		</collection>
 	</resultMap>
 	
-	<select id="selectProductGap" resultMap="productGap-product-resultmap">
+	<select id="selectProductGapList" resultMap="productGap-product-resultmap">
 		SELECT g.identify_code, g.product_gap, g.product_id, g.store_id, p.product_name, p.product_category
 		FROM   product_gap g, product p
 		WHERE  g.store_id = p.store_id
 		AND	   g.product_id = p.product_id
 	</select>
 
-	<select id="selectProductGapByIdentifyCode" parameterType="string" resultMap="productGap-product-resultmap">
+	<select id="selectProductGapListByIdentifyCode" parameterType="string" resultMap="productGap-product-resultmap">
 		SELECT g.identify_code, g.product_gap, g.product_id, g.store_id, p.product_name, p.product_category
 		FROM   product_gap g, product p
 		WHERE  g.store_id = p.store_id

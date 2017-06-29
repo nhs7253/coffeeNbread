@@ -99,10 +99,11 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803'
 
 
 /* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
+/* 예약 내역에는 날짜 뿐만 아니라 시간도 들어가있어야 하지 않나..? */
 SELECT *FROM RESERVATION_DETAILS
 DELETE FROM RESERVATION_DETAILS
 
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-1','s-1','u-1');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201608030800', 'yyyy-mm-dd HH24:mi'),4,to_date('201608030800', 'yyyy-mm-dd HH24:mi'),to_date('201608041300', 'yyyy-mm-dd HH24:mi'),'p-1','s-1','u-1');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-2','s-1','u-1');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-3','s-1','u-1');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-4','s-1','u-1');
@@ -110,6 +111,7 @@ INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-8','s-3','u-1');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-7','s-1','u-1');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160803', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-20','s-1','u-2');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160804', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-20','s-1','u-2');
 
 
 
@@ -127,7 +129,30 @@ INSERT INTO BOOKMARK_CARD_NUM VALUES('card-7','u-1');
 INSERT INTO BOOKMARK_CARD_NUM VALUES('card-8','u-1');
 
 
+/* 공지사항 */
+SELECT * FROM NOTICE_BOARD_CONTENTS;
+DELETE FROM NOTICE_BOARD_CONTENTS;
 
+DROP SEQUENCE notice_board_no_seq;
+CREATE SEQUENCE notice_board_no_seq;
+
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지1','1',TO_DATE('2017-06-24', 'yyyy-mm-dd'),1);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지2','2',TO_DATE('2017-06-25', 'yyyy-mm-dd'),2);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지3','3',TO_DATE('2017-06-26', 'yyyy-mm-dd'),3);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지4','4',TO_DATE('2017-06-27', 'yyyy-mm-dd'),4);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지5','5',TO_DATE('2017-06-28', 'yyyy-mm-dd'),5);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지6','6',TO_DATE('2017-06-29', 'yyyy-mm-dd'),6);
+
+
+/* 제품 증감폭 */
+SELECT * FROM PRODUCT_GAP;
+DELETE FROM PRODUCT_GAP;
+
+INSERT INTO PRODUCT_GAP VALUES('D', '1', 'p-1', 's-1');
+INSERT INTO PRODUCT_GAP VALUES('K', '2', 'p-2', 's-1');
+INSERT INTO PRODUCT_GAP VALUES('U', '3', 'p-7', 's-2');
+INSERT INTO PRODUCT_GAP VALUES('D', '4', 'p-8', 's-2');
+INSERT INTO PRODUCT_GAP VALUES('U', '5', 'p-9', 's-3');
 
 
 

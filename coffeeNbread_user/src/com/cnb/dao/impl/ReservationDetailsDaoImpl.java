@@ -12,7 +12,12 @@ import org.springframework.stereotype.Repository;
 import com.cnb.dao.ReservationDetailsDao;
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
-
+/*
+ * 최민희
+ * 2017-06-29 수정
+ * selectReservationDetailsListByStoreId 추가
+ * selectReservationDetailsListByStoreIdAndProductHopeTime 추가
+ */
 /*
  * 최민희
  * 2017-06-27 생성
@@ -40,11 +45,11 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	}
 
 	@Override
-	public List<ReservationDetails> selectReservationDetailsListByReservationTime(String storeId, Date reservationTime) {
+	public List<ReservationDetails> selectReservationDetailsListByStoreIdAndReservationTime(String storeId, Date reservationTime) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("reservationTime", reservationTime);
-		return session.selectList(makeSqlId("selectReservationDetailsListByReservationTime"), info);
+		return session.selectList(makeSqlId("selectReservationDetailsListByStoreIdAndReservationTime"), info);
 	}
 	/*
 	 * 김형주 DAO 기능 추가 <6.28>
@@ -52,8 +57,19 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	 */
 	@Override
 	public List<ReservationDetails> selectReservationDetailsListByUserId(String userId) {
-	
 		return session.selectList(makeSqlId("selectReservationDetailsListByUserId"), userId);
 	}
-
+	
+	@Override
+	public List<ReservationDetails> selectReservationDetailsListByStoreId(String storeId) {
+		return session.selectList(makeSqlId("selectReservationDetailsListByStoreId"), storeId);
+	}
+	
+	@Override
+	public List<ReservationDetails> selectReservationDetailsListByStoreIdAndProductHopeTime(String storeId, Date productHopeTime) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productHopeTime", productHopeTime);
+		return session.selectList(makeSqlId("selectReservationDetailsListByStoreIdAndProductHopeTime"), info);
+	}	
 }

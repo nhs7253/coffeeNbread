@@ -12,6 +12,13 @@ import com.cnb.vo.StoreBookmark;
 
 /*
  * 노현식
+ * 2017-06-29
+ * 페이징을 위한 테스트
+ * selectStoreBookmarkByUserIdJoinStoreList
+ * selectStoreBookmarkByUserIdJoinStoreListCount
+ * selectStoreBookmarkByUserIdJoinStoreListPagingCount
+ * 
+ * 노현식
  * 2017-06-28
  * 생성, 초기 구현
  */
@@ -56,6 +63,15 @@ public class StoreBookmarkDaoImplTest {
 		dao.deleteStoreBookmarkByStoreBookmark(new StoreBookmark("u-4", "s-3"));
 		System.out.println("deleteStoreBookmarkByStoreBookmark 후 조회");
 		System.out.println(dao.selectStoreBookmarkList());
+		
+		System.out.print("selectStoreBookmarkByUserIdJoinStoreListCount 조회 = ");
+		System.out.println(dao.selectStoreBookmarkByUserIdJoinStoreListCount("u-1"));
+		
+		System.out.print("selectStoreBookmarkByUserIdJoinStoreListPagingCount 조회 = ");
+		System.out.println(dao.selectStoreBookmarkByUserIdJoinStoreListPagingCount("u-1", 2, 5));
+		
+		System.out.print("selectStoreBookmarkByUserIdJoinStoreListPaging 조회 = ");
+		System.out.println(dao.selectStoreBookmarkByUserIdJoinStoreListPaging("u-1", 2, 5));
 		
 		
 		List<String> list = new ArrayList<>();
