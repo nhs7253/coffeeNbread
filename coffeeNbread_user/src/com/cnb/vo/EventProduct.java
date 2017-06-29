@@ -7,20 +7,21 @@ import java.io.Serializable;
 * 초기 구현
 */
 public class EventProduct implements Serializable{
+	
 	/***************************************************
 	 * 부모테이블 : StoreEvent  자식 테이블 : EventProduct
 	 * 이벤트제품 하나는 매장이벤트를 가짐
 	 * 이벤트제품에서 어떤 매장이벤트를 참조하고있는지 저장할 인스턴수 변수 선언 
 	 ***************************************************/
-	private String eventNo;
+	private String eventNo;	//PRIMARY KEY
 	
 	/***************************************************
 	 * 부모테이블 : product  자식 테이블 : EventProduct
 	 * 이벤트제품 하나는 제품을 가짐
 	 * 이벤트제품에서 어떤 제품을 참조하고있는지 저장할 인스턴수 변수 선언 
 	 ***************************************************/
-	private String productId;
-	private String storeId;
+	private String productId;	//PRIMARY KEY
+	private String storeId;	//PRIMARY KEY
 	
 	public EventProduct(String eventNo, String productId, String storeId) {
 		super();

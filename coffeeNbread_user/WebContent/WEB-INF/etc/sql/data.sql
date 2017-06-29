@@ -166,6 +166,9 @@ INSERT INTO STORE_PICTURE VALUES ('매장사진4', 's-2');
 INSERT INTO STORE_PICTURE VALUES ('매장사진5', 's-2');
 INSERT INTO STORE_PICTURE VALUES ('매장사진6', 's-3');
 
+/* 이벤트 제품 */
+SELECT * FROM event_product;
+DELETE FROM event_product;
 
 
 
