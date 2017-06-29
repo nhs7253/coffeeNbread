@@ -3,7 +3,13 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*
+ * 노현식
+ * 2017-06-29
+ * userBirth에 @DateTimeFormat(pattern="yyyy-MM-dd") 추가
+ * 
  * 노현식
  * 2017-06-27
  * String userActiveState 추가
@@ -16,6 +22,7 @@ public class GeneralUser implements Serializable{
 	private String userId; //PRIMARY KEY
 	private String userPw;
 	private String userName;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date userBirth;
 	private String userGender;
 	private String userEmail;

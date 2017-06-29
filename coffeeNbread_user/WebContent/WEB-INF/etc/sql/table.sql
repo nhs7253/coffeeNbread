@@ -54,7 +54,7 @@ CREATE TABLE store (
 /* 제품 */
 CREATE TABLE product (
 	product_id VARCHAR2(30) PRIMARY KEY, /* 제품아이디 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
+	store_id VARCHAR2(30), /* 매장아이디 */
 	product_name VARCHAR2(50) NOT NULL, /* 제품이름 */
 	product_price NUMBER(6) NOT NULL, /* 제품가격 */
 	product_category VARCHAR2(50) NOT NULL, /* 제품종류 */
@@ -62,7 +62,8 @@ CREATE TABLE product (
 	selling_option CHAR(1) NOT NULL, /* 판매여부 */
 	today_product_count NUMBER NOT NULL, /* 금일 제품 개수 */
 	recommend_product_count NUMBER NOT NULL, /* 추천 제품 개수 */
-	FOREIGN KEY(store_id) REFERENCES store(store_id)
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE SET NULL
+
 );
 
 
@@ -180,9 +181,9 @@ CREATE TABLE payment_details (
 	reservation_order_count NUMBER(4) NOT NULL, /* 주문판매량 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
+	store_id VARCHAR2(30), /* 매장아이디 */
 	product_trade_count NUMBER(4) NOT NULL, /* 거래제품개수 */
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ,
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE SET NULL,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id),
 	FOREIGN KEY(product_id) REFERENCES product(product_id)
 );

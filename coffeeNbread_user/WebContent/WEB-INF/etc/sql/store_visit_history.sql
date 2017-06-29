@@ -1,11 +1,12 @@
 /* 매장 방문 기록 */
 CREATE TABLE store_visit_history (
+	store_visit_history_no NUMBER PRIMARY KEY, /* 매장 방문 기록 번호 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	PRIMARY KEY(user_id, store_id),
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE
 );
+CREATE SEQUENCE store_visit_history_no_seq;
 
 
 SELECT * FROM user_authority;
