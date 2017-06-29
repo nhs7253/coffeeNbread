@@ -8,13 +8,27 @@ CREATE TABLE user_preference_store (
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE
 );
 
+SELECT * FROM user_preference_store 
+WHERE user_id = 'u-1' ORDER BY preference_hits DESC;
 
-SELECT * FROM user_authority;
+SELECT * FROM user_preference_store;
 
-INSERT INTO user_authority VALUES('1', 'CNB_USER');
-INSERT INTO user_authority VALUES('2', 'CNB_ADMIN');
-INSERT INTO user_authority VALUES('3', 'CNB_USER');
-INSERT INTO user_authority VALUES('4', 'CNB_STORE');
+INSERT INTO user_preference_store VALUES('u-1', 's-1', 0);
+INSERT INTO user_preference_store VALUES('u-1', 's-2', 1);
+INSERT INTO user_preference_store VALUES('u-1', 's-3', 2);
+
+INSERT INTO user_preference_store VALUES('u-2', 's-1', 0);
+
+DELETE FROM user_preference_store WHERE user_id = 'u-1'
+
+UPDATE user_preference_store 
+SET preference_hits = preference_hits + 1
+WHERE user_id = 'u-1' AND store_id = 's-1';
+
+UPDATE user_preference_store 
+SET preference_hits = (SELECT preference_hits FROM user_preference_store WHERE user_id = 'u-1' AND store_id = 's-1') + 1
+WHERE user_id = 'u-1' AND store_id = 's-1';
+
 
 DELETE FROM user_authority WHERE user_id = '2' AND user_authority = 'CNB_ADMIN';
 
@@ -31,4 +45,36 @@ UPDATE user_authority
 SET user_authority = 'CNB_STORE'
 WHERE user_id = '1';
 
+
+					SELECT rownum rnum, 
+						   user_id, 
+						   store_id,
+						   preference_hits,
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT user_id, 
+							   s.store_id, 
+							   preference_hits,
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM user_preference_store ups, store s 
+						WHERE ups.store_id = s.store_id AND user_id = 'u-2'
+						ORDER BY preference_hits DESC
+					)
+					WHERE rownum <= '5'
 
