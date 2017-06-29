@@ -11,14 +11,17 @@
 	</typeAliases>
 	
 	<mappers>
+		<!-- 사용자 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/GeneralUserMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/UserAuthorityMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/UserPreferenceStoreMapper.xml" />
 		
+		<!-- 제품 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductPictureMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/ProductGapMapper.xml"/>
 		
+		<!-- 매장 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StorePictureMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreBookmarkMapper.xml" />
@@ -27,11 +30,13 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreCategoryMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreEventMapper.xml" />
 
+		<!-- 장바구니, 결제, 예약 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/ShoppingBasketProductMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/PaymentDetailsMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/BookMarkCardNumMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/ReservationDetailsMapper.xml" />
 		
+		<!-- 게시판 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/NoticeBoardContentsMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/QnaBoardContentsMapper.xml" />
 		
