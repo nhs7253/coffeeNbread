@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.OptionDetailMapper">
+	<resultMap type="com.cnb.vo.OptionDetail" id="optionDetail-resultmap">
+		<id column="store_id" property="storeId"/>
+		<result column="product_id" property="productId"/>
+		<result column="option_id" property="optionId"/>
+		<result column="option_category_detail" property="optionCategoryDetail"/>
+	</resultMap>
+
+	<!-- 옵션 상세 insert -->
+	
+	
+	<!-- 옵션 상세 update -->
+	<!-- 옵션 상세 delete -->
+
+</mapper>
