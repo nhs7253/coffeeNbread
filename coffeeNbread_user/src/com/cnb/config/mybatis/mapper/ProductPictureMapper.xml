@@ -21,18 +21,20 @@
 	
 	
 	<!-- update -->
-	<update id="updateProductPicture" parameterType="productPicture">
+	<update id="updateProductPictureByProductPicture" parameterType="map">
 		UPDATE product_picture
-		SET	   product_picture = #{productPicture}
-		WHERE  product_id = #{productId}
-		AND    store_id = #{storeId}
+		SET	   product_picture = #{productPictureByVO}
+		WHERE  product_id = #{productIdByVO}
+		AND    store_id = #{storeIdByVO}
+		AND	   product_picture = #{productPicture}
 	</update>
 	
 	
 	<!-- delete -->
-	<delete id="deleteProductPictureByProductIdAndStoreId" parameterType="map">
+	<delete id="deleteProductPictureByProductIdAndStoreId" parameterType="productPicture">
 		DELETE FROM product_picture
-		WHERE  product_id = #{productId}
+		WHERE  product_picture = #{productPicture}
+		AND    product_id = #{productId}
 		AND	   store_id = #{storeId}
 	</delete>
 	

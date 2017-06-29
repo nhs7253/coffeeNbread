@@ -32,16 +32,18 @@ public class ProductPictureDaoImpl implements ProductPictureDao {
 	}
 
 	@Override
-	public int updateProductPicture(ProductPicture productPicture) {
-		return session.update(makeSqlId("updateProductPicture"), productPicture);
+	public int updateProductPictureByProductPicture(ProductPicture productPictureVO, String productPicture) {
+		Map<String, String> info = new HashMap<>();
+		info.put("productPictureByVO", productPictureVO.getProductPicture());
+		info.put("productIdByVO", productPictureVO.getProductId());
+		info.put("storeIdByVO", productPictureVO.getStoreId());
+		info.put("productPicture", productPicture);
+		return session.update(makeSqlId("updateProductPictureByProductPicture"), info);
 	}
 
 	@Override
-	public int deleteProductPictureByProductIdAndStoreId(String productId, String storeId) {
-		Map<String, String> info = new HashMap<>();
-		info.put("productId", productId);
-		info.put("storeId", storeId);
-		return session.delete(makeSqlId("deleteProductPictureByProductIdAndStoreId"), info);
+	public int deleteProductPicture(ProductPicture productPicture) {
+		return session.delete(makeSqlId("deleteProductPictureByProductIdAndStoreId"), productPicture);
 	}
 
 	@Override

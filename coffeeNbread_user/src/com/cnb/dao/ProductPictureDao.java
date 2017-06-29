@@ -24,17 +24,17 @@ public interface ProductPictureDao {
 	
 	/**
 	 * 1개의 제품 사진 정보 update
-	 * @param productPicture
+	 * @param productPictureVO, productPicture
 	 * @return 처리 개수
 	 */
-	int updateProductPicture(ProductPicture productPicture);
+	int updateProductPictureByProductPicture(ProductPicture productPictureVO, String productPicture);
 	
 	/**
 	 * 1개의 제품 사진 정보 delete
-	 * @param storeId, productId
+	 * @param productPicture
 	 * @return 처리 개수
 	 */
-	int deleteProductPictureByProductIdAndStoreId(String productId, String storeId);
+	int deleteProductPicture(ProductPicture productPicture);
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품정보로 제품 사진 정보들 select

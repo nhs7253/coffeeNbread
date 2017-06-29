@@ -19,6 +19,11 @@ public class StorePicture implements Serializable{
 	private String storeId;
 	private Store store;
 	
+	public StorePicture(String storePicture, String storeId) {
+		super();
+		this.storePicture = storePicture;
+		this.storeId = storeId;
+	}
 	
 	public StorePicture(String storePicture, String storeId, Store store) {
 		super();
