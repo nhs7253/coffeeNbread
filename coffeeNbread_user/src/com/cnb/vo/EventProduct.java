@@ -13,7 +13,7 @@ public class EventProduct implements Serializable{
 	 * 이벤트제품 하나는 매장이벤트를 가짐
 	 * 이벤트제품에서 어떤 매장이벤트를 참조하고있는지 저장할 인스턴수 변수 선언 
 	 ***************************************************/
-	private String eventNo;	//PRIMARY KEY
+	private int eventNo;	//PRIMARY KEY
 	
 	/***************************************************
 	 * 부모테이블 : product  자식 테이블 : EventProduct
@@ -23,46 +23,63 @@ public class EventProduct implements Serializable{
 	private String productId;	//PRIMARY KEY
 	private String storeId;	//PRIMARY KEY
 	
-	public EventProduct(String eventNo, String productId, String storeId) {
-		super();
-		this.eventNo = eventNo;
-		this.productId = productId;
-		this.storeId = storeId;
-	}
 	public EventProduct() {
 		super();
 	}
-	public String getEventNo() {
-		return eventNo;
+/*
+	public EventProduct(int eventNo, String productId, String storeId) {
+		super();
+		this.eventNo = eventNo;
+		this.productId = productId;
+		this.storeId = storeId;
 	}
-	public void setEventNo(String eventNo) {
+*/
+	public EventProduct(String productId, String storeId, int eventNo) {
+		super();
+		this.productId = productId;
+		this.storeId = storeId;
 		this.eventNo = eventNo;
 	}
+
+	public int getEventNo() {
+		return eventNo;
+	}
+
+	public void setEventNo(int eventNo) {
+		this.eventNo = eventNo;
+	}
+
 	public String getProductId() {
 		return productId;
 	}
+
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
+
 	public String getStoreId() {
 		return storeId;
 	}
+
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
+
 	@Override
 	public String toString() {
 		return "EventProduct [eventNo=" + eventNo + ", productId=" + productId + ", storeId=" + storeId + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((eventNo == null) ? 0 : eventNo.hashCode());
+		result = prime * result + eventNo;
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -72,10 +89,7 @@ public class EventProduct implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		EventProduct other = (EventProduct) obj;
-		if (eventNo == null) {
-			if (other.eventNo != null)
-				return false;
-		} else if (!eventNo.equals(other.eventNo))
+		if (eventNo != other.eventNo)
 			return false;
 		if (productId == null) {
 			if (other.productId != null)
@@ -89,6 +103,4 @@ public class EventProduct implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 }

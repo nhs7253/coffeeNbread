@@ -41,14 +41,6 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public int deleteProductById(String storeId, String productId) {
-		Map<String, String> info = new HashMap<>();
-		info.put("storeId", storeId);
-		info.put("productId", productId);
-		return session.delete(makeSqlId("deleteProductById"), info);
-	}
-
-	@Override
 	public List<Product> selectProductListByCategory(String storeId, String productCategory) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);

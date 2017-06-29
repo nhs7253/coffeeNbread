@@ -1,5 +1,7 @@
 package com.cnb.dao;
 
+import java.util.List;
+
 import com.cnb.vo.EventProduct;
 
 /*
@@ -22,21 +24,23 @@ public interface EventProductDao {
 	
 	/**
 	 * 1개의 이벤트 제품 정보 update
-	 * @param productPictureVO, productPicture
+	 * @param eventProductAfter, eventProductBefore
 	 * @return 처리 개수
 	 */
-	
+	int updateEventProduct(EventProduct eventProductAfter, EventProduct eventProductBefore);
 	
 	/**
 	 * 1개의 이벤트 제품 정보 delete
-	 * @param productPicture
+	 * @param eventProduct
 	 * @return 처리 개수
 	 */
-	
+	int deleteEventProduct(EventProduct eventProduct);
 	
 	/**
-	 * 1개의 매장에 있는 1개의 제품정보로 제품 사진 정보들 select
-	 * @param productId, storeId
+	 * 1개의 이벤트에 해당되는 이벤트 제품 select
+	 * @param eventNo
 	 * @return 조회된 제품 사진 정보들
 	 */
+	List<EventProduct> selectEventProductListByEventNo(int eventNo);
+	
 }
