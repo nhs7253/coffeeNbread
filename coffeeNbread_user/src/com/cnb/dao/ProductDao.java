@@ -19,6 +19,12 @@ import com.cnb.vo.Product;
  * @author minhee
  *
  */
+/**
+ * 모든 제품의 판매여부를 관리하는 DAO
+ * sellingOption
+ * 판매 O : Y
+ * 판매 X : N
+ */
 public interface ProductDao {
 	/**
 	 * 1개의 제품 정보 insert
@@ -35,13 +41,6 @@ public interface ProductDao {
 	int updateProduct(Product product);
 	
 	/**
-	 * 1개의 매장에 있는 1개의 제품 정보 delete
-	 * @param storeId, productId
-	 * @return 처리 개수
-	 */
-	int deleteProductById(String storeId, String productId);
-	
-	/**
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 select
 	 * @param storeId, productCategory
 	 * @return 조회된 제품 정보들
@@ -54,6 +53,5 @@ public interface ProductDao {
 	 * @return 조회된 제품 정보
 	 */
 	Product selectProductListByName(String storeId, String productName);
-	
 	
 }

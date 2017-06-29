@@ -166,9 +166,25 @@ INSERT INTO STORE_PICTURE VALUES ('매장사진4', 's-2');
 INSERT INTO STORE_PICTURE VALUES ('매장사진5', 's-2');
 INSERT INTO STORE_PICTURE VALUES ('매장사진6', 's-3');
 
+/* 매장 이벤트 */
+SELECT * FROM STORE_EVENT;
+DELETE FROM STORE_EVENT;
+
+INSERT INTO STORE_EVENT VALUES(event_no_seq.nextval, 's-1', '이벤트1', 'Y', TO_DATE('2017-06-26', 'yyyy-mm-dd'), TO_DATE('2017-06-28', 'yyyy-mm-dd'), '이벤트1입니다', 'N', 0, 'N', '이벤트사진1', 'N');
+INSERT INTO STORE_EVENT VALUES(event_no_seq.nextval, 's-2', '이벤트2', 'Y', TO_DATE('2017-06-26', 'yyyy-mm-dd'), TO_DATE('2017-06-28', 'yyyy-mm-dd'), '이벤트2입니다', 'N', 0, 'N', '이벤트사진2', 'N');
+INSERT INTO STORE_EVENT VALUES(event_no_seq.nextval, 's-3', '이벤트3', 'Y', TO_DATE('2017-06-26', 'yyyy-mm-dd'), TO_DATE('2017-06-28', 'yyyy-mm-dd'), '이벤트3입니다', 'N', 0, 'N', '이벤트사진3', 'N');
+INSERT INTO STORE_EVENT VALUES(event_no_seq.nextval, 's-1', '이벤트4', 'Y', TO_DATE('2017-06-26', 'yyyy-mm-dd'), TO_DATE('2017-06-28', 'yyyy-mm-dd'), '이벤트4입니다', 'N', 0, 'N', '이벤트사진4', 'N');
+INSERT INTO STORE_EVENT VALUES(event_no_seq.nextval, 's-3', '이벤트5', 'Y', TO_DATE('2017-06-26', 'yyyy-mm-dd'), TO_DATE('2017-06-28', 'yyyy-mm-dd'), '이벤트5입니다', 'N', 0, 'N', '이벤트사진5', 'N');
+
+
 /* 이벤트 제품 */
 SELECT * FROM event_product;
 DELETE FROM event_product;
 
+INSERT INTO EVENT_PRODUCT VALUES('p-1', 's-1', 4);
+INSERT INTO EVENT_PRODUCT VALUES('p-3', 's-1', 4);
+INSERT INTO EVENT_PRODUCT VALUES('p-11', 's-3', 6);
+INSERT INTO EVENT_PRODUCT VALUES('p-7', 's-2', 7);
+INSERT INTO EVENT_PRODUCT VALUES('p-2', 's-1', 3);
 
 

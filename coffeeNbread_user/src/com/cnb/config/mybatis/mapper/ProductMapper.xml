@@ -40,12 +40,6 @@
 	</update>	
 	
 	
-	<!-- delete -->
-	<delete id="deleteProductById" parameterType="map">
-		DELETE FROM product WHERE store_id = #{storeId} AND product_id = #{productId}
-	</delete>
-	
-	
 	<!-- select -->
 	<sql id="select-product-productPicture">
 		SELECT  p.product_id,

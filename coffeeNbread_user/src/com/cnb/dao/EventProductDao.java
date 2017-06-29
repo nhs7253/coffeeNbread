@@ -24,10 +24,10 @@ public interface EventProductDao {
 	
 	/**
 	 * 1개의 이벤트 제품 정보 update
-	 * @param eventProduct
+	 * @param eventProductAfter, eventProductBefore
 	 * @return 처리 개수
 	 */
-	int updateEventProduct(EventProduct eventProduct);
+	int updateEventProduct(EventProduct eventProductAfter, EventProduct eventProductBefore);
 	
 	/**
 	 * 1개의 이벤트 제품 정보 delete
@@ -41,6 +41,6 @@ public interface EventProductDao {
 	 * @param eventNo
 	 * @return 조회된 제품 사진 정보들
 	 */
-	List<EventProduct> selectEventProductListByEventNo(String eventNo);
+	List<EventProduct> selectEventProductListByEventNo(int eventNo);
 	
 }
