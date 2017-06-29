@@ -9,9 +9,26 @@
 	</resultMap>
 
 	<!-- 옵션 상세 insert -->
-	
+	<insert id="insertOptionDetail" parameterType="com.cnb.vo.OptionDetail">
+		INSERT INTO option_detail
+		values(
+			#{storeId},
+			#{productId},
+			#{optionId},
+			#{optionCategoryDetail})
+	</insert> 
 	
 	<!-- 옵션 상세 update -->
+	<update id="updateOptionDetail" parameterType="com.cnb.vo.OptionDetail">
+		UPDATE option_detail
+ 		SET option_category_detail = #{optionCategoryDetail}
+ 		WHERE store_id = #{storeId}
+ 		AND option_id = #{optionId}
+	</update>
+	
 	<!-- 옵션 상세 delete -->
-
+	<delete id="deleteOptionDetail" parameterType="int">
+		DELETE FROM option_detail
+ 		WHERE option_id = #{optionId}
+	</delete>
 </mapper>
