@@ -53,10 +53,10 @@
 		FROM store_bookmark
 	</select>
 	
-	<select id="selectStoreBookmarkByUserId" resultType="string">
+	<select id="selectStoreBookmarkByUserId" parameterType="string" resultType="string">
 		SELECT store_id
 		FROM store_bookmark
-		WHERE user_id = #{userId}
+		WHERE user_id = #{value}
 	</select>
 	
 	<select id="selectStoreBookmarkByUserIdJoinStoreList" parameterType="string" resultMap="StoreBookmark-Store-resultmap">
