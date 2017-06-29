@@ -34,6 +34,24 @@ public class OptionCategory implements Serializable{
 		this.storeId = storeId;
 		this.store = store;
 	}
+	
+	public OptionCategory(int optionId, String optionCategory, String storeId) {
+		super();
+		this.optionId = optionId;
+		this.optionCategory = optionCategory;
+		this.storeId = storeId;
+	}
+	
+	public OptionCategory(int optionId, String optionCategory, String storeId, Store store,
+			List<OptionDetail> optionDetailList) {
+		super();
+		this.optionId = optionId;
+		this.optionCategory = optionCategory;
+		this.storeId = storeId;
+		this.store = store;
+		this.optionDetailList = optionDetailList;
+	}
+
 	public int getOptionId() {
 		return optionId;
 	}
