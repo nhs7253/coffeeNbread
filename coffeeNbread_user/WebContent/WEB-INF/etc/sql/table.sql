@@ -20,7 +20,7 @@ CREATE TABLE user_authority (
 
 /* 결제 종류 */
 CREATE TABLE payment_optionlist (
-	payment_id VARCHAR2(30) PRIMARY KEY, /* 결제아이디 */
+	payment_id CHAR(1) PRIMARY KEY, /* 결제아이디 */
 	payment_method VARCHAR2(50) NOT NULL /* 결제방법 */
 );
 

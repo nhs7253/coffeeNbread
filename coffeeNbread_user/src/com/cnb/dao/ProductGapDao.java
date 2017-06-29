@@ -7,6 +7,11 @@ import com.cnb.vo.ProductGap;
 
 /*
  * 최민희
+ * 2017-06-29
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-28
  * 생성
  */
@@ -43,7 +48,7 @@ public interface ProductGapDao {
 	 * @param 
 	 * @return 조회된 제품 증감폭 정보들
 	 */
-	List<ProductGap> selectProductGap();
+	List<ProductGap> selectProductGapList();
 	
 	/**
 	 * 증감 식별코드로 해당 제품 정보들 select
@@ -51,6 +56,6 @@ public interface ProductGapDao {
 	 * @param identifyCode
 	 * @return 조회된 제품 증감폭 정보들
 	 */
-	List<ProductGap> selectProductGapByIdentifyCode(String identifyCode);
+	List<ProductGap> selectProductGapListByIdentifyCode(String identifyCode);
 	
 }

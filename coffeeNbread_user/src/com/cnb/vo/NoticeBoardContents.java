@@ -7,6 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /*
  * 최민희
+ * 2017-06-29 
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-28 생성
  * 초기 구현
  */
@@ -20,6 +25,15 @@ public class NoticeBoardContents implements Serializable {
 		
 	public NoticeBoardContents() {
 		super();
+	}
+
+	public NoticeBoardContents(int noticeBoardNo, String noticeBoardContent, String noticeBoardTitle,
+			Date noticeBoardDate) {
+		super();
+		this.noticeBoardNo = noticeBoardNo;
+		this.noticeBoardContent = noticeBoardContent;
+		this.noticeBoardTitle = noticeBoardTitle;
+		this.noticeBoardDate = noticeBoardDate;
 	}
 
 	public NoticeBoardContents(int noticeBoardNo, String noticeBoardContent, String noticeBoardTitle,

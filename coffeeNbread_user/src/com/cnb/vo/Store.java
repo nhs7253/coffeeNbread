@@ -72,9 +72,10 @@ public class Store implements Serializable{
 		this.storeClose = storeClose;
 		this.storePermission = storePermission;
 	}
+	
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
 			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission,
-			List<StorePicture> storePictureList, List<StoreEvent> StoreEventList,
+			List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
 			List<OptionCategory> optionCategoryList) {
 		super();
 		this.storeId = storeId;
@@ -88,12 +89,12 @@ public class Store implements Serializable{
 		this.storeClose = storeClose;
 		this.storePermission = storePermission;
 		StorePictureList = storePictureList;
-		StoreEventList = StoreEventList;
+		StoreEventList = storeEventList;
 		OptionCategoryList = optionCategoryList;
 	}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
 			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission,
-			List<StorePicture> storePictureList, List<StoreEvent> StoreEventList,
+			List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
 			List<OptionCategory> optionCategoryList, StoreCategory storeCategory) {
 		super();
 		this.storeId = storeId;
@@ -107,10 +108,11 @@ public class Store implements Serializable{
 		this.storeClose = storeClose;
 		this.storePermission = storePermission;
 		StorePictureList = storePictureList;
-		StoreEventList = StoreEventList;
+		StoreEventList = storeEventList;
 		OptionCategoryList = optionCategoryList;
 		this.storeCategory = storeCategory;
 	}
+	
 	public String getStoreId() {
 		return storeId;
 	}
