@@ -2,46 +2,59 @@ package com.cnb.service;
 
 import java.util.List;
 
+import com.cnb.exception.DuplicatedProudctIdOrProductNameException;
+import com.cnb.exception.ProductNotFoundException;
 import com.cnb.vo.Product;
 
 /*
  * 최민희
- * 2017-06-27
- * 생성
+ * 2017-06-30
+ * 수정
  */
 public interface ProductService {
 	/**
 	 * 1개의 매장에 1개의 제품 정보 추가
 	 * @param product
-	 * @return 처리 개수
+	 * @throws DuplicatedIdException 한 매장에 등록하려는 제품 아이디나 이름이 이미 등록되 있는 경우 발생
 	 */
-	int registerProduct(String storeId, Product product);
+	int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 수정
 	 * @param product
-	 * @return 처리 개수
+	 * @throws ProductNotFoundException 수정할 제품이 등록되 있지 않은 경우 발생
 	 */
-	int modifyProduct(String storeId, Product product);
-	
-	/**
-	 * 1개의 매장에 있는 1개의 제품 정보 삭제
-	 * @param productId
-	 * @return 처리 개수
-	 */
-	int removeProductById(String storeId, String productId);
+	int modifyProduct(Product product) throws ProductNotFoundException;
 	
 	/**
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 찾기
-	 * @param productCategory
-	 * @return 조회된 제품 정보들
+	 * @param storeId, productCategory
 	 */
-	List<Product> searchProductByCategory(String storeId, String productCategory);
+	List<Product> findProductListByCategory(String storeId, String productCategory);
 	
 	/**
 	 * 제품 이름으로 1개의 매장에 있는 제품 정보 찾기
-	 * @param productName
-	 * @return 조회된 제품 정보
+	 * @param storeId, productName
 	 */
-	Product searchProductByName(String storeId, String productName);
+	Product findProductByName(String storeId, String productName);
+	
+	/**
+	 * 제품 아이디로 1개의 매장에 있는 제품 정보 찾기
+	 * @param storeId, productId
+	 */
+	Product findProductById(String storeId, String productId);
+
+	/**
+	 * 판매여부 1개의 매장에 있는 제품 정보들 select
+	 * @param storeId, sellingOption
+	 * @return 조회된 제품 정보들
+	 */
+	List<Product> findProductListBySellingOption(String storeId, String sellingOption);
+	
+	
+	/**
+	 * 1개의 매장에 있는 제품 정보들 찾기
+	 * @param storeId
+	 */
+	List<Product> findProductList(String storeId);
 }

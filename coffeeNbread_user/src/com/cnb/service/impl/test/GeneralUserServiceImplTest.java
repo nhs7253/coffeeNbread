@@ -5,11 +5,9 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.cnb.exception.UserManageException;
 import com.cnb.service.GeneralUserService;
-import com.cnb.service.impl.GeneralUserServiceImpl;
 import com.cnb.vo.GeneralUser;
 
 /*
@@ -26,12 +24,6 @@ public class GeneralUserServiceImplTest {
 	
 	@Autowired
 	private GeneralUserService gus;
-	
-	public GeneralUserServiceImplTest(){}
-	
-	public GeneralUserServiceImplTest(GeneralUserService gus){
-		this.gus = gus;
-	}
 	
 	public void Test() throws UserManageException {
 		
@@ -53,12 +45,8 @@ public class GeneralUserServiceImplTest {
 	public static void main(String[] args) throws UserManageException {
 		
 		GeneralUserServiceImplTest gudit = 
-				(GeneralUserServiceImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("generalUserServiceImplTest");
+				(GeneralUserServiceImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml", "com/cnb/config/spring/security-context.xml").getBean("generalUserServiceImplTest");
 		gudit.Test();
 		
-//		GeneralUserServiceImpl t = 
-//				(GeneralUserServiceImpl)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("generalUserServiceImpl");
-//		
-//		System.out.println(t.findUser("u-1"));
 	}
 }
