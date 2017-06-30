@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnb.dao.BookMarkCardNumDao;
 import com.cnb.exception.BookCardNumDuplicationException;
@@ -25,6 +26,8 @@ public class BookMarkCardNumServiceImpl implements BookMarkCardNumService {
 	 * 있다면 등록해놓은것과 비교해서 중복되면 예외처리 , 중복되지 않으면 등록.
 	 */
 	@Override
+	@Transactional(rollbackFor=Exception.class)
+
 	public void addBookMarkCardNum(BookMarkCardNum bookMarkCardNum) throws BookCardNumDuplicationException {
 
 		List<BookMarkCardNum> bookMarkCardNumList = dao.selectCardNumListByUserId(bookMarkCardNum.getUserId());
@@ -51,15 +54,16 @@ public class BookMarkCardNumServiceImpl implements BookMarkCardNumService {
 	}
 
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void deleteBookMarkCardNumByCardNumAndUserId(String cardNum, String userId) throws DeleteBookMarkException {
 
 		List<BookMarkCardNum> bookMarkCardNumList = findBookMarkCardNumListByUserId(userId);
 
 		if (bookMarkCardNumList.size() == 0) {
 			throw new DeleteBookMarkException("삭제할 카드번호가 없습니다.");
-		} else {
-			dao.deleteCardNumByCardNum(cardNum);
-		}
+		} 
+			dao.deleteCardNumByCardNumAndUserId(cardNum,userId);
+		
 
 	}
 

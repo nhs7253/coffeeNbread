@@ -32,7 +32,7 @@ public class BookMarkCardNumDaoImplTest {
 	}
 
 	public void Test(){
-		System.out.println("최초 조회");
+/*		System.out.println("최초 조회");
 		System.out.println(dao.selectCardNumListByUserId("u-1"));
 	System.out.println("--------------------------------------------------------------------------------------");	
 		
@@ -44,9 +44,11 @@ public class BookMarkCardNumDaoImplTest {
 		System.out.println("insertCardNum 후 조회");
 		System.out.println(dao.selectCardNumListByUserId("u-1"));
 		
-		
+		*/
+		System.out.println(dao.selectCardNumListByUserId("u-1"));
+
 		System.out.println("삭제후 조회");
-		dao.deleteCardNumByCardNum("card-6");
+		dao.deleteCardNumByCardNumAndUserId("card-1","u-1");
 		System.out.println(dao.selectCardNumListByUserId("u-1"));
 		
 		

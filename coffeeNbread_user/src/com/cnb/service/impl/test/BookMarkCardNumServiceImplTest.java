@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cnb.exception.BookCardNumDuplicationException;
 import com.cnb.exception.DeleteBookMarkException;
 import com.cnb.service.BookMarkCardNumService;
+import com.cnb.service.GeneralUserService;
 import com.cnb.vo.BookMarkCardNum;
 
 /*
@@ -20,16 +21,20 @@ public class BookMarkCardNumServiceImplTest {
 	   @Autowired
 	   private BookMarkCardNumService service; 
 	
+		
+	   
+	   
+	   
      /*  즐겨찾는 카드  새로 등록하는 서비스 */
-	   public void Test() throws BookCardNumDuplicationException{
+	   public void Test() {
 		   
-		   System.out.println("--------------------카드번호 새로 등록 --------------");
+		   /*System.out.println("--------------------카드번호 새로 등록 --------------");
 		   try{
-		    service.addBookMarkCardNum(new BookMarkCardNum("card-9","u-1"));
-		   service.addBookMarkCardNum(new BookMarkCardNum("card-8","u-1"));
+		    service.addBookMarkCardNum(new BookMarkCardNum("card-15","u-3"));
+		   // service.addBookMarkCardNum(new BookMarkCardNum("card-13","u-1"));
 		   }catch(BookCardNumDuplicationException e){
-			   e.getMessage();
-		   }
+			   System.out.println(e.getMessage());
+		   }*/
 		   
 		   
 	       System.out.println("--------------------카드번호 삭제 -------------------");
@@ -52,7 +57,8 @@ public class BookMarkCardNumServiceImplTest {
 	
 	
 	public static void main(String [] args) throws BookCardNumDuplicationException {
-		BookMarkCardNumServiceImplTest serviceTest = (BookMarkCardNumServiceImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean(" bookMarkCardNumServiceImplTest");
+		BookMarkCardNumServiceImplTest serviceTest 
+		= (BookMarkCardNumServiceImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("bookMarkCardNumServiceImplTest");
 		serviceTest.Test();
 		 
 	}
