@@ -25,8 +25,8 @@ public class GeneralUserServiceImpl implements GeneralUserService{
 	@Autowired
 	private UserAuthorityDao userAuthorityDao;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -34,6 +34,8 @@ public class GeneralUserServiceImpl implements GeneralUserService{
 		if(findUser(generalUser.getUserId())!= null){
 			throw new UserManageException("이미 있는 회원입니다.");
 		}
+		generalUser.setUserPw(passwordEncoder.encode(generalUser.getUserPw()));
+		generalUser.setUserActiveState("Y");
 		generalUserDao.insertGeneralUser(generalUser);
 		userAuthorityDao.insertUserAuthority(new UserAuthority(generalUser.getUserId(),"CNB_USER"));
 	}
@@ -46,5 +48,6 @@ public class GeneralUserServiceImpl implements GeneralUserService{
 	@Override
 	public void removeUser(String userId) {
 		generalUserDao.deleteGeneralUserByUserId(userId);
+		userAuthorityDao.deleteUserAuthorityByUserId(userId);
 	}
 }
