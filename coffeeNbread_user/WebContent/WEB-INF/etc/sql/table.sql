@@ -220,12 +220,12 @@ CREATE TABLE shopping_basket_product (
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
 	product_count NUMBER(4) NOT NULL, /* 제품개수 */
-	store_product_id VARCHAR2(30) NOT NULL, /* 제품 매장 아이디 */
-	PRIMARY KEY(user_id, product_id, store_id,store_product_id),
+	product_store_id VARCHAR2(30) NOT NULL, /* 제품 매장 아이디 */
+	PRIMARY KEY(user_id, product_id, store_id,product_store_id),
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
 	FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
-	FOREIGN KEY(store_product_id) REFERENCES store(store_id) ON DELETE CASCADE
+	FOREIGN KEY(product_store_id) REFERENCES store(store_id) ON DELETE CASCADE
 
 );
 
@@ -238,7 +238,8 @@ CREATE TABLE store_bookmark (
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 
-/* 매장 좌표 */
+
+
 CREATE TABLE store_position (
 	store_id VARCHAR2(30) PRIMARY KEY, /* 매장아이디 */
 	X VARCHAR2(50) NOT NULL, /* X좌표 */
