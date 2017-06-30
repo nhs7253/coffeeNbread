@@ -21,5 +21,5 @@ public interface BookMarkCardNumService {
 	List<BookMarkCardNum> findBookMarkCardNumListByUserId(String userId);
 	
 	
-	void deleteBookMarkCardNumByCardNumAndUserId(String cardNum,String userId)throws DeleteBookMarkException;
+	void removeBookMarkCardNumByCardNumAndUserId(String cardNum,String userId)throws DeleteBookMarkException;
 }

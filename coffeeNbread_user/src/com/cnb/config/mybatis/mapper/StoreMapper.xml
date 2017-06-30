@@ -5,6 +5,10 @@
 
  <!-- 
  	이진영
+ 	2017-06-30
+ 	내매장 조회 추가
+ 	
+ 	이진영
  	2017-06-28
  	StorePicture 조인
  
@@ -27,19 +31,29 @@
  	
  	</resultMap>
  
- 
+ <resultMap type="com.cnb.vo.Store" id="Store-OptionCategory-OptionDetail-resultmap" extends="store-resultmap">
+ 	<!-- <collection property="optionCategoryList" resultMap="com.cnb.config.mybatis.mapper.OptionCategoryMapper.optionCategory-resultmap"/> -->
+ 	<collection property="optionCategoryList" ofType="com.cnb.vo.OptionCategory">
+		<result column="option_id" property="optionId"/>
+		<result column="option_category" property="optionCategory"/>
+ 	</collection>
+ 	<collection property="optionDetailList" ofType="com.cnb.vo.OptionDetail">
+ 		<result column="product_id" property="productId"/>
+		<result column="option_id" property="optionId"/>
+		<result column="option_category_detail" property="optionCategoryDetail"/></collection>
+ </resultMap>
  	
  <resultMap type="com.cnb.vo.Store" id="store-storePicture-resultmap" extends="store-resultmap">
- 	<collection property="StorePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>
+ 	<collection property="storePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>	
  </resultMap>
  
  
  <resultMap type="com.cnb.vo.Store" id="store-storeEvent-resultmap" extends="store-resultmap">
- 	<collection property="StoreEventList" resultMap="com.cnb.config.mybatis.mapper.StoreEventMapper.storeEvent-resultmap"/>
+ 	<collection property="storeEventList" resultMap="com.cnb.config.mybatis.mapper.StoreEventMapper.storeEvent-resultmap"/>
  </resultMap>
  
  <resultMap type="com.cnb.vo.Store" id="store-storeCategory-resultmap" extends="store-resultmap">
- 	<association property="storeCategory" resultMap="com.cnb.config.mybatis.mapper.StoreCategoryMapper.StoreCategory-resultmap"/>
+ 	<collection property="storeCategoryList" resultMap="com.cnb.config.mybatis.mapper.StoreCategoryMapper.StoreCategory-resultmap"/>
  </resultMap>
  <!--매장 등록 Store insert  -->
 	<insert id="insertStore" parameterType="com.cnb.vo.Store">
@@ -73,7 +87,7 @@
  	</update>
  	
  	<!-- 매장 사진 조회 Store select  -->
-	<select id="selectStore" resultMap="store-storePicture-resultmap" parameterType="string">
+	<select id="selectStorePicture" resultMap="store-storePicture-resultmap" parameterType="string">
 		SELECT  s.store_id,
 				s.store_name,
 				s.store_intro,
@@ -111,7 +125,7 @@
 	</select>
 	
 	<!-- 매장 분류 조회 StoreCategory select -->
-	<select id="selectStoreCategory" resultMap="store-storeCategory-resultmap" parameterType="String">
+	<select id="selectStoreCategoryList" resultMap="store-storeCategory-resultmap" parameterType="String">
 		SELECT s.store_id,
 			   s.store_name,
 			   sc.store_category
@@ -119,4 +133,50 @@
 		WHERE s.store_id = sc.store_id
 		AND s.store_id=#{value}
 	</select>
+	
+	<!-- 내 매장 조회(매장컬럼만) selectStorebyId -->
+	<select id="selectStoreById" resultMap="store-resultmap" parameterType="String">
+		SELECT	
+			store_id,
+			store_name,
+			store_intro,
+			store_phone,
+			store_address,
+			store_email,
+			store_hits,
+			store_open,
+			store_close,
+			store_permission
+		FROM store  
+		WHERE store_id=#{storeId}
+		
+	</select>
+	
+	<!-- 내매장(옵션,옵션상세) 조회  -->
+	<select id="selectOpionCategoryNDetailById" resultMap="Store-OptionCategory-OptionDetail-resultmap" parameterType="String">
+		SELECT	
+			s.store_id,
+			s.store_name,
+			s.store_intro,
+			s.store_phone,
+			s.store_address,
+			s.store_email,
+			s.store_hits,
+			s.store_open,
+			s.store_close,
+			s.store_permission,
+			oc.option_category,
+			od.option_category_detail
+		FROM store s,option_category oc,option_detail od  
+		WHERE s.store_id = oc.store_id
+		AND s.store_id = od.store_id
+		AND s.store_id=#{value}
+	
+	</select>
+	
+	<!-- 매장 삭제 -->
+	<delete id="deleteStoreById" parameterType="com.cnb.vo.Store">
+		DELETE FROM store
+		WHERE store_id=#{storeId}
+	</delete>
 </mapper>

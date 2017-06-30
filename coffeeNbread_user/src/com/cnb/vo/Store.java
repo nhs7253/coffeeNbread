@@ -34,28 +34,29 @@ public class Store implements Serializable{
 	 * 하나의 매장은 여러개의 매장사진을 가지고있음
 	 * 매장사진을 저정할 인스턴수변수 선언 
 	 ***************************************************/
-	private List<StorePicture> StorePictureList;
+	private List<StorePicture> storePictureList;
 	
 	/***************************************************
 	 * 부모테이블 : Store  자식 테이블 : StoreEvent
 	 * 하나의 매장은 여러개의 이벤트를 가지고있음
 	 * 이벤트를 저정할 인스턴수변수 선언 
 	 ***************************************************/
-	private List<StoreEvent> StoreEventList;
+	private List<StoreEvent> storeEventList;
 	
 	/***************************************************
 	 * 부모테이블 : Store  자식 테이블 : OptionCategory
 	 * 하나의 매장은 여러개의 옵션카테고리를 가지고있음
 	 * 옵션카테고리를 저정할 인스턴수변수 선언 
 	 ***************************************************/
-	private List<OptionCategory> OptionCategoryList;
+	private List<OptionCategory> optionCategoryList;
 	
+	private List<OptionDetail> optionDetailList;
 	/***************************************************
 	 * 부모테이블 : Store  자식 테이블 : StoreCategory
-	 * 하나의 매장은 한 매장카테고리를 가지고있음
+	 * 하나의 매장은 여러 매장카테고리를 가지고있음
 	 * 매장카테고리를 저정할 인스턴수변수 선언 
 	 ***************************************************/
-	private StoreCategory storeCategory;
+	private List<StoreCategory> storeCategoryList;
 	
 	public Store(){}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
@@ -74,9 +75,20 @@ public class Store implements Serializable{
 	}
 	
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
+			String storeEmail, Date storeOpen, Date storeClose, String storePermission) {
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeIntro = storeIntro;
+		this.storePhone = storePhone;
+		this.storeAddress = storeAddress;
+		this.storeEmail = storeEmail;
+		this.storeOpen = storeOpen;
+		this.storeClose = storeClose;
+		this.storePermission = storePermission;
+	}
+	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
 			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission,
-			List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
-			List<OptionCategory> optionCategoryList) {
+			List<OptionCategory> optionCategoryList, List<OptionDetail> optionDetailList) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;
@@ -88,14 +100,14 @@ public class Store implements Serializable{
 		this.storeOpen = storeOpen;
 		this.storeClose = storeClose;
 		this.storePermission = storePermission;
-		StorePictureList = storePictureList;
-		StoreEventList = storeEventList;
-		OptionCategoryList = optionCategoryList;
+		this.optionCategoryList = optionCategoryList;
+		this.optionDetailList = optionDetailList;
 	}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
 			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission,
 			List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
-			List<OptionCategory> optionCategoryList, StoreCategory storeCategory) {
+			List<OptionCategory> optionCategoryList, List<OptionDetail> optionDetailList,
+			List<StoreCategory> storeCategoryList) {
 		super();
 		this.storeId = storeId;
 		this.storeName = storeName;
@@ -107,12 +119,12 @@ public class Store implements Serializable{
 		this.storeOpen = storeOpen;
 		this.storeClose = storeClose;
 		this.storePermission = storePermission;
-		StorePictureList = storePictureList;
-		StoreEventList = storeEventList;
-		OptionCategoryList = optionCategoryList;
-		this.storeCategory = storeCategory;
+		this.storePictureList = storePictureList;
+		this.storeEventList = storeEventList;
+		this.optionCategoryList = optionCategoryList;
+		this.optionDetailList = optionDetailList;
+		this.storeCategoryList = storeCategoryList;
 	}
-	
 	public String getStoreId() {
 		return storeId;
 	}
@@ -174,49 +186,56 @@ public class Store implements Serializable{
 		this.storePermission = storePermission;
 	}
 	public List<StorePicture> getStorePictureList() {
-		return StorePictureList;
+		return storePictureList;
 	}
 	public void setStorePictureList(List<StorePicture> storePictureList) {
-		StorePictureList = storePictureList;
+		this.storePictureList = storePictureList;
 	}
 	public List<StoreEvent> getStoreEventList() {
-		return StoreEventList;
+		return storeEventList;
 	}
-	public void setStoreEventList(List<StoreEvent> StoreEventList) {
-		StoreEventList = StoreEventList;
+	public void setStoreEventList(List<StoreEvent> storeEventList) {
+		this.storeEventList = storeEventList;
 	}
 	public List<OptionCategory> getOptionCategoryList() {
-		return OptionCategoryList;
+		return optionCategoryList;
 	}
 	public void setOptionCategoryList(List<OptionCategory> optionCategoryList) {
-		OptionCategoryList = optionCategoryList;
+		this.optionCategoryList = optionCategoryList;
 	}
-	public StoreCategory getStoreCategory() {
-		return storeCategory;
+	public List<OptionDetail> getOptionDetailList() {
+		return optionDetailList;
 	}
-	public void setStoreCategory(StoreCategory storeCategory) {
-		this.storeCategory = storeCategory;
+	public void setOptionDetailList(List<OptionDetail> optionDetailList) {
+		this.optionDetailList = optionDetailList;
 	}
+	public List<StoreCategory> getStoreCategoryList() {
+		return storeCategoryList;
+	}
+	public void setStoreCategoryList(List<StoreCategory> storeCategoryList) {
+		this.storeCategoryList = storeCategoryList;
+	}
+	
 	@Override
 	public String toString() {
 		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
 				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeHits="
 				+ storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose + ", storePermission="
-				+ storePermission + ", StorePictureList=" + StorePictureList + ", StoreEventList="
-				+ StoreEventList + ", OptionCategoryList=" + OptionCategoryList + ", storeCategory=" + storeCategory
-				+ "]";
+				+ storePermission + ", storePictureList=" + storePictureList + ", storeEventList=" + storeEventList
+				+ ", optionCategoryList=" + optionCategoryList + ", optionDetailList=" + optionDetailList
+				+ ", storeCategoryList=" + storeCategoryList + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((OptionCategoryList == null) ? 0 : OptionCategoryList.hashCode());
-		result = prime * result + ((StoreEventList == null) ? 0 : StoreEventList.hashCode());
-		result = prime * result + ((StorePictureList == null) ? 0 : StorePictureList.hashCode());
+		result = prime * result + ((optionCategoryList == null) ? 0 : optionCategoryList.hashCode());
+		result = prime * result + ((optionDetailList == null) ? 0 : optionDetailList.hashCode());
 		result = prime * result + ((storeAddress == null) ? 0 : storeAddress.hashCode());
-		result = prime * result + ((storeCategory == null) ? 0 : storeCategory.hashCode());
+		result = prime * result + ((storeCategoryList == null) ? 0 : storeCategoryList.hashCode());
 		result = prime * result + ((storeClose == null) ? 0 : storeClose.hashCode());
 		result = prime * result + ((storeEmail == null) ? 0 : storeEmail.hashCode());
+		result = prime * result + ((storeEventList == null) ? 0 : storeEventList.hashCode());
 		result = prime * result + storeHits;
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		result = prime * result + ((storeIntro == null) ? 0 : storeIntro.hashCode());
@@ -224,6 +243,7 @@ public class Store implements Serializable{
 		result = prime * result + ((storeOpen == null) ? 0 : storeOpen.hashCode());
 		result = prime * result + ((storePermission == null) ? 0 : storePermission.hashCode());
 		result = prime * result + ((storePhone == null) ? 0 : storePhone.hashCode());
+		result = prime * result + ((storePictureList == null) ? 0 : storePictureList.hashCode());
 		return result;
 	}
 	@Override
@@ -235,30 +255,25 @@ public class Store implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Store other = (Store) obj;
-		if (OptionCategoryList == null) {
-			if (other.OptionCategoryList != null)
+		if (optionCategoryList == null) {
+			if (other.optionCategoryList != null)
 				return false;
-		} else if (!OptionCategoryList.equals(other.OptionCategoryList))
+		} else if (!optionCategoryList.equals(other.optionCategoryList))
 			return false;
-		if (StoreEventList == null) {
-			if (other.StoreEventList != null)
+		if (optionDetailList == null) {
+			if (other.optionDetailList != null)
 				return false;
-		} else if (!StoreEventList.equals(other.StoreEventList))
-			return false;
-		if (StorePictureList == null) {
-			if (other.StorePictureList != null)
-				return false;
-		} else if (!StorePictureList.equals(other.StorePictureList))
+		} else if (!optionDetailList.equals(other.optionDetailList))
 			return false;
 		if (storeAddress == null) {
 			if (other.storeAddress != null)
 				return false;
 		} else if (!storeAddress.equals(other.storeAddress))
 			return false;
-		if (storeCategory == null) {
-			if (other.storeCategory != null)
+		if (storeCategoryList == null) {
+			if (other.storeCategoryList != null)
 				return false;
-		} else if (!storeCategory.equals(other.storeCategory))
+		} else if (!storeCategoryList.equals(other.storeCategoryList))
 			return false;
 		if (storeClose == null) {
 			if (other.storeClose != null)
@@ -269,6 +284,11 @@ public class Store implements Serializable{
 			if (other.storeEmail != null)
 				return false;
 		} else if (!storeEmail.equals(other.storeEmail))
+			return false;
+		if (storeEventList == null) {
+			if (other.storeEventList != null)
+				return false;
+		} else if (!storeEventList.equals(other.storeEventList))
 			return false;
 		if (storeHits != other.storeHits)
 			return false;
@@ -302,7 +322,13 @@ public class Store implements Serializable{
 				return false;
 		} else if (!storePhone.equals(other.storePhone))
 			return false;
+		if (storePictureList == null) {
+			if (other.storePictureList != null)
+				return false;
+		} else if (!storePictureList.equals(other.storePictureList))
+			return false;
 		return true;
 	}
 	
+
 }

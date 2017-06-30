@@ -13,13 +13,22 @@
 	
 	<!-- controller -->
 	
+	<!-- 
+		path (요청에서는) intercept-url pattern이 먹히나, view-name은 요청 디스패치로 가기 때문에 
+		security가 먹히지 않으므로 user/member_register_form.tiles 처럼 
+		<intercept-url pattern="/user/**" access="hasAnyRole('CNB_USER', 'CNB_STORE')"/> 같은
+		/user/** 조건도 무시 하게 된다.
+		즉, security는 유저 요청에만 반응함
+	 -->
+	
 	<!-- 메인페이지 -->
 	<mvc:view-controller path="/index.do" view-name="index.tiles"/>
 	<!-- 403 권한 없음 에러 페이지 -->
 	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
 	<!-- 로그인 폼 -->	
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
-
+	<!-- 회원 가입 폼 -->
+	<mvc:view-controller path="/add_user_form.do" view-name="user/add_user_form.tiles"/>
 	<!-- bean -->
 	<!--  -->
 	<mvc:view-controller path="/request2.do" view-name="request2"/>

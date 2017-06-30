@@ -7,6 +7,9 @@ import com.cnb.vo.StorePicture;
 
 /*
  * 이진영
+ * 2017-06-30 추가
+ * 
+ * 이진영
  * 2017-06-27 생성
  */
 /**
@@ -31,11 +34,11 @@ public interface StoreDao {
 	 int updateStore(Store store);
 	 
 	 /**
-		 * 여러개의 매장 정보 select
+		 * 매장사진 정보 select
 		 * @param storeId
 		 * @return list
 		 */
-	 List<Store> selectStore(String storeId);
+	 List<Store> selectStorePicture(String storeId);
 	 
 	 /**
 		 * 여러개의 매장이벤트 정보 select
@@ -57,4 +60,19 @@ public interface StoreDao {
 		 * @return int
 		 */
 	 int deleteStoreById(String storeId);
+	 
+	 /**
+		 * 매장정보 select
+		 * @param storeId
+		 * @return store
+		 */
+	 Store selectStoreById(String storeId);
+	 
+	 
+	 /**
+		 * 매장정보옵션 종류 상세 select
+		 * @param storeId
+		 * @return list
+		 */
+	 List<Store> selectOpionCategoryNDetailByIdList(String storeId);
 }
