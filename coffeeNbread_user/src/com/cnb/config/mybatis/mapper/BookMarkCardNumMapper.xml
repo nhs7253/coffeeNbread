@@ -15,8 +15,8 @@
 							     
 	</insert>
 	
-	<delete id="deleteCardNumByCardNum" parameterType="string">
-		DELETE FROM bookmark_card_num WHERE card_num = #{value}
+	<delete id="deleteCardNumByCardNumAndUserId" parameterType="map">
+		DELETE FROM bookmark_card_num WHERE card_num = #{cardNum} AND user_id=#{userId}
 	</delete>
 	
 	

@@ -43,7 +43,7 @@ public interface BookMarkCardNumDao {
 	 * @return
 	 */
 	
-	 int deleteCardNumByCardNum(String cardNum);
+	 int deleteCardNumByCardNumAndUserId(String cardNum,String userId);
 
 	
 	

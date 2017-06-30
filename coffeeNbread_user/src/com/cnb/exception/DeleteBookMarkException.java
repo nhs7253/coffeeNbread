@@ -9,10 +9,10 @@ package com.cnb.exception;
  * 2017-06-23 
  * 생성, 초기 구현
  */
-public class LoginException extends Exception{
+public class DeleteBookMarkException extends Exception{
 
-	public LoginException(){}
-	public LoginException(String message){
+	public DeleteBookMarkException(){}
+	public DeleteBookMarkException(String message){
 		super(message);
 	}
 }
