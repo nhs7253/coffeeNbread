@@ -40,8 +40,8 @@ public class BookMarkCardNumServiceImplTest {
 	       System.out.println("--------------------카드번호 삭제 -------------------");
 		   try{
 			   
-			   service.deleteBookMarkCardNumByCardNumAndUserId("card-5", "u-1");
-			   service.deleteBookMarkCardNumByCardNumAndUserId("card-22", "u-2");
+			   service.removeBookMarkCardNumByCardNumAndUserId("card-5", "u-1");
+			   service.removeBookMarkCardNumByCardNumAndUserId("card-22", "u-2");
 		   }catch(DeleteBookMarkException e){
 			   e.getMessage();
 		   }

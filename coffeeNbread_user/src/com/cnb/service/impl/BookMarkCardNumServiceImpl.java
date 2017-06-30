@@ -55,7 +55,7 @@ public class BookMarkCardNumServiceImpl implements BookMarkCardNumService {
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void deleteBookMarkCardNumByCardNumAndUserId(String cardNum, String userId) throws DeleteBookMarkException {
+	public void removeBookMarkCardNumByCardNumAndUserId(String cardNum, String userId) throws DeleteBookMarkException {
 
 		List<BookMarkCardNum> bookMarkCardNumList = findBookMarkCardNumListByUserId(userId);
 
