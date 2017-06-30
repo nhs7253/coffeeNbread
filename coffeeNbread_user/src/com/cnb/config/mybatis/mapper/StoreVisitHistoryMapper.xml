@@ -10,9 +10,168 @@
 		<result column="store_id" property="storeId"/>
 	</resultMap>
 	
-	<insert id="insertStoreVisitHistory">
+	<resultMap type="StoreVisitHistory" id="StoreVisitHistory-Store-resultmap" extends="StoreVisitHistory-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+	</resultMap>
+	
+	<insert id="insertStoreVisitHistory" parameterType="StoreVisitHistory">
+		<selectKey keyProperty="storeVisitHistoryNo" resultType="_int" order="BEFORE">
+			SELECT store_visit_history_no_seq.nextval FROM dual
+		</selectKey>
+			INSERT INTO  store_visit_history VALUES(#{storeVisitHistoryNo}, #{userId}, #{storeId})
 	</insert>
 	
+	<delete id="deleteStoreVisitHistoryByUserId" parameterType="string">
+		DELETE FROM store_visit_history WHERE user_id = #{userId}
+	</delete>
 	
+	<delete id="deleteStoreVisitHistoryByStoreVisitHistory" parameterType="StoreVisitHistory">
+		DELETE FROM store_visit_history WHERE user_id = #{userId} AND store_id = #{storeId}
+	</delete>
+	
+	<delete id="deleteStoreVisitHistoryByStoreVisitHistoryList" parameterType="list">
+		DELETE FROM	store_visit_history
+		<where>
+			<choose>
+				<when test="storeIdList != null and storeIdList.size() > 0">
+	 		 		user_id = #{userId} AND store_id IN 
+	 		 		<foreach collection="storeIdList" open="(" close=")" separator="," item="storeIdList">
+	 		 			#{storeIdList}
+	 		 		</foreach>
+	 		 	</when>
+	 		 	<otherwise>
+					1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+				</otherwise>
+	 		 </choose>
+	 	</where>
+	</delete>
+	
+	<select id="selectStoreVisitHistoryList" resultMap="StoreVisitHistory-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM store_visit_history
+		ORDER BY store_visit_history_no DESC
+	</select>
+	
+	<select id="selectStoreVisitHistoryByUserId" parameterType="string" resultType="string">
+		SELECT store_id
+		FROM store_visit_history
+		WHERE user_id = #{value}
+		ORDER BY store_visit_history_no DESC
+	</select>
+	
+	<select id="selectStoreVisitHistoryByUserIdJoinStoreList" parameterType="string" resultMap="StoreVisitHistory-Store-resultmap">
+		SELECT store_visit_history_no,
+			   user_id, 
+			   s.store_id, 
+			   store_name, 
+			   store_intro, 
+			   store_phone, 
+			   store_address, 
+			   store_email, 
+			   store_hits, 
+			   store_open, 
+			   store_close, 
+			   store_permission
+		FROM store_visit_history svh, store s
+		WHERE svh.store_id = s.store_id AND user_id = #{value}
+		ORDER BY store_visit_history_no DESC
+	</select>
+	
+	<select id="selectStoreVisitHistoryByUserIdJoinStoreListCount" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM store_visit_history svh, store s
+		WHERE svh.store_id = s.store_id AND user_id = #{value}
+	</select>
+	
+	<select id="selectStoreVisitHistoryByUserIdJoinStoreListPagingCount" parameterType="map" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+			FROM(
+					SELECT rownum rnum, 
+						   store_visit_history_no,
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT store_visit_history_no,
+							   user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_visit_history svh, store s 
+						WHERE svh.store_id = s.store_id AND user_id = #{userId}
+						ORDER BY store_visit_history_no DESC
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
+	<select id="selectStoreVisitHistoryByUserIdJoinStoreListPaging" parameterType="map" resultMap="StoreVisitHistory-Store-resultmap">
+		<![CDATA[
+			SELECT store_visit_history_no,
+				   user_id, 
+				   store_id, 
+				   store_name, 
+				   store_intro, 
+				   store_phone, 
+				   store_address, 
+				   store_email, 
+				   store_hits, 
+				   store_open, 
+				   store_close, 
+				   store_permission
+			FROM(
+					SELECT rownum rnum, 
+						   store_visit_history_no,
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT store_visit_history_no,
+							   user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_visit_history svh, store s 
+						WHERE svh.store_id = s.store_id AND user_id = #{userId}
+						ORDER BY store_visit_history_no DESC
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}	
+			]]>
+	</select>
 	
 </mapper>

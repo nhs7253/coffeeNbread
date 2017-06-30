@@ -29,7 +29,7 @@ public class StoreEventDaoImplTest {
 	}
 
 	public void Test() {
-		System.out.println("최초 조회");
+/*		System.out.println("최초 조회");
 		
 		System.out.println(dao.selectStoreEventList("id-3"));
 
@@ -44,7 +44,8 @@ public class StoreEventDaoImplTest {
 		System.out.println(dao.selectStoreEventList("id-3"));
 
 		dao.deleteStoreEvent(4);
-
+*/
+		System.out.println(dao.selectStoreEventList("s-1"));
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 
