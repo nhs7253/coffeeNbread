@@ -30,10 +30,10 @@ public class StorePaymentOptionListDaoImplTest {
 		System.out.println(dao.selectStorePaymentOptionListByStoreId("s-1"));
 		
 		/*System.out.println("----------예약만 가능했던 s-4 매장 현금 기능 추가 ----------");
-		System.out.println(dao.insertStorePaymentOptionList(new StorePaymentOptionList("s-4","p",new PaymentOptionList("p","현금"))));
+		System.out.println(dao.insertStorePaymentOptionList(new StorePaymentOptionList("s-4","p",new PaymentOptionList("p","현금"))));*/
 		
-		System.out.println("----------카드와 현금이 모두 가능했던 s-1 매장을  현금기능 삭제 ---------");
-		System.out.println(dao.deleteStorePaymentOptionListByStoreIdAndPaymentId("s-1", "p"));*/
+		/*System.out.println("----------카드와 현금이 모두 가능했던 s-1 매장을  현금기능 삭제 ---------");
+		System.out.println(dao.deleteStorePaymentOptionListByStoreIdAndPaymentId("s-1", "p")); */
 		
 		System.out.println("이상없음");
 	}

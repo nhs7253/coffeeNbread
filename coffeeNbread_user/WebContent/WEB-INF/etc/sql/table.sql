@@ -480,3 +480,7 @@ DROP SEQUENCE event_no_seq;
 DROP SEQUENCE option_id_seq;
 /* 매장 방문 기록 */
 DROP SEQUENCE store_visit_history_no_seq;
+
+
+
+select * from STORE_PAYMENT_OPTIONLIST
