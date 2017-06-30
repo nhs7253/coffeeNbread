@@ -9,10 +9,10 @@ package com.cnb.exception;
  * 2017-06-23 
  * 생성, 초기 구현
  */
-public class LoginException extends Exception{
+public class UserManageException extends Exception{
 
-	public LoginException(){}
-	public LoginException(String message){
+	public UserManageException(){}
+	public UserManageException(String message){
 		super(message);
 	}
 }
