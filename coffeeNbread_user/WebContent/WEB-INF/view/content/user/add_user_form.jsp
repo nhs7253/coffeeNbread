@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <h2> coffeeNbread_user 회원 가입</h2>
-<form action="${initParam.rootPath }/addUser.do" method="post">
+<form action="${initParam.rootPath }/addUserController.do" method="post">
 
 	<div class="form-group">
 		<label for="id">사용자 ID</label>

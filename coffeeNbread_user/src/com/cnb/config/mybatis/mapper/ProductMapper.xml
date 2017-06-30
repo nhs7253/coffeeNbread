@@ -99,6 +99,7 @@
 		WHERE p.store_id = #{storeId} 
 		AND   p.product_id = #{productId}
 		AND	  p.store_id = pp.store_id
+		AND   p.product_id = pp.product_id
 	</select>
 	
 	<!-- selectProductListBySellingOption -->
@@ -107,11 +108,13 @@
 		WHERE p.store_id = #{storeId} 
 		AND   p.selling_option = #{sellingOption}
 		AND	  p.store_id = pp.store_id
+		AND   p.product_id = pp.product_id
 	</select>
 	
 	<!-- selectProduct -->
 	<select id="selectProduct" resultMap="product-productPicture-resultmap" parameterType="string">
 		<include refid="select-product-productPicture"/>
-		WHERE p.store_id = #{storeId} 
+		WHERE p.store_id = #{storeId}
+		AND   p.product_id = pp.product_id
 	</select>
 </mapper>

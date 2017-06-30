@@ -20,12 +20,16 @@ public class OptionCategory implements Serializable{
 	private String storeId;
 	private Store store;
 	
+	
 	/***************************************************
 	 * 부모테이블 : OptionCategory  자식 테이블 : OptionDetail
 	 * 옵션상세하나는 하나의 옵션카테고리를 가짐
 	 * 옵션상세에서 어떤 옵션카테고리를 참조하고있는지 저장할 인스턴수 변수 선언 
 	 ***************************************************/
 	private List<OptionDetail> optionDetailList;
+	
+	public OptionCategory() {
+	}
 	
 	public OptionCategory(int optionId, String optionCategory, String storeId, Store store) {
 		super();

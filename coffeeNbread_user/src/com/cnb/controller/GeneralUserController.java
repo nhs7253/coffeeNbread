@@ -33,9 +33,15 @@ public class GeneralUserController {
 	private GeneralUserService service;
 	
 	//@RequestMapping의 value 값 생략시 루트 경로로 이동
-	@RequestMapping("addUser") //@ModelAttribute("generalUser")의 value 값으로 RequestScope에 매핑됨, 생략 시 클래이름 
+	@RequestMapping("addUserController") //@ModelAttribute("generalUser")의 value 값으로 RequestScope에 매핑됨, 생략 시 클래이름 
 						       //맨 앞글자 소문자로 매핑 됨
-	private String addUser(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors){
+	/**
+	 * 회원 가입을 처리하는 Controller
+	 * @param generalUserForm 요청 파라미터 검증 generalUser 객체
+	 * @param errors 요청 파라미터 에러
+	 * @return String - 응답 경로
+	 */
+	private String addUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return "user/add_user_form.tiles"; //에러 발생 시 회원 가입 페이지로 이동
 		}
