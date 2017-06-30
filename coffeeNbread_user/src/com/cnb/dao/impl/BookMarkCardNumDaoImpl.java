@@ -1,6 +1,8 @@
 package com.cnb.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +43,11 @@ public class BookMarkCardNumDaoImpl implements BookMarkCardNumDao{
 	}
 
 	@Override
-	public int deleteCardNumByCardNum(String cardNum) {
-		return session.delete(makeSqlId("deleteCardNumByCardNum"),cardNum);
+	public int deleteCardNumByCardNumAndUserId(String cardNum,String userId) {
+		Map<String, String> info = new HashMap<>();
+		info.put("cardNum", cardNum);
+		info.put("userId", userId);
+		return session.delete(makeSqlId("deleteCardNumByCardNumAndUserId"),info);
 	}
 
 

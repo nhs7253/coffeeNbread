@@ -30,11 +30,6 @@
    </resultMap>
 
 
-
-
-
-
-
 	<!-- storePaymentOptionList-PaymentOptionList-resultmap -->
 	<resultMap id="storePaymentOptionList-PaymentOptionList-resultmap" type="StorePaymentOptionList" extends="storePaymentOptionList-resultmap">
 			 <association property="paymentOptionList" resultMap="com.cnb.config.mybatis.mapper.PaymentOptionListMapper.paymentOptionList-resultmap"/>

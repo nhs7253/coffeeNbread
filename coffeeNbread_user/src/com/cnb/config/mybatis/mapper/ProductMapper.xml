@@ -9,6 +9,9 @@
 		+ 제품 삭제
 		+ 제품 종류로 제품 조회
 		+ 제품명으로 제품 조회
+		+ 제품 아이디로 제품 조회
+		+ 판매 여부로 제품 조회
+		+ 한 매장의 모든 제품 조회
 	 -->
 	
 	<!-- insert -->
@@ -48,6 +51,7 @@
 				p.product_price,
 				p.product_category,
 				p.product_detail,
+				p.selling_option,
 				p.today_product_count,
 				p.recommend_product_count,
 				pp.product_picture
@@ -62,6 +66,7 @@
 		<result column="product_price" property="productPrice"/>
 		<result column="product_category" property="productCategory"/>
 		<result column="product_detail" property="productDetail"/>
+		<result column="selling_option" property="sellingOption"/>
 		<result column="today_product_count" property="todayProductCount"/>
 		<result column="recommend_product_count" property="recommendProductCount"/>
 	</resultMap>
@@ -79,14 +84,34 @@
 		AND   p.product_id = pp.product_id
 	</select>
 	
-	<!-- selectProductListByName -->
-	<select id="selectProductListByName" resultMap="product-productPicture-resultmap" parameterType="map">
+	<!-- selectProductByName -->
+	<select id="selectProductByName" resultMap="product-productPicture-resultmap" parameterType="map">
 		<include refid="select-product-productPicture"/>
 		WHERE p.store_id = #{storeId} 
 		AND   p.product_name = #{productName}
 		AND	  p.store_id = pp.store_id
-		AND   p.product_id = pp.product_id
 	</select>
 	
 	
+	<!-- selectProductById -->
+	<select id="selectProductById" resultMap="product-productPicture-resultmap" parameterType="map">
+		<include refid="select-product-productPicture"/>
+		WHERE p.store_id = #{storeId} 
+		AND   p.product_id = #{productId}
+		AND	  p.store_id = pp.store_id
+	</select>
+	
+	<!-- selectProductListBySellingOption -->
+	<select id="selectProductListBySellingOption" resultMap="product-productPicture-resultmap" parameterType="map">
+		<include refid="select-product-productPicture"/>
+		WHERE p.store_id = #{storeId} 
+		AND   p.selling_option = #{sellingOption}
+		AND	  p.store_id = pp.store_id
+	</select>
+	
+	<!-- selectProduct -->
+	<select id="selectProduct" resultMap="product-productPicture-resultmap" parameterType="string">
+		<include refid="select-product-productPicture"/>
+		WHERE p.store_id = #{storeId} 
+	</select>
 </mapper>

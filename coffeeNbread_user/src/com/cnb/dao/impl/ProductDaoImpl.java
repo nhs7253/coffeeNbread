@@ -13,6 +13,11 @@ import com.cnb.vo.Product;
 
 /*
  * 최민희
+ * 2017-06-30
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-29
  * 수정
  */
@@ -49,11 +54,31 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Product selectProductListByName(String storeId, String productName) {
+	public Product selectProductByName(String storeId, String productName) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productName", productName);
-		return session.selectOne(makeSqlId("selectProductListByName"), info);
+		return session.selectOne(makeSqlId("selectProductByName"), info);
 	}
 
+	@Override
+	public Product selectProductById(String storeId, String productId) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productId", productId);
+		return session.selectOne(makeSqlId("selectProductById"), info);
+	}
+
+	@Override
+	public List<Product> selectProductListBySellingOption(String storeId, String sellingOption) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("sellingOption", sellingOption);
+		return session.selectList(makeSqlId("selectProductListBySellingOption"), info);
+	}
+	
+	@Override
+	public List<Product> selectProductList(String storeId) {
+		return session.selectList(makeSqlId("selectProduct"), storeId);
+	}
 }

@@ -483,4 +483,5 @@ DROP SEQUENCE store_visit_history_no_seq;
 
 
 
-select * from STORE_PAYMENT_OPTIONLIST
+
+
