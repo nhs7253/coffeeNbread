@@ -21,8 +21,10 @@
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 
 	<!-- bean -->
+	<!--  -->
+	<mvc:view-controller path="/request2.do" view-name="request2"/>
+	<mvc:view-controller path="/response2.do" view-name="response2"/>
 	
-
 			
 	<!-- TilesConfigurer 빈으로 등록 : Tiles설정파일을 등록하는 빈 -->
 	
@@ -52,9 +54,7 @@
 		
 	<!-- FileUpload -->
 	
-	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
-	
-	
+	<bean name="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
 		
 		  
 </beans>
