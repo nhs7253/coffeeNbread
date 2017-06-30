@@ -137,10 +137,9 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 	
+	 <!-- Logging -->
 
-	        <!-- Logging -->
-
-		<!-- <dependency>
+		<dependency>
 
 			<groupId>org.apache.logging.log4j</groupId>
 
@@ -150,7 +149,7 @@
 
 		</dependency>
 
-		Log4j2 SLF4J Bridge
+		<!-- Log4j2 SLF4J Bridge -->
 
 		<dependency>
 
@@ -160,9 +159,7 @@
 
 			<version>2.0</version>
 
-		</dependency> -->
-	
-
+		</dependency>
 	
   </dependencies>
 </project>
