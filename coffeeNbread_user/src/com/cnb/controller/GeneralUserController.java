@@ -7,6 +7,6 @@ package com.cnb.controller;
 /**
  * git용 Default 파일
  */
-public class DefaultController {
+public class GeneralUserController {
 
 }
