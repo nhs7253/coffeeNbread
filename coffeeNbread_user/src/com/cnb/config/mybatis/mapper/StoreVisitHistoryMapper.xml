@@ -165,7 +165,7 @@
 							   store_close, 
 							   store_permission
 						FROM store_visit_history svh, store s 
-						WHERE svh.store_id = s.store_id AND user_id = #{userId}
+						WHERE svh.store_id = s.store_id AND user_id = #{userId} AND store_name LIKE '%'||#{keyword}||'%'
 						ORDER BY store_visit_history_no DESC
 					) 
 					WHERE rownum <= #{endIndex}

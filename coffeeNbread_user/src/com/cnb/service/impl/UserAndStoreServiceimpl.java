@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cnb.dao.StoreBookmarkDao;
+import com.cnb.dao.StoreVisitHistoryDao;
 import com.cnb.exception.UserAndStoreServiceException;
 import com.cnb.service.UserAndStoreService;
 import com.cnb.util.PagingBean;
 import com.cnb.vo.StoreBookmark;
+import com.cnb.vo.StoreVisitHistory;
 
 /*
  * 노현식
@@ -23,6 +25,9 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	
 	@Autowired
 	private StoreBookmarkDao storeBookmarkDao;
+	
+	@Autowired
+	private StoreVisitHistoryDao storeVisitHistoryDao;
 
 	@Override
 	public void addStoreBookmark(StoreBookmark storeBookmark) throws UserAndStoreServiceException {
@@ -43,11 +48,38 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	}
 
 	@Override
-	public Map<String, Object> findStoreBookmarkListByKeyowrd(String userId, int page, String keyword) {
+	public Map<String, Object> findStoreBookmarkListByKeyword(String userId, int page, String keyword) {
 		Map<String, Object> map = new HashMap<>();
 		int tatalCount = storeBookmarkDao.selectStoreBookmarkByUserIdJoinStoreListCount(userId); //검색 결과 개수
 		PagingBean pageBean = new PagingBean(tatalCount, page); //(tatalCount, page) - (전체 페이지 수, 보려는 페이지 번호)
 		List<StoreBookmark> list = storeBookmarkDao.selectStoreBookmarkByUserIdJoinStoreListPaging(userId, keyword, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		//실제 표여줄 내용을 페이징하여 일정 개수 읽음  - userId, keyword - 검색 조건, getBeginItemInPage() 보여줄 시작 페이지 번호 , getEndItemInPage() 보여줄 끝페이지 번호
+		map.put("pageBean", pageBean);
+		map.put("list", list);
+		return map;
+	}
+
+	@Override
+	public void addStoreVisitHistory(StoreVisitHistory storeVisitHistory) {
+		storeVisitHistoryDao.insertStoreVisitHistory(storeVisitHistory);
+	}
+
+	@Override
+	public void removeAllStoreVisitHistory(String userId) {
+		storeVisitHistoryDao.deleteStoreVisitHistoryByUserId(userId);
+	}
+
+	@Override
+	public void selectRemoveStoreVisitHistory(String userId, List<String> storeIdList) {
+		storeVisitHistoryDao.deleteStoreVisitHistoryByStoreVisitHistoryList(userId, storeIdList);
+	}
+
+	@Override
+	public Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, int page, String keyword) {
+		Map<String, Object> map = new HashMap<>();
+		int tatalCount = storeVisitHistoryDao.selectStoreVisitHistoryByUserIdJoinStoreListCount(userId); //검색 결과 개수
+		PagingBean pageBean = new PagingBean(tatalCount, page); //(tatalCount, page) - (전체 페이지 수, 보려는 페이지 번호)
+		List<StoreVisitHistory> list = storeVisitHistoryDao.selectStoreVisitHistoryByUserIdJoinStoreListPaging(userId, keyword, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		//실제 표여줄 내용을 페이징하여 일정 개수 읽음  - userId, keyword - 검색 조건, getBeginItemInPage() 보여줄 시작 페이지 번호 , getEndItemInPage() 보여줄 끝페이지 번호
 		map.put("pageBean", pageBean);
 		map.put("list", list);
