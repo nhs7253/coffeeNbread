@@ -1,12 +1,12 @@
 package com.cnb.service.impl.test;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.cnb.exception.DuplicatedProudctIdOrProductNameException;
 import com.cnb.service.ProductService;
 import com.cnb.vo.Product;
 
@@ -51,7 +51,7 @@ public class ProductServiceImplTest {
 			System.err.println(e.getMessage());
 		}
 */
-	/*	
+		
 		//제품 조회
 		System.out.println("==========조회==========");
 		
@@ -61,13 +61,17 @@ public class ProductServiceImplTest {
 		//제품 종류로 제품 조회
 		System.out.println("==========제품 종류==========");
 		String productCategory = "빵";
-		HashMap<String, Object> list1 = service.findProductListByCategory(page, storeId, productCategory);
-		if(list1.size()==0){
+		HashMap<String, Object> map1 = service.findProductListByCategory(page, storeId, productCategory);
+		Iterator iterator1 = map1.entrySet().iterator();
+		if(iterator1 == null) {
 			System.out.printf("%s 종류의 제품이 없습니다.", productCategory);
-		}else{
-			for(Product product : list1){
-				System.out.println(product);
-			}
+		}else {
+		  while (iterator1.hasNext()) {
+		   Entry entry1 = (Entry)iterator1.next();
+		   if(entry1.getKey().equals("list")){
+			   System.out.println(entry1.getValue());
+		   }
+		  }	
 		}
 		
 		//제품명으로 제품 조회
@@ -89,24 +93,32 @@ public class ProductServiceImplTest {
 		//판매 여부로 제품 조회
 		System.out.println("==========판매 여부==========");
 		String sellingOption = "Y";
-		List<Product> list2 = service.findProductListBySellingOption(storeId, sellingOption);
-		if(list2.size()==0){
+		HashMap<String, Object> map2 = service.findProductListBySellingOption(page, storeId, sellingOption);
+		Iterator iterator2 = map2.entrySet().iterator();
+		if(iterator2 == null) {
 			System.out.printf("판매여부가 %s인 제품이 없습니다.", sellingOption);
-		}else{
-			for(Product product : list2){
-				System.out.println(product);
-			}
+		}else {
+		  while (iterator2.hasNext()) {
+		   Entry entry2 = (Entry)iterator2.next();
+		   if(entry2.getKey().equals("list")){
+			   System.out.println(entry2.getValue());
+		   }
+		  }	
 		}
 		
 		//한 매장의 모든 제품 조회
 		System.out.println("==========모든 종류==========");
-		List<Product> list3 = service.findProductList(storeId);
-		if(list3.size()==0){
+		HashMap<String, Object> map3 = service.findProductList(page, storeId);
+		Iterator iterator3 = map3.entrySet().iterator();
+		if(iterator3 == null) {
 			System.out.println("해당 매장에 제품이 없습니다.");
-		}else{
-			for(Product product : list3){
-				System.out.println(product);
-			}
-		}*/
+		}else {
+		  while (iterator3.hasNext()) {
+		   Entry entry3 = (Entry)iterator3.next();
+		   if(entry3.getKey().equals("list")){
+			   System.out.println(entry3.getValue());
+		   }
+		  }
+		}
 	}
 }
