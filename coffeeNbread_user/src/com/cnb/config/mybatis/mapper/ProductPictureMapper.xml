@@ -8,6 +8,7 @@
 		+ 제품 사진 수정
 		+ 제품 사진 삭제
 		+ 매장아이디, 제품아이디로 제품 사진 조회
+		+ 매장아이디, 제품정보로 제품 사진 조회
 	 -->
 
 	<!-- insert -->
@@ -58,5 +59,11 @@
 	<select id="selectProductPictureListByProductIdAndStoreId" resultMap="productPicture-resultmap" parameterType="map">
 		<include refid="select-productPicture"/>
 		WHERE product_id = #{productId} AND store_id = #{storeId}
+	</select>
+	
+	<!-- selectProductPictureListByProductPictureAndStoreId -->
+	<select id="selectProductPictureListByProductPictureAndStoreId" resultMap="productPicture-resultmap" parameterType="map">
+		<include refid="select-productPicture"/>
+		WHERE product_picture = #{productPicture} AND store_id = #{storeId}
 	</select>
 </mapper>
