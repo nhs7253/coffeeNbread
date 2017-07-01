@@ -14,7 +14,12 @@ import com.cnb.vo.UserAuthority;
 
 /*
  * 노현식 
- * 2017-06-23 생성
+ * 2017-06-30 
+ * 초기 구현
+ * 
+ * 노현식 
+ * 2017-06-23 
+ * 생성
  */
 @Service
 public class GeneralUserServiceImpl implements GeneralUserService{

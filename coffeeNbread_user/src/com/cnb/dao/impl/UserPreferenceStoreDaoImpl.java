@@ -42,6 +42,11 @@ public class UserPreferenceStoreDaoImpl implements UserPreferenceStoreDao{
 	public int updateUserPreferenceStoreByUserPreferenceStoreUpPreferenceHits(UserPreferenceStore userPreferenceStore) {
 		return session.update(makeSqlId("updateUserPreferenceStoreByUserPreferenceStoreUpPreferenceHits"), userPreferenceStore);
 	}
+	
+	@Override
+	public UserPreferenceStore selectUserPreferenceByUserPreferenceStore(UserPreferenceStore userPreferenceStore) {
+		return session.selectOne(makeSqlId("selectUserPreferenceByUserPreferenceStore"), userPreferenceStore);
+	}
 
 	@Override
 	public List<UserPreferenceStore> selectUserPreferenceJoinStoreSort(String userId) {
@@ -51,6 +56,10 @@ public class UserPreferenceStoreDaoImpl implements UserPreferenceStoreDao{
 	@Override
 	public List<UserPreferenceStore> selectUserPreferenceList() {
 		return session.selectList(makeSqlId("selectUserPreferenceList"));
+	}
+
+	public int aaa(String userId){
+		return session.selectOne(makeSqlId("aaa"), userId);
 	}
 
 }

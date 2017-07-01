@@ -15,7 +15,7 @@
 	</resultMap>
 	
 	<insert id="insertUserPreferenceStore" parameterType="UserPreferenceStore">
-		INSERT INTO user_preference_store VALUES(#{userId}, #{storeId}, 0)
+		INSERT INTO user_preference_store VALUES(#{userId}, #{storeId}, 1)
 	</insert>
 	
 	<delete id="deleteUserPreferenceStore" parameterType="string">
@@ -28,11 +28,18 @@
 		WHERE user_id = #{userId} AND store_id = #{storeId}
 	</update>
 	
+	<select id="selectUserPreferenceByUserPreferenceStore" parameterType="UserPreferenceStore" resultMap="UserPreferenceStore-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM user_preference_store
+		WHERE user_id = #{userId} AND store_id = #{storeId}
+	</select>
+	
 	<select id="selectUserPreferenceJoinStoreSort" parameterType="string" resultMap="UserPreferenceStore-Store-resultmap">
 		<![CDATA[
 			SELECT rownum rnum, 
 				   user_id, 
 				   store_id, 
+				   preference_hits,
 				   store_name, 
 				   store_intro, 
 				   store_phone, 
@@ -45,6 +52,7 @@
 			FROM(
 				   SELECT user_id, 
 						  s.store_id, 
+						  preference_hits,
 						  store_name, 
 						  store_intro, 
 						  store_phone, 
@@ -54,9 +62,9 @@
 						  store_open, 
 						  store_close, 
 						  store_permission
-					FROM store_bookmark sb, store s 
-					WHERE s.store_id = sb.store_id AND user_id = #{userId}
-					ORDER BY store_name
+					FROM user_preference_store ups, store s 
+					WHERE ups.store_id = s.store_id AND user_id = #{userId}
+					ORDER BY preference_hits DESC
 			) 
 			WHERE rownum <= '5'
 		]]>
@@ -65,6 +73,31 @@
 	<select id="selectUserPreferenceList" resultMap="UserPreferenceStore-resultmap">
 		SELECT <include refid="all-column"/>
 		FROM user_preference_store
+	</select>
+	
+	
+	<select id="aaa" parameterType="string" resultType="int">
+	<![CDATA[
+			SELECT COUNT(*)
+			FROM(
+				   SELECT user_id, 
+						  s.store_id, 
+						  preference_hits,
+						  store_name, 
+						  store_intro, 
+						  store_phone, 
+						  store_address, 
+						  store_email, 
+						  store_hits, 
+						  store_open, 
+						  store_close, 
+						  store_permission
+					FROM user_preference_store ups, store s 
+					WHERE ups.store_id = s.store_id AND user_id = #{userId}
+					ORDER BY preference_hits DESC
+			) 
+			WHERE rownum <= '5'
+		]]>
 	</select>
 		
 </mapper>
