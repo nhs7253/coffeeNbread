@@ -10,7 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.ProductDao;
 import com.cnb.vo.Product;
-
+/*
+ * 최민희
+ * 2017-07-01
+ * 수정
+ */
 /*
  * 최민희
  * 2017-06-30
@@ -46,10 +50,27 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectProductListByCategory(String storeId, String productCategory) {
+	public int selectProductListCount(String storeId) {
+		return session.selectOne(makeSqlId("selectProductListCount"), storeId);
+	}
+
+	@Override
+	public int selectProductListCountByMethod(String storeId, String method, String methodContent) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("method", method);
+		info.put("methodContent", methodContent);
+		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
+
+	}
+	
+	@Override
+	public List<Product> selectProductListByCategory(String storeId, String productCategory, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productCategory", productCategory);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectProductListByCategory"), info);
 	}
 
@@ -70,15 +91,21 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectProductListBySellingOption(String storeId, String sellingOption) {
+	public List<Product> selectProductListBySellingOption(String storeId, String sellingOption, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("sellingOption", sellingOption);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectProductListBySellingOption"), info);
 	}
 	
 	@Override
-	public List<Product> selectProductList(String storeId) {
-		return session.selectList(makeSqlId("selectProduct"), storeId);
+	public List<Product> selectProductList(String storeId, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectProductList"), info);
 	}
 }

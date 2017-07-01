@@ -6,6 +6,11 @@ import com.cnb.vo.Product;
 
 /*
  * 최민희
+ * 2017-07-01
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-30
  * 수정
  */
@@ -45,12 +50,26 @@ public interface ProductDao {
 	 */
 	int updateProduct(Product product);
 	
+	/** 
+	 * 조회된 제품 수 (Paging 용 count)
+	 * @param storeId
+	 * @return 조회된 제품 수
+	 */
+	int selectProductListCount(String storeId);
+
+	/** 
+	 * 여러 조건으로 조회된 제품 수 (Paging 용 count)
+	 * @param storeId, method, methodContent
+	 * @return 조회된 제품 수
+	 */
+	int selectProductListCountByMethod(String storeId, String method, String methodContent);
+	
 	/**
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 select
-	 * @param storeId, productCategory
+	 * @param storeId, productCategory, startIndex, endIndex
 	 * @return 조회된 제품 정보들
 	 */
-	List<Product> selectProductListByCategory(String storeId, String productCategory);
+	List<Product> selectProductListByCategory(String storeId, String productCategory, int startIndex, int endIndex);
 	
 	/**
 	 * 제품 이름으로 1개의 매장에 있는 제품 정보 select
@@ -68,15 +87,16 @@ public interface ProductDao {
 
 	/**
 	 * 판매여부 1개의 매장에 있는 제품 정보들 select
-	 * @param storeId, sellingOption
+	 * @param storeId, sellingOption, startIndex, endIndex
 	 * @return 조회된 제품 정보들
 	 */
-	List<Product> selectProductListBySellingOption(String storeId, String sellingOption);
+	List<Product> selectProductListBySellingOption(String storeId, String sellingOption, int startIndex, int endIndex);
 	
 	/**
 	 * 1개의 매장에 있는 모든 제품 정보 select
+	 * @param storeId, startIndex, endIndex
 	 * @return 조회된 제품 정보
 	 */
-	List<Product> selectProductList(String storeId);
+	List<Product> selectProductList(String storeId, int startIndex, int endIndex);
 	
 }
