@@ -70,7 +70,14 @@ public interface StoreBookmarkDao {
 	 * 해당 유저가 즐겨찾기한 매장 아이디들 조회
 	 * @return List<String> 매장 아이디 목록
 	 */
-	List<String> selectStoreBookmarkByUserId(String userId);
+	List<String> selectStoreBookmarkListByUserId(String userId);
+	
+	/**
+	 * 해당 유저가 즐겨찾기한 매장 조회
+	 * @param storeBookmark 검색할 매장 객체
+	 * @return StoreBookmark 검색된 매장 객체
+	 */
+	StoreBookmark selectStoreBookmarkByStoreBookmark(StoreBookmark storeBookmark);
 	
 	/** 
 	 * 해당 유저가 즐겨찾기한 매장 목록 조회
@@ -87,12 +94,12 @@ public interface StoreBookmarkDao {
 	int selectStoreBookmarkByUserIdJoinStoreListCount(String userId);
 	
 	/**
-	 * 해당 유저가 즐겨찾기한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬)
+	 * 해당 유저가 즐겨찾기한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬) - 사용X
 	 * @param userId 해당 목록을 찾을 유저 ID
 	 * @param keyword 부분일치 조회로 검색할 검색어
 	 * @param startIndex 페이징 시작 컬럼
 	 * @param endIndex 페이징 끝 컬럼
-	 * @return int - 유저가 즐겨 찾기한 매장 목록의 일정 조회 수 수
+	 * @return int - 유저가 즐겨 찾기한 매장 목록의 일정 조회 수
 	 */
 	int selectStoreBookmarkByUserIdJoinStoreListPagingCount(String userId, String keyword, int startIndex, int endIndex);
 	

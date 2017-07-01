@@ -23,11 +23,11 @@ import com.cnb.vo.GeneralUser;
 public class GeneralUserServiceImplTest {
 	
 	@Autowired
-	private GeneralUserService gus;
+	private GeneralUserService service;
 	
 	public void Test() throws UserManageException {
 		
-		gus.addUser(new GeneralUser("ServiceTestUser1", 
+		service.addUser(new GeneralUser("ServiceTestUser1", 
 						            "1111", 
 						            "서비스 테스트 유저1", 
 						            new Date(), 
@@ -37,9 +37,11 @@ public class GeneralUserServiceImplTest {
 						            "서비스테스트1동", 
 						            "Y"));
 		
-		System.out.println(gus.findUser("ServiceTestUser1"));
+		System.out.println(service.findUser("ServiceTestUser1"));
 		
-		gus.removeUser("ServiceTestUser1");
+		service.removeUser("ServiceTestUser1");
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 
 	public static void main(String[] args) throws UserManageException {

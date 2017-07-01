@@ -79,9 +79,10 @@ public class StoreVisitHistoryDaoImpl implements StoreVisitHistoryDao{
 	}
 
 	@Override
-	public List<StoreVisitHistory> selectStoreVisitHistoryByUserIdJoinStoreListPaging(String userId, int startIndex, int endIndex) {
+	public List<StoreVisitHistory> selectStoreVisitHistoryByUserIdJoinStoreListPaging(String userId, String keyword, int startIndex, int endIndex) {
 		Map<String, String> input = new HashMap<String, String>();
 		input.put("userId", userId);
+		input.put("keyword", keyword);
 		input.put("startIndex", String.valueOf(startIndex));
 		input.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectStoreVisitHistoryByUserIdJoinStoreListPaging"), input);

@@ -59,6 +59,12 @@
 		WHERE user_id = #{value}
 	</select>
 	
+	<select id="selectStoreBookmarkByStoreBookmark" parameterType="StoreBookmark" resultType="StoreBookmark">
+		SELECT <include refid="all-column"/>
+		FROM store_bookmark
+		WHERE user_id = #{userId} AND store_id = #{storeId}
+	</select>
+	
 	<select id="selectStoreBookmarkByUserIdJoinStoreList" parameterType="string" resultMap="StoreBookmark-Store-resultmap">
 		SELECT user_id, 
 			   s.store_id, 
