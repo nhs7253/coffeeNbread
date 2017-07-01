@@ -151,7 +151,7 @@ SELECT user_id, store_id, store_name, store_intro, store_phone, store_address, s
 							   store_close, 
 							   store_permission
 						FROM store_bookmark sb, store s 
-						WHERE s.store_id = sb.store_id AND user_id = 'u-1'
+						WHERE s.store_id = sb.store_id AND user_id = 'u-1' AND store_name LIKE '%장%'
 						ORDER BY store_name
 					) 
 					WHERE rownum <= '5'
@@ -159,7 +159,15 @@ SELECT user_id, store_id, store_name, store_intro, store_phone, store_address, s
 			WHERE rnum >= '2'
 			
 			
-			
+SELECT user_id,         store_id,         store_name,         store_intro,         store_phone,         store_address,         
+store_email,         store_hits,         store_open,         store_close,         store_permission    
+FROM(      SELECT rownum rnum,           user_id,           store_id,           store_name,           
+store_intro,           store_phone,           store_address,           store_email,           store_hits,           
+store_open,           store_close,           store_permission      FROM(       SELECT user_id,            
+s.store_id,            store_name,            store_intro,            store_phone,            store_address,           
+store_email,            store_hits,            store_open,            store_close,            store_permission       
+FROM store_bookmark sb, store s        WHERE s.store_id = sb.store_id AND user_id = 'u-1' AND store_name LIKE '%'||'장'||'%'      
+ORDER BY store_name      )       WHERE rownum <= 5    )    WHERE rnum >= 2			
 		
 			
 			
