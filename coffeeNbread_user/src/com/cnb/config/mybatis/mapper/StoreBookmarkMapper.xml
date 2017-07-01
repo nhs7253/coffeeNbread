@@ -110,7 +110,7 @@
 							   store_close, 
 							   store_permission
 						FROM store_bookmark sb, store s 
-						WHERE s.store_id = sb.store_id AND user_id = #{userId}
+						WHERE s.store_id = sb.store_id AND user_id = #{userId} AND store_name LIKE '%'||#{keyword}||'%'
 						ORDER BY store_name
 					) 
 					WHERE rownum <= #{endIndex}
@@ -158,7 +158,7 @@
 							   store_close, 
 							   store_permission
 						FROM store_bookmark sb, store s 
-						WHERE s.store_id = sb.store_id AND user_id = #{userId}
+						WHERE s.store_id = sb.store_id AND user_id = #{userId} AND store_name LIKE '%'||#{keyword}||'%'
 						ORDER BY store_name
 					) 
 					WHERE rownum <= #{endIndex}

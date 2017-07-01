@@ -45,7 +45,7 @@ public class GeneralUserServiceImplTest {
 	public static void main(String[] args) throws UserManageException {
 		
 		GeneralUserServiceImplTest gudit = 
-				(GeneralUserServiceImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml", "com/cnb/config/spring/security-context.xml").getBean("generalUserServiceImplTest");
+				(GeneralUserServiceImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("generalUserServiceImplTest");
 		gudit.Test();
 		
 	}
