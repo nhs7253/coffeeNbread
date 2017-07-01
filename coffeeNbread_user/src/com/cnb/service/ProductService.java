@@ -1,6 +1,6 @@
 package com.cnb.service;
 
-import java.util.List;
+import java.util.HashMap;
 
 import com.cnb.exception.DuplicatedProudctIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
@@ -30,7 +30,7 @@ public interface ProductService {
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 찾기
 	 * @param storeId, productCategory
 	 */
-	List<Product> findProductListByCategory(String storeId, String productCategory);
+	HashMap<String, Object> findProductListByCategory(int page, String storeId, String productCategory);
 	
 	/**
 	 * 제품 이름으로 1개의 매장에 있는 제품 정보 찾기
@@ -49,12 +49,12 @@ public interface ProductService {
 	 * @param storeId, sellingOption
 	 * @return 조회된 제품 정보들
 	 */
-	List<Product> findProductListBySellingOption(String storeId, String sellingOption);
+	HashMap<String, Object> findProductListBySellingOption(int page, String storeId, String sellingOption);
 	
 	
 	/**
 	 * 1개의 매장에 있는 제품 정보들 찾기
 	 * @param storeId
 	 */
-	List<Product> findProductList(String storeId);
+	HashMap<String, Object> findProductList(int page, String storeId);
 }

@@ -1,5 +1,6 @@
 package com.cnb.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import com.cnb.dao.ProductDao;
 import com.cnb.exception.DuplicatedProudctIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
 import com.cnb.service.ProductService;
+import com.cnb.util.PagingBean;
 import com.cnb.vo.Product;
 
 /*
@@ -21,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDao dao;
-/*	
+
 	@Override
 	public int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException {
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) != null) {
@@ -41,8 +43,20 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findProductListByCategory(String storeId, String productCategory) {
-		return dao.selectProductListByCategory(storeId, productCategory);
+	public HashMap<String, Object> findProductListByCategory(int page, String storeId, String productCategory) {
+		HashMap<String, Object> map = new HashMap<>();
+		String method ="category";
+		String methodContent = productCategory;
+		
+		//item 수
+		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+		
+		List<Product> list = dao.selectProductListByCategory(storeId, productCategory, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		map.put("list", list);
+		return map;
 	}
 
 	@Override
@@ -56,56 +70,34 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> findProductListBySellingOption(String storeId, String sellingOption) {
-		return dao.selectProductListBySellingOption(storeId, sellingOption);
+	public HashMap<String, Object> findProductListBySellingOption(int page, String storeId, String sellingOption) {
+		HashMap<String, Object> map = new HashMap<>();
+		String method ="sellingOption";
+		String methodContent = sellingOption;
+		
+		//item 수
+		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+		
+		List<Product> list = dao.selectProductListBySellingOption(storeId, sellingOption, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		map.put("list", list);
+		return map;
 	}
 	
 	@Override
-	public List<Product> findProductList(String storeId) {
-		return dao.selectProductList(storeId);
+	public HashMap<String, Object> findProductList(int page, String storeId) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		//item 수
+		int totalCount = dao.selectProductListCount(storeId);
+		
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+		
+		List<Product> list = dao.selectProductList(storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		map.put("list", list);
+		return map;
 	}
-	*/
-
-	@Override
-	public int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int modifyProduct(Product product) throws ProductNotFoundException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Product> findProductListByCategory(String storeId, String productCategory) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Product findProductByName(String storeId, String productName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Product findProductById(String storeId, String productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findProductListBySellingOption(String storeId, String sellingOption) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Product> findProductList(String storeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

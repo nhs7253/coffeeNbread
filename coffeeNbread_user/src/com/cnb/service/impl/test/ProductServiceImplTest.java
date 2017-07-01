@@ -1,5 +1,6 @@
 package com.cnb.service.impl.test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -22,7 +23,7 @@ public class ProductServiceImplTest {
 		//TODO Spring 컨테이너로 부터 ProductService bean 가져오기
 		ProductService service =  (ProductService)ctx.getBean("productServiceImpl");
 
-		//제품 등록
+/*		//제품 등록
 		//겹치는 거 없는 경우
 		Product p1 = new Product("p-30", "s-2", "제품30", 3000, "빵", "제품설명글30", "N", 100, 10);
 		//제품 아이디 겹치는 경우
@@ -38,7 +39,7 @@ public class ProductServiceImplTest {
 		} catch (DuplicatedProudctIdOrProductNameException e) {
 			System.err.println(e.getMessage());
 		}
-
+*/
 		
 /*		
 		//제품 수정
@@ -50,16 +51,17 @@ public class ProductServiceImplTest {
 			System.err.println(e.getMessage());
 		}
 */
-		
+	/*	
 		//제품 조회
 		System.out.println("==========조회==========");
 		
+		int page = 1;
 		String storeId = "s-1";
 		
 		//제품 종류로 제품 조회
 		System.out.println("==========제품 종류==========");
 		String productCategory = "빵";
-		List<Product> list1 = service.findProductListByCategory(storeId, productCategory);
+		HashMap<String, Object> list1 = service.findProductListByCategory(page, storeId, productCategory);
 		if(list1.size()==0){
 			System.out.printf("%s 종류의 제품이 없습니다.", productCategory);
 		}else{
@@ -105,6 +107,6 @@ public class ProductServiceImplTest {
 			for(Product product : list3){
 				System.out.println(product);
 			}
-		}
+		}*/
 	}
 }

@@ -10,7 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.ProductDao;
 import com.cnb.vo.Product;
-
+/*
+ * 최민희
+ * 2017-07-01
+ * 수정
+ */
 /*
  * 최민희
  * 2017-06-30
@@ -71,22 +75,18 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Product selectProductByName(String storeId, String productName, int startIndex, int endIndex) {
+	public Product selectProductByName(String storeId, String productName) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productName", productName);
-		info.put("startIndex", String.valueOf(startIndex));
-		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectOne(makeSqlId("selectProductByName"), info);
 	}
 
 	@Override
-	public Product selectProductById(String storeId, String productId, int startIndex, int endIndex) {
+	public Product selectProductById(String storeId, String productId) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productId", productId);
-		info.put("startIndex", String.valueOf(startIndex));
-		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectOne(makeSqlId("selectProductById"), info);
 	}
 
@@ -95,14 +95,17 @@ public class ProductDaoImpl implements ProductDao {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("sellingOption", sellingOption);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectProductListBySellingOption"), info);
 	}
 	
 	@Override
 	public List<Product> selectProductList(String storeId, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
-		return session.selectList(makeSqlId("selectProduct"), info);
+		return session.selectList(makeSqlId("selectProductList"), info);
 	}
 }
