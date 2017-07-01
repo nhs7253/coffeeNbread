@@ -2,7 +2,7 @@ package com.cnb.service;
 
 import java.util.List;
 
-import com.cnb.exception.DuplicatedProudctPictureException;
+import com.cnb.exception.DuplicatedProductPictureException;
 import com.cnb.exception.ProductPictureNotFoundException;
 import com.cnb.vo.ProductPicture;
 
@@ -20,9 +20,9 @@ public interface ProductPictureService {
 	/**
 	 * 1개의 제품 사진 정보 추가
 	 * @param productPicture
-	 * @throws DuplicatedProudctPictureException 한 제품에 등록하려는 제품 사	진이 이미 등록되 있는 경우 발생
+	 * @throws DuplicatedProductPictureException 한 제품에 등록하려는 제품 사	진이 이미 등록되 있는 경우 발생
 	 */
-	int addProductPicture(ProductPicture productPicture) throws DuplicatedProudctPictureException;
+	int addProductPicture(ProductPicture productPicture) throws DuplicatedProductPictureException;
 	
 	/**
 	 * 1개의 제품 사진 정보 수정

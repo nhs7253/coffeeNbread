@@ -10,9 +10,9 @@ package com.cnb.exception;
  * @author minhee
  *
  */
-public class DuplicatedProudctPictureException extends Exception {
-	public DuplicatedProudctPictureException(){}
-	public DuplicatedProudctPictureException(String message){
+public class DuplicatedProductPictureException extends Exception {
+	public DuplicatedProductPictureException(){}
+	public DuplicatedProductPictureException(String message){
 		super(message);
 	}
 }

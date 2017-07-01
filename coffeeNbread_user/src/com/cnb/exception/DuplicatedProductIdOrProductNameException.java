@@ -9,9 +9,9 @@ package com.cnb.exception;
  * @author minhee
  *
  */
-public class DuplicatedProudctIdOrProductNameException extends Exception{
-	public DuplicatedProudctIdOrProductNameException(){}
-	public DuplicatedProudctIdOrProductNameException(String message){
+public class DuplicatedProductIdOrProductNameException extends Exception{
+	public DuplicatedProductIdOrProductNameException(){}
+	public DuplicatedProductIdOrProductNameException(String message){
 		super(message);
 	}
 }

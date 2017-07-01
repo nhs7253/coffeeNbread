@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cnb.dao.ProductPictureDao;
-import com.cnb.exception.DuplicatedProudctPictureException;
+import com.cnb.exception.DuplicatedProductPictureException;
 import com.cnb.exception.ProductPictureNotFoundException;
 import com.cnb.service.ProductPictureService;
 import com.cnb.vo.ProductPicture;
@@ -29,9 +29,9 @@ public class ProductPictureServiceImpl implements ProductPictureService {
 	private ProductPictureDao dao;
 
 	@Override
-	public int addProductPicture(ProductPicture productPicture) throws DuplicatedProudctPictureException {
+	public int addProductPicture(ProductPicture productPicture) throws DuplicatedProductPictureException {
 		if(dao.selectProductPictureListByProductPictureAndStoreId(productPicture.getProductPicture(), productPicture.getStoreId()) != null) {
-			throw new DuplicatedProudctPictureException(productPicture.getProductPicture() + "은 이미 등록된 사진 정보입니다.");
+			throw new DuplicatedProductPictureException(productPicture.getProductPicture() + "은 이미 등록된 사진 정보입니다.");
 		}
 		return dao.insertProductPicture(productPicture);
 	}

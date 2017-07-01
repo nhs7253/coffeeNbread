@@ -2,7 +2,7 @@ package com.cnb.service;
 
 import java.util.HashMap;
 
-import com.cnb.exception.DuplicatedProudctIdOrProductNameException;
+import com.cnb.exception.DuplicatedProductIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
 import com.cnb.vo.Product;
 
@@ -17,7 +17,7 @@ public interface ProductService {
 	 * @param product
 	 * @throws DuplicatedIdException 한 매장에 등록하려는 제품 아이디나 이름이 이미 등록되 있는 경우 발생
 	 */
-	int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException;
+	int addProduct(Product product) throws DuplicatedProductIdOrProductNameException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 수정
