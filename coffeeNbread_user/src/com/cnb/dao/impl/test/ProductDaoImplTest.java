@@ -41,7 +41,7 @@ public class ProductDaoImplTest {
 		//System.out.println(dao.selectProductByName("s-1", "제품1"));
 		//System.out.println(dao.selectProductById("s-1", "p-1"));
 		//System.out.println(dao.selectProductList("s-1"));
-		System.out.println(dao.selectProductListBySellingOption("s-1", "Y"));
+		//System.out.println(dao.selectProductListBySellingOption("s-1", "Y"));
 		System.out.println("이상없음");
 	}
      

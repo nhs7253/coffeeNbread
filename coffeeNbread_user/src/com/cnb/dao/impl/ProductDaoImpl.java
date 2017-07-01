@@ -46,31 +46,52 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectProductListByCategory(String storeId, String productCategory) {
+	public int selectProductListCount(String storeId) {
+		return session.selectOne(makeSqlId("selectProductListCount"), storeId);
+	}
+
+	@Override
+	public int selectProductListCountByMethod(String storeId, String method, String methodContent) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("method", method);
+		info.put("methodContent", methodContent);
+		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
+
+	}
+	
+	@Override
+	public List<Product> selectProductListByCategory(String storeId, String productCategory, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productCategory", productCategory);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectProductListByCategory"), info);
 	}
 
 	@Override
-	public Product selectProductByName(String storeId, String productName) {
+	public Product selectProductByName(String storeId, String productName, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productName", productName);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectOne(makeSqlId("selectProductByName"), info);
 	}
 
 	@Override
-	public Product selectProductById(String storeId, String productId) {
+	public Product selectProductById(String storeId, String productId, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("productId", productId);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectOne(makeSqlId("selectProductById"), info);
 	}
 
 	@Override
-	public List<Product> selectProductListBySellingOption(String storeId, String sellingOption) {
+	public List<Product> selectProductListBySellingOption(String storeId, String sellingOption, int startIndex, int endIndex) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("sellingOption", sellingOption);
@@ -78,7 +99,10 @@ public class ProductDaoImpl implements ProductDao {
 	}
 	
 	@Override
-	public List<Product> selectProductList(String storeId) {
-		return session.selectList(makeSqlId("selectProduct"), storeId);
+	public List<Product> selectProductList(String storeId, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<>();
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectProduct"), info);
 	}
 }

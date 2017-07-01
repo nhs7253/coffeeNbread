@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDao dao;
-	
+/*	
 	@Override
 	public int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException {
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) != null) {
@@ -63,6 +63,49 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> findProductList(String storeId) {
 		return dao.selectProductList(storeId);
+	}
+	*/
+
+	@Override
+	public int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifyProduct(Product product) throws ProductNotFoundException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Product> findProductListByCategory(String storeId, String productCategory) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product findProductByName(String storeId, String productName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product findProductById(String storeId, String productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findProductListBySellingOption(String storeId, String sellingOption) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> findProductList(String storeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -71,6 +71,8 @@
 		<result column="recommend_product_count" property="recommendProductCount"/>
 	</resultMap>
 	
+	
+	
 	<resultMap type="product" id="product-productPicture-resultmap" extends="product-resultmap">
  		<collection property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
  	</resultMap>
