@@ -39,7 +39,7 @@ public class ProductServiceImplTest {
 			System.err.println(e.getMessage());
 		}
 
-
+		
 /*		
 		//제품 수정
 		Product p4 = new Product("p-30", "s-2", "제품31", 4000, "빵", "제품설명글31", "N", 150, 20);

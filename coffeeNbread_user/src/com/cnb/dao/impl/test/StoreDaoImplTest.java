@@ -13,6 +13,10 @@ import com.cnb.vo.Store;
 
 /*
  * 이진영
+ * 2017-06-30
+ * 수정
+ * 
+ * 이진영
  * 2017-06-27
  * 초기 구현
 
@@ -32,12 +36,13 @@ public class StoreDaoImplTest {
 
 	public void Test() {
 		System.out.println("최초 조회");
+		System.out.println(dao.deleteStoreById("s-1"));
+		//System.out.println(dao.selectStorePicture("s-1"));
+//		System.out.println(dao.selectOpionCategoryNDetailByIdList("s-1"));
+//		System.out.println(dao.selectStoreById("s-1"));
 
-
-//		System.out.println(dao.selectStore("s-1"));
-
-		System.out.println(dao.selectStoreEventList("s-1"));
-		System.out.println(dao.selectStoreCategoryList("s-1"));
+//		System.out.println(dao.selectStoreEventList("s-1"));
+//		System.out.println(dao.selectStoreCategoryList("s-1"));
 /*
 		dao.insertStore(new Store("id-5", "0000", "DOA테스트 소개", "000-0000-0000", "주소", "DaoTest-1@dao.com", 2,
 				new Date(), new Date(), "Y"));
