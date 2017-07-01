@@ -1,6 +1,9 @@
 package com.cnb.vo;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /*
  * 김형주
@@ -13,6 +16,7 @@ public class ProductPicture implements Serializable{
 	private String productPicture;	//PRIMARY KEY
 	private String productId;
 	private String storeId;
+	private List<MultipartFile> productPictureList; 
 	
 	public ProductPicture() {
 	}
@@ -46,6 +50,22 @@ public class ProductPicture implements Serializable{
 
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
+	}
+
+	
+	
+	public List<MultipartFile> getProductPictureList() {
+		return productPictureList;
+	}
+
+	public void setProductPictureList(List<MultipartFile> productPictureList) {
+		this.productPictureList = productPictureList;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductPicture [productPicture=" + productPicture + ", productId=" + productId + ", storeId=" + storeId
+				+ "]";
 	}
 
 	@Override
@@ -83,11 +103,5 @@ public class ProductPicture implements Serializable{
 		} else if (!storeId.equals(other.storeId))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "ProductPicture [productPicture=" + productPicture + ", productId=" + productId + ", storeId=" + storeId
-				+ "]";
 	}
 }
