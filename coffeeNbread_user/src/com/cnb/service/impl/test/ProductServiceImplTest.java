@@ -33,7 +33,7 @@ public class ProductServiceImplTest {
 
 		try {
 			//service.addProduct(p1);
-			service.addProduct(p2);	//PRIMARY KEY unique예외 처리해야함!
+			service.addProduct(p2);
 			//service.addProduct(p3);
 			System.out.println("등록 성공");
 		} catch (DuplicatedProudctIdOrProductNameException e) {

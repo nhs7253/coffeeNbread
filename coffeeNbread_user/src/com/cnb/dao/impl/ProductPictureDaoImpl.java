@@ -54,6 +54,11 @@ public class ProductPictureDaoImpl implements ProductPictureDao {
 		return session.selectList(makeSqlId("selectProductPictureListByProductIdAndStoreId"), info);
 	}
 
-
-
+	@Override
+	public ProductPicture selectProductPictureListByProductPictureAndStoreId(String productPicture, String storeId) {
+		Map<String, String> info = new HashMap<>();
+		info.put("productPicture", productPicture);
+		info.put("storeId", storeId);
+		return session.selectOne(makeSqlId("selectProductPictureListByProductPictureAndStoreId"), info);
+	}
 }

@@ -43,7 +43,10 @@ INSERT INTO PRODUCT VALUES('p-16','s-6','제품16',5000,'빵','제품설명글16
 INSERT INTO PRODUCT VALUES('p-17','s-6','제품17',5000,'빵','제품설명글17','Y',500,1000);
 INSERT INTO PRODUCT VALUES('p-18','s-7','제품18',5000,'빵','제품설명글18','Y',500,1000);
 INSERT INTO PRODUCT VALUES('p-19','s-7','제품19',5000,'빵','제품설명글19','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-20','s-1','제품20',5000,'빵','제품설명글20','Y',500,1000);
+/* 김형주 - 2017-07-01 수정 */
+INSERT INTO PRODUCT VALUES('p-20','s-7','제품20',5000,'빵','제품설명글20','Y',500,1000);
+/* 김형주 - 2017-07-01 추가 */
+INSERT INTO PRODUCT VALUES('p-21','s-7','제품21',5000,'빵','제품설명글20','Y',500,1000);
 
 
 

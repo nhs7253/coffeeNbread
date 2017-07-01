@@ -37,11 +37,17 @@ public interface ProductPictureDao {
 	int deleteProductPicture(ProductPicture productPicture);
 	
 	/**
-	 * 1개의 매장에 있는 1개의 제품정보로 제품 사진 정보들 select
+	 * 1개의 매장에 있는 1개의 제품아이디로 제품 사진 정보들 select
 	 * @param productId, storeId
 	 * @return 조회된 제품 사진 정보들
 	 */
 	List<ProductPicture> selectProductPictureListByProductIdAndStoreId(String productId, String storeId);
 	
+	/**
+	 * 1개의 매장에 있는 1개의 제품정보로 제품 사진 정보들 select
+	 * @param ProductPicture, storeId
+	 * @return 조회된 제품 사진 정보
+	 */
+	ProductPicture selectProductPictureListByProductPictureAndStoreId(String ProductPicture, String storeId);
 	
 }

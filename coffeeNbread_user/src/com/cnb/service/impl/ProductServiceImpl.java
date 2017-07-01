@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cnb.dao.ProductDao;
-import com.cnb.exception.DuplicatedProudctIdOrProductNameException;
+import com.cnb.exception.DuplicatedProductIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
 import com.cnb.service.ProductService;
 import com.cnb.util.PagingBean;
@@ -25,11 +25,11 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao dao;
 
 	@Override
-	public int addProduct(Product product) throws DuplicatedProudctIdOrProductNameException {
+	public int addProduct(Product product) throws DuplicatedProductIdOrProductNameException {
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) != null) {
-			throw new DuplicatedProudctIdOrProductNameException(product.getProductId() + "은 이미 등록된 ID입니다.");
+			throw new DuplicatedProductIdOrProductNameException(product.getProductId() + "은 이미 등록된 ID입니다.");
 		}else if(dao.selectProductByName(product.getStoreId(), product.getProductName()) != null) {
-			throw new DuplicatedProudctIdOrProductNameException(product.getProductName() + "은 이미 등록된 이름입니다.");
+			throw new DuplicatedProductIdOrProductNameException(product.getProductName() + "은 이미 등록된 이름입니다.");
 		}
 		return dao.insertProduct(product);
 	}
