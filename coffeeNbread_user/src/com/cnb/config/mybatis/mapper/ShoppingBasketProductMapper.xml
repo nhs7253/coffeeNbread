@@ -6,7 +6,7 @@
 
 
 	<!--장바구니 타입 조회. -->
-	<resultMap type="ShoppingBasketProduct" id="ShoppingBasketProduct-basic-resultmap">
+	<resultMap type="ShoppingBasketProduct" id="ShoppingBasketProduct-resultmap">
 		<id column="user_id" property="userId" />
 		<result column="store_id" property="storeId" />
 		<result column="product_id" property="productId" />
@@ -16,49 +16,145 @@
 
 
 	
-	<resultMap id="ShoppingBasketProduct-product-productPicture-store-resultmap" type="ShoppingBasketProduct">
-	         <association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap"/>
+	<resultMap id="ShoppingBasketProduct-product-store-productPicture-resultmap" type="ShoppingBasketProduct" extends="ShoppingBasketProduct-resultmap">
+	         <association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-productPicture-resultmap"/>
 	         <association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>	
-		     <association property="productPicture" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
+	</resultMap>
+	
+	<resultMap id="ShoppingBasketProduct-product-resultmap" type="ShoppingBasketProduct" extends="ShoppingBasketProduct-resultmap">
+	         <association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-productPicture-resultmap"/>
 	</resultMap>
 	
 	
+    
+       <insert id="insertShoppingBasketProduct" parameterType="ShoppingBasketProduct">
+		INSERT INTO Shopping_Basket_Product VALUES (
+									#{productId},
+									#{userId},
+									#{storeId},
+									#{productCount},
+									#{productStoreId})
+	    </insert>
 	
-  
- 	 <!--제품 ID로 제품 조회.-->
-  	 <select id="selectShoppingBasketProductByProductId" parameterType="String" resultMap="ShoppingBasketProduct-product-productPicture-store-resultmap">
-	  select s.store_id,
-       p.product_category,
+	
+	
+       
+	<delete id="deleteShoppingBasketProductByProductIdAndUserId" parameterType="map">
+		DELETE FROM shopping_basket_product 
+		WHERE product_id = #{productId}
+		AND user_id=#{userId}
+	</delete>
+	  
+	
+	   	<update id="updateShoppingBasketProductCount" parameterType="ShoppingBasketProduct">
+		UPDATE 	shopping_basket_product
+		SET		user_id = #{userId},
+				store_id = #{storeId},
+				product_id = #{productId},
+				product_count = #{productCount},
+				product_store_id = #{productStoreId}
+	   WHERE    product_id=#{productId}
+	   AND      store_id=#{storeId}
+	   AND      user_id=#{userId}
+	</update>	
+
+	
+	
+	  
+ 	   
+  	 <!-- <select id="selectShoppingBasketProductByProductNameAndUserIdAndStoreId" parameterType="map" resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
+	    select s.store_name,
        pp.product_picture,
+       p.product_category,
        p.product_name,
-       p.product_price,
-       sbp.product_count,  
-       p.product_id
+       sbp.product_count 
        from store s, product p, product_picture pp, shopping_basket_product sbp
        where s.store_id=p.store_id 
        and  pp.product_id=p.product_id
        and sbp.product_id=p.product_id
-       and  p.product_id=#{value}  
-	</select>  
+       and  sbp.user_id= #{userId} 
+       and  p.product_name like '%'||#{productName}||'%'
+       and  sbp.store_id= #{storeId}
+       
+	</select>   -->
 	
+     <select id="selectShoppingBasketProductByProductNameAndUserIdAndProductId" parameterType="map" resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
+	    select s.store_name,
+       pp.product_picture,
+       p.product_category,
+       p.product_name,
+       sbp.product_count 
+       from store s, product p, product_picture pp, shopping_basket_product sbp
+       where s.store_id=p.store_id 
+       and  pp.product_id=p.product_id
+       and sbp.product_id=p.product_id
+       and  sbp.user_id= #{userId} 
+       and  p.product_name like '%'||#{productName}||'%'
+       and  sbp.product_id= #{productId}
+       
+	</select> 
  
-
-
-<!-- 장바구니 목록 삭제 - 유저 -->
-	<delete id="deleteProductByProductId" parameterType="String">
-		DELETE FROM shopping_basket_product WHERE product_id = #{value}
-	</delete>
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+      
+       <select id="selectShoppingBasketProductListByStoreIdAndUserId" parameterType="map" resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
+	    select s.store_name,
+       pp.product_picture,
+       p.product_category,
+       p.product_name,
+       p.product_id,
+       sbp.product_count 
+       from store s, product p, product_picture pp, shopping_basket_product sbp
+       where s.store_id=p.store_id 
+       and  pp.product_id=p.product_id
+       and sbp.product_id=p.product_id
+       and sbp.user_id =#{userId} 
+       and sbp.store_id=#{storeId}  
+	</select> 
+     
+  
+      
+ 
    
 
+  <select id="selectShoppingBasketProductNameByProductIdAndUserId" parameterType="String" resultType="String">
+	    select p.product_name
+         from shopping_Basket_product sbp, product p
+          where sbp.product_id=#{productId}
+          AND   sbp.user_id=#{userId}
+          AND   Sbp.product_id=p.product_id
+        
+	</select> 
 
 
-
-
-
-
-
+        <select id="selectShoppingBasketProductByProductIdAndUserId" parameterType="map" resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
+	    select s.store_name,
+       pp.product_picture,
+       p.product_category,
+       p.product_name,
+       p.product_id,
+       sbp.product_count 
+       from store s, product p, product_picture pp, shopping_basket_product sbp
+       where s.store_id=p.store_id 
+       and  pp.product_id=p.product_id
+       and sbp.product_id=p.product_id
+       and sbp.user_id =#{userId} 
+       and sbp.product_id=#{productId}  
+	</select> 
 
 
 
