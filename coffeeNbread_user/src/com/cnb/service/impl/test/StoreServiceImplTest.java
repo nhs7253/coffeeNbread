@@ -88,25 +88,7 @@ public class StoreServiceImplTest {
 		for (Store store3 : optionlist) {
 			System.out.println(store3);
 		}
-		/*
-		 * //제품 아이디로 제품 조회 System.out.println("==========제품 아이디==========");
-		 * String productId = "p-2"; Product p6 =
-		 * service.findProductById(storeId, productId); if(p6 == null) {
-		 * System.out.printf("%s 아이디의 제품이 없습니다.", productId); }else
-		 * System.out.println(p6);
-		 * 
-		 * //판매 여부로 제품 조회 System.out.println("==========판매 여부==========");
-		 * String sellingOption = "Y"; List<Product> list2 =
-		 * service.findProductListBySellingOption(storeId, sellingOption);
-		 * if(list2.size()==0){ System.out.printf("판매여부가 %s인 제품이 없습니다.",
-		 * sellingOption); }else{ for(Product product : list2){
-		 * System.out.println(product); } }
-		 * 
-		 * //한 매장의 모든 제품 조회 System.out.println("==========모든 종류==========");
-		 * List<Product> list3 = service.findProductList(storeId);
-		 * if(list3.size()==0){ System.out.println("해당 매장에 제품이 없습니다."); }else{
-		 * for(Product product : list3){ System.out.println(product); } }
-		 */
+	
 		System.out.println("-------------------완료 ---------------");
 	}
 
