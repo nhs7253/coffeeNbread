@@ -94,7 +94,7 @@ public interface StoreBookmarkDao {
 	int selectStoreBookmarkByUserIdJoinStoreListCount(String userId);
 	
 	/**
-	 * 해당 유저가 즐겨찾기한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬)
+	 * 해당 유저가 즐겨찾기한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬) - 사용X
 	 * @param userId 해당 목록을 찾을 유저 ID
 	 * @param keyword 부분일치 조회로 검색할 검색어
 	 * @param startIndex 페이징 시작 컬럼

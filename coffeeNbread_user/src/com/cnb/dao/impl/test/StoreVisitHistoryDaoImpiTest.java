@@ -58,7 +58,7 @@ public class StoreVisitHistoryDaoImpiTest {
 		System.out.println(dao.selectStoreVisitHistoryByUserIdJoinStoreListPagingCount("u-1", 2, 5));
 		
 		System.out.print("selectStoreVisitHistoryByUserIdJoinStoreListPaging 조회 = ");
-		System.out.println(dao.selectStoreVisitHistoryByUserIdJoinStoreListPaging("u-1", 2, 5));
+		System.out.println(dao.selectStoreVisitHistoryByUserIdJoinStoreListPaging("u-1", "매", 2, 5));
 		
 		
 		List<String> list = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.cnb.dao;
 
 import java.util.List;
 
+import com.cnb.vo.StoreBookmark;
 import com.cnb.vo.StoreVisitHistory;
 
 /*
@@ -17,7 +18,7 @@ public interface StoreVisitHistoryDao {
 	
 	/**
 	 * storeVisitHistory객체를 받아 해당 정보를 추가
-	 * @param storeVisitHistory StoreVisitHistory(String userId, String storeId)
+	 * @param storeVisitHistory StoreVisitHistory(String userId, String storeId) 방문한 유저 ID, 방문한 매장 ID
 	 * @return 처리 개수
 	 */
 	int insertStoreVisitHistory(StoreVisitHistory storeVisitHistory);
@@ -72,7 +73,7 @@ public interface StoreVisitHistoryDao {
 	int selectStoreVisitHistoryByUserIdJoinStoreListCount(String userId);
 	
 	/**
-	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬) - (가장 마지막에 방문한 매장 부터 조회)
+	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging 용 count - 부분 조회 수 - 매장 이름 순 정렬) - (가장 마지막에 방문한 매장 부터 조회)  - 사용X
 	 * @param userId 해당 목록을 찾을 유저 ID
 	 * @param startIndex 페이징 시작 컬럼
 	 * @param endIndex 페이징 끝 컬럼
@@ -83,9 +84,12 @@ public interface StoreVisitHistoryDao {
 	/**
 	 * 해당 유저가 방문한 매장 목록 수를 일정 크기만큼 조회 (Paging) -  (가장 마지막에 방문한 매장 부터 조회)
 	 * @param userId 해당 목록을 찾을 유저 ID
+	 * @param keyword 검색할 키워드
 	 * @param startIndex 페이징 시작 컬럼
 	 * @param endIndex 페이징 끝 컬럼
 	 * @return List<StoreVisitHistory> - 유저가 방문한 매장 목록 일정량
 	 */
-	List<StoreVisitHistory> selectStoreVisitHistoryByUserIdJoinStoreListPaging(String userId, int startIndex, int endIndex);
+	List<StoreVisitHistory> selectStoreVisitHistoryByUserIdJoinStoreListPaging(String userId, String keyword, int startIndex, int endIndex);
+
+
 }

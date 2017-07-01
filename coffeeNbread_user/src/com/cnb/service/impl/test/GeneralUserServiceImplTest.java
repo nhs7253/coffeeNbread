@@ -40,6 +40,8 @@ public class GeneralUserServiceImplTest {
 		System.out.println(service.findUser("ServiceTestUser1"));
 		
 		service.removeUser("ServiceTestUser1");
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 
 	public static void main(String[] args) throws UserManageException {
