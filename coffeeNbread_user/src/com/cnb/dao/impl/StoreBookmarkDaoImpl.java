@@ -73,9 +73,14 @@ public class StoreBookmarkDaoImpl implements StoreBookmarkDao{
 	}
 
 	@Override
-	public List<String> selectStoreBookmarkByUserId(String userId) {
+	public List<String> selectStoreBookmarkListByUserId(String userId) {
 		return session.selectList(makeSqlId("selectStoreBookmarkByUserId"), userId);
 	}
+	
+	@Override
+	public StoreBookmark selectStoreBookmarkByStoreBookmark(StoreBookmark storeBookmark) {
+		return session.selectOne(makeSqlId("selectStoreBookmarkByStoreBookmark"), storeBookmark);
+	}	
 
 	@Override
 	public List<StoreBookmark> selectStoreBookmarkByUserIdJoinStoreList(String userId) {
@@ -105,5 +110,7 @@ public class StoreBookmarkDaoImpl implements StoreBookmarkDao{
 		input.put("startIndex", String.valueOf(startIndex));
 		input.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectStoreBookmarkByUserIdJoinStoreListPaging"), input);
-	}	
+	}
+
+	
 }

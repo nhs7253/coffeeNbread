@@ -57,8 +57,14 @@ public class StoreBookmarkDaoImplTest {
 		System.out.println(dao.selectStoreBookmarkList());
 		
 		
+		
+		dao.selectStoreBookmarkByStoreBookmark(new StoreBookmark("u-3", "s-4"));
+		System.out.println("selectStoreBookmarkByStoreBookmark 후 조회");
+		System.out.println(dao.selectStoreBookmarkList());
+		
+		
 		System.out.print("selectStoreBookmarkByUserId 조회 : ");
-		System.out.println(dao.selectStoreBookmarkByUserId("u-1"));
+		System.out.println(dao.selectStoreBookmarkListByUserId("u-1"));
 		
 		
 		dao.deleteStoreBookmarkByUserId("u-3");
