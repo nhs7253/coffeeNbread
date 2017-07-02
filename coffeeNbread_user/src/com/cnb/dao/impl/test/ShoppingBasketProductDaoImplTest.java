@@ -37,7 +37,7 @@ public class ShoppingBasketProductDaoImplTest {
    public void Test(){
 	   
      System.out.println("--------장바구니 목록 조회------");
-      System.out.println(dao.selectShoppingBasketProductListByStoreIdAndUserId("s-1","u-1"));
+      System.out.println(dao.selectShoppingBasketProductList("s-7", "u-1"));
       
      System.out.println("------장바구니 목록 카운트 수정------");     
      System.out.println(dao.updateShoppingBasketProductCount(new ShoppingBasketProduct("u-1","s-7","p-1",100,"s-7") ));

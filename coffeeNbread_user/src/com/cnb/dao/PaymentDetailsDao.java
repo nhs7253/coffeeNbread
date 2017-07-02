@@ -1,9 +1,9 @@
 package com.cnb.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.cnb.vo.PaymentDetails;
+import com.cnb.vo.ShoppingBasketProduct;
 
 /*
  * 김형주
@@ -29,26 +29,36 @@ import com.cnb.vo.PaymentDetails;
 
 public interface PaymentDetailsDao {
 	
-/**
- * 제품별 결제내역
- * @param paymentDetails
- * @return
- */
 	
+	/**
+	 * ShoppingBasket에 있는걸 조회한다음 바로 결제내역 테이블에 삽입.
+	 * @param paymentDetails
+	 * @return
+	 */
 	int insertPaymentDetails(PaymentDetails paymentDetails);
 	
   
-  
+	
+	
 	/**
-	 * 결제자가 매장아이디와 매장
-	 * @param userId
-	 * @param storeId
-	 * @return
+	 * 결제내역 조회. (유저가 그 매장에서 결제했을때 그 순간 내역) - 
+	 *   - 개발자 확인용.(유저는 이걸 확인할이유는 없다)
 	 */
-	List<PaymentDetails> selectPaymentDetailsByUserIdAndStoreIdAndProductId(String userId,String storeId,String productId);
+	
+	List<PaymentDetails>selectPaymentDetailsListByUserIdAndStoreId(String userId,String storeId);
+		
+		
+		
+	List<ShoppingBasketProduct> selectAllProductPriceByUserIdAndStoreId(String userId, String storeId);
+	
+	
+	
+	
+	
+	
 	
 
-
+	
 	
 	
 

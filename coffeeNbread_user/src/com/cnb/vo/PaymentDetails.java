@@ -24,6 +24,9 @@ public class PaymentDetails implements Serializable{
 	private String storeId;
 	private int productTradeCount;
 	
+	
+	
+	
 	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
 			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount) {
 		super();

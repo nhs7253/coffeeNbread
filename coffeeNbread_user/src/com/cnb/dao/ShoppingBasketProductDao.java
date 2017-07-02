@@ -5,7 +5,11 @@ import java.util.List;
 
 import com.cnb.vo.ShoppingBasketProduct;
 
-/*
+/*김형주
+ * 2017-07-02
+ * 수정.
+ * 
+ * 
  * 김형주
  * 2017-06-27
  * 생성, 초기구현
@@ -15,6 +19,25 @@ import com.cnb.vo.ShoppingBasketProduct;
 public interface ShoppingBasketProductDao {
 
 	
+	
+	
+	   /**
+     * 매장아이디와 유저아이디로 단순 장바구니테이블조회- > 결제내역테이블에 쓰이기 위해.
+     * 
+     * @param storeId
+     * @param userId
+     * @return
+     */
+    List<ShoppingBasketProduct> selectShoppingBasketProductList(String storeId,String userId);
+	
+    
+    /**
+	  * 세션정보로 장바구니에 넣은정보를 세션이 아웃되기전까지 확인가능. 결제직전에 추가로 장바구니에 넣을수도있으니 필요가 있으니 확인 가능하게 할것.
+	  * @param userId
+	  * @return
+	  */
+    List<ShoppingBasketProduct> selectShoppingBasketProductListByStoreIdAndUserId(String storeId,String userId);
+    
 	/**
 	 * 장바구니 목록 삭제 -productId가 끝날때까지  그 productId로 장바구니에 있는거 삭제 .- 서비스에서 처리
 	 */
@@ -35,35 +58,17 @@ public interface ShoppingBasketProductDao {
      * @return
      */
      int updateShoppingBasketProductCount(ShoppingBasketProduct shoppingBasketProduct);
- 		
-          
-     /**
-      * 제품 이름 부분일치로 해당 제품의  장바구니 목록 조회( 1개만 조회)  - 서비스에서  제품아이디 같다면 둘이 합쳐서 count만 증가시키고 한컬럼만 보이게 할 계획
+ 	 
+ 	 
+ 	/**
+      * 유저아이디와 제품아이디로 장바구니목록 조회.
+      * 
       * @param productId
       * @param userId
       * @return
       */
- 	 ShoppingBasketProduct selectShoppingBasketProductByProductNameAndUserId (String productName,String userId);
-     
- 	 
- 	 
- 	 /**
- 	  * 세션정보로 장바구니에 넣은정보를 세션이 아웃되기전까지 확인가능. 결제직전에 추가로 장바구니에 넣을수도있으니 필요가 있으니 확인 가능하게 할것.
- 	  * @param userId
- 	  * @return
- 	  */
-     List<ShoppingBasketProduct> selectShoppingBasketProductListByStoreIdAndUserId(String storeId,String userId);
-     
-     /**
-      * productId로 productName select
-      * @param productId
-      * @return
-      */
-     String selectShoppingBasketProductNameByProductIdAndUserId(String productId,String userId);
-     
      ShoppingBasketProduct selectShoppingBasketProductByProductIdAndUserId(String productId,String userId); 
      
      
-     
-     
+
 }
