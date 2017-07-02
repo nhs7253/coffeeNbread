@@ -29,8 +29,10 @@ public class UserPreferenceStoreDaoImpiTest {
 		System.out.println("최초 조회");
 		System.out.println(dao.selectUserPreferenceList());
 		
-		
+		dao.insertUserPreferenceStore(new UserPreferenceStore("u-1", "s-3"));
 		dao.insertUserPreferenceStore(new UserPreferenceStore("u-1", "s-4"));
+		dao.insertUserPreferenceStore(new UserPreferenceStore("u-1", "s-5"));
+		dao.insertUserPreferenceStore(new UserPreferenceStore("u-1", "s-6"));
 		System.out.println("insertGeneralUser 후 조회");
 		System.out.println(dao.selectUserPreferenceList());
 		
@@ -40,7 +42,8 @@ public class UserPreferenceStoreDaoImpiTest {
 		
 		System.out.print("selectUserPreferenceJoinStoreSort 로 조회 = ");
 		System.out.println(dao.selectUserPreferenceJoinStoreSort("u-1"));
-		
+		System.out.println(dao.selectUserPreferenceJoinStoreSort("u-1").size());
+		System.out.println(dao.aaa("u-1"));
 		
 		dao.deleteUserPreferenceStore("u-1");
 		System.out.println("deleteUserPreferenceStore 후 조회");

@@ -11,6 +11,7 @@ import com.cnb.exception.UserAndStoreServiceException;
 import com.cnb.service.UserAndStoreService;
 import com.cnb.vo.StoreBookmark;
 import com.cnb.vo.StoreVisitHistory;
+import com.cnb.vo.UserPreferenceStore;
 
 /*
  * 노현식 
@@ -48,8 +49,8 @@ public class UserAndStoreServiceImplTest {
 		/************** 즐겨찾기 **************/
 		
 		
-		/************** 조회 수별 추천 가게 **************/
-		System.out.println("\n************** 조회 수별 추천 가게 **************");
+		/************** 최근 조회 매장 **************/
+		System.out.println("\n************** 최근 조회 매장 **************");
 		
 		service.addStoreVisitHistory(new StoreVisitHistory("u-4", "s-1"));
 		service.addStoreVisitHistory(new StoreVisitHistory("u-4", "s-2"));
@@ -68,12 +69,32 @@ public class UserAndStoreServiceImplTest {
 		System.out.println("removeAllStoreVisitHistory 실행 후");
 		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", 1, "매"));
 		
+		/************** 최근 조회 매장 **************/
+		
+		
 		/************** 조회 수별 추천 가게 **************/
+		System.out.println("\n************** 조회 수별 추천 가게 **************");
+		
+		service.addUserPreferenceStore(new UserPreferenceStore("u-4", "s-1")); //최초 등록
+		System.out.println("addUserPreferenceStore 실행 - INSERT 실행");
+		System.out.println(service.viewUserPreferenceStoreList("u-4"));
+		
+		service.addUserPreferenceStore(new UserPreferenceStore("u-4", "s-1")); //업데이트
+		System.out.println("addUserPreferenceStore 실행 - UPDATE 실행");
+		System.out.println(service.viewUserPreferenceStoreList("u-4"));
+		
+		service.addUserPreferenceStore(new UserPreferenceStore("u-4", "s-2"));
+		service.addUserPreferenceStore(new UserPreferenceStore("u-4", "s-3"));
+		System.out.println("addUserPreferenceStore 실행 - 추가 INSERT 실행");
+		System.out.println(service.viewUserPreferenceStoreList("u-4"));
+		System.err.println("size = "+((List<UserPreferenceStore>)service.viewUserPreferenceStoreList("u-4")).size());
+				
+//		service.removeAllUserPreferenceStore("u-4");
+//		System.out.println("removeAllUserPreferenceStore 실행 후");
+//		System.out.println(service.viewUserPreferenceStoreList("u-4"));
 		
 		
-		
-		/************** 최근 조회 매장 **************/
-		/************** 최근 조회 매장 **************/
+		/************** 조회 수별 추천 가게 **************/
 		
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}

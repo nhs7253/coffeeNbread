@@ -6,6 +6,7 @@ import java.util.Map;
 import com.cnb.exception.UserAndStoreServiceException;
 import com.cnb.vo.StoreBookmark;
 import com.cnb.vo.StoreVisitHistory;
+import com.cnb.vo.UserPreferenceStore;
 
 /*
  * 노현식
@@ -55,7 +56,7 @@ public interface UserAndStoreService {
 	
 	
 
-	/************** 조회 수별 추천 가게 **************/
+	/************** 최근 조회 매장 **************/
 	
 	/**
 	 * 유저가 방문한 내역을 저장
@@ -84,12 +85,36 @@ public interface UserAndStoreService {
 	 * @return 페이징을 위한 정보 결과
 	 */
 	Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, int page, String keyword);
+	
+	/************** 최근 조회 매장 **************/
+	
+	
+	/************** 조회 수별 추천 가게 **************/
+	
+	/**
+	 * 유저가 첫 방문일 시에 해당 매장를 추천 목록에 등록 시켜줌, 만약 이미 방문한 가게면 방문수를 늘려준다.
+	 * @param userPreferenceStore UserPreferenceStore(String userId, String storeId) 방문한 유저 ID, 방문한 매장 ID
+	 */
+	void addUserPreferenceStore(UserPreferenceStore userPreferenceStore);
+	
+	/**
+	 * 탈퇴하는 유저에게로의 추천 매장 모두 삭제
+	 * @param userId 탈퇴하는 유저의 ID
+	 */
+	void removeAllUserPreferenceStore(String userId);
+	
+	/**
+	 * 유저에게 방문빈도를 기준으로 매장을 5개 까지 추천해줌
+	 * @param userId 추천할 유저 ID
+	 * @return List<UserPreferenceStore> 추천하는 매장 목록 (5개)
+	 */
+	List<UserPreferenceStore> viewUserPreferenceStoreList(String userId);
+	
+	
 	/************** 조회 수별 추천 가게 **************/
 	
 	
 	
 	
-	/************** 최근 조회 매장 **************/
-	/************** 최근 조회 매장 **************/
 	
 }

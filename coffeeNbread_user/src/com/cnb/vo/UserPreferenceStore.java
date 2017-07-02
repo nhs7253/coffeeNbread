@@ -25,7 +25,7 @@ public class UserPreferenceStore implements Serializable{
 	public UserPreferenceStore(String userId, String storeId) {
 		this.userId = userId;
 		this.storeId = storeId;
-		this.preferenceHits = 0;
+		this.preferenceHits = 1;
 	}
 
 	public UserPreferenceStore(String userId, String storeId, int preferenceHits) {

@@ -8,6 +8,7 @@ CREATE TABLE store_visit_history (
 );
 CREATE SEQUENCE store_visit_history_no_seq;
 
+DELETE FROM store_visit_history WHERE user_id = 'u-4';
 
 SELECT * FROM store_visit_history;
 

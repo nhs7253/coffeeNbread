@@ -37,18 +37,12 @@ public class PaymentDetailsDaoImplTest {
 		
 		//매장에서 총 결제내역 조회
 		System.out.println("최초 조회");
-		System.out.println("s-1매장에서 p-1제품에대한 결제내역:"+dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-1", "s-1", "p-1"));
-		System.out.println("s-1매장에서 p-2제품에대한 결제내역:"+dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-1", "s-1", "p-2"));
-		System.out.println("s-1매장에서 p-3제품에대한 결제내역:"+dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-1", "s-1", "p-3"));
-		System.out.println("s-1매장에서 p-4제품에대한 결제내역:"+dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-1", "s-1", "p-4"));
-		System.out.println("s-1매장에서 p-7제품에대한 결제내역:"+dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-1", "s-1", "p-7"));
-	    System.out.println("s-1매장에서 p-20제품에대한 결제내역:"+dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-2", "s-1", "p-20"));
+        System.out.println(dao.selectPaymentDetailsListByUserIdAndStoreId("u-1", "s-1"));
 
 		//유저입장에서 장바구니에있는걸 결제내역 테이블에 넣을것.
 	    System.out.println("--추가된 결제테이블 내역--");
 		System.out.println(dao.insertPaymentDetails(new PaymentDetails(4,"c",new Date(),"r",5,"u-1","p-1","s-1",0)));
 		System.out.println("-------------------------");
-      System.out.println(dao.selectPaymentDetailsByUserIdAndStoreIdAndProductId("u-1", "s-1", "p-1"));
 		
 		
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
