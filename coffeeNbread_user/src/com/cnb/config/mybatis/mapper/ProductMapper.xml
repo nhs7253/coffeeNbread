@@ -7,6 +7,8 @@
 		+ 제품 등록
 		+ 제품 수정
 		+ 제품 삭제
+		+ 전체 제품 수 조회
+		+ 여러 조건으로 제품 수 조회
 		+ 제품 종류로 제품 조회
 		+ 제품명으로 제품 조회
 		+ 제품 아이디로 제품 조회
@@ -73,13 +75,11 @@
 	</resultMap>
 	
 	
-	
 	<resultMap type="product" id="product-productPicture-resultmap" extends="product-resultmap">
  		<association property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
  	</resultMap>
 	
 	
-	<!-- 수정 -->
 	<!-- selectProductListCount -->
 	<select id="selectProductListCount" parameterType="string" resultType="int">
 		SELECT COUNT(*)
@@ -107,7 +107,6 @@
 				AND	  store_id = #{storeId}
 			]]>
 			</otherwise>
-		
 		</choose>
 	</select>
 	
