@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,7 @@ import com.cnb.service.UserAndStoreService;
 import com.cnb.validation.annotation.StoreBookmarkForm;
 import com.cnb.validation.annotation.UserAndStoreFindListForm;
 import com.cnb.validation.annotation.UserAndStoreSelectDeleteForm;
+import com.cnb.vo.GeneralUser;
 import com.cnb.vo.StoreBookmark;
 import com.cnb.vo.UserPreferenceStore;
 
@@ -47,7 +50,7 @@ public class UserAndStoreController {
 	 * @return String - 응답 경로
 	 */
 	@RequestMapping("addStoreBookmarkController") 
-	private String addStoreBookmarkController(@ModelAttribute("storeBookmark") @Valid StoreBookmarkForm storeBookmarkFrom, BindingResult errors){
+	public String addStoreBookmarkController(@ModelAttribute("storeBookmark") @Valid StoreBookmarkForm storeBookmarkFrom, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
 		}
@@ -72,7 +75,7 @@ public class UserAndStoreController {
 	 * @return String - 응답 경로
 	 */
 	@RequestMapping("selectRemoveStoreBookmarkController") 
-	private String selectRemoveStoreBookmarkController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
+	public String selectRemoveStoreBookmarkController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
 		}
@@ -89,7 +92,7 @@ public class UserAndStoreController {
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
 	@RequestMapping("findStoreBookmarkListByKeywordController") 
-	private ModelAndView findStoreBookmarkListByKeywordController(@ModelAttribute("userAndStoreFindList") @Valid UserAndStoreFindListForm userAndStoreFindListForm, BindingResult errors){
+	public ModelAndView findStoreBookmarkListByKeywordController(@ModelAttribute("userAndStoreFindList") @Valid UserAndStoreFindListForm userAndStoreFindListForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
 		}
@@ -118,7 +121,7 @@ public class UserAndStoreController {
 	 * @return String - 응답 경로
 	 */
 	@RequestMapping("selectRemoveStoreVisitHistoryController") 
-	private String selectRemoveStoreVisitHistoryController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
+	public String selectRemoveStoreVisitHistoryController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
 		}
@@ -135,7 +138,7 @@ public class UserAndStoreController {
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
 	@RequestMapping("findStoreVisitHistoryListByKeywordController") 
-	private ModelAndView findStoreVisitHistoryListByKeywordController(@ModelAttribute("userAndStoreFindList") @Valid UserAndStoreFindListForm userAndStoreFindListForm, BindingResult errors){
+	public ModelAndView findStoreVisitHistoryListByKeywordController(@ModelAttribute("userAndStoreFindList") @Valid UserAndStoreFindListForm userAndStoreFindListForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
 		}
@@ -158,12 +161,13 @@ public class UserAndStoreController {
 	/************** 조회 수별 추천 가게 **************/
 	
 	@RequestMapping("viewUserPreferenceStoreListController") 
-	private ModelAndView viewUserPreferenceStoreListController(String userId){
-		if(userId == null || userId.trim().isEmpty()){
-			return null; //에러 발생 시 이동할 경로
+	public ModelAndView viewUserPreferenceStoreListController(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
+		if(authentication == null){
+			return null; //에러 페이지로 이동 (잘못된 접근)
 		}
 		
-		List<UserPreferenceStore> list = service.viewUserPreferenceStoreList(userId);
+		List<UserPreferenceStore> list = service.viewUserPreferenceStoreList(((GeneralUser)authentication.getPrincipal()).getUserId());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName(null); //성공 시 이동할 경로

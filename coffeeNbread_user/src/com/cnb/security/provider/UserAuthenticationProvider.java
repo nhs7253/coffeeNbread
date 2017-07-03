@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		
 		//ID 체크
 		String id = authentication.getName();//사용자가 입력한 ID
 		GeneralUser generalUser = userDao.selectGeneralUserByUserId(id);
@@ -65,7 +65,7 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 		//SimpleGrantedAuthority - 권한정보를 문자열로 저장.
 		List<SimpleGrantedAuthority> authList = new ArrayList<>();
 		authList.add(new SimpleGrantedAuthority(userauthority.getUserAuthority()));
-		
+				
 		//인증한 사용자 정보(Principal), 패스워드, 인증된사용자의 권한들 을 넣어 Authentication객체 생성해 리턴
 		return new UsernamePasswordAuthenticationToken(generalUser, null, authList);
 	}
