@@ -24,7 +24,7 @@ import com.cnb.vo.GeneralUser;
  * 생성
  */
 /**
- * 유저 관련 요청을 처리하는 Controller
+ * 유저 관련 요청을 처리하는 Controller class
  */
 @Controller
 public class GeneralUserController {

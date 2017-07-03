@@ -59,5 +59,4 @@ public interface UserPreferenceStoreDao {
 	 */
 	List<UserPreferenceStore> selectUserPreferenceList();
 	
-	int aaa(String userId);
 }

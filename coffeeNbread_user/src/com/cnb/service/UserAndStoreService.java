@@ -14,7 +14,7 @@ import com.cnb.vo.UserPreferenceStore;
  * 생성, 기본구현
  */
 /**
- * 유저가 매장에 대해 받는 보조적인 서비스 집합 - 
+ * 유저가 매장 정보에 관해 받는 보조적인 서비스 집합
  * 즐겨찾기, 조회 수별 추천가게, 최근 조회 매장
  */
 public interface UserAndStoreService {
