@@ -11,13 +11,15 @@ INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-m
 SELECT *FROM STORE
 DELETE FROM STORE
 
-INSERT INTO STORE VALUES('s-1','매장1','매장소개글1','010-0000-0000','매장주소1','매장1@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-2','매장2','매장소개글2','010-0000-0000','매장주소2','매장2@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-3','매장3','매장소개글3','010-0000-0000','매장주소3','매장3@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-4','매장4','매장소개글4','010-0000-0000','매장주소4','매장4@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-5','매장5','매장소개글5','010-0000-0000','매장주소5','매장5@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-6','매장6','매장소개글6','010-0000-0000','매장주소6','매장6@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-7','매장7','매장소개글7','010-0000-0000','매장주소7','매장7@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+
+
+INSERT INTO STORE VALUES('s-1','매장1','매장소개글1','010-0000-0000','매장주소1','매장1@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
+INSERT INTO STORE VALUES('s-2','매장2','매장소개글2','010-0000-0000','매장주소2','매장2@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
+INSERT INTO STORE VALUES('s-3','매장3','매장소개글3','010-0000-0000','매장주소3','매장3@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
+INSERT INTO STORE VALUES('s-4','매장4','매장소개글4','010-0000-0000','매장주소4','매장4@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
+INSERT INTO STORE VALUES('s-5','매장5','매장소개글5','010-0000-0000','매장주소5','매장5@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
+INSERT INTO STORE VALUES('s-6','매장6','매장소개글6','010-0000-0000','매장주소6','매장6@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
+INSERT INTO STORE VALUES('s-7','매장7','매장소개글7','010-0000-0000','매장주소7','매장7@email.com',1000,to_date('201608031000', 'yyyy-mm-dd-hh24-mi'),to_date('201608032200', 'yyyy-mm-dd-hh24-mi'),'Y');
 
 
 /* 제품 */
@@ -114,6 +116,7 @@ INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160804', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-2','s-1','u-1');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160804', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-1','s-1','u-1');
 
+INSERT INTO RESERVATION_DETAILS VALUES(0,to_date('20160804', 'yyyy-mm-dd'),4,to_date('20160803', 'yyyy-mm-dd'),to_date('20160804','yyyy-mm-dd'),'p-18','s-7','u-1');
 
 
 /*  즐겨 찾는 카드 번호  */
@@ -209,14 +212,13 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','c');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-4','c');
 
-SELECT           payment_no,
-				payment_option,
-				trade_date,
-				sell_method,
-				reservation_order_count,
-				user_id,
-				product_id,
-				store_id,
-				product_trade_count
-		FROM	payment_details
-		WHERE user_id='u-1'
+
+		INSERT INTO reservation_details VALUES (
+											0,
+											to_date('20180033','yyyy-MM-dd'),
+											4,
+											to_date('20180033','yyyy-MM-dd'),
+											to_date('20180033','yyyy-MM-dd'),
+										     'p-18',
+											's-7',
+											'u-1'	)
