@@ -61,10 +61,5 @@ public interface ShoppingBasketProductService {
 	
 	
 
-    /**
-     * 장바구니 목록에 있는 제품들 총가격- 결제 내역창 보여줄때  총가격 보여주기위해 쿼리 미리 짜놓음.
-     */
-     
-     int findShoppingBasketProductAllPrice(List<ShoppingBasketProduct> shoppingBasketProduct);
 
 }

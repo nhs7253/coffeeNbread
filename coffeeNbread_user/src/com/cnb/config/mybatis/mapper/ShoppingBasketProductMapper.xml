@@ -48,7 +48,7 @@
 	</select>
 
 
-	<!--장바구니목록에 그대로 띄워줄 selectList -->
+	<!--나중에 장바구니목록에 그대로 띄워줄 selectList -->
 	<select id="selectShoppingBasketProductListByStoreIdAndUserId"
 		parameterType="map"
 		resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
@@ -107,7 +107,11 @@
 	<select id="selectShoppingBasketProductByProductIdAndUserId"
 		parameterType="map"
 		resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
-		select s.store_name,
+		select
+		sbp.user_id,
+	    sbp.store_id,
+		s.store_name,
+		sbp.product_store_id,
 		pp.product_picture,
 		p.product_category,
 		p.product_name,
