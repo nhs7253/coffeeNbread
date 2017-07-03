@@ -2,15 +2,38 @@ package com.cnb.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
-/*
+/*김형주
+ * 2017-07-03
+ * 기능 추가
+ * 
+ * 
  * 최민희
  * 2017-07-01
  * 생성
  */
 public interface ReservationDetailsService {
+	
+	
+	/**
+	 * 사용자가 원하는 시간 입력하면  예약테이블에 제품수령희망시간 넣을  서비스 
+	 */
+	void addUserHopedGetProductDate(PaymentDetails paymentDetails);
+	
+	
+	 int addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList);
+	
+	
+	/** 
+	 * 매장이 확인버튼 누르면 유저가 예약 확인 목록을 볼떄 date값 받아온다.
+	 */
+/*	int modifyReservationDetails(ReservationDetails reservationDetails);*/
+	
+	
 	/**
 	 * 1개의 예약 정보 insert
 	 * @param reservationDetails

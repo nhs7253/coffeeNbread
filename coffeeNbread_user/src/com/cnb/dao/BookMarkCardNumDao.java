@@ -45,7 +45,6 @@ public interface BookMarkCardNumDao {
 	
 	 int deleteCardNumByCardNumAndUserId(String cardNum,String userId);
 
-	
-	
+
 
 }

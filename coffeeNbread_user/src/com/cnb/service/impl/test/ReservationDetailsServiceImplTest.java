@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.cnb.service.ReservationDetailsService;
 import com.cnb.vo.ReservationDetails;
@@ -23,7 +24,16 @@ import com.cnb.vo.ReservationDetails;
  * 2017-07-01
  * 생성
  */
+
 public class ReservationDetailsServiceImplTest {
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		//TODO ApplicationContext 객체 생성
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml");
@@ -133,5 +143,14 @@ public class ReservationDetailsServiceImplTest {
 		} catch (ParseException e) {
 			System.out.println("이상발생3");
 		}
+		
+		
+	
+		
+		
+		
+		
+		
+		
 	}
 }

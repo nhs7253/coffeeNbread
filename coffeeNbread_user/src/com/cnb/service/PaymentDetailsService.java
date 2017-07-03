@@ -38,4 +38,13 @@ public interface PaymentDetailsService {
 	  * @return
 	  */
       int findAllProductPrice(List<ShoppingBasketProduct> shoppingBasketProduct);
+      
+      
+      /**
+       * 유저아이디가 등록한 결제내역 목록
+       * 
+       */
+      List<PaymentDetails> findPaymentDetailsListByUserId(String userId);
+      
+      
 }
