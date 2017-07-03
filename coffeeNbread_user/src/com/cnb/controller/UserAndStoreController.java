@@ -84,7 +84,7 @@ public class UserAndStoreController {
 	
 	/**
 	 * 유저가 입력한 키워드를 통해 조회 북마크 목록을 페이징하여 보여주는 Controller
-	 * @param userAndStoreFindListForm (String userId, int page, String keyword) - 검색하는 유저 ID, 보려는 페이지 번호, 검색하려는 키워드
+	 * @param userAndStoreFindListForm (String userId, String keyword, int page) - 검색하는 유저 ID, 검색하려는 키워드, 보려는 페이지 번호
 	 * @param errors 요청 파라미터 체크
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
@@ -94,7 +94,7 @@ public class UserAndStoreController {
 			return null; //에러 발생 시 이동할 경로
 		}
 		
-		Map<String, Object> map = service.findStoreBookmarkListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getPage(), userAndStoreFindListForm.getKeyword());
+		Map<String, Object> map = service.findStoreBookmarkListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName(null); //성공 시 이동할 경로
@@ -130,7 +130,7 @@ public class UserAndStoreController {
 	
 	/**
 	 * 유저가 입력한 키워드를 통해 조회 북마크 목록을 페이징하여 보여주는 Controller
-	 * @param userAndStoreFindListForm (String userId, int page, String keyword) - 검색하는 유저 ID, 보려는 페이지 번호, 검색하려는 키워드
+	 * @param userAndStoreFindListForm  (String userId, String keyword, int page) - 검색하는 유저 ID, 검색하려는 키워드, 보려는 페이지 번호
 	 * @param errors 요청 파라미터 체크
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
@@ -140,7 +140,7 @@ public class UserAndStoreController {
 			return null; //에러 발생 시 이동할 경로
 		}
 		
-		Map<String, Object> map = service.findStoreVisitHistoryListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getPage(), userAndStoreFindListForm.getKeyword());
+		Map<String, Object> map = service.findStoreVisitHistoryListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName(null); //성공 시 이동할 경로

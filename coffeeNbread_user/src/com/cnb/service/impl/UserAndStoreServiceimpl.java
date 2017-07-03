@@ -55,7 +55,7 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	}
 
 	@Override
-	public Map<String, Object> findStoreBookmarkListByKeyword(String userId, int page, String keyword) {
+	public Map<String, Object> findStoreBookmarkListByKeyword(String userId, String keyword, int page) {
 		Map<String, Object> map = new HashMap<>();
 		int tatalCount = storeBookmarkDao.selectStoreBookmarkByUserIdJoinStoreListCount(userId); //검색 결과 개수
 		PagingBean pageBean = new PagingBean(tatalCount, page); //(tatalCount, page) - (전체 페이지 수, 보려는 페이지 번호)
@@ -87,7 +87,7 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	}
 
 	@Override
-	public Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, int page, String keyword) {
+	public Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, String keyword, int page) {
 		Map<String, Object> map = new HashMap<>();
 		int tatalCount = storeVisitHistoryDao.selectStoreVisitHistoryByUserIdJoinStoreListCount(userId); //검색 결과 개수
 		PagingBean pageBean = new PagingBean(tatalCount, page); //(tatalCount, page) - (전체 페이지 수, 보려는 페이지 번호)
