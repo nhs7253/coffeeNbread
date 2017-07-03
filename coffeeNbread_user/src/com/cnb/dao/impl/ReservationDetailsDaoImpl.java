@@ -110,6 +110,10 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectReservationDetailsListByStoreIdAndProductHopeTime"), info);
 	}
+	@Override
+	public int updateReservationConfirmDate(ReservationDetails reservationDetails) {
+		return session.update(makeSqlId("updateReservationConfirmDate"), reservationDetails);
+	}
 
 	
 	

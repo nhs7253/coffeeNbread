@@ -53,18 +53,26 @@ public class ReservationDetails implements Serializable {
 		super();
 	}
 
+	
+	
+	
 	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
-			Date productHopeTime, String productId, String storeId, String userId) {
+			Date productHopeTime, String userId, String productId, String storeId) {
 		super();
 		this.reservationNo = reservationNo;
 		this.reservationTime = reservationTime;
 		this.reservationCount = reservationCount;
 		this.reservationConfirm = reservationConfirm;
 		this.productHopeTime = productHopeTime;
+		this.userId = userId;
 		this.productId = productId;
 		this.storeId = storeId;
-		this.userId = userId;
 	}
+
+
+
+
+
 
 	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
 			Date productHopeTime, String userId, GeneralUser generalUser, String productId, List<Product> productList,

@@ -209,4 +209,14 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','c');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-4','c');
 
-
+SELECT           payment_no,
+				payment_option,
+				trade_date,
+				sell_method,
+				reservation_order_count,
+				user_id,
+				product_id,
+				store_id,
+				product_trade_count
+		FROM	payment_details
+		WHERE user_id='u-1'

@@ -1,5 +1,6 @@
 package com.cnb.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cnb.vo.PaymentDetails;
@@ -53,11 +54,25 @@ public interface PaymentDetailsDao {
 	
 	
 	
+	PaymentDetails selectPaymentDetailsByStoreIdAndProductId(String storeId,String productId);
+	
+	/**
+	 * 유저아이디로 결제내역테이블에 넣은 목록들 조회.
+	 * @param userId
+	 * @return
+	 */
+	List<PaymentDetails> selectPaymentDetailsListByUserId(String userId);
 	
 	
 	
-	
-
+	/**
+	 * 결제내역테이블에 거래 시간을 통해 같은시간에 결제한 제품들 모두 가져옴.
+	 * @param tradeDate
+	 * @return
+	 */
+     List<PaymentDetails> selectPaymentDetailsListByTradeDate(Date tradeDate);
+    	
+    
 	
 	
 	
