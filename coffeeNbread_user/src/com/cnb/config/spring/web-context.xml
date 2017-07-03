@@ -34,6 +34,11 @@
 	<mvc:view-controller path="/request2.do" view-name="request2"/>
 	<mvc:view-controller path="/response2.do" view-name="response2"/>
 	
+	<mvc:view-controller path="/aaa/mypage.do" view-name="/user/mypage.tiles"/>
+	<!-- 
+	<mvc:view-controller path="/user/mypage.do" view-name="/user/mypage.tiles"/>
+	 -->
+	
 			
 	<!-- TilesConfigurer 빈으로 등록 : Tiles설정파일을 등록하는 빈 -->
 	

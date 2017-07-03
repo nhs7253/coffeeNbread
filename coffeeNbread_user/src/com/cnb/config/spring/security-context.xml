@@ -46,6 +46,10 @@
  * 매점 - CNB_STORE
  * 일반 유저 - CNB_USER
  --> 
+ 
+ <!-- 
+ <intercept-url pattern="/user/**" access="hasAnyRole('CNB_USER', 'CNB_STORE')"/>
+  -->
 	
 		<intercept-url pattern="/store/**" access="hasRole('CNB_STORE')"/>
 		<intercept-url pattern="/user/**" access="hasAnyRole('CNB_USER', 'CNB_STORE')"/>
