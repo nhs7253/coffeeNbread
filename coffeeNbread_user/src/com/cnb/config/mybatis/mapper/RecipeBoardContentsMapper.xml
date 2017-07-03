@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.NoticeBoardContentsMapper">
+	<!-- 
+		Recipe_Board_Contents 테이블 관련 mapper
+		+ 레시피게시글 등록
+		+ 레시피게시글 수정
+		+ 레시피게시글 삭제
+		+ 내용으로 레시피게시글 조회
+		+ 제목으로 레시피게시글 조회
+		+ 작성일로 레시피게시글 조회
+		+ 조회수로 레시피게시글 조회
+		+ 모든 레시피게시글 조회
+	 -->
+<!--
+
+   2017-07-03 김형주 
+  -->
+
+	<!-- insert -->
+	<insert id="insertRecipeBoardContents" parameterType="RecipeBoardContents">
+		<selectKey keyProperty="recipeBoardNo" resultType="_int" order="BEFORE">
+			SELECT recipe_board_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO recipe_board_contents VALUES (
+												#{recipeBoardNo},
+												#{recipeBoardContent},
+												#{recipeBoardTitle},
+												#{recipeBoardDate},
+												#{recipeBoardHits} )
+	</insert>
+	
+	<!-- update -->
+	<update id="updateRecipeBoardContents" parameterType="RecipeBoardContents">
+		UPDATE recipe_board_contents
+		SET	   recipe_board_content = #{recipeBoardContent},
+			   recipe_board_title = #{recipeBoardTitle},
+			   recipe_board_date = #{recipeBoardDate}
+			   recipe_board_hits = #{recipeBoardHits}
+			   recipe_board_picture = #{recipeBoardPicture}
+			   recipe_recommend_count = #{recipeRecommendCount}
+			   
+		WHERE  recipe_board_no = #{recipeBoardNo}
+	</update>
+	
+	
+	<!-- delete -->
+	<delete id="deleteRecipeBoardContentsByRecipeBoardNo" parameterType="string">
+		DELETE FROM recipe_board_contents
+		WHERE recipe_board_no = #{value}
+	</delete>
+	
+	
+	<!-- select -->
+	<sql id="select-recipeBoardContents">
+		SELECT  recipe_board_no,
+				recipe_board_content,
+				recipe_board_title,
+				recipe_board_date,
+				recipe_board_hits,
+				recipe_board_picture,
+				recommend_count
+		FROM	recipe_board_contents
+	</sql>
+	
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-resultmap">
+		<id column="recipe_board_no" property="recipeBoardNo"/>
+		<result column="recipe_board_content" property="recipeBoardContent"/>
+		<result column="recipe_board_title" property="recipeBoardTitle"/>
+		<result column="recipe_board_date" property="recipeBoardDate"/>
+		<result column="recipe_board_picture" property="recipeBoardHits"/>
+		<result column="recipe_board_hits" property="recipeBoardHits"/>
+		<result column="recommend_count" property="recommendCount"/>
+	</resultMap>
+	
+	<!--내용으로 조회.  -->
+	<!-- selectRecipeBoardContentsByRecipeBoardContent -->
+	<select id="selectRecipeBoardContentsListByRecipeBoardContent" resultMap="recipeBoardContents-resultmap" parameterType="string">
+		<include refid="select-recipeBoardContents"/>
+		<!-- CLOB타입으로 SELECT시 -->
+		WHERE dbms_lob.instr(recipe_board_content, #{recipeBoardContent}) > 0
+	</select>
+	
+	<!-- selectRecipeBoardContentsListByRecipeBoardTitle -->
+	<select id="selectRecipeBoardContentsListByRecipeBoardTitle" resultMap="recipeBoardContents-resultmap" parameterType="string">
+		<include refid="select-recipeBoardContents"/>
+		WHERE recipe_board_title = #{recipeBoardTitle}
+	</select>
+	
+	<!-- selectNoticeBoardContentsListByNoticeBoardDate -->
+	<select id="selectRecipeBoardContentsListByRecipeBoardDate" resultMap="recipeBoardContents-resultmap" parameterType="java.util.Date">
+		<include refid="select-recipeBoardContents"/>
+		WHERE recipe_board_date = #{recipeBoardDate}
+	</select>
+	
+	<!-- selectNoticeBoardContentsListByNoticeBoardHits -->
+	<select id="selectRecipeBoardContentsByRecipeBoardHits" resultMap="recipeBoardContents-resultmap" parameterType="_int">
+		<include refid="select-recipeBoardContents"/>
+		WHERE recipe_board_hits = #{recipeBoardHits}
+	</select>
+	
+	<!-- selectNoticeBoardContentsList -->
+	<select id="selectRecipeBoardContentsList" resultMap="recipeBoardContents-resultmap">
+		<include refid="select-recipeBoardContents"/>
+		ORDER BY recipe_board_no ASC
+	</select>
+	
+</mapper>
