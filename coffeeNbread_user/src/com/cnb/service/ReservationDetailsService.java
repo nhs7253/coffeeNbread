@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import com.cnb.exception.NotInputTradeHopeDateException;
-import com.cnb.exception.NotInsertTradeDateException;
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
@@ -21,17 +19,31 @@ import com.cnb.vo.ReservationDetails;
 public interface ReservationDetailsService {
 	
 	
+	/**
+	 * 사용자가 원하는 시간 입력하면  예약테이블에 제품수령희망시간 넣을  서비스 
+	 */
+	void addUserHopedGetProductDate(PaymentDetails paymentDetails);
+	
+	
+	 int addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList);
+	
+	
 	/** 
 	 * 매장이 확인버튼 누르면 유저가 예약 확인 목록을 볼떄 date값 받아온다.
 	 */
-	 void addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList,String userId,String storeId,Date tradeHopeDate)throws NotInsertTradeDateException, NotInputTradeHopeDateException;
-	
-	
-
 /*	int modifyReservationDetails(ReservationDetails reservationDetails);*/
 	
 	
-
+	/**
+	 * 1개의 예약 정보 insert
+	 * @param reservationDetails
+	 */
+	int addReservationDetails(ReservationDetails reservationDetails);
+	
+	/**
+	 * 예약자로 1개의 매장의 예약 정보 select
+	 * @param storeId, userId
+	 */
 	HashMap<String, Object> findReservationDetailsListByUserIdAndStoreId(int page, String storeId, String userId);
 	
 	/**

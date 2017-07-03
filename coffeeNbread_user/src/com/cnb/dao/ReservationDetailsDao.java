@@ -91,19 +91,6 @@ public interface ReservationDetailsDao {
 	 */
 	List<ReservationDetails> selectReservationDetailsListByUserId(String userId, int startIndex, int endIndex);
 	
-	
-	/*
-	 * 김형주 - 유저입장에서 매장아이디로 예약 조회.
-	 * 07-03 추가 
-	 * 
-	 */
-	int selectReservationDetailsListCountForPagingToStoreId(String userId,String storeId,int startIndex, int endIndex);
-	
-	
-	
-	
-	
-	
 	/**
 	 * 1개의 매장의 예약 정보 select
 	 * @param storeId, startIndex, endIndex

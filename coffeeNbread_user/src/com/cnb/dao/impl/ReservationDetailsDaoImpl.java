@@ -114,17 +114,6 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	public int updateReservationConfirmDate(ReservationDetails reservationDetails) {
 		return session.update(makeSqlId("updateReservationConfirmDate"), reservationDetails);
 	}
-	@Override
-	public int selectReservationDetailsListCountForPagingToStoreId(String userId, String storeId, int startIndex,
-			int endIndex) {
-		Map<String, Object> info = new HashMap<>();
-		info.put("storeId", storeId);
-		info.put("userId", userId);
-		info.put("startIndex", String.valueOf(startIndex));
-		info.put("endIndex", String.valueOf(endIndex));
-		return session.selectOne(makeSqlId("selectReservationDetailsListCountForPagingToStoreId"), info);
-
-	}
 
 	
 	
