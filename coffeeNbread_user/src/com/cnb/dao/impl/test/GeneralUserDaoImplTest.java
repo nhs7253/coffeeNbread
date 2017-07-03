@@ -12,6 +12,10 @@ import com.cnb.vo.GeneralUser;
 /*
  * 노현식
  * 2017-07-03
+ * GeneralUser변경에 따른 값 추가
+ * 
+ * 노현식
+ * 2017-07-03
  * 페이징 메서드 추가
  * 
  * 노현식
@@ -48,7 +52,8 @@ public class GeneralUserDaoImplTest {
 											  "DaoTest-1@dao.com", 
 											  "000-0000-0000", 
 											  "DAO시1", 
-											  "Y"));
+											  "Y",
+											  "DAO-STORE-0"));
 		
 		dao.insertGeneralUser(new GeneralUser("DAO-1", 
 				  "0000", 
@@ -58,7 +63,8 @@ public class GeneralUserDaoImplTest {
 				  "DaoTest-1@dao.com", 
 				  "000-0000-0000", 
 				  "DAO시1", 
-				  "Y"));
+				  "Y",
+				  "DAO-STORE-1"));
 		
 		dao.insertGeneralUser(new GeneralUser("DAO-2", 
 				  "0000", 
@@ -68,7 +74,8 @@ public class GeneralUserDaoImplTest {
 				  "DaoTest-1@dao.com", 
 				  "000-0000-0000", 
 				  "DAO시1", 
-				  "Y"));
+				  "Y",
+				  "DAO-STORE-2"));
 		
 		dao.insertGeneralUser(new GeneralUser("DAO-3", 
 				  "0000", 
@@ -78,7 +85,8 @@ public class GeneralUserDaoImplTest {
 				  "DaoTest-1@dao.com", 
 				  "000-0000-0000", 
 				  "DAO시1", 
-				  "Y"));
+				  "Y",
+				  "DAO-STORE-3"));
 		
 		System.out.println("insertGeneralUser 후 조회");
 		System.out.println(dao.selectGeneralUserList());
@@ -91,7 +99,8 @@ public class GeneralUserDaoImplTest {
 				  											"DaoTest-5@dao.com", 
 				  											"5555-5555-5555", 
 				  											"DAO시5", 
-															"Y"));
+															"Y",
+				  											"DAO-STORE-5"));
 		System.out.println("updateGeneralUserByUserIdToInfo 후 조회");
 		System.out.println(dao.selectGeneralUserList());
 		

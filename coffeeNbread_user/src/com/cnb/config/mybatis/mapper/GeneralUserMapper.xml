@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cnb.config.mybatis.mapper.GeneralUserMapper">
 
-	<sql id="all-column"> user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state </sql>
+	<sql id="all-column"> user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state, store_id </sql>
 
 	<resultMap type="GeneralUser" id="GeneralUser-resultmap">
 		<id column="user_id" property="userId"/>
@@ -14,6 +14,7 @@
 		<result column="user_phone" property="userPhone"/>
 		<result column="user_address" property="userAddress"/>
 		<result column="user_active_state" property="userActiveState"/>
+		<result column="store_id" property="storeId"/>
 	</resultMap>
 	
 	<insert id="insertGeneralUser" parameterType="GeneralUser">
@@ -25,7 +26,8 @@
 										#{userEmail},
 										#{userPhone},
 										#{userAddress},
-										#{userActiveState})
+										#{userActiveState},
+										#{storeId})
 	</insert>
 	
 	<delete id="deleteGeneralUserByUserId" parameterType="string">
@@ -41,7 +43,8 @@
 			user_email = #{userEmail},
 			user_phone = #{userPhone},
 			user_address = #{userAddress},
-			user_active_state = #{userActiveState}
+			user_active_state = #{userActiveState},
+			store_id = #{storeId}
 		WHERE user_id = #{userId}		
 	</update>
 	

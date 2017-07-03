@@ -34,7 +34,7 @@ CREATE TABLE general_user (
 	user_email VARCHAR2(50) NOT NULL, /* 이메일 */
 	user_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
 	user_address VARCHAR2(200) NOT NULL, /* 주소 */
-	user_active_state CHAR(1) NOT NULL /* 활동 상태 */
+	user_active_state CHAR(1) NOT NULL, /* 활동 상태 */
 	store_id VARCHAR2(30) /* 매장아이디 */
 );
 
