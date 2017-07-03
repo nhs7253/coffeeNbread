@@ -14,6 +14,24 @@
 		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
 	</resultMap>
 	
+	<resultMap type="UserPreferenceStore" id="UserPreferenceStore-Store-resultmap2">
+		<id column="user_id" property="userId"/>
+		<id column="store_id" property="storeId"/>
+		<result column="preference_hits" property="preferenceHits"/>
+		<association property="store" javaType="Store">
+			<id column="store_id" property="storeId"/>
+	 		<result column="store_name" property="storeName"/>
+	 		<result column="store_intro" property="storeIntro"/>
+	 		<result column="store_phone" property="storePhone"/>
+	 		<result column="store_address" property="storeAddress"/>
+	 		<result column="store_email" property="storeEmail"/>
+	 		<result column="store_hits" property="storeHits"/>
+	 		<result column="store_open" property="storeOpen"/>
+	 		<result column="store_close" property="storeClose"/>
+	 		<result column="store_permission" property="storePermission"/>
+		</association>
+	</resultMap>
+	
 	<insert id="insertUserPreferenceStore" parameterType="UserPreferenceStore">
 		INSERT INTO user_preference_store VALUES(#{userId}, #{storeId}, 1)
 	</insert>
@@ -34,10 +52,9 @@
 		WHERE user_id = #{userId} AND store_id = #{storeId}
 	</select>
 	
-	<select id="selectUserPreferenceJoinStoreSort" parameterType="string" resultMap="UserPreferenceStore-Store-resultmap">
+	<select id="selectUserPreferenceJoinStoreSort" parameterType="string" resultMap="UserPreferenceStore-Store-resultmap2">
 		<![CDATA[
-			SELECT rownum rnum, 
-				   user_id, 
+			SELECT user_id, 
 				   store_id, 
 				   preference_hits,
 				   store_name, 
@@ -66,7 +83,7 @@
 					WHERE ups.store_id = s.store_id AND user_id = #{userId}
 					ORDER BY preference_hits DESC
 			) 
-			WHERE rownum <= '5'
+			WHERE rownum <= 5
 		]]>
 	</select>
 	
@@ -75,29 +92,5 @@
 		FROM user_preference_store
 	</select>
 	
-	
-	<select id="aaa" parameterType="string" resultType="int">
-	<![CDATA[
-			SELECT COUNT(*)
-			FROM(
-				   SELECT user_id, 
-						  s.store_id, 
-						  preference_hits,
-						  store_name, 
-						  store_intro, 
-						  store_phone, 
-						  store_address, 
-						  store_email, 
-						  store_hits, 
-						  store_open, 
-						  store_close, 
-						  store_permission
-					FROM user_preference_store ups, store s 
-					WHERE ups.store_id = s.store_id AND user_id = #{userId}
-					ORDER BY preference_hits DESC
-			) 
-			WHERE rownum <= '5'
-		]]>
-	</select>
 		
 </mapper>
