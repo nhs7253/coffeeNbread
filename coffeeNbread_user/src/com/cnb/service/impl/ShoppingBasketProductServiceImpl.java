@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.SystemPropertyUtils;
 
 import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.exception.EmptyShoppingBasketProductListByProductNameException;
@@ -22,14 +23,16 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	@Autowired
 	private ShoppingBasketProductDao shoppingBasketProductDao;
 
-	/* 장바구니 테이블 조회 - 결제내역에 담긴것 조회하기위함. */
+	/**
+	 * 단순히 장바구니 테이블에 담긴것.
+	 */
 	@Override
 	public List<ShoppingBasketProduct> findShoppingBasketProductList(String storeId, String userId) {
 		return shoppingBasketProductDao.selectShoppingBasketProductList(storeId, userId);
 	}
 
 	/**
-	 * userId와 해당 매장아이디로 단순 자신의 장바구니담은 목록들 조회하는것이므로 다른 조치 취할거 없음.
+	 * userId와 해당 매장아이디로 단순 자신의 장바구니담은 목록들 조회(제품사진, 매장, 제품 과 조인)
 	 */
 	@Override
 	public List<ShoppingBasketProduct> findShoppingBasketProductListByStoreIdAndUserId(String storeId, String userId) {
@@ -68,26 +71,25 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	 */
 	@Override
 	public void addShoppingBasketProduct(List<ShoppingBasketProduct> shoppingBasketProductList) {
-		List<ShoppingBasketProduct> sbp = null;
+
 		ShoppingBasketProduct selectedSbp = null;
 		for (int i = 0; i < shoppingBasketProductList.size(); i++) {
 			selectedSbp = shoppingBasketProductDao.selectShoppingBasketProductByProductIdAndUserId(
 					shoppingBasketProductList.get(i).getProductId(), shoppingBasketProductList.get(i).getUserId());
 			if (selectedSbp != null) {
+				
 				selectedSbp.setProductCount(
 						selectedSbp.getProductCount() + shoppingBasketProductList.get(i).getProductCount());
-				System.out.println(shoppingBasketProductDao.updateShoppingBasketProductCount(selectedSbp));
+			
+				
+				 shoppingBasketProductDao.updateShoppingBasketProductCount(selectedSbp);
 			} else {
-				shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProductList.get(i));
+				
+						 shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProductList.get(i));
 			}
 
 		}
 
 	}
 
-	@Override
-	public int findShoppingBasketProductAllPrice(List<ShoppingBasketProduct> shoppingBasketProduct) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }
