@@ -79,4 +79,42 @@
 		WHERE user_active_state = #{value}
 	</select>
 	
+	<select id="selectGeneralUserListBySelectToKeyword" parameterType="map" resultMap="GeneralUser-resultmap">
+		SELECT <include refid="all-column"/>
+			FROM(
+					SELECT rownum rnum, 
+						   <include refid="all-column"/>
+					FROM(
+						SELECT <include refid="all-column"/>
+						FROM general_user
+						<choose>
+							<when test="select == 'userName'">
+								WHERE user_name LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'userId'">
+								WHERE user_id LIKE '%'||#{keyword}||'%'
+							</when>				
+						</choose>
+						ORDER BY user_name
+					) 
+					WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
+	
+	<select id="selectGeneralUserListBySelectToKeywordCount" parameterType="map" resultType="_int">
+
+		SELECT COUNT(*)
+		FROM general_user
+		<choose>
+			<when test="select == 'userName'">
+				WHERE user_name LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'userId'">
+				WHERE user_id LIKE '%'||#{keyword}||'%'
+			</when>				
+		</choose>
+
+	</select>
+	
 </mapper>
