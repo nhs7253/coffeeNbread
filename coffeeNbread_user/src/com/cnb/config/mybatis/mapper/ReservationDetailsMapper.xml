@@ -55,7 +55,17 @@
 	</resultMap>
 	 
 	 
-	 <update id="updateReservationConfirmDate" parameterType="com.cnb.vo.ReservationDetails">
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+<!-- 	 <update id="updateReservationConfirmDate" parameterType="com.cnb.vo.ReservationDetails">
 		UPDATE reservation_details
 		SET reservation_no=#{reservationNo},
 		    reservation_time=#{reservationTime},
@@ -64,7 +74,7 @@
 		    reservation_hope_time=#{reservationHopeTime}
 		WHERE product_id=#{productId}
 		AND  store_id=#{storeId}    
-	</update>
+	</update> -->
 	 
 	
 	<!-- selectReservationDetailsListCountByStoreId --> 
@@ -191,7 +201,48 @@
 			WHERE rnum >= #{startIndex}
 		]]>
 	</select> 
-	 
+	
+	
+	 <!--7.3 김형주 기능 추가  --> 
+	<!-- selectReservationDetailsListByUserId -->
+	<select id="selectReservationDetailsListByUserIdAndStoreId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							user_id
+					FROM(
+							SELECT  reservation_no,
+									reservation_time,
+									reservation_count,
+									reservation_confirm,
+									product_hope_time,
+									product_id,
+									store_id,
+									user_id
+							FROM	reservation_details
+							WHERE user_id = #{userId}
+							AND   store_id=#{storeId}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select> 
 	 
 	<!-- selectReservationDetailsListByStoreIdAndReservationTime -->
 	<select id="selectReservationDetailsListByStoreIdAndReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
