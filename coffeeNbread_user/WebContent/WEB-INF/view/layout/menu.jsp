@@ -26,7 +26,7 @@
 
 
 <%--회원/관리자 공통 메뉴 /member로 시작 --%>
-<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MEMBER')">
+<sec:authorize access="hasAnyRole('CNB_USER', 'CNB_STORE')">
 	<li><a href="${initParam.rootPath }/member/mypage.do">사용자 정보조회</a></li>
 </sec:authorize>
 
