@@ -46,7 +46,7 @@ SELECT * FROM user_authority;
 
 SELECT * 
 FROM user_authority
-WHERE user_id = '1';
+WHERE user_id = 'u-1';
 
 UPDATE user_authority 
 SET user_authority = 'CNB_STORE'
@@ -169,8 +169,41 @@ WHERE user_id = '1';
 						  store_close, 
 						  store_permission
 					FROM user_preference_store ups, store s 
-					WHERE ups.store_id = s.store_id AND user_id = 'u-4'
+					WHERE ups.store_id = s.store_id AND user_id = 'u-1'
 					ORDER BY preference_hits DESC
 			) 
 			WHERE rownum <= '5'
 
+			
+			
+			
+			SELECT user_id, 
+				   store_id, 
+				   preference_hits,
+				   store_name, 
+				   store_intro, 
+				   store_phone, 
+				   store_address, 
+				   store_email, 
+				   store_hits, 
+				   store_open, 
+				   store_close, 
+				   store_permission
+			FROM(
+				   SELECT user_id, 
+						  s.store_id, 
+						  preference_hits,
+						  store_name, 
+						  store_intro, 
+						  store_phone, 
+						  store_address, 
+						  store_email, 
+						  store_hits, 
+						  store_open, 
+						  store_close, 
+						  store_permission
+					FROM user_preference_store ups, store s 
+					WHERE ups.store_id = s.store_id AND user_id = 'u-1'
+					ORDER BY preference_hits DESC
+			) 
+			WHERE rownum <= 5

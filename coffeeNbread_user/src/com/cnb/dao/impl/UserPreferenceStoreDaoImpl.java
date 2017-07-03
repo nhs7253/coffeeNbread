@@ -57,9 +57,4 @@ public class UserPreferenceStoreDaoImpl implements UserPreferenceStoreDao{
 	public List<UserPreferenceStore> selectUserPreferenceList() {
 		return session.selectList(makeSqlId("selectUserPreferenceList"));
 	}
-
-	public int aaa(String userId){
-		return session.selectOne(makeSqlId("aaa"), userId);
-	}
-
 }

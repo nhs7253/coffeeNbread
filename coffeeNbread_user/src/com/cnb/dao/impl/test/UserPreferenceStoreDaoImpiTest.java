@@ -42,8 +42,6 @@ public class UserPreferenceStoreDaoImpiTest {
 		
 		System.out.print("selectUserPreferenceJoinStoreSort 로 조회 = ");
 		System.out.println(dao.selectUserPreferenceJoinStoreSort("u-1"));
-		System.out.println(dao.selectUserPreferenceJoinStoreSort("u-1").size());
-		System.out.println(dao.aaa("u-1"));
 		
 		dao.deleteUserPreferenceStore("u-1");
 		System.out.println("deleteUserPreferenceStore 후 조회");
