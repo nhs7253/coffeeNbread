@@ -11,6 +11,10 @@ import com.cnb.vo.GeneralUser;
 
 /*
  * 노현식
+ * 2017-07-03
+ * 페이징 메서드 추가
+ * 
+ * 노현식
  * 2017-06-27
  * 초기 구현
  * 
@@ -38,13 +42,43 @@ public class GeneralUserDaoImplTest {
 		
 		dao.insertGeneralUser(new GeneralUser("DAO-0", 
 											  "0000", 
-											  "DOA테스트 유저1", 
+											  "DOA테스트 유저0", 
 											  new Date(), 
 											  "남자", 
 											  "DaoTest-1@dao.com", 
 											  "000-0000-0000", 
 											  "DAO시1", 
 											  "Y"));
+		
+		dao.insertGeneralUser(new GeneralUser("DAO-1", 
+				  "0000", 
+				  "DOA테스트 유저1", 
+				  new Date(), 
+				  "남자", 
+				  "DaoTest-1@dao.com", 
+				  "000-0000-0000", 
+				  "DAO시1", 
+				  "Y"));
+		
+		dao.insertGeneralUser(new GeneralUser("DAO-2", 
+				  "0000", 
+				  "DOA테스트 유저2", 
+				  new Date(), 
+				  "남자", 
+				  "DaoTest-1@dao.com", 
+				  "000-0000-0000", 
+				  "DAO시1", 
+				  "Y"));
+		
+		dao.insertGeneralUser(new GeneralUser("DAO-3", 
+				  "0000", 
+				  "DOA테스트 유저3", 
+				  new Date(), 
+				  "남자", 
+				  "DaoTest-1@dao.com", 
+				  "000-0000-0000", 
+				  "DAO시1", 
+				  "Y"));
 		
 		System.out.println("insertGeneralUser 후 조회");
 		System.out.println(dao.selectGeneralUserList());
@@ -72,7 +106,17 @@ public class GeneralUserDaoImplTest {
 		dao.selectGeneralUserByUserId("DAO-0");
 		System.out.println("selectGeneralUserByUserId 후 조회");
 		System.out.println(dao.selectGeneralUserList());
+	
+		System.out.print("selectGeneralUserListBySelectToKeywordCount 조회 - userId : ");
+		System.out.println(dao.selectGeneralUserListBySelectToKeywordCount("userId", "DAO"));
+		System.out.print("selectGeneralUserListBySelectToKeyword 조회 - userId : ");
+		System.out.println(dao.selectGeneralUserListBySelectToKeyword("userId", "DAO", 2, 3));
+
 		
+		System.out.print("selectGeneralUserListBySelectToKeywordCount 조회 - userName : ");
+		System.out.println(dao.selectGeneralUserListBySelectToKeywordCount("userName", "유저"));
+		System.out.print("selectGeneralUserListBySelectToKeyword 조회 - userName : ");
+		System.out.println(dao.selectGeneralUserListBySelectToKeyword("userName", "유저", 2, 3));
 		
 		
 		System.out.print("selectGeneralUserCount 조회 : ");
@@ -83,6 +127,9 @@ public class GeneralUserDaoImplTest {
 		
 		
 		dao.deleteGeneralUserByUserId("DAO-0");
+		dao.deleteGeneralUserByUserId("DAO-1");
+		dao.deleteGeneralUserByUserId("DAO-2");
+		dao.deleteGeneralUserByUserId("DAO-3");
 		System.out.println("deleteGeneralUserByUserId 후 조회");
 		System.out.println(dao.selectGeneralUserList());
 		

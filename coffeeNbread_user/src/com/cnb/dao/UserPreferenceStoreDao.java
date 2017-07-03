@@ -40,7 +40,14 @@ public interface UserPreferenceStoreDao {
 	int updateUserPreferenceStoreByUserPreferenceStoreUpPreferenceHits(UserPreferenceStore userPreferenceStore);
 	
 	/**
-	 * userId를 기준으로 UserPreferenceStore와 Store의 Join 결과를 preferenceHits수가 높은 순으로 정렬
+	 * 매개변수로 받은 userPreferenceStore객체의 userId와 storeId가 같은 UserPreferenceStore를 조회
+	 * @param userPreferenceStore 검색할 userId와 storeId를 가진 UserPreferenceStore 객체
+	 * @return UserPreferenceStore 검색한 UserPreferenceStore 객체 
+	 */
+	UserPreferenceStore selectUserPreferenceByUserPreferenceStore(UserPreferenceStore userPreferenceStore);
+	
+	/**
+	 * userId를 기준으로 UserPreferenceStore와 Store의 Join 결과를 preferenceHits수가 높은 순으로 정렬하여 5개 까지 보여줌
 	 * @param userId 매장을 추천해줄 유저의 ID
 	 * @return List<UserPreferenceStore> 유저에게의 추천 매장 목록
 	 */
@@ -51,4 +58,5 @@ public interface UserPreferenceStoreDao {
 	 * @return List<UserPreferenceStore>
 	 */
 	List<UserPreferenceStore> selectUserPreferenceList();
+	
 }

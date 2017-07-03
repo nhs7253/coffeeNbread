@@ -53,10 +53,37 @@
 		<result column="product_trade_count" property="productTradeCount"/>
 	</resultMap>
 	
+	
+	
+	
+	
 	<!-- 결제내역 조회 -->
-	<select id="selectPaymentDetailsByUserIdAndStoreIdAndProductId" resultMap="paymentDetails-resultmap" parameterType="map">
+	<select id="selectPaymentDetailsListByUserIdAndStoreId" resultMap="paymentDetails-resultmap" parameterType="map">
+		
 		<include refid="select-paymentDetails"/>
-		WHERE store_id = #{storeId} AND product_id = #{productId} AND user_id=#{userId}
+		WHERE store_id = #{storeId} AND user_id=#{userId}
+	</select>
+	
+   <!-- 결제내역에서 제품별로 결제내역 조회  -->
+	<select id="selectPaymentDetailsByStoreIdAndProductId" resultMap="paymentDetails-resultmap" parameterType="map">
+		
+		<include refid="select-paymentDetails"/>
+		WHERE store_id = #{storeId} AND product_id=#{productId}
+	</select>
+	
+	
+	<!--같은시각으로 결제할떄 그 시간 가져오기   -->
+	<select id="selectPaymentDetailsListByTradeDate" resultMap="paymentDetails-resultmap" parameterType="date">
+		
+		<include refid="select-paymentDetails"/>
+		WHERE trade_date=#{tradeDate}
+	</select>
+	
+	
+	<select id="selectPaymentDetailsListByUserId" resultMap="paymentDetails-resultmap" parameterType="String">
+		
+		<include refid="select-paymentDetails"/>
+		WHERE user_id=#{userId}
 	</select>
 	
 	

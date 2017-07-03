@@ -83,7 +83,7 @@
 		WHERE svh.store_id = s.store_id AND user_id = #{value}
 	</select>
 	
-	<select id="selectStoreVisitHistoryByUserIdJoinStoreListPagingCount" parameterType="map" resultType="int">
+	<select id="selectStoreVisitHistoryByUserIdJoinStoreListPagingCount" parameterType="map" resultType="_int">
 		<![CDATA[
 		SELECT COUNT(*)
 			FROM(

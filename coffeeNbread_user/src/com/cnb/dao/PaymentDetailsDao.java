@@ -1,9 +1,10 @@
 package com.cnb.dao;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.cnb.vo.PaymentDetails;
+import com.cnb.vo.ShoppingBasketProduct;
 
 /*
  * 김형주
@@ -29,26 +30,50 @@ import com.cnb.vo.PaymentDetails;
 
 public interface PaymentDetailsDao {
 	
-/**
- * 제품별 결제내역
- * @param paymentDetails
- * @return
- */
 	
+	/**
+	 * ShoppingBasket에 있는걸 조회한다음 바로 결제내역 테이블에 삽입.
+	 * @param paymentDetails
+	 * @return
+	 */
 	int insertPaymentDetails(PaymentDetails paymentDetails);
 	
   
-  
+	
+	
 	/**
-	 * 결제자가 매장아이디와 매장
+	 * 결제내역 조회. (유저가 그 매장에서 결제했을때 그 순간 내역) - 
+	 *   - 개발자 확인용.(유저는 이걸 확인할이유는 없다)
+	 */
+	
+	List<PaymentDetails>selectPaymentDetailsListByUserIdAndStoreId(String userId,String storeId);
+		
+		
+		
+	List<ShoppingBasketProduct> selectAllProductPriceByUserIdAndStoreId(String userId, String storeId);
+	
+	
+	
+	PaymentDetails selectPaymentDetailsByStoreIdAndProductId(String storeId,String productId);
+	
+	/**
+	 * 유저아이디로 결제내역테이블에 넣은 목록들 조회.
 	 * @param userId
-	 * @param storeId
 	 * @return
 	 */
-	List<PaymentDetails> selectPaymentDetailsByUserIdAndStoreIdAndProductId(String userId,String storeId,String productId);
+	List<PaymentDetails> selectPaymentDetailsListByUserId(String userId);
 	
-
-
+	
+	
+	/**
+	 * 결제내역테이블에 거래 시간을 통해 같은시간에 결제한 제품들 모두 가져옴.
+	 * @param tradeDate
+	 * @return
+	 */
+     List<PaymentDetails> selectPaymentDetailsListByTradeDate(Date tradeDate);
+    	
+    
+	
 	
 	
 

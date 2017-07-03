@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.cnb.dao.StoreBookmarkDao;
 import com.cnb.dao.StoreVisitHistoryDao;
+import com.cnb.dao.UserPreferenceStoreDao;
 import com.cnb.exception.UserAndStoreServiceException;
 import com.cnb.service.UserAndStoreService;
 import com.cnb.util.PagingBean;
 import com.cnb.vo.StoreBookmark;
 import com.cnb.vo.StoreVisitHistory;
+import com.cnb.vo.UserPreferenceStore;
 
 /*
  * 노현식
@@ -28,7 +30,12 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	
 	@Autowired
 	private StoreVisitHistoryDao storeVisitHistoryDao;
+	
+	@Autowired
+	private UserPreferenceStoreDao userPreferenceStoreDao;
 
+	/************** 즐겨찾기 **************/	
+	
 	@Override
 	public void addStoreBookmark(StoreBookmark storeBookmark) throws UserAndStoreServiceException {
 		if(storeBookmarkDao.selectStoreBookmarkByStoreBookmark(storeBookmark) != null){
@@ -48,7 +55,7 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	}
 
 	@Override
-	public Map<String, Object> findStoreBookmarkListByKeyword(String userId, int page, String keyword) {
+	public Map<String, Object> findStoreBookmarkListByKeyword(String userId, String keyword, int page) {
 		Map<String, Object> map = new HashMap<>();
 		int tatalCount = storeBookmarkDao.selectStoreBookmarkByUserIdJoinStoreListCount(userId); //검색 결과 개수
 		PagingBean pageBean = new PagingBean(tatalCount, page); //(tatalCount, page) - (전체 페이지 수, 보려는 페이지 번호)
@@ -58,6 +65,11 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 		map.put("list", list);
 		return map;
 	}
+	
+	/************** 즐겨찾기 **************/	
+	
+	
+	/************** 최근 조회 매장 **************/
 
 	@Override
 	public void addStoreVisitHistory(StoreVisitHistory storeVisitHistory) {
@@ -75,7 +87,7 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	}
 
 	@Override
-	public Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, int page, String keyword) {
+	public Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, String keyword, int page) {
 		Map<String, Object> map = new HashMap<>();
 		int tatalCount = storeVisitHistoryDao.selectStoreVisitHistoryByUserIdJoinStoreListCount(userId); //검색 결과 개수
 		PagingBean pageBean = new PagingBean(tatalCount, page); //(tatalCount, page) - (전체 페이지 수, 보려는 페이지 번호)
@@ -85,5 +97,32 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 		map.put("list", list);
 		return map;
 	}
+	
+	/************** 최근 조회 매장 **************/
+	
+	
+	
+	/************** 조회 수별 추천 가게 **************/
+
+	@Override
+	public void addUserPreferenceStore(UserPreferenceStore userPreferenceStore) {
+		if(userPreferenceStoreDao.selectUserPreferenceByUserPreferenceStore(userPreferenceStore) == null){
+			userPreferenceStoreDao.insertUserPreferenceStore(userPreferenceStore);
+		}else{
+			userPreferenceStoreDao.updateUserPreferenceStoreByUserPreferenceStoreUpPreferenceHits(userPreferenceStore);
+		}
+	}
+
+	@Override
+	public void removeAllUserPreferenceStore(String userId) {
+		userPreferenceStoreDao.deleteUserPreferenceStore(userId);
+	}
+
+	@Override
+	public List<UserPreferenceStore> viewUserPreferenceStoreList(String userId) {
+		return userPreferenceStoreDao.selectUserPreferenceJoinStoreSort(userId);
+	}
+	
+	/************** 조회 수별 추천 가게 **************/
 	
 }
