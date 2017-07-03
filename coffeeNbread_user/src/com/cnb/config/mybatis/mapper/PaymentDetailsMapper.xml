@@ -54,9 +54,10 @@
 	</resultMap>
 	
 	<!-- 결제내역 조회 -->
-	<select id="selectPaymentDetailsByUserIdAndStoreIdAndProductId" resultMap="paymentDetails-resultmap" parameterType="map">
+	<select id="selectPaymentDetailsListByUserIdAndStoreId" resultMap="paymentDetails-resultmap" parameterType="map">
+		
 		<include refid="select-paymentDetails"/>
-		WHERE store_id = #{storeId} AND product_id = #{productId} AND user_id=#{userId}
+		WHERE store_id = #{storeId} AND user_id=#{userId}
 	</select>
 	
 	

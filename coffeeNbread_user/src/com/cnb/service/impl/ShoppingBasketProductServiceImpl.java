@@ -22,54 +22,20 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	@Autowired
 	private ShoppingBasketProductDao shoppingBasketProductDao;
 
+	/* 장바구니 테이블 조회 - 결제내역에 담긴것 조회하기위함. */
+	@Override
+	public List<ShoppingBasketProduct> findShoppingBasketProductList(String storeId, String userId) {
+		return shoppingBasketProductDao.selectShoppingBasketProductList(storeId, userId);
+	}
+
 	/**
-	 * userId와 해당 매장아이디로 단순 자신의 장바구니담은 목록 조회하는것이므로 다른 조치 취할거 없음.
+	 * userId와 해당 매장아이디로 단순 자신의 장바구니담은 목록들 조회하는것이므로 다른 조치 취할거 없음.
 	 */
 	@Override
 	public List<ShoppingBasketProduct> findShoppingBasketProductListByStoreIdAndUserId(String storeId, String userId) {
 
 		return shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId);
 	}
-
-	/**
-	 *  검색창에 제품이름을쳤을때 조회기능. productName
-	 *  아무것도 없을떄 제품이름 치면 - 장바구니 목록이 비어있다.라고 뜸.
-	 *  아무것도 없을때 장바구니버튼 누르면 장바구니가 목록이 비어있다라는 알람과 함께 제품목록으로 가기 보여주기.
-	 * @throws EmptyShoppingBasketProductListException
-	 * @throws EmptyShoppingBasketProductListByProductNameException
-	 */
-	
-	/*@Override
-	@Transactional(rollbackFor = Exception.class)
-	public ShoppingBasketProduct findShoppingBasketProductByProductNameAndUserIdAndStoreId(String productName,
-			String userId, String storeId)
-			throws EmptyShoppingBasketProductListException, EmptyShoppingBasketProductListByProductNameException {
-
-		List<ShoppingBasketProduct> shoppingBasketProductList 
-		 = shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId);
-		System.out.println("1----"+shoppingBasketProductList);
-		ShoppingBasketProduct productFullName = null;
-		if (shoppingBasketProductList.size() == 0) {
-			throw new EmptyShoppingBasketProductListException("장바구니 목록이 비어있습니다.");
-		}
-
-		for (int i = 0; i < shoppingBasketProductList.size(); i++) {
-             System.out.println("for문 진입.");
-			productFullNameList.add(shoppingBasketProductDao.selectShoppingBasketProductByProductIdAndUserId(productId, userId))
-			      (shoppingBasketProductDao.selectShoppingBasketProductNameByProductIdAndUserId(
-					shoppingBasketProductList.get(i).getProductId(), userId)) ;
-			   //System.out.println("productFullName:"+productFullName);
-		  
-             productFullName=shoppingBasketProductDao.selectShoppingBasketProductNameByProductIdAndUserId("p-1, userId");
-             
-			if (!(productFullName.contains(productName))) {
-				throw new EmptyShoppingBasketProductListByProductNameException("검색하신 제품은 장바구니에 담기지 않았습니다.");
-			}
-			return shoppingBasketProductDao.selectShoppingBasketProductByProductNameAndUserId(productName, userId);
-		}
-		return shoppingBasketProductDao.selectShoppingBasketProductByProductNameAndUserId(productName, userId);
-
-	}*/
 
 	/**
 	 * 장바구니에서 수정할거라면 해당제품을 목록에 넣어두고 제품개수 수정.
@@ -107,28 +73,21 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 		for (int i = 0; i < shoppingBasketProductList.size(); i++) {
 			selectedSbp = shoppingBasketProductDao.selectShoppingBasketProductByProductIdAndUserId(
 					shoppingBasketProductList.get(i).getProductId(), shoppingBasketProductList.get(i).getUserId());
-			System.out.println("selectedSbp:"+selectedSbp);
 			if (selectedSbp != null) {
-				System.out.println("selectedSbp전:"+selectedSbp);
 				selectedSbp.setProductCount(
 						selectedSbp.getProductCount() + shoppingBasketProductList.get(i).getProductCount());
-				System.out.println("selectedSbp후:"+selectedSbp);
-				System.out.println("selectedSbp.getProductCount()"+selectedSbp.getProductCount());
-			System.out.println(shoppingBasketProductDao.updateShoppingBasketProductCount(selectedSbp));
+				System.out.println(shoppingBasketProductDao.updateShoppingBasketProductCount(selectedSbp));
 			} else {
 				shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProductList.get(i));
 			}
-           
+
 		}
-		
 
 	}
 
 	@Override
-	public ShoppingBasketProduct findShoppingBasketProductByProductNameAndUserIdAndStoreId(String productName,
-			String userId, String storeId)
-			throws EmptyShoppingBasketProductListException, EmptyShoppingBasketProductListByProductNameException {
+	public int findShoppingBasketProductAllPrice(List<ShoppingBasketProduct> shoppingBasketProduct) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 }

@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.PaymentDetailsDao;
-import com.cnb.vo.BookMarkCardNum;
 import com.cnb.vo.PaymentDetails;
+import com.cnb.vo.ShoppingBasketProduct;
 
 /*
  * 김형주
@@ -37,14 +37,26 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 	}
 
 	@Override
-	public List<PaymentDetails> selectPaymentDetailsByUserIdAndStoreIdAndProductId(String userId, String storeId,
-		String productId	) {
+	public List<PaymentDetails>selectPaymentDetailsListByUserIdAndStoreId(String userId,String storeId){
 		Map<String, String> info = new HashMap<>();
-		info.put("storeId", storeId);
 		info.put("userId", userId);
-		info.put("productId", productId);
-		return session.selectList(makeSqlId("selectPaymentDetailsByUserIdAndStoreIdAndProductId"),info);
+		info.put("storeId", storeId);
+		return session.selectList(makeSqlId("selectPaymentDetailsListByUserIdAndStoreId"), info);
 	}
+
+  public  List<ShoppingBasketProduct> selectAllProductPriceByUserIdAndStoreId(String userId, String storeId){
+	  
+	  Map<String, String> info = new HashMap<>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		return session.selectList("com.cnb.config.mybatis.mapper.ShoppingBasketProductMapper.selectAllProductPriceByUserIdAndStoreId", info);
+	  
+  }
+
+
+	
+	
+	
 
 
 	
