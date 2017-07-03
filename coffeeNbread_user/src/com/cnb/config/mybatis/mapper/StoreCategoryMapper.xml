@@ -28,14 +28,39 @@
 		UPDATE store_category
  		SET store_category = #{storeCategory}
  		WHERE store_category_no = #{storeCategoryNo}
- 	
+ 		AND store_id = #{storeId}
 	</update>
 	
 	
 	<!-- 매장 카테고리 delete -->
-	<delete id="deleteStoreCategoryById" parameterType="com.cnb.vo.StoreCategory">
+	<delete id="deleteStoreCategoryByNo" parameterType="com.cnb.vo.StoreCategory">
 		DELETE FROM store_category
 		WHERE store_category_no=#{storeCategoryNo}
-
+		AND store_id= #{storeId}
 	</delete>
+	
+	<!-- 매장카테고리 select -->
+	<select id="selectStoreCategoryListByNo">
+		SELECT
+		store_category_no ,
+		store_category,
+		store_id
+		FROM store_category
+		WHERE store_category_no = #{storeCategoryNo}
+		AND
+		store_id = #{storeId}
+	</select>
+
+	<!-- 매장카테고리 select -->
+	<select id="selectStoreCategoryByName" parameterType="map"
+		resultMap="StoreCategory-resultmap">
+		SELECT
+		store_category_no,
+		store_category,
+		store_id
+		FROM
+		store_category
+		WHERE store_category = #{storeCategory}
+		AND store_id =#{storeId}
+	</select>
 </mapper>
