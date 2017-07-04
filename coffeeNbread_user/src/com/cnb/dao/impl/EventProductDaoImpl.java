@@ -52,5 +52,12 @@ public class EventProductDaoImpl implements EventProductDao {
 	public List<EventProduct> selectEventProductListByEventNo(int eventNo) {
 		return session.selectList(makeSqlId("selectEventProductListByEventNo"), eventNo);
 	}
-	
+	@Override
+	public EventProduct selectEventProductByEventNoANDProductId(String productId, int eventNo) {
+		Map info = new HashMap();
+		info.put("productId", productId);
+		info.put("eventNo",eventNo);
+		return session.selectOne(makeSqlId("selectEventProductByEventNoANDProductId"), info);
+	}
+
 }
