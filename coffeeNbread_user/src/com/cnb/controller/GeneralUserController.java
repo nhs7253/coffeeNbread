@@ -33,6 +33,7 @@ import com.cnb.vo.GeneralUser;
  * 노현식 
  * 2017-07-04 
  * modifyUserController 비밀번호 검증 추가 및 테스트
+ * removeUserController 탈퇴시 비밀번호 확인 후 탈퇴
  * 
  * 노현식 
  * 2017-07-03 
@@ -138,26 +139,32 @@ public class GeneralUserController {
 	
 	/**
 	 * 로그인된 회원의 정보를 받아 해당 회원을 탈퇴 시키는 Controller
+	 * @param password 탈퇴할 회원의 비밀번호
 	 * @return String - 응답 경로
 	 */
 	@RequestMapping("/user/removeUserController")
-	public String removeUserController(){
+	public String removeUserController(@RequestParam(value="password",required=false) String password){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 		//GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
 		
 		if(authentication == null){
-			return null; //에러 페이지로 이동 (잘못된 접근)
+			return "index.tiles"; //에러 페이지로 이동 (잘못된 접근)
+		}
+		
+		if(password == null || !passwordEncoder.matches(password, ((GeneralUser)authentication.getPrincipal()).getUserPw())){
+			return "user/remove_user_form.tiles"; //탈퇴 시도 실패
 		}
 
 		try {
 			service.removeUser(((GeneralUser)authentication.getPrincipal()).getUserId());
 		} catch (UserManageException e) {
-			return null; //에러 페이지 이동
+			return "index.tiles"; //에러 페이지 이동
 		}
 
-		//SecurityContextHolder.getContext().setAuthentication(null); //SecurityContext에 묶여 있던 유저 정보 제거
+		SecurityContextHolder.getContext().setAuthentication(null); //SecurityContext에 묶여 있던 유저 정보 제거
 		
-		return "logout.do"; //로그아웃 페이지로 이동 하여 로그아웃 후 로그아웃 페이지가 메인 페이지로 보냄   ↑해당 구문 주석
+		return "redirect:/index.do"; 
+		//로그아웃 페이지로 이동 하여 로그아웃 후 로그아웃 페이지가 메인 페이지로 보냄   ↑해당 구문 주석 - 현재 불가능
 	}
 	
 	/**
@@ -166,16 +173,20 @@ public class GeneralUserController {
 	 * @param errors 요청 파라미터 체크
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
-	@RequestMapping("findUserListBySelectToKeywordController")
+	@RequestMapping("/findUserListBySelectToKeywordController")
 	public ModelAndView findUserListBySelectToKeywordController(@ModelAttribute("generalUserView") @Valid GeneralUserViewForm generalUserViewForm, BindingResult errors){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
 		if(errors.hasErrors()){
-			return null; //에러 발생 시 이동할 경로
+			modelAndView.setViewName("index.tiles");
+			return modelAndView; //에러 발생 시 이동할 경로
 		}
 		
 		Map<String, Object> map = service.findUserListBySelectToKeyword(generalUserViewForm.getSelect(), generalUserViewForm.getKeyword(), generalUserViewForm.getPage());
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(null); //성공 시 이동할 경로
+
+				
+		modelAndView.setViewName("user_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("keyword", generalUserViewForm.getKeyword());
