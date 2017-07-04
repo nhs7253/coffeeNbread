@@ -14,6 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.ViewResolverComposite;
 
 import com.cnb.exception.UserAndStoreServiceException;
 import com.cnb.service.UserAndStoreService;
@@ -73,16 +77,16 @@ public class UserAndStoreController {
 	 * @param userAndStoreSelectDeleteForm (String userId, List<String> storeIdList) - 북마크를 가진 유저ID, 삭제할 매장 ID 목록
 	 * @param errors 요청 파라미터 체크
 	 * @return String - 응답 경로
+	 * @throws Exception 
 	 */
 	@RequestMapping("/user/selectRemoveStoreBookmarkController") 
-	public String selectRemoveStoreBookmarkController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
+	public String selectRemoveStoreBookmarkController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors) throws Exception{
+		
 		if(errors.hasErrors()){
-			return null; //에러 발생 시 이동할 경로
-		}
-		
-		service.selectRemoveStoreBookmark(userAndStoreSelectDeleteForm.getUserId(), userAndStoreSelectDeleteForm.getStoreIdList());
-		
-		return null; //삭제 성공 시 이동할 페이지
+			return "redirect:/user/findStoreBookmarkListByKeywordController.do"; //에러 발생 시 이동할 경로
+		}			
+		service.selectRemoveStoreBookmark(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), userAndStoreSelectDeleteForm.getStoreIdList());
+		return "redirect:/user/findStoreBookmarkListByKeywordController.do"; //삭제 성공 시 이동할 페이지
 	}
 	
 	/**
@@ -127,12 +131,12 @@ public class UserAndStoreController {
 	@RequestMapping("/user/selectRemoveStoreVisitHistoryController") 
 	public String selectRemoveStoreVisitHistoryController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
 		if(errors.hasErrors()){
-			return null; //에러 발생 시 이동할 경로
+			return "redirect:/user/findStoreVisitHistoryListByKeywordController.do"; //에러 발생 시 이동할 경로
 		}
 		
-		service.selectRemoveStoreVisitHistory(userAndStoreSelectDeleteForm.getUserId(), userAndStoreSelectDeleteForm.getStoreIdList());
+		service.selectRemoveStoreVisitHistory(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), userAndStoreSelectDeleteForm.getStoreIdList());
 		
-		return null; //삭제 성공 시 이동할 페이지
+		return "redirect:/user/findStoreVisitHistoryListByKeywordController.do"; //삭제 성공 시 이동할 페이지
 	}
 	
 	/**
@@ -151,10 +155,9 @@ public class UserAndStoreController {
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 		
-		Map<String, Object> map = service.findStoreVisitHistoryListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
+		Map<String, Object> map = service.findStoreVisitHistoryListByKeyword(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
 		
-		
-		modelAndView.setViewName(null); //성공 시 이동할 경로
+		modelAndView.setViewName("user/visitHistory_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("keyword", userAndStoreFindListForm.getKeyword());

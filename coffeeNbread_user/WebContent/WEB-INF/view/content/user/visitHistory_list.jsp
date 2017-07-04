@@ -6,17 +6,17 @@
 <body>
 	
 
-	<h2>매장 북마크 목록</h2>
+	<h2>유저 방문 기록 목록</h2>
 
 
 
-	<form action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do" method="post">
+	<form action="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do" method="post">
 		<input type="text" name="keyword" /> 
 		<input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	<br>
-	<form action="${initParam.rootPath }/user/selectRemoveStoreBookmarkController.do" method="post">
+	<form action="${initParam.rootPath }/user/selectRemoveStoreVisitHistoryController.do" method="post">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	
 		<table class="w3-table-all">
@@ -68,7 +68,7 @@
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=1&keyword=${requestScope.keyword}">첫페이지</a>
+			href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=1&keyword=${requestScope.keyword}">첫페이지</a>
 
 
 		<!--
@@ -79,7 +79,7 @@
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.beginPage-1}&keyword=${requestScope.keyword}">◀</a>
+					href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.beginPage-1}&keyword=${requestScope.keyword}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -101,7 +101,7 @@
 			<c:choose>
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
-					<a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${page}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+					<a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${page}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -119,7 +119,7 @@
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.endPage+1}&keyword=${requestScope.keyword}">▶</a>
+					href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.endPage+1}&keyword=${requestScope.keyword}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -131,7 +131,7 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
+			href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
 
 

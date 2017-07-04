@@ -24,7 +24,6 @@ import com.cnb.vo.Store;
  */
 public class UserAndStoreSelectDeleteForm implements Serializable{
 	
-	@NotEmpty
 	private String userId;
 	private List<String> storeIdList;
 	

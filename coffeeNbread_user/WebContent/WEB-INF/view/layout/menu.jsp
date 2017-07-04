@@ -30,6 +30,8 @@
 	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
 	<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자 탈퇴</a></li>
 	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
+	<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
+	
 </sec:authorize>
 
 <li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
