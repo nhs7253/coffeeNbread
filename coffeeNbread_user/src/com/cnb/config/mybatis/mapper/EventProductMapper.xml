@@ -56,4 +56,11 @@
 		<include refid="select-eventProduct"/>
 		WHERE event_no = #{value}
 	</select>
+	
+	<!-- selectEventProductByEventNoANDProductId -->
+	<select id="selectEventProductByEventNoANDProductId" resultMap="eventProduct-resultmap" parameterType="map">
+		<include refid="select-eventProduct"/>
+		WHERE event_no = #{eventNo}
+		AND product_id = #{productId}
+	</select>
 </mapper>

@@ -24,11 +24,52 @@
  		SET option_category_detail = #{optionCategoryDetail}
  		WHERE store_id = #{storeId}
  		AND option_id = #{optionId}
+ 		AND product_id = #{productId}
 	</update>
 	
 	<!-- 옵션 상세 delete -->
-	<delete id="deleteOptionDetail" parameterType="int">
+	<delete id="deleteOptionDetail" parameterType="map">
 		DELETE FROM option_detail
- 		WHERE option_id = #{optionId}
+ 		WHERE option_id = #{optionId} And store_id=#{storeId}
 	</delete>
+	
+		
+	<delete id="deleteOptionDetailByProductId" parameterType="map">
+		DELETE FROM option_detail
+ 		WHERE store_id = #{storeId} And product_id=#{productId}
+	
+	</delete>
+	<!-- 옵션 카테고리로 옵션 상세 list 조회 -->
+	<select id="selectOptionDetailListByOptionCategory" parameterType="map" resultMap="optionDetail-resultmap">
+		SELECT oc.option_category,
+			   oc.option_id,
+			   oc.store_id,
+			   od.option_category_detail
+		FROM option_category oc, option_detail od
+		WHERE oc.store_id = od.store_id
+		AND	  oc.option_id = od.option_id
+		AND   oc.store_id = #{storeId}
+		AND	  oc.option_id= #{optionId}
+	</select>
+	
+	<!-- 옵션 상세 조회 -->
+	<select id="selectOptionDetailByOptionDetailName" parameterType="map" resultMap="optionDetail-resultmap">
+		SELECT option_category_detail,
+			   option_id,
+			   store_id
+		FROM option_detail
+		WHERE option_category_detail = #{optionCategoryDetail}
+		AND	   option_id = #{optionId}
+		AND	   store_id = #{storeId}
+	</select>
+	
+	<!-- 제품아이디로 옵션 상세조회 -->
+	<select id="selectOptionDetailByProductId" parameterType="map" resultMap="optionDetail-resultmap">
+		SELECT option_category_detail,
+			   option_id,
+			   store_id
+		FROM option_detail
+		WHERE product_id = #{productId}
+		AND	   store_id = #{storeId}
+	</select>
 </mapper>
