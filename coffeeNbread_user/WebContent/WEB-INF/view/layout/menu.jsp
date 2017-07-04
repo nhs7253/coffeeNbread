@@ -24,7 +24,7 @@
 	<li><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
 </sec:authorize>
 
-	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회11111111111111</a></li>
+
 <%--회원/관리자 공통 메뉴 /member로 시작 --%>
 <sec:authorize access="hasAnyRole('CNB_USER', 'CNB_STORE')">
 	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
