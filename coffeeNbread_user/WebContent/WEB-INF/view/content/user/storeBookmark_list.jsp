@@ -6,31 +6,28 @@
 <body>
 	
 
-	<h2>유저 목록</h2>
+	<h2>매장 북마크 목록</h2>
 
 
 
-	<form action="${initParam.rootPath }/findUserListBySelectToKeywordController.do" method="post">
-		<select name="select">
-			<option value="userId">아이디</option>
-			<option value="userName">이름</option>
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
+	<form action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do" method="post">
+		<input type="text" name="keyword" /> 
+		<input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	<br>
 
 	<table class="w3-table-all">
 		<thead>
-			<tr class="w3-blue">
+			<tr class="w3-blue"> 
 				<th>아이디</th>
 				<th>이름</th>
-				<th>생년월일</th>
-				<th>성별</th>
-				<th>이메일</th>
 				<th>전화번호</th>
 				<th>주소</th>
-				<th>활동 상태</th>
-				<th>매장아이디</th>
+				<th>이메일</th>
+				<th>조회수</th>
+				<th>여는 시간</th>
+				<th>닫는 시간</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,18 +35,17 @@
 			<%-- ######################################################
 															조회된 item 출력 
 				###################################################### --%>
-			<c:forEach items="${requestScope.list }" var="user">
+			<c:forEach items="${requestScope.list }" var="bokmark">
 
 				<tr>
-					<td>${user.userId}</td>
-					<td>${user.userName}</td>
-					<td>${user.birthFormat}</td>
-					<td>${user.userGender}</td>
-					<td>${user.userEmail}</td>
-					<td>${user.userPhone}</td>
-					<td>${user.userAddress}</td>
-					<td>${user.userActiveState}</td>
-					<td>${user.storeId}</td>
+					<td>${bokmark.store.storeId}</td>
+					<td>${bokmark.store.storeName}</td>
+					<td>${bokmark.store.storePhone}</td>
+					<td>${bokmark.store.storeAddress}</td>
+					<td>${bokmark.store.storeEmail}</td>
+					<td>${bokmark.store.storeHits}</td>
+					<td>${bokmark.store.storeOpenFormat}</td>
+					<td>${bokmark.store.storeCloseFormat}</td>
 				</tr>
 			</c:forEach>
 
@@ -67,7 +63,7 @@
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
+			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=1&keyword=${requestScope.keyword}">첫페이지</a>
 
 
 		<!--
@@ -78,7 +74,7 @@
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
+					href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.beginPage-1}&keyword=${requestScope.keyword}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -100,8 +96,7 @@
 			<c:choose>
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
-					<a
-						href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+					<a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${page}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -119,7 +114,7 @@
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
+					href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.endPage+1}&keyword=${requestScope.keyword}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -131,7 +126,7 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
+			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
 
 

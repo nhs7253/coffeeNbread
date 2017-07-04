@@ -49,7 +49,7 @@ public class UserAndStoreController {
 	 * @param errors 요청 파라미터 체크
 	 * @return String - 응답 경로
 	 */
-	@RequestMapping("addStoreBookmarkController") 
+	@RequestMapping("/user/addStoreBookmarkController") 
 	public String addStoreBookmarkController(@ModelAttribute("storeBookmark") @Valid StoreBookmarkForm storeBookmarkFrom, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
@@ -74,7 +74,7 @@ public class UserAndStoreController {
 	 * @param errors 요청 파라미터 체크
 	 * @return String - 응답 경로
 	 */
-	@RequestMapping("selectRemoveStoreBookmarkController") 
+	@RequestMapping("/user/selectRemoveStoreBookmarkController") 
 	public String selectRemoveStoreBookmarkController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
@@ -86,21 +86,25 @@ public class UserAndStoreController {
 	}
 	
 	/**
-	 * 유저가 입력한 키워드를 통해 조회 북마크 목록을 페이징하여 보여주는 Controller
+	 * 유저가 입력한 키워드를 통해 조회, 북마크 목록을 페이징하여 보여주는 Controller
 	 * @param userAndStoreFindListForm (String userId, String keyword, int page) - 검색하는 유저 ID, 검색하려는 키워드, 보려는 페이지 번호
 	 * @param errors 요청 파라미터 체크
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
-	@RequestMapping("findStoreBookmarkListByKeywordController") 
+	@RequestMapping("/user/findStoreBookmarkListByKeywordController") 
 	public ModelAndView findStoreBookmarkListByKeywordController(@ModelAttribute("userAndStoreFindList") @Valid UserAndStoreFindListForm userAndStoreFindListForm, BindingResult errors){
-		if(errors.hasErrors()){
-			return null; //에러 발생 시 이동할 경로
-		}
-		
-		Map<String, Object> map = service.findStoreBookmarkListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName(null); //성공 시 이동할 경로
+		
+		if(errors.hasErrors()){
+			modelAndView.setViewName("index.tiles");
+			return modelAndView; //에러 발생 시 이동할 경로
+		}
+		
+		Map<String, Object> map = service.findStoreBookmarkListByKeyword(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
+		
+		
+		modelAndView.setViewName("user/storeBookmark_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("keyword", userAndStoreFindListForm.getKeyword());
@@ -120,7 +124,7 @@ public class UserAndStoreController {
 	 * @param errors 요청 파라미터 체크
 	 * @return String - 응답 경로
 	 */
-	@RequestMapping("selectRemoveStoreVisitHistoryController") 
+	@RequestMapping("/user/selectRemoveStoreVisitHistoryController") 
 	public String selectRemoveStoreVisitHistoryController(@ModelAttribute("userAndStoreSelectDelete") @Valid UserAndStoreSelectDeleteForm userAndStoreSelectDeleteForm, BindingResult errors){
 		if(errors.hasErrors()){
 			return null; //에러 발생 시 이동할 경로
@@ -137,15 +141,19 @@ public class UserAndStoreController {
 	 * @param errors 요청 파라미터 체크
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
-	@RequestMapping("findStoreVisitHistoryListByKeywordController") 
+	@RequestMapping("/user/findStoreVisitHistoryListByKeywordController") 
 	public ModelAndView findStoreVisitHistoryListByKeywordController(@ModelAttribute("userAndStoreFindList") @Valid UserAndStoreFindListForm userAndStoreFindListForm, BindingResult errors){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
 		if(errors.hasErrors()){
-			return null; //에러 발생 시 이동할 경로
+			modelAndView.setViewName("index.tiles");
+			return modelAndView; //에러 발생 시 이동할 경로
 		}
 		
 		Map<String, Object> map = service.findStoreVisitHistoryListByKeyword(userAndStoreFindListForm.getUserId(), userAndStoreFindListForm.getKeyword(), userAndStoreFindListForm.getPage());
 		
-		ModelAndView modelAndView = new ModelAndView();
+		
 		modelAndView.setViewName(null); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
@@ -160,16 +168,19 @@ public class UserAndStoreController {
 	
 	/************** 조회 수별 추천 가게 **************/
 	
-	@RequestMapping("viewUserPreferenceStoreListController") 
+	@RequestMapping("/user/viewUserPreferenceStoreListController") 
 	public ModelAndView viewUserPreferenceStoreListController(){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
 		if(authentication == null){
-			return null; //에러 페이지로 이동 (잘못된 접근)
+			modelAndView.setViewName("index.tiles");
+			return modelAndView; //에러 페이지로 이동 (잘못된 접근)
 		}
 		
 		List<UserPreferenceStore> list = service.viewUserPreferenceStoreList(((GeneralUser)authentication.getPrincipal()).getUserId());
 		
-		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName(null); //성공 시 이동할 경로
 		modelAndView.addObject("list", list);
 		

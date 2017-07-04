@@ -36,6 +36,11 @@
 	<!-- 유저 탈퇴 폼 -->
 	<mvc:view-controller path="/user/remove_user_form.do" view-name="user/remove_user_form.tiles"/>
 	
+	<!-- 북마크 조회 폼 -->
+	<mvc:view-controller path="/user/storeBookmark_list.do" view-name="user/storeBookmark_list.tiles"/>
+	
+	
+	
 	
 	<mvc:view-controller path="/user_list.do" view-name="user_list.tiles"/>
 

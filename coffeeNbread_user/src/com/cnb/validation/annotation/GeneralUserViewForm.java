@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class GeneralUserViewForm implements Serializable{
 	
 	@NotEmpty
-	private String select;
+	private String select="userId";
 	private String keyword;
 	@NotNull
 	private int page=1;

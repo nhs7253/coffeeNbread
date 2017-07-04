@@ -1,10 +1,16 @@
 package com.cnb.vo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/* 이진영
+/*
+ * 노현식
+ * 2017-07-04
+ * getStoreOpenFormat(), getStoreCloseFormat() 추가
+ * 
+ * 이진영
  * 2017-06-28 수정
  * 참조변수 추가
  * 
@@ -125,6 +131,24 @@ public class Store implements Serializable{
 		this.optionDetailList = optionDetailList;
 		this.storeCategoryList = storeCategoryList;
 	}
+	
+	/**
+	 * JSP에서 storeOpenFormat로 호출 - storeOpen를 지정 포멧으로 반환한다.
+	 * @return HH-mm형식의 DATE 문자열 - ex - (20:15)
+	 */
+	public String getStoreOpenFormat(){
+		return new SimpleDateFormat("HH:mm").format(storeOpen);
+	}
+	
+	/**
+	 * JSP에서 storeCloseFormat로 호출 - storeClose를 지정 포멧으로 반환한다.
+	 * @return HH-mm형식의 DATE 문자열 - ex - (20:15)
+	 */
+	public String getStoreCloseFormat(){
+		return new SimpleDateFormat("HH:mm").format(storeClose);
+	}
+	
+	
 	public String getStoreId() {
 		return storeId;
 	}
