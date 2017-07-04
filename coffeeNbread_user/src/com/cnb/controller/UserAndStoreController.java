@@ -184,7 +184,7 @@ public class UserAndStoreController {
 		
 		List<UserPreferenceStore> list = service.viewUserPreferenceStoreList(((GeneralUser)authentication.getPrincipal()).getUserId());
 		
-		modelAndView.setViewName(null); //성공 시 이동할 경로
+		modelAndView.setViewName("user/userPreferenceStore_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", list);
 		
 		return modelAndView;
