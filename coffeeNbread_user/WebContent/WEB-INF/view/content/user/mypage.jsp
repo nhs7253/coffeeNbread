@@ -18,7 +18,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-2">생일</div>
-		<div class="col-sm-10"><sec:authentication property="principal.userBirth"/></div>
+		<div class="col-sm-10"><sec:authentication property="principal.birthFormat"/></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-2">성별</div>

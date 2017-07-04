@@ -29,15 +29,17 @@
 	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
 	<!-- 회원 가입 폼 -->
 	<mvc:view-controller path="/add_user_form.do" view-name="user/add_user_form.tiles"/>
+	<!-- 회원 정보 변경 폼 -->
+	<mvc:view-controller path="/user/update_profile_form.do" view-name="user/update_profile_form.tiles"/>
+	<!-- 유저 정보 폼 -->
+	<mvc:view-controller path="/user/mypage.do" view-name="user/mypage.tiles"/>
 	<!-- bean -->
 	<!--  -->
 	<mvc:view-controller path="/request2.do" view-name="request2"/>
 	<mvc:view-controller path="/response2.do" view-name="response2"/>
 	
-	<mvc:view-controller path="/aaa/mypage.do" view-name="/user/mypage.tiles"/>
-	<!-- 
-	<mvc:view-controller path="/user/mypage.do" view-name="/user/mypage.tiles"/>
-	 -->
+	
+	
 	
 			
 	<!-- TilesConfigurer 빈으로 등록 : Tiles설정파일을 등록하는 빈 -->
