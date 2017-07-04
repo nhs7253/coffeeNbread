@@ -48,6 +48,10 @@ public class UserAuthenticationProvider implements AuthenticationProvider{
 			throw new UsernameNotFoundException("ID를 확인하세요");
 		}
 		
+		if(generalUser.getUserActiveState().equals("N")){
+			throw new UsernameNotFoundException("탈퇴한 회원입니다.");
+		}
+		
 		//패스워드 체크
 		String password = (String)authentication.getCredentials();//사용자가 입력한 패스워드.
 		if(!encoder.matches(password, generalUser.getUserPw())){//틀린 패스워드

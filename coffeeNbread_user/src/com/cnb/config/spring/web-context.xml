@@ -33,6 +33,12 @@
 	<mvc:view-controller path="/user/update_profile_form.do" view-name="user/update_profile_form.tiles"/>
 	<!-- 유저 정보 폼 -->
 	<mvc:view-controller path="/user/mypage.do" view-name="user/mypage.tiles"/>
+	<!-- 유저 탈퇴 폼 -->
+	<mvc:view-controller path="/user/remove_user_form.do" view-name="user/remove_user_form.tiles"/>
+	
+	
+	<mvc:view-controller path="/user_list.do" view-name="user_list.tiles"/>
+
 	<!-- bean -->
 	<!--  -->
 	<mvc:view-controller path="/request2.do" view-name="request2"/>

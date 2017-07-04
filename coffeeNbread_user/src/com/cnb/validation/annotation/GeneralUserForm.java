@@ -33,6 +33,8 @@ public class GeneralUserForm implements Serializable{
 	@NotEmpty
 	private String userAddress;
 	private String userActiveState;
+	private String store_id;
+	
 	
 	public String getUserId() {
 		return userId;
@@ -87,5 +89,11 @@ public class GeneralUserForm implements Serializable{
 	}
 	public void setUserActiveState(String userActiveState) {
 		this.userActiveState = userActiveState;
+	}
+	public String getStore_id() {
+		return store_id;
+	}
+	public void setStore_id(String store_id) {
+		this.store_id = store_id;
 	}
 }

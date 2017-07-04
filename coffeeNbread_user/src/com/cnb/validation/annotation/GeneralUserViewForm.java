@@ -1,12 +1,9 @@
 package com.cnb.validation.annotation;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /*
  * 노현식
@@ -17,10 +14,9 @@ public class GeneralUserViewForm implements Serializable{
 	
 	@NotEmpty
 	private String select;
-	@NotEmpty
 	private String keyword;
 	@NotNull
-	private int page;
+	private int page=1;
 	public String getSelect() {
 		return select;
 	}
@@ -38,6 +34,10 @@ public class GeneralUserViewForm implements Serializable{
 	}
 	public void setPage(int page) {
 		this.page = page;
+	}
+	@Override
+	public String toString() {
+		return "GeneralUserViewForm [select=" + select + ", keyword=" + keyword + ", page=" + page + "]";
 	}
 	
 	
