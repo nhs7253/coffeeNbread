@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cnb.dao.OptionDetailDao;
 import com.cnb.dao.ProductDao;
 import com.cnb.exception.DuplicatedProductIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
 import com.cnb.service.ProductService;
 import com.cnb.util.PagingBean;
+import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
 
 /*
@@ -24,22 +26,34 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao dao;
 
+	@Autowired
+	private OptionDetailDao optionDetaildao;
+	
 	@Override
-	public int addProduct(Product product) throws DuplicatedProductIdOrProductNameException {
+	public int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException {
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) != null) {
 			throw new DuplicatedProductIdOrProductNameException(product.getProductId() + "은 이미 등록된 ID입니다.");
 		}else if(dao.selectProductByName(product.getStoreId(), product.getProductName()) != null) {
 			throw new DuplicatedProductIdOrProductNameException(product.getProductName() + "은 이미 등록된 이름입니다.");
+		}else {
+			int cnt = dao.insertProduct(product);
+			
+			optionDetaildao.insertOptionDetail(optionDetail);
+			return cnt;
 		}
-		return dao.insertProduct(product);
 	}
 
 	@Override
-	public int modifyProduct(Product product) throws ProductNotFoundException{
+	public int modifyProduct(Product product,OptionDetail optionDetail) throws ProductNotFoundException{
+		
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) == null) {
+			System.out.println(dao.selectProductById(product.getStoreId(), product.getProductId()));
 			throw new ProductNotFoundException(String.format("ID가 %s 인 제품이 없습니다.", product.getProductId()));
+		}else{
+			int cnt =  dao.updateProduct(product);
+			optionDetaildao.updateOptionDetail(optionDetail);
+			return cnt;
 		}
-		return dao.updateProduct(product);
 	}
 
 	@Override
@@ -99,5 +113,13 @@ public class ProductServiceImpl implements ProductService {
 		List<Product> list = dao.selectProductList(storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		map.put("list", list);
 		return map;
+	}
+	
+	@Override
+	public void removeOptionDetail(Product product, OptionDetail optionDetail) {
+		if(dao.selectProductBySellingOption(product.getStoreId(),"N", product.getProductName())!=null){
+			optionDetaildao.deleteOptionDetailByProductId(optionDetail.getStoreId(), optionDetail.getProductId());
+
+		}
 	}
 }
