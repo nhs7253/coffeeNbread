@@ -66,13 +66,15 @@ public interface PaymentDetailsDao {
 	 */
 	List<PaymentDetails> selectPaymentDetailsListByStoreIdAndProductId(String storeId, String productId);
 	
+
 	/**
 	 * 한 매장의 결제 날짜에 따른 결제 내역 조회 - 판매량에 사용 (오늘 날짜)
 	 * @param storeId, tradeDate
 	 * @return 조회된 결제 내역
 	 */
 	List<PaymentDetails> selectPaymentDetailsListByStoreIdAndTradeDate(String storeId, Date tradeDate);
-	
+
+
 	/**
 	 * 한 매장의 날짜별에 따른 결제 내역 조회  (1주일, 1개월, 3개월, 6개월, 12개월) - 판매량에 사용
 	 * @param storeId, method
@@ -93,6 +95,7 @@ public interface PaymentDetailsDao {
 	 * @return 조회된 결제 내역
 	 */
 	List<PaymentDetails> selectPaymentDetailsListByStoreIdAndProductIdAndSellMethod(String storeId, String productId, String sellMethod);
+	
 	
 	/**
 	 * 한 매장의 제품 종류에 따른 결제 내역 조회 - 판매량에 사용
@@ -133,4 +136,22 @@ public interface PaymentDetailsDao {
 	 */
 	List<PaymentDetails> selectTotalSalesVolumeForAllDays(String storeId, String productCategory, Date todayDate);
 
+	//필요없을 것 같은데 확인 필요
+	PaymentDetails selectPaymentDetailsByStoreIdAndProductId(String storeId,String productId);
+	
+	
+	/**
+	 * 결제내역테이블에 거래 시간을 통해 같은시간에 결제한 제품들 모두 가져옴.
+	 * @param tradeDate
+	 * @return
+	 */
+    List<PaymentDetails> selectPaymentDetailsListByTradeDate(Date tradeDate);
+    
+    
+	/**
+	 * 유저아이디로 결제내역테이블에 넣은 목록들 조회.
+	 * @param userId
+	 * @return
+	 */
+	List<PaymentDetails> selectPaymentDetailsListByUserId(String userId);
 }

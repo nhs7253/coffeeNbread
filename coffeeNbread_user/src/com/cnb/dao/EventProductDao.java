@@ -43,4 +43,12 @@ public interface EventProductDao {
 	 */
 	List<EventProduct> selectEventProductListByEventNo(int eventNo);
 	
+	/**
+	 * 1개의 이벤트에 해당되는 이벤트 제품 select
+	 * @param productId
+	 * @param eventNo
+	 * @return
+	 */
+	EventProduct selectEventProductByEventNoANDProductId(String productId,int eventNo);
+
 }

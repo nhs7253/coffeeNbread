@@ -26,8 +26,11 @@
 		values(
 			
 			#{optionId},
-			#{optionCategory},
-			#{storeId}
+			#{storeId},
+			#{optionCategory}
+			
+			
+			
 			)
 		
 	</insert>
@@ -41,12 +44,43 @@
 	</update>
 	
 <!-- 옵션 카테고리 delete -->
-	<delete id="deleteOptionCategory" parameterType="int">
+	<delete id="deleteOptionCategory" parameterType="map">
 		DELETE FROM option_category
-		
- 		WHERE option_id = #{optionId}
+ 		WHERE option_id = #{optionId} AND store_id=#{storeId}
 	</delete>
-
+<!-- 옵션 카테고리(이름)로 조회 -->
+	<select id="selectOptionCategoryByName" parameterType="map" resultMap="optionCategory-resultmap">
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = #{storeId}
+		AND option_category = #{optionCategory}
+	</select>
+ 	
+ 	<!-- 옵션 카테고리 (매장 ID)로 조회 -->
+ 		<select id="selectOptionCategoryListByStoreId" parameterType="map" resultMap="optionCategory-resultmap">
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = #{storeId}
+	
+	</select>
+	<!-- 옵션카테고리 디테일 조회 -->
+	<!--
+	<select id="selectOptionDetailListByOptionCategory" parameterType="map" resultMap="optionCategory-optionDetailList-resultmap">
+		SELECT oc.option_category,
+			   oc.option_id,
+			   oc.store_id,
+			   od.option_category_detail
+		FROM option_category oc, option_detail od
+		WHERE oc.store_id = od.store_id
+		AND	  oc.option_id = od.option_id
+		AND   oc.store_id = #{storeId}
+		AND	  oc.option_id= #{optionId}
+	</select>
+ -->
 
 
 </mapper>

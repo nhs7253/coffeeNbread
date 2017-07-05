@@ -56,4 +56,5 @@ public class ProductPictureServiceImpl implements ProductPictureService {
 		return dao.selectProductPictureListByProductIdAndStoreId(productId, storeId);
 	}
 	
+	
 }

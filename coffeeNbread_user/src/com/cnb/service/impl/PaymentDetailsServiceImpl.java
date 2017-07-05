@@ -11,7 +11,9 @@ import com.cnb.service.PaymentDetailsService;
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ShoppingBasketProduct;
 
-/*
+/*김형주
+ * 2017-07-03 수정
+ * 
  * 김형주
  * 2017-07-01 생성
  */
@@ -83,4 +85,9 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		return paymentDetailsDao.selectPaymentDetailsListByStoreIdAndProductIdAndSellMethod(storeId, productId, sellMethod);
 	}
 	
+      /* 유저아이디로 결제내역 리스트 조회 */
+	@Override
+	public List<PaymentDetails> findPaymentDetailsListByUserId(String userId) {
+		return paymentDetailsDao.selectPaymentDetailsListByUserId(userId);
+	}
 }

@@ -34,8 +34,10 @@ CREATE TABLE general_user (
 	user_email VARCHAR2(50) NOT NULL, /* 이메일 */
 	user_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
 	user_address VARCHAR2(200) NOT NULL, /* 주소 */
-	user_active_state CHAR(1) NOT NULL /* 활동 상태 */
+	user_active_state CHAR(1) NOT NULL, /* 활동 상태 */
+	store_id VARCHAR2(30) /* 매장아이디 */
 );
+
 
 /* 매장 */
 CREATE TABLE store (
@@ -194,7 +196,7 @@ CREATE TABLE reservation_details (
 	reservation_no NUMBER PRIMARY KEY, /* 예약번호 */
 	reservation_time DATE NOT NULL, /* 예약시간 */
 	reservation_count NUMBER(3) NOT NULL, /* 예약개수 */
-	reservation_confirm DATE NOT NULL, /* 예약확인유무 */
+	reservation_confirm DATE  NULL, /* 예약확인유무   -null허용으로 수정(07-03) */
 	product_hope_time DATE NULL,/*제품수령희망시간*/
 	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
@@ -321,6 +323,7 @@ CREATE TABLE store_payment_optionlist (
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(payment_id) REFERENCES payment_OptionList(payment_id) ON DELETE CASCADE
 );
+
 /* 생성후 이상 확인 */
 
 /* 관리자 */
@@ -483,6 +486,10 @@ DROP SEQUENCE option_id_seq;
 DROP SEQUENCE store_visit_history_no_seq;
 
 
-
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = 's-2'
 
 

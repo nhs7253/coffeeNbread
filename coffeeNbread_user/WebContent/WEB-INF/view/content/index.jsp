@@ -9,5 +9,6 @@
 </sec:authorize>
 
 
+	<sec:authentication property="authorities"/> 님 환영합니다.<br>
 메인페이지입니다.
 타일즈 기반으로 접속하게 변경

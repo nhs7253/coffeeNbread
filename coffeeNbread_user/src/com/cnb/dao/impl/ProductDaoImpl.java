@@ -115,6 +115,16 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectProductList"), info);
+	
+	}
+	
+	@Override
+	public Product selectProductBySellingOption(String storeId, String sellingOption,String productName) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("sellingOption", sellingOption);
+		info.put("productName", productName);
+		return session.selectOne(makeSqlId("selectProductBySellingOption"), info);
 	}
 
 

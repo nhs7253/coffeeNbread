@@ -25,7 +25,8 @@ public class EventProductDaoImplTest {
 		//dao.insertEventProduct(new EventProduct("p-1", "s-1", 3));
 		//dao.updateEventProduct(new EventProduct("p-6", "s-1", 4), new EventProduct("p-1", "s-1", 4));
 		//dao.deleteEventProduct(new EventProduct("p-4", "s-1", 4));
-		System.out.println(dao.selectEventProductListByEventNo(3));
+		//System.out.println(dao.selectEventProductListByEventNo(3));
+		System.out.println(dao.selectEventProductByEventNoANDProductId("p-6", 1));
 		System.out.println("이상없음");
 	}
      

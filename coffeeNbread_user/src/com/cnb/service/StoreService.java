@@ -2,8 +2,16 @@ package com.cnb.service;
 
 import java.util.List;
 
+import com.cnb.exception.DuplicatedOptionCategoryNameException;
+import com.cnb.exception.DuplicatedStoreCategorytNameException;
 import com.cnb.exception.DuplicatedStoreIdException;
+
+import com.cnb.exception.DuplicatedStorePictureException;
+import com.cnb.vo.OptionCategory;
+import com.cnb.vo.Product;
 import com.cnb.vo.Store;
+import com.cnb.vo.StoreCategory;
+import com.cnb.vo.StorePicture;
 
 /*
  * 이진영
@@ -17,9 +25,10 @@ public interface StoreService {
 	 * @return 
 	 * 
 	 * @throws DuplicatedStoreIdException 
+	 * @throws DuplicatedStoreCategorytNameException 
+	 * @throws DuplicatedStorePictureException 
 	 */
-	int addStore(Store store) throws DuplicatedStoreIdException;
-	
+	public int addStore(Store store,StoreCategory storeCategory,OptionCategory optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;	
 	/**
 	 * 매장수정
 	 * @param store

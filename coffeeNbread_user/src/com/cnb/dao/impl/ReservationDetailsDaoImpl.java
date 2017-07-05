@@ -49,7 +49,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	public int selectReservationDetailsListCountByUserId(String userId) {
 		return session.selectOne(makeSqlId("selectReservationDetailsListCountByUserId"), userId);
 	}
-	
+
 	@Override
 	public int selectReservationDetailsListCountByMethod(String storeId, String method, String methodContent) {
 		Map<String, String> info = new HashMap<>();
@@ -108,6 +108,10 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectReservationDetailsListByStoreIdAndProductHopeTime"), info);
+	}
+	@Override
+	public int updateReservationConfirmDate(ReservationDetails reservationDetails) {
+		return session.update(makeSqlId("updateReservationConfirmDate"), reservationDetails);
 	}
 
 	

@@ -99,6 +99,14 @@ public interface ProductDao {
 	 * @return 조회된 제품 정보들
 	 */
 	List<Product> selectProductListBySellingOption(String storeId, String sellingOption, int startIndex, int endIndex);
+
+	/**
+	 * 판매여부 1개의 매장에 있는 제품 정보 select
+	 * @param storeId, sellingOption,productName
+	 * @return 조회된 제품 정보
+	 */
+	Product selectProductBySellingOption(String storeId, String sellingOption,String productName);
+
 	
 	/**
 	 * 1개의 매장에 있는 모든 제품 정보 select

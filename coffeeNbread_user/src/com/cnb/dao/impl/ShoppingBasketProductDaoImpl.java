@@ -78,6 +78,59 @@ public class ShoppingBasketProductDaoImpl implements ShoppingBasketProductDao {
 		info.put("productId", productId);
 		return session.selectOne(makeSql("selectShoppingBasketProductByProductIdAndUserId"),info);
 	}
+        /*                                             페이징                                                 */
+
+	
+
+	@Override
+	public int selectShoppingBasketProductCountForPagingCount(String userId, String storeId, int startIndex,
+			int endIndex) {
+		Map<String, String> info = new HashMap<String, String>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));		
+		return session.selectOne(makeSql("selectShoppingBasketProductCountForPagingCount"), info);
+	}
+
+	@Override
+	public int selectShoppingBasketProductCountForPagingToProductCategoryCount(String userId, String storeId,
+			String productCategory, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<String, String>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		info.put("productCategory", productCategory);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));	
+		 
+	  return session.selectOne(makeSql("selectShoppingBasketProductCountForPagingToProductCategoryCount"), info);
+	}
+
+	@Override
+	public List<ShoppingBasketProduct> selectShoppingBasketProductListForPaging(String userId, String storeId,
+			int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<String, String>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSql("selectShoppingBasketProductListForPaging"), info);
+	}
+
+	@Override
+	public List<ShoppingBasketProduct> selectShoppingBasketProductListForPagingToProductCategory(String userId,
+			String storeId, String productCategory, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<String, String>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		info.put("productCategory", productCategory);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		
+		return session.selectList(makeSql("selectShoppingBasketProductListForPagingToProductCategory"), info);
+	}
+
+
 
  
         

@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.service.ProductService;
+import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
 
 /*
@@ -23,29 +24,32 @@ public class ProductServiceImplTest {
 		//TODO Spring 컨테이너로 부터 ProductService bean 가져오기
 		ProductService service =  (ProductService)ctx.getBean("productServiceImpl");
 
-/*		//제품 등록
+		//제품 등록
 		//겹치는 거 없는 경우
-		Product p1 = new Product("p-30", "s-2", "제품30", 3000, "빵", "제품설명글30", "N", 100, 10);
+		Product p1 = new Product("p-41", "s-2", "제품41", 3000, "빵", "제품설명글30", "N", 100, 10);
 		//제품 아이디 겹치는 경우
 		Product p2 = new Product("p-2", "s-1", "제품33", 3000, "빵", "제품설명글33", "N", 100, 10);
 		//제품 이름 겹치는 경우
 		Product p3 = new Product("p-32", "s-2", "제품1", 3000, "빵", "제품설명글32", "N", 100, 10);
 
+		OptionDetail op1 = new OptionDetail("s-2","p-40",3,"디4");
+
+/*		
 		try {
 			//service.addProduct(p1);
-			service.addProduct(p2);
+			service.addProduct(p1,op1);
 			//service.addProduct(p3);
 			System.out.println("등록 성공");
-		} catch (DuplicatedProudctIdOrProductNameException e) {
+		} catch (DuplicatedProductIdOrProductNameException e) {
 			System.err.println(e.getMessage());
 		}
 */
 		
 /*		
 		//제품 수정
-		Product p4 = new Product("p-30", "s-2", "제품31", 4000, "빵", "제품설명글31", "N", 150, 20);
+		Product p4 = new Product("p-35", "s-2", "제품30", 4000, "빵", "제품설명글31", "N", 150, 20);
 		try {
-			service.modifyProduct(p4);
+			service.modifyProduct(p4,op1);
 			System.out.println("수정 성공");
 		}catch(ProductNotFoundException e) {
 			System.err.println(e.getMessage());

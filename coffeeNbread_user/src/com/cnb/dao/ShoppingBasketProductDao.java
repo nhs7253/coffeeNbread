@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.cnb.vo.ShoppingBasketProduct;
+import com.cnb.vo.StoreVisitHistory;
 
 /*김형주
  * 2017-07-02
@@ -68,7 +69,25 @@ public interface ShoppingBasketProductDao {
       * @return
       */
      ShoppingBasketProduct selectShoppingBasketProductByProductIdAndUserId(String productId,String userId); 
+    
      
      
+     /*---------------------------------------------페이징 ----------------------------------------*/
+     /**
+     * 유저가 매장에 넣은 장바구니 목록 개수조회 - int 형
+     * @param userId
+     * @param storeId
+     * @return
+     */
+ 	int selectShoppingBasketProductCountForPagingCount(String userId, String storeId,int startIndex, int endIndex );
+	
+ 	   
+ 	int selectShoppingBasketProductCountForPagingToProductCategoryCount(String userId,String storeId, String productCategory,int startIndex, int endIndex);
+ 	
+
+ 	List<ShoppingBasketProduct> selectShoppingBasketProductListForPaging(String userId,String storeId, int startIndex, int endIndex);
+
+
+ 	List<ShoppingBasketProduct> selectShoppingBasketProductListForPagingToProductCategory(String userId,String storeId, String productCategory, int startIndex, int endIndex);
 
 }

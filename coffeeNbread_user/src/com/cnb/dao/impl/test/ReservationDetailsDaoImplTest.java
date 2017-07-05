@@ -1,15 +1,16 @@
 package com.cnb.dao.impl.test;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.cnb.dao.PaymentDetailsDao;
 import com.cnb.dao.ReservationDetailsDao;
+import com.cnb.vo.ReservationDetails;
 
 /*
  * 최민희
@@ -38,19 +39,23 @@ public class ReservationDetailsDaoImplTest {
 	@Autowired
 	private ReservationDetailsDao dao;
 	
-	private ReservationDetailsDaoImplTest(ReservationDetailsDao dao){
-		this.dao = dao;
-	}
-	
+	@Autowired
+	private PaymentDetailsDao pdDao;
 	
 	public void Test() {
 
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		
-		//System.out.println("유저가 예약 내역 삽입");
-		//System.out.println(dao.insertReservationDetails(new ReservationDetails(0,new Date(),4,new Date(),new Date(),"p-1","s-1","u-1")));
+		System.out.println("유저가 예약 내역 삽입"); 
+		System.out.println(pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18"));
+		System.out.println("거래날짜:"+pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getTradeDate());
+		System.out.println("거래개수:"+pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getReservationOrderCount());
+
+		System.out.println(dao.updateReservationConfirmDate
+				(new ReservationDetails(0,pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getTradeDate(),
+						pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getReservationOrderCount(),new Date(),new Date(),"p-18","s-7","u-1")));
 		
-		System.out.println("===============Count===================");
+		/*System.out.println("===============Count===================");
 		System.out.println("매장의 전체 예약수 : " + dao.selectReservationDetailsListCountByStoreId("s-1"));
 		System.out.println("유저의 전체 예약수 : " + dao.selectReservationDetailsListCountByUserId("u-1"));
 		System.out.println("매장에서 유저아이디로 조회한 에약 수 : " + dao.selectReservationDetailsListCountByMethod("s-1", "userId", "u-1"));
@@ -103,7 +108,9 @@ public class ReservationDetailsDaoImplTest {
 	        }
 		} catch (ParseException e) {
 			System.out.println("이상발견");
-		}
+		}*/
+		
+		
 	}
 		
 	public static void main(String[] args) throws IOException {

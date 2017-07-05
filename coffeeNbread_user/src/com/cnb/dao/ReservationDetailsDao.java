@@ -22,6 +22,21 @@ import com.cnb.vo.ReservationDetails;
  *
  */
 public interface ReservationDetailsDao {
+	
+	
+
+	/**
+	 * 매장에서 예약확인하면 그 시각을 예약확인테이블에 제품별로 확인시각 넣어줌.
+	 * 시각이 없었다가 매장이 확인하면 그 시각으로 들어감.
+	 * @param reservationDetails
+	 * @return
+	 */
+	int updateReservationConfirmDate(ReservationDetails reservationDetails);
+	
+	
+	
+	
+	
 	/**
 	 * 1개의 예약 정보 insert
 	 * @param reservationDetails

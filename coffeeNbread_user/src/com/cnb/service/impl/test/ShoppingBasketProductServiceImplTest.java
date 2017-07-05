@@ -58,7 +58,7 @@ public class ShoppingBasketProductServiceImplTest {
 				new ShoppingBasketProduct("u-1","s-7","p-19",500,"s-7"),
 				new ShoppingBasketProduct("u-1","s-7","p-20",500,"s-7"),
 				new ShoppingBasketProduct("u-1","s-7","p-21",500,"s-7"),
-				new ShoppingBasketProduct("u-1","s-7","p-22",500,"s-7")
+				new ShoppingBasketProduct("u-2","s-7","p-22",500,"s-7")
 
 				);
 		    

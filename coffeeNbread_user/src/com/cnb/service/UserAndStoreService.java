@@ -44,11 +44,11 @@ public interface UserAndStoreService {
 	/**
 	 * 유저가 입력한 키워드를 통해 조회한 데이터를 페이징하여 보여줌
 	 * @param userId 검색하는 유저의 ID
-	 * @param page 보려는 페이지번호
 	 * @param keyword 부분일치 조회로 검색할 키워드
-	 * @return 페이징을 위한 정보 결과
+	 * @param page 보려는 페이지번호
+	 * @return Map<String, Object> 페이징을 위한 정보 결과
 	 */
-	Map<String, Object> findStoreBookmarkListByKeyword(String userId, int page, String keyword);
+	Map<String, Object> findStoreBookmarkListByKeyword(String userId, String keyword, int page);
 	
 	
 	
@@ -80,11 +80,11 @@ public interface UserAndStoreService {
 	/**
 	 * 유저가 입력한 키워드를 통해 조회한 데이터를 페이징하여 보여줌
 	 * @param userId 검색하는 유저의 ID
-	 * @param page 보려는 페이지번호
 	 * @param keyword 부분일치 조회로 검색할 키워드
-	 * @return 페이징을 위한 정보 결과
+	 * @param page 보려는 페이지번호
+	 * @return Map<String, Object> 페이징을 위한 정보 결과
 	 */
-	Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, int page, String keyword);
+	Map<String, Object> findStoreVisitHistoryListByKeyword(String userId, String keyword, int page);
 	
 	/************** 최근 조회 매장 **************/
 	

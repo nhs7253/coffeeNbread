@@ -50,10 +50,18 @@ public interface PaymentDetailsService {
 	 */
 	List<PaymentDetails> findPaymentDetailsListByStoreIdAndTradeDate(String storeId, Date tradeDate);
 	
+
 	/**
 	 * 한 매장의 특정 제품의 현장 결제 내역 조회 - 판매시스템(포스)에 사용
 	 * @param storeId, productId, sellMethod
 	 */
 	List<PaymentDetails> findPaymentDetailsListByStoreIdAndProductIdAndSellMethod(String storeId, String productId, String sellMethod);
 	
+      /**
+       * 유저아이디가 등록한 결제내역 목록
+       * 
+       */
+      List<PaymentDetails> findPaymentDetailsListByUserId(String userId);
+      
+      
 }

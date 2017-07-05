@@ -1,8 +1,14 @@
 package com.cnb.dao;
 
+
+import java.util.List;
+
 import com.cnb.vo.StoreCategory;
 
-/*
+/*이진영
+ * 2017-07-03
+ * 수정
+ * 
  * 이진영
  * 2017-06-28 생성
  */
@@ -32,6 +38,23 @@ public interface StoreCategoryDao {
 	 * @param storeId, storeCategoryNo
 	 * @return 처리 개수
 	 */
-	int deleteStoreCategoryById(int storeCategoryNo);
+	int deleteStoreCategoryByNo(String storeId,int storeCategoryNo);
+	
+
+	/**
+	 * 매장 카테고리 이름으로 1개의 매장에 있는 제품 정보 select
+	 * @param storeId, storeCategory
+	 * @return 조회된 제품 정보
+	 */
+	StoreCategory selectStoreCategoryByName(String storeId, String storeCategory);
+	
+
+	/**
+	 * 매장 카테고리 이름으로 1개의 매장에 있는 제품 정보들 select
+	 * @param storeId, storeCategory
+	 * @return 조회된 제품 정보 리스트 
+	 */
+	List<StoreCategory>	selectStoreCategoryListByStoreId(String storeId);
+	
 	
 }

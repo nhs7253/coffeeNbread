@@ -1,10 +1,12 @@
 /* 유저 */
 SELECT *FROM GENERAL_USER
 DELETE FROM GENERAL_USER
-INSERT INTO GENERAL_USER VALUES('u-1','pw-1','user1',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
-INSERT INTO GENERAL_USER VALUES('u-2','pw-2','user2',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
-INSERT INTO GENERAL_USER VALUES('u-3','pw-3','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
-INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y');
+
+/* 노현식 - 2017-07-03 수정 */  
+INSERT INTO GENERAL_USER VALUES('u-1','pw-1','user1',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-2','pw-2','user2',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-3','pw-3','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
 
 
 /* 매장 */
@@ -29,24 +31,24 @@ INSERT INTO PRODUCT VALUES('p-2','s-1','제품2',5000,'빵','제품설명글2','
 INSERT INTO PRODUCT VALUES('p-3','s-1','제품3',5000,'빵','제품설명글3','Y',500,1000);
 INSERT INTO PRODUCT VALUES('p-4','s-1','제품4',5000,'빵','제품설명글4','Y',500,1000);
 INSERT INTO PRODUCT VALUES('p-5','s-1','제품5',5000,'빵','제품설명글5','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-6','s-1','제품6',5000,'빵','제품설명글6','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-7','s-2','제품7',5000,'빵','제품설명글7','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-8','s-2','제품8',5000,'빵','제품설명글8','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-6','s-1','제품6',5000,'빵','제품설명글6','Y',500,1000); --s-1- > p-6까지
+INSERT INTO PRODUCT VALUES('p-7','s-2','제품7',5000,'빵','제품설명글7','Y',500,1000); 
+INSERT INTO PRODUCT VALUES('p-8','s-2','제품8',5000,'빵','제품설명글8','Y',500,1000);--s-2- > p-8까지
 INSERT INTO PRODUCT VALUES('p-9','s-3','제품9',5000,'빵','제품설명글9','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-10','s-3','제품10',5000,'빵','제품설명글10','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-11','s-3','제품11',5000,'빵','제품설명글11','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-10','s-3','제품10',5000,'빵','제품설명글10','Y',500,1000); 
+INSERT INTO PRODUCT VALUES('p-11','s-3','제품11',5000,'빵','제품설명글11','Y',500,1000); --s-3-> p-10까지
 INSERT INTO PRODUCT VALUES('p-12','s-4','제품12',5000,'빵','제품설명글12','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-13','s-4','제품13',5000,'빵','제품설명글13','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-14','s-5','제품14',5000,'빵','제품설명글14','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-13','s-4','제품13',5000,'빵','제품설명글13','Y',500,1000); --s-4-> p-13까지
+INSERT INTO PRODUCT VALUES('p-14','s-5','제품14',5000,'빵','제품설명글14','Y',500,1000); --s-5-> p-14까지
 INSERT INTO PRODUCT VALUES('p-15','s-6','제품15',5000,'빵','제품설명글15','Y',500,1000);
 INSERT INTO PRODUCT VALUES('p-16','s-6','제품16',5000,'빵','제품설명글16','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-17','s-6','제품17',5000,'빵','제품설명글17','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-17','s-6','제품17',5000,'빵','제품설명글17','Y',500,1000); --s-6-> p-17까지
 INSERT INTO PRODUCT VALUES('p-18','s-7','제품18',5000,'빵','제품설명글18','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-19','s-7','제품19',5000,'빵','제품설명글19','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-19','s-7','제품19',5000,'빵','제품설명글19','Y',500,1000); --s-7-> p-19까지
 /* 김형주 - 2017-07-01 수정 */
-INSERT INTO PRODUCT VALUES('p-20','s-7','제품20',5000,'빵','제품설명글20','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-20','s-7','제품20',5000,'빵','제품설명글20','Y',500,1000); 
 /* 김형주 - 2017-07-01 추가 */
-INSERT INTO PRODUCT VALUES('p-21','s-7','제품21',5000,'빵','제품설명글20','Y',500,1000);
+INSERT INTO PRODUCT VALUES('p-21','s-7','제품21',5000,'빵','제품설명글20','Y',500,1000);--s-7 -> p-21까지
 
 
 
@@ -209,4 +211,79 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-2','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','c');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-4','c');
+<<<<<<< HEAD
+=======
 
+delete  from recipe_board_contents
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
+
+
+
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글1', '레시피제목1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),2,'레시피사진',2,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글2', '레시피제목2', TO_DATE('2017-06-27', 'yyyy-mm-dd'),3,'레시피사진',3,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글3', '레시피제목3', TO_DATE('2017-06-28', 'yyyy-mm-dd'),4,'레시피사진',4,'u-1','s-7');
+
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글4', '레시피제목4', TO_DATE('2017-06-29', 'yyyy-mm-dd'),5,'레시피사진',5,'u-1','s-6');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글5', '레시피제목5', TO_DATE('2017-06-30', 'yyyy-mm-dd'),6,'레시피사진',6,'u-1','s-6');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글6', '레시피제목6', TO_DATE('2017-06-31', 'yyyy-mm-dd'),7,'레시피사진',7,'u-1','s-6');
+
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글7', '레시피제목7', TO_DATE('2017-07-01', 'yyyy-mm-dd'),8,'레시피사진',8,'u-2','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글8', '레시피제목8', TO_DATE('2017-07-02', 'yyyy-mm-dd'),9,'레시피사진',9,'u-2','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글9', '레시피제목9', TO_DATE('2017-07-03', 'yyyy-mm-dd'),10,'레시피사진',10,'u-2','s-7');
+
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글10', '레시피제목10', TO_DATE('2017-07-04', 'yyyy-mm-dd'),11,'레시피사진',11,'u-3','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글10', '레시피제목11', TO_DATE('2017-07-05', 'yyyy-mm-dd'),12,'레시피사진',12,'u-3','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글12', '레시피제목12', TO_DATE('2017-07-06', 'yyyy-mm-dd'),13,'레시피사진',13,'u-3','s-7');
+
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글14', '레시피제목14', TO_DATE('2017-07-06', 'yyyy-mm-dd'),14,'레시피사진',14,'','');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글15', '레시피제목15', TO_DATE('2017-07-06', 'yyyy-mm-dd'),15,'레시피사진',15,'','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-07-06', 'yyyy-mm-dd'),16,'레시피사진',15,'u-1','');
+
+
+
+/*  레시피 게시판 추가  - 김형주 2017-07-05 */
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글12', '레시피제목12', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글13', '레시피제목13', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글14', '레시피제목14', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글15', '레시피제목15', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글17', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글18', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+/* 테스트용  받으셔도 되고 안받으셔도 됩니다.*/
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글17', 'tttt', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

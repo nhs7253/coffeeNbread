@@ -42,13 +42,15 @@
 	
 		
 		<!-- 
- * 관리자 - CNB_ADMIN
- * 매점 - CNB_STORE
- * 일반 유저 - CNB_USER
+ * 관리자 - ROLE_CNB_ADMIN
+ * 매점 - ROLE_CNB_STORE
+ * 일반 유저 - ROLE_CNB_USER
  --> 
+ 
+ 
 	
-		<intercept-url pattern="/store/**" access="hasRole('CNB_STORE')"/>
-		<intercept-url pattern="/user/**" access="hasAnyRole('CNB_USER', 'CNB_STORE')"/>
+		<intercept-url pattern="/store/**" access="hasRole('ROLE_CNB_STORE')"/>
+		<intercept-url pattern="/user/**" access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')"/>
 		<intercept-url pattern="/**" access="permitAll"/>
 		
 		<form-login

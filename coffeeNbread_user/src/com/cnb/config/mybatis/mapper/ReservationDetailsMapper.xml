@@ -54,6 +54,18 @@
 		<result column="user_id" property="userId"/>
 	</resultMap>
 	 
+	 
+	 <update id="updateReservationConfirmDate" parameterType="com.cnb.vo.ReservationDetails">
+		UPDATE reservation_details
+		SET reservation_no=#{reservationNo},
+		    reservation_time=#{reservationTime},
+		    reservation_count=#{reservationCount},
+		    reservation_confirm=#{reservationConfirm},
+		    reservation_hope_time=#{reservationHopeTime}
+		WHERE product_id=#{productId}
+		AND  store_id=#{storeId}    
+	</update>
+	 
 	
 	<!-- selectReservationDetailsListCountByStoreId --> 
 	<select id="selectReservationDetailsListCountByStoreId" parameterType="string" resultType="int">

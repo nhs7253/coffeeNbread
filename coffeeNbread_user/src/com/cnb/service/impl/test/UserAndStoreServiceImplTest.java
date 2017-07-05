@@ -33,18 +33,18 @@ public class UserAndStoreServiceImplTest {
 		service.addStoreBookmark(new StoreBookmark("u-4", "s-2"));
 		service.addStoreBookmark(new StoreBookmark("u-4", "s-3"));
 		System.out.println("addStoreBookmark 실행 후");
-		System.out.println(service.findStoreBookmarkListByKeyword("u-4", 1, "매"));
+		System.out.println(service.findStoreBookmarkListByKeyword("u-4", "매", 1));
 		                           
 		List<String> list = new ArrayList<>();
 		list.add("s-1");
 		list.add("s-2");	
 		service.selectRemoveStoreBookmark("u-4", list);
 		System.out.println("selectRemoveStoreBookmark 실행 후");
-		System.out.println(service.findStoreBookmarkListByKeyword("u-4", 1, "매"));
+		System.out.println(service.findStoreBookmarkListByKeyword("u-4", "매", 1));
 		
 		service.removeAllStoreBookmark("u-4");
 		System.out.println("removeAllStoreBookmark 실행 후");
-		System.out.println(service.findStoreBookmarkListByKeyword("u-4", 1, "매"));
+		System.out.println(service.findStoreBookmarkListByKeyword("u-4", "매", 1));
 		
 		/************** 즐겨찾기 **************/
 		
@@ -56,18 +56,18 @@ public class UserAndStoreServiceImplTest {
 		service.addStoreVisitHistory(new StoreVisitHistory("u-4", "s-2"));
 		service.addStoreVisitHistory(new StoreVisitHistory("u-4", "s-3"));
 		System.out.println("addStoreVisitHistory 실행 후");
-		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", 1, "매"));
+		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", "매", 1));
 		
 		List<String> list2 = new ArrayList<>();
 		list2.add("s-1");
 		list2.add("s-2");
 		service.selectRemoveStoreVisitHistory("u-4", list2);
 		System.out.println("selectRemoveStoreVisitHistory 실행 후");
-		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", 1, "매"));
+		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", "매", 1));
 		
 		service.removeAllStoreVisitHistory("u-4");
 		System.out.println("removeAllStoreVisitHistory 실행 후");
-		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", 1, "매"));
+		System.out.println(service.findStoreVisitHistoryListByKeyword("u-4", "매", 1));
 		
 		/************** 최근 조회 매장 **************/
 		
@@ -87,11 +87,10 @@ public class UserAndStoreServiceImplTest {
 		service.addUserPreferenceStore(new UserPreferenceStore("u-4", "s-3"));
 		System.out.println("addUserPreferenceStore 실행 - 추가 INSERT 실행");
 		System.out.println(service.viewUserPreferenceStoreList("u-4"));
-		System.err.println("size = "+((List<UserPreferenceStore>)service.viewUserPreferenceStoreList("u-4")).size());
 				
-//		service.removeAllUserPreferenceStore("u-4");
-//		System.out.println("removeAllUserPreferenceStore 실행 후");
-//		System.out.println(service.viewUserPreferenceStoreList("u-4"));
+		service.removeAllUserPreferenceStore("u-4");
+		System.out.println("removeAllUserPreferenceStore 실행 후");
+		System.out.println(service.viewUserPreferenceStoreList("u-4"));
 		
 		
 		/************** 조회 수별 추천 가게 **************/

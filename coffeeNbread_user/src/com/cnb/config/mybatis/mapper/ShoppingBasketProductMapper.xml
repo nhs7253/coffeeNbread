@@ -17,13 +17,14 @@
 		<result column="product_store_id" property="productStoreId" />
 	</resultMap>
 
-	<resultMap id="ShoppingBasketProduct-product-resultmap" type="ShoppingBasketProduct" extends="ShoppingBasketProduct-resultmap">
-		
+	<resultMap id="ShoppingBasketProduct-product-resultmap" type="ShoppingBasketProduct"
+		extends="ShoppingBasketProduct-resultmap">
+
 		<association property="product"
 			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-productPicture-resultmap" />
 	</resultMap>
 
-    <resultMap
+	<resultMap
 		id="ShoppingBasketProduct-product-store-productPicture-resultmap"
 		type="ShoppingBasketProduct" extends="ShoppingBasketProduct-resultmap">
 		<association property="product"
@@ -48,7 +49,7 @@
 	</select>
 
 
-	<!--장바구니목록에 그대로 띄워줄 selectList -->
+	<!--나중에 장바구니목록에 그대로 띄워줄 selectList -->
 	<select id="selectShoppingBasketProductListByStoreIdAndUserId"
 		parameterType="map"
 		resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
@@ -59,12 +60,16 @@
 		p.product_name,
 		p.product_id,
 		sbp.product_count
-		from store s, product p, product_picture pp, shopping_basket_product sbp
-		where s.store_id=p.store_id
+		from store s, product p,
+		product_picture pp, shopping_basket_product sbp
+		where
+		s.store_id=p.store_id
 		and pp.product_id=p.product_id
-		and sbp.product_id=p.product_id
+		and
+		sbp.product_id=p.product_id
 		and sbp.user_id =#{userId}
-		and sbp.store_id=#{storeId}
+		and
+		sbp.store_id=#{storeId}
 	</select>
 
 
@@ -81,60 +86,204 @@
 
 
 
-    <!--제품아이디와 유저아이디로 장바구니목록 삭제  -->
+	<!--제품아이디와 유저아이디로 장바구니목록 삭제 -->
 	<delete id="deleteShoppingBasketProductByProductIdAndUserId"
 		parameterType="map">
 		DELETE FROM shopping_basket_product
-		WHERE product_id = #{productId}
+		WHERE product_id =
+		#{productId}
 		AND user_id=#{userId}
 	</delete>
 
-    <!--장바구니목록에있는 제품개수 수정할떄./제품아이디를 같은거 넣을때 업데이트용으로도 쓰임.  -->
+	<!--장바구니목록에있는 제품개수 수정할떄./제품아이디를 같은거 넣을때 업데이트용으로도 쓰임. -->
 	<update id="updateShoppingBasketProductCount" parameterType="ShoppingBasketProduct">
 		UPDATE shopping_basket_product
 		SET user_id = #{userId},
-		store_id = #{storeId},
+		store_id =
+		#{storeId},
 		product_id = #{productId},
 		product_count = #{productCount},
 		product_store_id = #{productStoreId}
 		WHERE product_id=#{productId}
-		AND store_id=#{storeId}
+		AND
+		store_id=#{storeId}
 		AND user_id=#{userId}
 	</update>
 
 
-   <!--장바구니 목록 삭제할때 필요.  -->
+	<!--장바구니 목록 삭제할때 필요. -->
 	<select id="selectShoppingBasketProductByProductIdAndUserId"
 		parameterType="map"
 		resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap">
-		select s.store_name,
+		select
+		sbp.user_id,
+		sbp.store_id,
+		sbp.product_store_id,
+		s.store_name,
 		pp.product_picture,
 		p.product_category,
 		p.product_name,
 		p.product_id,
 		sbp.product_count
-		from store s, product p, product_picture pp, shopping_basket_product sbp
+		from store s, product p, product_picture
+		pp, shopping_basket_product sbp
 		where s.store_id=p.store_id
-		and pp.product_id=p.product_id
+		and
+		pp.product_id=p.product_id
 		and sbp.product_id=p.product_id
-		and sbp.user_id =#{userId}
+		and
+		sbp.user_id =#{userId}
 		and sbp.product_id=#{productId}
 	</select>
 
-<!--장바구니에 넣은 제품 총개수 구하기  -->
-<select id="selectAllProductPriceByUserIdAndStoreId"
-		parameterType="map"
-		resultMap="ShoppingBasketProduct-product-resultmap">
-		select p.product_price, sbp.product_count
-        from product p, shopping_Basket_Product sbp
-        where p.product_id=sbp.product_id
-        And sbp.user_id=#{userId}
-        And sbp.store_id=#{storeId}		
+	<!--장바구니에 넣은 제품 총가격 구하기 -->
+	<select id="selectAllProductPriceByUserIdAndStoreId"
+		parameterType="map" resultMap="ShoppingBasketProduct-product-resultmap">
+		select p.product_price,
+		sbp.product_count
+		from product p, shopping_Basket_Product sbp
+		where p.product_id=sbp.product_id
+		And sbp.user_id=#{userId}
+		And sbp.store_id=#{storeId}
+	</select>
+
+               
+<!--장바구니 목록 전체 페이징 원함.-->
+<select id="selectShoppingBasketProductCountForPagingCount" parameterType="map" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+			FROM(
+					SELECT rownum rnum, 
+						   store_name,
+							product_picture,
+							product_category,
+							product_name,
+							product_id,
+							product_count
+					FROM(
+						SELECT 
+							   s.store_name,
+							   pp.product_picture,
+							   p.product_category,
+							   p.product_name,
+							   sbp.product_id,
+							   sbp.product_count
+						FROM	shopping_basket_product sbp,product p,store s, product_picture pp
+							WHERE sbp.user_id = #{userId} 
+							AND sbp.store_id = #{storeId}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+
+<!--장바구니 목록 카테고리별 페이징 원함.-->
+<select id="selectShoppingBasketProductCountForPagingToProductCategoryCount" parameterType="map" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+			FROM(
+					SELECT rownum rnum, 
+						   store_name,
+							product_picture,
+							product_category,
+							product_name,
+							product_id,
+							product_count
+					FROM(
+						SELECT 
+							   s.store_name,
+							   pp.product_picture,
+							   p.product_category,
+							   p.product_name,
+							   sbp.product_id,
+							   sbp.product_count
+						FROM	shopping_basket_product sbp,product p,store s, product_picture pp
+							WHERE sbp.user_id = #{userId} 
+							AND sbp.store_id = #{storeId}
+							AND p.product_category=#{productCategory} 
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
 	</select>
 
 
+	<!--장바구니 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회. -->
+	<select id="selectShoppingBasketProductListForPaging"
+		resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap"
+		parameterType="map">
+		<![CDATA[
+			SELECT          store_name,
+							product_picture,
+							product_category,
+							product_name,
+							product_id,
+							product_count
+					
+			FROM(
+					SELECT  rownum rnum,
+							store_name,
+							product_picture,
+							product_category,
+							product_name,
+							product_id,
+							product_count
+					  FROM(
+							SELECT  s.store_name,
+		                            pp.product_picture,
+		                            p.product_category,
+		                            p.product_name,
+		                            p.product_id,
+		                            sbp.product_count
+							FROM	shopping_basket_product sbp,product p,store s, product_picture pp
+							WHERE sbp.user_id = #{userId} 
+							AND   sbp.store_id = #{storeId}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
 
-
+<!--장바구니 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회. - 제품카테고리별 파악하기위한 페이징. -->
+	<select id="selectShoppingBasketProductListForPagingToProductCategory"
+		resultMap="ShoppingBasketProduct-product-store-productPicture-resultmap"
+		parameterType="map">
+		<![CDATA[
+			SELECT          store_name,
+							product_picture,
+							product_category,
+							product_name,
+							product_id,
+							product_count
+					
+			FROM(
+					SELECT  rownum rnum,
+							store_name,
+							product_picture,
+							product_category,
+							product_name,
+							product_id,
+							product_count
+					  FROM(
+							SELECT  s.store_name,
+		                            pp.product_picture,
+		                            p.product_category,
+		                            p.product_name,
+		                            p.product_id,
+		                            sbp.product_count
+							FROM	shopping_basket_product sbp,product p,store s, product_picture pp
+							WHERE sbp.user_id = #{userId} 
+							AND sbp.store_id = #{storeId}
+							AND sbp.product_category= #{productCategory}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
 
 
 

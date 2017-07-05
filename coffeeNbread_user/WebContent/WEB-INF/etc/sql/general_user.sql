@@ -33,3 +33,94 @@ WHERE user_id = '2';
 UPDATE general_user    
 SET user_active_state = 'N'  
 WHERE user_id = '1'
+
+
+		SELECT COUNT(*)
+			FROM(
+					SELECT rownum rnum, 
+						   
+					FROM(
+						SELECT store_visit_history_no,
+							   
+						FROM store_visit_history svh, store s 
+						WHERE svh.store_id = s.store_id AND user_id = #{userId}
+						ORDER BY store_visit_history_no DESC
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		
+
+SELECT   
+user_id, user_pw, user_name, user_birth, user_gender, user_email, 
+user_phone, user_address, user_active_state      
+FROM(      
+SELECT rownum rnum, 
+	   user_id, 
+	   user_pw, 
+	   user_name, 
+	   user_birth, 
+       user_gender, 
+       user_email, 
+       user_phone, 
+       user_address, 
+       user_active_state       
+FROM(       
+SELECT   user_id, user_pw, user_name, user_birth, 
+         user_gender, user_email, user_phone, user_address, user_active_state         
+         FROM general_user
+         WHERE user_id LIKE 'DAO'              
+         ORDER BY user_name      
+         )     
+         WHERE rownum <= 1    )    
+         WHERE rnum >= 3
+         
+         
+
+         SELECT COUNT(*) 
+			FROM(
+					SELECT rownum rnum, 
+	  					   user_id, 
+	  					   user_pw,  
+	  					   user_name, 
+	  					   user_birth, 
+	  					   user_gender, 
+	  					   user_email, 
+	  					   user_phone, 
+	  					   user_address, 
+	  					   user_active_state  
+					FROM(
+						SELECT user_id, 
+	  					       user_pw,  
+	  					       user_name, 
+	  					       user_birth, 
+	  					       user_gender, 
+	  					       user_email, 
+	  					       user_phone, 
+	  					       user_address, 
+	  					       user_active_state 
+						FROM general_user
+							WHERE user_id LIKE 'u'
+						ORDER BY user_name
+					) 
+					WHERE rownum <= 1
+			)
+			WHERE rnum >= 3
+
+
+
+			
+			
+			SELECT user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state
+			FROM(
+					SELECT rownum rnum, 
+						   user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state
+					FROM(
+						SELECT user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state
+						FROM general_user
+								WHERE user_id LIKE '%u%'
+						ORDER BY user_name
+					) 
+					WHERE rownum <= 1
+			)
+			WHERE rnum >= 30

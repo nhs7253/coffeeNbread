@@ -13,6 +13,10 @@ import com.cnb.vo.GeneralUser;
 
 /*
  * 노현식
+ * 2017-07-03
+ * 페이징 관련 메서드 추가
+ * 
+ * 노현식
  * 2017-06-27
  * 초기 구현
  * 
@@ -76,6 +80,24 @@ public class GeneralUserDaoImpl implements GeneralUserDao{
 	@Override
 	public int selectGeneralUserByUserActiveStateCount(String userActiveState) {
 		return session.selectOne(makeSqlId("selectGeneralUserByUserActiveStateCount"), userActiveState);
+	}
+
+	@Override
+	public List<GeneralUser> selectGeneralUserListBySelectToKeyword(String select, String keyword, int startIndex, int endIndex) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		input.put("startIndex", String.valueOf(startIndex));
+		input.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectGeneralUserListBySelectToKeyword"), input);
+	}
+
+	@Override
+	public int selectGeneralUserListBySelectToKeywordCount(String select, String keyword) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		return session.selectOne(makeSqlId("selectGeneralUserListBySelectToKeywordCount"), input);
 	}
 
 }
