@@ -1,19 +1,11 @@
 package com.cnb.dao.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.PaymentOptionListDao;
-import com.cnb.dao.ProductGapDao;
 import com.cnb.vo.PaymentOptionList;
-import com.cnb.vo.Product;
-import com.cnb.vo.ProductGap;
-import com.cnb.vo.ReservationDetails;
 
 /*
  * 김형주

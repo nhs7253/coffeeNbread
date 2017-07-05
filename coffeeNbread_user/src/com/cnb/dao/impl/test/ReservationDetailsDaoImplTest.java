@@ -1,10 +1,8 @@
 package com.cnb.dao.impl.test;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.cnb.dao.PaymentDetailsDao;
 import com.cnb.dao.ReservationDetailsDao;
-import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
 /*

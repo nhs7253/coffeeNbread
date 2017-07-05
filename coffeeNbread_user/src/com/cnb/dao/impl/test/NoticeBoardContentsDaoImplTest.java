@@ -9,7 +9,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.NoticeBoardContentsDao;
-import com.cnb.vo.NoticeBoardContents;
 
 /*
  * 최민희

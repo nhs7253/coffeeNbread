@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.ReservationDetailsDao;
-import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
 /*
@@ -50,7 +49,7 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	public int selectReservationDetailsListCountByUserId(String userId) {
 		return session.selectOne(makeSqlId("selectReservationDetailsListCountByUserId"), userId);
 	}
-	
+
 	@Override
 	public int selectReservationDetailsListCountByMethod(String storeId, String method, String methodContent) {
 		Map<String, String> info = new HashMap<>();

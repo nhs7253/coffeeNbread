@@ -1,5 +1,7 @@
 package com.cnb.service.impl.test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,14 +44,12 @@ public class PaymentDetailsServiceImplTest {
 					new ShoppingBasketProduct("u-1","s-7","p-18",4,"s-7"),
 					new ShoppingBasketProduct("u-1","s-7","p-19",4,"s-7"),
 					new ShoppingBasketProduct("u-1","s-7","p-20",4,"s-7"),
-					new ShoppingBasketProduct("u-1","s-7","p-21",4,"s-7"),
-					new ShoppingBasketProduct("u-1","s-7","p-22",4,"s-7")
+					new ShoppingBasketProduct("u-1","s-7","p-21",4,"s-7")
 
 					);
-	      sbpservice.addShoppingBasketProduct(list);
+	 //   sbpservice.addShoppingBasketProduct(list);
 	      
-	     service.addPaymentDetails(sbpservice.findShoppingBasketProductList("s-7", "u-1"));
-
+	   //  service.addPaymentDetails(sbpservice.findShoppingBasketProductList("s-7", "u-1"));
 	
  	    System.out.println("--------------결제테이블 추가후 조회------------");
  	    System.out.println(service.findPaymentDetailsListByStoreIdAndUserId("s-7", "u-1"));
@@ -58,12 +58,25 @@ public class PaymentDetailsServiceImplTest {
  	    System.out.println("------------ 총금액 조회---------------------");
  	    System.out.println(service.findAllProductPrice(list));
  	    
+ 	    System.out.println("-------------------------------------------");
+ 	    System.out.println("한 매장의 특정 제품의 결제 내역 조회 - 판매량에 사용");
+ 	    System.out.println(service.findPaymentDetailsListByStoreIdAndProductId("s-1", "p-1"));
+ 	    
+ 	    System.out.println("-------------------------------------------");
+ 	    System.out.println("한 매장의 결제 날짜에 따른 결제 내역 조회 - 판매량에 사용");
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+ 	    try {
+			System.out.println(service.findPaymentDetailsListByStoreIdAndTradeDate("s-1", dt.parse("2016-08-03")));
+		} catch (ParseException e) {
+			System.out.println("이상발생");
+		}
+ 	    
+ 	    System.out.println("-------------------------------------------");
+ 	    System.out.println("한 매장의 특정 제품의 현장 결제 내역 조회 - 판매시스템(포스)에 사용");
+ 	    System.out.println(service.findPaymentDetailsListByStoreIdAndProductIdAndSellMethod("s-1", "p-1", "f"));
+ 	    
  	}
 
-	
-	
-	
-	
 	public static void main(String[] args) throws UserManageException {
 		
 		PaymentDetailsServiceImplTest pds = 

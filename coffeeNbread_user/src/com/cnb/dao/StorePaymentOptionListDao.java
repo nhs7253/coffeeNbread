@@ -1,10 +1,7 @@
 package com.cnb.dao;
 
-import java.util.Date;
 import java.util.List;
 
-import com.cnb.vo.PaymentOptionList;
-import com.cnb.vo.ReservationDetails;
 import com.cnb.vo.StorePaymentOptionList;
 
 

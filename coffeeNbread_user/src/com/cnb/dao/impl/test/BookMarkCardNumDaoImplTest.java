@@ -7,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.BookMarkCardNumDao;
-import com.cnb.vo.BookMarkCardNum;
 
 /*
  * 김형주

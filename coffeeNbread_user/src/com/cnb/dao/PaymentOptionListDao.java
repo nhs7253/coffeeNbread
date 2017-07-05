@@ -1,9 +1,5 @@
 package com.cnb.dao;
 
-import java.util.Date;
-import java.util.List;
-
-import com.cnb.vo.NoticeBoardContents;
 import com.cnb.vo.PaymentOptionList;
 
 /*

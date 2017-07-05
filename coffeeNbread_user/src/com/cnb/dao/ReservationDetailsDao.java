@@ -3,7 +3,6 @@ package com.cnb.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
 /*

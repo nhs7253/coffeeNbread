@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.SystemPropertyUtils;
 
 import com.cnb.dao.ShoppingBasketProductDao;
-import com.cnb.exception.EmptyShoppingBasketProductListByProductNameException;
-import com.cnb.exception.EmptyShoppingBasketProductListException;
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
 import com.cnb.service.ShoppingBasketProductService;
 import com.cnb.vo.ShoppingBasketProduct;

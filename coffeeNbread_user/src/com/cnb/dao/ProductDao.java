@@ -50,6 +50,7 @@ public interface ProductDao {
 	 */
 	int updateProduct(Product product);
 	
+	
 	/** 
 	 * 조회된 제품 수 (Paging 용 count)
 	 * @param storeId
@@ -70,6 +71,13 @@ public interface ProductDao {
 	 * @return 조회된 제품 정보들
 	 */
 	List<Product> selectProductListByCategory(String storeId, String productCategory, int startIndex, int endIndex);
+	
+	/**
+	 * 제품 종류로 1개의 매장에 있는 제품 정보들 select - 페이징 없는거 (판매량에 사용)
+	 * @param storeId, productCategory
+	 * @return 조회된 제품 정보들
+	 */
+	List<Product> selectProductListByCategoryNoPaging(String storeId, String productCategory);
 	
 	/**
 	 * 제품 이름으로 1개의 매장에 있는 제품 정보 select

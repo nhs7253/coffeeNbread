@@ -5,7 +5,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.StoreCategoryDao;
-import com.cnb.dao.StoreDao;
 import com.cnb.vo.StoreCategory;
 
 /*

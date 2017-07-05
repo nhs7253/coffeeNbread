@@ -22,8 +22,8 @@ public class Product implements Serializable {
 	private String productCategory;
 	private String productDetail;
 	private String sellingOption;
-	private int todayProductCount;
-	private int recommendProductCount;
+	private int todayProductCount; //예상생산량 (제품 등록시 기본값 등록해놓고 상승/하락세에 따라 수정 가능
+	private int recommendProductCount;	//예상생산량-당일판매량 (제품 목록 페이지에서 예약 가능 개수를 표시해주기 위함)
 	
 	/*********************************************************************
 	 * 부모 테이블 : Store, 자식 테이블 : Product

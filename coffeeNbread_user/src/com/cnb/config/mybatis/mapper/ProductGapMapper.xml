@@ -38,24 +38,113 @@
 	</resultMap>
 	
 	<resultMap id="productGap-product-resultmap" type="productGap" extends="productGap-resultmap">
-		<collection ofType="com.cnb.vo.Product" property="productList">
-			<result column="product_name" property="productName"/>
-			<result column="product_category" property="productCategory"/>
-		</collection>
+ 		<association property="productList" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap"/>
 	</resultMap>
 	
-	<select id="selectProductGapList" resultMap="productGap-product-resultmap">
-		SELECT g.identify_code, g.product_gap, g.product_id, g.store_id, p.product_name, p.product_category
-		FROM   product_gap g, product p
-		WHERE  g.store_id = p.store_id
-		AND	   g.product_id = p.product_id
+	<!-- selectProductGapListCountByMethod -->
+	<select id="selectProductGapListCountByMethod" parameterType="map" resultType="int">
+		<choose>
+			<when test="method == 'identifyCode'">
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product_gap
+				WHERE identify_code = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<when test="method == 'productId'">
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product_gap
+				WHERE product_id = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<when test="method == 'productGap'">
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product_gap
+				WHERE product_gap = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<otherwise>	<!-- method == 'storeId' 매장의 전체 제품 증감폭 조회 -->
+			<![CDATA[	
+				SELECT COUNT(product_id)
+				FROM product_gap
+				WHERE store_id = #{storeId}
+			]]>
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="selectProductGapListByStoreId" parameterType="map" resultMap="productGap-product-resultmap">
+		<![CDATA[
+			SELECT  identify_code,
+					product_gap,
+					product_id,
+					store_id,
+					product_name,
+					product_category			
+			FROM(
+					SELECT  rownum rnum, 
+							identify_code,
+							product_gap,
+							product_id,
+							store_id,
+							product_name,
+							product_category
+					FROM(
+							SELECT  g.identify_code,
+									g.product_gap, 
+									g.product_id, 
+									g.store_id, 
+									p.product_name, 
+									p.product_category
+							FROM	product_gap g, product p
+							WHERE  g.store_id = p.store_id
+							AND	   g.product_id = p.product_id
+							AND    g.store_id = #{storeId}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
 	</select>
 
-	<select id="selectProductGapListByIdentifyCode" parameterType="string" resultMap="productGap-product-resultmap">
-		SELECT g.identify_code, g.product_gap, g.product_id, g.store_id, p.product_name, p.product_category
-		FROM   product_gap g, product p
-		WHERE  g.store_id = p.store_id
-		AND	   g.product_id = p.product_id	
-		AND	   g.identify_code = #{value}
+	<select id="selectProductGapListByIdentifyCodeByStoreIdAndIdentifyCode" parameterType="map" resultMap="productGap-product-resultmap">
+		<![CDATA[
+			SELECT  identify_code,
+					product_gap,
+					product_id,
+					store_id,
+					product_name,
+					product_category			
+			FROM(
+					SELECT  rownum rnum, 
+							identify_code,
+							product_gap,
+							product_id,
+							store_id,
+							product_name,
+							product_category
+					FROM(
+							SELECT  g.identify_code,
+									g.product_gap, 
+									g.product_id, 
+									g.store_id, 
+									p.product_name, 
+									p.product_category
+							FROM	product_gap g, product p
+							WHERE  g.store_id = p.store_id
+							AND	   g.product_id = p.product_id
+							AND	   g.store_id = #{storeId}
+							AND	   g.identify_code = #{identifyCode}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
 	</select>
 </mapper>

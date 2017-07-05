@@ -2,10 +2,7 @@ package com.cnb.service;
 
 import java.util.List;
 
-import com.cnb.exception.EmptyShoppingBasketProductListByProductNameException;
-import com.cnb.exception.EmptyShoppingBasketProductListException;
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
-import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
