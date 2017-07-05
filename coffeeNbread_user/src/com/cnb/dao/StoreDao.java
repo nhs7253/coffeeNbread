@@ -3,7 +3,6 @@ package com.cnb.dao;
 import java.util.List;
 
 import com.cnb.vo.Store;
-import com.cnb.vo.StorePicture;
 
 /*
  * 이진영

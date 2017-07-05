@@ -88,7 +88,6 @@ INSERT INTO PRODUCT_PICTURE values('제품사진20','p-20','s-1');
 select*from PAYMENT_DETAILS
 delete from PAYMENT_DETAILS
 
-
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-1','s-1',0);   -- s-1 /r,f모두 가능 /예약/ 카드                            
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-2','s-1',0);   -- s-1   -> 같은유저가 여러제품살경우 어떻게 나올지 보여주기위함.
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-3','s-1',0);   -- s-1 /r,f모두 가능 /예약/카드                            
@@ -147,13 +146,15 @@ INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지6',
 
 /* 제품 증감폭 */
 SELECT * FROM PRODUCT_GAP;
-DELETE FROM PRODUCT_GAP;
+DELETE FROM PRODUCT_GAP
 
 INSERT INTO PRODUCT_GAP VALUES('D', '1', 'p-1', 's-1');
 INSERT INTO PRODUCT_GAP VALUES('K', '2', 'p-2', 's-1');
 INSERT INTO PRODUCT_GAP VALUES('U', '3', 'p-7', 's-2');
 INSERT INTO PRODUCT_GAP VALUES('D', '4', 'p-8', 's-2');
 INSERT INTO PRODUCT_GAP VALUES('U', '5', 'p-9', 's-3');
+INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-20', 's-1');
+INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-4', 's-1');
 
 
 /* 매장 사진 */
@@ -208,5 +209,4 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-2','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','c');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-4','c');
-
 

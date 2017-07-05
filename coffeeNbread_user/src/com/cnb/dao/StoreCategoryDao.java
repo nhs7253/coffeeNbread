@@ -1,6 +1,5 @@
 package com.cnb.dao;
 
-import com.cnb.vo.Product;
 import com.cnb.vo.StoreCategory;
 
 /*

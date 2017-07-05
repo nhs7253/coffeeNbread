@@ -7,8 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.StorePaymentOptionListDao;
-import com.cnb.vo.PaymentOptionList;
-import com.cnb.vo.StorePaymentOptionList;
 
 /*
  * 김형주

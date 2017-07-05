@@ -7,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.ProductDao;
-import com.cnb.vo.Product;
 
 /*
  * 최민희

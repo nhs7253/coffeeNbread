@@ -1,15 +1,11 @@
 package com.cnb.service.impl.test;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.cnb.exception.DuplicatedStoreIdException;
-import com.cnb.service.ProductService;
 import com.cnb.service.StoreService;
-import com.cnb.vo.Product;
 import com.cnb.vo.Store;
 
 public class StoreServiceImplTest {

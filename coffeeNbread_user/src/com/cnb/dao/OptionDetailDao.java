@@ -1,6 +1,5 @@
 package com.cnb.dao;
 
-import com.cnb.vo.OptionCategory;
 import com.cnb.vo.OptionDetail;
 
 /*

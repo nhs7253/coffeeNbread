@@ -3,13 +3,10 @@ package com.cnb.service.impl.test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.cnb.exception.BookCardNumDuplicationException;
 import com.cnb.exception.DeleteBookMarkException;
 import com.cnb.service.BookMarkCardNumService;
-import com.cnb.service.GeneralUserService;
-import com.cnb.vo.BookMarkCardNum;
 
 /*
  * 김형주 

@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cnb.dao.PaymentDetailsDao;
-import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.service.PaymentDetailsService;
 import com.cnb.vo.PaymentDetails;
-import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
@@ -21,11 +19,12 @@ import com.cnb.vo.ShoppingBasketProduct;
 public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	@Autowired
 	private PaymentDetailsDao paymentDetailsDao;
-
-	@Autowired
-	private ShoppingBasketProductDao shoppingBasketProductDao;
-
 	
+//
+//	@Autowired
+//	private ShoppingBasketProductDao shoppingBasketProductDao;
+//
+//	
 	
 	@Override
 	public List<PaymentDetails> findPaymentDetailsListByStoreIdAndUserId(String storeId, String userId) {
@@ -68,4 +67,20 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 		}
 		return totalPrice;
 	}
+
+	@Override
+	public List<PaymentDetails> findPaymentDetailsListByStoreIdAndProductId(String storeId, String productId) {
+		return paymentDetailsDao.selectPaymentDetailsListByStoreIdAndProductId(storeId, productId);
+	}
+	
+	@Override
+	public List<PaymentDetails> findPaymentDetailsListByStoreIdAndTradeDate(String storeId, Date tradeDate) {
+		return paymentDetailsDao.selectPaymentDetailsListByStoreIdAndTradeDate(storeId, tradeDate);
+	}
+
+	@Override
+	public List<PaymentDetails> findPaymentDetailsListByStoreIdAndProductIdAndSellMethod(String storeId, String productId, String sellMethod) {
+		return paymentDetailsDao.selectPaymentDetailsListByStoreIdAndProductIdAndSellMethod(storeId, productId, sellMethod);
+	}
+	
 }

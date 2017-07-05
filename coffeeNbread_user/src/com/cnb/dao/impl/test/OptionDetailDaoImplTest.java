@@ -5,8 +5,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.OptionDetailDao;
-import com.cnb.vo.OptionCategory;
-import com.cnb.vo.OptionDetail;
 /*
  * 이진영
  * 2017-06-28
