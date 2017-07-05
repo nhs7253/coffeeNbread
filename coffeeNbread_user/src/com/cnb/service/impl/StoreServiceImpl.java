@@ -36,7 +36,7 @@ public class StoreServiceImpl implements StoreService{
 	
 	
 	@Override
-	public int addStore(Store store,StoreCategory storeCategory,OptionCategory optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
+	public void addStore(Store store,StoreCategory storeCategory,OptionCategory optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
 		//storeId 중복확인
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
@@ -54,7 +54,7 @@ public class StoreServiceImpl implements StoreService{
 		storePictureService.addStorePicture(storePicture);
 		
 		
-		return storedao.insertStore(store);
+		
 		
 	}
 

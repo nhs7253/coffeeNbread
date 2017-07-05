@@ -24,7 +24,7 @@ public class StorePictureServiceImplTest {
 		StorePictureService service =  (StorePictureService)ctx.getBean("storePictureServiceImpl");
 	
 	//매장 사진 등록 
-		StorePicture p1 = new StorePicture("매장사진120","s-2");
+		StorePicture p1 = new StorePicture("매장사진120","s-1");
 	
 		
 	try{

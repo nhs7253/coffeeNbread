@@ -26,7 +26,8 @@ public class StorePictureServiceImpl implements StorePictureService{
 			return dao.insertStorePicture(storePicture);
 		}else{
 			for(int i = 0;i<storePictureList.size();i++){
-				if((dao.selectStorePictureByStoreIdAndStorePicture(storePictureList.get(i).getStorePicture(), storePictureList.get(i).getStoreId()).getStorePicture().equals(storePicture.getStorePicture()))){
+				if((dao.selectStorePictureByStoreIdAndStorePicture(storePictureList.get(i).getStorePicture(), storePictureList.get(i).getStoreId()).getStorePicture().equals(storePicture.getStorePicture()))
+						&&(dao.selectStorePictureByStoreIdAndStorePicture(storePictureList.get(i).getStorePicture(), storePictureList.get(i).getStoreId()).getStoreId().equals(storePicture.getStoreId()))){
 					throw new DuplicatedStorePictureException(storePicture.getStorePicture()+"이미 등록되어 있음");
 				}
 			}}
