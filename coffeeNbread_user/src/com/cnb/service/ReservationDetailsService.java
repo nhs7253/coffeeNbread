@@ -31,7 +31,7 @@ public interface ReservationDetailsService {
 	/** 
 	 * 매장이 확인버튼 누르면 유저가 예약 확인 목록을 볼떄 date값 받아온다.
 	 */
-/*	int modifyReservationDetails(ReservationDetails reservationDetails);*/
+    /*	int modifyReservationDetails(ReservationDetails reservationDetails);*/
 	
 	
 	/**

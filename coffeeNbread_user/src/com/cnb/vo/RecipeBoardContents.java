@@ -27,6 +27,65 @@ public class RecipeBoardContents implements Serializable {
 
 	private GeneralUser generalUser; //조인 위한 참조객체
 	private Store store; //조인 위한 참조객체.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
+			Date recipeBoardDate, int recipeBoardHits, String recipeBoardPicture, int recommendCount, String userId,
+			String storeId) {
+		super();
+		this.recipeBoardNo = recipeBoardNo;
+		this.recipeBoardContent = recipeBoardContent;
+		this.recipeBoardTitle = recipeBoardTitle;
+		this.recipeBoardDate = recipeBoardDate;
+		this.recipeBoardHits = recipeBoardHits;
+		this.recipeBoardPicture = recipeBoardPicture;
+		this.recommendCount = recommendCount;
+		this.userId = userId;
+		this.storeId = storeId;
+	}
+
+
+	/* 레시피 게시판에 넣을 생성자   - store을 가져와서 store_name을 찍을것임.*/
+	public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
+			Date recipeBoardDate, int recipeBoardHits, String recipeBoardPicture, int recommendCount, String userId,
+			Store store) {
+		super();
+		this.recipeBoardNo = recipeBoardNo;
+		this.recipeBoardContent = recipeBoardContent;
+		this.recipeBoardTitle = recipeBoardTitle;
+		this.recipeBoardDate = recipeBoardDate;
+		this.recipeBoardHits = recipeBoardHits;
+		this.recipeBoardPicture = recipeBoardPicture;
+		this.recommendCount = recommendCount;
+		this.userId = userId;
+		this.store = store;
+	}
+	
+	
+	    /*  조회수와 추천수 빼고 남은 생성자 -  update할떄 조회수와 추천수는 고정이므로 */
+	public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
+			Date recipeBoardDate, int recipeBoardHits, String recipeBoardPicture, int recommendCount) {
+		super();
+		this.recipeBoardNo = recipeBoardNo;
+		this.recipeBoardContent = recipeBoardContent;
+		this.recipeBoardTitle = recipeBoardTitle;
+		this.recipeBoardDate = recipeBoardDate;
+		this.recipeBoardHits = recipeBoardHits;
+		this.recipeBoardPicture = recipeBoardPicture;
+		this.recommendCount = recommendCount;
+	}
+	
+		/* 조인 합친 생성자 */
 	public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
 			Date recipeBoardDate, int recipeBoardHits, String recipeBoardPicture, int recommendCount, String userId,
 			String storeId, GeneralUser generalUser, Store store) {
