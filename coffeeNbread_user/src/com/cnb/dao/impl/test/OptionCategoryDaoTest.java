@@ -28,17 +28,24 @@ public class OptionCategoryDaoTest {
 		
 		
 
-		
+		//옵션 카테고리 등록
 
-//		System.out.println("insertStoreEvent 후 조회");
-//		System.out.println(dao.insertOptionCategory(new OptionCategory(13,"s-2","대분류1")));
+//		System.out.println(dao.insertOptionCategory(new OptionCategory(13,"s-2","대분류11")));
 //		System.out.println(dao.insertOptionCategory(new OptionCategory(14,"s-2","대분류2")));
 		
 //		System.out.println("updateStoreEvent 후 조회");
-		System.out.println(dao.updateOptionCategory(new OptionCategory(14,"대분류1수정3f","s-2")));
-
-//		System.out.println(dao.deleteOptionCategory(13));
 		
+		
+		//옵션 카테고리 수정
+		//System.out.println(dao.updateOptionCategory(new OptionCategory(13,"대분류1수정","s-2")));
+
+		
+		//옵션 카테고리 삭제
+		
+		//System.out.println(dao.deleteOptionCategory("s-2",13));
+		
+		//옵션카테고리 리스트 조회
+		System.out.println(dao.selectOptionCategoryListByStoreId("s-2"));
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}

@@ -323,6 +323,7 @@ CREATE TABLE store_payment_optionlist (
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(payment_id) REFERENCES payment_OptionList(payment_id) ON DELETE CASCADE
 );
+
 /* 생성후 이상 확인 */
 
 /* 관리자 */
@@ -485,6 +486,10 @@ DROP SEQUENCE option_id_seq;
 DROP SEQUENCE store_visit_history_no_seq;
 
 
-
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = 's-2'
 
 

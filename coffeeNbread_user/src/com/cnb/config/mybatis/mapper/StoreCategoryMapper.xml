@@ -63,4 +63,17 @@
 		WHERE store_category = #{storeCategory}
 		AND store_id =#{storeId}
 	</select>
+	
+	<select id="selectStoreCategoryListByStoreId" parameterType="String"
+		resultMap="StoreCategory-resultmap">
+		SELECT
+		store_category_no,
+		store_category,
+		store_id
+		FROM
+		store_category
+		
+		WHERE store_id =#{storeId}
+	</select>
+	
 </mapper>

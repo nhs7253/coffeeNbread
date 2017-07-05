@@ -1,5 +1,9 @@
 package com.cnb.dao.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,9 +37,48 @@ public class OptionDetailDaoImpl implements OptionDetailDao{
 	}
 
 	@Override
-	public int deleteOptionDetail(int optionId) {
-		return session.delete(makeSqlId("deleteOptionDetail"), optionId);
+	public int deleteOptionDetail(String storeId, int optionId) {
+		Map info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("optionId", optionId);
 
+		return session.delete(makeSqlId("deleteOptionDetail"), info);
+
+	}
+
+	@Override
+	public List<OptionDetail> selectOptionDetailListByOptionCategory(String storeId, int optionId) {
+		Map info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("optionId", optionId);
+
+		return session.selectList(makeSqlId("selectOptionDetailListByOptionCategory"), info);
+	}
+
+	@Override
+	public OptionDetail selectOptionDetailByOptionDetailName(String storeId, int optionId,
+			String optionCategoryDetail) {
+		Map info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("optionId", optionId);
+		info.put("optionCategoryDetail", optionCategoryDetail);
+		return session.selectOne(makeSqlId("selectOptionDetailByOptionDetailName"), info);
+	}
+
+	@Override
+	public OptionDetail selectOptionDetailByProductId(String storeId, String productId) {
+		Map info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productId", productId);
+		return session.selectOne(makeSqlId("selectOptionDetailByProductId"), info);
+	}
+
+	@Override
+	public int deleteOptionDetailByProductId(String storeId, String productId) {
+		Map info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productId", productId);
+		return session.delete(makeSqlId("deleteOptionDetailByProductId"),info);
 	}
 
 }

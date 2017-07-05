@@ -24,13 +24,19 @@
 	<li><a href="${initParam.rootPath }/admin/register_admin_form.do">관리자 등록</a></li>
 </sec:authorize>
 
-	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회11111111111111</a></li>
+
 <%--회원/관리자 공통 메뉴 /member로 시작 --%>
 <sec:authorize access="hasAnyRole('CNB_USER', 'CNB_STORE')">
 	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
+	<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자 탈퇴</a></li>
+	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
+	<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
+	<li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
+	
+	
 </sec:authorize>
 
-
+<li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
 </ul>

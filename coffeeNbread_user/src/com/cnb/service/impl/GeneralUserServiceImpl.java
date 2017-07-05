@@ -51,7 +51,7 @@ public class GeneralUserServiceImpl implements GeneralUserService{
 		generalUser.setUserPw(passwordEncoder.encode(generalUser.getUserPw()));
 		generalUser.setUserActiveState("Y");
 		generalUserDao.insertGeneralUser(generalUser);
-		userAuthorityDao.insertUserAuthority(new UserAuthority(generalUser.getUserId(),"CNB_USER"));
+		userAuthorityDao.insertUserAuthority(new UserAuthority(generalUser.getUserId(),"ROLE_CNB_USER"));
 	}
 
 	@Override

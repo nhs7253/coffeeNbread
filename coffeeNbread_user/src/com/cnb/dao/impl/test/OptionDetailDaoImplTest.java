@@ -29,18 +29,29 @@ public class OptionDetailDaoImplTest {
 		
 		
 
-		
+/*		
 
-//		System.out.println("insertStoreEvent 후 조회");
-//		System.out.println(dao.insertOptionDetail(new OptionDetail("s-2","p-7",12,"소분류2")));
+		System.out.println("optionDetail 등록 ");
+		System.out.println(dao.insertOptionDetail(new OptionDetail("s-2","p-7",3,"소분류2")));
 //		System.out.println(dao.insertOptionCategory(new OptionCategory(12,"s-2","대분류2")));
+	*/	
 		
-//		System.out.println("updateStoreEvent 후 조회");
-//	System.out.println(dao.updateOptionDetail(new OptionDetail("s-2","p-7",12,"소분류2수정")));
-
-		System.out.println(dao.deleteOptionDetail(12));
 		
+		System.out.println("optionDetail 수정");
+	//System.out.println(dao.updateOptionDetail(new OptionDetail("s-2","p-7",3,"소분류2수정")));
 
+//		System.out.println(dao.deleteOptionDetail(12));
+		
+	
+	System.out.println("optionDetail 조회");
+//	System.out.println(dao.selectOptionDetailListByOptionCategory("s-2",3));
+//	System.out.println(dao.selectOptionDetailByOptionDetailName("s-2",3,"e"));
+//	System.out.println(dao.selectOptionDetailByProductId("s-2","p-7"));
+	
+	System.out.println("optionDetail 삭제");
+
+	//	System.out.println(dao.deleteOptionDetail("s-2",3));
+		System.out.println(dao.deleteOptionDetailByProductId("s-2", "p-12"));
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 

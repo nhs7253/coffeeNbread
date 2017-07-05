@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.cnb.exception.DuplicatedProductIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
+import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
 
 /*
@@ -17,14 +18,14 @@ public interface ProductService {
 	 * @param product
 	 * @throws DuplicatedIdException 한 매장에 등록하려는 제품 아이디나 이름이 이미 등록되 있는 경우 발생
 	 */
-	int addProduct(Product product) throws DuplicatedProductIdOrProductNameException;
+	int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 수정
 	 * @param product
 	 * @throws ProductNotFoundException 수정할 제품이 등록되 있지 않은 경우 발생
 	 */
-	int modifyProduct(Product product) throws ProductNotFoundException;
+	int modifyProduct(Product product,OptionDetail optionDetail) throws ProductNotFoundException;
 	
 	/**
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 찾기
@@ -57,4 +58,13 @@ public interface ProductService {
 	 * @param storeId
 	 */
 	HashMap<String, Object> findProductList(int page, String storeId);
+
+
+	/**
+	 * 1개의 제품 판매 상태로 1개의 옵션상세 삭제하기 
+	 * @param product,optionDetail
+	 */
+	void removeOptionDetail(Product product,OptionDetail optionDetail);
+
+
 }
