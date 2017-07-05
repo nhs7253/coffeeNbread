@@ -39,7 +39,7 @@
 											  #{qnaBoardSecret})
 	</insert>
 	
-	<delete id="deleteQnaBoardContents" parameterType="string">
+	<delete id="deleteQnaBoardContents" parameterType="int">
 		DELETE FROM qna_board_contents WHERE qna_board_no = #{value}
 	</delete>
 	
@@ -84,10 +84,10 @@
 			</when>
 							
 			<when test="select == 'titleAndcontent' and storeId == null">
-				WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%') AND qna_store_id IS NULL
+				WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id IS NULL
 			</when>
 			<when test="select == 'titleAndcontent' and storeId != null">
-				WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR(qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id = #{storeId}
+				WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id = #{storeId}
 			</when>
 			<otherwise>
 				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
@@ -123,7 +123,7 @@
 								WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id IS NULL
 							</when>
 							<when test="select == 'titleAndcontent' and storeId != null">
-								WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR(qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id = #{storeId}
+								WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id = #{storeId}
 							</when>
 							<otherwise>
 								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->

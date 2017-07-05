@@ -71,7 +71,25 @@ public class QnaBoardContentsDaoImplTest {
 				System.out.println(dao.selectQnaBoardContentsPagingList("titleAndcontent", "qna", null, 1, 10));
 				System.out.println("selectQnaBoardContentsPagingCount : " + dao.selectQnaBoardContentsPagingCount("title", "제목", null));
 
-
+				System.out.println("=========== update =============");
+				
+		dao.updateQnaBoardContents(new QnaBoardContents(dao.selectQnaBoardContentsList().get(2).getQnaBoardNo(),"qna-s-1", "qna-u-1", "qna-매장 글로 변경 하는 마법의 제목4", "qna-내용4-매장 글로 변경 하는 마법의 내용", new Date(), "0", "N"));
+		System.out.println("QnaBoardContents 후 조회");
+		System.out.println(dao.selectQnaBoardContentsList());
+		System.out.println("전체 조회 개수 = " + dao.selectQnaBoardContentsList().size());
+		
+		System.out.println("=========== update 후 =============");
+		
+		System.out.println("updateQnaBoardContents = " + dao.selectQnaBoardContentsPagingList("titleAndcontent", "qna", "qna-s-1", 1, 10));
+		System.out.println("updateQnaBoardContents 개수 = " + dao.selectQnaBoardContentsPagingCount("title", "제목", "qna-s-1"));
+		
+		dao.deleteQnaBoardContents(dao.selectQnaBoardContentsList().get(1).getQnaBoardNo());
+		dao.deleteQnaBoardContents(dao.selectQnaBoardContentsList().get(2).getQnaBoardNo());
+		
+		System.out.println("deleteQnaBoardContents 후 조회");
+		System.out.println(dao.selectQnaBoardContentsList());
+		System.out.println("전체 조회 개수 = " + dao.selectQnaBoardContentsList().size());
+		
 		dao.deleteQnaBoardContentsAll();
 		System.out.println("deleteQnaBoardContentsAll 후 조회");
 		System.out.println(dao.selectQnaBoardContentsList());

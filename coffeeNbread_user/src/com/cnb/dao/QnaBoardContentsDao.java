@@ -59,7 +59,7 @@ public interface QnaBoardContentsDao {
 	List<QnaBoardContents> selectQnaBoardContentsList();
 	
 	/**
-	 * Q&A 게시판의 게시글 페이징을 위한 검색 결과 개수를 리턴 (paging)
+	 * Q&A 게시판의 게시글 페이징을 위한 검색 결과 개수를 리턴 (paging) - count
 	 * @param select 검색 종류 - 글 제목, 글 내용, 제목 + 내용
 	 * @param keyword 검색할 키워드
 	 * @param storeId ID가 있다면 해당 매장 글, 없다면 전체 Q&A글
@@ -68,8 +68,8 @@ public interface QnaBoardContentsDao {
 	int selectQnaBoardContentsPagingCount(String select, String keyword, String storeId);
 	
 	/**
-	 * Q&A 게시판의 게시글 페이징을 위한 검색 결과 개수를 리턴 (paging)
-	 * @param select 검색 종류 - 글 제목, 글 내용, 제목 + 내용
+	 * Q&A 게시판의 게시글을 페이징 하여, 그 범위 만큼 내용을 반환  (paging) - content
+	 * @param select 검색 종류 - 글 제목, 글 내용, 제목 + 내용 
 	 * @param keyword 검색할 키워드
 	 * @param storeId ID가 있다면 해당 매장 글, 없다면 전체 Q&A글
 	 * @param startIndex 시작 컬럼 번호
