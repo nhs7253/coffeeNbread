@@ -60,7 +60,7 @@ public class GeneralUserController {
 	private PasswordEncoder passwordEncoder;
 	
 	//@RequestMapping의 value 값 생략시 루트 경로로 이동
-	@RequestMapping("addUserController") //@ModelAttribute("generalUser")의 value 값으로 RequestScope에 매핑됨, 생략 시 클래이름 
+	@RequestMapping("addUserController") //@ModelAttribute("generalUser")의 value 값으로 RequestScope에 매핑됨, 생략 시 클래스 이름 
 						       //맨 앞글자 소문자로 매핑 됨
 	/**
 	 * 회원 가입을 처리하는 Controller
