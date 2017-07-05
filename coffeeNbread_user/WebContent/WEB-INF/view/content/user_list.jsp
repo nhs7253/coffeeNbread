@@ -14,20 +14,14 @@
 		<select name="select">
 			<option value="userId">아이디</option>
 			<option value="userName">이름</option>
-		</select> 
-		<input type="text" name="keyword" /> 
-		<!-- 
-			<input type="hidden" name="page" value="1">
-		 -->
-		
-		<input type="submit" value="검색" />
+		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	<br>
 
 	<table class="w3-table-all">
 		<thead>
-			<tr class="w3-blue"> 
+			<tr class="w3-blue">
 				<th>아이디</th>
 				<th>이름</th>
 				<th>생년월일</th>

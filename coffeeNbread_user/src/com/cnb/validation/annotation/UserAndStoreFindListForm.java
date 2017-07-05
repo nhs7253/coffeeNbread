@@ -24,11 +24,9 @@ import com.cnb.vo.Store;
  */
 public class UserAndStoreFindListForm implements Serializable{
 	
-	@NotEmpty
 	private String userId;
 	@NotNull
-	private int page; 
-	@NotEmpty
+	private int page=1; 
 	private String keyword;
 	public String getUserId() {
 		return userId;
