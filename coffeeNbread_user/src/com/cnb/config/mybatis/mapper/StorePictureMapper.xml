@@ -49,7 +49,7 @@
 	</resultMap>
 	
 	<!-- selectStorePictureListByStoreId -->
-	<select id="selectProductPictureListByProductIdAndStoreId" resultMap="storePicture-resultmap" parameterType="string">
+	<select id="selectStorePictureListByStoreId" resultMap="storePicture-resultmap" parameterType="string">
 		<include refid="select-storePicture"/>
 		WHERE store_id = #{storeId}
 	</select>

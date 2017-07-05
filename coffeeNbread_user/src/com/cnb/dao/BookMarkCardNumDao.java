@@ -2,10 +2,7 @@ package com.cnb.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-
 import com.cnb.vo.BookMarkCardNum;
-import com.cnb.vo.GeneralUser;
 
 /*
  * 김형주

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.ProductGapDao;
-import com.cnb.vo.Product;
 import com.cnb.vo.ProductGap;
 
 /*
@@ -46,12 +45,30 @@ public class ProductGapDaoImpl implements ProductGapDao {
 	}
 
 	@Override
-	public List<ProductGap> selectProductGapList() {
-		return session.selectList(makeSqlId("selectProductGapList"));
+	public int selectProductGapListCountByMethod(String storeId, String method, String methodContent) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("method", method);
+		info.put("methodContent", methodContent);
+		return session.selectOne(makeSqlId("selectProductGapListCountByMethod"), info);
 	}
 
 	@Override
-	public List<ProductGap> selectProductGapListByIdentifyCode(String identifyCode) {
-		return session.selectList(makeSqlId("selectProductGapListByIdentifyCode"), identifyCode);
+	public List<ProductGap> selectProductGapListByStoreId(String storeId, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectProductGapListByStoreId"), info);
+	}
+
+	@Override
+	public List<ProductGap> selectProductGapListByIdentifyCodeByStoreIdAndIdentifyCode(String storeId, String identifyCode, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("identifyCode", identifyCode);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectProductGapListByIdentifyCodeByStoreIdAndIdentifyCode"), info);
 	}
 }

@@ -1,6 +1,7 @@
 package com.cnb.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -55,4 +56,8 @@ public class OptionCategoryDaoImpl implements OptionCategoryDao{
 		
 		return session.selectList(makeSqlId("selectOptionDetailListByOptionCategory"),info);
 	}*/
+	@Override
+	public List<OptionCategory> selectOptionCategoryListByStoreId(String storeId) {
+		return session.selectList(makeSqlId("selectOptionCategoryListByStoreId"),storeId);
+	}
 }

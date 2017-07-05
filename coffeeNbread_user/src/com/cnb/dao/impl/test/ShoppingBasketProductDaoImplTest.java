@@ -7,10 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.ShoppingBasketProductDao;
-import com.cnb.vo.GeneralUser;
-import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
-import com.cnb.vo.Store;
 
 /*
  * 김형주

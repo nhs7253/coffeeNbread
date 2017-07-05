@@ -158,6 +158,27 @@
 		]]>
 	</select>
 	
+	<!-- selectProductListByCategoryNoPaging -->
+	<select id="selectProductListByCategoryNoPaging" resultMap="product-productPicture-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  p.product_id,
+					p.store_id,
+					p.product_name,
+					p.product_price,
+					p.product_category,
+					p.product_detail,
+					p.selling_option,
+					p.today_product_count,
+					p.recommend_product_count,
+					pp.product_picture
+			FROM	product p, product_picture pp
+			WHERE p.store_id = #{storeId}
+			AND   p.product_category = #{productCategory}
+			AND	  p.store_id = pp.store_id
+			AND   p.product_id = pp.product_id
+		]]>
+	</select>
+	
 	<!-- selectProductByName -->
 	<select id="selectProductByName" resultMap="product-productPicture-resultmap" parameterType="map">
 		<include refid="select-product-productPicture"/>

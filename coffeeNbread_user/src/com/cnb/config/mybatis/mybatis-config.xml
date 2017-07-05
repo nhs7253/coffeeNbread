@@ -43,11 +43,13 @@
 		<!-- 게시판 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/NoticeBoardContentsMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/QnaBoardContentsMapper.xml" />
-		
+		<mapper resource="com/cnb/config/mybatis/mapper/RecipeBoardContentsMapper.xml" />
 		
 		<!--결제 종류 관련  -->
 		<mapper resource="com/cnb/config/mybatis/mapper/PaymentOptionListMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StorePaymentOptionListMapper.xml" />
+		
+		
 	</mappers>
 	 
 </configuration>

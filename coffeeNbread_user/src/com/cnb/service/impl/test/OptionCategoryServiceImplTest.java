@@ -15,19 +15,20 @@ public class OptionCategoryServiceImplTest {
 		//TODO Spring 컨테이너로 부터 ProductService bean 가져오기
 		OptionCategoryService service =  (OptionCategoryService)ctx.getBean("optionCategoryServiceImpl");
 	
-	/*	
+	
 		
 		//option category 등록
-		OptionCategory oc1 = new OptionCategory(25,"s-2","대분류1");
+		
+		OptionCategory oc1 = new OptionCategory(7,"s-2","대분류100");
 		
 		try{
 			service.addOptionCategory(oc1);
 			System.out.println("등록 성공");
 		} catch (DuplicatedOptionCategoryNameException e) {
 			System.err.println(e.getMessage());
-		}*/
+		}
 	
-		//option category 수정
+	/*	//option category 수정
 		OptionCategory oc2 = new OptionCategory(3,"s-2","대분류2");
 		
 		
@@ -39,6 +40,6 @@ public class OptionCategoryServiceImplTest {
 			service.removeOptionCategory("s-2",9);
 			System.out.println("삭제완료");
 	
-	
+	*/
 	}
 }

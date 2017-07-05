@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.StorePaymentOptionListDao;
-import com.cnb.vo.PaymentDetails;
-import com.cnb.vo.PaymentOptionList;
 import com.cnb.vo.StorePaymentOptionList;
 
 /*

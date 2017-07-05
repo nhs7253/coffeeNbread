@@ -10,7 +10,7 @@
 	
 	<!-- 매장 카테고리 insert -->
 	<insert id="insertStoreCategory" parameterType="com.cnb.vo.StoreCategory">
-		<selectKey resultType="_int" keyProperty="storeCategoryNo" >
+		<selectKey resultType="_int" keyProperty="storeCategoryNo" order="BEFORE">
 			select store_category_no_seq.nextval from dual
 		</selectKey>
 		INSERT INTO store_category
@@ -63,4 +63,17 @@
 		WHERE store_category = #{storeCategory}
 		AND store_id =#{storeId}
 	</select>
+	
+	<select id="selectStoreCategoryListByStoreId" parameterType="String"
+		resultMap="StoreCategory-resultmap">
+		SELECT
+		store_category_no,
+		store_category,
+		store_id
+		FROM
+		store_category
+		
+		WHERE store_id =#{storeId}
+	</select>
+	
 </mapper>

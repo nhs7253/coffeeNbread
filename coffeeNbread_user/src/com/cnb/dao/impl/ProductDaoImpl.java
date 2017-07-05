@@ -75,6 +75,14 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
+	public List<Product> selectProductListByCategoryNoPaging(String storeId, String productCategory) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productCategory", productCategory);
+		return session.selectList(makeSqlId("selectProductListByCategoryNoPaging"), info);
+	}
+	
+	@Override
 	public Product selectProductByName(String storeId, String productName) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
@@ -118,4 +126,6 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("productName", productName);
 		return session.selectOne(makeSqlId("selectProductBySellingOption"), info);
 	}
+
+
 }

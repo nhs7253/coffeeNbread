@@ -1,10 +1,12 @@
 package com.cnb.service.impl.test;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.cnb.exception.DuplicatedProductIdOrProductNameException;
-import com.cnb.exception.ProductNotFoundException;
 import com.cnb.service.ProductService;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
@@ -43,7 +45,7 @@ public class ProductServiceImplTest {
 		}
 */
 		
-		
+/*		
 		//제품 수정
 		Product p4 = new Product("p-35", "s-2", "제품30", 4000, "빵", "제품설명글31", "N", 150, 20);
 		try {
@@ -52,9 +54,9 @@ public class ProductServiceImplTest {
 		}catch(ProductNotFoundException e) {
 			System.err.println(e.getMessage());
 		}
-
+*/
 		
-	/*	//제품 조회
+		//제품 조회
 		System.out.println("==========조회==========");
 		
 		int page = 1;
@@ -131,6 +133,6 @@ public class ProductServiceImplTest {
 				   System.out.println(entry3.getValue());
 			   }
 		   }
-		}*/
+		}
 	}
 }

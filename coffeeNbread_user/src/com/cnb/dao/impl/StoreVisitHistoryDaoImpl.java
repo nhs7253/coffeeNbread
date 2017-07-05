@@ -87,4 +87,28 @@ public class StoreVisitHistoryDaoImpl implements StoreVisitHistoryDao{
 		input.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectStoreVisitHistoryByUserIdJoinStoreListPaging"), input);
 	}	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

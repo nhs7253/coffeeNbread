@@ -7,10 +7,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.exception.DuplicatedStoreIdException;
-import com.cnb.service.ProductService;
 import com.cnb.service.StoreService;
+
+import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Product;
+
 import com.cnb.vo.Store;
+import com.cnb.vo.StoreCategory;
+import com.cnb.vo.StorePicture;
 
 public class StoreServiceImplTest {
 	public static void main(String[] args) throws Exception {
@@ -19,26 +23,23 @@ public class StoreServiceImplTest {
 
 		// TODO Spring 컨테이너로 부터 ProductService bean 가져오기
 		StoreService service = (StoreService) ctx.getBean("storeServiceImpl");
-/*
+
 		// 매장 등록
 		// 겹치는 거 없는 경우
 		Store s1 = new Store("s-22", "매장이다", "매장소개다", "01011112222", "매장주소다", "매장이메일", new Date(), new Date(), "Y");
 
-		
-		 * //제품 아이디 겹치는 경우 Product p2 = new Product("p
-		 * -2", "s-1", "제품33", 3000, "빵", "제품설명글33", "N", 100, 10); //제품 이름 겹치는
-		 * 경우 Product p3 = new Product("p-32", "s-2", "제품1", 3000, "빵",
-		 * "제품설명글32", "N", 100, 10);
-		 
+		StoreCategory sc1 = new StoreCategory();
+		OptionCategory op1 = new OptionCategory();
+		StorePicture sp1 = new StorePicture();
 		try {
 			// service.addProduct(p1);
-			service.addStore(s1); // PRIMARY KEY unique예외 처리해야함!
+			service.addStore(s1, sc1, op1, sp1); // PRIMARY KEY unique예외 처리해야함!
 			// service.addProduct(p3);
 			System.out.println("등록 성공");
 		} catch (DuplicatedStoreIdException e) {
 			System.err.println(e.getMessage());
 		}
-
+		/*
 		// 매장 수정
 		Store s2 = new Store("s-5", "매장수정이다", "매장소개다", "01011112222", "매장주소다", "매장이메일", new Date(), new Date(), "Y");
 
@@ -82,13 +83,13 @@ public class StoreServiceImplTest {
 		}*/
 
 		// 매장명으로 매장카테고리 조회
-		System.out.println("==========옵션 및 디테일==========");
+	/*	System.out.println("==========옵션 및 디테일==========");
 
 		List<Store> optionlist = service.findOpionCategoryNDetailByIdList("s-2");
 		for (Store store3 : optionlist) {
 			System.out.println(store3);
 		}
-	
+	*/
 		System.out.println("-------------------완료 ---------------");
 	}
 

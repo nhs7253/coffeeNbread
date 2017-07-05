@@ -7,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.EventProductDao;
-import com.cnb.vo.EventProduct;
 /*
  * 최민희
  * 2017-06-29

@@ -2,6 +2,7 @@ package com.cnb.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 
@@ -24,7 +25,7 @@ public class PaymentDetails implements Serializable{
 	private String storeId;
 	private int productTradeCount;
 	
-	
+	private List<Product> productList;
 	
 	
 	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
@@ -40,6 +41,25 @@ public class PaymentDetails implements Serializable{
 		this.storeId = storeId;
 		this.productTradeCount = productTradeCount;
 	}
+	
+	
+	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
+			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount,
+			List<Product> productList) {
+		super();
+		this.paymentNo = paymentNo;
+		this.paymentOption = paymentOption;
+		this.tradeDate = tradeDate;
+		this.sellMethod = sellMethod;
+		this.reservationOrderCount = reservationOrderCount;
+		this.userId = userId;
+		this.productId = productId;
+		this.storeId = storeId;
+		this.productTradeCount = productTradeCount;
+		this.productList = productList;
+	}
+
+
 	public PaymentDetails() {
 		super();
 	}
@@ -97,6 +117,14 @@ public class PaymentDetails implements Serializable{
 	public void setProductTradeCount(int productTradeCount) {
 		this.productTradeCount = productTradeCount;
 	}
+	public List<Product> getProductList() {
+		return productList;
+	}
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

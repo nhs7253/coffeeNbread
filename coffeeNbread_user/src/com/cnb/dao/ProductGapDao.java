@@ -2,7 +2,6 @@ package com.cnb.dao;
 
 import java.util.List;
 
-import com.cnb.vo.Product;
 import com.cnb.vo.ProductGap;
 
 /*
@@ -25,7 +24,7 @@ import com.cnb.vo.ProductGap;
  * identifyCode
  * 하락 : D
  * 유지 : K
- * 증가 : U
+ * 상승 : U
  */
 public interface ProductGapDao {
 	/**
@@ -42,20 +41,28 @@ public interface ProductGapDao {
 	 */
 	int updateProductGap(ProductGap productGap);
 	
-	/**
-	 * 제품 증감폭들 select
-	 * 모든 제품 증감폭과 해당 제품 정보들을 조회한다.
-	 * @param 
-	 * @return 조회된 제품 증감폭 정보들
+	/** 
+	 * 여러 조건으로 조회된 예약 내역 수 (Paging 용 count)
+	 * @param storeId, method, methodContent
+	 * @return 조회된 예약 내역 수
 	 */
-	List<ProductGap> selectProductGapList();
+	int selectProductGapListCountByMethod(String storeId, String method, String methodContent);
+	
 	
 	/**
-	 * 증감 식별코드로 해당 제품 정보들 select
-	 * 제품 증감폭과 해당 제품 정보들을 조회한다.
-	 * @param identifyCode
+	 * 한 매장에서의 제품 증감폭들 select
+	 * 모든 제품 증감폭과 해당 제품 정보들을 조회한다.
+	 * @param storeId, startIndex, endIndex
 	 * @return 조회된 제품 증감폭 정보들
 	 */
-	List<ProductGap> selectProductGapListByIdentifyCode(String identifyCode);
+	List<ProductGap> selectProductGapListByStoreId(String storeId, int startIndex, int endIndex);
+	
+	/**
+	 * 한 매장에서 증감 식별코드로 해당 제품 정보들 select
+	 * 제품 증감폭과 해당 제품 정보들을 조회한다.
+	 * @param storeId, identifyCode, startIndex, endIndex
+	 * @return 조회된 제품 증감폭 정보들
+	 */
+	List<ProductGap> selectProductGapListByIdentifyCodeByStoreIdAndIdentifyCode(String storeId, String identifyCode, int startIndex, int endIndex);
 	
 }
