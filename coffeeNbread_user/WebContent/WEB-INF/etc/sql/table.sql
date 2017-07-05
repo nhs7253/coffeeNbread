@@ -323,6 +323,7 @@ CREATE TABLE store_payment_optionlist (
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(payment_id) REFERENCES payment_OptionList(payment_id) ON DELETE CASCADE
 );
+
 /* 생성후 이상 확인 */
 
 /* 관리자 */

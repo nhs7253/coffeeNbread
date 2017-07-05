@@ -35,8 +35,8 @@ public class StoreCategoryDaoImplTest {
 //		System.out.println(dao.insertStoreCategory(new StoreCategory(10,"빵","s-2")));
 //		System.out.println(dao.updateStoreCategory(new StoreCategory(10,"대분류1","s-2")));
 //		System.out.println(dao.deleteStoreCategoryByNo("s-2",1));
-		System.out.println(dao.selectStoreCategoryByName("s-2","커피집"));
-
+	//	System.out.println(dao.selectStoreCategoryByName("s-2","커피집"));
+		System.out.println(dao.selectStoreCategoryListByStoreId("s-2"));
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	
 	}

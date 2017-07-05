@@ -1,5 +1,7 @@
 package com.cnb.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +26,19 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	
 	@Override
 	public int addOptionCategory(OptionCategory optionCategory) throws DuplicatedOptionCategoryNameException {
-		if(dao.selectOptionCategoryByName(optionCategory.getStoreId(), optionCategory.getOptionCategory())!=null){
-			throw new DuplicatedOptionCategoryNameException(optionCategory.getOptionCategory()+"는 이미 등록되어 있습니다.");
-		}
+		List<OptionCategory> optionCategoryList = dao.selectOptionCategoryListByStoreId(optionCategory.getStoreId());
+				
+		if(optionCategoryList.size() == 0){
 			return dao.insertOptionCategory(optionCategory);
-		
+		}else{
+			for(int i = 0;i<optionCategoryList.size();i++){
+				if((dao.selectOptionCategoryByName(optionCategoryList.get(i).getStoreId(),optionCategoryList.get(i).getOptionCategory()).getOptionCategory().equals(optionCategory.getOptionCategory()))){
+					throw new DuplicatedOptionCategoryNameException(optionCategory.getOptionCategory()+"는 이미 등록되어 있습니다.");
+				}
+			}
+		}		
+		return dao.insertOptionCategory(optionCategory);
+
 	}
 
 	@Override

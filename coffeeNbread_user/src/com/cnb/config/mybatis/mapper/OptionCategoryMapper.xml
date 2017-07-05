@@ -26,8 +26,9 @@
 		values(
 			
 			#{optionId},
-			#{optionCategory},
-			#{storeId}
+			#{storeId},
+			#{optionCategory}
+			
 			
 			
 			)
@@ -57,6 +58,15 @@
 		AND option_category = #{optionCategory}
 	</select>
  	
+ 	<!-- 옵션 카테고리 (매장 ID)로 조회 -->
+ 		<select id="selectOptionCategoryListByStoreId" parameterType="map" resultMap="optionCategory-resultmap">
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = #{storeId}
+	
+	</select>
 	<!-- 옵션카테고리 디테일 조회 -->
 	<!--
 	<select id="selectOptionDetailListByOptionCategory" parameterType="map" resultMap="optionCategory-optionDetailList-resultmap">

@@ -48,7 +48,7 @@ public class StorePictureServiceImplTest {
 	
 	
 	//매장사진 삭제
-	System.out.println(service.removeStorePicture(new StorePicture("매장사진수정2","s-2")));
+	//System.out.println(service.removeStorePicture(new StorePicture("매장사진수정2","s-2")));
 	
 	}
 	

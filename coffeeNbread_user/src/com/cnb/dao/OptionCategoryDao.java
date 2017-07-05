@@ -1,7 +1,8 @@
 package com.cnb.dao;
 
+import java.util.List;
+
 import com.cnb.vo.OptionCategory;
-import com.cnb.vo.Product;
 
 /*
  * 이진영
@@ -42,6 +43,15 @@ public interface OptionCategoryDao {
 	 * @return 조회된 카테고리정보
 	 */
 	OptionCategory selectOptionCategoryByName(String storeId, String OptionCategory);
+	
+	/**
+	 * 1개 매장 아이디로 1개의 옵션카테고리 정보 select
+	 * @param storeId, OptionCategory
+	 * @return 조회된 카테고리정보
+	 */
+	List<OptionCategory> selectOptionCategoryListByStoreId(String storeId);
+	
+	
 	/**
 	 * 옵션카테고리로 옵션 디테일  정보리스트 select
 	 * @param storeId, OptionId

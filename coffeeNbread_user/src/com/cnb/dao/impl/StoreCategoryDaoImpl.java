@@ -1,6 +1,7 @@
 package com.cnb.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,5 +54,12 @@ public class StoreCategoryDaoImpl implements StoreCategoryDao{
 		info.put("storeId", storeId);
 		info.put("storeCategory", storeCategory);
 		return session.selectOne(makeSqlId("selectStoreCategoryByName"), info);
+	}
+	@Override
+	public List<StoreCategory> selectStoreCategoryListByStoreId(String storeId) {
+
+
+		return session.selectList(makeSqlId("selectStoreCategoryListByStoreId"), storeId);
+	
 	}
 }

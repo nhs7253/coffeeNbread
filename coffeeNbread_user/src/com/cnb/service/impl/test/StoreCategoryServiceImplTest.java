@@ -24,6 +24,16 @@ public class StoreCategoryServiceImplTest {
 
 			// 매장 카테고리 
 			// 겹치는 거 없는 경우 + 겹칠때 예외처리
+			StoreCategory sc1=new StoreCategory(16, "커피3", "s-2");
+			try {
+				
+				service.addStoreCategory(sc1); 
+				// service.addProduct(p3);
+				System.out.println("등록 성공");
+			} catch (DuplicatedStoreCategorytNameException e) {
+				System.err.println(e.getMessage());
+			}
+			
 			
 			/*StoreCategory sc1=new StoreCategory(3, "빵집", "s-2");
 			
@@ -42,7 +52,7 @@ public class StoreCategoryServiceImplTest {
 			System.out.println("수정 성공");
 		*/
 			System.out.println("==매장삭제==");
-			System.out.println(service.removeStoreCategoryByNo("s-2",4));
+			//System.out.println(service.removeStoreCategoryByNo("s-2",4));
 			
 			System.out.println("-------------------완료 ---------------");
 		}
