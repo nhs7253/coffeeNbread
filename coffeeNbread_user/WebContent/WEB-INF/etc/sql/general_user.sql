@@ -108,7 +108,37 @@ SELECT   user_id, user_pw, user_name, user_birth,
 			WHERE rnum >= 3
 
 
+			SELECT COUNT(*) 
+			FROM(
+					SELECT rownum rnum, 
+	  					   user_id, 
+	  					   user_pw,  
+	  					   user_name, 
+	  					   user_birth, 
+	  					   user_gender, 
+	  					   user_email, 
+	  					   user_phone, 
+	  					   user_address, 
+	  					   user_active_state  
+					FROM(
+						SELECT user_id, 
+	  					       user_pw,  
+	  					       user_name, 
+	  					       user_birth, 
+	  					       user_gender, 
+	  					       user_email, 
+	  					       user_phone, 
+	  					       user_address, 
+	  					       user_active_state 
+						FROM general_user
+							
+						ORDER BY user_name
+					) 
+					WHERE rownum <= 1
+			)
+			WHERE rnum >= 3
 
+			
 			
 			
 			SELECT user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state
@@ -124,3 +154,19 @@ SELECT   user_id, user_pw, user_name, user_birth,
 					WHERE rownum <= 1
 			)
 			WHERE rnum >= 30
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		

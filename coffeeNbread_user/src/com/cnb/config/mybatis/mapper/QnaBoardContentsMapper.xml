@@ -1,5 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.cnb.config.mybatis.mapper.qnaBoardContentsMapper">
+<mapper namespace="com.cnb.config.mybatis.mapper.qnaBoardContentsMapper">
+	
+	<sql id="all-column">
+		qna_board_no,
+		qna_store_id,
+		qna_board_writer,
+		qna_board_title,
+		qna_board_content,
+		qna_board_date,
+		qna_board_hits,
+		qna_board_secret
+	</sql>
+	
+	<resultMap type="QnaBoardContents" id="QnaBoardContents-resultmap">
+		<id column="qna_board_no" property="qnaBoardNo"/>
+		<result column="qna_store_id" property="qnaStoreId"/>
+		<result column="qna_board_writer" property="qnaBoardWriter"/>
+		<result column="qna_board_title" property="qnaBoardTitle"/>
+		<result column="qna_board_content" property="qnaBoardContent"/>
+		<result column="qna_board_date" property="qnaBoardDate"/>
+		<result column="qna_board_hits" property="qnaBoardHits"/>
+		<result column="qna_board_secret" property="qnaBoardSecret"/>
+	</resultMap>
+	
+		
+	<insert id="insertQnaBoardContents" parameterType="QnaBoardContents">
+		<selectKey keyProperty="qnaBoardNo" resultType="_int" order="BEFORE">
+			SELECT qna_board_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO qna_board_contents VALUES(#{qnaBoardNo},
+											  #{qnaStoreId},
+											  #{qnaBoardWriter},
+											  #{qnaBoardTitle},
+											  #{qnaBoardContent},
+											  #{qnaBoardDate},
+											  #{qnaBoardHits},
+											  #{qnaBoardSecret})
+	</insert>
+	
+	<delete id="deleteQnaBoardContents" parameterType="string">
+		DELETE FROM qna_board_contents WHERE qna_board_no = #{value}
+	</delete>
+	
+	<delete id="deleteQnaBoardContentsAll">
+		DELETE FROM qna_board_contents
+	</delete>
+	
+	<update id="updateQnaBoardContents" parameterType="QnaBoardContents">
+		UPDATE qna_board_contents 
+		SET qna_store_id = #{qnaStoreId},
+			qna_board_writer = #{qnaBoardWriter},
+			qna_board_title = #{qnaBoardTitle},
+			qna_board_content = #{qnaBoardContent},
+			qna_board_date = #{qnaBoardDate},
+			qna_board_hits = #{qnaBoardHits},
+			qna_board_secret = #{qnaBoardSecret}
+		WHERE qna_board_no = #{qnaBoardNo}
+	</update>
+	
+	<select id="selectQnaBoardContentsList" resultMap="QnaBoardContents-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM qna_board_contents
+	</select>
+	
+	<select id="selectQnaBoardContentsPagingCount" parameterType="map" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM qna_board_contents
+		<choose>
+			<when test="select == 'title' and storeId == null">
+				WHERE qna_board_title LIKE '%'||#{keyword}||'%' AND qna_store_id IS NULL
+			</when>
+				<when test="select == 'title' and storeId != null">
+				WHERE qna_board_title LIKE '%'||#{keyword}||'%' AND qna_store_id = #{storeId}
+			</when>
+								
+			<when test="select == 'content' and storeId == null">
+				WHERE qna_board_content LIKE '%'||#{keyword}||'%' AND qna_store_id IS NULL
+			</when>
+			<when test="select == 'content' and storeId != null">
+				WHERE qna_board_content LIKE '%'||#{keyword}||'%' AND qna_store_id = #{storeId}
+			</when>
+							
+			<when test="select == 'titleAndcontent' and storeId == null">
+				WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%') AND qna_store_id IS NULL
+			</when>
+			<when test="select == 'titleAndcontent' and storeId != null">
+				WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR(qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id = #{storeId}
+			</when>
+			<otherwise>
+				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+			</otherwise>		
+		</choose>
+		
+	</select>
+	
+	<select id="selectQnaBoardContentsPagingList" parameterType="map" resultMap="QnaBoardContents-resultmap">
+		SELECT <include refid="all-column"/> 
+			FROM(
+					SELECT rownum rnum, 
+	  					   <include refid="all-column"/>  
+					FROM(
+						SELECT <include refid="all-column"/> 
+						FROM qna_board_contents
+						<choose>
+							<when test="select == 'title' and storeId == null">
+								WHERE qna_board_title LIKE '%'||#{keyword}||'%' AND qna_store_id IS NULL
+							</when>
+							<when test="select == 'title' and storeId != null">
+								WHERE qna_board_title LIKE '%'||#{keyword}||'%' AND qna_store_id = #{storeId}
+							</when>
+								
+							<when test="select == 'content' and storeId == null">
+								WHERE qna_board_content LIKE '%'||#{keyword}||'%' AND qna_store_id IS NULL
+							</when>
+							<when test="select == 'content' and storeId != null">
+								WHERE qna_board_content LIKE '%'||#{keyword}||'%' AND qna_store_id = #{storeId}
+							</when>
+							
+							<when test="select == 'titleAndcontent' and storeId == null">
+								WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR (qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id IS NULL
+							</when>
+							<when test="select == 'titleAndcontent' and storeId != null">
+								WHERE ((qna_board_title LIKE '%'||#{keyword}||'%') OR(qna_board_content LIKE '%'||#{keyword}||'%')) AND qna_store_id = #{storeId}
+							</when>
+							<otherwise>
+								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+							</otherwise>		
+						</choose>
+						ORDER BY qna_board_no
+					) 
+					WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
+	
 </mapper>
