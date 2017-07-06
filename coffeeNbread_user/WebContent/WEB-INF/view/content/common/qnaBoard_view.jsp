@@ -6,33 +6,35 @@
 <body>
 	
 
-	<h2>${sessionScope.storeName }Q&A 게시판</h2>
+	
+	<h1>게시글 내용</h1><hr><br>
+	
+		제목 : <input type="text" value="${requestScope.content.qnaBoardTitle }" disabled><br>
+		내용<br>
+		 <textarea rows="20" cols="100" disabled>
+		 	${requestScope.content.qnaBoardContent }
+		 </textarea>
+		
+		<p/>
+		
+		<form action="${initParam.rootPath }/user/QnA_board_update_form.do">
+			<sec:csrfInput/>
+			<input type="submit" value="수정">
+		</form>
+		
+		<form action="${initParam.rootPath }/user/removeQnaBoardContents.do">
+			<sec:csrfInput/>
+			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
+			<input type="hidden" name="qnaStoreId" value="${requestScope.content.qnaStoreId }"/>
+			<input type="submit" value="삭제">
+		</form>
+	
 
 
-
-	<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do" method="post">
-		<select name="select">
-			<option value="title">제목</option>
-			<option value="content">내용</option>
-			<option value="titleAndcontent">제목+내용</option>
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	</form>
-	<br>
 
 
 	
 	<table class="w3-table-all">
-		<thead>
-			<tr class="w3-blue">
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-				<th>비밀글</th>
-			</tr>
-		</thead>
 		<tbody>
 
 			<%-- ######################################################
@@ -41,12 +43,10 @@
 			<c:forEach items="${requestScope.list }" var="list">
 
 				<tr>
-					<td>${list.qnaBoardNo}</td>
-					<td><a href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}">${list.qnaBoardTitle}</a></td>
-					<td>${list.qnaBoardWriter}</td>
-					<td>${list.qnaBoardDateFormat}</td>
-					<td>${list.qnaBoardHits}</td>
-					<td>${list.qnaBoardSecret}</td>
+					<td>${list.replyNo}</td>
+					<td>${list.replyContent}</td>
+					<td>${list.replyName}</td>
+					<td>${list.replyRegDateFormat}</td>
 				</tr>
 			</c:forEach>
 
@@ -64,7 +64,7 @@
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">첫페이지</a>
+			href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=1&qnaBoardNo=${requestScope.content.qnaBoardNo}">첫페이지</a>
 
 
 		<!--
@@ -75,7 +75,7 @@
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">◀</a>
+					href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.beginPage-1}&qnaBoardNo=${requestScope.content.qnaBoardNo}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -98,7 +98,7 @@
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${page}&qnaBoardNo=${requestScope.content.qnaBoardNo}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -116,7 +116,7 @@
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">▶</a>
+					href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.endPage+1}&qnaBoardNo=${requestScope.content.qnaBoardNo}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -128,7 +128,7 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
+			href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.qnaBoardNo}">마지막
 			페이지</a>
 
 

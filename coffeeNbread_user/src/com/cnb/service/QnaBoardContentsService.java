@@ -51,5 +51,11 @@ public interface QnaBoardContentsService {
 	 */
 	Map<String, Object> findQnaBoardContentsBySelectToKeyword(String select, String keyword, String storeId, int page);
 	
-	
+	/**
+	 * Q&A 게시글의 내용과 댓글 목록을 조회하는 서비스
+	 * @param qnaBoardNo int 글 번호
+	 * @param page int 보려는 페이지 번호
+	 * @return Map<String, Object> 페이징을 위한 정보 결과
+	 */
+	Map<String, Object> viewQnaBoardContentsByReplyListService(int qnaBoardNo, int page);
 }
