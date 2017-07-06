@@ -41,6 +41,8 @@
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?storeId=service-qna-s-1">매장 Q&A 게시판 목록</a></li>
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
+<li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
+
 </ul>
 
 

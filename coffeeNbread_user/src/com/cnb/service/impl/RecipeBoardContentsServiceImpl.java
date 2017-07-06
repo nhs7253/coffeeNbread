@@ -68,8 +68,7 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 		
 		HashMap<String, Object> map = new HashMap<>();
 		// item 수
-		System.out.println("Service에서의 method:"+method);
-		System.out.println("Service에서의 methodContent:"+methodContent);
+
          /* 회원이든 비회원이든 방법에따라 전부다 조회 했을떄 나오는 개수 */
 		int totalCount = dao.countSelectRecipeBoardContentsByMethod(method, methodContent);
 	    System.out.println("totalCount:"+totalCount);    

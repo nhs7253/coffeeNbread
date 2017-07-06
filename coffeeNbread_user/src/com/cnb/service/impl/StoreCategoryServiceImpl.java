@@ -22,19 +22,25 @@ public class StoreCategoryServiceImpl implements StoreCategoryService{
 	
 
 	@Override
-	public int addStoreCategory(StoreCategory storeCategory) throws DuplicatedStoreCategorytNameException {
+	public void addStoreCategory(List<StoreCategory> storeCategoryList) throws DuplicatedStoreCategorytNameException {
 		
-		List<StoreCategory> storeCategoryList = dao.selectStoreCategoryListByStoreId(storeCategory.getStoreId());
-		if(storeCategoryList.size() == 0){
-			return  dao.insertStoreCategory(storeCategory);
+		List<StoreCategory> storeCategoryList2 = dao.selectStoreCategoryListByStoreId(storeCategoryList.get(0).getStoreId());
+		
+		
+		if(storeCategoryList2.size() == 0){
+			for(int i = 0;i<storeCategoryList.size();i++)  
+			dao.insertStoreCategory(storeCategoryList.get(i));
 		}else{
 			for(int i = 0; i<storeCategoryList.size();i++){
-				
-				if((((dao.selectStoreCategoryByName(storeCategoryList.get(i).getStoreId(), storeCategoryList.get(i).getStoreCategory())).getStoreCategory()).equals(storeCategory.getStoreCategory()))){
-					throw new DuplicatedStoreCategorytNameException(storeCategory.getStoreCategory()+"이미 등록되어 있습니다.");
+				for(int j = 0;j<storeCategoryList.size();j++){
+					if((dao.selectStoreCategoryByName(storeCategoryList.get(j).getStoreId(), storeCategoryList.get(j).getStoreCategory()))!=null){ 
+						if(((dao.selectStoreCategoryByName(storeCategoryList.get(j).getStoreId(), storeCategoryList.get(j).getStoreCategory())).getStoreCategory()).equals(storeCategoryList.get(i).getStoreCategory())){
+							throw new DuplicatedStoreCategorytNameException(storeCategoryList.get(i).getStoreCategory()+"이미 등록되어 있습니다.");
+						}
+					}else 
+					dao.insertStoreCategory(storeCategoryList.get(i));
 				}
 			}}
-		return  dao.insertStoreCategory(storeCategory);
 		
 		
 	}

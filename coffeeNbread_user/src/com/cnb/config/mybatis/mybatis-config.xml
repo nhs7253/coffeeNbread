@@ -44,6 +44,7 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/NoticeBoardContentsMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/QnaBoardContentsMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/RecipeBoardContentsMapper.xml" />
+		<mapper resource="com/cnb/config/mybatis/mapper/BoardReplyMapper.xml" />
 		
 		<!--결제 종류 관련  -->
 		<mapper resource="com/cnb/config/mybatis/mapper/PaymentOptionListMapper.xml" />

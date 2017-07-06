@@ -8,17 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${initParam.rootPath }/addStoreController.do" method="post">
+	<form action="${initParam.rootPath }/addStoreController.do" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<table>
 			<tr>
 				<th>매장 분류</th>
-				<td><input type="text" name="StoreCategory"><input type="button" value="추가하기"></td>
+				<td><input type="text" name="storeCategoryList"><input type="button" value="추가하기"></td>
 			</tr>
 			
 			<tr>
 				<th>옵션 카테고리</th>
-				<td><input type="text" name="OptionCategory"><input type="button" value="추가하기"></td>
+				<td><input type="text" name="optionCategoryList"><input type="button" value="추가하기"></td>
 			</tr>
 			
 			<tr>
@@ -48,7 +48,7 @@
 			</tr>
 			<tr>
 				<th>매장 사진</th>
-				<td><input type="button" name = "storePicture" value="찾아보기"></td>
+				<td><input type="file" name="storePictureList" multiple></td>
 			</tr>
 			<tr>
 				<th>매장 위치</th>

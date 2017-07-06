@@ -1,6 +1,9 @@
 package com.cnb.vo;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /*
  * 이진영 
@@ -18,7 +21,7 @@ public class StorePicture implements Serializable{
 	 ***************************************************/
 	private String storeId;
 	private Store store;
-	
+	private List<MultipartFile> storePictureList; 
 	public StorePicture(String storePicture, String storeId) {
 		super();
 		this.storePicture = storePicture;
@@ -34,6 +37,15 @@ public class StorePicture implements Serializable{
 	public StorePicture() {
 		super();
 	}
+	
+	public List<MultipartFile> getStorePictureList() {
+		return storePictureList;
+	}
+
+	public void setStorePictureList(List<MultipartFile> storePictureList) {
+		this.storePictureList = storePictureList;
+	}
+
 	public String getStorePicture() {
 		return storePicture;
 	}

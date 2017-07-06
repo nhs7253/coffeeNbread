@@ -163,15 +163,13 @@ CREATE TABLE board_reply (
 );
 CREATE SEQUENCE reply_no_seq;
 
-/* 추천수 */
-CREATE TABLE board_recommend (
+/* 추천수 */ --매장아이디 삭제( '김형주'- 0706수정)
+CREATE TABLE board_recommend (  
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	recipe_board_no NUMBER NOT NULL, /* 레시피 글번호 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	PRIMARY KEY(user_id, recipe_board_no, store_id),
+	PRIMARY KEY(user_id, recipe_board_no),
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
-	FOREIGN KEY(recipe_board_no) REFERENCES recipe_board_contents(recipe_board_no) ON DELETE CASCADE,
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
+	FOREIGN KEY(recipe_board_no) REFERENCES recipe_board_contents(recipe_board_no) ON DELETE CASCADE
 );
 
 /* 결제 내역 */
@@ -486,10 +484,6 @@ DROP SEQUENCE option_id_seq;
 DROP SEQUENCE store_visit_history_no_seq;
 
 
-		SELECT option_category,
-				store_id,
-				option_id
-		FROM option_category
-		WHERE store_id = 's-2'
+	
 
 

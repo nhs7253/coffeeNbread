@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.cnb.dao.OptionDetailDao;
 import com.cnb.dao.ProductDao;
+import com.cnb.dao.ProductGapDao;
 import com.cnb.exception.DuplicatedProductIdOrProductNameException;
 import com.cnb.exception.ProductNotFoundException;
 import com.cnb.service.ProductService;
 import com.cnb.util.PagingBean;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
+import com.cnb.vo.ProductGap;
 
 /*
  * 최민희
@@ -27,7 +29,10 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDao dao;
 
 	@Autowired
-	private OptionDetailDao optionDetaildao;
+	private OptionDetailDao optionDetailDao;
+	
+	@Autowired
+	private ProductGapDao productGapDao;
 	
 	@Override
 	public int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException {
@@ -38,7 +43,11 @@ public class ProductServiceImpl implements ProductService {
 		}else {
 			int cnt = dao.insertProduct(product);
 			
-			optionDetaildao.insertOptionDetail(optionDetail);
+			optionDetailDao.insertOptionDetail(optionDetail);
+			
+			//제품 등록시에는 모두 제품 등록폼을 유지, 0%로 등록
+			productGapDao.insertProductGap(new ProductGap("K", "0", product.getProductId(), product.getStoreId()));
+			
 			return cnt;
 		}
 	}
@@ -51,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
 			throw new ProductNotFoundException(String.format("ID가 %s 인 제품이 없습니다.", product.getProductId()));
 		}else{
 			int cnt =  dao.updateProduct(product);
-			optionDetaildao.updateOptionDetail(optionDetail);
+			optionDetailDao.updateOptionDetail(optionDetail);
 			return cnt;
 		}
 	}
@@ -118,7 +127,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void removeOptionDetail(Product product, OptionDetail optionDetail) {
 		if(dao.selectProductBySellingOption(product.getStoreId(),"N", product.getProductName())!=null){
-			optionDetaildao.deleteOptionDetailByProductId(optionDetail.getStoreId(), optionDetail.getProductId());
+			optionDetailDao.deleteOptionDetailByProductId(optionDetail.getStoreId(), optionDetail.getProductId());
 
 		}
 	}

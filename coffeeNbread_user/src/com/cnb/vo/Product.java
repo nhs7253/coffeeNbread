@@ -40,6 +40,8 @@ public class Product implements Serializable {
 	 *********************************************************************/
 	private List<ProductPicture> productPictureList; 
 
+	private String optionCategory;
+	
 	public Product() {
 		super();
 	}
@@ -89,6 +91,24 @@ public class Product implements Serializable {
 		this.storeId = storeId;
 		this.store = store;
 		this.productPictureList = productPictureList;
+	}
+	
+	public Product(String productId, String productName, int productPrice, String productCategory, String productDetail,
+			String sellingOption, int todayProductCount, int recommendProductCount, String storeId, Store store,
+			List<ProductPicture> productPictureList, String optionCategory) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.productDetail = productDetail;
+		this.sellingOption = sellingOption;
+		this.todayProductCount = todayProductCount;
+		this.recommendProductCount = recommendProductCount;
+		this.storeId = storeId;
+		this.store = store;
+		this.productPictureList = productPictureList;
+		this.optionCategory = optionCategory;
 	}
 
 	public String getProductId() {
@@ -178,6 +198,14 @@ public class Product implements Serializable {
 	public void setStore(Store store) {
 		this.store = store;
 	}
+	
+	public String getOptionCategory() {
+		return optionCategory;
+	}
+
+	public void setOptionCategory(String optionCategory) {
+		this.optionCategory = optionCategory;
+	}
 
 	@Override
 	public String toString() {
@@ -185,20 +213,23 @@ public class Product implements Serializable {
 				+ ", productCategory=" + productCategory + ", productDetail=" + productDetail + ", sellingOption="
 				+ sellingOption + ", todayProductCount=" + todayProductCount + ", recommendProductCount="
 				+ recommendProductCount + ", storeId=" + storeId + ", store=" + store + ", productPictureList="
-				+ productPictureList + "]";
+				+ productPictureList + ", optionCategory=" + optionCategory + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((optionCategory == null) ? 0 : optionCategory.hashCode());
 		result = prime * result + ((productCategory == null) ? 0 : productCategory.hashCode());
 		result = prime * result + ((productDetail == null) ? 0 : productDetail.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((productPictureList == null) ? 0 : productPictureList.hashCode());
 		result = prime * result + productPrice;
 		result = prime * result + recommendProductCount;
 		result = prime * result + ((sellingOption == null) ? 0 : sellingOption.hashCode());
+		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		result = prime * result + todayProductCount;
 		return result;
@@ -213,6 +244,11 @@ public class Product implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
+		if (optionCategory == null) {
+			if (other.optionCategory != null)
+				return false;
+		} else if (!optionCategory.equals(other.optionCategory))
+			return false;
 		if (productCategory == null) {
 			if (other.productCategory != null)
 				return false;
@@ -233,6 +269,11 @@ public class Product implements Serializable {
 				return false;
 		} else if (!productName.equals(other.productName))
 			return false;
+		if (productPictureList == null) {
+			if (other.productPictureList != null)
+				return false;
+		} else if (!productPictureList.equals(other.productPictureList))
+			return false;
 		if (productPrice != other.productPrice)
 			return false;
 		if (recommendProductCount != other.recommendProductCount)
@@ -241,6 +282,11 @@ public class Product implements Serializable {
 			if (other.sellingOption != null)
 				return false;
 		} else if (!sellingOption.equals(other.sellingOption))
+			return false;
+		if (store == null) {
+			if (other.store != null)
+				return false;
+		} else if (!store.equals(other.store))
 			return false;
 		if (storeId == null) {
 			if (other.storeId != null)
@@ -251,4 +297,5 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
+
 }
