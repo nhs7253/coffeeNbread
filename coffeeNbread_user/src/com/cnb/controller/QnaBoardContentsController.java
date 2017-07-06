@@ -1,21 +1,11 @@
 package com.cnb.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,14 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cnb.exception.UserManageException;
-import com.cnb.service.GeneralUserService;
 import com.cnb.service.QnaBoardContentsService;
-import com.cnb.validation.annotation.GeneralUserForm;
-import com.cnb.validation.annotation.GeneralUserViewForm;
 import com.cnb.validation.annotation.QnaBoardContentsForm;
 import com.cnb.validation.annotation.QnaBoardContentsViewForm;
-import com.cnb.vo.GeneralUser;
 import com.cnb.vo.QnaBoardContents;
 
 /*
@@ -107,6 +92,6 @@ public class QnaBoardContentsController {
 		return modelAndView;
 	}
 	
-	//댓글 완성 후 상세 내용 추가
+	//댓글 완성 후 상세 내용 추가 
 	
 }
