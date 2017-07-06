@@ -1,6 +1,8 @@
 package com.cnb.service;
 
 
+import java.util.List;
+
 import com.cnb.exception.DuplicatedStorePictureException;
 import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.vo.StorePicture;
@@ -16,7 +18,7 @@ public interface StorePictureService {
 	 * @param StorePicture
 	 * @throws DuplicatedProductPictureException 한 제품에 등록하려는 제품 사	진이 이미 등록되 있는 경우 발생
 	 */
-	int addStorePicture(StorePicture storePicture) throws DuplicatedStorePictureException;
+	void addStorePicture(List<StorePicture> storePicture) throws DuplicatedStorePictureException;
 	
 	/**
 	 * 1개의 매장 사진 정보 수정

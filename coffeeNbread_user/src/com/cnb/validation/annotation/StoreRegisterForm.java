@@ -8,12 +8,12 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StoreEvent;
-import com.cnb.vo.StorePicture;
 
 /*
  * 노현식
@@ -27,14 +27,10 @@ public class StoreRegisterForm implements Serializable{
 	private String storeId;
 	@NotEmpty
 	private String storeName;
-	private String storeCategory;
-	private String optionCategory;
-	@NotEmpty
-	private String storePicture;
+	private List<MultipartFile> storePicture;
 	private String storeIntro;
 	@NotEmpty
 	private String storePhone;
-
 	private String storeAddress;
 	@NotEmpty
 	private String storeEmail;
@@ -46,29 +42,25 @@ public class StoreRegisterForm implements Serializable{
 	@DateTimeFormat(pattern="hh:mm")
 	private Date storeClose;
 	private String storePermission="N";
-	private List<StorePicture> storePictureList;
+	private List<MultipartFile> storePictureList;
 	private List<StoreEvent> storeEventList;
-	private List<OptionCategory> optionCategoryList;
+	
+	private List<String> optionCategoryList;
 	private List<OptionDetail> optionDetailList;
-	private List<StoreCategory> storeCategoryList;
+	private List<String> storeCategoryList;
 
 	
-	public List<StorePicture> getStorePictureList() {
-		return storePictureList;
-	}
-	public void setStorePictureList(List<StorePicture> storePictureList) {
-		this.storePictureList = storePictureList;
-	}
+	
 	public List<StoreEvent> getStoreEventList() {
 		return storeEventList;
 	}
 	public void setStoreEventList(List<StoreEvent> storeEventList) {
 		this.storeEventList = storeEventList;
 	}
-	public List<OptionCategory> getOptionCategoryList() {
+	public List<String> getOptionCategoryList() {
 		return optionCategoryList;
 	}
-	public void setOptionCategoryList(List<OptionCategory> optionCategoryList) {
+	public void setOptionCategoryList(List<String> optionCategoryList) {
 		this.optionCategoryList = optionCategoryList;
 	}
 	public List<OptionDetail> getOptionDetailList() {
@@ -77,10 +69,10 @@ public class StoreRegisterForm implements Serializable{
 	public void setOptionDetailList(List<OptionDetail> optionDetailList) {
 		this.optionDetailList = optionDetailList;
 	}
-	public List<StoreCategory> getStoreCategoryList() {
+	public List<String> getStoreCategoryList() {
 		return storeCategoryList;
 	}
-	public void setStoreCategoryList(List<StoreCategory> storeCategoryList) {
+	public void setStoreCategoryList(List<String> storeCategoryList) {
 		this.storeCategoryList = storeCategoryList;
 	}
 	public String getStoreId() {
@@ -143,24 +135,15 @@ public class StoreRegisterForm implements Serializable{
 	public void setStorePermission(String storePermission) {
 		this.storePermission = storePermission;
 	}
-	public String getStoreCategory() {
-		return storeCategory;
+	
+	public List<MultipartFile> getStorePictureList() {
+		return storePictureList;
 	}
-	public void setStoreCategory(String storeCategory) {
-		this.storeCategory = storeCategory;
+	public void setStorePictureList(List<MultipartFile> storePictureList) {
+		this.storePictureList = storePictureList;
 	}
-	public String getOptionCategory() {
-		return optionCategory;
-	}
-	public void setOptionCategory(String optionCategory) {
-		this.optionCategory = optionCategory;
-	}
-	public String getStorePicture() {
-		return storePicture;
-	}
-	public void setStorePicture(String storePicture) {
-		this.storePicture = storePicture;
-	}
+
+	
 	
 	
 	
