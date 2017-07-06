@@ -25,4 +25,8 @@ public interface OptionCategoryService {
 	* @param storeId optionId
 		 */
 	 int removeOptionCategory(String storeId,int optionId);
+	 
+	 List<OptionCategory> findOptionCategoryList(String storeId);
+	 
+	 String findOptionCategoryByOptionId(int optionId);
 }

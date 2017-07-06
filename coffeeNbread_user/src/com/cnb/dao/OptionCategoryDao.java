@@ -58,5 +58,8 @@ public interface OptionCategoryDao {
 	 * @return 조회된 옵션 디테일
 	 *//*
 	List<OptionCategory> selectOptionDetailListByOptionCategory(String storeId,int OptionId);
+	
+	
 */
+	String selectOptionCategoryByOptionId(int optionId);
 }
