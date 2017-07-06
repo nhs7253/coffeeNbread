@@ -20,7 +20,7 @@ public interface ProductService {
 	 * - 제품 등록시 사진, 제품증감폭도 함께 등록해야함
 	 * - 제품 등록시 제품 카테고리 안에 제품을 등록해야함
 	 */
-	int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException;
+	int addProduct(Product product, OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 수정

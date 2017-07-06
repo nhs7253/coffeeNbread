@@ -60,4 +60,10 @@ public class OptionCategoryDaoImpl implements OptionCategoryDao{
 	public List<OptionCategory> selectOptionCategoryListByStoreId(String storeId) {
 		return session.selectList(makeSqlId("selectOptionCategoryListByStoreId"),storeId);
 	}
+	@Override
+	public String selectOptionCategoryByOptionId(int optionId) {
+		return session.selectOne(makeSqlId("selectOptionCategoryByOptionId"), optionId);
+	}
+	
+	
 }

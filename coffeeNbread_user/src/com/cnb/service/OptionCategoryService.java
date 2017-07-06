@@ -1,7 +1,8 @@
 package com.cnb.service;
 
-import com.cnb.exception.DuplicatedOptionCategoryNameException;
+import java.util.List;
 
+import com.cnb.exception.DuplicatedOptionCategoryNameException;
 import com.cnb.vo.OptionCategory;
 
 public interface OptionCategoryService {
@@ -24,4 +25,8 @@ public interface OptionCategoryService {
 	* @param storeId optionId
 		 */
 	 int removeOptionCategory(String storeId,int optionId);
+	 
+	 List<OptionCategory> findOptionCategoryList(String storeId);
+	 
+	 String findOptionCategoryByOptionId(int optionId);
 }

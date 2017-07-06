@@ -82,5 +82,10 @@
 	</select>
  -->
 
-
+	<!-- 옵션아이디로 옵션이름 조회 -->
+	<select id="selectOptionCategoryByOptionId" parameterType="int" resultType="string">
+	SELECT option_category
+	FROM   option_category
+	WHERE  option_id = #{option_id}
+	</select>
 </mapper>
