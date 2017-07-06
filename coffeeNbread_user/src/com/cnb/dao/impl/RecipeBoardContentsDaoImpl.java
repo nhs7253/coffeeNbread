@@ -158,4 +158,12 @@ public class RecipeBoardContentsDaoImpl implements RecipeBoardContentsDao {
 
 	}
 
+	 /* 레시피 게시번호를 통해 레시피게시객체를 가져오는것.*/
+	@Override
+	public RecipeBoardContents selectRecipeBoardContentsByrecipeBoardNo(int recipeBoardNo) {
+		
+		
+		return session.selectOne(makeSqlId("selectRecipeBoardContentsByrecipeBoardNo"), recipeBoardNo);
+	}
+
 }

@@ -123,41 +123,15 @@ public interface RecipeBoardContentsDao {
 	
 	
 	
-	
-	
-	
-	
-	
-	/*int selectRecipeBoardListPagingCountByMethod(String method, int startIndex, int endIndex);
-	
-	*//**
-	 * 전체 목록 -방법에 의한 페이징 List
-	 * @param method
-	 * @param startIndex
-	 * @param endIndex
+	/**
+	 * 레시피게시번호를 통해 레시피게시글객체를 가져오는것.
+	 * @param recipeBoardNo
 	 * @return
-	 *//*
-	List<RecipeBoardContents> selectRecipeBoardContentsPagingListByMethod(String method,String methodContent, int startIndex, int endIndex);
+	 */
+	RecipeBoardContents selectRecipeBoardContentsByrecipeBoardNo(int recipeBoardNo);
 	
 	
-	*//**
-	 * 유저든 비회원이든 매장에 들어가서 조건별
-	 * 매장- 전체목록-방법에 의한 페이징 개수
-	 * @param storeId
-	 * @param method
-	 * @param startIndex
-	 * @param endIndex
-	 * @return
-	 *//*
-	int selectRecipeBoardContentsPagingCountByStoreIdAndMethod(String storeId,String method, int startIndex, int endIndex);
 	
-	*//**
-	 * 매장- 전체목록 -방법에 의한 페이징 List
-	 * @param storeId
-	 * @param method
-	 * @param startIndex
-	 * @param endIndex
-	 * @return
-	 *//*
-	List<RecipeBoardContents> selectRecipeBoardContentsListPagingByStoreIdAndMethod(String storeId, String method, int startIndex, int endIndex);*/
+	
+
 }
