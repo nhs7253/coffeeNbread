@@ -17,8 +17,7 @@ public interface StoreCategoryService {
 	 * @param StoreCategory
 	 * @return 처리 개수
 	 */
-	int addStoreCategory(StoreCategory storeCategory) throws DuplicatedStoreCategorytNameException
-;
+	void addStoreCategory(List<StoreCategory> storeCategoryList) throws DuplicatedStoreCategorytNameException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 매장 카테고리 수정

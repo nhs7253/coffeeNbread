@@ -24,4 +24,5 @@ public interface OptionDetailService {
 	* @param storeId optionId
 		 */
 	 int removeOptionDetail(String storeId,int optionId);
+	 
 }

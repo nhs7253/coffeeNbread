@@ -48,8 +48,18 @@
 
 
 	<!-- 매장 등록 폼 -->
-	
 	<mvc:view-controller path="/store/store_register.do" view-name="store/store_register.tiles"/>
+	
+	<!-- 내 매장 조회 폼 -->
+	<mvc:view-controller path="/store/store_success.do" view-name="store/store_success.tiles"/>
+	
+	
+	<!-- 제품 등록 폼 -->
+	<mvc:view-controller path="/store/product_register.do" view-name="store/product_register.tiles"/>
+	<!-- 제품 등록 성공 폼 -->
+	<mvc:view-controller path="/store/product_success.do" view-name="store/product_success.tiles"/>
+	
+	
 	
 	<!-- bean -->
 	<!--  -->

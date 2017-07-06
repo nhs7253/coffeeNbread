@@ -19,7 +19,7 @@
 <!--옵션 카테고리 insert  -->
 
 	<insert id="insertOptionCategory" parameterType="com.cnb.vo.OptionCategory">
-		<selectKey resultType="_int" keyProperty="optionId" >
+		<selectKey resultType="_int" keyProperty="optionId" order="BEFORE">
 			select option_id_seq.nextval from dual
 		</selectKey>
 		INSERT INTO option_category
@@ -82,5 +82,10 @@
 	</select>
  -->
 
-
+	<!-- 옵션아이디로 옵션이름 조회 -->
+	<select id="selectOptionCategoryByOptionId" parameterType="int" resultType="string">
+	SELECT option_category
+	FROM   option_category
+	WHERE  option_id = #{option_id}
+	</select>
 </mapper>

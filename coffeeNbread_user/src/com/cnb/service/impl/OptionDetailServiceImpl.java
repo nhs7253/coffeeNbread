@@ -13,7 +13,7 @@ public class OptionDetailServiceImpl implements OptionDetailService{
 
 	@Autowired
 	private OptionDetailDao dao;
-	
+
 	@Override
 	public int addOptionDetail(OptionDetail optionDetail) throws DuplicatedOptionDetailNameException {
 		if(dao.selectOptionDetailByOptionDetailName(optionDetail.getStoreId(), optionDetail.getOptionId(), optionDetail.getOptionCategoryDetail())!=null){
@@ -35,5 +35,7 @@ public class OptionDetailServiceImpl implements OptionDetailService{
 		
 		return dao.deleteOptionDetail(storeId, optionId);
 	}
+
+	
 
 }

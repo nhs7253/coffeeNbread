@@ -29,6 +29,13 @@ public class StoreCategory implements Serializable{
 		this.storeCategory = storeCategory;
 		this.storeId = storeId;
 	}
+	
+	
+
+	public StoreCategory(String storeCategory, String storeId) {
+		this.storeCategory = storeCategory;
+		this.storeId = storeId;
+	}
 
 	public StoreCategory(int storeCategoryNo, String storeCategory, String storeId, Store store) {
 		super();

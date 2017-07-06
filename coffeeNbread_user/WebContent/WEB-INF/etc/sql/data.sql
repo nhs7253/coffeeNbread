@@ -7,6 +7,7 @@ INSERT INTO GENERAL_USER VALUES('u-1','pw-1','user1',to_date('20160803', 'yyyy-m
 INSERT INTO GENERAL_USER VALUES('u-2','pw-2','user2',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
 INSERT INTO GENERAL_USER VALUES('u-3','pw-3','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
 INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-5','pw5','user5',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y','s-1');
 
 
 /* 매장 */
@@ -213,7 +214,9 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-3','p');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-4','c');
 
 
+
 delete  from recipe_board_contents
+
 
 
 

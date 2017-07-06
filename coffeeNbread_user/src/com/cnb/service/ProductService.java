@@ -17,8 +17,10 @@ public interface ProductService {
 	 * 1개의 매장에 1개의 제품 정보 추가
 	 * @param product
 	 * @throws DuplicatedIdException 한 매장에 등록하려는 제품 아이디나 이름이 이미 등록되 있는 경우 발생
+	 * - 제품 등록시 사진, 제품증감폭도 함께 등록해야함
+	 * - 제품 등록시 제품 카테고리 안에 제품을 등록해야함
 	 */
-	int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException;
+	int addProduct(Product product, OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 수정

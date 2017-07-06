@@ -25,19 +25,22 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	private OptionDetailDao detailDao;
 	
 	@Override
-	public int addOptionCategory(OptionCategory optionCategory) throws DuplicatedOptionCategoryNameException {
-		List<OptionCategory> optionCategoryList = dao.selectOptionCategoryListByStoreId(optionCategory.getStoreId());
+	public void addOptionCategory(List<OptionCategory> optionCategoryList) throws DuplicatedOptionCategoryNameException {
+		List<OptionCategory> optionCategoryList2 = dao.selectOptionCategoryListByStoreId(optionCategoryList.get(0).getStoreId());
 				
-		if(optionCategoryList.size() == 0){
-			return dao.insertOptionCategory(optionCategory);
+		if(optionCategoryList2.size() == 0){
+			for(int i = 0;i<optionCategoryList.size();i++){
+			 dao.insertOptionCategory(optionCategoryList.get(i));
+			}
 		}else{
 			for(int i = 0;i<optionCategoryList.size();i++){
-				if((dao.selectOptionCategoryByName(optionCategoryList.get(i).getStoreId(),optionCategoryList.get(i).getOptionCategory()).getOptionCategory().equals(optionCategory.getOptionCategory()))){
-					throw new DuplicatedOptionCategoryNameException(optionCategory.getOptionCategory()+"는 이미 등록되어 있습니다.");
+				for(int j = 0;j<optionCategoryList.size();j++)
+				if((dao.selectOptionCategoryByName(optionCategoryList.get(j).getStoreId(),optionCategoryList.get(j).getOptionCategory()).getOptionCategory().equals(optionCategoryList.get(i).getOptionCategory()))){
+					throw new DuplicatedOptionCategoryNameException(optionCategoryList.get(i).getOptionCategory()+"는 이미 등록되어 있습니다.");
 				}
+				dao.insertOptionCategory(optionCategoryList.get(i));
 			}
 		}		
-		return dao.insertOptionCategory(optionCategory);
 
 	}
 
@@ -63,4 +66,15 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 		}
 	}
 
+	@Override
+	public List<OptionCategory> findOptionCategoryList(String storeId) {
+		return dao.selectOptionCategoryListByStoreId(storeId);
+	}
+
+	@Override
+	public String findOptionCategoryByOptionId(int optionId) {
+		return dao.selectOptionCategoryByOptionId(optionId);
+	}
+	
+	
 }
