@@ -50,6 +50,8 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/PaymentOptionListMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StorePaymentOptionListMapper.xml" />
 		
+		<!--추천수 관련  -->
+		<mapper resource="com/cnb/config/mybatis/mapper/BoardRecommendMapper.xml" />
 		
 	</mappers>
 	 

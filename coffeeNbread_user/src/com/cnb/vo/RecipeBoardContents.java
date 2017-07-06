@@ -38,8 +38,14 @@ public class RecipeBoardContents implements Serializable {
 	
 	
 	
-	
-	 public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
+	// 추천수 작업 떄문에 만들어둠.
+	 public RecipeBoardContents(String storeId) {
+		super();
+		this.storeId = storeId;
+	}
+
+
+	public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
 			Date recipeBoardDate, int recipeBoardHits, String recipeBoardPicture, int recommendCount, String userId,
 			String storeId) {
 		super();
