@@ -68,7 +68,7 @@ public class ProductController {
 		String destDir = request.getServletContext().getRealPath("/up_image");
 		List<MultipartFile> list = productRegisterForm.getProductPictureList();
 		ArrayList<String> imageName = new ArrayList<>();	//업로드된 파일명을 저장할 list
-		
+		System.out.println("사이즈"+list.size());
 		//업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
 		for(int i = 0; i < list.size(); i++) {
 			MultipartFile mFile = list.get(i);

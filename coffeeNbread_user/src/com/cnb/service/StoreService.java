@@ -28,7 +28,7 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	public void addStore(Store store,List<StoreCategory> storeCategory,List<OptionCategory> optionCategory/*,List<StorePicture> storePicture*/) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	public void addStore(Store store,List<StoreCategory> storeCategory,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store

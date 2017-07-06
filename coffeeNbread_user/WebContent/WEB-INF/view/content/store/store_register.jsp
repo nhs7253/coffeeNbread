@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${initParam.rootPath }/addStoreController.do" method="post">
+	<form action="${initParam.rootPath }/addStoreController.do" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<table>
 			<tr>
