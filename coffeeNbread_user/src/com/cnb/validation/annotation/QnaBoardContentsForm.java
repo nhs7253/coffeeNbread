@@ -19,18 +19,18 @@ public class QnaBoardContentsForm implements Serializable {
 	@NotNull
 	private int qnaBoardNo;		//PRIMARY KEY
 	private String qnaStoreId;
-	@NotEmpty
+
 	private String qnaBoardWriter;
 	@NotEmpty
 	private String qnaBoardTitle;
 	@NotEmpty
 	private String qnaBoardContent;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@NotEmpty
+
 	private Date qnaBoardDate;
-	private String qnaBoardHits;
+	private int qnaBoardHits;
 	@NotEmpty
-	private String qnaBoardSecret;
+	private String qnaBoardSecret="N";
 	
 	public int getQnaBoardNo() {
 		return qnaBoardNo;
@@ -68,10 +68,10 @@ public class QnaBoardContentsForm implements Serializable {
 	public void setQnaBoardDate(Date qnaBoardDate) {
 		this.qnaBoardDate = qnaBoardDate;
 	}
-	public String getQnaBoardHits() {
+	public int getQnaBoardHits() {
 		return qnaBoardHits;
 	}
-	public void setQnaBoardHits(String qnaBoardHits) {
+	public void setQnaBoardHits(int qnaBoardHits) {
 		this.qnaBoardHits = qnaBoardHits;
 	}
 	public String getQnaBoardSecret() {

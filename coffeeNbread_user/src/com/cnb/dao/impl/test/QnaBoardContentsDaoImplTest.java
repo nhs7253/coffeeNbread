@@ -33,10 +33,10 @@ public class QnaBoardContentsDaoImplTest {
 		System.out.println(dao.selectQnaBoardContentsList());
 		System.out.println("전체 조회 개수 = " + dao.selectQnaBoardContentsList().size());
 		
-		dao.insertQnaBoardContents(new QnaBoardContents(10,"qna-s-1", "qna-u-1", "qna-제목1", "qna-내용1-매장 비밀글", new Date(), "0", "Y"));
-		dao.insertQnaBoardContents(new QnaBoardContents(11,"qna-s-1", "qna-u-1", "qna-제목2", "qna-내용2-매장 공개글", new Date(), "0", "N"));
-		dao.insertQnaBoardContents(new QnaBoardContents(12,null, "qna-u-1", "qna-제목3", "qna-내용3-전체 비밀글", new Date(), "0", "Y"));
-		dao.insertQnaBoardContents(new QnaBoardContents(13,null, "qna-u-1", "qna-제목4", "qna-내용4-전체 공개글", new Date(), "0", "N"));
+		dao.insertQnaBoardContents(new QnaBoardContents(10,"qna-s-1", "qna-u-1", "qna-제목1", "qna-내용1-매장 비밀글", new Date(), 0, "Y"));
+		dao.insertQnaBoardContents(new QnaBoardContents(11,"qna-s-1", "qna-u-1", "qna-제목2", "qna-내용2-매장 공개글", new Date(), 0, "N"));
+		dao.insertQnaBoardContents(new QnaBoardContents(12,null, "qna-u-1", "qna-제목3", "qna-내용3-전체 비밀글", new Date(), 0, "Y"));
+		dao.insertQnaBoardContents(new QnaBoardContents(13,null, "qna-u-1", "qna-제목4", "qna-내용4-전체 공개글", new Date(), 0, "N"));
 		System.out.println("insertQnaBoardContents 후 조회");
 		System.out.println(dao.selectQnaBoardContentsList());
 		System.out.println("전체 조회 개수 = " + dao.selectQnaBoardContentsList().size());
@@ -73,7 +73,7 @@ public class QnaBoardContentsDaoImplTest {
 
 				System.out.println("=========== update =============");
 				
-		dao.updateQnaBoardContents(new QnaBoardContents(dao.selectQnaBoardContentsList().get(2).getQnaBoardNo(),"qna-s-1", "qna-u-1", "qna-매장 글로 변경 하는 마법의 제목4", "qna-내용4-매장 글로 변경 하는 마법의 내용", new Date(), "0", "N"));
+		dao.updateQnaBoardContents(new QnaBoardContents(dao.selectQnaBoardContentsList().get(2).getQnaBoardNo(),"qna-s-1", "qna-u-1", "qna-매장 글로 변경 하는 마법의 제목4", "qna-내용4-매장 글로 변경 하는 마법의 내용", new Date(), 0, "N"));
 		System.out.println("QnaBoardContents 후 조회");
 		System.out.println(dao.selectQnaBoardContentsList());
 		System.out.println("전체 조회 개수 = " + dao.selectQnaBoardContentsList().size());
