@@ -43,11 +43,13 @@ public interface QnaBoardContentsService {
 	
 	/**
 	 * Q&A 게시판의 게시글에 대해 유저가 입력한 키워드를 통해 조회한 데이터를 페이징하여 보여주는 Service - 매장과 전체 Q&A 접근은 컨트롤러에서 storeId가 있고 없고로 구분 할것 
-	 * @param select 검색 종류 - 글 제목, 글 내용, 제목 + 내용
+	 * @param select 검색 종류 - 글 제목(title), 글 내용(content), 제목 + 내용(titleAndcontent)
 	 * @param keyword 검색할 키워드
 	 * @param storeId ID가 있다면 해당 매장 글, 없다면 전체 Q&A글
 	 * @param page 보려는 페이지 번호
 	 * @return Map<String, Object> 페이징을 위한 정보 결과
 	 */
 	Map<String, Object> findQnaBoardContentsBySelectToKeyword(String select, String keyword, String storeId, int page);
+	
+	
 }

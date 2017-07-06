@@ -43,6 +43,10 @@
 	<!-- 유저 추천 매장 조회 폼 -->
 	<mvc:view-controller path="/user/userPreferenceStore_list.do" view-name="user/userPreferenceStore_list.tiles"/>
 	
+	<!-- 사진을 넣지 않는 게시판 등록 폼 -->
+	<mvc:view-controller path="/user/QnA_board_register_form.do" view-name="user/QnA_board_register_form.tiles"/>
+	<!-- Q&A 게시판 -->
+	<mvc:view-controller path="/common/qnaBoard.do" view-name="common/qnaBoard.tiles"/>
 	
 	<mvc:view-controller path="/user_list.do" view-name="user_list.tiles"/>
 

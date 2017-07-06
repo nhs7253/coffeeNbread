@@ -10,17 +10,22 @@ import org.hibernate.validator.constraints.NotEmpty;
  * 2017-07-03
  * 생성, 초기 구현
  */
-public class GeneralUserViewForm implements Serializable{
+public class GeneralUserViewForm{
 	
 	@NotEmpty
-	private String select="userId";
+	private String select= "userId";
 	private String keyword;
 	@NotNull
-	private int page=1;
+	private int page = 1;
+	
 	public String getSelect() {
 		return select;
 	}
 	public void setSelect(String select) {
+		if(select == null || select.trim().isEmpty()){
+			this.select = "userId";
+			return;
+		}
 		this.select = select;
 	}
 	public String getKeyword() {
@@ -33,6 +38,10 @@ public class GeneralUserViewForm implements Serializable{
 		return page;
 	}
 	public void setPage(int page) {
+		if(page == 0){
+			this.page = 1;
+			return;
+		}
 		this.page = page;
 	}
 	@Override
