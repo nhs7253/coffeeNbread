@@ -170,7 +170,13 @@ public class QnaBoardContentsController {
 	}
 	
 	
-	
+	/**
+	 * 게시글의 내용, 그리고 댓글을 페이징하여 보여주는 컨트롤러
+	 * @param qnaBoardNo 볼 게시글
+	 * @param page 볼 댓글 페이지
+	 * @param qnaStoreId 매장, 전체 글 여부
+	 * @return ModelAndView -  응답 경로, 페이징 결과 목록
+	 */
 	@RequestMapping("/common/viewQnaBoardContentsByReplyListController")
 	public ModelAndView ViewQnaBoardContentsByReplyListController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, Integer page, String qnaStoreId){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

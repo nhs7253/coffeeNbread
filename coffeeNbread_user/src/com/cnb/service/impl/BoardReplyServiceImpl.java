@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cnb.dao.BoardReplyDao;
 import com.cnb.dao.GeneralUserDao;
+import com.cnb.exception.BoardReplyException;
 import com.cnb.exception.ProductPictureNotFoundException;
 import com.cnb.service.BoardReplyService;
 import com.cnb.util.PagingBean;
@@ -28,6 +29,7 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	@Autowired
 	private BoardReplyDao dao;
 
+	@Autowired
 	private GeneralUserDao gDao;
 	/* 레시피 게시판에 댓글 등록 */
 	/*  댓글 쓰는 사람은 회원이기만 하면 됨 */
@@ -41,21 +43,22 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 	/* qna 게시판에 댓글 등록 */
 	@Override
 	public int addBoardReplyToQnaBoardNo(BoardReply boardReply) {
-		boardReply.setReplyRegDate(new Date());
+		//boardReply.setReplyRegDate(new Date());
 		return dao.insertBoardReplyToQnaBoardNo(boardReply);
 	}
 
 	/* 레시피 게시판에 댓글 수정 */
 	@Override
 	public int modifyBoardReplyToRecipeBoardNo(BoardReply boardReply) {
-        boardReply.setReplyRegDate(new Date());
+        //boardReply.setReplyRegDate(new Date());
 		return dao.updateBoardReplyToRecipeBoardNo(boardReply);
 	}
 
 	/* qna 게시판에 댓글 수정 */
 	@Override
 	public int modifyBoardReplyToQnaBoardNo(BoardReply boardReply) {
-        boardReply.setReplyRegDate(new Date());
+		
+//        boardReply.setReplyRegDate(new Date());
 		return dao.updateBoardReplyToQnaBoardNo(boardReply);
 	}
 
@@ -68,9 +71,15 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 
 	/* qna 게시판에 댓글 삭제 */
 	@Override
-	public int removeBoardReplyToQnaBoardNo(int replyNo, int recipeBoardNo) {
-		return dao.deleteBoardReplyByQnaBoardNo(replyNo,recipeBoardNo);
+	public int removeBoardReplyToQnaBoardNo(int replyNo, int qnaBoardNo, String replyName, String userId) throws BoardReplyException {
+		if(!userId.equals(replyName)){
+			System.out.println(userId + " = " + replyName);
+			throw new BoardReplyException("삭제 권한이 없습니다.");
+		}
+		return dao.deleteBoardReplyByQnaBoardNo(replyNo, qnaBoardNo);
 	}
+	
+	
 
 	/* 레시피게시판에 적힌 댓글 목록 찾기 */
 	@Override
@@ -104,5 +113,19 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		map.put("list", list);
 		return map;
 	}
+	
+	@Override
+	public BoardReply findBoardReplyModifySetting(int replyNo, String userId, String replyName) throws BoardReplyException {
+		BoardReply boardReply = dao.selectBoardReplyByreplyNo(replyNo);
+		if(boardReply == null){
+			throw new BoardReplyException("해당 댓글을 찾을 수 없습니다.");
+		}
+		if(!userId.equals(replyName)){
+			throw new BoardReplyException("수정 권한이 없습니다.");
+		}
+		return boardReply;
+	}
+	
+	
 
 }

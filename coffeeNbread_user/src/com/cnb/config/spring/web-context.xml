@@ -53,6 +53,8 @@
 	<mvc:view-controller path="/user/QnA_board_update_form.do" view-name="user/QnA_board_update_form.tiles"/>
 	
 	
+	<!-- 댓글 수정 폼 -->
+	<mvc:view-controller path="/user/reply_update_form.do" view-name="user/reply_update_form.tiles"/>
 	
 	<mvc:view-controller path="/user_list.do" view-name="user_list.tiles"/>
 
