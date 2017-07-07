@@ -43,8 +43,8 @@ public class QnaBoardContentsController {
 //	@Autowired
 //	private QnaBoardContentsService service;
 	
-	@RequestMapping("/user/addQnaBoardContents")
-	public String addQnaBoardContents(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors){
+	@RequestMapping("/user/addQnaBoardContentsController")
+	public String addQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors){
 		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		
 		if(errors.hasErrors()){
@@ -65,8 +65,8 @@ public class QnaBoardContentsController {
 		return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+qnaBoardContents.getQnaBoardNo();
 	}
 	
-	@RequestMapping("/user/removeQnaBoardContents")
-	public String removeQnaBoardContents(Integer qnaBoardNo, String qnaBoardWriter, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId){
+	@RequestMapping("/user/removeQnaBoardContentsController")
+	public String removeQnaBoardContentsController(Integer qnaBoardNo, String qnaBoardWriter, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId){
 		
 		if(!qnaBoardWriter.equals(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId())){
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
@@ -74,13 +74,13 @@ public class QnaBoardContentsController {
 		
 		qnaBoardContentsService.removeQnaBoardContents(qnaBoardNo);
 		
-		return "redirect:/common/findQnaBoardContentsBySelectToKeyword.do?storeId="+qnaStoreId;
+		return "redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId;
 		
 		
 	}
 	
-	@RequestMapping("/user/modifyQnaBoardContents")
-	public String modifyQnaBoardContents(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo){
+	@RequestMapping("/user/modifyQnaBoardContentsController")
+	public String modifyQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo){
 		if(errors.hasErrors()){
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo; //에러 발생
 		}
@@ -107,7 +107,6 @@ public class QnaBoardContentsController {
 		
 		try {
 			request.setAttribute("content", qnaBoardContentsService.findQnaBoardContents(qnaBoardNo));
-			System.out.println(request.getAttribute("content"));
 		} catch (ContentsNotFoundException e) {
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
 		}
@@ -115,8 +114,8 @@ public class QnaBoardContentsController {
 		return "user/QnA_board_update_form.tiles";
 	}
 	
-	@RequestMapping("/common/findQnaBoardContentsBySelectToKeyword")
-	public ModelAndView findQnaBoardContentsBySelectToKeyword(@ModelAttribute("generalUserView") @Valid QnaBoardContentsViewForm qnaBoardContentsViewForm, BindingResult errors){
+	@RequestMapping("/common/findQnaBoardContentsBySelectToKeywordController")
+	public ModelAndView findQnaBoardContentsBySelectToKeywordController(@ModelAttribute("generalUserView") @Valid QnaBoardContentsViewForm qnaBoardContentsViewForm, BindingResult errors){
 
 		ModelAndView modelAndView = new ModelAndView();
 				
