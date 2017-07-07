@@ -59,7 +59,7 @@ public class QnaBoardContentsServiceImplTest {
 		
 		System.out.println("=========== update =============");
 											
-		service.modifyQnaBoardContents(new QnaBoardContents(service.findQnaBoardContentsList().get(2).getQnaBoardNo(),"qna-s-1", "qna-u-1", "qna-매장 글로 변경 하는 마법의 제목4", "qna-내용4-매장 글로 변경 하는 마법의 내용", new Date(), 0, "N"));
+//		service.modifyQnaBoardContents(new QnaBoardContents(service.findQnaBoardContentsList().get(2).getQnaBoardNo(),"qna-s-1", "qna-u-1", "qna-매장 글로 변경 하는 마법의 제목4", "qna-내용4-매장 글로 변경 하는 마법의 내용", new Date(), 0, "N"));
 		
 		System.out.println("modifyQnaBoardContents 후 조회");
 		System.out.println(service.findQnaBoardContentsList());
