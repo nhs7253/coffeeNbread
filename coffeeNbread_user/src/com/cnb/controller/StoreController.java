@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cnb.exception.DuplicatedOptionCategoryNameException;
@@ -29,7 +30,11 @@ import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
 
-/*
+/*이진영
+ * 2017-07-06
+ * storeCategory controller 추가
+ * optionCategory controller 추가
+ * 
  * 이진영
  * 2017-07-05
  * 생성
@@ -42,7 +47,7 @@ public class StoreController {
 	private StoreService service;
 
 	/**
-	 * Store 기본 내용을 등록하는 Controller
+	 * Store 매장 전체를 등록하는 Controller
 	 * 
 	 * @param Store
 	 *            요청파라미터 검증 Store 객체
@@ -57,16 +62,20 @@ public class StoreController {
 		if (errors.hasErrors()) {
 			return "store/store_register.tiles";
 		}
+		
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 
 		// storeCategory 등록
 		List<String> storeCategoryList = new ArrayList<String>();
-		storeCategoryList.add(storeRegisterForm.getStoreCategoryList().get(0));
-
-		StoreCategory storeCategoryList2 = new StoreCategory(storeCategoryList.get(0), storeRegisterForm.getStoreId());
 		List<StoreCategory> sclist = new ArrayList<StoreCategory>();
-		sclist.add(storeCategoryList2);
+		
+		for(int i = 0;i<storeRegisterForm.getStoreCategoryList().size();i++){
+			storeCategoryList.add(storeRegisterForm.getStoreCategoryList().get(i));	
+			StoreCategory storeCategoryList2= new StoreCategory(storeCategoryList.get(i), storeRegisterForm.getStoreId());
+			sclist.add(storeCategoryList2);
+		}
+
 
 		// optionCategory 등록
 		List<String> optionCategoryList = new ArrayList<String>();
@@ -77,24 +86,14 @@ public class StoreController {
 		List<OptionCategory> oplist = new ArrayList<OptionCategory>();
 		oplist.add(optionCategoryList2);
 
-		System.out.println("store = " + store);
-		for (int i = 0; i < sclist.size(); i++) {
-
-			System.out.println("sclist" + sclist);
-		}
-		for (int i = 0; i < oplist.size(); i++) {
-
-			System.out.println("oplist" + oplist);
-		}
+		
 
 		// storePicture 등록
 		String destDir = request.getServletContext().getRealPath("/up_image");
 
 		List<MultipartFile> list = storeRegisterForm.getStorePictureList();
 		ArrayList<String> imageName = new ArrayList<>();// 업로드된 파일명을 저장할 list
-		System.out.println("store = " + store);
-
-		System.out.println("리스트사이즈" + list.size());
+		
 
 		// 업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
 		for (int i = 0; i < list.size(); i++) {
@@ -125,4 +124,38 @@ public class StoreController {
 		}
 		return "store/store_success.tiles";
 	}
+	
+	/**
+	 * store매장을 수정하는 controller
+	 * @param storeRegisterForm
+	 * @param errors
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("modifyStoreController")
+	public String modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
+			BindingResult errors, HttpServletRequest request){
+				
+		
+		return null;
+		
+	}
+	
+	/**
+	 * store매장을 삭제하는 controller
+	 * @param storeRegisterForm
+	 * @param errors
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("removeStoreController")
+	public String removeStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
+			BindingResult errors, HttpServletRequest request){
+				
+		
+		return null;
+		
+	}
+	
+
 }

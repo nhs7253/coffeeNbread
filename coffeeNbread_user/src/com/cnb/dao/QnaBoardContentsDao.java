@@ -77,5 +77,13 @@ public interface QnaBoardContentsDao {
 	 * @return 지정한 수만큼의 페이징한 결과
 	 */
 	List<QnaBoardContents> selectQnaBoardContentsPagingList(String select, String keyword, String storeId, int startIndex, int endIndex);
+	
+	/**
+	 * 해당 게시판 글 번호로 해당 글을 가져옴
+	 * @param qnaBoardNo 게시판 글번호
+	 * @return QnaBoardContents 해당 게시판 글의 객체
+	 */
+	QnaBoardContents selectQnaBoardContents(int qnaBoardNo);
+	
 }
 
