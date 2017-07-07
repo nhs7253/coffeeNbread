@@ -63,53 +63,53 @@ public class RecipeBoardContentsDaoImpl implements RecipeBoardContentsDao {
 
 	/* 비회원, 회원 -전체개수-방법 */
 	@Override
-	public int countSelectRecipeBoardContentsByMethod(String method, Object methodContent) {
+	public int countSelectRecipeBoardContentsByMethod(String select, Object keyword) {
 		Map<String, Object> info = new HashMap<>();
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 
 		return session.selectOne(makeSqlId("countSelectRecipeBoardContentsByMethod"), info);
 	}
 
 	/* 비회원,유저-매장별개수-방법 */
 	@Override
-	public int countSelectRecipeBoardContentsByStoreIdAndMethod(String storeId, String method, Object methodContent) {
+	public int countSelectRecipeBoardContentsByStoreIdAndMethod(String storeId, String select, Object keyword) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("storeId", storeId);
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		return session.selectOne(makeSqlId("countSelectRecipeBoardContentsByStoreIdAndMethod"), info);
 	}
 
 	/* 유저가 전체게시글에서 자신이 쓴글 조회개수-방법별. */
 	@Override
-	public int countSelectRecipeBoardContentsByUserIdAndMethod(String userId, String method, Object methodContent) {
+	public int countSelectRecipeBoardContentsByUserIdAndMethod(String userId, String select, Object keyword) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		return session.selectOne(makeSqlId("countSelectRecipeBoardContentsByUserIdAndMethod"), info);
 	}
 
 	/* 유저가 매장별 자신이 쓴글 조회개수- 방법별 */
 	@Override
-	public int countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod(String userId, String storeId, String method,
-			Object methodContent) {
+	public int countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod(String userId, String storeId, String select,
+			Object keyword) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
 		info.put("storeId", storeId);
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		return session.selectOne(makeSqlId("countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod"), info);
 	}
 
 	/* 비회원, 회원 전체게시글에서 방법별로 보여주는것. */
 	@Override
-	public List<RecipeBoardContents> selectRecipeBoardContentsListByMethod(String method, Object methodContent,
+	public List<RecipeBoardContents> selectRecipeBoardContentsListByMethod(String select, Object keyword,
 			int startIndex, int endIndex) {
 		Map<String, Object> info = new HashMap<>();
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectRecipeBoardContentsListByMethod"), info);
@@ -118,12 +118,12 @@ public class RecipeBoardContentsDaoImpl implements RecipeBoardContentsDao {
 
 	/* 비회원, 회원 -매장별 방법별로 보여주는것 */
 	@Override
-	public List<RecipeBoardContents> selectRecipeBoardContentsListByStoreIdAndMethod(String storeId, String method,
-			Object methodContent, int startIndex, int endIndex) {
+	public List<RecipeBoardContents> selectRecipeBoardContentsListByStoreIdAndMethod(String storeId, String select,
+			Object keyword, int startIndex, int endIndex) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("storeId", storeId);
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectRecipeBoardContentsListByStoreIdAndMethod"), info);
@@ -131,12 +131,12 @@ public class RecipeBoardContentsDaoImpl implements RecipeBoardContentsDao {
 
 	/* 유저별 방법별로 전체게시글 조회. */
 	@Override
-	public List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndMethod(String userId, String method,
-			Object methodContent, int startIndex, int endIndex) {
+	public List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndMethod(String userId, String select,
+			Object keyword, int startIndex, int endIndex) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectRecipeBoardContentsListByUserIdAndMethod"), info);
@@ -146,12 +146,12 @@ public class RecipeBoardContentsDaoImpl implements RecipeBoardContentsDao {
 	/* 유저가 매장에서 방법별 게시글 조회 */
 	@Override
 	public List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndStoreIdAndMethod(String userId,
-			String storeId, String method, Object methodContent, int startIndex, int endIndex) {
+			String storeId, String select, Object keyword, int startIndex, int endIndex) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
 		info.put("storeId", storeId);
-		info.put("method", method);
-		info.put("methodContent", methodContent);
+		info.put("select", select);
+		info.put("keyword", keyword);
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectRecipeBoardContentsListByUserIdAndStoreIdAndMethod"), info);

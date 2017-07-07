@@ -97,7 +97,7 @@
 
 
 
-  	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-store-user-resultmap">
+	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-store-user-resultmap">
 		<id column="recipe_board_no" property="recipeBoardNo" />
 		<result column="recipe_board_content" property="recipeBoardContent" />
 		<result column="recipe_board_title" property="recipeBoardTitle" />
@@ -105,10 +105,11 @@
 		<result column="recipe_board_picture" property="recipeBoardPicture" />
 		<result column="recipe_board_hits" property="recipeBoardHits" />
 		<result column="recommend_count" property="recommendCount" />
-		
+
 		<association property="store"
 			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
-		<association property="generalUser" resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap"/>	
+		<association property="generalUser"
+			resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap" />
 	</resultMap>
 
 
@@ -127,13 +128,13 @@
 	<select id="countSelectRecipeBoardContentsByMethod"
 		parameterType="map" resultType="_int">
 		<choose>
-			<when test="method == 'recipeBoardContent'">
+			<when test="select == 'recipeBoardContent'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
-				 recipe_board_content like '%'||#{methodContent}||'%'
+				recipe_board_content like '%'||#{keyword}||'%'
 
 			</when>
 			<when test="method == 'recipeBoardTitle'">
@@ -142,32 +143,33 @@
 				FROM
 				recipe_board_contents
 				WHERE
-				recipe_board_title like '%'||#{methodContent}||'%'
+				recipe_board_title like
+				'%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
-				recipe_board_Hits = #{methodContent}
+				recipe_board_Hits = #{keyword}
 
 			</when>
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
-				recommendCount = #{methodContent}
+				recommendCount = #{keyword}
 
 			</when>
-			<when test="method =='recipeBoardDate">
+			<when test="select =='recipeBoardDate'">
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
-				WHERE recipe_board_date =#{methodContent}
+				WHERE recipe_board_date =#{keyword}
 
 			</when>
 			<otherwise> <!--방법조건 설정 안했을때. -->
@@ -187,7 +189,7 @@
 	<select id="countSelectRecipeBoardContentsByStoreIdAndMethod"
 		parameterType="map" resultType="_int">
 		<choose>
-			<when test="method == 'recipeBoardContent'">
+			<when test="select == 'recipeBoardContent'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
@@ -195,46 +197,48 @@
 				WHERE
 				store_id=#{storeId}
 				AND
-				recipe_board_content like '%'||#{methodContent}||'%'
+				recipe_board_content like '%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardTitle'">
+			<when test="select == 'recipeBoardTitle'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
 				store_Id=#{storeId}
-				AND recipe_board_title like '%'||#{methodContent}||'%'
+				AND recipe_board_title
+				like '%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
 				store_id=#{storeId}
-				AND recipe_board_Hits = #{methodContent}
+				AND recipe_board_Hits =
+				#{keyword}
 
 			</when>
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
-				  store_id=#{storeId}
-				AND recommend_Count =#{methodContent}
+				store_id=#{storeId}
+				AND recommend_Count =#{keyword}
 
 			</when>
-			<when test="method =='recipeBoardDate">
+			<when test="select =='recipeBoardDate'">
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
-				  store_id=#{storeId}
-				AND recipe_board_date =#{methodContent}
+				store_id=#{storeId}
+				AND recipe_board_date =#{keyword}
 
 			</when>
 			<otherwise> <!--방법조건 설정 안했을때. -->
@@ -255,7 +259,7 @@
 	<select id="countSelectRecipeBoardContentsByUserIdAndMethod"
 		parameterType="map" resultType="_int">
 		<choose>
-			<when test="method == 'recipeBoardContent'">
+			<when test="select == 'recipeBoardContent'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
@@ -263,44 +267,47 @@
 				WHERE
 				user_id=#{userId}
 				AND
-				recipe_board_content like '%'||#{methodContent}||'%'
+				recipe_board_content
+				like '%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardTitle'">
+			<when test="select == 'recipeBoardTitle'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
 				user_id=#{userId}
-				AND recipe_board_title like '%'||#{methodContent}||'%'
+				AND recipe_board_title
+				like '%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
 				user_id=#{userId}
-				
+
 
 			</when>
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
 				recipe_board_contents
 				WHERE
 				user_id=#{userId}
-				
+
 
 			</when>
 			<otherwise> <!--방법조건 설정 안했을때. -->
 
 				SELECT COUNT(recipe_board_no)
 				FROM recipe_board_contents
-				WHERE user_id=#{userId}
+				WHERE
+				user_id=#{userId}
 			</otherwise>
 		</choose>
 
@@ -311,7 +318,7 @@
 	<select id="countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod"
 		parameterType="map" resultType="_int">
 		<choose>
-			<when test="method == 'recipeBoardContent'">
+			<when test="select == 'recipeBoardContent'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
@@ -319,10 +326,10 @@
 				WHERE
 				user_id=#{userId}
 				AND store_id=#{storeId}
-				AND  recipe_board_content like '%'||#{methodContent}||'%'
+				AND recipe_board_content like '%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardTitle'">
+			<when test="select == 'recipeBoardTitle'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
@@ -330,10 +337,10 @@
 				WHERE
 				user_id=#{userId}
 				AND store_id=#{storeId}
-				AND recipe_board_title like '%'||#{methodContent}||'%'
+				AND recipe_board_title like '%'||#{keyword}||'%'
 
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
@@ -341,10 +348,10 @@
 				WHERE
 				user_id=#{userId}
 				AND store_id=#{storeId}
-				
+
 
 			</when>
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 
 				SELECT COUNT(recipe_board_no)
 				FROM
@@ -352,9 +359,10 @@
 				WHERE
 				user_id=#{userId}
 				AND store_id=#{storeId}
-				
+
 
 			</when>
+
 			<otherwise> <!--방법조건 설정 안했을때. -->
 
 				SELECT COUNT(recipe_board_no)
@@ -409,22 +417,22 @@
 		Where rbc.store_id=s.store_id
 
 		<choose>
-			<when test="method == 'recipeBoardDate'">
-                 order by recipe_board_date desc
-				
+			<when test="select == 'recipeBoardDate'">
+				order by recipe_board_date desc
+
 			</when>
-			<when test="method == 'recipeBoardTitle'">
+			<when test="select == 'recipeBoardTitle'">
 				And recipe_board_title like
-				'%'||#{methodContent}||'%'
+				'%'||#{keyword}||'%'
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 				order by recipe_board_hits desc
 			</when>
-			<when test="method == 'recipeBoardContent'">
-				and  recipe_board_content like '%'||#{methodContent}||'%'
+			<when test="select == 'recipeBoardContent'">
+				and recipe_board_content like '%'||#{keyword}||'%'
 			</when>
 
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 				order by recommend_count desc
 			</when>
 
@@ -440,7 +448,7 @@
 	<!-- 매장으로 들어가서 매장별 전체목록 보기 -->
 	<select id="selectRecipeBoardContentsListByStoreIdAndMethod"
 		parameterType="map" resultMap="recipeBoardContents-store-resultmap">
-         
+
 		SELECT recipe_board_no,
 		recipe_board_content,
 		recipe_board_title,
@@ -477,21 +485,21 @@
 		Where rbc.store_id=s.store_id
 		And s.store_id=#{storeId}
 		<choose>
-			<when test="method == 'recipeBoardDate'">
+			<when test="select == 'recipeBoardDate'">
 
 				order by recipe_board_date desc
 			</when>
-			<when test="method == 'recipeBoardTitle'">
-				And recipe_board_title like '%'||#{methodContent}||'%'
+			<when test="select == 'recipeBoardTitle'">
+				And recipe_board_title like '%'||#{keyword}||'%'
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 				order by recipe_board_hits desc
 			</when>
-			<when test="method == 'recipeBoardContent'">
-				and recipe_board_content like '%'||#{methodContent}||'%'
+			<when test="select == 'recipeBoardContent'">
+				and recipe_board_content like '%'||#{keyword}||'%'
 			</when>
 
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 				order by recommend_count desc
 			</when>
 
@@ -541,27 +549,27 @@
 		s.store_name
 		FROM recipe_board_contents
 		rbc, store s
-		Where rbc.store_id=s.store_id
-		And rbc.user_id=#{userId}
+		Where rbc.user_id=#{userId}
+		And rbc.store_id=s.store_id(+)
 		<choose>
-			<when test="method == 'recipeBoardDate'">
+			<when test="select == 'recipeBoardDate'">
 
 				And recipe_board_date= #{methodContent}
 			</when>
-			<when test="method == 'recipeBoardTitle'">
-				And recipe_board_title like '%'||#{methodContent}||'%'
+			<when test="select == 'recipeBoardTitle'">
+				And recipe_board_title like '%'||#{keyword}||'%'
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 				order by recipe_board_hits desc
 			</when>
-			<when test="method == 'recipeBoardContent'">
-				AND  recipe_board_content like '%'||#{methodContent}||'%'
+			<when test="select == 'recipeBoardContent'">
+				AND recipe_board_content like '%'||#{keyword}||'%'
 			</when>
 
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 				order by recommend_count desc
 			</when>
-
+            
 		</choose>
 		)
 		WHERE rownum &lt;= #{endIndex}
@@ -607,27 +615,28 @@
 		s.store_name
 		FROM recipe_board_contents
 		rbc, store s
-		Where rbc.store_id=s.store_id
-		And rbc.user_id=#{userId}
-		AND rbc.store_id=#{storeId}
+		Where rbc.user_id=#{userId}
+		And rbc.store_id=s.store_id
+		
+		rbc.store_id=#{storeId}
 		<choose>
-			<when test="method == 'recipeBoardDate'">
+			<when test="select == 'recipeBoardDate'">
 
-				And recipe_board_date= #{methodContent}
+				And recipe_board_date= #{keyword}
 			</when>
-			<when test="method == 'recipeBoardTitle'">
+			<when test="select == 'recipeBoardTitle'">
 				And recipe_board_title like
-				'%'||#{methodContent}||'%'
+				'%'||#{keyword}||'%'
 			</when>
-			<when test="method == 'recipeBoardHits'">
+			<when test="select == 'recipeBoardHits'">
 				order by recipe_board_hits desc
 			</when>
-			<when test="method == 'recipeBoardContent'">
-			     
-				AND recipe_board_content like '%'||#{methodContent}||'%'
+			<when test="select == 'recipeBoardContent'">
+
+				AND recipe_board_content like '%'||#{keyword}||'%'
 			</when>
 
-			<when test="method == 'recommendCount'">
+			<when test="select == 'recommendCount'">
 				order by recommend_count desc
 			</when>
 
@@ -639,38 +648,38 @@
 
 	</select>
 
-    
-     <!--recipeBoardNo를 통해 recipeBoardContents 객체를 가져오기.  -->   
-     
-	<select id="selectRecipeBoardContentsByrecipeBoardNo" parameterType="int"
-		resultMap="recipeBoardContents-store-user-resultmap">
+
+	<!--recipeBoardNo를 통해 recipeBoardContents 객체를 가져오기. -->
+
+	<select id="selectRecipeBoardContentsByrecipeBoardNo"
+		parameterType="int" resultMap="recipeBoardContents-store-user-resultmap">
 
 		select recipe_board_no,
-		       recipe_board_content,
-		       recipe_board_title,
-		       recipe_board_date,
-		       recipe_board_hits,
-		        recipe_board_picture,
-		       recommend_count,
-		       user_id,
-		       store_id
-		  from  recipe_board_contents
-		  where recipe_board_no=#{recipeBoardNo}
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		user_id,
+		store_id
+		from recipe_board_contents
+		where recipe_board_no=#{recipeBoardNo}
 	</select>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
