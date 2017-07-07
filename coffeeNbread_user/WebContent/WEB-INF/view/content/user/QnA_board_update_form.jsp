@@ -9,11 +9,13 @@
 
 <form action="${initParam.rootPath }/user/modifyQnaBoardContents.do">
 	<sec:csrfInput/>
-	제목 : <input type="text" name="qnaBoardTitle" value="${sessionScope.content.qnaBoardTitle }"> 비밀글<input type="checkbox" name="qnaBoardSecret" value="Y"><br>
+	제목 : <input type="text" name="qnaBoardTitle" value="${requestScope.content.qnaBoardTitle }"> 비밀글<input type="checkbox" name="qnaBoardSecret" value="Y"><br>
 	내용<br>
 	 <textarea rows="20" cols="100" name="qnaBoardContent">
-	 	${sessionScope.content.qnaBoardContent }
+	 	${requestScope.content.qnaBoardContent }
 	 </textarea>
+	 <input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
+	 
 	<p>
 	<input type="submit" value="수정">
 	</p>

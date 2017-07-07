@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cnb.exception.ContentsNotFoundException;
 import com.cnb.service.QnaBoardContentsService;
 import com.cnb.validation.annotation.QnaBoardContentsForm;
 import com.cnb.validation.annotation.QnaBoardContentsViewForm;
@@ -63,10 +66,11 @@ public class QnaBoardContentsController {
 	}
 	
 	@RequestMapping("/user/removeQnaBoardContents")
-	public String removeQnaBoardContents(@RequestParam(value="qnaBoardNo",required=false) Integer qnaBoardNo, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId){
-//		if(qnaBoardNo == null){
-//			return null; //에러페이지 이동
-//		}
+	public String removeQnaBoardContents(Integer qnaBoardNo, String qnaBoardWriter, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId){
+		
+		if(!qnaBoardWriter.equals(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId())){
+			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
+		}
 		
 		qnaBoardContentsService.removeQnaBoardContents(qnaBoardNo);
 		
@@ -76,25 +80,39 @@ public class QnaBoardContentsController {
 	}
 	
 	@RequestMapping("/user/modifyQnaBoardContents")
-	public String modifyQnaBoardContents(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, HttpSession session){
+	public String modifyQnaBoardContents(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo){
 		if(errors.hasErrors()){
-			return null; //에러 발생
+			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo; //에러 발생
 		}
 		
 		QnaBoardContents qnaBoardContents = new QnaBoardContents();
 		
 		BeanUtils.copyProperties(qnaBoardContentsForm, qnaBoardContents);
 		
-		QnaBoardContents sessionQnaBoardContents = (QnaBoardContents)session.getAttribute("content");
-		session.removeAttribute("content");
+		try {
+			qnaBoardContentsService.modifyQnaBoardContents(qnaBoardNo, qnaBoardContents);
+		} catch (ContentsNotFoundException e) {
+			return "/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
+		}
 		
-		sessionQnaBoardContents.setQnaBoardTitle(qnaBoardContents.getQnaBoardTitle());
-		sessionQnaBoardContents.setQnaBoardContent(qnaBoardContents.getQnaBoardContent());
-		sessionQnaBoardContents.setQnaBoardSecret(qnaBoardContents.getQnaBoardSecret());
+		return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+qnaBoardNo;
+	}
+	
+	@RequestMapping("/user/settingQnaBoardContentsController")
+	public String settingQnaBoardContentsController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, String qnaBoardWriter, HttpServletRequest request){
 		
-		qnaBoardContentsService.modifyQnaBoardContents(sessionQnaBoardContents);
+		if(!qnaBoardWriter.equals(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId())){
+			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
+		}
 		
-		return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+sessionQnaBoardContents.getQnaBoardNo();
+		try {
+			request.setAttribute("content", qnaBoardContentsService.findQnaBoardContents(qnaBoardNo));
+			System.out.println(request.getAttribute("content"));
+		} catch (ContentsNotFoundException e) {
+			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
+		}
+		
+		return "user/QnA_board_update_form.tiles";
 	}
 	
 	@RequestMapping("/common/findQnaBoardContentsBySelectToKeyword")
@@ -177,7 +195,7 @@ public class QnaBoardContentsController {
 //			return modelAndView; //에러 발생 시 이동할 경로
 //		}
 //		
-//		//전체 비밀글일 떼 && 본인이나 매장 주인이 아니라면
+//		//전체 비밀글일 떼 && 본인이나 관리자가 아니라면
 //		if((qnaBoardContents.getQnaBoardSecret().equals("Y") && qnaBoardContents.getQnaStoreId() == null) && !(qnaBoardContents.getQnaBoardWriter().equals(generalUser.getUserId()) && !(authority.equals("ROLE_CNB_ADMIN")))){
 //			modelAndView.setViewName("redirect:/common/findQnaBoardContentsBySelectToKeyword.do");
 //			System.out.println("전체 비밀글");
@@ -190,7 +208,6 @@ public class QnaBoardContentsController {
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("content", qnaBoardContents);
 		
-		session.setAttribute("content", qnaBoardContents);
 		
 		return modelAndView;
 	}

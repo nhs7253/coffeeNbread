@@ -17,8 +17,10 @@
 		
 		<p/>
 		
-		<form action="${initParam.rootPath }/user/QnA_board_update_form.do">
+		<form action="${initParam.rootPath }/user/settingQnaBoardContentsController.do">
 			<sec:csrfInput/>
+			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
+			<input type="hidden" name="qnaBoardWriter" value="${requestScope.content.qnaBoardWriter }"/>
 			<input type="submit" value="수정">
 		</form>
 		
@@ -26,6 +28,7 @@
 			<sec:csrfInput/>
 			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
 			<input type="hidden" name="qnaStoreId" value="${requestScope.content.qnaStoreId }"/>
+			<input type="hidden" name="qnaBoardWriter" value="${requestScope.content.qnaBoardWriter }"/>
 			<input type="submit" value="삭제">
 		</form>
 	
