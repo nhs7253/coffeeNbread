@@ -37,7 +37,21 @@ public class RecipeBoardContents implements Serializable {
 	
 	
 	
-	
+	/* 유저가 매장안거치고 등록 */
+	public RecipeBoardContents(int recipeBoardNo, String recipeBoardContent, String recipeBoardTitle,
+			Date recipeBoardDate, int recipeBoardHits, String recipeBoardPicture, int recommendCount, String userId) {
+		super();
+		this.recipeBoardNo = recipeBoardNo;
+		this.recipeBoardContent = recipeBoardContent;
+		this.recipeBoardTitle = recipeBoardTitle;
+		this.recipeBoardDate = recipeBoardDate;
+		this.recipeBoardHits = recipeBoardHits;
+		this.recipeBoardPicture = recipeBoardPicture;
+		this.recommendCount = recommendCount;
+		this.userId = userId;
+	}
+
+
 	// 추천수 작업 떄문에 만들어둠.
 	 public RecipeBoardContents(String storeId) {
 		super();

@@ -26,15 +26,15 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 	@Autowired
 	private RecipeBoardContentsDao dao;
 	
-	@Autowired
-	private StoreDao sDao;
-
 	/* 유저가 매장에서 단순 등록 */
 	@Override
 	public int addRecipeBoardContents(RecipeBoardContents recipeBoardContents) {
-		return dao.insertRecipeBoardContents(new RecipeBoardContents(recipeBoardContents.getRecipeBoardNo(),
-				recipeBoardContents.getRecipeBoardContent(), recipeBoardContents.getRecipeBoardTitle(), new Date(), 0,
-				recipeBoardContents.getRecipeBoardPicture(), 0,recipeBoardContents.getUserId(),recipeBoardContents.getStoreId()));
+		System.out.println("recipeBoardContents작업전:"+recipeBoardContents);
+
+		recipeBoardContents.setRecipeBoardHits(0);
+		recipeBoardContents.setRecommendCount(0);
+		System.out.println("recipeBoardContents작업후:"+recipeBoardContents);
+		return dao.insertRecipeBoardContents(recipeBoardContents);
 	}
 
 	@Override
@@ -115,12 +115,13 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 		
          /* 회원이든 비회원이든 방법에따라 전부다 조회 했을떄 나오는 개수 */
 		int totalCount = dao.countSelectRecipeBoardContentsByUserIdAndMethod(userId, method, methodContent);
-	      
+	      System.out.println("totalCount:"+totalCount);
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
 		
 		List<RecipeBoardContents> list =dao.selectRecipeBoardContentsListByUserIdAndMethod(userId, method, methodContent, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		map.put("list", list);
+		System.out.println("list:"+list);
 		return map;
 	}
 

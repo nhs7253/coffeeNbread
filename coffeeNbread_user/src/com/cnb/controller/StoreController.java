@@ -62,6 +62,7 @@ public class StoreController {
 		if (errors.hasErrors()) {
 			return "store/store_register.tiles";
 		}
+		
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 
@@ -124,8 +125,37 @@ public class StoreController {
 		return "store/store_success.tiles";
 	}
 	
+	/**
+	 * store매장을 수정하는 controller
+	 * @param storeRegisterForm
+	 * @param errors
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("modifyStoreController")
+	public String modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
+			BindingResult errors, HttpServletRequest request){
+				
+		
+		return null;
+		
+	}
 	
-	
+	/**
+	 * store매장을 삭제하는 controller
+	 * @param storeRegisterForm
+	 * @param errors
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("removeStoreController")
+	public String removeStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
+			BindingResult errors, HttpServletRequest request){
+				
+		
+		return null;
+		
+	}
 	
 
 }

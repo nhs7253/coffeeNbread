@@ -54,14 +54,14 @@ public interface RecipeBoardContentsDao {
 	 * @param methodContent
 	 * @return
 	 */
-	int countSelectRecipeBoardContentsByMethod(String method, Object methodContent);
+	int countSelectRecipeBoardContentsByMethod(String select, Object keyword);
 
 	
  /**
   * 매장별 전체게시글을 조회할때 방법적으로 찾는개수.
   *  회원, 비회원
   */
-	int countSelectRecipeBoardContentsByStoreIdAndMethod(String storeId,String method,Object methodContent);
+	int countSelectRecipeBoardContentsByStoreIdAndMethod(String storeId,String select,Object keyword);
 	
 	/* **********************************************************************/
 	
@@ -71,7 +71,7 @@ public interface RecipeBoardContentsDao {
 	 * @param method
 	 * @return
 	 */
-	int countSelectRecipeBoardContentsByUserIdAndMethod(String userId,String method, Object methodContent);
+	int countSelectRecipeBoardContentsByUserIdAndMethod(String userId,String select, Object keyword);
 	
 	
    /**
@@ -79,7 +79,7 @@ public interface RecipeBoardContentsDao {
     * 
     */
 	
-	int countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod(String userId,String storeId,String method, Object methodContent);
+	int countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod(String userId,String storeId,String select, Object keyword);
 	
 	
 	
@@ -91,7 +91,7 @@ public interface RecipeBoardContentsDao {
 	 * @param method
 	 * @return
 	 */
-	List<RecipeBoardContents> selectRecipeBoardContentsListByMethod(String method,Object methodContent,int startIndex, int endIndex);
+	List<RecipeBoardContents> selectRecipeBoardContentsListByMethod(String select,Object keyword,int startIndex, int endIndex);
 
 	
 	 /**
@@ -100,7 +100,7 @@ public interface RecipeBoardContentsDao {
 	   * @param method
 	   * @return
 	   */
-	List<RecipeBoardContents> selectRecipeBoardContentsListByStoreIdAndMethod(String storeId,String method,Object methodContent,int startIndex,int endIndex);
+	List<RecipeBoardContents> selectRecipeBoardContentsListByStoreIdAndMethod(String storeId,String select,Object keyword,int startIndex,int endIndex);
 	
 
 	
@@ -110,7 +110,7 @@ public interface RecipeBoardContentsDao {
 	 * @param method
 	 * @return
 	 */
-	List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndMethod(String userId,String method,Object methodContent,int startIndex,int endIndex);
+	List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndMethod(String userId,String select,Object keyword,int startIndex,int endIndex);
 	
     	
   /**
@@ -119,7 +119,7 @@ public interface RecipeBoardContentsDao {
    * @param method
    * @return
    */
-	List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndStoreIdAndMethod(String userId,String storeId,String method,Object methodContent,int startIndex,int endIndex);
+	List<RecipeBoardContents> selectRecipeBoardContentsListByUserIdAndStoreIdAndMethod(String userId,String storeId,String select,Object keyword,int startIndex,int endIndex);
 	
 	
 	

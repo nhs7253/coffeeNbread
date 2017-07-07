@@ -24,7 +24,7 @@ public class RecipeBoardContentsServiceImplTest {
 
 	public void Test() {
 
-		System.out.println("-----------레시판 댓글 등록 서비스--------------");
+/*		System.out.println("-----------레시판 댓글 등록 서비스--------------");
 		List<RecipeBoardContents> list = Arrays.asList(
 				new RecipeBoardContents(0, "레시판 댓글내역 추가1", "레시판 제목 추가1", new Date(), 0, "사진", 0, "u-1", "s-7"),
 				new RecipeBoardContents(0, "레시판 댓글내역 추가2", "레시판 제목 추가2", new Date(), 0, "사진", 0, "u-1", "s-7"),
@@ -33,15 +33,14 @@ public class RecipeBoardContentsServiceImplTest {
 				new RecipeBoardContents(0, "레시판 댓글내역 추가5", "레시판 제목 추가5", new Date(), 0, "사진", 0, "u-1", "s-7")
 
 		);
+*/
+		
+		 System.out.
+		 println("------------------ 레시판 게시글 추가 확인 ------------------");
+		 
+	/* rbcService.addRecipeBoardContents(new RecipeBoardContents(0,"0707내역","0707제목",new Date(),0,"0707사진",0,"u-1","s-1"));*/
+		/*rbcService.addRecipeBoardContents(new RecipeBoardContents(0, "레시판 댓글내역 추가6", "레시판 제목 추가6", new Date(), 0, "사진", 0, "u-1"));*/
 
-		/*
-		 * System.out.
-		 * println("------------------ 레시판 게시글 추가 확인 ------------------");
-		 * 
-		 * rbcService.addRecipeBoardContents(new
-		 * RecipeBoardContents(0,"레시판 댓글내역 추가1","레시판 제목 추가1",new
-		 * Date(),0,"사진",0,"u-1","s-7"));
-		 */
 
 		/*
 		 * System.out.
@@ -113,24 +112,26 @@ public class RecipeBoardContentsServiceImplTest {
 		
 		
 		
-/*		System.out.println("유저가 전체게시판에서 자신이 쓴글 방법별로 검색.");
+		System.out.println("유저가 전체게시판에서 자신이 쓴글 방법별로 검색.");
 		
 		
-			HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndMethod(page, "u-1", "recipeBoardHits", "");
-			                                                                   
+			HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndMethod(page, "u-1", "", "");
 				Iterator iterator1 = map1.entrySet().iterator();
 				while (iterator1.hasNext()) {
+					
 				   Entry entry1 = (Entry)iterator1.next();
 				   if(entry1.getKey().equals("list")){
 					   if(entry1.getValue() == null) {
 						   System.out.println("유저또는 비회원 모두 전체게시판 조회할 목록이 없습니다.");				   
 					   }else{
-						   System.out.println("결과:"+entry1.getValue());				   
+						   
+						   System.out.println("결과:"+entry1.getValue());	
+						   
 					   }
 				   }
-				}*/
+				}
 				
-				System.out.println("유저가 매장별 자신이 쓴글 방법별로 검색.");
+			/*	System.out.println("유저가 매장별 자신이 쓴글 방법별로 검색.");
 				
 				
 				HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndStoreIdAndMethod(page, "u-1", "s-7", "recommendCount", "");
@@ -145,7 +146,7 @@ public class RecipeBoardContentsServiceImplTest {
 							   System.out.println(entry1.getValue());				   
 						   }
 					   }
-					}
+					}*/
 					
 		
 	}

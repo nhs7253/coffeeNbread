@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body> 내 매장 정보
+	<form action="${initParam.rootPath }/index.tiles" method="post" >
+
 <table>
 			<tr>
 				<th>매장 분류</th>
@@ -73,5 +75,12 @@
 				<td colspan="2"><input type="button" value="확인"></td>
 			</tr>
 		</table>
+		</form>
+			<form action="${initParam.rootPath }/modifyStoreController" method="post" >
+				<input type="submit" value="수정">
+			</form>
+			<form action="${initParam.rootPath }/removeStoreController" method="post" >
+				<input type="submit" value="삭제">
+			</form>
 </body>
 </html>

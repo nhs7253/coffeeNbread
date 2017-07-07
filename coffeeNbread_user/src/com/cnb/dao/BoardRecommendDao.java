@@ -32,4 +32,7 @@ public interface BoardRecommendDao {
      */
 	 int updateMinusBoardRecommend(int recommendCount,int recipeBoardNo, String recommendWriterId) ;
 
+	 
+	 
+	 
 }
