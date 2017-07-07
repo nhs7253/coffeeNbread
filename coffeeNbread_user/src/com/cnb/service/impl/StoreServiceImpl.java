@@ -51,7 +51,7 @@ public class StoreServiceImpl implements StoreService{
 		optionCategoryService.addOptionCategory(optionCategory);
 		
 		//매장 사진 추가 
-		//storePictureService.addStorePicture(storePicture);
+		storePictureService.addStorePicture(storePicture);
 		
 		
 		
