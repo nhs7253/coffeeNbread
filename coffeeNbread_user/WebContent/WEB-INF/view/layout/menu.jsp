@@ -26,7 +26,7 @@
 
 
 <%--회원/관리자 공통 메뉴 /member로 시작 --%>
-<sec:authorize access="hasAnyRole('CNB_USER', 'CNB_STORE')">
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
 	<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자 탈퇴</a></li>
 	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
@@ -37,8 +37,11 @@
 <li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
-<li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
-
+<%-- 매장 관리자 --%>
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
+	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
+	<li><a href="${initParam.rootPath }/findProductListController.do">메뉴 목록</a></li>
+</sec:authorize>
 </ul>
 
 

@@ -5,17 +5,21 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cnb.dao.OptionDetailDao;
 import com.cnb.dao.ProductDao;
 import com.cnb.dao.ProductGapDao;
+import com.cnb.dao.ProductPictureDao;
 import com.cnb.exception.DuplicatedProductIdOrProductNameException;
+import com.cnb.exception.DuplicatedProductPictureException;
 import com.cnb.exception.ProductNotFoundException;
 import com.cnb.service.ProductService;
 import com.cnb.util.PagingBean;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
 import com.cnb.vo.ProductGap;
+import com.cnb.vo.ProductPicture;
 
 /*
  * 최민희
@@ -34,8 +38,11 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductGapDao productGapDao;
 	
+	@Autowired
+	private ProductPictureDao productPictureDao;
+	
 	@Override
-	public int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException {
+	public int addProduct(Product product,OptionDetail optionDetail, List<MultipartFile> productPictureList) throws DuplicatedProductIdOrProductNameException, DuplicatedProductPictureException {
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) != null) {
 			throw new DuplicatedProductIdOrProductNameException(product.getProductId() + "은 이미 등록된 ID입니다.");
 		}else if(dao.selectProductByName(product.getStoreId(), product.getProductName()) != null) {
@@ -48,6 +55,15 @@ public class ProductServiceImpl implements ProductService {
 			//제품 등록시에는 모두 제품 등록폼을 유지, 0%로 등록
 			productGapDao.insertProductGap(new ProductGap("K", "0", product.getProductId(), product.getStoreId()));
 			
+			List<MultipartFile> pictureList = productPictureList;
+			for(int i=0; i<pictureList.size(); i++) {
+				if(productPictureDao.selectProductPictureListByProductPictureAndStoreId(pictureList.get(i).getOriginalFilename(), product.getStoreId()) != null) {
+					throw new DuplicatedProductPictureException("제품 사진이 중복되었습니다.");
+				}else{
+					productPictureDao.insertProductPicture(new ProductPicture(productPictureList.get(i).getOriginalFilename(), product.getProductId(), product.getStoreId()));				
+			
+				}
+			}
 			return cnt;
 		}
 	}
