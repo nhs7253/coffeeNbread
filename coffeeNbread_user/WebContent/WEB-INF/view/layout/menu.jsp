@@ -43,6 +43,7 @@
 
 <li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
 
+<li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
 </ul>
 
 
