@@ -50,7 +50,7 @@
  
 	
 		<intercept-url pattern="/store/**" access="hasRole('ROLE_CNB_STORE')"/>
-		<intercept-url pattern="/user/**" access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')"/>
+		<intercept-url pattern="/user/**" access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE', 'ROLE_CNB_ADMIN')"/>
 		<intercept-url pattern="/**" access="permitAll"/>
 		
 		<form-login

@@ -42,7 +42,7 @@
 
 				<tr>
 					<td>${list.qnaBoardNo}</td>
-					<td><a href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}">${list.qnaBoardTitle}</a></td>
+					<td><a href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}&qnaStoreId=${list.qnaStoreId}">${list.qnaBoardTitle}</a></td>
 					<td>${list.qnaBoardWriter}</td>
 					<td>${list.qnaBoardDateFormat}</td>
 					<td>${list.qnaBoardHits}</td>
