@@ -60,7 +60,7 @@ public interface QnaBoardContentsDao {
 	
 	/**
 	 * Q&A 게시판의 게시글 페이징을 위한 검색 결과 개수를 리턴 (paging) - count
-	 * @param select 검색 종류 - 글 제목, 글 내용, 제목 + 내용
+	 * @param select 검색 종류 - 글 제목(title), 글 내용(content), 제목 + 내용(titleAndcontent)
 	 * @param keyword 검색할 키워드
 	 * @param storeId ID가 있다면 해당 매장 글, 없다면 전체 Q&A글
 	 * @return int 검색 결과 개수
@@ -69,7 +69,7 @@ public interface QnaBoardContentsDao {
 	
 	/**
 	 * Q&A 게시판의 게시글을 페이징 하여, 그 범위 만큼 내용을 반환  (paging) - content
-	 * @param select 검색 종류 - 글 제목, 글 내용, 제목 + 내용 
+	 * @param select 검색 종류 - 글 제목(title), 글 내용(content), 제목 + 내용(titleAndcontent)
 	 * @param keyword 검색할 키워드
 	 * @param storeId ID가 있다면 해당 매장 글, 없다면 전체 Q&A글
 	 * @param startIndex 시작 컬럼 번호
@@ -77,5 +77,13 @@ public interface QnaBoardContentsDao {
 	 * @return 지정한 수만큼의 페이징한 결과
 	 */
 	List<QnaBoardContents> selectQnaBoardContentsPagingList(String select, String keyword, String storeId, int startIndex, int endIndex);
+	
+	/**
+	 * 해당 게시판 글 번호로 해당 글을 가져옴
+	 * @param qnaBoardNo 게시판 글번호
+	 * @return QnaBoardContents 해당 게시판 글의 객체
+	 */
+	QnaBoardContents selectQnaBoardContents(int qnaBoardNo);
+	
 }
 

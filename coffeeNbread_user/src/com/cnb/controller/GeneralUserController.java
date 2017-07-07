@@ -1,7 +1,6 @@
 package com.cnb.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -184,7 +182,6 @@ public class GeneralUserController {
 		}
 		
 		Map<String, Object> map = service.findUserListBySelectToKeyword(generalUserViewForm.getSelect(), generalUserViewForm.getKeyword(), generalUserViewForm.getPage());
-
 				
 		modelAndView.setViewName("user_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));

@@ -8,7 +8,6 @@ CREATE TABLE qna_board_contents (
 	qna_board_date DATE NOT NULL, /* 문의작성일지 */
 	qna_board_hits NUMBER(6) NOT NULL, /* 문의조회수 */
 	qna_board_secret CHAR(1) NOT NULL /* 비밀글 */
-	
 );
 CREATE SEQUENCE qna_board_no_seq;
 

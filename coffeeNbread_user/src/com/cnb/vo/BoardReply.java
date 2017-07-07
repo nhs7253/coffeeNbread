@@ -1,8 +1,13 @@
 package com.cnb.vo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 /*
+ * 노현식
+ * 2017-07-06
+ * getReplyRegDateFormat()
+ * 
  * 김형주 
  * 2017-07-03  
  * 초기생성.
@@ -242,7 +247,15 @@ public class BoardReply implements Serializable {
 
 
 
-
+	/**
+	 * sec:authentication를 통해 JSP에서 yyyy-MM-dd형식으로 DATE 타입을 문자열로 출력
+	 * <sec:authentication property="principal.userName"/>
+	 * 처럼 getReplyRegDateFormat -> replyRegDateFormat 호출 됨(get을 제외한 맨 앞글자 소문자 - is도 가능)
+	 * @return new SimpleDateFormat("yyyy-MM-dd").format(replyRegDate);
+	 */
+	public String getReplyRegDateFormat(){
+		return new SimpleDateFormat("yyyy-MM-dd").format(replyRegDate);
+	}
 	
   
 	
