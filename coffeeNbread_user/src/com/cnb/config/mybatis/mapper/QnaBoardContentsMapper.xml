@@ -136,4 +136,10 @@
 			WHERE rnum >= #{startIndex}
 	</select>
 	
+	<select id="selectQnaBoardContents" parameterType="_int" resultMap="QnaBoardContents-resultmap">
+		SELECT <include refid="all-column"/> 
+		FROM qna_board_contents
+		WHERE qna_board_no = #{value}
+	</select>
+	
 </mapper>

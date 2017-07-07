@@ -1,15 +1,13 @@
 package com.cnb.service.impl.test;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.exception.DuplicatedStoreCategorytNameException;
-import com.cnb.exception.DuplicatedStoreIdException;
 import com.cnb.service.StoreCategoryService;
-import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 
 public class StoreCategoryServiceImplTest {
@@ -25,9 +23,13 @@ public class StoreCategoryServiceImplTest {
 			// 매장 카테고리 
 			// 겹치는 거 없는 경우 + 겹칠때 예외처리
 			StoreCategory sc1=new StoreCategory(16, "커피3", "s-2");
+			List<StoreCategory> list = new ArrayList<StoreCategory>();
+			list.add(new StoreCategory(19,"커피1","s-2"));
+			list.add(new StoreCategory(20,"커피2","s-2"));
+
 			try {
 				
-				service.addStoreCategory(sc1); 
+				service.addStoreCategory(list); 
 				// service.addProduct(p3);
 				System.out.println("등록 성공");
 			} catch (DuplicatedStoreCategorytNameException e) {

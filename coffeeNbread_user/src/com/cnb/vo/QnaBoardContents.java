@@ -23,7 +23,7 @@ public class QnaBoardContents implements Serializable {
 	private String qnaBoardContent;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date qnaBoardDate;
-	private String qnaBoardHits;
+	private int qnaBoardHits;
 	private String qnaBoardSecret;
 	
 	
@@ -33,7 +33,7 @@ public class QnaBoardContents implements Serializable {
 	
 	
 	public QnaBoardContents(String qnaStoreId, String qnaBoardWriter, String qnaBoardTitle, String qnaBoardContent,
-			Date qnaBoardDate, String qnaBoardHits, String qnaBoardSecret) {
+			Date qnaBoardDate, int qnaBoardHits, String qnaBoardSecret) {
 		this.qnaStoreId = qnaStoreId;
 		this.qnaBoardWriter = qnaBoardWriter;
 		this.qnaBoardTitle = qnaBoardTitle;
@@ -46,7 +46,7 @@ public class QnaBoardContents implements Serializable {
 	
 
 	public QnaBoardContents(int qnaBoardNo, String qnaStoreId, String qnaBoardWriter, String qnaBoardTitle,
-			String qnaBoardContent, Date qnaBoardDate, String qnaBoardHits, String qnaBoardSecret) {
+			String qnaBoardContent, Date qnaBoardDate, int qnaBoardHits, String qnaBoardSecret) {
 		this.qnaBoardNo = qnaBoardNo;
 		this.qnaStoreId = qnaStoreId;
 		this.qnaBoardWriter = qnaBoardWriter;
@@ -141,13 +141,13 @@ public class QnaBoardContents implements Serializable {
 
 
 
-	public String getQnaBoardHits() {
+	public int getQnaBoardHits() {
 		return qnaBoardHits;
 	}
 
 
 
-	public void setQnaBoardHits(String qnaBoardHits) {
+	public void setQnaBoardHits(int qnaBoardHits) {
 		this.qnaBoardHits = qnaBoardHits;
 	}
 
@@ -181,7 +181,7 @@ public class QnaBoardContents implements Serializable {
 		int result = 1;
 		result = prime * result + ((qnaBoardContent == null) ? 0 : qnaBoardContent.hashCode());
 		result = prime * result + ((qnaBoardDate == null) ? 0 : qnaBoardDate.hashCode());
-		result = prime * result + ((qnaBoardHits == null) ? 0 : qnaBoardHits.hashCode());
+		result = prime * result + qnaBoardHits;
 		result = prime * result + qnaBoardNo;
 		result = prime * result + ((qnaBoardSecret == null) ? 0 : qnaBoardSecret.hashCode());
 		result = prime * result + ((qnaBoardTitle == null) ? 0 : qnaBoardTitle.hashCode());
@@ -211,10 +211,7 @@ public class QnaBoardContents implements Serializable {
 				return false;
 		} else if (!qnaBoardDate.equals(other.qnaBoardDate))
 			return false;
-		if (qnaBoardHits == null) {
-			if (other.qnaBoardHits != null)
-				return false;
-		} else if (!qnaBoardHits.equals(other.qnaBoardHits))
+		if (qnaBoardHits != other.qnaBoardHits)
 			return false;
 		if (qnaBoardNo != other.qnaBoardNo)
 			return false;
@@ -240,6 +237,9 @@ public class QnaBoardContents implements Serializable {
 			return false;
 		return true;
 	}
+
+
+
 	
 	
 

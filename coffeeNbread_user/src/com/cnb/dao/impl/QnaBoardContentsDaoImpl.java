@@ -73,4 +73,9 @@ public class QnaBoardContentsDaoImpl implements QnaBoardContentsDao {
 		input.put("endIndex", String.valueOf(endIndex));		
 		return session.selectList(makeSqlId("selectQnaBoardContentsPagingList"), input);
 	}
+
+	@Override
+	public QnaBoardContents selectQnaBoardContents(int qnaBoardNo) {
+		return session.selectOne(makeSqlId("selectQnaBoardContents"), qnaBoardNo);
+	}
 }

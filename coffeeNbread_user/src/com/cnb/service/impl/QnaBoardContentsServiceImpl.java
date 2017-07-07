@@ -9,13 +9,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cnb.dao.BoardReplyDao;
 import com.cnb.dao.GeneralUserDao;
 import com.cnb.dao.QnaBoardContentsDao;
 import com.cnb.dao.UserAuthorityDao;
+import com.cnb.exception.ContentsNotFoundException;
 import com.cnb.exception.UserManageException;
 import com.cnb.service.GeneralUserService;
 import com.cnb.service.QnaBoardContentsService;
 import com.cnb.util.PagingBean;
+import com.cnb.vo.BoardReply;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.QnaBoardContents;
 import com.cnb.vo.UserAuthority;
@@ -30,6 +33,9 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 	
 	@Autowired
 	private QnaBoardContentsDao qnaBoardContentsDao;
+	
+	@Autowired
+	private BoardReplyDao boardReplyDao;
 
 	@Override
 	public void addQnaBoardContents(QnaBoardContents qnaBoardContents) {
@@ -52,8 +58,16 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 	}
 
 	@Override
-	public void modifyQnaBoardContents(QnaBoardContents qnaBoardContents) {
-		qnaBoardContentsDao.updateQnaBoardContents(qnaBoardContents);
+	public void modifyQnaBoardContents(int qnaBoardNo, QnaBoardContents qnaBoardContents) throws ContentsNotFoundException {
+		QnaBoardContents content = qnaBoardContentsDao.selectQnaBoardContents(qnaBoardNo);
+		if(content == null){
+			throw new ContentsNotFoundException("해당 게시글을 찾을 수 없습니다.");
+		}
+		
+		content.setQnaBoardTitle(qnaBoardContents.getQnaBoardTitle());
+		content.setQnaBoardContent(qnaBoardContents.getQnaBoardContent());
+		content.setQnaBoardSecret(qnaBoardContents.getQnaBoardSecret());
+		qnaBoardContentsDao.updateQnaBoardContents(content);
 	}
 
 	@Override
@@ -66,5 +80,31 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 		map.put("pageBean", pageBean);
 		map.put("list", list);
 		return map;
+	}
+
+	@Override
+	public Map<String, Object> viewQnaBoardContentsByReplyListService(int qnaBoardNo, int page) {
+		HashMap<String, Object> map = new HashMap<>();
+		//item 수 - 레시피게시판에 달린 항목당 댓글개수 
+        int totalCount= boardReplyDao.countReplyBoardByQnaBoardNo(qnaBoardNo);
+   
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+
+		List<BoardReply> list =boardReplyDao.selectBoardReplyListByQnaBoardNo(qnaBoardNo, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+	
+		map.put("list", list);
+		map.put("content", qnaBoardContentsDao.selectQnaBoardContents(qnaBoardNo));
+		return map;
+	}
+
+	@Override
+	public QnaBoardContents findQnaBoardContents(int qnaBoardNo) throws ContentsNotFoundException {
+		
+		QnaBoardContents qnaBoardContents = qnaBoardContentsDao.selectQnaBoardContents(qnaBoardNo);
+		if(qnaBoardContents == null){
+			throw new ContentsNotFoundException("해당 글 정보를 찾을 수 없습니다.");
+		}
+		return qnaBoardContents;
 	}
 }

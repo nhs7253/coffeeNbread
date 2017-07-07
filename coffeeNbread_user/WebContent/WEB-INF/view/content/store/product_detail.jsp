@@ -1,7 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <h2>제품 상세</h2>
+
+<form  action="${initParam.rootPath }/findProductListController.do" method="post">
+	<sec:csrfInput/><%-- csrf 토큰 --%>
+	<input type="submit" value="제품 목록" />
+</form>
 
 <table>
 	<tr>
@@ -30,7 +36,7 @@
 	</tr>	
 	<tr>
 		<th>추천 제품 개수</th>
-		<td>${requestScope.product.recommentProductCount }</td>
+		<td>${requestScope.product.recommendProductCount }</td>
 	</tr>
 	<tr>
 		<th>제품 사진</th>

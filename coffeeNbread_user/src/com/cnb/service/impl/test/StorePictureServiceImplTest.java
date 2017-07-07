@@ -1,12 +1,13 @@
 package com.cnb.service.impl.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.exception.DuplicatedStorePictureException;
-import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.service.StorePictureService;
-import com.cnb.vo.Store;
 import com.cnb.vo.StorePicture;
 
 /*
@@ -24,12 +25,14 @@ public class StorePictureServiceImplTest {
 		StorePictureService service =  (StorePictureService)ctx.getBean("storePictureServiceImpl");
 	
 	//매장 사진 등록 
-		StorePicture p1 = new StorePicture("매장사진120","s-1");
+		List<StorePicture> p1 = new ArrayList<StorePicture>();
+		p1.add(new StorePicture("매장사진220","s-1"));
+		p1.add(new StorePicture("매장사진221","s-1"));
 	
 		
 	try{
 		
-		System.out.println(service.addStorePicture(p1));
+		service.addStorePicture(p1);
 		System.out.println("등록완료");
 	}catch(DuplicatedStorePictureException e){
 		System.err.println(e.getMessage());

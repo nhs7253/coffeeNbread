@@ -50,7 +50,7 @@
 			</tr>
 			<tr>
 				<th>제품 사진</th>
-				<td><input type="file" name="productPictureList" multiple></td>
+				<td><input type="file" name="imageName"></td>
 			<tr>
 				<td colspan="2"><input type="submit" value="등록"></td>
 			</tr>

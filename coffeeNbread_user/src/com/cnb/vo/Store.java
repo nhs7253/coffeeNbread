@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*
  * 노현식
  * 2017-07-04
@@ -31,7 +33,9 @@ public class Store implements Serializable{
 	private String storeAddress;
 	private String storeEmail;
 	private int storeHits;
+	@DateTimeFormat(pattern="hh:mm")
 	private Date storeOpen;
+	@DateTimeFormat(pattern="hh:mm")
 	private Date storeClose;
 	private String storePermission;
 	

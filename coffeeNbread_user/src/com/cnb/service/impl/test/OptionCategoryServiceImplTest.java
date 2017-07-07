@@ -1,5 +1,8 @@
 package com.cnb.service.impl.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,9 +23,11 @@ public class OptionCategoryServiceImplTest {
 		//option category 등록
 		
 		OptionCategory oc1 = new OptionCategory(7,"s-2","대분류100");
-		
+		List<OptionCategory> list = new ArrayList<OptionCategory>();
+		list.add(new OptionCategory (17,"s-2","대"));
+		list.add(new OptionCategory (18,"s-2","대2"));
 		try{
-			service.addOptionCategory(oc1);
+			service.addOptionCategory(list);
 			System.out.println("등록 성공");
 		} catch (DuplicatedOptionCategoryNameException e) {
 			System.err.println(e.getMessage());

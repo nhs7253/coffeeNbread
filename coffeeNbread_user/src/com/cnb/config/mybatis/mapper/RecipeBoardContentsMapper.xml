@@ -96,6 +96,31 @@
 	</resultMap>
 
 
+
+  	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-store-user-resultmap">
+		<id column="recipe_board_no" property="recipeBoardNo" />
+		<result column="recipe_board_content" property="recipeBoardContent" />
+		<result column="recipe_board_title" property="recipeBoardTitle" />
+		<result column="recipe_board_date" property="recipeBoardDate" />
+		<result column="recipe_board_picture" property="recipeBoardPicture" />
+		<result column="recipe_board_hits" property="recipeBoardHits" />
+		<result column="recommend_count" property="recommendCount" />
+		
+		<association property="store"
+			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
+		<association property="generalUser" resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap"/>	
+	</resultMap>
+
+
+
+
+
+
+
+
+
+
+
 	<!-- 페이징. -->
 
 	<!--전체 레시피게시글에서 방법과 방법내용으로 찾는 개수 -->
@@ -614,5 +639,38 @@
 
 	</select>
 
+    
+     <!--recipeBoardNo를 통해 recipeBoardContents 객체를 가져오기.  -->   
+     
+	<select id="selectRecipeBoardContentsByrecipeBoardNo" parameterType="int"
+		resultMap="recipeBoardContents-store-user-resultmap">
 
+		select recipe_board_no,
+		       recipe_board_content,
+		       recipe_board_title,
+		       recipe_board_date,
+		       recipe_board_hits,
+		        recipe_board_picture,
+		       recommend_count,
+		       user_id,
+		       store_id
+		  from  recipe_board_contents
+		  where recipe_board_no=#{recipeBoardNo}
+	</select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </mapper>

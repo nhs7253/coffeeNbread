@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.BoardRecommendMapper">
+
+	
+	<resultMap type="BoardRecommend" id="BoardRecommend-resultmap">
+		<id column="user_id" property="userId"/>
+		<result column="recipe_board_no" property="recipeBoardNo"/>
+	</resultMap>
+	
+
+	
+
+	<!--레시피 게시판의 추천수 증가  -->
+	<update id="updatePlusBoardRecommend" parameterType="map">
+		UPDATE recipe_board_contents 
+		SET  recommend_count=#{recommendCount}
+	     where	recipe_board_no = #{recipeBoardNo}
+		
+	</update>
+	
+	
+	<!--레시피 게시판 추천수 감소  -->
+	<update id="updateMinusBoardRecommend" parameterType="map">
+		UPDATE recipe_board_contents
+		SET    recommend_count=#{recommendCount} 
+		where	recipe_board_no=#{recipeBoardNo}
+		
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

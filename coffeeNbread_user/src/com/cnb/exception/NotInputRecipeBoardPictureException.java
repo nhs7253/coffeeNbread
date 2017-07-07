@@ -3,7 +3,7 @@ package com.cnb.exception;
 /*
  * 김형주 
  * 2017-07-04
- * BookMarkDelete용 Exception으로 용도 변경
+ * 레시피게시판 사진 업로드 할떄 같은 사진 넣었을떄의 에러
  * 
  * 김형주
  * 2017-07-04 

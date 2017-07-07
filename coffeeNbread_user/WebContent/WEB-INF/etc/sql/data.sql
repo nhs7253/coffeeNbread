@@ -215,6 +215,11 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-4','c');
 
 
 
+delete  from recipe_board_contents
+
+
+
+
 
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글1', '레시피제목1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),2,'레시피사진',2,'u-1','s-7');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글2', '레시피제목2', TO_DATE('2017-06-27', 'yyyy-mm-dd'),3,'레시피사진',3,'u-1','s-7');
@@ -262,23 +267,35 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
 /* 테스트용  받으셔도 되고 안받으셔도 됩니다.*/
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글17', 'tttt', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+/* u-2가 작성한 레시판 게시글들 */
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글20', '레시피제목20', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-2','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글21', '레시피제목21', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-2','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글22', '레시피제목22', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-2','s-6');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글23', '레시피제목23', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-2','s-6');
 
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+/* qna board 목록 */		
+INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자1', '문의글제목1', '내용 1',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
+INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자2', '문의글제목2', '내용 2',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
+INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자3', '문의글제목3', '내용 3',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
+INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자4', '문의글제목4', '내용4',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
+INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자5', '문의글제목5', '내용 5',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
+
+/* 댓글 목록  */
+
+  -- 레시피 게시판에있는거 댓글
+INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),'',1);
+INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),1,'');
+ --Qna 게시판에 있는 댓글
+INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),'',2);
+INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),2,'');
 		
 		
 		

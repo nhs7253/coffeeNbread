@@ -32,16 +32,23 @@
 	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
 	<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
 	<li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
+	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
+	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=service-qna-s-1">매장 Q&A 글쓰기</a></li>
 </sec:authorize>
 
 <li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
+<li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do">Q&A 게시판 목록</a></li>
+<li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?storeId=service-qna-s-1">매장 Q&A 게시판 목록</a></li>
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
+
 
 <%-- 매장 관리자 --%>
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
-	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
-	<li><a href="${initParam.rootPath }/findProductListController.do">메뉴 목록</a></li>
+	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
+	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
 </sec:authorize>
+
+<li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
 </ul>
 
 

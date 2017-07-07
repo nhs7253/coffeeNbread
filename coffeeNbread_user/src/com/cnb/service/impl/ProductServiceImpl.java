@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 	private ProductPictureDao productPictureDao;
 	
 	@Override
-	public int addProduct(Product product,OptionDetail optionDetail, List<MultipartFile> productPictureList) throws DuplicatedProductIdOrProductNameException, DuplicatedProductPictureException {
+	public int addProduct(Product product,OptionDetail optionDetail, MultipartFile productPicture) throws DuplicatedProductIdOrProductNameException, DuplicatedProductPictureException {
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) != null) {
 			throw new DuplicatedProductIdOrProductNameException(product.getProductId() + "은 이미 등록된 ID입니다.");
 		}else if(dao.selectProductByName(product.getStoreId(), product.getProductName()) != null) {
@@ -54,16 +54,12 @@ public class ProductServiceImpl implements ProductService {
 			
 			//제품 등록시에는 모두 제품 등록폼을 유지, 0%로 등록
 			productGapDao.insertProductGap(new ProductGap("K", "0", product.getProductId(), product.getStoreId()));
-			
-			List<MultipartFile> pictureList = productPictureList;
-			for(int i=0; i<pictureList.size(); i++) {
-				if(productPictureDao.selectProductPictureListByProductPictureAndStoreId(pictureList.get(i).getOriginalFilename(), product.getStoreId()) != null) {
+
+				if(productPictureDao.selectProductPictureListByProductPictureAndStoreId(productPicture.getOriginalFilename(), product.getStoreId()) != null) {
 					throw new DuplicatedProductPictureException("제품 사진이 중복되었습니다.");
 				}else{
-					productPictureDao.insertProductPicture(new ProductPicture(productPictureList.get(i).getOriginalFilename(), product.getProductId(), product.getStoreId()));				
-			
+					productPictureDao.insertProductPicture(new ProductPicture(productPicture.getOriginalFilename(), product.getProductId(), product.getStoreId()));				
 				}
-			}
 			return cnt;
 		}
 	}
@@ -72,7 +68,6 @@ public class ProductServiceImpl implements ProductService {
 	public int modifyProduct(Product product,OptionDetail optionDetail) throws ProductNotFoundException{
 		
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) == null) {
-			System.out.println(dao.selectProductById(product.getStoreId(), product.getProductId()));
 			throw new ProductNotFoundException(String.format("ID가 %s 인 제품이 없습니다.", product.getProductId()));
 		}else{
 			int cnt =  dao.updateProduct(product);
@@ -98,6 +93,24 @@ public class ProductServiceImpl implements ProductService {
 		return map;
 	}
 
+	@Override
+	public HashMap<String, Object> findProductListByName(int page, String storeId, String productName) {
+		HashMap<String, Object> map = new HashMap<>();
+		String method ="name";
+		String methodContent = productName;
+		
+		//item 수
+		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+		
+		List<Product> list = dao.selectProductListByName(storeId, productName, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		map.put("list", list);
+		return map;
+	}
+
+	
 	@Override
 	public Product findProductByName(String storeId, String productName) {
 		return dao.selectProductByName(storeId, productName);
@@ -132,10 +145,13 @@ public class ProductServiceImpl implements ProductService {
 		//item 수
 		int totalCount = dao.selectProductListCount(storeId);
 		
+		System.out.println("totalCount = " + totalCount);
+		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
 		
 		List<Product> list = dao.selectProductList(storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		
 		map.put("list", list);
 		return map;
 	}
