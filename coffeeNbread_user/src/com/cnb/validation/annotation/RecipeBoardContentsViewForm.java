@@ -6,18 +6,47 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /*
- * 노현식
+ * 김형주
  * 2017-07-06
  * 생성, 초기 구현
  */
 public class RecipeBoardContentsViewForm{
 	
 	@NotEmpty
-	private String select = "title";
+	private String select="recipeBoardTitle";
 	
 	private String keyword = null;
 	private String storeId = null;
+	private String userId;
 	
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+
+	
+	
+	public RecipeBoardContentsViewForm() {
+		super();
+	}
+
+
+
+	public RecipeBoardContentsViewForm(String select, String keyword, String storeId, String userId, int page) {
+		super();
+		this.select = select;
+		this.keyword = keyword;
+		this.storeId = storeId;
+		this.userId = userId;
+		this.page = page;
+	}
+
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	@NotNull
 	private int page = 1;
 
@@ -26,7 +55,7 @@ public class RecipeBoardContentsViewForm{
 	}
 	public void setSelect(String select) {	
 		if(select == null || select.trim().isEmpty()){
-			this.select = "title";
+			this.select = "recipeBoardTitle";
 			return;
 		}
 		this.select = select;
@@ -61,9 +90,10 @@ public class RecipeBoardContentsViewForm{
 	}
 	@Override
 	public String toString() {
-		return "QnaBoardContentsViewForm [select=" + select + ", keyword=" + keyword + ", storeId=" + storeId
-				+ ", page=" + page + "]";
+		return "RecipeBoardContentsViewForm [select=" + select + ", keyword=" + keyword + ", storeId=" + storeId
+				+ ", userId=" + userId + ", page=" + page + "]";
 	}
+
 	
 	
 }

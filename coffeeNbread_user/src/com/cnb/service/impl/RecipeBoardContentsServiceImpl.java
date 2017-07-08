@@ -3,15 +3,18 @@ package com.cnb.service.impl;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cnb.dao.BoardReplyDao;
 import com.cnb.dao.RecipeBoardContentsDao;
 import com.cnb.dao.StoreDao;
 import com.cnb.exception.NotInputRecipeBoardPictureException;
 import com.cnb.service.RecipeBoardContentsService;
 import com.cnb.util.PagingBean;
+import com.cnb.vo.BoardReply;
 import com.cnb.vo.RecipeBoardContents;
 import com.cnb.vo.Store;
 
@@ -25,15 +28,14 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 
 	@Autowired
 	private RecipeBoardContentsDao dao;
-	
+	@Autowired
+	private BoardReplyDao boardReplyDao;
 	/* 유저가 매장에서 단순 등록 */
 	@Override
 	public int addRecipeBoardContents(RecipeBoardContents recipeBoardContents) {
-		System.out.println("recipeBoardContents작업전:"+recipeBoardContents);
-
+		
 		recipeBoardContents.setRecipeBoardHits(0);
 		recipeBoardContents.setRecommendCount(0);
-		System.out.println("recipeBoardContents작업후:"+recipeBoardContents);
 		return dao.insertRecipeBoardContents(recipeBoardContents);
 	}
 
@@ -96,32 +98,29 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 	    System.out.println("totalCount:"+totalCount);    
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-		System.out.println("list전:");
 		List<RecipeBoardContents> list =dao.selectRecipeBoardContentsListByStoreIdAndMethod(storeId, method, methodContent, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		
+		
+		
+		
 		System.out.println("방법에의해 조회:"+list);
 		map.put("list", list);
 		return map;
 	}
 	
-	/**
-	 * 회원이 전체게시판에서 자신이 쓴글 조회가능. method 가 없다면 전체조회.
-	 * 
-	 */
+
 	@Override
 	public HashMap<String, Object> findRecipeBoardContentsByUserIdAndMethod(int page,String userId,String method,Object methodContent) {
 		
 		HashMap<String, Object> map = new HashMap<>();
-		// item 수
-		
-         /* 회원이든 비회원이든 방법에따라 전부다 조회 했을떄 나오는 개수 */
-		int totalCount = dao.countSelectRecipeBoardContentsByUserIdAndMethod(userId, method, methodContent);
-	      System.out.println("totalCount:"+totalCount);
-		PagingBean pageBean = new PagingBean(totalCount, page);
+	   	int totalCount = dao.countSelectRecipeBoardContentsByUserIdAndMethod(userId, method, methodContent);
+	  	PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-		
+		map.put("userId", userId);
 		List<RecipeBoardContents> list =dao.selectRecipeBoardContentsListByUserIdAndMethod(userId, method, methodContent, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		map.put("list", list);
-		System.out.println("list:"+list);
+		     
+		
 		return map;
 	}
 
@@ -145,6 +144,20 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 		map.put("list", list);
 		return map;
 	}
-	
+	@Override
+	public HashMap<String, Object> viewRecipeBoardContentsByReplyListService(int recipeBoardNo, int page) {
+		
+		HashMap<String, Object> map = new HashMap<>();
+		//item 수 - 레시피게시판에 달린 항목당 댓글개수 
+        int totalCount= boardReplyDao.countReplyBoardByQnaBoardNo(recipeBoardNo);
+   
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+
+		List<BoardReply> list =boardReplyDao.selectBoardReplyListByRecipeBoardNo(recipeBoardNo, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		map.put("list", list);
+		map.put("content",dao.selectRecipeBoardContentsByrecipeBoardNo(recipeBoardNo));
+		return map;
+	}
 
 }

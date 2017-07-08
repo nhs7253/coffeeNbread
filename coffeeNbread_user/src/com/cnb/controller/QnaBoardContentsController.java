@@ -45,8 +45,9 @@ public class QnaBoardContentsController {
 	
 	@RequestMapping("/user/addQnaBoardContents")
 	public String addQnaBoardContents(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors){
-		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		
+	
+		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		if(errors.hasErrors()){
 			return "user/QnA_board_register_form.tiles"; //에러 발생
 		}

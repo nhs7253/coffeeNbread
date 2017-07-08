@@ -115,7 +115,7 @@ public class RecipeBoardContentsServiceImplTest {
 		System.out.println("유저가 전체게시판에서 자신이 쓴글 방법별로 검색.");
 		
 		
-			HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndMethod(page, "u-1", "", "");
+			HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndMethod(page, "", "", "");
 				Iterator iterator1 = map1.entrySet().iterator();
 				while (iterator1.hasNext()) {
 					

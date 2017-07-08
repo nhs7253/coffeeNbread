@@ -3,6 +3,7 @@ package com.cnb.service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.RecipeBoardContents;
@@ -94,5 +95,14 @@ public interface RecipeBoardContentsService {
 	 */
 	HashMap<String, Object> findRecipeBoardContentsByUserIdAndStoreIdAndMethod(int page,String userId,String storeId,String method,Object methodContent);
 
-   
+	
+	
+	/**
+	 * 레시피게시글마다 댓글리스트 달기.
+	 * 
+	 * @param recipeBoardNo
+	 * @param page
+	 * @return
+	 */
+	HashMap<String, Object> viewRecipeBoardContentsByReplyListService(int recipeBoardNo, int page);
 }

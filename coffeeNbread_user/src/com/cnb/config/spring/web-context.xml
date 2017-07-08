@@ -53,6 +53,24 @@
 	<mvc:view-controller path="/user/QnA_board_update_form.do" view-name="user/QnA_board_update_form.tiles"/>
 	
 	
+		
+	<!--전체 레시피게시판 조회  -->
+	<mvc:view-controller path="/common/recipeBoard.do" view-name="common/recipeBoard.tiles"/>
+	
+	<!-- 레시피 게시글 등록폼 -->
+	<mvc:view-controller path="/user/recipe_board_register_form.do" view-name="user/recipe_board_register_form.tiles"/>
+	
+	
+
+	<!-- 레시피 상세글 내용 -->
+	<mvc:view-controller path="/common/recipeBoard_view.do" view-name="common/recipeBoard_view.tiles"/>
+	
+	<!-- 레시피 게시글 수정 폼 -->
+	<mvc:view-controller path="/common/recipe_board_update_form.do" view-name="user/recipe_board_update_form.tiles"/>
+	
+	
+	
+	
 	
 	<mvc:view-controller path="/user_list.do" view-name="user_list.tiles"/>
 
@@ -70,8 +88,7 @@
 	<mvc:view-controller path="/store/product_success.do" view-name="store/product_success.tiles"/>
 	
 	
-	<!--전체 레시피게시판 조회  -->
-	<mvc:view-controller path="/common/recipeBoard_find.do" view-name="common/recipeBoard_find.tiles"/>
+
 	
 	
 	

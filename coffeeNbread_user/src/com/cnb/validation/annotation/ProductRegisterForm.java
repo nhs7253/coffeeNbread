@@ -45,6 +45,7 @@ public class ProductRegisterForm implements Serializable {
 	private String optionCategoryDetail;
 	
 	private ProductPicture productPicture;
+	
 	private List<MultipartFile> productPictureList;
 	
 	public String getProductId() {

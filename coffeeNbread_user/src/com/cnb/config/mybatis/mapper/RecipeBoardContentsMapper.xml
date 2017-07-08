@@ -135,6 +135,7 @@
 				recipe_board_contents
 				WHERE
 				recipe_board_content like '%'||#{keyword}||'%'
+				
 
 			</when>
 			<when test="method == 'recipeBoardTitle'">
@@ -185,7 +186,7 @@
 
 
 
-	<!--전체 레시피게시글에서 방법과 방법내용으로 찾는 개수 -->
+	<!--전체 레시피게시글에서 매장별 방법과 방법내용으로 찾는 개수 -->
 	<select id="countSelectRecipeBoardContentsByStoreIdAndMethod"
 		parameterType="map" resultType="_int">
 		<choose>
@@ -554,7 +555,8 @@
 		<choose>
 			<when test="select == 'recipeBoardDate'">
 
-				And recipe_board_date= #{methodContent}
+				And recipe_board_date= #{keyword}
+				oreder by recipe_board_date desc
 			</when>
 			<when test="select == 'recipeBoardTitle'">
 				And recipe_board_title like '%'||#{keyword}||'%'
@@ -570,6 +572,7 @@
 				order by recommend_count desc
 			</when>
             
+       
 		</choose>
 		)
 		WHERE rownum &lt;= #{endIndex}

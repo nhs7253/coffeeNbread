@@ -42,9 +42,13 @@
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
 <li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
-<li><a href="${initParam.rootPath }/common//findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
+
+
+<li><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do">전체 레시피 게시판 </a></li>
+<li><a href="${initParam.rootPath }/user/recipe_board_register_form.do">Recipe 게시판 글쓰기. </a></li>
+
 </ul>
 
 
