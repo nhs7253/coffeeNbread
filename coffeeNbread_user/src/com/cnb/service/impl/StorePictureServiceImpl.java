@@ -18,14 +18,13 @@ public class StorePictureServiceImpl implements StorePictureService {
 	private StorePictureDao dao;
 
 	@Override
-	public void addStorePicture(List<StorePicture> storePictureList) throws DuplicatedStorePictureException {
-		List<StorePicture> storePictureList2 = dao.selectStorePictureListByStoreId(storePictureList.get(0).getStoreId());
+	public void addStorePicture(StorePicture storePicture) throws DuplicatedStorePictureException {
+		List<StorePicture> storePictureList2 = dao.selectStorePictureListByStoreId(storePicture.getStoreId());
 
 
-		if (storePictureList2.size() == 0) {
-			for (int i = 0; i < storePictureList.size(); i++) {
-				dao.insertStorePicture(storePictureList.get(i));
-			}
+		
+				dao.insertStorePicture(storePicture);
+			
 		}/* else {
 			for (int i = 0; i < storePictureList.size(); i++) {
 				System.out.println("for문 " + storePictureList.get(i).getStorePicture());
@@ -41,16 +40,17 @@ public class StorePictureServiceImpl implements StorePictureService {
 			}
 		}*/
 
-	}
+	
 
 	@Override
 
-	public int modifyStorePictureByStorePicture(StorePicture storePictureVO, String storePicture)
+	public int modifyStorePictureByStorePicture(StorePicture storePictureVO)
 			throws StorePictureNotFoundException {
-		if (dao.selectStorePictureByStoreIdAndStorePicture(storePicture, storePictureVO.getStoreId()) == null) {
-			throw new StorePictureNotFoundException(storePicture + "등록되어 있지 않음");
+		if(dao.selectStorePictureByStoreIdAndStorePicture(storePictureVO.getStorePicture(), storePictureVO.getStoreId())!=null){
+			dao.deleteStorePicture(dao.selectStorePictureByStoreIdAndStorePicture(storePictureVO.getStorePicture(), storePictureVO.getStoreId()));
+			return dao.updateStorePictureByStorePicture(storePictureVO);
 		}
-		return dao.updateStorePictureByStorePicture(storePictureVO, storePicture);
+		return dao.updateStorePictureByStorePicture(storePictureVO);
 	}
 
 	@Override

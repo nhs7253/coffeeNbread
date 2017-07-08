@@ -18,13 +18,13 @@ public interface StorePictureService {
 	 * @param StorePicture
 	 * @throws DuplicatedProductPictureException 한 제품에 등록하려는 제품 사	진이 이미 등록되 있는 경우 발생
 	 */
-	void addStorePicture(List<StorePicture> storePicture) throws DuplicatedStorePictureException;
+	void addStorePicture(StorePicture storePicture) throws DuplicatedStorePictureException;
 	
 	/**
 	 * 1개의 매장 사진 정보 수정
 	 * @param StorePictureVO, StorePicture
 	 */
-	int modifyStorePictureByStorePicture(StorePicture storePictureVO, String productPicture) throws StorePictureNotFoundException;
+	int modifyStorePictureByStorePicture(StorePicture storePictureVO) throws StorePictureNotFoundException;
 	
 	/**
 	 * 1개의 매장 사진 정보 삭제

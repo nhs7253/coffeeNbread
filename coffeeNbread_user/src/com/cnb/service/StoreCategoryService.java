@@ -24,7 +24,7 @@ public interface StoreCategoryService {
 	 * @param storeCategory
 	 * @return 처리 개수
 	 */
-	int modifyStoreCategory(StoreCategory storeCategory);
+	void modifyStoreCategory(List<StoreCategory> storeCategory);
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 삭제

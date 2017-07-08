@@ -45,14 +45,16 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	}
 
 	@Override
-	public int modifyOptionCategory(OptionCategory optionCategory) {
-		//소분류 있을 경우 소분류 삭제 후 수정
-		if(detailDao.selectOptionDetailListByOptionCategory(optionCategory.getStoreId(), optionCategory.getOptionId()).size()>0){
-			detailDao.deleteOptionDetail(optionCategory.getStoreId(), optionCategory.getOptionId());
-			return dao.updateOptionCategory(optionCategory);
+	public void modifyOptionCategory(List<OptionCategory> optionCategoryList) {
+	/*	//소분류 있을 경우 소분류 삭제 후 수정
+		for(int i = 0;i<optionCategoryList.size();i++){
+		if(detailDao.select(optionCategoryList.get(i).getStoreId()).size()>0){
+			detailDao.deleteOptionDetail(optionCategoryList.get(i).getStoreId(), optionCategoryList.get(i).getOptionId());
+			dao.updateOptionCategory(optionCategoryList.get(i));
 		}else{
-		return dao.updateOptionCategory(optionCategory);
+		 dao.updateOptionCategory(optionCategoryList.get(i));
 		}
+		}*/
 	}
 
 	@Override

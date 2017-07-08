@@ -45,6 +45,7 @@
 <li><a href="${initParam.rootPath }/common//findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
+<li><a href="${initParam.rootPath}/ selectStoreController.do">매장 조회</a></li>
 </ul>
 
 
