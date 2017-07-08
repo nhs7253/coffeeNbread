@@ -5,8 +5,21 @@
 </head>
 <body>
 	
+<style type="text/css">
+table, td {
+   border: 1px solid black;
+}
 
-	<h2>${sessionScope.storeName }Q&A 게시판</h2>
+table {
+   width: 700px;
+   border-collapse: collapse;
+}
+
+td {
+   padding: 5px; /* //td 간 간격 */
+}
+</style>
+	<h2>${sessionScope.storeName } Q&A 게시판</h2>
 
 
 

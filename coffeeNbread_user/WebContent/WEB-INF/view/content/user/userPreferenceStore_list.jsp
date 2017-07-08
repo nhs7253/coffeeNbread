@@ -2,6 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+<style type="text/css">
+table, td {
+   border: 1px solid black;
+}
+
+table {
+   width: 700px;
+   border-collapse: collapse;
+}
+
+td {
+   padding: 5px; /* //td 간 간격 */
+}
+</style>
+
 </head>
 <body>
 	
