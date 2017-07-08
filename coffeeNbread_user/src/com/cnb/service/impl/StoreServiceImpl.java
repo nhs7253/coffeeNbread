@@ -80,7 +80,17 @@ public class StoreServiceImpl implements StoreService{
 		
 	@Override
 	public int removeStoretById(String storeId) {
-		return storedao.deleteStoreById(storeId);
+		System.out.println("service들어옴");
+		System.out.println("storeId = "+storeId);
+		storeCategoryService.removeStoreCategoryById(storeId);
+		System.out.println("매장분류 삭제");
+		storePictureService.removeStorePictureById(storeId);
+		System.out.println("사진 삭제");
+
+		int cnt = storedao.deleteStoreById(storeId);
+		System.out.println("매장삭제");
+
+		return cnt;
 		
 	}
 

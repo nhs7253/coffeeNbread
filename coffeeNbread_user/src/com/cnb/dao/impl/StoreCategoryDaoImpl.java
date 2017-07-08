@@ -62,4 +62,9 @@ public class StoreCategoryDaoImpl implements StoreCategoryDao{
 		return session.selectList(makeSqlId("selectStoreCategoryListByStoreId"), storeId);
 	
 	}
+	@Override
+	public int deleteStoreCategoryById(String storeId) {
+		
+		return session.delete(makeSqlId("deleteStoreCategoryById"), storeId);
+	}
 }

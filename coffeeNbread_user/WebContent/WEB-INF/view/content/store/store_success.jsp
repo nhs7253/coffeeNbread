@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -69,8 +70,9 @@
 			<form action="${initParam.rootPath}/store/store_modify.do"  >
 				<input type="submit" value="수정">
 			</form>
-			<form action="${initParam.rootPath }/removeStoreController.do" method="post" >
+			<form action="${initParam.rootPath }/removeStoreController.do">
 				<input type="submit" value="삭제">
 			</form>
+			
 </body>
 </html>

@@ -59,4 +59,12 @@ public class StorePictureServiceImpl implements StorePictureService {
 		return dao.deleteStorePicture(storePicture);
 	}
 
+
+
+	@Override
+	public int removeStorePictureById(String storeId) {
+		
+		return dao.deleteStorePictureById(storeId);
+	}
+
 }

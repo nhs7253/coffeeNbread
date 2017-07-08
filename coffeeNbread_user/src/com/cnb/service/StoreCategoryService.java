@@ -33,6 +33,6 @@ public interface StoreCategoryService {
 	 */
 	int removeStoreCategoryByNo(String storeId,int storeCategoryNo);
 	
-	
+	int removeStoreCategoryById(String storeId);
 	
 }

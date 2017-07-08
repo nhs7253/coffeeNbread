@@ -51,7 +51,6 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 
-	private String eclipseDir = "C:\\javaexam\\coffeeNbread_user\\WebContent\\up_images"; 
 
 	/**
 	 * Store 매장 전체를 등록하는 Controller
@@ -119,6 +118,9 @@ public class StoreController {
 
 	    StorePicture storePicture = new StorePicture(imageName.get(0), storeRegisterForm.getStoreId());
 
+		
+		
+		
 	      System.out.println("store = " + store);
 
 			// 세션으로 묶음
@@ -150,7 +152,7 @@ public class StoreController {
 	@RequestMapping("modifyStoreController")
 	public String modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
 			BindingResult errors, HttpServletRequest request) throws IllegalStateException, IOException {
-
+		HttpSession session = request.getSession();
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 
@@ -184,6 +186,17 @@ public class StoreController {
 		List<MultipartFile> list = storeRegisterForm.getStorePictureList();
 		ArrayList<String> imageName = new ArrayList<>();// 업로드된 파일명을 저장할 list
 
+	/*	System.out.println(list.get(0).toString());
+		if(list.size()==0){
+			
+			String storePicture = storeRegisterForm.getStorePictureList().get(0).toString();
+			List<StorePicture> storePictureList = new ArrayList<StorePicture>();
+			storePictureList.add(new StorePicture(storePicture, storeRegisterForm.getStoreId()));
+			
+		}*/
+		
+		
+	
 		// 업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
 		for (int i = 0; i < list.size(); i++) {
 			MultipartFile mFile = list.get(i);
@@ -204,7 +217,7 @@ public class StoreController {
 			storePictureList.add(new StorePicture(imageName.get(i), storeRegisterForm.getStoreId()));
 		}
 		
-		HttpSession session = request.getSession();
+		
 		session.setAttribute("store", store);
 		
 		//수정하는 서비스 호출
@@ -229,17 +242,15 @@ public class StoreController {
 	@RequestMapping("removeStoreController")
 	public String removeStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
 			BindingResult errors, HttpServletRequest request) {
-
-		return null;
-
-	}
-
-	@RequestMapping("selectStoreController")
-	public String selectStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
-			BindingResult errors, HttpServletRequest request) {
-
-		return "store/store_success.tiles";
+		HttpSession session = request.getSession();
+		
+		Store store=(Store)session.getAttribute("store");
+		
+		service.removeStoretById(store.getStoreId());
+		session.removeAttribute("store");
+		return  "store/store_register.tiles";
 
 	}
+
 
 }

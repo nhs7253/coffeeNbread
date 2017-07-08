@@ -56,4 +56,10 @@ public class StoreCategoryServiceImpl implements StoreCategoryService{
 		return dao.deleteStoreCategoryByNo(storeId, storeCategoryNo);
 	}
 
+	@Override
+	public int removeStoreCategoryById(String storeId) {
+		
+		return dao.deleteStoreCategoryById(storeId);
+	}
+
 }

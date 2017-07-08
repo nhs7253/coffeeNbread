@@ -59,4 +59,9 @@ public class StorePictureDaoImpl implements StorePictureDao {
 		return session.selectOne(makeSqlId("selectStorePictureByStoreIdAndStorePicture"), info);
 	}
 
+	@Override
+	public int deleteStorePictureById(String storeId) {
+		return session.delete(makeSqlId("deleteStorePictureById"), storeId);
+	}
+
 }

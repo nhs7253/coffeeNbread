@@ -69,7 +69,7 @@
 				<th>매장 ID</th>
 
 				<td><input type="text" name="storeId"
-					value="${sessionScope.store.storeId}"></td>
+					value="${sessionScope.store.storeId}" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>매장 이름</th>

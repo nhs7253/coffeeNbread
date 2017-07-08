@@ -32,4 +32,5 @@ public interface StorePictureService {
 	 */
 	int removeStorePicture(StorePicture storePicture) throws StorePictureNotFoundException;
 	
+	int removeStorePictureById(String storeId);
 }

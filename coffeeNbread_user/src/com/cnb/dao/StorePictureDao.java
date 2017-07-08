@@ -36,6 +36,12 @@ public interface StorePictureDao {
 	 */
 	int deleteStorePicture(StorePicture storePicture);
 	
+	/**
+	 * 1개의 매장 사진정보 delete
+	 * @param storeId
+	 * @return
+	 */
+	int deleteStorePictureById(String storeId);
 
 	/**
 	 * 1개의 매장 사진 정보들 select
