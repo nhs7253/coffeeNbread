@@ -2,8 +2,8 @@
 	CREATE USER CNB_manager IDENTIFIED BY manager;
 	GRANT ALL PRIVILEGES TO CNB_manager; 
 */
-/* 테이블 : 27, 시퀀스 : 9 - 총합 : 36 */
 
+--테이블 : 28, 시퀀스 : 10 - 총합 : 38 */     --테이블 추가된거 하나 추가 해서 반영  -6.29
 /* 테이블 및 시퀀스 생성 */
 
 /* 관리자 */
@@ -20,21 +20,25 @@ CREATE TABLE user_authority (
 
 /* 결제 종류 */
 CREATE TABLE payment_optionlist (
-	payment_id VARCHAR2(30) PRIMARY KEY, /* 결제아이디 */
+	payment_id CHAR(1) PRIMARY KEY, /* 결제아이디 */
 	payment_method VARCHAR2(50) NOT NULL /* 결제방법 */
 );
 
 /* 일반 사용자 */
 CREATE TABLE general_user (
 	user_id VARCHAR2(30) PRIMARY KEY, /* 유저아이디 */
-	user_pw VARCHAR2(50) NOT NULL, /* 비밀번호 */
+	user_pw VARCHAR2(80) NOT NULL, /* 비밀번호 */
 	user_name VARCHAR2(50) NOT NULL, /* 이름 */
 	user_birth DATE NOT NULL, /* 생년월일 */
 	user_gender VARCHAR2(50) NOT NULL, /* 성별 */
+	
 	user_email VARCHAR2(50) NOT NULL, /* 이메일 */
 	user_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
-	user_address VARCHAR2(200) NOT NULL /* 주소 */
+	user_address VARCHAR2(200) NOT NULL, /* 주소 */
+	user_active_state CHAR(1) NOT NULL, /* 활동 상태 */
+	store_id VARCHAR2(30) /* 매장아이디 */
 );
+
 
 /* 매장 */
 CREATE TABLE store (
@@ -44,25 +48,25 @@ CREATE TABLE store (
 	store_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
 	store_address VARCHAR2(200) NOT NULL, /* 주소 */
 	store_email VARCHAR2(50) NOT NULL, /* 이메일 */
-	store_picture VARCHAR2(300), /* 매장사진 */
 	store_hits NUMBER NOT NULL, /* 조회수 */
 	store_open DATE NOT NULL, /* 여는 시간 */
-	store_close DATE NOT NULL /* 닫는 시간 */
+	store_close DATE NOT NULL, /* 닫는 시간 */
+	store_permission CHAR(1) NOT NULL  /* 매장 허가여부  */
 );
 
 /* 제품 */
 CREATE TABLE product (
 	product_id VARCHAR2(30) PRIMARY KEY, /* 제품아이디 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
+	store_id VARCHAR2(30), /* 매장아이디 */
 	product_name VARCHAR2(50) NOT NULL, /* 제품이름 */
-	product_picture VARCHAR2(300) NOT NULL, /* 제품사진 */
 	product_price NUMBER(6) NOT NULL, /* 제품가격 */
 	product_category VARCHAR2(50) NOT NULL, /* 제품종류 */
 	product_detail CLOB NOT NULL, /* 제품상세설명 */
 	selling_option CHAR(1) NOT NULL, /* 판매여부 */
 	today_product_count NUMBER NOT NULL, /* 금일 제품 개수 */
 	recommend_product_count NUMBER NOT NULL, /* 추천 제품 개수 */
-	FOREIGN KEY(store_id) REFERENCES store(store_id)
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE SET NULL
+
 );
 
 
@@ -79,18 +83,20 @@ CREATE TABLE store_event (
 	sale_rate NUMBER(3) NOT NULL, /* 할인률 */
 	new_menu_option CHAR(1) NOT NULL, /* 신메뉴여부 */
 	event_picture VARCHAR2(300) , /* 이벤트 사진 */
+    event_check   CHAR(1)  NOT NULL, /* 이벤트 알람여부  */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 CREATE SEQUENCE event_no_seq;
 
 /* 매장 방문 기록 */
 CREATE TABLE store_visit_history (
+	store_visit_history_no NUMBER PRIMARY KEY, /* 매장 방문 기록 번호 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	PRIMARY KEY(user_id, store_id),
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE
 );
+CREATE SEQUENCE store_visit_history_no_seq;
 
 /* 사용자 선호 매장 */
 CREATE TABLE user_preference_store (
@@ -113,7 +119,7 @@ CREATE TABLE notice_board_contents (
 CREATE SEQUENCE notice_board_no_seq;
 
 /* 레시피 게시글 */
-/* 유저 탈퇴시에도 레시피는 남으나 매장이 없어지면 해당 레시피 글들도 삭제 */
+/* 유저 탈퇴시에도 레시피는 남으나 매장이 없어지면 해당 레시피 글들도 삭제 */   /* 매장아이디 not null에서 null로 수정- 유저가 매장이 가지고 있는 게시판에 등록하는게 아니라 그냥 등록할수 있게 하기위해 */
 CREATE TABLE recipe_board_contents (
 	recipe_board_no NUMBER PRIMARY KEY, /* 레시피 글번호 */
 	recipe_board_content CLOB NOT NULL, /* 레시피 글내용 */
@@ -123,7 +129,7 @@ CREATE TABLE recipe_board_contents (
 	recipe_board_picture VARCHAR2(300) NOT NULL, /* 레시피 사진 */
 	recommend_count NUMBER NOT NULL, /* 추천수 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
-	store_id VARCHAR2(30) NOT NULL,/* 매장아이디 */
+	store_id VARCHAR2(30),/* 매장아이디 */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id)
 );
@@ -158,15 +164,13 @@ CREATE TABLE board_reply (
 );
 CREATE SEQUENCE reply_no_seq;
 
-/* 추천수 */
-CREATE TABLE board_recommend (
+/* 추천수 */ --매장아이디 삭제( '김형주'- 0706수정)
+CREATE TABLE board_recommend (  
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	recipe_board_no NUMBER NOT NULL, /* 레시피 글번호 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	PRIMARY KEY(user_id, recipe_board_no, store_id),
+	PRIMARY KEY(user_id, recipe_board_no),
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
-	FOREIGN KEY(recipe_board_no) REFERENCES recipe_board_contents(recipe_board_no) ON DELETE CASCADE,
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
+	FOREIGN KEY(recipe_board_no) REFERENCES recipe_board_contents(recipe_board_no) ON DELETE CASCADE
 );
 
 /* 결제 내역 */
@@ -178,9 +182,9 @@ CREATE TABLE payment_details (
 	reservation_order_count NUMBER(4) NOT NULL, /* 주문판매량 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
+	store_id VARCHAR2(30), /* 매장아이디 */
 	product_trade_count NUMBER(4) NOT NULL, /* 거래제품개수 */
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ,
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE SET NULL,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id),
 	FOREIGN KEY(product_id) REFERENCES product(product_id)
 );
@@ -191,8 +195,7 @@ CREATE TABLE reservation_details (
 	reservation_no NUMBER PRIMARY KEY, /* 예약번호 */
 	reservation_time DATE NOT NULL, /* 예약시간 */
 	reservation_count NUMBER(3) NOT NULL, /* 예약개수 */
-	reservation_requirement VARCHAR2(500), /* 요구사항 */
-	reservation_confirm DATE NOT NULL, /* 예약확인유무 */
+	reservation_confirm DATE  NULL, /* 예약확인유무   -null허용으로 수정(07-03) */
 	product_hope_time DATE NULL,/*제품수령희망시간*/
 	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
@@ -218,10 +221,13 @@ CREATE TABLE shopping_basket_product (
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
 	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
 	product_count NUMBER(4) NOT NULL, /* 제품개수 */
-	PRIMARY KEY(user_id, product_id, store_id),
+	product_store_id VARCHAR2(30) NOT NULL, /* 제품 매장 아이디 */
+	PRIMARY KEY(user_id, product_id, store_id,product_store_id),
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
 	FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
+	FOREIGN KEY(product_store_id) REFERENCES store(store_id) ON DELETE CASCADE
+
 );
 
 /* 매장 즐겨찾기 */
@@ -233,7 +239,8 @@ CREATE TABLE store_bookmark (
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 
-/* 매장 좌표 */
+
+
 CREATE TABLE store_position (
 	store_id VARCHAR2(30) PRIMARY KEY, /* 매장아이디 */
 	X VARCHAR2(50) NOT NULL, /* X좌표 */
@@ -252,13 +259,15 @@ CREATE TABLE bookmark_card_num (
 CREATE TABLE product_gap(
     identify_code CHAR(1) NOT NULL,
     product_gap VARCHAR2(50) NOT NULL,
-    PRIMARY KEY(identify_code, product_gap)
+    product_id VARCHAR2(30) NOT NULL,
+    store_id VARCHAR2(30) NOT NULL,
+    PRIMARY KEY(identify_code, product_gap, product_id, store_id)
 );
 
 /* 매장 사진  */
 CREATE TABLE store_picture (
 	store_picture VARCHAR2(300) PRIMARY KEY,  /* 매장 사진 */
-	store_id NOT NULL,  /* 이벤트 상태  */
+	store_id NOT NULL,  /* 매장 아이디  */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 
@@ -266,7 +275,7 @@ CREATE TABLE store_picture (
 CREATE TABLE product_picture (
 	product_picture VARCHAR2(300) PRIMARY KEY, /* 제품 사진 */
 	product_id NOT NULL, /* 제품 아이디 */
-	store_id NOT NULL,  /* 이벤트 상태  */
+	store_id NOT NULL,  /* 매장 아이디  */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
     FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE
 
@@ -276,7 +285,11 @@ CREATE TABLE product_picture (
 CREATE TABLE event_product(
     product_id  VARCHAR2(30) NOT NULL, /* 제품 아이디  */
     store_id  VARCHAR2(30) NOT NULL, /* 매장 아이디  */
-    event_no NUMBER  NOT NULL /* 이벤트 번호 */
+    event_no NUMBER  NOT NULL, /* 이벤트 번호 */
+    PRIMARY KEY(product_id, store_id, event_no),
+    FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
+    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
+    FOREIGN KEY(event_no) REFERENCES store_event(event_no) ON DELETE CASCADE
 );
 
 /* 옵션카테고리 */
@@ -288,7 +301,7 @@ CREATE TABLE option_category (
    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 CREATE SEQUENCE option_id_seq;
-
+ 
 /* 옵션 상세 */
 CREATE TABLE option_detail (
    store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
@@ -301,6 +314,14 @@ CREATE TABLE option_detail (
    FOREIGN KEY(option_id, store_id) REFERENCES option_category(option_id, store_id) ON DELETE CASCADE
 );
 
+/* 매장 결제 종류 */
+CREATE TABLE store_payment_optionlist (
+	store_id VARCHAR2(30) NOT NULL, /* 매장아이디  */
+	payment_id CHAR(1) NOT NULL, /* 결제아이디 */
+	PRIMARY KEY(store_id, payment_id),
+	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
+	FOREIGN KEY(payment_id) REFERENCES payment_OptionList(payment_id) ON DELETE CASCADE
+);
 
 /* 생성후 이상 확인 */
 
@@ -358,7 +379,8 @@ SELECT * FROM event_product;
 SELECT * FROM option_category;
 /* 옵션 상세 */
 SELECT * FROM option_detail;
-
+/* 제품 결제 내역 */
+SELECT * FROM store_payment_optionlist;
 
 /* 공지사항 게시글 시퀀스 */
 SELECT notice_board_no_seq.nextval FROM dual;
@@ -378,10 +400,14 @@ SELECT store_category_no_seq.nextval FROM dual;
 SELECT event_no_seq.nextval FROM dual;
 /* 옵션카테고리 */
 SELECT option_id_seq.nextval FROM dual;
-
+/* 매장 방문 기록 */
+SELECT store_visit_history_no_seq.nextval FROM dual;
 
 /* 삭제 */
 
+
+/* 매장 결제 종류 */
+DROP TABLE store_payment_optionlist;
 /* 옵션 상세 */
 DROP TABLE option_detail;
 /* 옵션카테고리 */
@@ -455,4 +481,10 @@ DROP SEQUENCE store_category_no_seq;
 DROP SEQUENCE event_no_seq;
 /* 옵션카테고리 */
 DROP SEQUENCE option_id_seq;
+/* 매장 방문 기록 */
+DROP SEQUENCE store_visit_history_no_seq;
+
+
+	
+
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.EventProductMapper">
+
+	<!-- 
+		EventProduct 테이블 관련 mapper
+		+ 이벤트 제품 등록
+		+ 이벤트 제품 수정
+		+ 이벤트 제품 삭제
+		+ 이벤트 번호로 이벤트 제품 조회
+	 -->
+
+	<!-- insert -->
+	<insert id="insertEventProduct" parameterType="eventProduct">
+		INSERT INTO event_product VALUES (
+										#{productId},
+										#{storeId},
+										#{eventNo} )
+	</insert>
+
+	<!-- update -->
+	<update id="updateEventProduct" parameterType="map">
+		UPDATE event_product
+		SET	   product_id = #{afterProductId},
+			   store_id = #{afterStoreId},
+		   	   event_no = #{afterEventNo}
+		WHERE  product_id = #{beforeProductId}
+		AND    store_id = #{beforeStoreId}
+		AND	   event_no = #{beforeEventNo}
+	</update>
+	
+	<!-- delete -->
+	<delete id="deleteEventProduct" parameterType="eventProduct">
+		DELETE FROM event_product
+		WHERE  event_no = #{eventNo}
+		AND    product_id = #{productId}
+		AND	   store_id = #{storeId}
+	</delete>
+	
+	<!-- select -->
+	<sql id="select-eventProduct">
+		SELECT product_id,
+			   store_id,
+			   event_no
+		FROM  event_product
+	</sql>
+	
+	<resultMap type="com.cnb.vo.EventProduct" id="eventProduct-resultmap">
+		<result column="event_no" property="eventNo"/>
+		<result column="product_id" property="productId"/>
+		<result column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<!-- selectEventProductListByEventNo -->
+	<select id="selectEventProductListByEventNo" resultMap="eventProduct-resultmap" parameterType="_int">
+		<include refid="select-eventProduct"/>
+		WHERE event_no = #{value}
+	</select>
+	
+	<!-- selectEventProductByEventNoANDProductId -->
+	<select id="selectEventProductByEventNoANDProductId" resultMap="eventProduct-resultmap" parameterType="map">
+		<include refid="select-eventProduct"/>
+		WHERE event_no = #{eventNo}
+		AND product_id = #{productId}
+	</select>
+</mapper>
