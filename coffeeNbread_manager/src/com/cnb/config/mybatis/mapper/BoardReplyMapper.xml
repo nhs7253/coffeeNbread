@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.BoardReplyMapper">
+
+	<sql id="all-column"> reply_no,reply_content,reply_name,reply_regdate,qna_board_no,recipe_board_no </sql>
+
+	<resultMap type="BoardReply" id="BoardReply-resultmap">
+		<id column="reply_no" property="replyNo"/>
+		<result column="reply_content" property="replyContent"/>
+		<result column="reply_name" property="replyName"/>
+		<result column="reply_regdate" property="replyRegDate"/>
+		<result column="qna_board_no" property="qnaBoardNo"/>
+		<result column="recipe_board_no" property="recipeBoardNo"/>
+	</resultMap>
+	
+
+	
+	
+	<insert id="insertBoardReplyToRecipeBoardNo" parameterType="BoardReply">
+		<selectKey keyProperty="replyNo" resultType="_int" order="BEFORE">
+			SELECT reply_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO board_reply VALUES(#{replyNo},
+										#{replyContent},
+										#{replyName},
+										#{replyRegDate},
+										#{qnaBoardNo},
+										#{recipeBoardNo}
+										)
+	</insert>
+	
+	
+	
+	<insert id="insertBoardReplyToQnaBoardNo" parameterType="BoardReply">
+		<selectKey keyProperty="replyNo" resultType="_int" order="BEFORE">
+			SELECT reply_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO board_reply VALUES(#{replyNo},
+										#{replyContent},
+										#{replyName},
+										#{replyRegDate},
+										#{qnaBoardNo},
+										#{recipeBoardNo}
+										)
+						
+	</insert>
+	
+	<!--해당 레시피 게시판을 작성한 아이디가 수정하려는 사람의 아이디와 같을때만 가능.  -->
+	<update id="updateBoardReplyToRecipeBoardNo" parameterType="BoardReply">
+		UPDATE board_reply 
+		SET reply_content = #{replyContent},
+			reply_name = #{replyName},
+			reply_regdate = #{replyRegDate}
+		where	recipe_board_no = #{recipeBoardNo}
+		and	   reply_no=#{replyNo}
+	</update>
+	
+	
+	<!--해당 레시피 게시판을 작성한 아이디가 수정하려는 사람의 아이디와 같을때만 가능.  -->
+	<update id="updateBoardReplyToQnaBoardNo" parameterType="BoardReply">
+		UPDATE board_reply 
+		SET 
+			reply_content = #{replyContent},
+			reply_name = #{replyName},
+			reply_regdate = #{replyRegDate}
+		where	reply_no=#{replyNo}
+	</update>
+	
+	
+	
+	<delete id="deleteBoardReplyByRecipeBoardNo" parameterType="map">
+		DELETE FROM Board_reply WHERE reply_no = #{replyNo}
+		and recipe_board_no=#{recipeBoardNo}
+	</delete>
+	
+	<delete id="deleteBoardReplyByQnaBoardNo" parameterType="map">
+		DELETE FROM Board_reply WHERE reply_no = #{replyNo}
+		and qna_board_no=#{qnaBoardNo}
+	</delete>
+	
+	<select id="selectBoardReplyByreplyNo" parameterType="_int" resultMap="BoardReply-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM board_reply
+		WHERE reply_no = #{replyNo}
+	</select>
+	
+	
+	<!-- 레시피게시판에 달린 댓글 개수  -->
+	<select id="countReplyBoardByRecipeBoardNo"
+		parameterType="int" resultType="_int">
+		
+			   SELECT COUNT(reply_no)
+				FROM
+				board_reply
+				WHERE recipe_board_no=#{recipeBoardNo}
+		</select>		 
+
+	<!-- QNA게시판에 달린 댓글 개수  -->
+	<select id="countReplyBoardByQnaBoardNo"
+		parameterType="int" resultType="_int">
+		
+			   SELECT COUNT(reply_no)
+				FROM
+				board_reply
+				WHERE qna_board_no=#{qnaBoardNo}
+		</select>			
+	
+
+	
+	
+	<!-- 레시피게시판에있는 댓글목록 조회.  -->
+	<select id="selectBoardReplyListByRecipeBoardNo" resultMap="BoardReply-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT reply_no,
+			       reply_content,
+			       reply_name,
+			       reply_regdate,
+			       qna_board_no,
+			       recipe_board_no
+			FROM(
+					SELECT  rownum rnum,
+							reply_no,
+			                reply_content,
+			                reply_name,
+			                reply_regdate,
+			                qna_board_no,
+			                 recipe_board_no
+					FROM(
+							SELECT  reply_no,
+			                        reply_content,
+			                        reply_name,
+			                         reply_regdate,
+			                         qna_board_no,
+			                        recipe_board_no
+							FROM	board_reply
+							WHERE recipe_board_no = #{recipeBoardNo}
+							
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
+	
+	<!-- Qna게시판에있는 댓글목록 조회.  -->
+	<select id="selectBoardReplyListByQnaBoardNo" resultMap="BoardReply-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT reply_no,
+			       reply_content,
+			       reply_name,
+			       reply_regdate,
+			       qna_board_no,
+			       recipe_board_no
+			FROM(
+					SELECT  rownum rnum,
+							reply_no,
+			                reply_content,
+			                reply_name,
+			                reply_regdate,
+			                qna_board_no,
+			                 recipe_board_no
+					FROM(
+							SELECT  reply_no,
+			                        reply_content,
+			                        reply_name,
+			                         reply_regdate,
+			                         qna_board_no,
+			                        recipe_board_no
+							FROM	board_reply
+							WHERE qna_board_no = #{qnaBoardNo}
+							
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

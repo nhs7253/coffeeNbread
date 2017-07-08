@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.StoreEventMapper">
+
+
+<!--  
+	   
+
+	    이진영
+	  2017-06-27 생성
+	     초기 구현 
+-->
+
+	<!-- 매장 이벤트 insert -->
+	<insert id="insertStoreEvent" parameterType="com.cnb.vo.StoreEvent">
+		<selectKey resultType="_int" keyProperty="eventNo" >
+			select event_no_seq.nextval from dual
+		</selectKey>
+	INSERT INTO store_event
+	values(
+		#{eventNo},
+		#{storeId},
+		#{eventTitle},
+		#{eventOption},
+		#{eventStartDate},
+		#{eventEndDate},
+		#{eventDetails},
+		#{saleOption},
+		#{saleRate},
+		#{newMenuOption},
+		#{eventPicture},
+		#{eventCheck}
+	)
+	
+	</insert>
+	
+	<!-- 매장 이벤트 update -->
+	<update id="updateStoreEvent" parameterType="com.cnb.vo.StoreEvent">
+	UPDATE store_event
+	SET
+		event_title = #{eventTitle},
+		event_start_date = #{eventStartDate},
+		event_end_date = #{eventEndDate},
+		event_option = #{eventOption},
+		event_details = #{eventDetails},
+		sale_option = #{saleOption},
+		sale_rate = #{saleRate},
+		event_picture = #{eventPicture},
+		new_menu_option = #{newMenuOption},
+		event_check = #{eventCheck}
+	WHERE event_no = #{eventNo}	
+	</update>
+	
+	<!-- 매장 이벤트 삭제  -->
+	<delete id="deleteStoreEvent"	parameterType="com.cnb.vo.StoreEvent">
+		DELETE FROM  store_event
+		WHERE event_no = #{eventNo}	
+	</delete>
+	
+	<!-- select -->
+	<sql id="select-storeEvent-eventProduct">
+		SELECT  se.event_no,
+				se.event_title,
+				se.event_start_date,
+				se.event_end_date,
+				se.event_option,
+				se.event_details,
+				se.sale_option,
+				se.sale_rate,
+				se.event_picture,
+				se.new_menu_option,
+				se.event_check,
+				ep.product_id,
+				ep.store_id
+		FROM    store_event se, event_product ep
+	</sql>
+	
+	
+	<!-- 매장 이벤트 resultMap -->
+	<resultMap type="com.cnb.vo.StoreEvent" id="storeEvent-resultmap">
+		<id column="event_no" property="eventNo"/>
+		<result column="store_id" property="storeId"/>
+		<result column="event_title" property="eventTitle"/>
+		<result column="event_start_date" property="eventStartDate"/>
+		<result column="event_end_date" property="eventEndDate"/>
+		<result column="event_option" property="eventOption"/>
+		<result column="event_details" property="eventDetails"/>
+		<result column="sale_option" property="saleOption"/>
+		<result column="sale_rate" property="saleRate"/>
+		<result column="event_picture" property="eventPicture"/>
+		<result column="new_menu_option" property="newMenuOption"/>
+		<result column="event_check" property="eventCheck"/>
+	</resultMap>
+	
+	<resultMap type="storeEvent" id="storeEvent-eventProduct-resultmap" extends="storeEvent-resultmap">
+ 		<collection property="eventProductList" resultMap="com.cnb.config.mybatis.mapper.EventProductMapper.eventProduct-resultmap"/>
+ 	</resultMap>
+	
+	<!-- 매장 이벤트 목록(리스트) select -->
+	<select id="selectStoreEventList" resultMap="storeEvent-eventProduct-resultmap" parameterType="string">
+		<include refid="select-storeEvent-eventProduct"/>
+		WHERE se.store_id = #{value}
+		AND   se.store_id = ep.store_id
+	</select>
+	
+	
+	
+</mapper>

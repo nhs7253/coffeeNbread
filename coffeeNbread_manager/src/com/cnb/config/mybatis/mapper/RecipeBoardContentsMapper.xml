@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.RecipeBoardContentsMapper">
+	<!-- Recipe_Board_Contents 테이블 관련 mapper + 레시피게시글 등록 + 레시피게시글 수정 + 레시피게시글 
+		삭제 + 내용으로 레시피게시글 조회 + 제목으로 레시피게시글 조회 + 작성일로 레시피게시글 조회 + 조회수로 레시피게시글 조회 + 
+		모든 레시피게시글 조회 -->
+	<!-- 2017-07-03 김형주 -->
+
+	<!-- insert -->
+	<insert id="insertRecipeBoardContents" parameterType="RecipeBoardContents">
+		<selectKey keyProperty="recipeBoardNo" resultType="_int"
+			order="BEFORE">
+			SELECT recipe_board_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO recipe_board_contents VALUES (
+		#{recipeBoardNo},
+		#{recipeBoardContent},
+		#{recipeBoardTitle},
+		#{recipeBoardDate},
+		#{recipeBoardHits},
+		#{recipeBoardPicture},
+		#{recommendCount},
+		#{userId},
+		#{storeId}
+		)
+	</insert>
+
+	<!-- update -->
+	<update id="updateRecipeBoardContents" parameterType="RecipeBoardContents">
+		UPDATE
+		recipe_board_contents
+		SET recipe_board_content = #{recipeBoardContent},
+		recipe_board_title = #{recipeBoardTitle},
+		recipe_board_date =
+		#{recipeBoardDate},
+		recipe_board_picture = #{recipeBoardPicture}
+		WHERE
+		recipe_board_no = #{recipeBoardNo}
+	</update>
+
+
+	<!-- 전체 레시피 게시판에서 유저가 자기꺼 찾아서 지움. -->
+	<delete id="deleteRecipeBoardContentsByRecipeBoardNo"
+		parameterType="map">
+		DELETE FROM recipe_board_contents
+		WHERE user_id=#{userId}
+		AND recipe_board_no = #{recipeBoardNo}
+	</delete>
+
+
+	<!-- 매장 레시피 게시판에서 유저가 자기꺼 찾아서 지움. -->
+	<delete id="deleteRecipeBoardContentsByRecipeBoardNoAndStoreId"
+		parameterType="map">
+		DELETE FROM recipe_board_contents
+		WHERE user_id=#{userId}
+		AND store_id=#{storeId}
+		AND recipe_board_no = #{recipeBoardNo}
+	</delete>
+
+
+
+
+	<!-- select -->
+	<sql id="select-recipeBoardContents">
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count
+		FROM recipe_board_contents
+	</sql>
+
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-resultmap">
+		<id column="recipe_board_no" property="recipeBoardNo" />
+		<result column="recipe_board_content" property="recipeBoardContent" />
+		<result column="recipe_board_title" property="recipeBoardTitle" />
+		<result column="recipe_board_date" property="recipeBoardDate" />
+		<result column="recipe_board_picture" property="recipeBoardPicture" />
+		<result column="recipe_board_hits" property="recipeBoardHits" />
+		<result column="recommend_count" property="recommendCount" />
+	</resultMap>
+
+	<!--레시피게시판과 매장 조인 -->
+	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-store-resultmap">
+		<id column="recipe_board_no" property="recipeBoardNo" />
+		<result column="recipe_board_content" property="recipeBoardContent" />
+		<result column="recipe_board_title" property="recipeBoardTitle" />
+		<result column="recipe_board_date" property="recipeBoardDate" />
+		<result column="recipe_board_picture" property="recipeBoardPicture" />
+		<result column="recipe_board_hits" property="recipeBoardHits" />
+		<association property="store"
+			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
+	</resultMap>
+
+
+
+	<resultMap type="com.cnb.vo.RecipeBoardContents" id="recipeBoardContents-store-user-resultmap">
+		<id column="recipe_board_no" property="recipeBoardNo" />
+		<result column="recipe_board_content" property="recipeBoardContent" />
+		<result column="recipe_board_title" property="recipeBoardTitle" />
+		<result column="recipe_board_date" property="recipeBoardDate" />
+		<result column="recipe_board_picture" property="recipeBoardPicture" />
+		<result column="recipe_board_hits" property="recipeBoardHits" />
+		<result column="recommend_count" property="recommendCount" />
+
+		<association property="store"
+			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
+		<association property="generalUser"
+			resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap" />
+	</resultMap>
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 페이징. -->
+
+	<!--전체 레시피게시글에서 방법과 방법내용으로 찾는 개수 -->
+	<select id="countSelectRecipeBoardContentsByMethod"
+		parameterType="map" resultType="_int">
+		<choose>
+			<when test="select == 'recipeBoardContent'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				recipe_board_content like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="method == 'recipeBoardTitle'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				recipe_board_title like
+				'%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardHits'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				recipe_board_Hits = #{keyword}
+
+			</when>
+			<when test="select == 'recommendCount'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				recommendCount = #{keyword}
+
+			</when>
+			<when test="select =='recipeBoardDate'">
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE recipe_board_date =#{keyword}
+
+			</when>
+			<otherwise> <!--방법조건 설정 안했을때. -->
+
+				SELECT COUNT(recipe_board_no)
+				FROM recipe_board_contents
+
+			</otherwise>
+		</choose>
+
+	</select>
+
+
+
+
+	<!--전체 레시피게시글에서 방법과 방법내용으로 찾는 개수 -->
+	<select id="countSelectRecipeBoardContentsByStoreIdAndMethod"
+		parameterType="map" resultType="_int">
+		<choose>
+			<when test="select == 'recipeBoardContent'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				store_id=#{storeId}
+				AND
+				recipe_board_content like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				store_Id=#{storeId}
+				AND recipe_board_title
+				like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardHits'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				store_id=#{storeId}
+				AND recipe_board_Hits =
+				#{keyword}
+
+			</when>
+			<when test="select == 'recommendCount'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				store_id=#{storeId}
+				AND recommend_Count =#{keyword}
+
+			</when>
+			<when test="select =='recipeBoardDate'">
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				store_id=#{storeId}
+				AND recipe_board_date =#{keyword}
+
+			</when>
+			<otherwise> <!--방법조건 설정 안했을때. -->
+
+				SELECT COUNT(recipe_board_no)
+				FROM recipe_board_contents
+				WHERE
+				store_id=#{storeId}
+			</otherwise>
+		</choose>
+
+	</select>
+
+
+
+
+	<!--유저가 전체게시글에서 내가 쓴글 찾을떄 개수. -->
+	<select id="countSelectRecipeBoardContentsByUserIdAndMethod"
+		parameterType="map" resultType="_int">
+		<choose>
+			<when test="select == 'recipeBoardContent'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND
+				recipe_board_content
+				like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND recipe_board_title
+				like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardHits'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+
+
+			</when>
+			<when test="select == 'recommendCount'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+
+
+			</when>
+			<otherwise> <!--방법조건 설정 안했을때. -->
+
+				SELECT COUNT(recipe_board_no)
+				FROM recipe_board_contents
+				WHERE
+				user_id=#{userId}
+			</otherwise>
+		</choose>
+
+	</select>
+
+
+	<!--유저가 매장 레시판게시글에서 내가 쓴글 찾을떄 개수. -->
+	<select id="countSelectRecipeBoardContentsByUserIdAndStoreIdAndMethod"
+		parameterType="map" resultType="_int">
+		<choose>
+			<when test="select == 'recipeBoardContent'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND store_id=#{storeId}
+				AND recipe_board_content like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND store_id=#{storeId}
+				AND recipe_board_title like '%'||#{keyword}||'%'
+
+			</when>
+			<when test="select == 'recipeBoardHits'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND store_id=#{storeId}
+
+
+			</when>
+			<when test="select == 'recommendCount'">
+
+				SELECT COUNT(recipe_board_no)
+				FROM
+				recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND store_id=#{storeId}
+
+
+			</when>
+
+			<otherwise> <!--방법조건 설정 안했을때. -->
+
+				SELECT COUNT(recipe_board_no)
+				FROM recipe_board_contents
+				WHERE
+				user_id=#{userId}
+				AND store_id=#{storeId}
+			</otherwise>
+		</choose>
+
+	</select>
+
+
+
+	<!-- 유저와 비회원 상관없이 방법별 전체 목록 보기 -->
+	<select id="selectRecipeBoardContentsListByMethod"
+		parameterType="map" resultMap="recipeBoardContents-store-resultmap">
+
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.store_id=s.store_id
+
+		<choose>
+			<when test="select == 'recipeBoardDate'">
+				order by recipe_board_date desc
+
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+				And recipe_board_title like
+				'%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'recipeBoardHits'">
+				order by recipe_board_hits desc
+			</when>
+			<when test="select == 'recipeBoardContent'">
+				and recipe_board_content like '%'||#{keyword}||'%'
+			</when>
+
+			<when test="select == 'recommendCount'">
+				order by recommend_count desc
+			</when>
+
+		</choose>
+		)
+		WHERE rownum &lt;= #{endIndex}
+		)
+		WHERE rnum >= #{startIndex}
+
+	</select>
+
+
+	<!-- 매장으로 들어가서 매장별 전체목록 보기 -->
+	<select id="selectRecipeBoardContentsListByStoreIdAndMethod"
+		parameterType="map" resultMap="recipeBoardContents-store-resultmap">
+
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.store_id=s.store_id
+		And s.store_id=#{storeId}
+		<choose>
+			<when test="select == 'recipeBoardDate'">
+
+				order by recipe_board_date desc
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+				And recipe_board_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'recipeBoardHits'">
+				order by recipe_board_hits desc
+			</when>
+			<when test="select == 'recipeBoardContent'">
+				and recipe_board_content like '%'||#{keyword}||'%'
+			</when>
+
+			<when test="select == 'recommendCount'">
+				order by recommend_count desc
+			</when>
+
+		</choose>
+		)
+		WHERE rownum &lt;= #{endIndex}
+		)
+		WHERE rnum >= #{startIndex}
+
+	</select>
+
+
+	<!-- 유저가 전체 게시판에서 자신이 쓴글 조회 -방법별 -->
+	<select id="selectRecipeBoardContentsListByUserIdAndMethod"
+		parameterType="map" resultMap="recipeBoardContents-store-resultmap">
+
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.user_id=#{userId}
+		And rbc.store_id=s.store_id(+)
+		<choose>
+			<when test="select == 'recipeBoardDate'">
+
+				And recipe_board_date= #{methodContent}
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+				And recipe_board_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'recipeBoardHits'">
+				order by recipe_board_hits desc
+			</when>
+			<when test="select == 'recipeBoardContent'">
+				AND recipe_board_content like '%'||#{keyword}||'%'
+			</when>
+
+			<when test="select == 'recommendCount'">
+				order by recommend_count desc
+			</when>
+            
+		</choose>
+		)
+		WHERE rownum &lt;= #{endIndex}
+		)
+		WHERE rnum >= #{startIndex}
+
+	</select>
+
+	<!-- 유저가 매장별 게시판에서 자신이 쓴글 조회 -방법별 -->
+	<select id="selectRecipeBoardContentsListByUserIdAndStoreIdAndMethod"
+		parameterType="map" resultMap="recipeBoardContents-store-resultmap">
+
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.user_id=#{userId}
+		And rbc.store_id=s.store_id
+		
+		rbc.store_id=#{storeId}
+		<choose>
+			<when test="select == 'recipeBoardDate'">
+
+				And recipe_board_date= #{keyword}
+			</when>
+			<when test="select == 'recipeBoardTitle'">
+				And recipe_board_title like
+				'%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'recipeBoardHits'">
+				order by recipe_board_hits desc
+			</when>
+			<when test="select == 'recipeBoardContent'">
+
+				AND recipe_board_content like '%'||#{keyword}||'%'
+			</when>
+
+			<when test="select == 'recommendCount'">
+				order by recommend_count desc
+			</when>
+
+		</choose>
+		)
+		WHERE rownum &lt;= #{endIndex}
+		)
+		WHERE rnum >= #{startIndex}
+
+	</select>
+
+
+	<!--recipeBoardNo를 통해 recipeBoardContents 객체를 가져오기. -->
+
+	<select id="selectRecipeBoardContentsByrecipeBoardNo"
+		parameterType="int" resultMap="recipeBoardContents-store-user-resultmap">
+
+		select recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		user_id,
+		store_id
+		from recipe_board_contents
+		where recipe_board_no=#{recipeBoardNo}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

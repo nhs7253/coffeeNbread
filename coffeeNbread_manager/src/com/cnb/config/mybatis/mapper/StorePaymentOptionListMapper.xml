@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cnb.config.mybatis.mapper.StorePaymentOptionListMapper">
+	
+	
+	<!-- 
+	매장 결제 종류 List관리
+	 -->
+	
+	<!-- insert--> 
+	<insert id="insertStorePaymentOptionList" parameterType="StorePaymentOptionList">
+		INSERT INTO store_payment_optionlist VALUES (
+										     #{storeId},
+										     #{paymentId}
+										       
+										        )
+	</insert>
+  
+	<!--delete -->
+    <delete id="deleteStorePaymentOptionListByStoreIdAndPaymentId" parameterType="map">
+		DELETE FROM store_payment_optionlist WHERE store_id = #{storeId} AND payment_id = #{paymentId}
+	</delete>
+	
+
+
+  <resultMap id="storePaymentOptionList-resultmap" type="StorePaymentOptionList">
+		<result column="store_id" property="storeId"/>
+		<result column="payment_id" property="paymentId"/>
+   </resultMap>
+
+
+	<!-- storePaymentOptionList-PaymentOptionList-resultmap -->
+	<resultMap id="storePaymentOptionList-PaymentOptionList-resultmap" type="StorePaymentOptionList" extends="storePaymentOptionList-resultmap">
+			 <association property="paymentOptionList" resultMap="com.cnb.config.mybatis.mapper.PaymentOptionListMapper.paymentOptionList-resultmap"/>
+	</resultMap>
+
+
+	<select id="selectStorePaymentOptionListByStoreId" parameterType="string" resultMap="storePaymentOptionList-PaymentOptionList-resultmap">
+		SELECT p.payment_method
+		FROM   store_payment_optionlist s , payment_optionlist p
+		WHERE  s.payment_id=p.payment_id
+		AND    s.store_id = #{value}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

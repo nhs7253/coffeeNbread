@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.StoreBookmarkMapper">
+
+	<sql id="all-column"> user_id, store_id </sql>
+
+	<resultMap type="StoreBookmark" id="StoreBookmark-resultmap">
+		<id column="user_id" property="userId"/>
+		<id column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<resultMap type="StoreBookmark" id="StoreBookmark-Store-resultmap" extends="StoreBookmark-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+	</resultMap>
+	
+	<insert id="insertStoreBookmark" parameterType="StoreBookmark">
+		INSERT INTO store_bookmark VALUES(#{userId}, #{storeId})
+	</insert>
+	
+	<delete id="deleteStoreBookmarkByUserId" parameterType="string">
+		DELETE FROM store_bookmark WHERE user_id = #{value}
+	</delete>
+	
+	<delete id="deleteStoreBookmarkByStoreBookmark" parameterType="StoreBookmark">
+		DELETE FROM store_bookmark WHERE user_id = #{userId} AND store_id = #{storeId}
+	</delete>
+	
+	<delete id="deleteStoreBookmarkByStoreBookmarkList" parameterType="list">
+		DELETE FROM	store_bookmark
+        <where>
+			<choose>
+				<when test="storeIdList != null and storeIdList.size() > 0">
+	 		 		user_id = #{userId} AND store_id IN 
+	 		 		<foreach collection="storeIdList" open="(" close=")" separator="," item="storeIdList">
+	 		 			#{storeIdList}
+	 		 		</foreach>
+	 		 	</when>
+	 		 	<otherwise>
+					1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+				</otherwise>
+	 		 </choose>
+	 	</where>
+	</delete>
+	
+	<update id="updateStoreBookmark" parameterType="StoreBookmark">
+		UPDATE store_bookmark 
+		SET store_id = #{storeId}
+		WHERE user_id = #{userId}
+	</update>
+	
+	<select id="selectStoreBookmarkList" resultMap="StoreBookmark-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM store_bookmark
+	</select>
+	
+	<select id="selectStoreBookmarkByUserId" parameterType="string" resultType="string">
+		SELECT store_id
+		FROM store_bookmark
+		WHERE user_id = #{value}
+	</select>
+	
+	<select id="selectStoreBookmarkByStoreBookmark" parameterType="StoreBookmark" resultType="StoreBookmark">
+		SELECT <include refid="all-column"/>
+		FROM store_bookmark
+		WHERE user_id = #{userId} AND store_id = #{storeId}
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreList" parameterType="string" resultMap="StoreBookmark-Store-resultmap">
+		SELECT user_id, 
+			   s.store_id, 
+			   store_name, 
+			   store_intro, 
+			   store_phone, 
+			   store_address, 
+			   store_email, 
+			   store_hits, 
+			   store_open, 
+			   store_close, 
+			   store_permission
+		FROM store_bookmark sb, store s
+		WHERE sb.store_id = s.store_id AND user_id = #{value}
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreListCount" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM store_bookmark sb, store s
+		WHERE sb.store_id = s.store_id AND user_id = #{value}
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreListPagingCount" parameterType="map" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM(
+					SELECT rownum rnum, 
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_bookmark sb, store s 
+						WHERE s.store_id = sb.store_id AND user_id = #{userId} AND store_name LIKE '%'||#{keyword}||'%'
+						ORDER BY store_name
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
+	<select id="selectStoreBookmarkByUserIdJoinStoreListPaging" parameterType="map" resultMap="StoreBookmark-Store-resultmap">
+		<![CDATA[
+			SELECT user_id, 
+				   store_id, 
+				   store_name, 
+				   store_intro, 
+				   store_phone, 
+				   store_address, 
+				   store_email, 
+				   store_hits, 
+				   store_open, 
+				   store_close, 
+				   store_permission
+			FROM(
+					SELECT rownum rnum, 
+						   user_id, 
+						   store_id, 
+						   store_name, 
+						   store_intro, 
+						   store_phone, 
+						   store_address, 
+						   store_email, 
+						   store_hits, 
+						   store_open, 
+						   store_close, 
+						   store_permission
+					FROM(
+						SELECT user_id, 
+							   s.store_id, 
+							   store_name, 
+							   store_intro, 
+							   store_phone, 
+							   store_address, 
+							   store_email, 
+							   store_hits, 
+							   store_open, 
+							   store_close, 
+							   store_permission
+						FROM store_bookmark sb, store s 
+						WHERE s.store_id = sb.store_id AND user_id = #{userId} AND store_name LIKE '%'||#{keyword}||'%'
+						ORDER BY store_name
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+
+</mapper>

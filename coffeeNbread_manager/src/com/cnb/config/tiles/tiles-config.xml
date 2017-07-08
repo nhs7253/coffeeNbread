@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+		"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<!-- tiles설정파일의 root : tiles-definitions -->
+<tiles-definitions>
+	<!-- 하나의 페이지(View)를 설정하는 태그 : definition 
+		속성 : name - 설정의 식별자 (handler가 리턴하는 view name과 연결)
+		      template - layout jsp의 위치를 지정.
+		      extends - 기존 definition 설정을 상속(그대로 쓰겠다.)
+		
+		하위태그 : put-attribute : template(view)를 구성하는 하나의 요소를 설정
+			속성 - name : template 페이지에서 조회할 때 사용할 식별값
+				   value : template 페이지에 넣어줄 jsp의 위치
+	-->
+	
+	<!-- template 설정- 수업시간에 한것 -->
+	<!-- 
+	<definition name="template" template="/WEB-INF/view/layout/template.jsp">
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp"/>
+		<put-attribute name="nav" value="/WEB-INF/view/layout/menu.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp"/>
+	</definition>
+	 -->
+	<definition name="template" template="/WEB-INF/view/layout/template.jsp">
+		<put-attribute name="menu" value="/WEB-INF/view/layout/menu.jsp"/>
+	</definition>
+	
+	<definition name="*.tiles" extends="template">
+		<put-attribute name="content" value="/WEB-INF/view/content/{1}.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="*/*.tiles" extends="template">
+		<put-attribute name="content" value="/WEB-INF/view/content/{1}/{2}.jsp"/>
+	</definition>
+	 
+	
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

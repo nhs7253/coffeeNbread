@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.UserPreferenceStoreMapper">
+	
+	<sql id="all-column"> user_id, store_id, preference_hits </sql>
+	
+	<resultMap type="UserPreferenceStore" id="UserPreferenceStore-resultmap">
+		<id column="user_id" property="userId"/>
+		<result column="store_id" property="storeId"/>
+		<result column="preference_hits" property="preferenceHits"/>
+	</resultMap>
+	
+	<resultMap type="UserPreferenceStore" id="UserPreferenceStore-Store-resultmap" extends="UserPreferenceStore-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+	</resultMap>
+	
+	<resultMap type="UserPreferenceStore" id="UserPreferenceStore-Store-resultmap2">
+		<id column="user_id" property="userId"/>
+		<id column="store_id" property="storeId"/>
+		<result column="preference_hits" property="preferenceHits"/>
+		<association property="store" javaType="Store">
+			<id column="store_id" property="storeId"/>
+	 		<result column="store_name" property="storeName"/>
+	 		<result column="store_intro" property="storeIntro"/>
+	 		<result column="store_phone" property="storePhone"/>
+	 		<result column="store_address" property="storeAddress"/>
+	 		<result column="store_email" property="storeEmail"/>
+	 		<result column="store_hits" property="storeHits"/>
+	 		<result column="store_open" property="storeOpen"/>
+	 		<result column="store_close" property="storeClose"/>
+	 		<result column="store_permission" property="storePermission"/>
+		</association>
+	</resultMap>
+	
+	<insert id="insertUserPreferenceStore" parameterType="UserPreferenceStore">
+		INSERT INTO user_preference_store VALUES(#{userId}, #{storeId}, 1)
+	</insert>
+	
+	<delete id="deleteUserPreferenceStore" parameterType="string">
+		DELETE FROM user_preference_store WHERE user_id = #{value}
+	</delete>
+
+	<update id="updateUserPreferenceStoreByUserPreferenceStoreUpPreferenceHits" parameterType="UserPreferenceStore">
+		UPDATE user_preference_store 
+		SET preference_hits = preference_hits + 1
+		WHERE user_id = #{userId} AND store_id = #{storeId}
+	</update>
+	
+	<select id="selectUserPreferenceByUserPreferenceStore" parameterType="UserPreferenceStore" resultMap="UserPreferenceStore-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM user_preference_store
+		WHERE user_id = #{userId} AND store_id = #{storeId}
+	</select>
+	
+	<select id="selectUserPreferenceJoinStoreSort" parameterType="string" resultMap="UserPreferenceStore-Store-resultmap2">
+		<![CDATA[
+			SELECT user_id, 
+				   store_id, 
+				   preference_hits,
+				   store_name, 
+				   store_intro, 
+				   store_phone, 
+				   store_address, 
+				   store_email, 
+				   store_hits, 
+				   store_open, 
+				   store_close, 
+				   store_permission
+			FROM(
+				   SELECT user_id, 
+						  s.store_id, 
+						  preference_hits,
+						  store_name, 
+						  store_intro, 
+						  store_phone, 
+						  store_address, 
+						  store_email, 
+						  store_hits, 
+						  store_open, 
+						  store_close, 
+						  store_permission
+					FROM user_preference_store ups, store s 
+					WHERE ups.store_id = s.store_id AND user_id = #{userId}
+					ORDER BY preference_hits DESC
+			) 
+			WHERE rownum <= 5
+		]]>
+	</select>
+	
+	<select id="selectUserPreferenceList" resultMap="UserPreferenceStore-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM user_preference_store
+	</select>
+	
+		
+</mapper>
