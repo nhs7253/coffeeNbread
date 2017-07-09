@@ -1,11 +1,16 @@
 package com.cnb.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.cnb.dao.StoreDao;
+import com.cnb.dao.StoreVisitHistoryDao;
+import com.cnb.dao.UserPreferenceStoreDao;
 import com.cnb.exception.DuplicatedOptionCategoryNameException;
 import com.cnb.exception.DuplicatedStoreCategorytNameException;
 import com.cnb.exception.DuplicatedStoreIdException;
@@ -15,16 +20,25 @@ import com.cnb.service.OptionCategoryService;
 import com.cnb.service.StoreCategoryService;
 import com.cnb.service.StorePictureService;
 import com.cnb.service.StoreService;
+import com.cnb.service.UserAndStoreService;
+import com.cnb.util.PagingBean;
+import com.cnb.vo.GeneralUser;
+import com.cnb.vo.NoticeBoardContents;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
+import com.cnb.vo.StoreVisitHistory;
+import com.cnb.vo.UserPreferenceStore;
 
 @Service
 public class StoreServiceImpl implements StoreService{
 
 	@Autowired
 	private StoreDao storedao; 
+	
+	@Autowired
+	private StoreVisitHistoryDao storeVisitHistoryDao;
 	
 	@Autowired
 	private StoreCategoryService storeCategoryService;
@@ -34,6 +48,9 @@ public class StoreServiceImpl implements StoreService{
 	
 	@Autowired
 	private StorePictureService storePictureService;
+	
+	@Autowired
+	UserAndStoreService userAndStoreService;
 	
 	
 	@Override
@@ -118,5 +135,30 @@ public class StoreServiceImpl implements StoreService{
 		return storedao.selectOpionCategoryNDetailByIdList(storeId);
 	}
 
+	@Override
+	public Map<String, Object> findStorePagingList(String select, String keyword, int page) {
+		Map<String, Object> map = new HashMap<>();
+		int tatalCount = storedao.selectStoreBySelectAndKeywordPagingCount(select, keyword);
+		PagingBean pageBean = new PagingBean(tatalCount, page);
+		List<Store> list = storedao.selectStoreBySelectAndKeywordPagingList(select, keyword, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		map.put("pageBean", pageBean);
+		map.put("list", list);
+		return map;
+	}
 
+	@Override
+	public Store viewStore(String storeId, Authentication authentication) {
+		String userInfo = authentication.getAuthorities().toString();
+		if(!(userInfo.equals("[ROLE_ANONYMOUS]") || userInfo.equals("[ROLE_CNB_ADMIN]"))){
+			storeVisitHistoryDao.insertStoreVisitHistory(new StoreVisitHistory(((GeneralUser)authentication.getPrincipal()).getUserId(), storeId));
+			userAndStoreService.addUserPreferenceStore(new UserPreferenceStore(((GeneralUser)authentication.getPrincipal()).getUserId(), storeId));
+		}
+		Store store = storedao.selectStroeJoinPicture(storeId);
+		int hits = store.getStoreHits();
+		store.setStoreHits(hits+1);
+		storedao.updateStore(store);
+		return store;
+	}
+	
+	
 }

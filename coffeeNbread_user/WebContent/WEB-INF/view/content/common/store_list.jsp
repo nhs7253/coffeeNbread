@@ -23,11 +23,11 @@ td {
 
 
 
-	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post">
+	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post">
 		<select name="select">
-			<option value="title" ${param.select eq "title" ? "selected" :""}>제목</option>
-			<option value="content" ${param.select eq "content" ? "selected" :""}>내용</option>
-			<option value="titleAndcontent" ${param.select eq "titleAndcontent" ? "selected" :""}>제목+내용</option>
+			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>이름</option>
+			<option value="storeIntro" ${param.select eq "storeIntro" ? "selected" :""}>소개</option>
+			<option value="storeAddress" ${param.select eq "storeAddress" ? "selected" :""}>주소</option>
 		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
@@ -38,11 +38,10 @@ td {
 	<table class="w3-table-all">
 		<thead>
 			<tr class="w3-blue">
-				<th>글번호</th>
-				<th>제목</th>
-				<th>내용</th>
-				<th>작성일시</th>
-				<th>조회수</th>
+				<th>매장이름</th>
+				<th>주소</th>
+				<th>여는 시간</th>
+				<th>닫는 시간</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,11 +52,10 @@ td {
 			<c:forEach items="${requestScope.list }" var="list">
 
 				<tr>
-					<td>${list.noticeBoardNo}</td>
-					<td>${list.noticeBoardTitle}</td>
-					<td><a href="${initParam.rootPath }/common/viewNoticeBoardContentsController.do?noticeBoardNo=${list.noticeBoardNo}">${list.noticeBoardContent}</a></td>
-					<td>${list.noticeBoardDateFormat}</td>
-					<td>${list.noticeBoardHits}</td>
+					<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.storeId}">${list.storeName}</a></td>
+					<td>${list.storeAddress}</td>
+					<td>${list.storeOpenFormat}</td>
+					<td>${list.storeCloseFormat}</td>
 				</tr>
 			</c:forEach>
 
@@ -75,7 +73,7 @@ td {
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
+			href="${initParam.rootPath }/common/findStorePagingListController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
 
 
 		<!--
@@ -86,7 +84,7 @@ td {
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
+					href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -109,7 +107,7 @@ td {
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/common/findStorePagingListController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -127,7 +125,7 @@ td {
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
+					href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -139,7 +137,7 @@ td {
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
+			href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
 
 		<p/>

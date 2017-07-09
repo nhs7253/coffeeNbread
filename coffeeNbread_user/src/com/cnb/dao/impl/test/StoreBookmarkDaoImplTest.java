@@ -57,8 +57,7 @@ public class StoreBookmarkDaoImplTest {
 		System.out.println(dao.selectStoreBookmarkList());
 		
 		
-		
-		dao.selectStoreBookmarkByStoreBookmark(new StoreBookmark("u-3", "s-4"));
+		System.out.println("selectStoreBookmarkByStoreBookmark = " + dao.selectStoreBookmarkByStoreBookmark(new StoreBookmark("u-3", "s-4")));
 		System.out.println("selectStoreBookmarkByStoreBookmark 후 조회");
 		System.out.println(dao.selectStoreBookmarkList());
 		

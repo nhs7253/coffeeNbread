@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +15,16 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cnb.exception.DuplicatedOptionCategoryNameException;
 import com.cnb.exception.DuplicatedStoreCategorytNameException;
@@ -29,7 +33,9 @@ import com.cnb.exception.DuplicatedStorePictureException;
 import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.exception.UserManageException;
 import com.cnb.service.StoreService;
+import com.cnb.validation.annotation.NoticeBoardContentsViewForm;
 import com.cnb.validation.annotation.StoreRegisterForm;
+import com.cnb.validation.annotation.StoreViewForm;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
@@ -223,6 +229,50 @@ public class StoreController {
 		session.removeAttribute("store");
 		return "store/store_register.tiles";
 
+	}
+	
+	/**
+	 * 매장 목록을 페이징 하여 보여주는 컨드롤러
+	 * @param storeViewForm (select 검색 종류 -매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), keyword 검색 내용, 볼 페이지) 
+	 * @param errors 요청파라미터 에러
+	 * @return 반환 경로
+	 */
+	@RequestMapping("/common/findStorePagingListController")
+	public ModelAndView findStorePagingListController(@ModelAttribute("storeView") @Valid StoreViewForm storeViewForm, BindingResult errors){
+		ModelAndView modelAndView = new ModelAndView();
+		if(errors.hasErrors()){
+			modelAndView.setViewName("index.tiles");
+			return modelAndView; //에러 발생 시 이동할 경로
+		}
+		
+		Map<String, Object> map = service.findStorePagingList(storeViewForm.getSelect(), storeViewForm.getKeyword(), storeViewForm.getPage());
+		
+		modelAndView.setViewName("common/store_list.tiles");
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("pageBean", map.get("pageBean"));
+		modelAndView.addObject("keyword", storeViewForm.getKeyword());
+		modelAndView.addObject("select", storeViewForm.getSelect());
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/common/viewStoreController")
+	public ModelAndView viewStoreController(@RequestParam(value="storeId", required=false) String storeId, HttpSession session){
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(storeId == null){
+			modelAndView.setViewName("redirect:/common/findStorePagingListController.do");
+			return modelAndView; //에러 발생 시 이동할 경로
+		}
+	
+		Store store = service.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
+		
+		modelAndView.setViewName("common/store_view.tiles"); //성공 시 이동할 경로
+		modelAndView.addObject("store", store);
+		
+		session.setAttribute("storeInfo", store);
+		return modelAndView;
 	}
 
 }

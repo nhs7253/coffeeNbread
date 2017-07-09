@@ -185,7 +185,6 @@ public class GeneralUserController {
 		Map<String, Object> map = service.findUserListBySelectToKeyword(generalUserViewForm.getSelect(), generalUserViewForm.getKeyword(), generalUserViewForm.getPage());
 
 		List<Product> list = (List<Product>) map.get("list");
-		System.out.println(list);
 		
 		modelAndView.setViewName("user_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));

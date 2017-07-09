@@ -7,7 +7,9 @@ CREATE TABLE store_bookmark (
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 
-
+SELECT *
+FROM store_bookmark
+WHERE user_id = 'u-1' AND store_id = 's-4'
 
 
 DELETE FROM user_authority WHERE user_id = '2' AND user_authority = 'CNB_ADMIN';

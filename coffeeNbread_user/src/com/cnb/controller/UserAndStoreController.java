@@ -56,7 +56,7 @@ public class UserAndStoreController {
 	@RequestMapping("/user/addStoreBookmarkController") 
 	public String addStoreBookmarkController(@ModelAttribute("storeBookmark") @Valid StoreBookmarkForm storeBookmarkFrom, BindingResult errors){
 		if(errors.hasErrors()){
-			return null; //에러 발생 시 이동할 경로
+			return "redirect:/common/viewStoreController.do?storeId="+storeBookmarkFrom.getStoreId(); //에러 발생 시 이동할 경로
 		}
 		
 		StoreBookmark storeBookmark = new StoreBookmark();
@@ -65,10 +65,10 @@ public class UserAndStoreController {
 		try {
 			service.addStoreBookmark(storeBookmark);
 		} catch (UserAndStoreServiceException e) {
-			return null; //이미 등록한 매장일 경우 이동할 페이지
+			return "redirect:/common/viewStoreController.do?storeId="+storeBookmarkFrom.getStoreId(); //이미 등록한 매장일 경우 이동할 페이지
 		}
 		
-		return null; //성공적인 추가 시 이동할 페이지
+		return "redirect:/common/viewStoreController.do?storeId="+storeBookmarkFrom.getStoreId(); //성공적인 추가 시 이동할 페이지
 	}
 	
 	
