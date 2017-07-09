@@ -23,11 +23,14 @@ import com.cnb.vo.StoreEvent;
 
 public class StoreRegisterForm implements Serializable{
 	
+	private String originalName; //원래이름
+	private String saveName; //UUID로 생성한 이름 - 파일명 중복을 피하기 위해
+	
 	@NotEmpty
 	private String storeId;
 	@NotEmpty
 	private String storeName;
-	private List<MultipartFile> storePicture;
+	private MultipartFile storePicture;
 	private String storeIntro;
 	@NotEmpty
 	private String storePhone;
@@ -51,6 +54,18 @@ public class StoreRegisterForm implements Serializable{
 
 	
 	
+	public String getOriginalName() {
+		return originalName;
+	}
+	public void setOriginalName(String originalName) {
+		this.originalName = originalName;
+	}
+	public String getSaveName() {
+		return saveName;
+	}
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
+	}
 	public List<StoreEvent> getStoreEventList() {
 		return storeEventList;
 	}
@@ -141,6 +156,12 @@ public class StoreRegisterForm implements Serializable{
 	}
 	public void setStorePictureList(List<MultipartFile> storePictureList) {
 		this.storePictureList = storePictureList;
+	}
+	public MultipartFile getStorePicture() {
+		return storePicture;
+	}
+	public void setStorePicture(MultipartFile storePicture) {
+		this.storePicture = storePicture;
 	}
 
 	

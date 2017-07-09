@@ -36,7 +36,12 @@ public interface OptionCategoryDao {
 	 */
 	int deleteOptionCategory(String storeId,int optionId);
 	
-
+	/**
+	 * 1개의 매장에 있는 모든 옵션카테고리 정보 delete
+	 * @param storeId
+	 * @return
+	 */
+	int deleteOptionCategoryByStoreId(String storeId);
 	/**
 	 * 1개 매장 아이디로 1개의 옵션카테고리 정보 select
 	 * @param storeId, OptionCategory

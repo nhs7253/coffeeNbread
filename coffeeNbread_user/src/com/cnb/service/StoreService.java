@@ -7,6 +7,7 @@ import com.cnb.exception.DuplicatedStoreCategorytNameException;
 import com.cnb.exception.DuplicatedStoreIdException;
 
 import com.cnb.exception.DuplicatedStorePictureException;
+import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Product;
 import com.cnb.vo.Store;
@@ -28,13 +29,15 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	public void addStore(Store store,List<StoreCategory> storeCategory,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store
+	 * @throws DuplicatedStoreIdException 
+	 * @throws StorePictureNotFoundException 
 	 *
 	 */
-	int modifyStore(Store store);
+	void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException;
 	
 	/**
 	 * 매장삭제

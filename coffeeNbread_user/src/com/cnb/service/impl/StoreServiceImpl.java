@@ -10,6 +10,7 @@ import com.cnb.exception.DuplicatedOptionCategoryNameException;
 import com.cnb.exception.DuplicatedStoreCategorytNameException;
 import com.cnb.exception.DuplicatedStoreIdException;
 import com.cnb.exception.DuplicatedStorePictureException;
+import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.service.OptionCategoryService;
 import com.cnb.service.StoreCategoryService;
 import com.cnb.service.StorePictureService;
@@ -36,7 +37,7 @@ public class StoreServiceImpl implements StoreService{
 	
 	
 	@Override
-	public void addStore(Store store,List<StoreCategory> storeCategory,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
+	public void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
 		//storeId 중복확인
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
@@ -45,10 +46,8 @@ public class StoreServiceImpl implements StoreService{
 		storedao.insertStore(store);
 		
 		//매장 분류 추가
-		storeCategoryService.addStoreCategory(storeCategory);
-		
-		//옵션 카테고리 추가
 		optionCategoryService.addOptionCategory(optionCategory);
+
 		
 		//매장 사진 추가 
 		storePictureService.addStorePicture(storePicture);
@@ -58,15 +57,34 @@ public class StoreServiceImpl implements StoreService{
 		
 	}
 
-	@Override
+	/*@Override
 	public int modifyStore(Store store) {
 		return storedao.updateStore(store);
 		
+	}*/
+	@Override
+	public void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException {
+		 if(storedao.selectStoreById(store.getStoreId())==null){
+			 storedao.updateStore(store);
+		 }else{
+				throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
+		 }
+		 
+		 optionCategoryService.modifyOptionCategory(optionCategory);
+		 
+		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
+		 
+		 
+		 
 	}
-
+		
 	@Override
 	public int removeStoretById(String storeId) {
-		return storedao.deleteStoreById(storeId);
+		optionCategoryService.removeOptionCategoryByStoreId(storeId);
+		storePictureService.removeStorePictureById(storeId);
+		int cnt = storedao.deleteStoreById(storeId);
+
+		return cnt;
 		
 	}
 

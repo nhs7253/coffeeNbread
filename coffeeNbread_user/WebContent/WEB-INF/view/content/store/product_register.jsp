@@ -2,15 +2,15 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type="checkbox"]').on("click", function(){
+		$('input[type="checkbox"]').not(this).prop("checked", false);
+	});
+});
+</script>
 
-
-</head>
-<body>
 	<form action="${initParam.rootPath }/addProductController.do" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<table>
@@ -24,11 +24,7 @@
 			</tr>
 			<tr>
 				<th>제품 가격</th>
-				<td><input type="number" name="productPrice"></td>
-			</tr>
-			<tr>
-				<th>제품 종류</th>
-				<td><input type="text" name="productCategory"></td>
+				<td><input type="number" min="100" name="productPrice"></td>
 			</tr>
 			<tr>
 				<th>제품 상세</th>
@@ -36,16 +32,19 @@
 			</tr>
 			<tr>
 				<th>판매 여부</th>
-				<td><input type="text" name="sellingOption"></td>
+				<td>
+				<input type="checkbox" name="sellingOption" value="Y">판매함
+				<input type="checkbox" name="sellingOption" value="N">판매안함
+				</td>
 			</tr>
 
 			<tr>
 				<th>금일 제품 개수</th>
-				<td><input type="number" name="todayProductCount"></td>
+				<td><input type="number" min="0" name="todayProductCount"></td>
 			</tr>
 			<tr>
 				<th>추천 제품 개수</th>
-				<td><input type="number" name="recommendProductCount"></td>
+				<td><input type="number" min="0" name="recommendProductCount"></td>
 			</tr>
 			<tr>
 				<th>옵션</th>
@@ -60,11 +59,9 @@
 			</tr>
 			<tr>
 				<th>제품 사진</th>
-				<td><input type="file" name="productPictureList" multiple></td>
+				<td><input type="file" name="productPicture"></td>
 			<tr>
 				<td colspan="2"><input type="submit" value="등록"></td>
 			</tr>
 		</table>
 	</form>
-</body>
-</html>

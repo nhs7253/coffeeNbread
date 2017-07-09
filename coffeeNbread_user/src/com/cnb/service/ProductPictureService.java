@@ -2,6 +2,8 @@ package com.cnb.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cnb.exception.DuplicatedProductPictureException;
 import com.cnb.exception.ProductPictureNotFoundException;
 import com.cnb.vo.ProductPicture;
@@ -26,9 +28,9 @@ public interface ProductPictureService {
 	
 	/**
 	 * 1개의 제품 사진 정보 수정
-	 * @param productPictureVO, productPicture
+	 * @param productPicture
 	 */
-	int modifyProductPictureByProductPicture(ProductPicture productPictureVO, String productPicture) throws ProductPictureNotFoundException;
+	int modifyProductPictureByProductPicture(String productPicture, String productId, String storeId) throws ProductPictureNotFoundException;
 	
 	/**
 	 * 1개의 제품 사진 정보 삭제
@@ -40,6 +42,6 @@ public interface ProductPictureService {
 	 * 1개의 매장에 있는 1개의 제품정보로 제품 사진 정보들 찾기
 	 * @param productId, storeId
 	 */
-	List<ProductPicture> findProductPictureListByProductIdAndStoreId(String productId, String storeId);
+	ProductPicture findProductPictureByProductIdAndStoreId(String productId, String storeId);
 
 }

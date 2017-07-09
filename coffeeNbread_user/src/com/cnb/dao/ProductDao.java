@@ -59,7 +59,7 @@ public interface ProductDao {
 	int selectProductListCount(String storeId);
 
 	/** 
-	 * 여러 조건으로 조회된 제품 수 (Paging 용 count)
+	 * 여러 조건으로 조회된 제품 수 (Paging 용 count) - method : category, name, sellingOption
 	 * @param storeId, method, methodContent
 	 * @return 조회된 제품 수
 	 */
@@ -80,10 +80,11 @@ public interface ProductDao {
 	List<Product> selectProductListByCategoryNoPaging(String storeId, String productCategory);
 	
 	/**
-	 * 제품 이름으로 1개의 매장에 있는 제품 정보 select
-	 * @param storeId, productName
+	 * 제품 이름으로 1개의 매장에 있는 제품 정보들 select
+	 * @param storeId, productName, startIndex, endIndex
 	 * @return 조회된 제품 정보
 	 */
+	List<Product> selectProductListByName(String storeId, String productName, int startIndex, int endIndex);
 	Product selectProductByName(String storeId, String productName);
 	
 	/**

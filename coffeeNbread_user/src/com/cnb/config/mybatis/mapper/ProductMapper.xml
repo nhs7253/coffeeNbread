@@ -76,7 +76,7 @@
 	
 	
 	<resultMap type="product" id="product-productPicture-resultmap" extends="product-resultmap">
- 		<association property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
+ 		<collection property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
  	</resultMap>
 	
 	
@@ -96,6 +96,14 @@
 				SELECT COUNT(product_id)
 				FROM product
 				WHERE product_category LIKE '%'||#{methodContent}||'%'
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<when test="method == 'name'">
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product
+				WHERE product_name LIKE '%'||#{methodContent}||'%'
 				AND	  store_id = #{storeId}
 			]]>
 			</when>
@@ -179,12 +187,61 @@
 		]]>
 	</select>
 	
+	<!-- selectProductListByName -->
+	<select id="selectProductListByName" resultMap="product-productPicture-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  product_id,
+					store_id,
+					product_name,
+					product_price,
+					product_category,
+					product_detail,
+					selling_option,
+					today_product_count,
+					recommend_product_count,
+					product_picture
+			FROM(
+					SELECT  rownum rnum, 
+							product_id,
+							store_id,
+							product_name,
+							product_price,
+							product_category,
+							product_detail,
+							selling_option,
+							today_product_count,
+							recommend_product_count,
+							product_picture
+					FROM(
+							SELECT  p.product_id,
+									p.store_id,
+									p.product_name,
+									p.product_price,
+									p.product_category,
+									p.product_detail,
+									p.selling_option,
+									p.today_product_count,
+									p.recommend_product_count,
+									pp.product_picture
+							FROM	product p, product_picture pp
+							WHERE p.store_id = #{storeId}
+							AND   p.product_name LIKE '%'||#{productName}||'%'
+							AND	  p.store_id = pp.store_id
+							AND   p.product_id = pp.product_id
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
 	<!-- selectProductByName -->
 	<select id="selectProductByName" resultMap="product-productPicture-resultmap" parameterType="map">
 		<include refid="select-product-productPicture"/>
 		WHERE p.store_id = #{storeId} 
 		AND   p.product_name = #{productName}
 		AND	  p.store_id = pp.store_id
+		AND   p.product_id = pp.product_id
 	</select>
 	
 	<!-- selectProductById -->

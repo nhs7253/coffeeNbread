@@ -7,6 +7,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cnb.dao.ProductPictureDao;
 import com.cnb.vo.ProductPicture;
@@ -32,12 +33,11 @@ public class ProductPictureDaoImpl implements ProductPictureDao {
 	}
 
 	@Override
-	public int updateProductPictureByProductPicture(ProductPicture productPictureVO, String productPicture) {
+	public int updateProductPictureByProductPicture(String productPicture, String productId, String storeId) {
 		Map<String, String> info = new HashMap<>();
-		info.put("productPictureByVO", productPictureVO.getProductPicture());
-		info.put("productIdByVO", productPictureVO.getProductId());
-		info.put("storeIdByVO", productPictureVO.getStoreId());
 		info.put("productPicture", productPicture);
+		info.put("productIdByVO", productId);
+		info.put("storeIdByVO", storeId);
 		return session.update(makeSqlId("updateProductPictureByProductPicture"), info);
 	}
 
@@ -47,11 +47,11 @@ public class ProductPictureDaoImpl implements ProductPictureDao {
 	}
 
 	@Override
-	public List<ProductPicture> selectProductPictureListByProductIdAndStoreId(String productId, String storeId) {
+	public ProductPicture selectProductPictureByProductIdAndStoreId(String productId, String storeId) {
 		Map<String, String> info = new HashMap<>();
 		info.put("productId", productId);
 		info.put("storeId", storeId);
-		return session.selectList(makeSqlId("selectProductPictureListByProductIdAndStoreId"), info);
+		return session.selectOne(makeSqlId("selectProductPictureByProductIdAndStoreId"), info);
 	}
 
 	@Override
