@@ -7,7 +7,7 @@
 <h1>게시글 작성</h1><hr><br>
 
 
-<form action="${initParam.rootPath }/user/addQnaBoardContents.do">
+<form action="${initParam.rootPath }/user/addQnaBoardContentsController.do">
 	<sec:csrfInput/>
 	제목 : <input type="text" name="qnaBoardTitle" required> 비밀글<input type="checkbox" name="qnaBoardSecret" value="Y"><br>
 	내용<br>

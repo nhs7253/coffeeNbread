@@ -24,7 +24,7 @@
 			<input type="submit" value="수정">
 		</form>
 		
-		<form action="${initParam.rootPath }/user/removeQnaBoardContents.do">
+		<form action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
 			<sec:csrfInput/>
 			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
 			<input type="hidden" name="qnaStoreId" value="${requestScope.content.qnaStoreId }"/>
@@ -44,12 +44,31 @@
 															조회된 item 출력 
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
-
 				<tr>
 					<td>${list.replyNo}</td>
 					<td>${list.replyContent}</td>
 					<td>${list.replyName}</td>
 					<td>${list.replyRegDateFormat}</td>
+					<td>
+						<form action="${initParam.rootPath }/user/modifyBoardReplySettigController.do">
+							<sec:csrfInput/>
+							<input type="hidden" name="replyNo" value=" ${list.replyNo }"/>
+							<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
+			 				<input type="hidden" name="qnaStoreId" value=" ${requestScope.content.qnaStoreId }"/>
+							<input type="hidden" name="replyName" value="${list.replyName }"/>
+							<input type="submit" value="수정">
+						</form>
+					</td>
+					<td>
+						<form action="${initParam.rootPath }/user/removeBoardReplyToQnaBoardNoController.do">
+							<sec:csrfInput/>
+							<input type="hidden" name="replyNo" value=" ${list.replyNo }"/>
+							<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
+							<input type="hidden" name="qnaStoreId" value="${requestScope.content.qnaStoreId }"/>
+							<input type="hidden" name="replyName" value="${list.replyName }"/>
+							<input type="submit" value="삭제">
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 
@@ -134,5 +153,14 @@
 			href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.qnaBoardNo}">마지막
 			페이지</a>
 
+		<p/>
+		<form action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
+			<sec:csrfInput/>
+			 <textarea rows="5" cols="80" name="replyContent" required></textarea>
+			 <input type="hidden" name="qnaBoardNo" value=" ${requestScope.content.qnaBoardNo }"/>
+			 <input type="hidden" name="qnaStoreId" value=" ${requestScope.content.qnaStoreId }"/>
+			 <input type="submit" value="댓글 쓰기">
+		</form>
+		
 
-
+	

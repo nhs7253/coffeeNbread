@@ -17,6 +17,9 @@
 	
 	
 	<insert id="insertBoardReplyToRecipeBoardNo" parameterType="BoardReply">
+		<selectKey keyProperty="replyNo" resultType="_int" order="BEFORE">
+			SELECT reply_no_seq.nextval FROM dual
+		</selectKey>
 		INSERT INTO board_reply VALUES(#{replyNo},
 										#{replyContent},
 										#{replyName},
@@ -29,6 +32,9 @@
 	
 	
 	<insert id="insertBoardReplyToQnaBoardNo" parameterType="BoardReply">
+		<selectKey keyProperty="replyNo" resultType="_int" order="BEFORE">
+			SELECT reply_no_seq.nextval FROM dual
+		</selectKey>
 		INSERT INTO board_reply VALUES(#{replyNo},
 										#{replyContent},
 										#{replyName},
@@ -57,8 +63,7 @@
 			reply_content = #{replyContent},
 			reply_name = #{replyName},
 			reply_regdate = #{replyRegDate}
-		where	qna_board_no = #{qnaBoardNo}
-		and    reply_no=#{replyNo}
+		where	reply_no=#{replyNo}
 	</update>
 	
 	
@@ -73,6 +78,11 @@
 		and qna_board_no=#{qnaBoardNo}
 	</delete>
 	
+	<select id="selectBoardReplyByreplyNo" parameterType="_int" resultMap="BoardReply-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM board_reply
+		WHERE reply_no = #{replyNo}
+	</select>
 	
 	
 	<!-- 레시피게시판에 달린 댓글 개수  -->

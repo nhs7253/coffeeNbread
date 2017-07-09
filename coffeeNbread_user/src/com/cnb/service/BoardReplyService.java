@@ -2,10 +2,8 @@ package com.cnb.service;
 
 import java.util.HashMap;
 
-import com.cnb.exception.ProductPictureNotFoundException;
+import com.cnb.exception.BoardReplyException;
 import com.cnb.vo.BoardReply;
-import com.cnb.vo.QnaBoardContents;
-import com.cnb.vo.RecipeBoardContents;
 
 /*
  * 김형주 
@@ -47,16 +45,16 @@ public interface BoardReplyService {
     * 레시피 게시판의 번호로 들어가서 댓글번호로  댓글 지우기.
     * @return
     */
-	int removeBoardReplyToRecipeBoardNo(int replyNo, int recipeBoardNo) ;
+	int removeBoardReplyToRecipeBoardNo(int replyNo, int recipeBoardNo,String replyName,String userId)throws BoardReplyException ;
 	
 	/**
 	 * qna게시판의 번호로 들어가서  댓글번호로 댓글 지우기.
 	 * @param qnaBoardNo
 	 * @param replyNo
 	 * @return
-	 * @throws ProductPictureNotFoundException
+	 * @throws BoardReplyException 삭제 권한이 없음
 	 */
-	int removeBoardReplyToQnaBoardNo(int replyNo, int recipeBoardNo );
+	int removeBoardReplyToQnaBoardNo(int replyNo, int qnaBoardNo, String replyName, String userId) throws BoardReplyException;
 
 	  
 	/**
@@ -73,4 +71,14 @@ public interface BoardReplyService {
 	 */
 	  HashMap<String, Object> findBoardReplyListByQnaBoardContent(int page, int qnaBoardNo);
 	
+	  
+	  /**
+	   * 댓글 번호로 해당 댓글 조회 및 권한 검증 서비스 - 업데이터 셋팅
+	   * @param replyNo 댓글 번호
+	   * @param userId
+	   * @param qnaBoardWriter
+	   * @return
+	   * @throws BoardReplyException
+	   */
+	  BoardReply findBoardReplyModifySetting(int replyNo, String userId, String replyName) throws BoardReplyException;
 }

@@ -107,6 +107,12 @@ public class BoardReplyDaoImpl implements BoardReplyDao {
 	}
 
 
+	@Override
+	public BoardReply selectBoardReplyByreplyNo(int replyNo) {
+		return session.selectOne(makeSqlId("selectBoardReplyByreplyNo"), replyNo);
+	}
+
+
 	
 
 	

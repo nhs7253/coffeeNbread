@@ -11,14 +11,14 @@
 	
 	
 	    레시피게시판 사진
-		<c:forEach items="${requestScope.recipeBoardPicture }" var="fileName">
-					<img src="${initParam.rootPath }/up_image/${requestScope.fileName }" width="300px">
+		<c:forEach items="${requestScope.content.recipeBoardPicture }" var="fileName">
+					<img src="${initParam.rootPath }/up_image/${fileName }" width="200px"  height="200px">
 				</c:forEach>
 	
 		제목 : <input type="text" value="${requestScope.content.recipeBoardTitle }" disabled><br>
 		내용<br>
 		 <textarea rows="20" cols="100" disabled>
-		 	${requestScope.content.recipeBoardContent }
+		     	${requestScope.content.recipeBoardContent }
 		 </textarea>
 		    
 	 	<p/>
@@ -26,54 +26,65 @@
 		<form action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
 			<sec:csrfInput/>
 			<input type="hidden" name="recipeBoardNo" value="${requestScope.content.recipeBoardNo }"/>
-			<input type="hidden" name=userId" value="${requestScope.content.userId }"/>
+			<input type="hidden" name="recipeBoardPicture" value="${requestScope.content.recipeBoardPicture }"/>
+			<input type="hidden" name="userId" value="${requestScope.content.userId }"/>
 			<input type="submit" value="수정">
 		</form>
 		
-		<form action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
+		<form action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
 			<sec:csrfInput/>
 			<input type="hidden" name="recipeBoardNo" value="${requestScope.content.recipeBoardNo }"/>
 			<input type="hidden" name="storeId" value="${requestScope.content.storeId }"/>
 			<input type="hidden" name="userId" value="${requestScope.content.userId }"/>
 			<input type="submit" value="삭제">
 		</form>
-	 
+	  
 
 
 
 
-	<%-- 
 	<table class="w3-table-all">
 		<tbody>
 
-			######################################################
-															조회된 item 출력 
-				######################################################
 			<c:forEach items="${requestScope.list }" var="list">
-
 				<tr>
 					<td>${list.replyNo}</td>
 					<td>${list.replyContent}</td>
 					<td>${list.replyName}</td>
 					<td>${list.replyRegDateFormat}</td>
+					<td>
+						<form action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
+							<sec:csrfInput/>
+							<input type="hidden" name="replyNo" value=" ${list.replyNo }"/>
+							<input type="hidden" name="recipeBoardNo" value="${requestScope.content.recipeBoardNo }"/>
+			 				<input type="hidden" name="storeId" value=" ${requestScope.content.storeId }"/>
+							<input type="hidden" name="replyName" value="${list.replyName }"/>
+							<input type="submit" value="수정">
+						</form>
+					</td>
+					<td>
+						<form action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
+							<sec:csrfInput/>
+							<input type="hidden" name="replyNo" value=" ${list.replyNo }"/>
+							<input type="hidden" name="recipeBoardNo" value="${requestScope.content.recipeBoardNo }"/>
+							<input type="hidden" name="storeId" value="${requestScope.content.storeId }"/>
+							<input type="hidden" name="replyName" value="${list.replyName }"/>
+							<input type="submit" value="삭제">
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
 
-	
- --%>
-
-
-<%-- 
 	<p>
-		######################################################
+		<%--######################################################
 															페이징 처리
-				######################################################
+				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=1&qnaBoardNo=${requestScope.content.recipeBoardNo}">첫페이지</a>
+			href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=1&recipeBoardNo=${requestScope.content.recipeBoardNo}">첫페이지</a>
 
 
 		<!--
@@ -137,8 +148,15 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&recipeBoardNo=${requestScope.content.recipeBoardNo}">마지막
+			href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.recipeBoardNo}">마지막
 			페이지</a>
 
- --%>
+		<p/>
+		<form action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
+			<sec:csrfInput/>
+			 <textarea rows="5" cols="80" name="replyContent" required></textarea>
+			 <input type="hidden" name="recipeBoardNo" value=" ${requestScope.content.recipeBoardNo }"/>
+			 <input type="hidden" name="storeId" value=" ${requestScope.content.storeId }"/>
+			 <input type="submit" value="댓글 쓰기">
+		</form>
 

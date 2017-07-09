@@ -33,6 +33,15 @@ public class RecipeBoardContentsForm implements Serializable{
 	
 	private int recommendCount=0;
 
+	private String userId;
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public int getRecipeBoardNo() {
 		return recipeBoardNo;
 	}

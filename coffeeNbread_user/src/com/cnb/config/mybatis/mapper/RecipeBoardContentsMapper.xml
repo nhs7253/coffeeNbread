@@ -31,9 +31,12 @@
 		recipe_board_contents
 		SET recipe_board_content = #{recipeBoardContent},
 		recipe_board_title = #{recipeBoardTitle},
-		recipe_board_date =
-		#{recipeBoardDate},
-		recipe_board_picture = #{recipeBoardPicture}
+		recipe_board_date =#{recipeBoardDate},
+		recipe_board_picture = #{recipeBoardPicture},
+		recipe_board_hits=#{recipeBoardHits},
+		recommend_count=#{recommendCount},
+		user_id=#{userId},
+		store_id=#{storeId}
 		WHERE
 		recipe_board_no = #{recipeBoardNo}
 	</update>
@@ -105,6 +108,8 @@
 		<result column="recipe_board_picture" property="recipeBoardPicture" />
 		<result column="recipe_board_hits" property="recipeBoardHits" />
 		<result column="recommend_count" property="recommendCount" />
+		<result column="user_id" property="userId" />
+		<result column="store_id" property="storeId" />
 
 		<association property="store"
 			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
@@ -163,7 +168,7 @@
 				FROM
 				recipe_board_contents
 				WHERE
-				recommendCount = #{keyword}
+				recommend_Count = #{keyword}
 
 			</when>
 			<when test="select =='recipeBoardDate'">
@@ -415,8 +420,8 @@
 		s.store_name
 		FROM recipe_board_contents
 		rbc, store s
-		Where rbc.store_id=s.store_id
-
+		Where rbc.store_id=s.store_id(+)
+         
 		<choose>
 			<when test="select == 'recipeBoardDate'">
 				order by recipe_board_date desc
@@ -425,18 +430,23 @@
 			<when test="select == 'recipeBoardTitle'">
 				And recipe_board_title like
 				'%'||#{keyword}||'%'
+				order by recipe_board_date desc
 			</when>
 			<when test="select == 'recipeBoardHits'">
 				order by recipe_board_hits desc
 			</when>
 			<when test="select == 'recipeBoardContent'">
 				and recipe_board_content like '%'||#{keyword}||'%'
+				order by recipe_board_date desc
 			</when>
 
 			<when test="select == 'recommendCount'">
 				order by recommend_count desc
 			</when>
+             <otherwise> 
 
+			    
+			</otherwise>
 		</choose>
 		)
 		WHERE rownum &lt;= #{endIndex}

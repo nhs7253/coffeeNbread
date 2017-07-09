@@ -29,3 +29,12 @@ SELECT s.store_id, X, Y, store_name, store_intro, store_phone, store_address, st
 FROM store_position sp, store s
 WHERE sp.store_id = s.store_id AND sp.store_id = 's-1'
 
+
+		UPDATE board_reply 
+		SET 
+			reply_content = '변경11111111',
+			reply_name = '테스터',
+			reply_regdate = '2000-01-01'
+		where	reply_no=32
+
+

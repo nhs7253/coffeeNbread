@@ -437,9 +437,51 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 		
 		
 		
+				SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.store_id=s.store_id(+)
 		
+		)
+		WHERE rownum <= 100
+		)
+		WHERE rnum >= 1
+
 		
-		
-		
-		
+		INSERT INTO board_reply VALUES(5,
+										'댓글내용1',
+										'댓글작성자',
+									     TO_DATE('2017-06-26', 'yyyy-mm-dd'),
+										1
+										)
 		

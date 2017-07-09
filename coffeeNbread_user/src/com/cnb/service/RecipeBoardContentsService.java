@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
+
+import com.cnb.exception.ContentsNotFoundException;
+import com.cnb.exception.NotInputRecipeBoardPictureException;
+import com.cnb.exception.QnaBoardContentsAuthenticationException;
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.RecipeBoardContents;
 import com.cnb.vo.ReservationDetails;
@@ -27,26 +32,23 @@ public interface RecipeBoardContentsService {
    */
 	int addRecipeBoardContents(RecipeBoardContents recipeBoardContents);
 	
-  /**
-   * 유저가 매장에 매장에 등록한것을 수정하려고 한다.
-   * @param userId
-   * @param storeId
-   * @return
-   */
-	int modifyRecipeBoardContents(RecipeBoardContents recipeBoardContents);
+ /**
+  *  수정하려는 레시피 게시글의 번호
+  * @param recipeBoardNo
+  * @param recipeBoardContents
+  * @return
+  */
+	int modifyRecipeBoardContents(int recipeBoardNo, RecipeBoardContents recipeBoardContents)throws ContentsNotFoundException, NotInputRecipeBoardPictureException ;
 	
 
 	/**
 	 * 유저가 전체 글쓰는 곳에서 레시피게시글 지우기.
 	 * 매장들어가서 지운다면 매장아이디를 받아서 매장 게시판 지우기.
 	 */
-	int removeRecipeBoardContentsByUserId(String userId,int recipeBoardNo);
+	void removeRecipeBoardContents(int recipeBoardNo,Authentication authentication)throws ContentsNotFoundException, QnaBoardContentsAuthenticationException;
 	 
-	/**
-	 * 유저가 전체 글쓰는 곳에서 레시피게시글 지우기.
-	 * 매장들어가서 지운다면 매장아이디를 받아서 매장 게시판 지우기.
-	 */
-	int removeRecipeBoardContentsByUserIdAndStoreId(String userId,String storeId,int recipeBoardNo);
+
+	/*int removeRecipeBoardContentsByUserIdAndStoreId(String userId,String storeId,int recipeBoardNo);*/
 	
 	
 	
@@ -104,5 +106,19 @@ public interface RecipeBoardContentsService {
 	 * @param page
 	 * @return
 	 */
-	HashMap<String, Object> viewRecipeBoardContentsByReplyListService(int recipeBoardNo, int page);
+	HashMap<String, Object> viewRecipeBoardContentsByReplyListService(int recipeBoardNo, int page) throws ContentsNotFoundException;
+	
+	
+	/**
+	 * 레시피 게시글번호로 레시피게시글 객체 
+	 * @param recipeBoardNo
+	 * @return
+	 * @throws ContentsNotFoundException
+	 */
+    RecipeBoardContents findRecipeBoardContents(int recipeBoardNo) throws ContentsNotFoundException;
+	
+	
+    
+    
+    
 }

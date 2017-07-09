@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 /*
  * 노현식
+ * 2017-07-08
+ * 레시피 게시판 댓글 달기 용 생성자2 추가
+ * 
+ * 노현식
  * 2017-07-06
  * getReplyRegDateFormat()
  * 
@@ -15,7 +19,6 @@ import java.util.Date;
  */
 public class BoardReply implements Serializable {
 
-	
 	private int replyNo;
 	private String replyContent;
 	private String replyName;
@@ -30,8 +33,17 @@ public class BoardReply implements Serializable {
 	private  RecipeBoardContents recipeBoardContents; //조인 위한 레시피 게시글 
 
 	
-	
-	/* 레시피 게시판 댓글 달기 용 생성ㅈ아 */
+	/* 레시피 게시판 댓글 달기 용 생성자2 */
+	public BoardReply(String replyContent, String replyName, Date replyRegDate, Integer qnaBoardNo) {
+		this.replyContent = replyContent;
+		this.replyName = replyName;
+		this.replyRegDate = replyRegDate;
+		this.qnaBoardNo = qnaBoardNo;
+	}
+
+
+
+	/* 레시피 게시판 댓글 달기 용 생성아 */
 	public BoardReply(int replyNo, String replyContent, String replyName, Date replyRegDate, Integer recipeBoardNo) {
 		super();
 		this.replyNo = replyNo;
@@ -45,7 +57,6 @@ public class BoardReply implements Serializable {
 	
 	/* qna 게시판 댓글달기 생성자 */
 	public BoardReply(int replyNo, String replyContent, String replyName,Integer qnaBoardNo, Date replyRegDate) {
-		super();
 		this.replyNo = replyNo;
 		this.replyContent = replyContent;
 		this.replyName = replyName;

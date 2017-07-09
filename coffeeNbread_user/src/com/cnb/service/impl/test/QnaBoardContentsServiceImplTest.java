@@ -69,8 +69,8 @@ public class QnaBoardContentsServiceImplTest {
 		
 		System.out.println(service.findQnaBoardContentsBySelectToKeyword("titleAndcontent", "qna", "service-qna-s-1", 1));
 		
-		service.removeQnaBoardContents(service.findQnaBoardContentsList().get(1).getQnaBoardNo());
-		service.removeQnaBoardContents(service.findQnaBoardContentsList().get(2).getQnaBoardNo());
+//		service.removeQnaBoardContents(service.findQnaBoardContentsList().get(1).getQnaBoardNo());
+//		service.removeQnaBoardContents(service.findQnaBoardContentsList().get(2).getQnaBoardNo());
 
 		
 		System.out.println("removeQnaBoardContents 후 조회");

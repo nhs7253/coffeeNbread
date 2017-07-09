@@ -85,8 +85,12 @@ public interface BoardReplyDao {
   	int countReplyBoardByQnaBoardNo(int QnaBoardNo);
   	
   	
-      
-      
+      /**
+       * 댓글 번호로 해당 댓글 조회
+       * @param replyNo 댓글 번호
+       * @return BoardReply 조회된 댓글
+       */
+  	BoardReply selectBoardReplyByreplyNo(int replyNo);
       
       
       
@@ -106,5 +110,7 @@ public interface BoardReplyDao {
   	 * @return
   	 */
   	List<BoardReply> selectBoardReplyListByQnaBoardNo(int qnaBoardNo,int startIndex, int endIndex);
-
+  	
+  	
+  	
 }

@@ -17,7 +17,7 @@ public class RecipeBoardContentsViewForm{
 	
 	private String keyword = null;
 	private String storeId = null;
-	private String userId;
+	private String userId=null;
 	
 	
 	

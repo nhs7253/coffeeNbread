@@ -7,8 +7,13 @@
 <meta charset="UTF-8">
 <script type="text/javascript"
 	src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.js"></script>
-<script type="text/javascript"
-	src="${initParam.rootPath }/resource/jquery/recipeDetailInfo.js"></script>
+	
+	
+	
+
+
+
+
 
 
 <style type="text/css">
@@ -25,28 +30,16 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 
-select {
-	width: 150px;
-	height: 35px;
-	padding: 5px;
-}
 
-#product_info_layer {
-	width: 700px;
-	border: 1px solid gray;
-	padding: 5px;
-	display: none; /*최초 로딩시에는 안보이도록 처리*/ /*값이 있을때는 나타나게 show로 설정  */
-}
-
-#tbody {
-	cursor: pointer;
-}
 </style>
 </head>
 <body>
 
 
 	<h2>전체 게시판</h2>
+
+
+
 
 
 
@@ -73,15 +66,17 @@ select {
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 	</form>
-	<a href="${initParam.rootPath }/user/recipe_board_register_form.do"><input
-		type="button" value="글쓰기" /></a>
+	<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
+	<input type="button" value="글쓰기" /></a>
 	<br>
 
 
 
 
 
-	<table class="w3-table-all">
+   
+
+	<table class="w3-table-all" >
 		<thead>
 			<tr class="w3-blue">
 				<th>글번호</th>
@@ -108,26 +103,23 @@ select {
 
 				<tr>
 					<td>${list.recipeBoardNo}</td>
-					<td>${list.recipeBoardPicture}</td>
-					<td>${list.recipeBoardTitle}</td>
+					<c:forEach items="${list.recipeBoardPicture }" var="fileName">
+					     <td> <img src="${initParam.rootPath }/up_image/${fileName }" width="100px" height="100px"></td>
+				        </c:forEach>
+					<td><a href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}">${list.recipeBoardTitle}</a></td>
 					<td>${list.recipeBoardContent}</td>
 					<td>${list.recipeBoardDate}</td>
 					<td>${list.recipeBoardHits}</td>
 					<td>${list.recommendCount}</td>
-					<%-- <td>
-				  <c:forEach items="${requestScope.imageName }" var="fileName">
-					<img src="/coffeeNbread_user/up_image/${requestScope.fileName }" width="300px">
-				  </c:forEach>
-				  </td> --%>
+					 
+		
+				 
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
-
-
-
-
+    
 	<p>
 		<%--######################################################
 															페이징 처리

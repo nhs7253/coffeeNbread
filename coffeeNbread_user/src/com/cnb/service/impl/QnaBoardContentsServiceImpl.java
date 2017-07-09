@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import com.cnb.dao.GeneralUserDao;
 import com.cnb.dao.QnaBoardContentsDao;
 import com.cnb.dao.UserAuthorityDao;
 import com.cnb.exception.ContentsNotFoundException;
+import com.cnb.exception.QnaBoardContentsAuthenticationException;
 import com.cnb.exception.UserManageException;
 import com.cnb.service.GeneralUserService;
 import com.cnb.service.QnaBoardContentsService;
@@ -43,7 +45,16 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 	}
 
 	@Override
-	public void removeQnaBoardContents(int qnaBoardNo) {
+	public void removeQnaBoardContents(int qnaBoardNo, Authentication authentication) throws ContentsNotFoundException, QnaBoardContentsAuthenticationException {
+		QnaBoardContents qnaBoardContents = findQnaBoardContents(qnaBoardNo); //해당 게시글 객체 확인
+		if(!(authentication.getAuthorities().toString().equals("[ROLE_CNB_ADMIN]"))){ //관리자라면 삭제 가능
+			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal(); //관리자가 아닐경우 유저 확인을 위해 로그인 정보 받음
+			if(!qnaBoardContents.getQnaBoardWriter().equals(generalUser.getUserId()) && !(generalUser.getStoreId() != null || qnaBoardContents.getQnaStoreId().equals(generalUser.getStoreId()))){
+				//내가 쓴글 이거나 && 매장 주인이면 삭제 가능 -> 둘 다 만족하지 못 할 시에 삭제 권한 X
+				throw new QnaBoardContentsAuthenticationException("삭제 권한이 없습니다.");
+			}
+		}
+		//삭제 권한 O -> 삭제
 		qnaBoardContentsDao.deleteQnaBoardContents(qnaBoardNo);
 	}
 	
@@ -83,7 +94,31 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 	}
 
 	@Override
-	public Map<String, Object> viewQnaBoardContentsByReplyListService(int qnaBoardNo, int page) {
+	public Map<String, Object> viewQnaBoardContentsByReplyListService(int qnaBoardNo, int page, Authentication authentication) throws ContentsNotFoundException, QnaBoardContentsAuthenticationException {
+				
+		GeneralUser generalUser = null;
+		QnaBoardContents qnaBoardContents = findQnaBoardContents(qnaBoardNo); //해당 게시글 객체 확인
+		if(qnaBoardContents.getQnaBoardSecret().equals("Y")){
+			if((authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]"))){
+				throw new QnaBoardContentsAuthenticationException("매장 비밀글 조회 권한이 없습니다.");
+			}
+			if(!(authentication.getAuthorities().toString().equals("[ROLE_CNB_ADMIN]"))){ 
+				generalUser = (GeneralUser)authentication.getPrincipal(); //관리자가 아닐경우 유저 확인을 위해 로그인 정보 받음
+				//전체 비밀글일 떼 && 본인이나 관리자가 아니라면
+				if((qnaBoardContents.getQnaStoreId() == null) && !(qnaBoardContents.getQnaBoardWriter().equals(generalUser.getUserId()) )){
+					throw new QnaBoardContentsAuthenticationException("전체 비밀글 조회 권한이 없습니다.");
+				}
+				//매장 비밀글일 때 && 본인이나 매장 주인이 아니라면		
+				if(    (qnaBoardContents.getQnaStoreId() != null) && !(   qnaBoardContents.getQnaBoardWriter().equals(generalUser.getUserId())  ) && !(  generalUser.getStoreId() != null && qnaBoardContents.getQnaStoreId().equals(generalUser.getStoreId())   )  ){
+								throw new QnaBoardContentsAuthenticationException("매장 비밀글 조회 권한이 없습니다.");
+				}
+			}
+			else if(qnaBoardContents.getQnaStoreId() != null){
+				throw new QnaBoardContentsAuthenticationException("매장 비밀글 조회 권한이 없습니다.");
+			}
+		}
+		
+		/////////////////// 권한 처리 ////////////////////////////
 		HashMap<String, Object> map = new HashMap<>();
 		//item 수 - 레시피게시판에 달린 항목당 댓글개수 
         int totalCount= boardReplyDao.countReplyBoardByQnaBoardNo(qnaBoardNo);
@@ -95,6 +130,9 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 	
 		map.put("list", list);
 		map.put("content", qnaBoardContentsDao.selectQnaBoardContents(qnaBoardNo));
+		int hits = qnaBoardContents.getQnaBoardHits();
+		qnaBoardContents.setQnaBoardHits(hits+1);
+		qnaBoardContentsDao.updateQnaBoardContents(qnaBoardContents);
 		return map;
 	}
 
