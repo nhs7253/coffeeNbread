@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.GeneralUserMapper">
+
+	<sql id="all-column"> user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state, store_id </sql>
+
+	<resultMap type="GeneralUser" id="GeneralUser-resultmap">
+		<id column="user_id" property="userId"/>
+		<result column="user_pw" property="userPw"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_birth" property="userBirth"/>
+		<result column="user_gender" property="userGender"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="user_phone" property="userPhone"/>
+		<result column="user_address" property="userAddress"/>
+		<result column="user_active_state" property="userActiveState"/>
+		<result column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<insert id="insertGeneralUser" parameterType="GeneralUser">
+		INSERT INTO general_user VALUES(#{userId},
+										#{userPw},
+										#{userName},
+										#{userBirth},
+										#{userGender},
+										#{userEmail},
+										#{userPhone},
+										#{userAddress},
+										#{userActiveState},
+										#{storeId})
+	</insert>
+	
+	<delete id="deleteGeneralUserByUserId" parameterType="string">
+		DELETE FROM general_user WHERE user_id = #{value}
+	</delete>
+	
+	<update id="updateGeneralUserByUserIdToInfo" parameterType="GeneralUser">
+		UPDATE general_user 
+		SET user_pw = #{userPw},
+			user_name = #{userName},
+			user_birth = #{userBirth},
+			user_gender = #{userGender},
+			user_email = #{userEmail},
+			user_phone = #{userPhone},
+			user_address = #{userAddress},
+			user_active_state = #{userActiveState},
+			store_id = #{storeId}
+		WHERE user_id = #{userId}		
+	</update>
+	
+	<update id="updateGeneralUserByUserIdToUserActiveState" parameterType="map">
+		UPDATE general_user 
+		SET user_active_state = #{userActiveState}
+		WHERE user_id = #{userId}
+	</update>
+	
+	<select id="selectGeneralUserList" resultMap="GeneralUser-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM general_user
+	</select>
+	
+	<select id="selectGeneralUserByUserActiveState" parameterType="string" resultMap="GeneralUser-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM general_user
+		WHERE user_active_state = #{value}
+	</select>
+	
+	<select id="selectGeneralUserByUserId" parameterType="string" resultMap="GeneralUser-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM general_user
+		WHERE user_id = #{value}
+	</select>
+	
+	<select id="selectGeneralUserCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM general_user
+	</select>
+	
+	<select id="selectGeneralUserByUserActiveStateCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM general_user
+		WHERE user_active_state = #{value}
+	</select>
+	
+	<select id="selectGeneralUserListBySelectToKeyword" parameterType="map" resultMap="GeneralUser-resultmap">
+		SELECT <include refid="all-column"/>
+			FROM(
+					SELECT rownum rnum, 
+						   <include refid="all-column"/>
+					FROM(
+						SELECT <include refid="all-column"/>
+						FROM general_user
+						<choose>
+							<when test="select == 'userName'">
+								WHERE user_name LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'userId'">
+								WHERE user_id LIKE '%'||#{keyword}||'%'
+							</when>				
+						</choose>
+						ORDER BY user_name
+					) 
+					WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
+	
+	<select id="selectGeneralUserListBySelectToKeywordCount" parameterType="map" resultType="_int">
+
+		SELECT COUNT(*)
+		FROM general_user
+		<choose>
+			<when test="select == 'userName'">
+				WHERE user_name LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'userId'">
+				WHERE user_id LIKE '%'||#{keyword}||'%'
+			</when>				
+		</choose>
+
+	</select>
+	
+</mapper>

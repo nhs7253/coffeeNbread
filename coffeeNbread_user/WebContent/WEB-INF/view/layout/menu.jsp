@@ -46,8 +46,9 @@
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
 
 
+
 <li><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do">전체 레시피 게시판 </a></li>
-<li><a href="${initParam.rootPath }/user/recipe_board_register_form.do">Recipe 게시판 글쓰기. </a></li>
+<li><a href="${initParam.rootPath}/ selectStoreController.do">매장 조회</a></li>
 
 </ul>
 

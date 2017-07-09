@@ -46,14 +46,20 @@ public class StoreCategoryServiceImpl implements StoreCategoryService{
 	}
 
 	@Override
-	public int modifyStoreCategory(StoreCategory storeCategory) {
-		
-		return dao.updateStoreCategory(storeCategory);
+	public void modifyStoreCategory(List<StoreCategory> storeCategoryList) {
+		for(int i = 0;i<storeCategoryList.size();i++)
+		 dao.updateStoreCategory(storeCategoryList.get(i));
 	}
 
 	@Override
 	public int removeStoreCategoryByNo(String storeId, int storeCategoryNo) {
 		return dao.deleteStoreCategoryByNo(storeId, storeCategoryNo);
+	}
+
+	@Override
+	public int removeStoreCategoryById(String storeId) {
+		
+		return dao.deleteStoreCategoryById(storeId);
 	}
 
 }

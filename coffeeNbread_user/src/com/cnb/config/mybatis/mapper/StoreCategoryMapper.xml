@@ -39,6 +39,11 @@
 		AND store_id= #{storeId}
 	</delete>
 	
+	
+	<delete id="deleteStoreCategoryById" parameterType="com.cnb.vo.StoreCategory">
+		DELETE FROM store_category
+		WHERE store_id= #{storeId}
+	</delete>
 	<!-- 매장카테고리 select -->
 	<select id="selectStoreCategoryListByNo">
 		SELECT

@@ -6,14 +6,6 @@
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
-    <resources>
-      <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -32,8 +24,7 @@
       </plugin>
     </plugins>
   </build>
-  
-  <!-- 버전 관리 -->
+   <!-- 버전 관리 -->
   <properties>
   	<spring.version>4.3.9.RELEASE</spring.version>
   	<mybatis.version>3.4.4</mybatis.version>
@@ -123,7 +114,6 @@
 	    <version>${validator.version}</version>
 	</dependency>
 	
-	
 	<!-- 스프링 Security 관련 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -146,6 +136,29 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 	
+	 <!-- Logging -->
+
+		<dependency>
+
+			<groupId>org.apache.logging.log4j</groupId>
+
+			<artifactId>log4j-core</artifactId>
+
+			<version>2.0</version>
+
+		</dependency>
+
+		<!-- Log4j2 SLF4J Bridge -->
+
+		<dependency>
+
+			<groupId>org.apache.logging.log4j</groupId>
+
+			<artifactId>log4j-slf4j-impl</artifactId>
+
+			<version>2.0</version>
+
+		</dependency>
+	
   </dependencies>
-  
 </project>

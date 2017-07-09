@@ -29,14 +29,14 @@ public class StorePictureServiceImplTest {
 		p1.add(new StorePicture("매장사진220","s-1"));
 		p1.add(new StorePicture("매장사진221","s-1"));
 	
-		
+	/*	
 	try{
 		
 		service.addStorePicture(p1);
 		System.out.println("등록완료");
 	}catch(DuplicatedStorePictureException e){
 		System.err.println(e.getMessage());
-	}
+	}*/
 	
 	/*	
 	//매장 사진 수정

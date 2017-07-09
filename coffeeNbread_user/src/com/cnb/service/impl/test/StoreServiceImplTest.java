@@ -105,6 +105,9 @@ public class StoreServiceImplTest {
 			System.out.println(store3);
 		}
 	*/
+		
+		//매장 삭제 
+		service.removeStoretById("s-7");
 		System.out.println("-------------------완료 ---------------");
 	}
 
