@@ -4,7 +4,7 @@
 
 <h2>제품 상세</h2>
 
-<form  action="${initParam.rootPath }/findProductListController.do" method="post">
+<form  action="${initParam.rootPath }/findProductListController.do" method="post" >
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 	<input type="submit" value="제품 목록" />
 </form>
@@ -40,10 +40,12 @@
 	</tr>
 	<tr>
 		<th>제품 사진</th>
-		<td>
-			<c:forEach items="${requestScope.product.productPictureList }" var="productPicture">
-				<td><img id="productImage" src="/coffeeNbread_user/up_image/${productPicture.productPicture}" width="300px"></td>
-			</c:forEach>
-		</td>
+		<td><img id="productImage" src="/coffeeNbread_user/up_image/${requestScope.product.productPicture}" width="300px"></td>
 	</tr>		
 </table>
+
+<form method=get action="${initParam.rootPath }/findOptionCategoryController.do">
+	<sec:csrfInput/><%-- csrf 토큰 --%>
+	<input type="hidden" name="productId" value="${requestScope.product.productId}"/>
+	<input type="submit" value="수정하기" />
+</form>

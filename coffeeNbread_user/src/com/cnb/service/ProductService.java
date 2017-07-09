@@ -13,6 +13,11 @@ import com.cnb.vo.Product;
 
 /*
  * 최민희
+ * 2017-07-08
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-30
  * 수정
  */
@@ -24,14 +29,14 @@ public interface ProductService {
 	 * - 제품 등록시 사진, 제품증감폭도 함께 등록해야함
 	 * - 제품 등록시 제품 카테고리 안에 제품을 등록해야함
 	 */
-	int addProduct(Product product, OptionDetail optionDetail, MultipartFile productPicture) throws DuplicatedProductIdOrProductNameException, DuplicatedProductPictureException;
+	int addProduct(Product product, OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException, DuplicatedProductPictureException;
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품 정보 수정
-	 * @param product
+	 * @param product, fileName
 	 * @throws ProductNotFoundException 수정할 제품이 등록되 있지 않은 경우 발생
 	 */
-	int modifyProduct(Product product,OptionDetail optionDetail) throws ProductNotFoundException;
+	int modifyProduct(Product product,OptionDetail optionDetail, String fileName) throws ProductNotFoundException, DuplicatedProductPictureException;
 	
 	/**
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 찾기

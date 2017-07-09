@@ -4,12 +4,12 @@
 
 
 
-<h1>게시글 작성</h1><hr><br>
+<h1>레시피 게시글 목록</h1><hr><br>
 
 
-<form action="${initParam.rootPath }/user/addQnaBoardContentsController.do">
+<form action="${initParam.rootPath }/user/addRecipeBoardContents.do">
 	<sec:csrfInput/>
-	제목 : <input type="text" name="qnaBoardTitle" required> 비밀글<input type="checkbox" name="qnaBoardSecret" value="Y"><br>
+	제목 : <input type="text" name="recipeBoardTitle" required> <br>
 	내용<br>
 	 <textarea rows="20" cols="100" name="qnaBoardContent" required></textarea>
 	 <input type="hidden" name="qnaStoreId" value="${param.storeId }"/>

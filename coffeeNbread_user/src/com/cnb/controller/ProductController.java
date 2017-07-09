@@ -33,6 +33,7 @@ import com.cnb.validation.annotation.ProductRegisterForm;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
+import com.cnb.vo.ProductPicture;
 
 /*
  * 최민희
@@ -64,11 +65,10 @@ public class ProductController {
 	
 	//제품 등록 (+제품 사진 등록)
 	@RequestMapping("addProductController")
-	public String addProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, HttpServletRequest request, ModelMap map, BindingResult errors) throws Exception {
+	public String addProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors, HttpServletRequest request, ModelMap map) throws Exception {
 		if(errors.hasErrors()) {
 			return "store/product_register.tiles";
 		}
-
 		Product product = new Product();
 		BeanUtils.copyProperties(productRegisterForm, product);
 		
@@ -81,29 +81,20 @@ public class ProductController {
 		OptionDetail optionDetail = new OptionDetail(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(),
 														productRegisterForm.getProductId(), productRegisterForm.getOptionId(), productRegisterForm.getProductId());
 		
-		//제품 사진 등록
-		//파일 이동 (임시 경로 -> 최종 경로(up_image))
-		String destDir = request.getServletContext().getRealPath("/up_image");
-		MultipartFile productPicture = productRegisterForm.getProductPicture();
-		//String imageName = null;	//업로드된 파일명을 저장할 list
-
+		String fileName = productRegisterForm.getProductPicture().getOriginalFilename();
 		
-		//업로드된 파일의 정보(파일명) 조회, 파일 이동 처리
-	//	if(mFile != null && !mFile.isEmpty()) {	//업로드된 파일이 있는 경우
-		    String imageName = productPicture.getOriginalFilename();	//파일명을 담음
-			if(imageName.equals("")) {
-				productRegisterForm.setImageName(null);
-			}else {
-				productRegisterForm.setImageName(imageName);
-			}
-			productPicture.transferTo(new File(destDir, productPicture.getOriginalFilename()));	//예외 던짐
-			//다른 경로로 이동 -> 경로 변경
-			//경로는 고정, 파일은 여러개 -> 파일 이름 저장
-			map.addAttribute("imageName", imageName);
-	//	}
-
+		if (fileName.equals("")) {
+			product.setProductPicture(null);
+		}else {
+			product.setProductPicture(fileName);
+			File dest = new File(request.getServletContext().getRealPath("/up_image"), fileName);
+			// 톰켓안에 넣는다.
+			productRegisterForm.getProductPicture().transferTo(dest);
+			map.addAttribute("fileName", fileName);
+		}
+		
 		try {
-			service.addProduct(product, optionDetail, productPicture);
+			service.addProduct(product, optionDetail);
 		} catch (DuplicatedProductIdOrProductNameException | DuplicatedProductPictureException e ) {
 			return "store/product_register.tiles";
 		}
@@ -112,18 +103,67 @@ public class ProductController {
 
 	//제품 상세 수정
 	@RequestMapping("modifyProductController")
-	public String modifyProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors) throws ProductNotFoundException {
+	public ModelAndView modifyProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors, HttpServletRequest request, ModelMap map) throws ProductNotFoundException, Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
 		if(errors.hasErrors()){
-			return "store/product_update.tiles"; //에러 발생
+			modelAndView.setViewName("store/product_update.tiles");
+			return modelAndView; //에러 발생
 		}
 		
 		Product product = new Product();
 		BeanUtils.copyProperties(productRegisterForm, product);
 
+		product.setStoreId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		product.setOptionCategory(productRegisterForm.getOptionCategoryString());
+		product.setProductCategory(productRegisterForm.getOptionCategoryString());
+				
 		OptionDetail optionDetail = new OptionDetail(product.getStoreId(), product.getProductId(), productRegisterForm.getOptionId(), productRegisterForm.getOptionCategoryString());
-		service.modifyProduct(product, optionDetail);
-		return "store/product_success.tiles";
+		
+		String fileName = productRegisterForm.getProductPicture().getOriginalFilename();
+		
+		if (fileName.equals("")) {
+			product.setProductPicture(productRegisterForm.getOriginalProductPicture());
+		}else {
+			product.setProductPicture(fileName);
+			File dest = new File(request.getServletContext().getRealPath("/up_image"), fileName);
+			// 톰켓안에 넣는다.
+			productRegisterForm.getProductPicture().transferTo(dest);
+			map.addAttribute("fileName", fileName);
+		}
+		
+		System.out.println("modifyProductController - productId : " + product.getProductId());
+		System.out.println("modifyProductController - storeId : " + ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		System.out.println("modifyProductController - fileName : " + fileName);	//새로 선택한 사진
+		
+		ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(product.getProductId(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		productPicture.setProductPicture(fileName);
+		
+		try {
+			product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productRegisterForm.getProductId());
+			
+			product.setProductName(productRegisterForm.getProductName());
+			product.setProductPrice(productRegisterForm.getProductPrice());
+			product.setProductDetail(productRegisterForm.getProductDetail());
+			product.setSellingOption(productRegisterForm.getSellingOption());
+			product.setTodayProductCount(productRegisterForm.getTodayProductCount());
+			product.setRecommendProductCount(productRegisterForm.getRecommendProductCount());
+			product.setProductCategory(productRegisterForm.getOptionCategoryString());
+			
+			System.out.println(product);	//product.productPicture = 이미 있던 사진
+			System.out.println(productPicture);	//새로 선택한 사진
+			
+			service.modifyProduct(product, optionDetail, fileName);
+		} catch (DuplicatedProductPictureException e) {
+			modelAndView.setViewName("store/product_update.tiles");
+			return modelAndView;
+		}
+		modelAndView.setViewName("store/product_success.tiles");
+		modelAndView.addObject("product", product);
+		return modelAndView;
 	}
+	
 	
 	//제품 목록 조회
 	@RequestMapping("findProductListController")
@@ -192,6 +232,9 @@ public class ProductController {
 		}
 		
 		Product product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId);
+		ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(productId, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		
+		product.setProductPicture(productPicture.getProductPicture());
 		
 		modelAndView.setViewName("store/product_detail.tiles");
 		modelAndView.addObject("product", product);

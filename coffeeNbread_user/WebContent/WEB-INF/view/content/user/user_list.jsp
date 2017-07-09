@@ -12,8 +12,8 @@
 
 	<form action="${initParam.rootPath }/findUserListBySelectToKeywordController.do" method="post">
 		<select name="select">
-			<option value="userId">아이디</option>
-			<option value="userName">이름</option>
+			<option value="userId" ${param.select eq "userId" ? "selected" :""}>아이디</option>
+			<option value="userName" ${param.select eq "userName" ? "selected" :""}>이름</option>   
 		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>

@@ -2,6 +2,15 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input[type="checkbox"]').on("click", function(){
+		$('input[type="checkbox"]').not(this).prop("checked", false);
+	});
+});
+</script>
+
 	<form action="${initParam.rootPath }/addProductController.do" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<table>
@@ -50,7 +59,7 @@
 			</tr>
 			<tr>
 				<th>제품 사진</th>
-				<td><input type="file" name="imageName"></td>
+				<td><input type="file" name="productPicture"></td>
 			<tr>
 				<td colspan="2"><input type="submit" value="등록"></td>
 			</tr>

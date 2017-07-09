@@ -3,6 +3,8 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /*
  * 김형주
  * 2017-06-27 변경
@@ -38,7 +40,8 @@ public class Product implements Serializable {
 	 * 제품 한 개에 여러 개의 제품 사진들이 포함된다. 
 	 * 제품 사진들을 저장할 Instance 변수를 선언해야 한다.
 	 *********************************************************************/
-	private List<ProductPicture> productPictureList; 
+	private String productPicture;
+	private List<MultipartFile> productPictureList; 
 
 	private String optionCategory;
 	
@@ -62,7 +65,7 @@ public class Product implements Serializable {
 	
 	public Product(String productId, String storeId, String productName, int productPrice, String productCategory,
 			String productDetail, String sellingOption, int todayProductCount, int recommendProductCount,
-			List<ProductPicture> productPictureList) {
+			List<MultipartFile> productPictureList) {
 		super();
 		this.productId = productId;
 		this.storeId = storeId;
@@ -78,7 +81,7 @@ public class Product implements Serializable {
 
 	public Product(String productId, String productName, int productPrice, String productCategory, String productDetail,
 			String sellingOption, int todayProductCount, int recommendProductCount, String storeId, Store store,
-			List<ProductPicture> productPictureList) {
+			List<MultipartFile> productPictureList) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -95,7 +98,7 @@ public class Product implements Serializable {
 	
 	public Product(String productId, String productName, int productPrice, String productCategory, String productDetail,
 			String sellingOption, int todayProductCount, int recommendProductCount, String storeId, Store store,
-			List<ProductPicture> productPictureList, String optionCategory) {
+			List<MultipartFile> productPictureList, String optionCategory) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -107,6 +110,25 @@ public class Product implements Serializable {
 		this.recommendProductCount = recommendProductCount;
 		this.storeId = storeId;
 		this.store = store;
+		this.productPictureList = productPictureList;
+		this.optionCategory = optionCategory;
+	}
+	
+	public Product(String productId, String productName, int productPrice, String productCategory, String productDetail,
+			String sellingOption, int todayProductCount, int recommendProductCount, String storeId, Store store,
+			String productPicture, List<MultipartFile> productPictureList, String optionCategory) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productCategory = productCategory;
+		this.productDetail = productDetail;
+		this.sellingOption = sellingOption;
+		this.todayProductCount = todayProductCount;
+		this.recommendProductCount = recommendProductCount;
+		this.storeId = storeId;
+		this.store = store;
+		this.productPicture = productPicture;
 		this.productPictureList = productPictureList;
 		this.optionCategory = optionCategory;
 	}
@@ -175,11 +197,11 @@ public class Product implements Serializable {
 		this.recommendProductCount = recommendProductCount;
 	}
 	
-	public List<ProductPicture> getProductPictureList() {
+	public List<MultipartFile> getProductPictureList() {
 		return productPictureList;
 	}
 
-	public void setProductPictureList(List<ProductPicture> productPictureList) {
+	public void setProductPictureList(List<MultipartFile> productPictureList) {
 		this.productPictureList = productPictureList;
 	}
 	
@@ -207,13 +229,22 @@ public class Product implements Serializable {
 		this.optionCategory = optionCategory;
 	}
 
+	public String getProductPicture() {
+		return productPicture;
+	}
+
+	public void setProductPicture(String productPicture) {
+		this.productPicture = productPicture;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
 				+ ", productCategory=" + productCategory + ", productDetail=" + productDetail + ", sellingOption="
 				+ sellingOption + ", todayProductCount=" + todayProductCount + ", recommendProductCount="
-				+ recommendProductCount + ", storeId=" + storeId + ", store=" + store + ", productPictureList="
-				+ productPictureList + ", optionCategory=" + optionCategory + "]";
+				+ recommendProductCount + ", storeId=" + storeId + ", store=" + store + ", productPicture="
+				+ productPicture + ", productPictureList=" + productPictureList + ", optionCategory=" + optionCategory
+				+ "]";
 	}
 
 	@Override

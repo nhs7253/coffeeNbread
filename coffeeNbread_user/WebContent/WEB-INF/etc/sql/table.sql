@@ -31,6 +31,7 @@ CREATE TABLE general_user (
 	user_name VARCHAR2(50) NOT NULL, /* 이름 */
 	user_birth DATE NOT NULL, /* 생년월일 */
 	user_gender VARCHAR2(50) NOT NULL, /* 성별 */
+	
 	user_email VARCHAR2(50) NOT NULL, /* 이메일 */
 	user_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
 	user_address VARCHAR2(200) NOT NULL, /* 주소 */
@@ -118,7 +119,7 @@ CREATE TABLE notice_board_contents (
 CREATE SEQUENCE notice_board_no_seq;
 
 /* 레시피 게시글 */
-/* 유저 탈퇴시에도 레시피는 남으나 매장이 없어지면 해당 레시피 글들도 삭제 */
+/* 유저 탈퇴시에도 레시피는 남으나 매장이 없어지면 해당 레시피 글들도 삭제 */   /* 매장아이디 not null에서 null로 수정- 유저가 매장이 가지고 있는 게시판에 등록하는게 아니라 그냥 등록할수 있게 하기위해 */
 CREATE TABLE recipe_board_contents (
 	recipe_board_no NUMBER PRIMARY KEY, /* 레시피 글번호 */
 	recipe_board_content CLOB NOT NULL, /* 레시피 글내용 */
@@ -128,7 +129,7 @@ CREATE TABLE recipe_board_contents (
 	recipe_board_picture VARCHAR2(300) NOT NULL, /* 레시피 사진 */
 	recommend_count NUMBER NOT NULL, /* 추천수 */
 	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
-	store_id VARCHAR2(30) NOT NULL,/* 매장아이디 */
+	store_id VARCHAR2(30),/* 매장아이디 */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id)
 );

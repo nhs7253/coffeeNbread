@@ -34,17 +34,10 @@
 			</tr>
 			<tr>
 				<th>옵션</th>
-				<td>${requestScope.product.optionCategoryString}</td>
+				<td>${requestScope.product.productCategory}</td>
 			</tr>
 			<tr>
 				<th>제품 사진</th>
-				<td>
-				<c:forEach items="${requestScope.imageName }" var="fileName">
-					<img src="/coffeeNbread_user/up_image/${fileName}" width="300px">
-				</c:forEach>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="button" value="확인"></td>
+				<td><img src="/coffeeNbread_user/up_image/${requestScope.fileName}" width="300px"></td>
 			</tr>
 		</table>

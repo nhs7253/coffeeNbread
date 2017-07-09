@@ -6,31 +6,33 @@
 <body>
 	
 
-	<h2>유저 목록</h2>
+	<h2>전체 게시판</h2>
 
 
 
-	<form action="${initParam.rootPath }/findUserListBySelectToKeywordController.do" method="post">
+	<form action="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do" method="post">
 		<select name="select">
-			<option value="userId" ${param.select eq "userId" ? "selected" :""}>아이디</option>
-			<option value="userName" ${param.select eq "userName" ? "selected" :""}>이름</option>   
+			<option value="recipeBoardTitle" ${param.select eq "recipeBoardTitle" ? "selected" :""}> 제목</option>
+			<option value="recipeBoardContent"${param.select eq "recipeBoardContent" ? "selected" :""}>내용</option>
+			<option value="recipeBoardDate" ${param.select eq "recipeBoardDate" ? "selected" :""}>최신 날짜순</option>
+			<option value="recipeBoardHits"${param.select eq "recipeBoardHits" ? "selected" :""}>조회순</option>
+			<option value="recommendCount"${param.select eq "recommendCount" ? "selected" :""}>추천순</option>
 		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	<br>
 
+
+	
 	<table class="w3-table-all">
 		<thead>
 			<tr class="w3-blue">
-				<th>아이디</th>
-				<th>이름</th>
-				<th>생년월일</th>
-				<th>성별</th>
-				<th>이메일</th>
-				<th>전화번호</th>
-				<th>주소</th>
-				<th>활동 상태</th>
-				<th>매장아이디</th>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>내용</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>추천순</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -38,18 +40,16 @@
 			<%-- ######################################################
 															조회된 item 출력 
 				###################################################### --%>
-			<c:forEach items="${requestScope.list }" var="user">
+			<c:forEach items="${requestScope.list }" var="list">
 
 				<tr>
-					<td>${user.userId}</td>
-					<td>${user.userName}</td>
-					<td>${user.birthFormat}</td>
-					<td>${user.userGender}</td>
-					<td>${user.userEmail}</td>
-					<td>${user.userPhone}</td>
-					<td>${user.userAddress}</td>
-					<td>${user.userActiveState}</td>
-					<td>${user.storeId}</td>
+					<td>${list.recipeBoardNo}</td>
+					<td>${list.recipeBoardTitle}</td>
+					<td>${list.recipeBoardContent}</td>
+					<td>${list.recipeBoardDate}</td>
+					<td>${list.recipeBoardHits}</td>
+					<td>${list.recommendCount}</td>
+					
 				</tr>
 			</c:forEach>
 
@@ -67,7 +67,7 @@
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
+			href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">첫페이지</a>
 
 
 		<!--
@@ -78,7 +78,7 @@
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
+					href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -101,7 +101,7 @@
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -119,7 +119,7 @@
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
+					href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -131,7 +131,7 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
+			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
 			페이지</a>
 
 

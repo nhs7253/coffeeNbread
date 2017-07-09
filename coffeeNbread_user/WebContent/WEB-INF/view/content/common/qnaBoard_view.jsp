@@ -24,7 +24,7 @@
 			<input type="submit" value="수정">
 		</form>
 		
-		<form action="${initParam.rootPath }/user/removeQnaBoardContents.do">
+		<form action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
 			<sec:csrfInput/>
 			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
 			<input type="hidden" name="qnaStoreId" value="${requestScope.content.qnaStoreId }"/>

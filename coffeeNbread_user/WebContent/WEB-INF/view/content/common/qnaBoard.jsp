@@ -10,7 +10,7 @@
 
 
 
-	<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do" method="post">
+	<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" method="post">
 		<select name="select">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
@@ -42,7 +42,7 @@
 
 				<tr>
 					<td>${list.qnaBoardNo}</td>
-					<td><a href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}">${list.qnaBoardTitle}</a></td>
+					<td><a href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}&qnaStoreId=${list.qnaStoreId}">${list.qnaBoardTitle}</a></td>
 					<td>${list.qnaBoardWriter}</td>
 					<td>${list.qnaBoardDateFormat}</td>
 					<td>${list.qnaBoardHits}</td>
@@ -64,7 +64,7 @@
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">첫페이지</a>
+			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">첫페이지</a>
 
 
 		<!--
@@ -75,7 +75,7 @@
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">◀</a>
+					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -98,7 +98,7 @@
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -116,7 +116,7 @@
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">▶</a>
+					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -128,7 +128,7 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeyword.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
+			href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
 			페이지</a>
 
 

@@ -280,7 +280,6 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피
 
 
 
-
 /* qna board 목록 */		
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자1', '문의글제목1', '내용 1',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자2', '문의글제목2', '내용 2',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
@@ -299,5 +298,96 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 		
 		
 		
+		select*from RECIPE_BOARD_CONTENTS
 		
-		
+		SELECT COUNT(recipe_board_no)
+				FROM recipe_board_contents
+				WHERE user_id='u-1'
+				
+				
+				
+				
+				
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.user_id='u-1'
+		And rbc.store_id=s.store_id(+)		
+				
+				
+				
+						)
+		WHERE rownum <= 100
+		)
+		WHERE rnum >= 1
+
+				
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		store_id,
+		store_name
+
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents
+		rbc, store s
+		Where rbc.user_id='u-1'
+		And rbc.store_id=s.store_id(+)
+					)
+		WHERE rownum <= 100
+		)
+		WHERE rnum >= 1

@@ -174,5 +174,3 @@ ORDER BY product_id
 							AND   p.product_id = pp.product_id
 
 
-
-
