@@ -12,6 +12,15 @@
 		+ 조회수로 공지글 조회
 		+ 모든 공지글 조회
 	 -->
+	 
+	
+    <sql id="all-column">
+	   notice_board_no,
+       notice_board_content,
+       notice_board_title,
+       notice_board_date,
+       notice_board_hits
+	</sql>
 
 	<!-- insert -->
 	<insert id="insertNoticeBoardContents" parameterType="noticeBoardContents">
@@ -31,13 +40,14 @@
 		UPDATE notice_board_contents
 		SET	   notice_board_content = #{noticeBoardContent},
 			   notice_board_title = #{noticeBoardTitle},
-			   notice_board_date = #{noticeBoardDate}
+			   notice_board_date = #{noticeBoardDate},
+			   notice_board_hits = #{noticeBoardHits}
 		WHERE  notice_board_no = #{noticeBoardNo}
 	</update>
 	
 	
 	<!-- delete -->
-	<delete id="deleteNoticeBoardContentsByNoticeBoardNo" parameterType="string">
+	<delete id="deleteNoticeBoardContentsByNoticeBoardNo" parameterType="_int">
 		DELETE FROM notice_board_contents
 		WHERE notice_board_no = #{value}
 	</delete>
@@ -91,6 +101,60 @@
 	<select id="selectNoticeBoardContentsList" resultMap="noticeBoardContents-resultmap">
 		<include refid="select-noticeBoardContents"/>
 		ORDER BY notice_board_no ASC
+	</select>
+	
+	<select id="selectNoticeBoardContentsBySelectAndKeywordPagingList" parameterType="map" resultMap="noticeBoardContents-resultmap">
+			SELECT <include refid="all-column"/>
+			FROM(
+					SELECT rownum rnum, 
+	  					   <include refid="all-column"/>
+					FROM(
+						SELECT <include refid="all-column"/>
+						FROM notice_board_contents
+						<choose>
+							<when test="select == 'title'">
+								WHERE notice_board_title LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'content'">
+								WHERE notice_board_content LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'titleAndcontent'">
+								WHERE ((notice_board_title LIKE '%'||#{keyword}||'%') OR (notice_board_content LIKE '%'||#{keyword}||'%'))
+							</when>
+							<otherwise>
+								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+							</otherwise>		
+						</choose>
+						ORDER BY notice_board_no DESC
+					) 
+					WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
+	
+	<select id="selectNoticeBoardContentsBySelectAndKeywordPagingCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM notice_board_contents
+		<choose>
+			<when test="select == 'title'">
+				WHERE notice_board_title LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'content'">
+				WHERE notice_board_content LIKE '%'||#{keyword}||'%'
+			</when>			
+			<when test="select == 'titleAndcontent'">
+				WHERE ((notice_board_title LIKE '%'||#{keyword}||'%') OR (notice_board_content LIKE '%'||#{keyword}||'%'))
+			</when>
+			<otherwise>
+				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+			</otherwise>		
+		</choose>
+	</select>
+	
+	<select id="selectNoticeBoardContentsByNoticeBoardNo" parameterType="_int" resultMap="noticeBoardContents-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM notice_board_contents
+		WHERE notice_board_no = #{noticeBoardNo}
 	</select>
 	
 </mapper>

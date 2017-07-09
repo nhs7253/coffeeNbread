@@ -1,16 +1,20 @@
 package com.cnb.vo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 /*
+ * 노현식
+ * 2017-07-04
+ * getNoticeBoardDateFormat() 추가
+ * 
  * 최민희
  * 2017-06-29 
  * 수정
- */
-/*
+ *
  * 최민희
  * 2017-06-28 생성
  * 초기 구현
@@ -24,12 +28,18 @@ public class NoticeBoardContents implements Serializable {
 	private int noticeBoardHits;
 		
 	public NoticeBoardContents() {
-		super();
 	}
+	
+
+	public NoticeBoardContents(String noticeBoardContent, String noticeBoardTitle, Date noticeBoardDate) {
+		this.noticeBoardContent = noticeBoardContent;
+		this.noticeBoardTitle = noticeBoardTitle;
+		this.noticeBoardDate = noticeBoardDate;
+	}
+
 
 	public NoticeBoardContents(int noticeBoardNo, String noticeBoardContent, String noticeBoardTitle,
 			Date noticeBoardDate) {
-		super();
 		this.noticeBoardNo = noticeBoardNo;
 		this.noticeBoardContent = noticeBoardContent;
 		this.noticeBoardTitle = noticeBoardTitle;
@@ -38,12 +48,21 @@ public class NoticeBoardContents implements Serializable {
 
 	public NoticeBoardContents(int noticeBoardNo, String noticeBoardContent, String noticeBoardTitle,
 			Date noticeBoardDate, int noticeBoardHits) {
-		super();
 		this.noticeBoardNo = noticeBoardNo;
 		this.noticeBoardContent = noticeBoardContent;
 		this.noticeBoardTitle = noticeBoardTitle;
 		this.noticeBoardDate = noticeBoardDate;
 		this.noticeBoardHits = noticeBoardHits;
+	}
+	
+	/**
+	 * sec:authentication를 통해 JSP에서 yyyy-MM-dd형식으로 DATE 타입을 문자열로 출력
+	 * <sec:authentication property="principal.noticeBoardDateFormat"/>
+	 * 처럼 getNoticeBoardDateFormat -> noticeBoardDateFormat 호출 됨(get을 제외한 맨 앞글자 소문자 - is도 가능)
+	 * @return new SimpleDateFormat("yyyy-MM-dd").format(noticeBoardDate);
+	 */
+	public String getNoticeBoardDateFormat(){
+		return new SimpleDateFormat("yyyy-MM-dd").format(noticeBoardDate);
 	}
 
 	public int getNoticeBoardNo() {
