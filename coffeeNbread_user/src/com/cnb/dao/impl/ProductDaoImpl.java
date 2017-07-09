@@ -61,7 +61,6 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("method", method);
 		info.put("methodContent", methodContent);
 		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
-
 	}
 	
 	@Override
@@ -82,6 +81,16 @@ public class ProductDaoImpl implements ProductDao {
 		return session.selectList(makeSqlId("selectProductListByCategoryNoPaging"), info);
 	}
 	
+	@Override
+	public List<Product> selectProductListByName(String storeId, String productName, int startIndex, int endIndex) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productName", productName);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectProductListByName"), info);
+	}
+
 	@Override
 	public Product selectProductByName(String storeId, String productName) {
 		Map<String, String> info = new HashMap<>();

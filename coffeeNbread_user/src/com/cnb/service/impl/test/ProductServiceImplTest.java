@@ -59,7 +59,7 @@ public class ProductServiceImplTest {
 		//제품 조회
 		System.out.println("==========조회==========");
 		
-		int page = 1;
+		int page = 2;
 		String storeId = "s-1";
 		
 		//제품 종류로 제품 조회
@@ -80,10 +80,10 @@ public class ProductServiceImplTest {
 		   	}
 		}	
 		
-		
+	/*	
 		//제품명으로 제품 조회
 		System.out.println("==========제품명==========");
-		String productName = "제품3";
+		String productName = "치즈치아바타";
 		Product p5 = service.findProductByName(storeId, productName);
 		if(p5 == null) {
 			System.out.printf("%s 이름의 제품이 없습니다.", productName);
@@ -92,7 +92,7 @@ public class ProductServiceImplTest {
 		
 		//제품 아이디로 제품 조회
 		System.out.println("==========제품 아이디==========");
-		String productId = "p-2";
+		String productId = "b-2";
 		Product p6 = service.findProductById(storeId, productId);
 		if(p6 == null) {
 			System.out.printf("%s 아이디의 제품이 없습니다.", productId);
@@ -117,7 +117,7 @@ public class ProductServiceImplTest {
 			   }
 		   }
 		}	
-		
+		*/
 		
 		//한 매장의 모든 제품 조회
 		System.out.println("==========모든 종류==========");

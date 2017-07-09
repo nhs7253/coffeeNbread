@@ -2,6 +2,8 @@ package com.cnb.dao;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cnb.vo.ProductPicture;
 
 /*
@@ -24,10 +26,10 @@ public interface ProductPictureDao {
 	
 	/**
 	 * 1개의 제품 사진 정보 update
-	 * @param productPictureVO, productPicture
+	 * @param productPicture, productId, storeId
 	 * @return 처리 개수
 	 */
-	int updateProductPictureByProductPicture(ProductPicture productPictureVO, String productPicture);
+	int updateProductPictureByProductPicture(String productPicture, String productId, String storeId);
 	
 	/**
 	 * 1개의 제품 사진 정보 delete
@@ -41,7 +43,7 @@ public interface ProductPictureDao {
 	 * @param productId, storeId
 	 * @return 조회된 제품 사진 정보들
 	 */
-	List<ProductPicture> selectProductPictureListByProductIdAndStoreId(String productId, String storeId);
+	ProductPicture selectProductPictureByProductIdAndStoreId(String productId, String storeId);
 	
 	/**
 	 * 1개의 매장에 있는 1개의 제품정보로 제품 사진 정보들 select

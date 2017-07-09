@@ -156,3 +156,21 @@ FROM (SELECT  SUM(pd.reservation_order_count + pd.product_trade_count) reservati
 	  ORDER BY pd.product_id ASC)
 GROUP BY product_id
 ORDER BY product_id
+
+
+							SELECT 
+									 DISTINCT p.product_id,
+									p.store_id,
+									p.product_name,
+									p.product_price,
+									p.product_category,
+									p.selling_option,
+									p.today_product_count,
+									p.recommend_product_count,
+									pp.product_picture
+							FROM	product p, product_picture pp
+							WHERE p.store_id = 's-1'
+							AND	  p.store_id = pp.store_id
+							AND   p.product_id = pp.product_id
+
+

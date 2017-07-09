@@ -43,18 +43,18 @@ public class ProductDaoImplTest {
 		//dao.updateProduct(new Product("p-3", "m-1", "몽블랑", 5000, "빵", "몽블랑랑", "N", 20, 20));
 		
 		System.out.println("===============List==================");
-		System.out.println(dao.selectProductListByCategory("s-1", "빵", 1, 4));		
-		System.out.println(dao.selectProductByName("s-1", "제품1"));
-		System.out.println(dao.selectProductById("s-1", "p-1"));
-		System.out.println(dao.selectProductListBySellingOption("s-1", "Y", 1, 4));
-		System.out.println(dao.selectProductList("s-1", 1, 4));
+		//System.out.println(dao.selectProductListByCategory("s-1", "빵", 1, 4));		
+		//System.out.println(dao.selectProductListByName("s-1", "제품1", 1, 4));
+		//System.out.println(dao.selectProductById("s-1", "p-1"));
+		//System.out.println(dao.selectProductListBySellingOption("s-1", "Y", 1, 4));
+		System.out.println(dao.selectProductList("s-1", 1, 15));
 		
 		System.out.println("===============Count===================");
 		System.out.println("총 제품 개수 : " + dao.selectProductListCount("s-1"));
-		System.out.println("category : " + dao.selectProductListCountByMethod("s-1", "category", "빵"));
-		System.out.println("name : " + dao.selectProductListCountByMethod("s-1", "name", "제품1"));
-		System.out.println("id : " + dao.selectProductListCountByMethod("s-1", "id", "p-2"));
-		System.out.println("sellingOption : " + dao.selectProductListCountByMethod("s-1", "sellingOption", "Y"));
+		///System.out.println("category : " + dao.selectProductListCountByMethod("s-1", "category", "빵"));
+		//System.out.println("name : " + dao.selectProductListCountByMethod("s-1", "name", "제품1"));
+		//System.out.println("id : " + dao.selectProductListCountByMethod("s-1", "id", "p-2"));
+		//System.out.println("sellingOption : " + dao.selectProductListCountByMethod("s-1", "sellingOption", "Y"));
 		System.out.println("이상없음");
 	}
      

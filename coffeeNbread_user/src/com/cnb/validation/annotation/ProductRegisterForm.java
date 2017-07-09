@@ -44,8 +44,9 @@ public class ProductRegisterForm implements Serializable {
 	private String optionCategoryString;
 	private String optionCategoryDetail;
 	
-	private ProductPicture productPicture;
-	
+
+	private String OriginalProductPicture;
+	private MultipartFile productPicture;
 	private List<MultipartFile> productPictureList;
 	
 	public String getProductId() {
@@ -126,10 +127,10 @@ public class ProductRegisterForm implements Serializable {
 	public void setOptionCategoryDetail(String optionCategoryDetail) {
 		this.optionCategoryDetail = optionCategoryDetail;
 	}
-	public ProductPicture getProductPicture() {
+	public MultipartFile getProductPicture() {
 		return productPicture;
 	}
-	public void setProductPicture(ProductPicture productPicture) {
+	public void setProductPicture(MultipartFile productPicture) {
 		this.productPicture = productPicture;
 	}
 	public List<MultipartFile> getProductPictureList() {
@@ -138,6 +139,11 @@ public class ProductRegisterForm implements Serializable {
 	public void setProductPictureList(List<MultipartFile> productPictureList) {
 		this.productPictureList = productPictureList;
 	}
+	public String getOriginalProductPicture() {
+		return OriginalProductPicture;
+	}
+	public void setOriginalProductPicture(String originalProductPicture) {
+		OriginalProductPicture = originalProductPicture;
+	}
 
-	
 }

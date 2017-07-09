@@ -301,7 +301,7 @@ CREATE TABLE option_category (
    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
 );
 CREATE SEQUENCE option_id_seq;
- 
+
 /* 옵션 상세 */
 CREATE TABLE option_detail (
    store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */

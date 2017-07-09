@@ -38,7 +38,7 @@ public class NoticeBoardContentsDaoImplTest {
 			System.out.println("이상발견");
 		}
 		*/
-		//dao.deleteNoticeBoardContentsByNoticeBoardNo("5");
+		dao.deleteNoticeBoardContentsByNoticeBoardNo("5");
   			
 		System.out.println("--------전체----------");
 		System.out.println(dao.selectNoticeBoardContentsList());
@@ -57,7 +57,7 @@ public class NoticeBoardContentsDaoImplTest {
 		System.out.println(dao.selectNoticeBoardContentsListByNoticeBoardHits(6));
 		
 		System.out.println("--------제목----------");
-		System.out.println(dao.selectNoticeBoardContentsListByNoticeBoardTitle("7"));
+		System.out.println(dao.selectNoticeBoardContentsListByNoticeBoardTitle("6"));
 		
 		System.out.println("이상없음");
 	}
