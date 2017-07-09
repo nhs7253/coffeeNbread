@@ -61,7 +61,6 @@
 
 	<!-- 매장 등록 폼 -->
 	<mvc:view-controller path="/store/store_register.do" view-name="store/store_register.tiles"/>
-	
 	<!-- 내 매장 조회 폼 -->
 	<mvc:view-controller path="/store/store_success.do" view-name="store/store_success.tiles"/>
 	
@@ -72,6 +71,12 @@
 	<mvc:view-controller path="/store/product_register.do" view-name="store/product_register.tiles"/>
 	<!-- 제품 등록 성공 폼 -->
 	<mvc:view-controller path="/store/product_success.do" view-name="store/product_success.tiles"/>
+	<!-- 제품 정보 수정 폼 -->
+	<mvc:view-controller path="/store/product_update.do" view-name="store/product_update.tiles"/>
+	<!-- 제품 목록 폼 -->
+	<mvc:view-controller path="/store/product_list.do" view-name="store/product_list.tiles"/>
+	<!-- 제품 상세 폼 -->
+	<mvc:view-controller path="/store/product_detail.do" view-name="store/product_detail.tiles"/>
 	
 	
 	<!--전체 레시피게시판 조회  -->
@@ -120,6 +125,6 @@
 	<!-- FileUpload -->
 	
 	<bean name="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>	
-		
+
 		  
 </beans>

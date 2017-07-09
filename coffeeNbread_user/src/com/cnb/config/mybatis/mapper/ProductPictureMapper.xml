@@ -24,10 +24,9 @@
 	<!-- update -->
 	<update id="updateProductPictureByProductPicture" parameterType="map">
 		UPDATE product_picture
-		SET	   product_picture = #{productPictureByVO}
+		SET	   product_picture = #{productPicture}
 		WHERE  product_id = #{productIdByVO}
 		AND    store_id = #{storeIdByVO}
-		AND	   product_picture = #{productPicture}
 	</update>
 	
 	
@@ -55,8 +54,8 @@
 		<result column="store_id" property="storeId"/>
 	</resultMap>
 
-	<!-- selectProductPictureListByProductIdAndStoreId -->
-	<select id="selectProductPictureListByProductIdAndStoreId" resultMap="productPicture-resultmap" parameterType="map">
+	<!-- selectProductPictureByProductIdAndStoreId -->
+	<select id="selectProductPictureByProductIdAndStoreId" resultMap="productPicture-resultmap" parameterType="map">
 		<include refid="select-productPicture"/>
 		WHERE product_id = #{productId} AND store_id = #{storeId}
 	</select>

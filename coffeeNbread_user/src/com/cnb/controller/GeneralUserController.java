@@ -26,6 +26,7 @@ import com.cnb.service.GeneralUserService;
 import com.cnb.validation.annotation.GeneralUserForm;
 import com.cnb.validation.annotation.GeneralUserViewForm;
 import com.cnb.vo.GeneralUser;
+import com.cnb.vo.Product;
 
 /*
  * 노현식 
@@ -182,7 +183,10 @@ public class GeneralUserController {
 		}
 		
 		Map<String, Object> map = service.findUserListBySelectToKeyword(generalUserViewForm.getSelect(), generalUserViewForm.getKeyword(), generalUserViewForm.getPage());
-				
+
+		List<Product> list = (List<Product>) map.get("list");
+		System.out.println(list);
+		
 		modelAndView.setViewName("user_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));

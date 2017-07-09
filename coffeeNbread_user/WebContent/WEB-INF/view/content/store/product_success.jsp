@@ -1,16 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body> 내 매장 정보
+<h2>내 제품 정보</h2>
 	<table>
-		<tr>
-			<th>제품 ID</th>
+			<tr>
+				<th>제품 ID</th>
 				<td>${requestScope.product.productId }</td>
 			</tr>
 			<tr>
@@ -20,10 +14,6 @@
 			<tr>
 				<th>제품 가격</th>
 				<td>${requestScope.product.productPrice}</td>
-			</tr>
-			<tr>
-				<th>제품 종류</th>
-				<td>${requestScope.product.productCategory}</td>
 			</tr>
 			<tr>
 				<th>제품 상세</th>
@@ -44,19 +34,10 @@
 			</tr>
 			<tr>
 				<th>옵션</th>
-				<td>${requestScope.product.optionCategoryString}</td>
+				<td>${requestScope.product.productCategory}</td>
 			</tr>
 			<tr>
-				<th>매장 사진</th>
-				<td>
-				<c:forEach items="${requestScope.imageName }" var="fileName">
-					<img src="/coffeeNbread_user/up_image/${fileName }" width="300px">
-				</c:forEach>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="button" value="확인"></td>
+				<th>제품 사진</th>
+				<td><img src="/coffeeNbread_user/up_image/${requestScope.fileName}" width="300px"></td>
 			</tr>
 		</table>
-</body>
-</html>

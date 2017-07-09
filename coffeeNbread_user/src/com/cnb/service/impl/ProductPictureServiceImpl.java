@@ -36,11 +36,11 @@ public class ProductPictureServiceImpl implements ProductPictureService {
 	}
 
 	@Override
-	public int modifyProductPictureByProductPicture(ProductPicture productPictureVO, String productPicture) throws ProductPictureNotFoundException {
-		if(dao.selectProductPictureListByProductPictureAndStoreId(productPicture, productPictureVO.getStoreId()) == null) {
-			throw new ProductPictureNotFoundException(String.format("제품 사진 정보가 %s 인 제품이 없습니다.", productPictureVO.getProductPicture()));
+	public int modifyProductPictureByProductPicture(String productPicture, String productId, String storeId) throws ProductPictureNotFoundException {
+		if(dao.selectProductPictureListByProductPictureAndStoreId(productPicture, storeId) == null) {
+			throw new ProductPictureNotFoundException(String.format("제품 사진 정보가 %s 인 제품이 없습니다.", productPicture));
 		}
-		return dao.updateProductPictureByProductPicture(productPictureVO, productPicture);
+		return dao.updateProductPictureByProductPicture(productPicture, productId, storeId);
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class ProductPictureServiceImpl implements ProductPictureService {
 	}
 
 	@Override
-	public List<ProductPicture> findProductPictureListByProductIdAndStoreId(String productId, String storeId) {
-		return dao.selectProductPictureListByProductIdAndStoreId(productId, storeId);
+	public ProductPicture findProductPictureByProductIdAndStoreId(String productId, String storeId) {
+		return dao.selectProductPictureByProductIdAndStoreId(productId, storeId);
 	}
 	
 	
