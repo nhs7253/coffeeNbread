@@ -10,12 +10,12 @@
 <script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#storeCategoryList").on("click",function(){
+	$("#optionCategoryList").on("click",function(){
 		
 	
 		var p2 = document.createElement("input");
-		p2.setAttribute("name","storeCategoryList");
-		var txt = document.createTextNode($("#storeCategory").val());
+		p2.setAttribute("name","optionCategoryList");
+		var txt = document.createTextNode($("#optionCategory").val());
 		p2.appendChild(txt);
 	
 		var input = document.getElementById("selectSC");
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		<table >
 			<tr >
 				<th>매장 분류</th>
-				<td><input type="text" name="storeCategoryList" id="storeCategory"><button type="button"  id="storeCategoryList">추가하기</button></td>
+				<td><input type="text" name="optionCategoryList" id="optionCategory"><button type="button"  id="optionCategoryList">추가하기</button></td>
 			</tr>
 			<tr><th></th>
 				<td id="selectSC">

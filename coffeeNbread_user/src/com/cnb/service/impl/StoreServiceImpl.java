@@ -37,7 +37,7 @@ public class StoreServiceImpl implements StoreService{
 	
 	
 	@Override
-	public void addStore(Store store,List<StoreCategory> storeCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
+	public void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
 		//storeId 중복확인
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
@@ -46,7 +46,7 @@ public class StoreServiceImpl implements StoreService{
 		storedao.insertStore(store);
 		
 		//매장 분류 추가
-		storeCategoryService.addStoreCategory(storeCategory);
+		optionCategoryService.addOptionCategory(optionCategory);
 
 		
 		//매장 사진 추가 
@@ -63,14 +63,14 @@ public class StoreServiceImpl implements StoreService{
 		
 	}*/
 	@Override
-	public void modifyStore(Store store,List<StoreCategory> storeCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException {
+	public void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException {
 		 if(storedao.selectStoreById(store.getStoreId())==null){
 			 storedao.updateStore(store);
 		 }else{
 				throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
 		 }
 		 
-		 storeCategoryService.modifyStoreCategory(storeCategory);
+		 optionCategoryService.modifyOptionCategory(optionCategory);
 		 
 		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
 		 
@@ -80,15 +80,9 @@ public class StoreServiceImpl implements StoreService{
 		
 	@Override
 	public int removeStoretById(String storeId) {
-		System.out.println("service들어옴");
-		System.out.println("storeId = "+storeId);
-		storeCategoryService.removeStoreCategoryById(storeId);
-		System.out.println("매장분류 삭제");
+		optionCategoryService.removeOptionCategoryByStoreId(storeId);
 		storePictureService.removeStorePictureById(storeId);
-		System.out.println("사진 삭제");
-
 		int cnt = storedao.deleteStoreById(storeId);
-		System.out.println("매장삭제");
 
 		return cnt;
 		

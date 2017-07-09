@@ -52,6 +52,16 @@
 	<!-- Q&A 게시글 수정 폼 -->
 	<mvc:view-controller path="/user/QnA_board_update_form.do" view-name="user/QnA_board_update_form.tiles"/>
 	
+	<!-- 공지사항 게시판 목록 -->
+	<mvc:view-controller path="/common/notice_board_list.do" view-name="common/notice_board_list.tiles"/>
+	<!-- 공지사항 내용 폼 -->
+	<mvc:view-controller path="/common/notice_board_view.do" view-name="common/notice_board_view.tiles"/>
+	<!-- 공지사항 등록 폼 -->
+	<mvc:view-controller path="/admin/notice_board_register_form.do" view-name="admin/notice_board_register_form.tiles"/>
+	<!-- 공지사항 수정 폼 -->
+	<mvc:view-controller path="/admin/notice_board_update_form.do" view-name="admin/notice_board_update_form.tiles"/>
+	
+	
 	
 	<!-- 댓글 수정 폼 -->
 	<mvc:view-controller path="/user/reply_update_form.do" view-name="user/reply_update_form.tiles"/>

@@ -33,18 +33,21 @@ public class OptionCategoryServiceImplTest {
 			System.err.println(e.getMessage());
 		}*/
 	
-		//option category 수정
+	/*	//option category 수정
 		OptionCategory oc2 = new OptionCategory(3,"s-2","대분류2");
 		
 		
 			service.modifyOptionCategory(list);
 			System.out.println("수정완료");
-			/*
+			*/
 		//option category 삭제
-			
+		/*
 			service.removeOptionCategory("s-2",9);
 			System.out.println("삭제완료");
 	
 	*/
+			service.removeOptionCategoryByStoreId("매장아이디");
+			System.out.println("완료!!!!!!!!!!!!!!!!!!!!!");
+
 	}
 }

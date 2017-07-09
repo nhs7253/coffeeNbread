@@ -1,18 +1,19 @@
 package com.cnb.validation.annotation;
 
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /*
  * 노현식
- * 2017-07-03
+ * 2017-07-08
  * 생성, 초기 구현
  */
-public class GeneralUserViewForm{
+public class NoticeBoardContentsViewForm{
 	
 	@NotEmpty
-	private String select= "userId";
+	private String select= "title";
 	private String keyword = null;
 	@NotNull
 	private int page = 1;
@@ -48,8 +49,9 @@ public class GeneralUserViewForm{
 	}
 	@Override
 	public String toString() {
-		return "GeneralUserViewForm [select=" + select + ", keyword=" + keyword + ", page=" + page + "]";
+		return "NoticeBoardContentsViewForm [select=" + select + ", keyword=" + keyword + ", page=" + page + "]";
 	}
+	
 	
 	
 }

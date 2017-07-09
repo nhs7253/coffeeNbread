@@ -17,8 +17,8 @@
 			<tr>
 				<th>매장 분류</th>
 				<td>
-				<c:forEach items="${sessionScope.store.storeCategoryList}" var="storeCategoryList">
-							${storeCategoryList}
+				<c:forEach items="${sessionScope.store.optionCategoryList}" var="optionCategoryList">
+							${optionCategoryList}
 				</c:forEach>
 				</td>
 			</tr>			

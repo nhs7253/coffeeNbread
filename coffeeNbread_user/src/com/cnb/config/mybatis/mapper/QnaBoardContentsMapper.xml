@@ -129,7 +129,7 @@
 								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
 							</otherwise>		
 						</choose>
-						ORDER BY qna_board_no
+						ORDER BY qna_board_no DESC
 					) 
 					WHERE rownum &lt;= #{endIndex}
 			)
