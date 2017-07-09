@@ -7,8 +7,17 @@
 <meta charset="UTF-8">
 <script type="text/javascript"
 	src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.js"></script>
+
+
+<script type="text/javascript">
+	
+$(document).ready(function () {
+    $("#tableid").freezeHeader({ 'height': '300px' });
+})
 	
 	
+	
+</script>
 	
 
 
@@ -76,7 +85,7 @@ td {
 
    
 
-	<table class="w3-table-all" >
+	<table class="w3-table-all"  >
 		<thead>
 			<tr class="w3-blue">
 				<th>글번호</th>
