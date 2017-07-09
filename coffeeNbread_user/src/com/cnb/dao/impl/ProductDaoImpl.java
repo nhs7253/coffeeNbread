@@ -136,5 +136,11 @@ public class ProductDaoImpl implements ProductDao {
 		return session.selectOne(makeSqlId("selectProductBySellingOption"), info);
 	}
 
-
+	@Override
+	public int deleteProductByProductList(String storeId, List<String> productIdList) {
+		Map<String, Object> info = new HashMap<String, Object>();
+		info.put("storeId", storeId);
+		info.put("productIdList", productIdList);
+		return session.delete(makeSqlId("deleteProductByProductList"), info);
+	}
 }
