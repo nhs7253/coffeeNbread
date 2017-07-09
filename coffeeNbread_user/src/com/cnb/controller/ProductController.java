@@ -1,9 +1,7 @@
 package com.cnb.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cnb.exception.DuplicatedProductIdOrProductNameException;
@@ -30,6 +27,7 @@ import com.cnb.service.ProductService;
 import com.cnb.validation.annotation.ProductFindByMethodForm;
 import com.cnb.validation.annotation.ProductFindForm;
 import com.cnb.validation.annotation.ProductRegisterForm;
+import com.cnb.validation.annotation.ProductSelectForDeleteForm;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
@@ -151,9 +149,6 @@ public class ProductController {
 			product.setRecommendProductCount(productRegisterForm.getRecommendProductCount());
 			product.setProductCategory(productRegisterForm.getOptionCategoryString());
 			
-			System.out.println(product);	//product.productPicture = 이미 있던 사진
-			System.out.println(productPicture);	//새로 선택한 사진
-			
 			service.modifyProduct(product, optionDetail, fileName);
 		} catch (DuplicatedProductPictureException e) {
 			modelAndView.setViewName("store/product_update.tiles");
@@ -241,5 +236,15 @@ public class ProductController {
 		
 		return modelAndView;
 	}	
+	
+	//삭제할 제품 선택
+	@RequestMapping("selectRemoveProductController")
+	public String selectRemoveProductController(@ModelAttribute("productSelectForDelete") @Valid ProductSelectForDeleteForm productSelectForDeleteForm, BindingResult errors) {
+		if(errors.hasErrors()) {
+			return "redirect:/findProductListController.do";
+		}
+		service.findRemoveProduct(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productSelectForDeleteForm.getProductIdList());
+		return "redirect:/findProductListController.do";
+	}
 }
 

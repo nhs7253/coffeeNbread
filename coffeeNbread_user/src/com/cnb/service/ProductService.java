@@ -13,6 +13,11 @@ import com.cnb.vo.Product;
 
 /*
  * 최민희
+ * 2017-07-09
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-07-08
  * 수정
  */
@@ -82,6 +87,13 @@ public interface ProductService {
 	 * @param product,optionDetail
 	 */
 	void removeOptionDetail(Product product,OptionDetail optionDetail);
+
+	/**
+	 * 선택한 제품들을 삭제 
+	 * @param storeId 삭제를 요청하는 매장 ID
+	 * @param productIdList 삭제 당할 제품의 ID 목록
+	 */
+	void findRemoveProduct(String storeId, List<String> productIdList);
 
 
 }

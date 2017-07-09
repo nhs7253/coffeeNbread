@@ -6,7 +6,6 @@
 		Product 테이블 관련 mapper
 		+ 제품 등록
 		+ 제품 수정
-		+ 제품 삭제
 		+ 전체 제품 수 조회
 		+ 여러 조건으로 제품 수 조회
 		+ 제품 종류로 제품 조회
@@ -15,6 +14,7 @@
 		+ 판매 여부로 제품 조회
 		+ 제품 정보로 제품 조회 (picturePicture)
 		+ 한 매장의 모든 제품 조회
+		+ 선택된 제품들 삭제
 	 -->
 	
 	<!-- insert -->
@@ -159,6 +159,7 @@
 							AND   p.product_category = #{productCategory}
 							AND	  p.store_id = pp.store_id
 							AND   p.product_id = pp.product_id
+							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
 			)
@@ -184,6 +185,7 @@
 			AND   p.product_category = #{productCategory}
 			AND	  p.store_id = pp.store_id
 			AND   p.product_id = pp.product_id
+			ORDER BY p.product_name ASC
 		]]>
 	</select>
 	
@@ -228,6 +230,7 @@
 							AND   p.product_name LIKE '%'||#{productName}||'%'
 							AND	  p.store_id = pp.store_id
 							AND   p.product_id = pp.product_id
+							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
 			)
@@ -242,6 +245,7 @@
 		AND   p.product_name = #{productName}
 		AND	  p.store_id = pp.store_id
 		AND   p.product_id = pp.product_id
+		ORDER BY p.product_name ASC
 	</select>
 	
 	<!-- selectProductById -->
@@ -251,6 +255,7 @@
 		AND   p.product_id = #{productId}
 		AND	  p.store_id = pp.store_id
 		AND   p.product_id = pp.product_id
+		ORDER BY p.product_name ASC
 	</select>
 
 	<!-- selectProductListBySellingOption -->
@@ -294,6 +299,7 @@
 							AND   p.selling_option = #{sellingOption}
 							AND	  p.store_id = pp.store_id
 							AND   p.product_id = pp.product_id
+							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
 			)
@@ -352,6 +358,7 @@
 							WHERE p.store_id = #{storeId}
 							AND	  p.store_id = pp.store_id
 							AND   p.product_id = pp.product_id
+							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
 			)
@@ -359,5 +366,21 @@
 		]]>
 	</select>
 
+	<delete id="deleteProductByProductList" parameterType="list">
+		DELETE FROM product
+		<where>
+			<choose>
+				<when test="productIdList != null and productIdList.size() > 0">
+					store_id = #{storeId} AND product_id IN
+					<foreach collection="productIdList" open="(" close=")" separator="," item="productIdList">
+						#{productIdList}
+					</foreach>
+				</when>
+				<otherwise>
+				 	1 = -1
+				</otherwise>
+			</choose>
+		</where>
+	</delete>
 
 </mapper>
