@@ -29,7 +29,7 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	 void addStore(Store store,List<StoreCategory> storeCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store
@@ -37,7 +37,7 @@ public interface StoreService {
 	 * @throws StorePictureNotFoundException 
 	 *
 	 */
-	void modifyStore(Store store,List<StoreCategory> storeCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException;
+	void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException;
 	
 	/**
 	 * 매장삭제
