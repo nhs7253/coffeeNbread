@@ -26,20 +26,20 @@ public class OptionCategoryServiceImplTest {
 		List<OptionCategory> list = new ArrayList<OptionCategory>();
 		list.add(new OptionCategory (17,"s-2","대"));
 		list.add(new OptionCategory (18,"s-2","대2"));
-		try{
+		/*try{
 			service.addOptionCategory(list);
 			System.out.println("등록 성공");
 		} catch (DuplicatedOptionCategoryNameException e) {
 			System.err.println(e.getMessage());
-		}
+		}*/
 	
-	/*	//option category 수정
+		//option category 수정
 		OptionCategory oc2 = new OptionCategory(3,"s-2","대분류2");
 		
 		
-			service.modifyOptionCategory(oc2);
+			service.modifyOptionCategory(list);
 			System.out.println("수정완료");
-		
+			/*
 		//option category 삭제
 			
 			service.removeOptionCategory("s-2",9);

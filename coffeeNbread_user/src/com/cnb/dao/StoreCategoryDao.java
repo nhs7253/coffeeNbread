@@ -41,6 +41,7 @@ public interface StoreCategoryDao {
 	int deleteStoreCategoryByNo(String storeId,int storeCategoryNo);
 	
 
+	int deleteStoreCategoryById(String storeId);
 	/**
 	 * 매장 카테고리 이름으로 1개의 매장에 있는 제품 정보 select
 	 * @param storeId, storeCategory

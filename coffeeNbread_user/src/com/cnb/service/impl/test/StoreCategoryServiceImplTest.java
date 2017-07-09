@@ -27,14 +27,14 @@ public class StoreCategoryServiceImplTest {
 			list.add(new StoreCategory(19,"커피1","s-2"));
 			list.add(new StoreCategory(20,"커피2","s-2"));
 
-			try {
+			/*try {
 				
 				service.addStoreCategory(list); 
 				// service.addProduct(p3);
 				System.out.println("등록 성공");
 			} catch (DuplicatedStoreCategorytNameException e) {
 				System.err.println(e.getMessage());
-			}
+			}*/
 			
 			
 			/*StoreCategory sc1=new StoreCategory(3, "빵집", "s-2");
@@ -55,7 +55,7 @@ public class StoreCategoryServiceImplTest {
 		*/
 			System.out.println("==매장삭제==");
 			//System.out.println(service.removeStoreCategoryByNo("s-2",4));
-			
+			service.removeStoreCategoryById("아이이");
 			System.out.println("-------------------완료 ---------------");
 		}
 }

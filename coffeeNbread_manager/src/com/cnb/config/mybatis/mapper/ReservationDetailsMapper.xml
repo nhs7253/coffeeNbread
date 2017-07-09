@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.ReservationDetailsMapper">
+	<!-- 
+		ReservationDetails 테이블 관련 mapper
+		+ 예약정보 등록
+		+ 매장의 전체 예약 수 조회
+		+ 유저의 전체 예약 수 조회
+		+ 여러 조건으로 예약 수 조회
+		+ 매장아이디 & 유저아이디로 예약정보 조회
+		+ 유저아이디로 예약정보 조회
+		+ 매장아이디 & 예약시간으로 예약정보 조회
+		+ 매장아이디로 예약정보 조회
+		+ 매장아이디 & 제품수령희망시간으로 예약정보 조회
+	 -->
+	 
+	<!-- insert -->
+	<insert id="insertReservationDetails" parameterType="reservationDetails">
+		<selectKey keyProperty="reservationNo" resultType="_int" order="BEFORE">
+			SELECT reservation_no_seq.nextval FROM dual
+		</selectKey>
+		INSERT INTO reservation_details VALUES (
+											#{reservationNo},
+											#{reservationTime},
+											#{reservationCount},
+											#{reservationConfirm},
+											#{productHopeTime},
+											#{productId},
+											#{storeId},
+											#{userId}	)
+	</insert>
+	
+	<!-- select -->
+	<sql id="select-reservationDetails">
+		SELECT  reservation_no,
+				reservation_time,
+				reservation_count,
+				reservation_confirm,
+				product_hope_time,
+				product_id,
+				store_id,
+				user_id
+		FROM	reservation_details
+	</sql>
+	 
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.ReservationDetails" id="reservationDetails-resultmap">
+		<id column="reservation_no" property="reservationNo"/>
+		<result column="reservation_time" property="reservationTime"/>
+		<result column="reservation_count" property="reservationCount"/>
+		<result column="product_hope_time" property="productHopeTime"/>
+		<result column="product_id" property="productId"/>
+		<result column="store_id" property="storeId"/>
+		<result column="user_id" property="userId"/>
+	</resultMap>
+	 
+	 
+	 <update id="updateReservationConfirmDate" parameterType="com.cnb.vo.ReservationDetails">
+		UPDATE reservation_details
+		SET reservation_no=#{reservationNo},
+		    reservation_time=#{reservationTime},
+		    reservation_count=#{reservationCount},
+		    reservation_confirm=#{reservationConfirm},
+		    reservation_hope_time=#{reservationHopeTime}
+		WHERE product_id=#{productId}
+		AND  store_id=#{storeId}    
+	</update>
+	 
+	
+	<!-- selectReservationDetailsListCountByStoreId --> 
+	<select id="selectReservationDetailsListCountByStoreId" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM   reservation_details
+		WHERE  store_id = #{value}
+	</select>
+	
+	<!-- selectReservationDetailsListCountByUserId -->
+	<select id="selectReservationDetailsListCountByUserId" parameterType="string" resultType="int">
+		SELECT COUNT(*)
+		FROM   reservation_details
+		WHERE  user_id = #{value}
+	</select>	 
+	 
+	<!-- selectReservationDetailsListCountByMethod -->
+	<select id="selectReservationDetailsListCountByMethod" parameterType="hashmap" resultType="_int">
+		<choose>
+			<when test="method == 'userId'">
+			<![CDATA[
+				SELECT COUNT(reservation_no)
+				FROM reservation_details
+				WHERE user_id = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<when test="method == 'reservationTime'">
+			<![CDATA[
+				SELECT COUNT(reservation_no)
+				FROM reservation_details
+				WHERE reservation_time = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<otherwise> <!-- method == 'productHopeTime' -->
+			<![CDATA[
+				SELECT COUNT(reservation_no)
+				FROM reservation_details
+				WHERE product_hope_time = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<!-- selectReservationDetailsListByUserIdAndStoreId -->
+	<select id="selectReservationDetailsListByUserIdAndStoreId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							user_id
+					FROM(
+							SELECT  reservation_no,
+									reservation_time,
+									reservation_count,
+									reservation_confirm,
+									product_hope_time,
+									product_id,
+									store_id,
+									user_id
+							FROM	reservation_details
+							WHERE store_id = #{storeId}
+							AND user_id = #{userId}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	 
+	<!--6.29 김형주 기능 추가  --> 
+	<!-- selectReservationDetailsListByUserId -->
+	<select id="selectReservationDetailsListByUserId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							user_id
+					FROM(
+							SELECT  reservation_no,
+									reservation_time,
+									reservation_count,
+									reservation_confirm,
+									product_hope_time,
+									product_id,
+									store_id,
+									user_id
+							FROM	reservation_details
+							WHERE user_id = #{userId}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select> 
+	 
+	 
+	<!-- selectReservationDetailsListByStoreIdAndReservationTime -->
+	<select id="selectReservationDetailsListByStoreIdAndReservationTime" resultMap="reservationDetails-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							user_id
+					FROM(
+							SELECT  reservation_no,
+									reservation_time,
+									reservation_count,
+									reservation_confirm,
+									product_hope_time,
+									product_id,
+									store_id,
+									user_id
+							FROM	reservation_details
+							WHERE store_id = #{storeId} 
+							AND reservation_time = #{reservationTime}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+
+	<!-- selectReservationDetailsListByStoreId -->
+	<select id="selectReservationDetailsListByStoreId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							user_id
+					FROM(
+							SELECT  reservation_no,
+									reservation_time,
+									reservation_count,
+									reservation_confirm,
+									product_hope_time,
+									product_id,
+									store_id,
+									user_id
+							FROM	reservation_details
+							WHERE store_id = #{storeId}
+							ORDER BY reservation_time ASC
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+	
+	<!-- selectReservationDetailsListByStoreIdAndProductHopeTime -->
+	<select id="selectReservationDetailsListByStoreIdAndProductHopeTime" resultMap="reservationDetails-resultmap" parameterType="map">
+		<![CDATA[
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							user_id
+					FROM(
+							SELECT  reservation_no,
+									reservation_time,
+									reservation_count,
+									reservation_confirm,
+									product_hope_time,
+									product_id,
+									store_id,
+									user_id
+							FROM	reservation_details
+							WHERE store_id = #{storeId} 
+							AND product_hope_time = #{productHopeTime}
+					) 
+					WHERE rownum <= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+		]]>
+	</select>
+</mapper>

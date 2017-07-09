@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.StorePictureMapper">
+
+	<!-- 
+		StorePicture 테이블 관련 mapper
+		+ 매장 사진 등록
+		+ 매장 사진 수정
+		+ 매장 사진 삭제
+		+ 매장아이디로 매장 사진 조회
+	 -->
+
+	<!-- insert -->
+	<insert id="insertStorePicture" parameterType="storePicture">
+		INSERT INTO store_picture VALUES (
+											#{storePicture},
+											#{storeId}	)
+	</insert>
+
+
+	<!-- update -->
+	<update id="updateStorePictureByStorePicture" parameterType="map">
+		UPDATE store_picture
+		SET	   store_picture = #{storePictureByVO}
+		WHERE  store_id = #{storeIdByVO}
+		AND	   store_picture = #{storePicture}
+	</update>
+	
+	
+	<!-- delete -->
+	<delete id="deleteStorePicture" parameterType="storePicture">
+		DELETE FROM store_picture
+		WHERE  store_picture = #{storePicture} 
+		AND    store_id = #{storeId}
+	</delete>
+	
+	
+	<!-- select -->
+	<sql id="select-storePicture">
+		SELECT store_picture,
+			   store_id
+		FROM   store_picture
+	</sql>
+	
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.StorePicture" id="storePicture-resultmap">
+		<id column="store_picture" property="storePicture"/>
+		<result column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<!-- selectStorePictureListByStoreId -->
+	<select id="selectStorePictureListByStoreId" resultMap="storePicture-resultmap" parameterType="string">
+		<include refid="select-storePicture"/>
+		WHERE store_id = #{storeId}
+	</select>
+	
+	<!-- selectStorePictureListByStoreIdAndStorePicture -->
+	<select id="selectStorePictureByStoreIdAndStorePicture" resultMap="storePicture-resultmap" parameterType="map">
+		<include refid="select-storePicture"/>
+		WHERE store_picture=#{storePicture} AND store_id = #{storeId}
+	</select>
+</mapper>

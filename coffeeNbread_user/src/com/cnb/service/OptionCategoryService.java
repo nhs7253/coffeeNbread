@@ -18,7 +18,7 @@ public interface OptionCategoryService {
 	 * 1개의 매장에 있는 1개의 옵션카테고리 정보 수정
 	 * @param optionCategory
 	 */
-	 int modifyOptionCategory(OptionCategory optionCategory);
+	 void modifyOptionCategory(List<OptionCategory> optionCategoryList);
 	
 	 /**
 	* 1개의 매장에 있는 1개의 옵션카테고리 정보 삭제

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.cnb.config.mybatis.mapper.OptionCategoryMapper">
+
+<!-- 옵션 카테고리 resultMap -->
+
+	<resultMap type="com.cnb.vo.OptionCategory" id="optionCategory-resultmap">
+		<id column="store_id" property="storeId"/>
+ 		<result column="option_id" property="optionId"/>
+ 		<result column="option_category" property="optionCategory"/>
+	</resultMap>
+	
+<!-- 옵션 카테고리 디테일 resultMap -->	
+	<resultMap type="com.cnb.vo.OptionCategory" id="optionCategory-optionDetailList-resultmap">
+		<collection property="optionDetailList" resultMap="com.cnb.config.mybatis.mapper.OptionDetailMapper.optionDetail-resultmap"/>
+	</resultMap>
+	
+<!--옵션 카테고리 insert  -->
+
+	<insert id="insertOptionCategory" parameterType="com.cnb.vo.OptionCategory">
+		<selectKey resultType="_int" keyProperty="optionId" order="BEFORE">
+			select option_id_seq.nextval from dual
+		</selectKey>
+		INSERT INTO option_category
+		values(
+			
+			#{optionId},
+			#{storeId},
+			#{optionCategory}
+			
+			
+			
+			)
+		
+	</insert>
+
+<!-- 옵션 카테고리 update -->
+	<update id="updateOptionCategory" parameterType="com.cnb.vo.OptionCategory">
+		UPDATE option_category
+ 		SET option_category = #{optionCategory}
+ 		WHERE store_id = #{storeId}
+ 		AND option_id = #{optionId}
+	</update>
+	
+<!-- 옵션 카테고리 delete -->
+	<delete id="deleteOptionCategory" parameterType="map">
+		DELETE FROM option_category
+ 		WHERE option_id = #{optionId} AND store_id=#{storeId}
+	</delete>
+<!-- 옵션 카테고리(이름)로 조회 -->
+	<select id="selectOptionCategoryByName" parameterType="map" resultMap="optionCategory-resultmap">
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = #{storeId}
+		AND option_category = #{optionCategory}
+	</select>
+ 	
+ 	<!-- 옵션 카테고리 (매장 ID)로 조회 -->
+ 		<select id="selectOptionCategoryListByStoreId" parameterType="map" resultMap="optionCategory-resultmap">
+		SELECT option_category,
+				store_id,
+				option_id
+		FROM option_category
+		WHERE store_id = #{storeId}
+	
+	</select>
+	<!-- 옵션카테고리 디테일 조회 -->
+	<!--
+	<select id="selectOptionDetailListByOptionCategory" parameterType="map" resultMap="optionCategory-optionDetailList-resultmap">
+		SELECT oc.option_category,
+			   oc.option_id,
+			   oc.store_id,
+			   od.option_category_detail
+		FROM option_category oc, option_detail od
+		WHERE oc.store_id = od.store_id
+		AND	  oc.option_id = od.option_id
+		AND   oc.store_id = #{storeId}
+		AND	  oc.option_id= #{optionId}
+	</select>
+ -->
+
+	<!-- 옵션아이디로 옵션이름 조회 -->
+	<select id="selectOptionCategoryByOptionId" parameterType="int" resultType="string">
+	SELECT option_category
+	FROM   option_category
+	WHERE  option_id = #{option_id}
+	</select>
+</mapper>

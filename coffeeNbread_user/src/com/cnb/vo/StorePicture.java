@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class StorePicture implements Serializable{
 
 	private String storePicture;
+	private String originalName; //원래이름
+	private String saveName; //UUID로 생성한 이름 - 파일명 중복을 피하기 위해
 	
 	/***************************************************
 	 * 부모테이블 : Store  자식 테이블 : Store_Picture

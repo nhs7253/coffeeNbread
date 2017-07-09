@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cnb.config.mybatis.mapper.UserAuthorityMapper">
+	
+	<sql id="all-column"> user_id, user_authority </sql>
+	
+	<resultMap type="UserAuthority" id="UserAuthority-resultmap">
+		<id column="user_id" property="userId"/>
+		<result column="user_authority" property="userAuthority"/>
+	</resultMap>
+	
+	<insert id="insertUserAuthority" parameterType="UserAuthority">
+		INSERT INTO user_authority VALUES(#{userId}, #{userAuthority})
+	</insert>
+	
+	<delete id="deleteUserAuthorityByUserId" parameterType="string">
+		DELETE FROM user_authority WHERE user_id = #{value}
+	</delete>
+	
+	<delete id="deleteUserAuthorityByUserAuthorityData" parameterType="UserAuthority">
+		DELETE FROM user_authority WHERE user_id = #{userId} AND user_authority = #{userAuthority}
+	</delete>
+	
+	<update id="updateUserAuthorityByUserId" parameterType="UserAuthority">
+		UPDATE user_authority 
+		SET user_authority = #{userAuthority}
+		WHERE user_id = #{userId}
+	</update>
+	
+	<select id="selectUserAuthorityList" resultMap="UserAuthority-resultmap">
+		SELECT <include refid="all-column"/> 
+		FROM user_authority
+	</select>
+	
+	<select id="selectUserAuthorityByUserId" parameterType="string" resultMap="UserAuthority-resultmap">
+		SELECT <include refid="all-column"/> 
+		FROM user_authority
+		WHERE user_id = #{userId}
+	</select>
+	
+</mapper>

@@ -35,6 +35,11 @@
 	</delete>
 	
 	
+	<!-- delete -->
+	<delete id="deleteStorePictureById" parameterType="storePicture">
+		DELETE FROM store_picture
+		WHERE store_id = #{storeId}
+	</delete>
 	<!-- select -->
 	<sql id="select-storePicture">
 		SELECT store_picture,

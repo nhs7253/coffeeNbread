@@ -27,7 +27,7 @@ public interface StorePictureDao {
 	 * @param storePictureVO, storePicture
 	 * @return 처리 개수
 	 */
-	int updateStorePictureByStorePicture(StorePicture storePictureVO, String storePicture);
+	int updateStorePictureByStorePicture(StorePicture storePictureVO);
 	
 	/**
 	 * 1개의 매장 사진 정보 delete
@@ -36,6 +36,12 @@ public interface StorePictureDao {
 	 */
 	int deleteStorePicture(StorePicture storePicture);
 	
+	/**
+	 * 1개의 매장 사진정보 delete
+	 * @param storeId
+	 * @return
+	 */
+	int deleteStorePictureById(String storeId);
 
 	/**
 	 * 1개의 매장 사진 정보들 select
