@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.SystemPropertyUtils;
 
 import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
+import com.cnb.exception.addShoppingCountZeroException;
 import com.cnb.service.ShoppingBasketProductService;
 import com.cnb.vo.ShoppingBasketProduct;
 
@@ -63,31 +63,73 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	}
 
 	/**
-	 * 세션끝나기전 제품목록으로가서 다시 장바구니목록에 추가 서비스 작업: 같은 제품을 또 몇개 추가하고싶을때 기존제품의 개수에서 추가
-	 * 똑같은 제품을 여러 유저가 샀을수 있으므로 UserId 제품을 구하면 매장아이디를 비식별로 갖고있으므로 매장아이디도 참조할수있으므로
-	 * ProductId
+	 * 유저가 매장에 들어와서 제품별로 장바구니 버튼눌렀을때 장바구니 목록에 등록 과정. // 만약 기존에 내가 장바구니 목록에 넣어둔게
+	 * 있다면 안됨. 추후 작업: 예약확인에서 유저가 매장에서 예약한 내역에서 예약확인유무 날짜가 만약 null이라면 개수 추가 만약
+	 * 예약확인유무 날짜가있다면 내가 새로등록하려는 제품개수그대로 반영.
+	 * 
+	 * @throws addShoppingCountZeroException
 	 */
 	@Override
-	public void addShoppingBasketProduct(List<ShoppingBasketProduct> shoppingBasketProductList) {
+	public void addShoppingBasketProduct(ShoppingBasketProduct shoppingBasketProduct)
+			throws addShoppingCountZeroException {
 
-		ShoppingBasketProduct selectedSbp = null;
-		for (int i = 0; i < shoppingBasketProductList.size(); i++) {
-			selectedSbp = shoppingBasketProductDao.selectShoppingBasketProductByProductIdAndUserId(
-					shoppingBasketProductList.get(i).getProductId(), shoppingBasketProductList.get(i).getUserId());
-			if (selectedSbp != null) {
-				
-				selectedSbp.setProductCount(
-						selectedSbp.getProductCount() + shoppingBasketProductList.get(i).getProductCount());
-			
-				
-				 shoppingBasketProductDao.updateShoppingBasketProductCount(selectedSbp);
+		// shoppingBasketProduct에는 userid, storeId,productStoreId(권한으로 세션처리함),
+		// 제품, 제품개수등등 세션에서 가져옴
+
+		// 유저가 매장에서 등록한 장바구니 목록들. 
+		List<ShoppingBasketProduct> sbpList = shoppingBasketProductDao
+				.selectShoppingBasketProductList(shoppingBasketProduct.getStoreId(), shoppingBasketProduct.getUserId());
+
+		if (shoppingBasketProduct.getProductCount() == 0) {
+			throw new addShoppingCountZeroException("제품 개수를 입력하십시오");
+		} else {
+			if (sbpList != null) {
+				for (int i = 0; i < sbpList.size(); i++) {
+
+					if (sbpList.get(i).getProductId().equals(shoppingBasketProduct.getProductId())) {
+
+						sbpList.get(i).setProductCount(
+								sbpList.get(i).getProductCount() + shoppingBasketProduct.getProductCount());
+						shoppingBasketProductDao.updateShoppingBasketProductCount(sbpList.get(i));
+					} else {
+						shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
+					}
+
+				}
 			} else {
-				
-						 shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProductList.get(i));
+				shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
 			}
-
 		}
+	}
 
+	/**
+	 * 장바구니에서 결제페이지 넘어갈때 총가격 부를수 있는 서비스.
+	 * 
+	 * @param shoppingBasketProduct
+	 * @return
+	 */
+	@Override
+	public int findAllProductPrice(String storeId, String userId) {
+		List<ShoppingBasketProduct> list = null;
+		int totalPrice = 0;
+		list = shoppingBasketProductDao.selectShoppingBasketProductList(storeId, userId);
+
+		for (int i = 0; i < list.size(); i++) {
+
+			totalPrice += list.get(i).getProduct().getProductPrice() * list.get(i).getProductCount();
+		}
+		return totalPrice;
+	}
+
+	/**
+	 * 장바구니에있는 제품의 가격 * 제품개수
+	 * 
+	 */
+	public int findProductPrice(String storeId, String userId, String productId) {
+
+		int price = 0;
+		shoppingBasketProductDao.selectShoppingBasketProductByProductId(userId, storeId, productId);
+		return price;
 	}
 
 }

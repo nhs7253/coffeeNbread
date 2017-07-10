@@ -57,10 +57,7 @@ public class QnaBoardContentsController {
 		if(errors.hasErrors()){
 			return "user/QnA_board_register_form.tiles"; //에러 발생
 		}
-		
-		
 		QnaBoardContents qnaBoardContents = new QnaBoardContents();
-		
 		BeanUtils.copyProperties(qnaBoardContentsForm, qnaBoardContents);
 		
 		

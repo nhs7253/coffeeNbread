@@ -9,16 +9,7 @@
 	src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.js"></script>
 
 
-<script type="text/javascript">
-	
-$(document).ready(function () {
-    $("#tableid").freezeHeader({ 'height': '300px' });
-})
-	
-	
-	
-</script>
-	
+
 
 
 
@@ -45,7 +36,7 @@ td {
 <body>
 
 
-	<h2>전체 게시판</h2>
+	<h2>전체 게시판 목록</h2>
 
 
 

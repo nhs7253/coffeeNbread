@@ -69,7 +69,42 @@ public interface ShoppingBasketProductDao {
       * @return
       */
      ShoppingBasketProduct selectShoppingBasketProductByProductIdAndUserId(String productId,String userId); 
+      
+     
     
+     /**
+      * 장바구니 목록에서 유저아이디와 , 해당매장을 들어가서 제품아이디로 장바구니객체 얻기.
+      * @param productId
+      * @return
+      */
+     ShoppingBasketProduct selectShoppingBasketProductByProductId(String userId, String storeId,String productId);
+     
+     
+     
+      /**
+       * 유저가 해당매장에서 최종적으로 담은 장바구니의 모든 제품의 총가격
+       * @param userId
+       * @param storeId
+       * @return
+       */
+    	int selectAllProductPriceByUserIdAndStoreId(String userId, String storeId);
+
+     
+        /**
+         * 
+         * 유저가 매장에서 최종적으로 담은 장바구니의 제품별 총가격
+         * @param userId
+         * @param storeId
+         * @return
+         */
+    	int selectProductPriceByUserIdAndStoreId(String userId, String storeId);
+         
+     
+     
+     
+     
+     
+     
      
      
      /*---------------------------------------------페이징 ----------------------------------------*/

@@ -34,6 +34,30 @@
 	</resultMap>
 
 
+
+
+   <!--매장안에서 들어왔다는 전제하에 유저가 매장에서 장바구니 목록안에서 넣은것중 제품아이디로 장바구니목록 한개 조회.-->
+	<select id="selectShoppingBasketProductByProductId" parameterType="map"
+		resultMap="ShoppingBasketProduct-resultmap">
+
+		select product_id,
+		       user_id,
+		       store_id,
+		       product_count,
+		        product_store_id
+		from shopping_basket_product
+		where user_id=#{userId}
+		AND store_id=#{storeId}
+		And product_id=#{productId}
+	</select>
+
+
+
+
+
+
+
+
 	<!--단순히 장바구니 테이블목록 조회 selectList -->
 	<select id="selectShoppingBasketProductList" parameterType="map"
 		resultMap="ShoppingBasketProduct-resultmap">
@@ -136,6 +160,9 @@
 		and sbp.product_id=#{productId}
 	</select>
 
+	
+	
+	
 	<!--장바구니에 넣은 제품 총가격 구하기 -->
 	<select id="selectAllProductPriceByUserIdAndStoreId"
 		parameterType="map" resultMap="ShoppingBasketProduct-product-resultmap">
@@ -147,6 +174,28 @@
 		And sbp.store_id=#{storeId}
 	</select>
 
+               
+               
+   <!--장바구니에 넣은 제품별 가격  -> 제품가격* 제품개수  구하기 -->
+	<select id="selectProductPriceByUserIdAndStoreId"
+		parameterType="map" resultMap="ShoppingBasketProduct-product-resultmap">
+		select p.product_price,
+		sbp.product_count
+		from product p, shopping_Basket_Product sbp
+		where p.product_id=sbp.product_id
+		And sbp.user_id=#{userId}
+		And sbp.store_id=#{storeId}
+	</select>   
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
                
 <!--장바구니 목록 전체 페이징 원함.-->
 <select id="selectShoppingBasketProductCountForPagingCount" parameterType="map" resultType="int">

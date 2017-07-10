@@ -1,8 +1,10 @@
 package com.cnb.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import com.cnb.exception.NullShoppingBasketProductException;
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ShoppingBasketProduct;
 
@@ -18,18 +20,17 @@ import com.cnb.vo.ShoppingBasketProduct;
  */
 public interface PaymentDetailsService {
 	
-	/**
-	 * 결제목록 목록 리스트로 조회 -유저아이디와 매장아이디로 장바구니 목록 리스트 조회
-	 * @param userId
-	 */
-	List<PaymentDetails> findPaymentDetailsListByStoreIdAndUserId(String storeId, String userId);
 
+	
+	
+	
+	
 	/**
 	 * 유저아이디와 해당 매장아이디로 조회한 장바구니 물품들 다 결제내역테이블에 등록.
 	 * 
 	 * @param shoppingBasketProduct
 	 */
-	void addPaymentDetails(List<ShoppingBasketProduct> shoppingBasketProduct);
+	void addPaymentDetails(List<ShoppingBasketProduct> shoppingBasketProduct) throws NullShoppingBasketProductException;
 
 	/**
 	 * 장바구니에 담긴 목록을 조회한 다음 제품아이디를 통해 모든 가격 보여줄떄 필요.
@@ -38,6 +39,15 @@ public interface PaymentDetailsService {
 	 */
 	int findAllProductPrice(List<ShoppingBasketProduct> shoppingBasketProduct);
 
+	HashMap<String, Object> findPaymentDetailsListByStoreIdAndUserId(int page, String storeId,
+			String userId);
+	
+	
+	
+/*----------------------------------------------------------매장 -------------------------------------------------*/	
+	
+	
+	
 	/**
 	 * 한 매장의 특정 제품의 결제 내역 조회 - 판매량에 사용
 	 * @param storeId, productId
@@ -57,11 +67,5 @@ public interface PaymentDetailsService {
 	 */
 	List<PaymentDetails> findPaymentDetailsListByStoreIdAndProductIdAndSellMethod(String storeId, String productId, String sellMethod);
 	
-      /**
-       * 유저아이디가 등록한 결제내역 목록
-       * 
-       */
-      List<PaymentDetails> findPaymentDetailsListByUserId(String userId);
-      
-      
+
 }

@@ -2,111 +2,193 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cnb.config.mybatis.mapper.PaymentDetailsMapper">
-	<!-- 
-		PaymentDetailMapper 테이블 관련 mapper
-		+ 결제 내역 추가
-		+ 결제내역들 조회
-	 -->
+	<!-- PaymentDetailMapper 테이블 관련 mapper + 결제 내역 추가 + 결제내역들 조회 -->
+
 	
-	<!-- insert -->
+	<sql id="select-paymentDetails">
+		SELECT payment_no,
+		payment_option,
+		trade_date,
+		sell_method,
+		reservation_order_count,
+		user_id,
+		product_id,
+		store_id,
+		product_trade_count
+		FROM payment_details
+	</sql>
+
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.PaymentDetails" id="paymentDetails-resultmap">
+		<id column="payment_no" property="paymentNo" />
+		<result column="payment_option" property="paymentOption" />
+		<result column="trade_date" property="tradeDate" />
+		<result column="sell_method" property="sellMethod" />
+		<result column="reservation_order_count" property="reservationOrderCount" />
+		<result column="user_id" property="userId" />
+		<result column="product_id" property="productId" />
+		<result column="store_id" property="storeId" />
+		<result column="product_trade_count" property="productTradeCount" />
+	</resultMap>
+
+	<resultMap type="PaymentDetails" id="paymentDetails-product-store-resultmap"
+		extends="paymentDetails-resultmap">
+		<association property="product"
+			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-store-productPicture-resultmap" />
+	</resultMap>
+
+    <!-- insert -->
 	<insert id="insertPaymentDetails" parameterType="com.cnb.vo.PaymentDetails">
 		<selectKey keyProperty="paymentNo" resultType="_int" order="BEFORE">
 			SELECT payment_no_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO payment_details VALUES (
-									#{paymentNo},
-									#{paymentOption},
-									#{tradeDate},
-									#{sellMethod},
-									#{reservationOrderCount},
-									#{userId},
-									#{productId},
-									#{storeId},
-									#{productTradeCount} )
-	     </insert>
-	
-	
-		<sql id="select-paymentDetails">
-			SELECT  payment_no,
-					payment_option,
-					trade_date,
-					sell_method,
-					reservation_order_count,
-					user_id,
-					product_id,
-					store_id,
-					product_trade_count
-			FROM	payment_details
-	    </sql>
+		#{paymentNo},
+		#{paymentOption},
+		#{tradeDate},
+		#{sellMethod},
+		#{reservationOrderCount},
+		#{userId},
+		#{productId},
+		#{storeId},
+		#{productTradeCount} )
+	</insert>
 
-	<!-- resultMap -->
-	<resultMap type="com.cnb.vo.PaymentDetails" id="paymentDetails-resultmap">
- 		<id column="payment_no" property="paymentNo"/>
- 		<result column="payment_option" property="paymentOption"/>
- 		<result column="trade_date" property="tradeDate"/>
-		<result column="sell_method" property="sellMethod"/>
-		<result column="reservation_order_count" property="reservationOrderCount"/>
-		<result column="user_id" property="userId"/>
-		<result column="product_id" property="productId"/>
-		<result column="store_id" property="storeId"/>
-		<result column="product_trade_count" property="productTradeCount"/>
-	</resultMap>
 
-	<resultMap type="PaymentDetails" id="paymentDetails-product-resultmap" extends="paymentDetails-resultmap">
- 		<association property="productList" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap"/>
- 	</resultMap>
+	<!--결제내역 목록 전체 페이징 원함. 매장별로도 검색가능. -->
+	<select id="countSelectPaymentDetailsByUserIdAndStoreId" parameterType="map"
+		resultType="_int">
 
-	<!-- 결제내역 조회 -->
-	<select id="selectPaymentDetailsListByUserIdAndStoreId" resultMap="paymentDetails-resultmap" parameterType="map">
-		<include refid="select-paymentDetails"/>
-		WHERE store_id = #{storeId}
-		AND user_id=#{userId}
+		SELECT COUNT(*)
+		FROM payment_details
+		where user_id=#{userId}
+		<choose>
+			<when test="storeId == null">
+				and store_id Is NuLL
+			</when>
+			<when test="storeId != null">
+				and store_id=#{storeId}
+			</when>
+			<otherwise>
+				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+			</otherwise>
+		</choose>
 	</select>
-	
-   <!-- 결제내역에서 제품별로 결제내역 조회  -->
-	<select id="selectPaymentDetailsByStoreIdAndProductId" resultMap="paymentDetails-resultmap" parameterType="map">
-		
-		<include refid="select-paymentDetails"/>
+
+
+	<!--결제내역 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회 매장아이디 있으면 매장별 조회- 매장없으면 매장없이 조회.유저의 결제내역은 어디서든 볼수있게 .-->
+	<select id="selectPaymentDetailsListByUserIdAndStoreId" resultMap="paymentDetails-product-store-resultmap"
+		parameterType="map">
+
+		SELECT payment_no,
+		store_name,
+		pp.product_picture,
+		product_name,
+		sell_method,
+		payment_option,
+		reservation_order_count,
+		product_price,
+		trade_date,
+
+		FROM(
+		SELECT rownum rnum,
+		payment_no,
+		store_name
+		pp.product_picture,
+		product_name,
+		sell_method,
+		payment_option,
+		reservation_order_count,
+		product_price,
+		trade_date,
+		FROM(
+		SELECT
+		pd.payment_no,
+		s.store_name,
+		pp.product_picture,
+		p.product_name,
+		pd.sell_method,
+		pd.payment_option,
+		pd.reservation_order_count,
+		p.product_price,
+		pd.trade_date,
+		FROM payment_details pd, product p,
+		product_picture pp,
+		WHERE pd.user_id = #{userId}
+		<choose>
+			<when test="storeId == null">
+				and store_id Is NuLL
+			</when>
+			<when test="storeId != null">
+				and store_id=#{storeId}
+			</when>
+			<otherwise>
+				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+			</otherwise>
+		</choose>
+		)
+		WHERE rownum &lt;= #{endIndex}
+		)
+		WHERE rnum >= #{startIndex}
+
+	</select>
+
+
+
+
+	<!-- 결제내역에서 제품별로 결제내역 조회 -->
+	<select id="selectPaymentDetailsByStoreIdAndProductId"
+		resultMap="paymentDetails-resultmap" parameterType="map">
+
+		<include refid="select-paymentDetails" />
 		WHERE store_id = #{storeId} AND product_id=#{productId}
 	</select>
-	
-	
-	<!--같은시각으로 결제할떄 그 시간 가져오기   -->
-	<select id="selectPaymentDetailsListByTradeDate" resultMap="paymentDetails-resultmap" parameterType="date">
-		
-		<include refid="select-paymentDetails"/>
+
+
+	<!--같은시각으로 결제할떄 그 시간 가져오기 -->
+	<select id="selectPaymentDetailsListByTradeDate" resultMap="paymentDetails-resultmap"
+		parameterType="date">
+
+		<include refid="select-paymentDetails" />
 		WHERE trade_date=#{tradeDate}
 	</select>
-	
-	
-	<select id="selectPaymentDetailsListByUserId" resultMap="paymentDetails-resultmap" parameterType="String">
-		
-		<include refid="select-paymentDetails"/>
+
+
+	<select id="selectPaymentDetailsListByUserId" resultMap="paymentDetails-resultmap"
+		parameterType="String">
+
+		<include refid="select-paymentDetails" />
 		WHERE user_id=#{userId}
 	</select>
-	
-	
+
+
 	<!-- selectPaymentDetailsListByStoreIdAndProductId -->
-	<select id="selectPaymentDetailsListByStoreIdAndProductId" resultMap="paymentDetails-resultmap" parameterType="map">
-		<include refid="select-paymentDetails"/>
+	<select id="selectPaymentDetailsListByStoreIdAndProductId"
+		resultMap="paymentDetails-resultmap" parameterType="map">
+		<include refid="select-paymentDetails" />
 		WHERE store_id = #{storeId}
-		AND   product_id = #{productId}
+		AND product_id = #{productId}
 	</select>
-	
+
 	<!-- selectPaymentDetailsListByStoreIdAndTradeDate -->
 	<!-- 한 제품 당 주문 판매량 + 거래 제품 개수는 reservation_order_count로 모아서 보여주는 걸로!!! -->
-	<select id="selectPaymentDetailsListByStoreIdAndTradeDate" resultType="hashmap" parameterType="map">
-		SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
-				product_id			
-		FROM	payment_details 
+	<select id="selectPaymentDetailsListByStoreIdAndTradeDate"
+		resultType="hashmap" parameterType="map">
+		SELECT SUM(reservation_order_count
+		+ product_trade_count) reservation_order_count,
+		product_id
+		FROM
+		payment_details
 		WHERE store_id = #{storeId}
-		AND   trade_date = #{tradeDate}
+		AND trade_date =
+		#{tradeDate}
 		GROUP BY product_id
 		ORDER BY product_id ASC
 	</select>
-	
+
 	<!-- selectPaymentDetailsListByStoreIdAndMethod -->
-	<select id="selectPaymentDetailsListByStoreIdAndMethod" resultType="hashmap" parameterType="map">
+	<select id="selectPaymentDetailsListByStoreIdAndMethod"
+		resultType="hashmap" parameterType="map">
 		<choose>
 			<when test="method == '1주일'">
 			<![CDATA[
@@ -170,9 +252,11 @@
 			</when>
 		</choose>
 	</select>
-	
+
 	<!-- selectPaymentDetailsListByStoreIdAndMethodAndStartDateAndEndDate -->
-	<select id="selectPaymentDetailsListByStoreIdAndMethodAndStartDateAndEndDate" resultType="hashmap" parameterType="map">
+	<select
+		id="selectPaymentDetailsListByStoreIdAndMethodAndStartDateAndEndDate"
+		resultType="hashmap" parameterType="map">
 		<![CDATA[
 				SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
 						product_id
@@ -184,9 +268,10 @@
 				ORDER BY product_id ASC				
 		]]>
 	</select>
-	
+
 	<!-- selectPaymentDetailsListByStoreIdAndProductIdAndSellMethod -->
-	<select id="selectPaymentDetailsListByStoreIdAndProductIdAndSellMethod" resultType="hashmap" parameterType="map">
+	<select id="selectPaymentDetailsListByStoreIdAndProductIdAndSellMethod"
+		resultType="hashmap" parameterType="map">
 		<![CDATA[
 				SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
 						product_id
@@ -196,11 +281,12 @@
 				AND	  sell_method = #{sellMethod}
 				GROUP BY product_id
 				ORDER BY product_id ASC				
-		]]>		
+		]]>
 	</select>
-	
+
 	<!-- selectPaymentDetailsListByStoreIdAndProductCategory -->
-	<select id="selectPaymentDetailsListByStoreIdAndProductCategory" resultType="hashmap" parameterType="map">
+	<select id="selectPaymentDetailsListByStoreIdAndProductCategory"
+		resultType="hashmap" parameterType="map">
 		<![CDATA[
 				SELECT  SUM(pd.reservation_order_count + pd.product_trade_count) reservation_order_count,
 						pd.product_id,
@@ -211,11 +297,12 @@
 				AND	  pd.product_id = p.product_id
 				GROUP BY pd.product_id, p.product_category
 				ORDER BY pd.product_id ASC					
-		]]>		
+		]]>
 	</select>
-	
+
 	<!-- selectPaymentDetailsListByStoreIdAndProductName -->
-	<select id="selectPaymentDetailsListByStoreIdAndProductName" resultType="hashmap" parameterType="map">
+	<select id="selectPaymentDetailsListByStoreIdAndProductName"
+		resultType="hashmap" parameterType="map">
 		<![CDATA[
 			SELECT  SUM(pd.reservation_order_count + pd.product_trade_count) reservation_order_count,
 					pd.product_id,
@@ -226,11 +313,12 @@
 			AND	  pd.product_id = p.product_id
 			GROUP BY pd.product_id, p.product_name
 			ORDER BY pd.product_id ASC				
-		]]>		
+		]]>
 	</select>
-	
+
 	<!-- selectRecommendSalesVolumeByStoreIdAndTodayDateAndMethod -->
-	<select id="selectRecommendSalesVolumeByStoreIdAndTodayDateAndMethod" resultType="hashmap" parameterType="map">
+	<select id="selectRecommendSalesVolumeByStoreIdAndTodayDateAndMethod"
+		resultType="hashmap" parameterType="map">
 		<choose>
 			<when test="method == 'productCategory'">
 			<![CDATA[
@@ -262,10 +350,11 @@
 			</otherwise>
 		</choose>
 	</select>
-	
-	<!--  ********************************************** -->
+
+	<!-- ********************************************** -->
 	<!-- selectTotalSalesVolumeFor7Days -->
-	<select id="selectTotalSalesVolumeFor7Days" resultType="hashmap" parameterType="map">
+	<select id="selectTotalSalesVolumeFor7Days" resultType="hashmap"
+		parameterType="map">
 		<![CDATA[
 				SELECT ROUND(RATIO_TO_REPORT(TRUNC(AVG(reservation_order_count))) OVER(), 2) reservation_order_count, product_id
 				FROM (SELECT SUM(pd.reservation_order_count + pd.product_trade_count) reservation_order_count,
@@ -283,9 +372,10 @@
 	 			ORDER BY product_id
 		]]>
 	</select>
-	
+
 	<!-- selectTotalSalesVolumeForAllDays -->
-	<select id="selectTotalSalesVolumeForAllDays" resultType="hashmap" parameterType="map">
+	<select id="selectTotalSalesVolumeForAllDays" resultType="hashmap"
+		parameterType="map">
 		<![CDATA[
 				SELECT ROUND(RATIO_TO_REPORT(TRUNC(AVG(reservation_order_count))) OVER(), 2) reservation_order_count, product_id
 				FROM (SELECT SUM(pd.reservation_order_count + pd.product_trade_count) reservation_order_count,

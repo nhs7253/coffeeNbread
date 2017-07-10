@@ -43,25 +43,33 @@ public class PaymentDetailsDaoImplTest {
 
 		//매장에서 총 결제내역 조회
 		System.out.println("최초 조회");
-        System.out.println(dao.selectPaymentDetailsListByUserIdAndStoreId("u-1", "s-1"));
-/*
-		// 유저입장에서 장바구니에있는걸 결제내역 테이블에 넣을것.
-		System.out.println("--추가된 결제테이블 내역--");
-		// System.out.println(dao.insertPaymentDetails(new
-		// PaymentDetails(4,"c",new Date(),"r",5,"u-1","p-1","s-1",0)));
-		// System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "c", new Date(), "f", 0, "u-1", "p-1", "s-1", 5)));
-		// System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", new Date(), "r", 0, "u-1", "p-1", "s-1", 10)));
+      /*  System.out.println(dao.selectPaymentDetailsListByUserIdAndStoreId("u-1", "s-1"));
+*/
+	
+        
+        // 유저입장에서 장바구니에있는걸 결제내역 테이블에 넣을것.
+	
+        
+
+		 
+		 
+		 
+		 
+	  /* System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "c", new Date(), "f", 0, "u-1", "p-1", "s-1", 5)));
+		 System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", new Date(), "r", 0, "u-1", "p-1", "s-1", 10)));
 		try {
-			//System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-04"), "r", 0, "u-3", "p-2", "s-1", 10)));
-			//System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-04"), "f", 2, "u-4", "p-2", "s-1", 0)));
-			//System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-04"), "f", 12, "u-4", "p-3", "s-1", 0)));
+			System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-04"), "r", 0, "u-3", "p-2", "s-1", 10)));
+			System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-04"), "f", 2, "u-4", "p-2", "s-1", 0)));
+			System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-04"), "f", 12, "u-4", "p-3", "s-1", 0)));
 			System.out.println(dao.insertPaymentDetails(new PaymentDetails(0, "p", dt.parse("2017-07-05"), "f", 10, "u-4", "p-3", "s-1", 0)));
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-*/
-		System.out.println("-------------------------");
+		}*/
+
+        
+        
+        
+		/*System.out.println("-------------------------");
 		
 		
 		System.out.println("selectPaymentDetailsListByStoreIdAndProductId");
@@ -146,7 +154,7 @@ public class PaymentDetailsDaoImplTest {
 		}
 		
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");*/
 	}
 		
      

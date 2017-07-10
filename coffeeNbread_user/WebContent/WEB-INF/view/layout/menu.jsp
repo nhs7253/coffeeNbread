@@ -41,30 +41,20 @@
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=service-qna-s-1">매장 Q&A 게시판 목록</a></li>
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
-<<<<<<< HEAD
-<li><a href="${initParam.rootPath }/findOptionCategoryController.do">메뉴 등록</a></li>
-=======
+
 
 <%-- 매장 관리자 --%>
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
 	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
 </sec:authorize>
->>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 
 
 <li><a href="${initParam.rootPath }/common//findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
-<<<<<<< HEAD
 
 
-
-<li><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do">전체 레시피 게시판 </a></li>
 <li><a href="${initParam.rootPath}/ selectStoreController.do">매장 조회</a></li>
-
-=======
-<li><a href="${initParam.rootPath}/ selectStoreController.do">매장 조회</a></li>
->>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 </ul>
 
 

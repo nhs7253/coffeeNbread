@@ -61,8 +61,8 @@ public class ShoppingBasketProductServiceImplTest {
 				new ShoppingBasketProduct("u-2","s-7","p-22",500,"s-7")
 
 				);
-		    
-		     service.addShoppingBasketProduct(list);
+		  /*  
+		     service.addShoppingBasketProduct(list);*/
 			System.out.println("------------이상 없음----------------");
 	}
 

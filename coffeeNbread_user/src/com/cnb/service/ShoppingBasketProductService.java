@@ -3,6 +3,7 @@ package com.cnb.service;
 import java.util.List;
 
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
+import com.cnb.exception.addShoppingCountZeroException;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
@@ -47,16 +48,28 @@ public interface ShoppingBasketProductService {
 	int deleteShoppingBasketProductByProductIdAndUserId(String productId, String userId);
 	
 	
+	
+	
+	void addShoppingBasketProduct(ShoppingBasketProduct shoppingBasketProduct)throws addShoppingCountZeroException;
+	
+	
+	
+   /*
+	void addShoppingBasketProductList(List<ShoppingBasketProduct> shoppingBasketProduct);
+	*/
+    
 	/**
-	 * 	  장바구니 목록에 여러 제품 추가 - 결제직전 제품목록으로 가서 다시 추가할수 있게 하기위해.
-     *                                          제품 아이디 같은걸 조회할떄는 비교해서 넣고 , 다른걸 넣을떄는 바로등록.
+	 * 장바구니에서 결제페이지로 이동 누를때 장바구니목록 리스트들 가져가서 목록에있는 전체  총가격 구하기.
 	 * @param shoppingBasketProduct
 	 * @return
 	 */
-	void addShoppingBasketProduct(List<ShoppingBasketProduct> shoppingBasketProduct);
-	
-	
-	
+	 int findAllProductPrice(String storeId,String userId);
 
-
+	 
+	 /**
+	  * 장바구니에서 제품별 제품가격 * 제품개수 구하기
+	  * 
+	  */
+	 int findProductPrice(String storeId,String userId,String productId);
+	 
 }

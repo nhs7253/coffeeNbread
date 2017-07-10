@@ -79,6 +79,12 @@
  		<collection property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
  	</resultMap>
 	
+		
+ 	<resultMap type="product" id="product-store-productPicture-resultmap" extends="product-productPicture-resultmap">
+	        
+	       	<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+  	</resultMap>
+	 
 	
 	<!-- selectProductListCount -->
 	<select id="selectProductListCount" parameterType="string" resultType="int">
