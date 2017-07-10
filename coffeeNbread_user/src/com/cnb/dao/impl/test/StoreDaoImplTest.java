@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 import com.cnb.dao.StoreDao;
 
 /*
+ * 노현식
+ * 2017-07-09
+ * 페이징 관련 테스트
+ * 
  * 이진영
  * 2017-06-30
  * 수정
@@ -53,6 +57,11 @@ public class StoreDaoImplTest {
 		System.out.println(dao.selectStore("id-5"));
 
 	*/
+		System.out.println(dao.selectStoreBySelectAndKeywordPagingList("storeName", "매장", 3, 5));
+		System.out.println(dao.selectStoreBySelectAndKeywordPagingList("storeName", "매장", 3, 5).size());
+		System.out.println(dao.selectStoreBySelectAndKeywordPagingCount("storeName", "매장"));
+		
+		System.out.println(dao.selectStroeJoinPicture("s-2"));
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}

@@ -48,6 +48,13 @@
 		DELETE FROM option_category
  		WHERE option_id = #{optionId} AND store_id=#{storeId}
 	</delete>
+	
+<!-- 옵션 카테고리 delete -->
+	<delete id="deleteOptionCategoryByStoreId" parameterType="string">
+		DELETE FROM option_category
+ 		WHERE store_id=#{storeId}
+	</delete>
+		
 <!-- 옵션 카테고리(이름)로 조회 -->
 	<select id="selectOptionCategoryByName" parameterType="map" resultMap="optionCategory-resultmap">
 		SELECT option_category,

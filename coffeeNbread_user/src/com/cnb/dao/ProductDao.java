@@ -6,6 +6,11 @@ import com.cnb.vo.Product;
 
 /*
  * 최민희
+ * 2017-07-09
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-07-01
  * 수정
  */
@@ -85,6 +90,7 @@ public interface ProductDao {
 	 * @return 조회된 제품 정보
 	 */
 	List<Product> selectProductListByName(String storeId, String productName, int startIndex, int endIndex);
+	
 	Product selectProductByName(String storeId, String productName);
 	
 	/**
@@ -116,4 +122,12 @@ public interface ProductDao {
 	 */
 	List<Product> selectProductList(String storeId, int startIndex, int endIndex);
 	
+	
+	/**
+	 * 선택한 제품들을 delete
+	 * @param storeId, productIdList
+	 * @return 삭제된 제품 개수
+	 */
+	int deleteProductByProductList(String storeId, List<String> productIdList);
+
 }

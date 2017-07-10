@@ -5,6 +5,10 @@ import java.util.List;
 import com.cnb.vo.Store;
 
 /*
+ * 노현식
+ * 2017-07-09 
+ * 페이징 관련 메서드 추가
+ * 
  * 이진영
  * 2017-06-30 추가
  * 
@@ -74,4 +78,29 @@ public interface StoreDao {
 		 * @return list
 		 */
 	 List<Store> selectOpionCategoryNDetailByIdList(String storeId);
+	 
+	 /**
+	 * 매장목록을 페이징 하여, 그 범위 만큼 내용을 반환  (paging) - content
+	 * @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress)
+	 * @param keyword 검색할 키워드
+	 * @param startIndex 시작 컬럼 번호
+	 * @param endIndex 끝 컬럼 번호
+	 * @return 지정한 수만큼의 페이징한 결과
+	 */
+	 List<Store> selectStoreBySelectAndKeywordPagingList(String select, String keyword, int startIndex, int endIndex);
+	 
+	/**
+	* 매장목록을 페이징 하여, 매장목록 페이징을 위한 검색 결과 개수를 리턴 (paging) - count
+	* @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress)
+	* @param keyword 검색할 키워드
+	* @return int 검색 결과 개수
+	*/
+	int selectStoreBySelectAndKeywordPagingCount(String select, String keyword);
+	
+	/**
+	 * 해당 아이디로 매장과 그 사진을 반환
+	 * @param storeId 찾을 매장 ID
+	 * @return 사진과 해당 매장 객체
+	 */
+	Store selectStroeJoinPicture(String storeId);
 }

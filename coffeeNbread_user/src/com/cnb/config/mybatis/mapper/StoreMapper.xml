@@ -4,6 +4,11 @@
 
 
  <!-- 
+ 	노현식
+ 	2017-07-09
+ 	페이징 및 상세 관련 쿼리 추가
+ 	<sql id="all-column"> 추가
+ 
  	이진영
  	2017-06-30
  	내매장 조회 추가
@@ -16,6 +21,20 @@
  	2017-06-26
  	초기 구현 
  -->
+	 <sql id="all-column">
+	   store_id,
+       store_name,
+       store_intro,
+       store_phone,
+       store_address,
+       store_email,
+       store_hits,
+       store_open,
+       store_close,
+       store_permission
+	</sql>
+ 
+ 
  <!-- 매장 resultMap -->
  	<resultMap type="com.cnb.vo.Store" id="store-resultmap">
  		<id column="store_id" property="storeId"/>
@@ -37,6 +56,7 @@
 		<result column="option_id" property="optionId"/>
 		<result column="option_category" property="optionCategory"/>
  	</collection>
+ 	
  	<collection property="optionDetailList" ofType="com.cnb.vo.OptionDetail">
  		<result column="product_id" property="productId"/>
 		<result column="option_id" property="optionId"/>
@@ -55,6 +75,7 @@
  <resultMap type="com.cnb.vo.Store" id="store-storeCategory-resultmap" extends="store-resultmap">
  	<collection property="storeCategoryList" resultMap="com.cnb.config.mybatis.mapper.StoreCategoryMapper.StoreCategory-resultmap"/>
  </resultMap>
+ 
  <!--매장 등록 Store insert  -->
 	<insert id="insertStore" parameterType="com.cnb.vo.Store">
 		INSERT INTO store
@@ -180,8 +201,68 @@
 		WHERE store_id=#{storeId}
 	</delete>
 	
+	<select id="selectStoreBySelectAndKeywordPagingList" parameterType="map" resultMap="store-resultmap">
+			SELECT <include refid="all-column"/>
+			FROM(
+					SELECT rownum rnum, 
+	  					   <include refid="all-column"/>
+					FROM(
+						SELECT <include refid="all-column"/>
+						FROM store
+						<choose>
+							<when test="select == 'storeName'">
+								WHERE store_name LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'storeIntro'">
+								WHERE store_intro LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'storeAddress'">
+								WHERE store_address LIKE '%'||#{keyword}||'%'
+							</when>
+							<otherwise>
+								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+							</otherwise>		
+						</choose>
+						ORDER BY store_name
+					) 
+					WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
 	
+	<select id="selectStoreBySelectAndKeywordPagingCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+		FROM store
+		<choose>
+			<when test="select == 'storeName'">
+				WHERE store_name LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'storeIntro'">
+				WHERE store_intro LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'storeAddress'">
+				WHERE store_address LIKE '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
+			</otherwise>		
+		</choose>
+	</select>
 	
-	    
-	
+	<select id="selectStroeJoinPicture" resultMap="store-storePicture-resultmap" parameterType="string">
+		SELECT  s.store_id,
+				s.store_name,
+				s.store_intro,
+				s.store_phone,
+				s.store_address,
+				s.store_email,
+				s.store_hits,
+				s.store_open,
+				s.store_close,
+				sp.store_picture
+		FROM store s,store_picture sp
+		WHERE s.store_id = sp.store_id(+)
+		AND s.store_id=#{value}
+	</select>
+
 </mapper>

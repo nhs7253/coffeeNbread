@@ -7,7 +7,7 @@
 <h1>게시글 수정</h1><hr><br>
 
 
-<form action="${initParam.rootPath }/user/modifyQnaBoardContentsController.do">
+<form action="${initParam.rootPath }/user/modifyQnaBoardContentsController.do" method="post">
 	<sec:csrfInput/>
 	제목 : <input type="text" name="qnaBoardTitle" value="${requestScope.content.qnaBoardTitle }"> 비밀글<input type="checkbox" name="qnaBoardSecret" value="Y"${requestScope.content.qnaBoardSecret eq "Y" ? "checked='checked'" :""}><br>
 	내용<br>

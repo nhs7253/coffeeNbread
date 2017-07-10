@@ -2,6 +2,21 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style type="text/css">
+table, td {
+   border: 1px solid black;
+}
+
+table {
+   width: 500px;
+   border-collapse: collapse;
+}
+
+td {
+   padding: 5px; /*td 간 간격 */
+}
+</style>
+
 <h2>제품 목록</h2> 
 
 <form action="${initParam.rootPath }/findProductListByMethod.do" method="post">
@@ -22,29 +37,36 @@
 
 <p>
 
-<table>
-	<thead>
-		<tr>
-			<th>종류&nbsp;&nbsp;</th>
-			<th>&nbsp;제품명&nbsp;&nbsp;</th>
-			<th>가격&nbsp;&nbsp;</th>
-			<th>판매여부&nbsp;&nbsp;</th>
-		</tr>
-	</thead>
-	<tbody>
-		<%-- 전체 제품 목록 --%>
-		<c:forEach items="${requestScope.list }" var="product">
+<form action="${initParam.rootPath }/selectRemoveProductController.do" method="post">
+	<sec:csrfInput/><%-- csrf 토큰 --%>
+	<table>
+		<thead>
+			<tr>
+				<th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;제품명&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;가격&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;판매여부&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%-- 전체 제품 목록 --%>
+			<c:forEach items="${requestScope.list }" var="product">
 			<tr>
 				<td>${product.productCategory }&nbsp;</td>
 				<td><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
 				<td>${product.productPrice }&nbsp;&nbsp;</td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
+				<td><input type="checkbox" name="productIdList" value="${product.productId}"></td>
 			</tr>
-		</c:forEach>
-	</tbody>
-</table>
+			</c:forEach>
+		</tbody>
+	</table>
+	<input type="submit" value="삭제" />
+</form>
 
 <p>
+
 <c:if test="${requestScope.method ne null}">
 	<%--######################################################
 				종류/이름/판매여부로 조회할 때 페이징 처리
@@ -99,6 +121,7 @@
 	<!-- 마지막 페이지로 이동 -->
 	<a href="${initParam.rootPath }/findProductListByMethod.do?page=${requestScope.pageBean.totalPage}&method=${requestScope.method }&methodContent=${requestScope.methodContent }&storeId=${requestScope.storeId}">마지막페이지</a>
 </c:if>
+
 <c:if test="${requestScope.method eq null}">
 	<%--######################################################
 						전체 조회 페이징 처리

@@ -52,6 +52,16 @@
 	<!-- Q&A 게시글 수정 폼 -->
 	<mvc:view-controller path="/user/QnA_board_update_form.do" view-name="user/QnA_board_update_form.tiles"/>
 	
+	<!-- 공지사항 게시판 목록 -->
+	<mvc:view-controller path="/common/notice_board_list.do" view-name="common/notice_board_list.tiles"/>
+	<!-- 공지사항 내용 폼 -->
+	<mvc:view-controller path="/common/notice_board_view.do" view-name="common/notice_board_view.tiles"/>
+	<!-- 공지사항 등록 폼 -->
+	<mvc:view-controller path="/admin/notice_board_register_form.do" view-name="admin/notice_board_register_form.tiles"/>
+	<!-- 공지사항 수정 폼 -->
+	<mvc:view-controller path="/admin/notice_board_update_form.do" view-name="admin/notice_board_update_form.tiles"/>
+	
+	
 	
 
 		
@@ -75,9 +85,13 @@
 	<mvc:view-controller path="/store/store_register.do" view-name="store/store_register.tiles"/>
 	<!-- 내 매장 조회 폼 -->
 	<mvc:view-controller path="/store/store_success.do" view-name="store/store_success.tiles"/>
-	
 	<!-- 매장 수정 폼 -->
 	<mvc:view-controller path="/store/store_modify.do" view-name="store/store_modify.tiles"/>
+	<!-- 매장 목록 조회 -->
+	<mvc:view-controller path="/common/store_lsit.do" view-name="common/store_lsit.tiles"/>
+	<!-- 매장 상세 페이지 -->
+	<mvc:view-controller path="/common/store_view.do" view-name="common/store_view.tiles"/>
+	
 	
 	<!-- 제품 등록 폼 -->
 	<mvc:view-controller path="/store/product_register.do" view-name="store/product_register.tiles"/>

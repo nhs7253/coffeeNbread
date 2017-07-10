@@ -1,7 +1,9 @@
 package com.cnb.dao.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class NoticeBoardContentsDaoImpl implements NoticeBoardContentsDao {
 	}
 
 	@Override
-	public int deleteNoticeBoardContentsByNoticeBoardNo(String noticeBoardNo) {
+	public int deleteNoticeBoardContentsByNoticeBoardNo(int noticeBoardNo) {
 		return session.delete(makeSqlId("deleteNoticeBoardContentsByNoticeBoardNo"), noticeBoardNo);
 	}
 
@@ -62,6 +64,29 @@ public class NoticeBoardContentsDaoImpl implements NoticeBoardContentsDao {
 	@Override
 	public List<NoticeBoardContents> selectNoticeBoardContentsList() {
 		return session.selectList(makeSqlId("selectNoticeBoardContentsList"));
+	}
+
+	@Override
+	public List<NoticeBoardContents> selectNoticeBoardContentsBySelectAndKeywordPagingList(String select, String keyword, int startIndex, int endIndex) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		input.put("startIndex", String.valueOf(startIndex));
+		input.put("endIndex", String.valueOf(endIndex));	
+		return session.selectList(makeSqlId("selectNoticeBoardContentsBySelectAndKeywordPagingList"), input);
+	}
+
+	@Override
+	public int selectNoticeBoardContentsBySelectAndKeywordPagingCount(String select, String keyword) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		return session.selectOne(makeSqlId("selectNoticeBoardContentsBySelectAndKeywordPagingCount"), input);
+	}
+
+	@Override
+	public NoticeBoardContents selectNoticeBoardContentsByNoticeBoardNo(int noticeBoardNo) {
+		return session.selectOne(makeSqlId("selectNoticeBoardContentsByNoticeBoardNo"), noticeBoardNo);
 	}
 
 }

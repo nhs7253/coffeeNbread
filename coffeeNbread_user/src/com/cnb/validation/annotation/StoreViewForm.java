@@ -6,13 +6,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /*
  * 노현식
- * 2017-07-03
+ * 2017-07-09
  * 생성, 초기 구현
  */
-public class GeneralUserViewForm{
+public class StoreViewForm{
 	
 	@NotEmpty
-	private String select= "userId";
+	private String select= "storeName";
 	private String keyword = null;
 	@NotNull
 	private int page = 1;
@@ -22,7 +22,7 @@ public class GeneralUserViewForm{
 	}
 	public void setSelect(String select) {
 		if(select == null || select.trim().isEmpty()){
-			this.select = "userId";
+			this.select = "storeName";
 			return;
 		}
 		this.select = select;
@@ -48,8 +48,9 @@ public class GeneralUserViewForm{
 	}
 	@Override
 	public String toString() {
-		return "GeneralUserViewForm [select=" + select + ", keyword=" + keyword + ", page=" + page + "]";
+		return "StoreViewForm [select=" + select + ", keyword=" + keyword + ", page=" + page + "]";
 	}
+	
 	
 	
 }

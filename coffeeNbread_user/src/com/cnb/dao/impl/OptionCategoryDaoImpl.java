@@ -64,6 +64,11 @@ public class OptionCategoryDaoImpl implements OptionCategoryDao{
 	public String selectOptionCategoryByOptionId(int optionId) {
 		return session.selectOne(makeSqlId("selectOptionCategoryByOptionId"), optionId);
 	}
+	@Override
+	public int deleteOptionCategoryByStoreId(String storeId) {
+		return session.delete(makeSqlId("deleteOptionCategoryByStoreId"), storeId);
+
+	}
 	
 	
 }

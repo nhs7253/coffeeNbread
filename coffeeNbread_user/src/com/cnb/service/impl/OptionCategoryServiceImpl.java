@@ -77,6 +77,11 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	public String findOptionCategoryByOptionId(int optionId) {
 		return dao.selectOptionCategoryByOptionId(optionId);
 	}
+
+	@Override
+	public int removeOptionCategoryByStoreId(String storeId) {
+		return dao.deleteOptionCategoryByStoreId(storeId);
+	}
 	
 	
 }

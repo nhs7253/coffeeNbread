@@ -39,6 +39,9 @@
 <li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do">Q&A 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=service-qna-s-1">매장 Q&A 게시판 목록</a></li>
+<li><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do">공지사항 게시판 목록</a></li>
+<li><a href="${initParam.rootPath }/common/findStorePagingListController.do">매장 목록</a></li>
+
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
 

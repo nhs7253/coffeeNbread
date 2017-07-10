@@ -169,4 +169,9 @@ public class ProductServiceImpl implements ProductService {
 
 		}
 	}
+
+	@Override
+	public void findRemoveProduct(String storeId, List<String> productIdList) {
+		dao.deleteProductByProductList(storeId, productIdList);
+	}
 }

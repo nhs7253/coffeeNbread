@@ -41,17 +41,16 @@ td {
 				<%-- ######################################################
 																조회된 item 출력 
 					###################################################### --%>
-				<c:forEach items="${requestScope.list }" var="preference">
-	
+				<c:forEach items="${requestScope.list }" var="list">
 					<tr>
-						<td>${preference.store.storeId}</td>
-						<td>${preference.store.storeName}</td>
-						<td>${preference.store.storePhone}</td>
-						<td>${preference.store.storeAddress}</td>
-						<td>${preference.store.storeEmail}</td>
-						<td>${preference.store.storeHits}</td>
-						<td>${preference.store.storeOpenFormat}</td>
-						<td>${preference.store.storeCloseFormat}</td>
+						<td>${list.store.storeId}</td>
+						<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
+						<td>${list.store.storePhone}</td>
+						<td>${list.store.storeAddress}</td>
+						<td>${list.store.storeEmail}</td>
+						<td>${list.store.storeHits}</td>
+						<td>${list.store.storeOpenFormat}</td>
+						<td>${list.store.storeCloseFormat}</td>
 					</tr>
 				</c:forEach>
 	

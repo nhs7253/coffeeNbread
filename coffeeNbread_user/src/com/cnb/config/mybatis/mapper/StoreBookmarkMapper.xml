@@ -59,7 +59,7 @@
 		WHERE user_id = #{value}
 	</select>
 	
-	<select id="selectStoreBookmarkByStoreBookmark" parameterType="StoreBookmark" resultType="StoreBookmark">
+	<select id="selectStoreBookmarkByStoreBookmark" parameterType="StoreBookmark" resultMap="StoreBookmark-resultmap">
 		SELECT <include refid="all-column"/>
 		FROM store_bookmark
 		WHERE user_id = #{userId} AND store_id = #{storeId}

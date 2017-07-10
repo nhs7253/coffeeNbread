@@ -13,11 +13,11 @@
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#storeCategoryList").on("click", function() {
+		$("#optionCategoryList").on("click", function() {
 
 			var p2 = document.createElement("input");
-			p2.setAttribute("name", "storeCategoryList");
-			var txt = document.createTextNode($("#storeCategory").val());
+			p2.setAttribute("name", "optionCategoryList");
+			var txt = document.createTextNode($("#optionCategory").val());
 			p2.appendChild(txt);
 
 			var input = document.getElementById("selectSC");
@@ -51,10 +51,10 @@
 				<th>매장 분류</th>
 				<td><c:forEach items="${sessionScope.store.storeCategoryList}"
 						var="storeCategoryList">
-						<input type="text" name="storeCategoryList" id="storeCategory"
-							value="${storeCategoryList}">
+						<input type="text" name="optionCategoryList" id="optionCategory"
+							value="${optionCategoryList}">
 					</c:forEach>
-					<button type="button" id="storeCategoryList">추가하기</button>
+					<button type="button" id="optionCategoryList">추가하기</button>
 				</td>
 			<tr>
 				<th></th>
