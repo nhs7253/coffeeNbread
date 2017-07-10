@@ -38,9 +38,22 @@ public class UserAndStoreServiceimpl implements UserAndStoreService{
 	
 	@Override
 	public void addStoreBookmark(StoreBookmark storeBookmark) throws UserAndStoreServiceException {
+		
+		StoreBookmark storeBookmarkInfo = storeBookmarkDao.selectStoreBookmarkByStoreBookmark(storeBookmark);
+		
+		System.out.println("addStoreBookmark = " + storeBookmark);
+		System.out.println("북마크 존재 여부  = " + storeBookmarkInfo != null);
+		System.out.println(storeBookmarkDao.selectStoreBookmarkByStoreBookmark(storeBookmark));
+		System.out.println("============================");
+		
+		
+
+		
 		if(storeBookmarkDao.selectStoreBookmarkByStoreBookmark(storeBookmark) != null){
+			System.out.println("aaaaaaa");
 			throw new UserAndStoreServiceException("이미 즐겨찾기 하신 매장입니다.");
 		}
+		System.out.println("bbbb");
 		storeBookmarkDao.insertStoreBookmark(storeBookmark);
 	}
 

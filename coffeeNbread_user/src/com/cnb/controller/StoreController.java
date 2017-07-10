@@ -101,7 +101,6 @@ public class StoreController {
 				imageName.add(mFile.getOriginalFilename());
 				mFile.transferTo(new File(destDir, mFile.getOriginalFilename())); // 예외
 				// 던짐
-
 			}
 		}
 
@@ -270,6 +269,7 @@ public class StoreController {
 		
 		modelAndView.setViewName("common/store_view.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("store", store);
+		
 		
 		session.setAttribute("storeInfo", store);
 		return modelAndView;

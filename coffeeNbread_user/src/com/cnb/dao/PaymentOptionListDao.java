@@ -1,5 +1,7 @@
 package com.cnb.dao;
 
+import java.util.List;
+
 import com.cnb.vo.PaymentOptionList;
 
 /*
@@ -30,6 +32,10 @@ public interface PaymentOptionListDao {
 	 */
 	int deletePaymentOptionListByPaymentId(String paymentId);
 	
-	
+	/**
+	 * 결제 내역의 전체 목록을 조회
+	 * @return List<PaymentOptionList> 전체 결제 내역 목록
+	 */
+	List<PaymentOptionList> paymentOptionListAll();
 	
 }

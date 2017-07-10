@@ -356,8 +356,8 @@
 									pp.product_picture
 							FROM	product p, product_picture pp
 							WHERE p.store_id = #{storeId}
-							AND	  p.store_id = pp.store_id
-							AND   p.product_id = pp.product_id
+							AND	  p.store_id = pp.store_id(+)
+							AND   p.product_id = pp.product_id(+)
 							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
