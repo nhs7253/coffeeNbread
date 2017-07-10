@@ -51,6 +51,7 @@ public class ShoppingBasketProductController {
 			return "store/product_register.tiles"; // 추후에 제품조회할떄의 뷰로 이동. 임시로
 													// index.tile로 바꿔둠.
 		}
+		
 		ShoppingBasketProduct shoppingBasketProduct = new ShoppingBasketProduct();
 		// 객체에서 담은 것 카피 해서 넣기.
 		BeanUtils.copyProperties(shoppingBasketProductForm, shoppingBasketProduct);
@@ -76,16 +77,17 @@ public class ShoppingBasketProductController {
 	@RequestMapping("/user/ViewShoppingBasketProductController")
 	public ModelAndView ViewShoppingBasketProductController(
 			@ModelAttribute("shoppingBasketProduct") @Valid ShoppingBasketProductForm shoppingBasketProductForm,
-			BindingResult errors, HttpServletRequest request, ModelMap map) {
+			BindingResult errors, HttpServletRequest request) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		// 요청파라미터를 잘못불렀을때 일어나는 보여줄 view
 		if (errors.hasErrors()) {
-			modelAndView.setViewName("store/.tiles"); ///// -------------------------------매장에서
-														///// 제품목록을 보여줄 페이지.
+			modelAndView.setViewName("store/product_list.tiles");
+			///// -------------------------------매장에서 제품목록을 보여줄 페이지.
 			return modelAndView; // 에러 발생
 		}
+		
 		// 유저와 매장으로 내가 등록한 장바구니 목록들 불러오기.
 		ShoppingBasketProduct shoppingBasketProduct = new ShoppingBasketProduct();
 		BeanUtils.copyProperties(shoppingBasketProductForm, shoppingBasketProduct);
@@ -93,17 +95,14 @@ public class ShoppingBasketProductController {
 		// shoppingBasketProductForm에서 받은 매장 정보를 - 전달할 shoppingBasektProduct에
 		// 세팅함.
 		shoppingBasketProduct.setStoreId(shoppingBasketProductForm.getStoreId());
-
+    
 		// 유저가 매장에서 등록한 장바구니 목록들 찾기.
 		List<ShoppingBasketProduct> shoppingBasketProductList = service.findShoppingBasketProductList(
 				shoppingBasketProduct.getStoreId(),
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
-
-		modelAndView.setViewName("user/ViewShoppingBasketProduct.tiles"); // 성공시
-																			// 이동할
-																			// view설정.
-
-		modelAndView.addObject("List", shoppingBasketProductList);
+            System.out.println("shoppingBasketProductList:"+shoppingBasketProductList);
+		modelAndView.setViewName("user/ViewShoppingBasketProduct.tiles"); // 성공시 이동할 view설정.	
+		modelAndView.addObject("list", shoppingBasketProductList);
 
 		return modelAndView;
 
@@ -130,7 +129,7 @@ public class ShoppingBasketProductController {
 		// 웹에서 수정한 개수반영되게함. 
 		shoppingBasketProduct.setProductCount(shoppingBasketProductForm.getProductCount());
   
-     
+         
 		try {
 			service.modifyShoppingBasketProduct(shoppingBasketProduct);
 		} catch (NoUpdateShoppingBasketProductException e) {

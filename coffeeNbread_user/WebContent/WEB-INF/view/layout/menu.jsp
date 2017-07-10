@@ -42,8 +42,13 @@
 <li><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do">공지사항 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">매장 목록</a></li>
 
+
+
+<li><a href="${initParam.rootPath }/user/ViewShoppingBasketProductController.do">장바구니 목록</a></li>
+
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 
+<li><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do">전체 레시피 게시판 </a></li>
 
 
 <%-- 매장 관리자 --%>
@@ -53,11 +58,10 @@
 </sec:authorize>
 
 
-<li><a href="${initParam.rootPath }/common//findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
 
 
-<li><a href="${initParam.rootPath}/ selectStoreController.do">매장 조회</a></li>
+<li><a href="${initParam.rootPath}/selectStoreController.do">매장 조회</a></li>
 </ul>
 
 
