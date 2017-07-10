@@ -161,25 +161,48 @@ public class ProductController {
 	
 	
 	//제품 목록 조회
-	@RequestMapping("findProductListController")
-	public ModelAndView findProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		if(errors.hasErrors()) {
-			modelAndView.setViewName("index.tiles");
+		@RequestMapping("findProductListController")
+		public ModelAndView findProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
+			
+			ModelAndView modelAndView = new ModelAndView();
+			
+			if(errors.hasErrors()) {
+				modelAndView.setViewName("index.tiles");
+				return modelAndView;
+			}
+
+			Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
+			
+			
+			
+			modelAndView.setViewName("store/product_list.tiles");
+			modelAndView.addObject("list", map.get("list"));
+			modelAndView.addObject("pageBean", map.get("pageBean"));
+			modelAndView.addObject("storeId", productFindForm.getStoreId());
+			
 			return modelAndView;
 		}
-
-		Map<String, Object> map = service.findProductList(productFindForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		
-		modelAndView.setViewName("store/product_list.tiles");
-		modelAndView.addObject("list", map.get("list"));
-		modelAndView.addObject("pageBean", map.get("pageBean"));
-		modelAndView.addObject("storeId", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		
-		return modelAndView;
-	}
+	
+//	//제품 목록 조회
+//	@RequestMapping("findProductListController")
+//	public ModelAndView findProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
+//		
+//		ModelAndView modelAndView = new ModelAndView();
+//		
+//		if(errors.hasErrors()) {
+//			modelAndView.setViewName("index.tiles");
+//			return modelAndView;
+//		}
+//
+//		Map<String, Object> map = service.findProductList(productFindForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+//		
+//		modelAndView.setViewName("store/product_list.tiles");
+//		modelAndView.addObject("list", map.get("list"));
+//		modelAndView.addObject("pageBean", map.get("pageBean"));
+//		modelAndView.addObject("storeId", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+//		
+//		return modelAndView;
+//	}
 
 	//제품 목록 조회 - 제품 종류/제품명/판매여부
 	@RequestMapping("findProductListByMethod")
