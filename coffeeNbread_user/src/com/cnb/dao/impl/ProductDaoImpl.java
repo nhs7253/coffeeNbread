@@ -69,7 +69,7 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("storeId", storeId);
 		info.put("productCategory", productCategory);
 		info.put("startIndex", String.valueOf(startIndex));
-		info.put("endIndex", String.valueOf(endIndex));
+		info.put("endIndex", String.valueOf(endIndex));	
 		return session.selectList(makeSqlId("selectProductListByCategory"), info);
 	}
 

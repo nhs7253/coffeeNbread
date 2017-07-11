@@ -6,13 +6,15 @@
 
 </head>
 <body>
-	
-
+	 
 	<h1>매장 상세</h1><hr><br>
 	
 		매장명 : <input type="text" value="${requestScope.store.storeName }" disabled><br>
+		<c:if test="${!empty requestScope.store.storePictureList[0].storePicture }">
+			<img src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }" alt="" /><br />
+		</c:if>
 		매장 소개 :<br>
-		 <textarea rows="20" cols="40" disabled>
+		 <textarea rows="10" cols="60" disabled>
 		 	${requestScope.store.storeIntro }
 		 </textarea> <br />
 		매장 주소 : <input type="text" value="${requestScope.store.storeAddress }" disabled><br>
@@ -31,6 +33,12 @@
 			</form>
 		</sec:authorize>
 		
+		<form action="${initParam.rootPath }/findProductListController.do" method="post">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
+			<input type="submit" value="제품 목록">
+		</form>
+				
 		
 
 	

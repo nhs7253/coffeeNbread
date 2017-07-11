@@ -157,8 +157,8 @@
 							FROM	product p, product_picture pp
 							WHERE p.store_id = #{storeId}
 							AND   p.product_category = #{productCategory}
-							AND	  p.store_id = pp.store_id
-							AND   p.product_id = pp.product_id
+							AND	  p.store_id = pp.store_id(+)
+							AND   p.product_id = pp.product_id(+)
 							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
@@ -228,8 +228,8 @@
 							FROM	product p, product_picture pp
 							WHERE p.store_id = #{storeId}
 							AND   p.product_name LIKE '%'||#{productName}||'%'
-							AND	  p.store_id = pp.store_id
-							AND   p.product_id = pp.product_id
+							AND	  p.store_id = pp.store_id(+)
+							AND   p.product_id = pp.product_id(+)
 							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
@@ -253,8 +253,8 @@
 		<include refid="select-product-productPicture"/>
 		WHERE p.store_id = #{storeId} 
 		AND   p.product_id = #{productId}
-		AND	  p.store_id = pp.store_id
-		AND   p.product_id = pp.product_id
+		AND	  p.store_id = pp.store_id(+)
+		AND   p.product_id = pp.product_id(+)
 		ORDER BY p.product_name ASC
 	</select>
 
@@ -297,8 +297,8 @@
 							FROM	product p, product_picture pp
 							WHERE p.store_id = #{storeId} 
 							AND   p.selling_option = #{sellingOption}
-							AND	  p.store_id = pp.store_id
-							AND   p.product_id = pp.product_id
+							AND	  p.store_id = pp.store_id(+)
+							AND   p.product_id = pp.product_id(+)
 							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
@@ -312,8 +312,8 @@
 		<include refid="select-product-productPicture"/>
 		WHERE p.store_id = #{storeId} 
 		AND   p.product_picture = #{productPicture}
-		AND	  p.store_id = pp.store_id
-		AND   p.product_id = pp.product_id
+		AND	  p.store_id = pp.store_id(+)
+		AND   p.product_id = pp.product_id(+)
 	</select>
 	
 	
@@ -356,8 +356,8 @@
 									pp.product_picture
 							FROM	product p, product_picture pp
 							WHERE p.store_id = #{storeId}
-							AND	  p.store_id = pp.store_id
-							AND   p.product_id = pp.product_id
+							AND	  p.store_id = pp.store_id(+)
+							AND   p.product_id = pp.product_id(+)
 							ORDER BY p.product_name ASC
 					) 
 					WHERE rownum <= #{endIndex}
