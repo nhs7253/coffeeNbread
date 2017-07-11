@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-</head>
-<body>
-	
 <style type="text/css">
 table, td {
    border: 1px solid black;
@@ -19,31 +16,38 @@ td {
    padding: 5px; /* //td 간 간격 */
 }
 </style>
-	<h2>공지사항 게시판</h2>
+
+</head>
+<body>
+
+	<h2>매장 목록</h2>
+	
 
 
-
-	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post">
+	<form action="${initParam.rootPath }/userManagementListController.do" method="post">
 		<select name="select">
-			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>이름</option>
-			<option value="storeIntro" ${param.select eq "storeIntro" ? "selected" :""}>소개</option>
-			<option value="storeAddress" ${param.select eq "storeAddress" ? "selected" :""}>주소</option>
-			<option value="storeCategory" ${param.select eq "storeCategory" ? "selected" :""}>카테고리</option>
+			<option value="userId" ${param.select eq "userId" ? "selected" :""}>유저 아이디</option>
+			<option value="userName" ${param.select eq "userName" ? "selected" :""}>유저 이름</option> 
+			<option value="storeId" ${param.select eq "storeId" ? "selected" :""}>매장 아이디</option>
+			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>매장 이름</option>   
 		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
 	<br>
 
-
-	
 	<table class="w3-table-all">
 		<thead>
 			<tr class="w3-blue">
-				<th>매장이름</th>
-				<th>주소</th>
-				<th>카테고리</th>
-				<th>여는 시간</th>
-				<th>닫는 시간</th>
+				<th>유저 아이디</th>
+				<th>유저 이름</th>
+				<th>매장아이디</th>
+				<th>매장 이름</th>
+				<th>매장 전화번호</th>
+				<th>매장 주소</th>
+				<th>매장 이메일</th>
+				<th>매장 카테고리</th>
+				<th>매장 허가 여부</th>
+				<th>매장 관리</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -54,11 +58,24 @@ td {
 			<c:forEach items="${requestScope.list }" var="list">
 
 				<tr>
-					<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.storeId}">${list.storeName}</a></td>
-					<td>${list.storeAddress}</td>
-					<td>${list.storeCategory}</td>
-					<td>${list.storeOpenFormat}</td>
-					<td>${list.storeCloseFormat}</td>
+					<td>${list.userId}</td>
+					<td>${list.userName}</td>
+					<td>${list.storeId}</td>
+					<td>${list.store.storeName }</td>
+					<td>${list.store.storePhone }</td>
+					<td>${list.store.storeAddress }</td>
+					<td>${list.store.storeEmail }</td>
+					<td>${list.store.storeCategory }</td>
+					<td>${list.store.storePermission }</td>
+					<td>
+						<form action="${initParam.rootPath }/storeApproveController.do" method="post">
+							<input type="hidden" value="${list.userId }" name="userId"/>
+							<input type="hidden" value="${list.storeId }" name="storeId"/>
+							<input type="hidden" value="${list.store.storePermission }" name="storePermission"/>
+							<input type="submit" value="변경" />
+							<sec:csrfInput/><%-- csrf 토큰 --%>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 
@@ -76,7 +93,7 @@ td {
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findStorePagingListController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
+			href="${initParam.rootPath }/userManagementListController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
 
 
 		<!--
@@ -87,7 +104,7 @@ td {
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
+					href="${initParam.rootPath }/userManagementListController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -110,7 +127,7 @@ td {
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/common/findStorePagingListController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/userManagementListController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -128,7 +145,7 @@ td {
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
+					href="${initParam.rootPath }/userManagementListController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -140,15 +157,8 @@ td {
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
+			href="${initParam.rootPath }/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
 
-		<p/>
-		
-		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
-		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
-			<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
-				<sec:csrfInput/>
-				<input type="submit" value="등록">
-			</form>
-		</sec:authorize>
+
+

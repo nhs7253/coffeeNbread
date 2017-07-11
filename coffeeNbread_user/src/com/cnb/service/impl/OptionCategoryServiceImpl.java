@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnb.dao.OptionCategoryDao;
 import com.cnb.dao.OptionDetailDao;
@@ -25,6 +26,7 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	private OptionDetailDao detailDao;
 	
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void addOptionCategory(List<OptionCategory> optionCategoryList) throws DuplicatedOptionCategoryNameException {
 		List<OptionCategory> optionCategoryList2 = dao.selectOptionCategoryListByStoreId(optionCategoryList.get(0).getStoreId());
 				

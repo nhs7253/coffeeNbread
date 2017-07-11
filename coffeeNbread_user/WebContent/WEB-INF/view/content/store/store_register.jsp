@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,17 +15,21 @@
 <script type="text/javascript"
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#optionCategoryList").on("click", function() {
 
-			var p2 = document.createElement("input");
-			p2.setAttribute("name", "optionCategoryList");
-			p2.setAttribute("class", "form-control");
-			var txt = document.createTextNode($("#optionCategory").val());
-			p2.appendChild(txt);
-
-			var input = document.getElementById("selectSC");
-			input.appendChild(p2);
+$(document).ready(function(){
+	$("#optionCategoryList").on("click",function(){
+		
+		
+		var p2 = document.createElement("input");
+		p2.setAttribute("name","optionCategoryList");
+		p2.setAttribute("class", "form-control");
+		var txt = document.createTextNode($("#optionCategory").val());
+		p2.appendChild(txt);
+	
+		var input = document.getElementById("selectSC");
+		input.appendChild(p2);
+		
+	
 
 		});//end of storeCategoryList
 
@@ -55,8 +63,17 @@
 			</tr>
 		</table>
 
-		<table>
-			<tr class="form-group">
+
+		
+		
+		결제 방식 선택<br />
+		<c:forEach items="${requestScope.paymentOptionList }" var="list">
+			<input type="checkbox" name="paymentIdList" value="${list.paymentId }"/>${list.paymentMethod }&nbsp;&nbsp;&nbsp;
+		</c:forEach>
+		
+	
+		<table>	
+			<tr  class="form-group">
 				<th>매장 ID</th>
 
 				<td><div class="col-xs-10"><input type="text" name="storeId" class="form-control"></div></td>
@@ -97,10 +114,11 @@
 			</tr>
 
 			<tr>
-				<td colspan="2"><button type="submit"
+				<td colspan="2">
+				<button type="submit"
 						class="btn btn-default btn-circle">
 						<i class="glyphicon glyphicon-ok"></i> 등록
-					</button></td>
+				</button></td>
 			</tr>
 		</table>
 

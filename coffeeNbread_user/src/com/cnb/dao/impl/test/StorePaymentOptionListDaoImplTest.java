@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.cnb.dao.StorePaymentOptionListDao;
+import com.cnb.vo.StorePaymentOptionList;
 
 /*
  * 김형주
@@ -33,6 +34,7 @@ public class StorePaymentOptionListDaoImplTest {
 		/*System.out.println("----------카드와 현금이 모두 가능했던 s-1 매장을  현금기능 삭제 ---------");
 		System.out.println(dao.deleteStorePaymentOptionListByStoreIdAndPaymentId("s-1", "p")); */
 		
+		System.out.println(dao.insertStorePaymentOptionList(new StorePaymentOptionList("erreg","M")));
 		System.out.println("이상없음");
 	}
      

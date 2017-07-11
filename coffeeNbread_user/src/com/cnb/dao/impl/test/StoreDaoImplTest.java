@@ -57,11 +57,11 @@ public class StoreDaoImplTest {
 		System.out.println(dao.selectStore("id-5"));
 
 	*/
-		System.out.println(dao.selectStoreBySelectAndKeywordPagingList("storeName", "매장", 3, 5));
-		System.out.println(dao.selectStoreBySelectAndKeywordPagingList("storeName", "매장", 3, 5).size());
-		System.out.println(dao.selectStoreBySelectAndKeywordPagingCount("storeName", "매장"));
+		System.out.println("1 =" + dao.selectStoreBySelectAndKeywordPagingList("storeName", "매장", 3, 5));
+		System.out.println("2 =" + dao.selectStoreBySelectAndKeywordPagingList("storeName", "매장", 3, 5).size());
+		System.out.println("3 =" + dao.selectStoreBySelectAndKeywordPagingCount("storeName", "매장"));
 		
-		System.out.println(dao.selectStroeJoinPicture("s-2"));
+		System.out.println("4 = " + dao.selectStroeJoinPicture("s-2"));
 
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}

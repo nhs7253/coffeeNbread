@@ -3,6 +3,8 @@
 <mapper namespace="com.cnb.config.mybatis.mapper.GeneralUserMapper">
 
 	<sql id="all-column"> user_id, user_pw, user_name, user_birth, user_gender, user_email, user_phone, user_address, user_active_state, store_id </sql>
+	
+	
 
 	<resultMap type="GeneralUser" id="GeneralUser-resultmap">
 		<id column="user_id" property="userId"/>
@@ -15,6 +17,14 @@
 		<result column="user_address" property="userAddress"/>
 		<result column="user_active_state" property="userActiveState"/>
 		<result column="store_id" property="storeId"/>
+	</resultMap>
+	
+	<resultMap type="GeneralUser" id="GeneralUser-Store-resultmap" extends="GeneralUser-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
+	</resultMap>
+	
+	<resultMap type="GeneralUser" id="GeneralUser-UserAuthority-resultmap" extends="GeneralUser-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.UserAuthorityMapper.UserAuthority-resultmap"/>
 	</resultMap>
 	
 	<insert id="insertGeneralUser" parameterType="GeneralUser">
@@ -52,6 +62,12 @@
 		UPDATE general_user 
 		SET user_active_state = #{userActiveState}
 		WHERE user_id = #{userId}
+	</update>
+	
+	<update id="updateGeneralUserByUserIdToStoreId" parameterType="map">
+		UPDATE general_user 
+		SET store_id = #{storeId}
+		WHERE user_id = #{userId}		
 	</update>
 	
 	<select id="selectGeneralUserList" resultMap="GeneralUser-resultmap">
@@ -118,6 +134,115 @@
 			</when>				
 		</choose>
 
+	</select>
+	
+	
+	<select id="selectGeneralUserListBySelectToKeywordJoinStoreContent" parameterType="map" resultMap="GeneralUser-Store-resultmap">
+		 SELECT user_id,
+				user_pw,
+				user_name,
+				user_birth,
+				user_gender,
+				user_email,
+				user_phone,
+				user_address,
+				user_active_state,
+				store_id,
+				store_name,
+				store_intro,
+				store_phone,
+				store_address,
+				store_email,
+				store_category,
+				store_hits,
+				store_open,
+				store_close,
+				store_permission
+			FROM(
+				 SELECT rownum rnum, 
+						user_id,
+						user_pw,
+						user_name,
+						user_birth,
+						user_gender,
+						user_email,
+						user_phone,
+						user_address,
+						user_active_state,
+						store_id,
+						store_name,
+						store_intro,
+						store_phone,
+						store_address,
+						store_email,
+						store_category,
+						store_hits,
+						store_open,
+						store_close,
+						store_permission
+					FROM(
+						 SELECT user_id,
+								user_pw,
+								user_name,
+								user_birth,
+								user_gender,
+								user_email,
+								user_phone,
+								user_address,
+								user_active_state,
+								gu.store_id,
+								store_name,
+								store_intro,
+								store_phone,
+								store_address,
+								store_email,
+								store_category,
+								store_hits,
+								store_open,
+								store_close,
+								store_permission
+						FROM general_user gu, store s
+						WHERE gu.store_id = s.store_id
+						<choose>
+							<when test="select == 'userName'">
+								AND user_name LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'userId'">
+								AND user_id LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="select == 'storeName'">
+								AND store_name LIKE '%'||#{keyword}||'%'
+							</when>	
+							<when test="select == 'storeId'">
+								AND store_id LIKE '%'||#{keyword}||'%'
+							</when>	
+						</choose>
+						ORDER BY store_permission, user_name
+					) 
+					WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
+	
+	<select id="selectGeneralUserListBySelectToKeywordJoinStoreCount" parameterType="map" resultType="_int">
+
+		SELECT COUNT(*)
+		FROM general_user gu, store s
+		WHERE gu.store_id = s.store_id
+		<choose>
+			<when test="select == 'userName'">
+				AND user_name LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'userId'">
+				AND user_id LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'storeName'">
+				AND store_name LIKE '%'||#{keyword}||'%'
+			</when>	
+			<when test="select == 'storeId'">
+				AND store_id LIKE '%'||#{keyword}||'%'
+			</when>	
+		</choose>
 	</select>
 	
 </mapper>
