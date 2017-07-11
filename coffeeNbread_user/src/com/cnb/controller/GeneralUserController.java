@@ -69,6 +69,7 @@ public class GeneralUserController {
 	 */
 	public String addUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors){
 		if(errors.hasErrors()){
+			System.err.println();
 			return "user/add_user_form.tiles"; //에러 발생 시 회원 가입 페이지로 이동
 		}
 		
