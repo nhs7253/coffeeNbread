@@ -49,12 +49,13 @@
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
 	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
+	<li><a href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내 제품 목록 조회</a></li>
 </sec:authorize>
 
 
-<li><a href="${initParam.rootPath }/common//findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
+<li><a href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
-<li><a href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내 제품 목록 조회</a></li>
+
 
 </ul>
 

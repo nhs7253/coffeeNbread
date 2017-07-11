@@ -6,10 +6,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
+<%-- <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap-theme.min.css">
 <script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
+ --%>
+<%--  <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/demo.css">
+ <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/paper.dashboard.css">
+ <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
+ <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/themify-icons.css">
+
+<script src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.min.js"></script>
+<script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
+ --%>
+  <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/demo.css">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/material-dashboard.css">  
+ <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
+
+ <script src="${initParam.rootPath }/resource/bootstrap/js/jquery-3.1.0.min.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/demo.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/material.min.js"></script>
+  <script src="${initParam.rootPath }/resource/bootstrap/js/material-dashboard.js"></script> 
+ <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 .whole {

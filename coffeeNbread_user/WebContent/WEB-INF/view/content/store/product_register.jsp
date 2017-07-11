@@ -14,23 +14,23 @@ $(document).ready(function(){
 	<form action="${initParam.rootPath }/addProductController.do" method="post" enctype="multipart/form-data">
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 		<table>
-			<tr>
+			<tr class="form-group">
 				<th>제품 ID</th>
-				<td><input type="text" name="productId"></td>
+				<td><input type="text" name="productId" class="form-control"></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>제품 이름</th>
-				<td><input type="text" name="productName"></td>
+				<td><input type="text" name="productName" class="form-control"></td>
 			</tr>
-			<tr>
+			<tr >
 				<th>제품 가격</th>
 				<td><input type="number" min="100" name="productPrice"></td>
 			</tr>
-			<tr>
+			<tr >
 				<th>제품 상세</th>
 				<td><textarea name="productDetail" rows="5" cols="50"></textarea></td>
 			</tr>
-			<tr>
+			<tr >
 				<th>판매 여부</th>
 				<td>
 				<input type="checkbox" name="sellingOption" value="Y">판매함
