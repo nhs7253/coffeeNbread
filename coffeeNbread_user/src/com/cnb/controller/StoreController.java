@@ -77,6 +77,7 @@ public class StoreController {
 
 		System.out.println("store = " + store);
 		
+		String storeCategory = "";
 	
 		  // optionCategory 등록
 		  List<String> optionCategoryList = new ArrayList<String>();
@@ -85,9 +86,12 @@ public class StoreController {
 			  optionCategoryList.add(storeRegisterForm.getOptionCategoryList().get(i));
 			 OptionCategory optionCategoryList2 = new OptionCategory(optionCategoryList.get(i),storeRegisterForm.getStoreId());
 			 oclist.add(optionCategoryList2);
+			 storeCategory += optionCategoryList2.getOptionCategory() +", ";
 		  }
-		 
-	
+		store.setStoreCategory(storeCategory.substring(0, storeCategory.length()-1));
+		
+		System.out.println("addStoreController = " + store);
+		
 		// storePicture 등록
 		String destDir = request.getServletContext().getRealPath("/up_image");
 
@@ -218,21 +222,20 @@ public class StoreController {
 	 */
 	@RequestMapping("removeStoreController")
 	public String removeStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
-			BindingResult errors, HttpServletRequest request) {
+			BindingResult errors, HttpSession session) {
 
-		HttpSession session = request.getSession();
-
-		Store store = (Store) session.getAttribute("store");
+		
+		Store store = (Store) session.getAttribute("storeInfo");
 
 		service.removeStoretById(store.getStoreId());
-		session.removeAttribute("store");
+		session.removeAttribute("storeInfo");
 		return "store/store_register.tiles";
 
 	}
 	
 	/**
 	 * 매장 목록을 페이징 하여 보여주는 컨드롤러
-	 * @param storeViewForm (select 검색 종류 -매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), keyword 검색 내용, 볼 페이지) 
+	 * @param storeViewForm (select 검색 종류 -매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), keyword 검색 내용, 카테고리(storeCategory)) 
 	 * @param errors 요청파라미터 에러
 	 * @return 반환 경로
 	 */

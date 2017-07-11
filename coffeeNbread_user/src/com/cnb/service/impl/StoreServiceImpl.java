@@ -156,6 +156,7 @@ public class StoreServiceImpl implements StoreService{
 		Store store = storedao.selectStroeJoinPicture(storeId);
 		int hits = store.getStoreHits();
 		store.setStoreHits(hits+1);
+				
 		storedao.updateStore(store);
 		return store;
 	}

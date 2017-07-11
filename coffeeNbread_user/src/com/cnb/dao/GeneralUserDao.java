@@ -3,6 +3,7 @@ package com.cnb.dao;
 import java.util.List;
 
 import com.cnb.vo.GeneralUser;
+import com.cnb.vo.Store;
 
 /*
  * 노현식
@@ -100,4 +101,22 @@ public interface GeneralUserDao {
 	 * @return int - 검색 결과 개수
 	 */
 	int selectGeneralUserListBySelectToKeywordCount(String select, String keyword);
+	
+	/**
+	 * GeneralUser의 목록을 Store와 외래 조인 후 검색 옵션 별로 keyword로 부분일치 검색하여, 페이징 후 결과를 반환 (페이징)
+	 * @param select 검색 카테고리 userId, userName, storeId, storeName
+	 * @param keyword 검색할 키워드
+	 * @param startIndex 페이징 시작 컬럼
+	 * @param endIndex 페이징 끝 컬럼
+	 * @return List<GeneralUser> - 페이징 된 검색 결과
+	 */
+	List<GeneralUser> selectGeneralUserListBySelectToKeywordJoinStoreContent(String select, String keyword, int startIndex, int endIndex);
+	
+	/**
+	 * GeneralUser의 목록을 Store와 외래 조인 후 검색 옵션 별로 keyword로 검색하여 그 총 수를 반환 (페이징)
+	 * @param select 검색 카테고리 userId, userName, storeId, storeName
+	 * @param keyword 검색할 키워드
+	 * @return int - 검색 결과 개수
+	 */
+	int selectGeneralUserListBySelectToKeywordJoinStoreCount(String select, String keyword);
 }

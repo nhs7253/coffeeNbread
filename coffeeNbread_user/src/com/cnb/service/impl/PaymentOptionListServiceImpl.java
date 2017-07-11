@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cnb.dao.PaymentOptionListDao;
 import com.cnb.service.PaymentOptionListService;
 import com.cnb.vo.PaymentOptionList;
 
@@ -17,24 +18,21 @@ import com.cnb.vo.PaymentOptionList;
 public class PaymentOptionListServiceImpl implements PaymentOptionListService{
 	
 	@Autowired
-	private PaymentOptionListService paymentOptionListService;
+	private PaymentOptionListDao paymentOptionListDao;
 
 	@Override
-	public int addPaymentOptionList(PaymentOptionList paymentOptionList) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void addPaymentOptionList(PaymentOptionList paymentOptionList) {
+		paymentOptionListDao.insertPaymentOptionList(paymentOptionList);
 	}
 
 	@Override
-	public int removePaymentOptionListByPaymentId(String paymentId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void removePaymentOptionListByPaymentId(String paymentId) {
+		paymentOptionListDao.deletePaymentOptionListByPaymentId(paymentId);
 	}
 
 	@Override
 	public List<PaymentOptionList> findpaymentOptionList() {
-		// TODO Auto-generated method stub
-		return null;
+		return paymentOptionListDao.paymentOptionListAll();
 	}
 	
 
