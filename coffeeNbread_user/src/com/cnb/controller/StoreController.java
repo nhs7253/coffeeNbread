@@ -32,16 +32,23 @@ import com.cnb.exception.DuplicatedStoreIdException;
 import com.cnb.exception.DuplicatedStorePictureException;
 import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.exception.UserManageException;
+import com.cnb.service.PaymentOptionListService;
 import com.cnb.service.StoreService;
 import com.cnb.validation.annotation.NoticeBoardContentsViewForm;
 import com.cnb.validation.annotation.StoreRegisterForm;
 import com.cnb.validation.annotation.StoreViewForm;
+import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
 
-/*이진영
+/*
+ * 노현식
+ * 2017-07-11
+ * StorePaymentOptionList 관련 업데이트
+ * 
+ * 이진영
  * 2017-07-06
  * storeCategory controller 추가
  * optionCategory controller 추가
@@ -55,7 +62,10 @@ import com.cnb.vo.StorePicture;
 public class StoreController {
 
 	@Autowired
-	private StoreService service;
+	private StoreService storeService;
+	 
+	@Autowired
+	private PaymentOptionListService paymentOptionListService;
 
 	/**
 	 * Store 매장 전체를 등록하는 Controller
@@ -71,11 +81,12 @@ public class StoreController {
 		if (errors.hasErrors()) {
 			return "store/store_register.tiles";
 		}
+		
+		
+		System.out.println("storeRegisterForm.getPaymentIdList() = " + storeRegisterForm.getPaymentIdList());
 
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
-
-		System.out.println("store = " + store);
 		
 		String storeCategory = "";
 	
@@ -88,9 +99,9 @@ public class StoreController {
 			 oclist.add(optionCategoryList2);
 			 storeCategory += optionCategoryList2.getOptionCategory() +", ";
 		  }
-		store.setStoreCategory(storeCategory.substring(0, storeCategory.length()-1));
-		
-		System.out.println("addStoreController = " + store);
+		  
+		store.setStoreCategory(storeCategory.substring(0, storeCategory.length()-2));
+
 		
 		// storePicture 등록
 		String destDir = request.getServletContext().getRealPath("/up_image");
@@ -119,7 +130,7 @@ public class StoreController {
 		HttpSession session = request.getSession();
 		session.setAttribute("store", store);
 		try {
-			service.addStore(store, oclist, storePicture);
+			storeService.addStore(store, oclist, storePicture, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), storeRegisterForm.getPaymentIdList());
 		} catch (DuplicatedStoreIdException | DuplicatedOptionCategoryNameException
 				| DuplicatedStoreCategorytNameException | DuplicatedStorePictureException e) {
 			System.out.println(e.getMessage());
@@ -203,7 +214,7 @@ public class StoreController {
 
 		// 수정하는 서비스 호출
 		try {
-			service.modifyStore(store, oclist, storePictureList);
+			storeService.modifyStore(store, oclist, storePictureList);
 		} catch (DuplicatedStoreIdException | StorePictureNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -227,7 +238,7 @@ public class StoreController {
 		
 		Store store = (Store) session.getAttribute("storeInfo");
 
-		service.removeStoretById(store.getStoreId());
+		storeService.removeStoretById(store.getStoreId());
 		session.removeAttribute("storeInfo");
 		return "store/store_register.tiles";
 
@@ -247,7 +258,7 @@ public class StoreController {
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 		
-		Map<String, Object> map = service.findStorePagingList(storeViewForm.getSelect(), storeViewForm.getKeyword(), storeViewForm.getPage());
+		Map<String, Object> map = storeService.findStorePagingList(storeViewForm.getSelect(), storeViewForm.getKeyword(), storeViewForm.getPage());
 		
 		modelAndView.setViewName("common/store_list.tiles");
 		modelAndView.addObject("list", map.get("list"));
@@ -268,7 +279,7 @@ public class StoreController {
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 	
-		Store store = service.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
+		Store store = storeService.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
 		
 		modelAndView.setViewName("common/store_view.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("store", store);
@@ -277,5 +288,16 @@ public class StoreController {
 		session.setAttribute("storeInfo", store);
 		return modelAndView;
 	}
-
+	
+	/**
+	 * 플랫폼에서 지원하는 결제 목록을 매장 등록 폼에 뿌려주는 컨트롤러
+	 * @return 반환 경로 및 뿌려줄 객체
+	 */
+	@RequestMapping("/user/callStoreRegisterController")
+	public ModelAndView callStoreRegisterController(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("store/store_register.tiles"); 
+		modelAndView.addObject("paymentOptionList", paymentOptionListService.findpaymentOptionList());
+		return modelAndView;
+	}
 }

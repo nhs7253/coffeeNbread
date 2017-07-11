@@ -119,4 +119,12 @@ public class GeneralUserDaoImpl implements GeneralUserDao{
 		return session.selectOne(makeSqlId("selectGeneralUserListBySelectToKeywordJoinStoreCount"), input);
 	}
 
+	@Override
+	public int updateGeneralUserByUserIdToStoreId(String userId, String storeId) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("userId", userId);
+		input.put("storeId", storeId);
+		return session.update(makeSqlId("updateGeneralUserByUserIdToStoreId"), input);
+	}
+
 }

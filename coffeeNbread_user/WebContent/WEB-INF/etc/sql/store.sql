@@ -6,6 +6,7 @@ CREATE TABLE store (
 	store_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
 	store_address VARCHAR2(200) NOT NULL, /* 주소 */
 	store_email VARCHAR2(50) NOT NULL, /* 이메일 */
+	store_category VARCHAR2(200), /* 매장분류 */
 	store_hits NUMBER NOT NULL, /* 조회수 */
 	store_open DATE NOT NULL, /* 여는 시간 */
 	store_close DATE NOT NULL, /* 닫는 시간 */

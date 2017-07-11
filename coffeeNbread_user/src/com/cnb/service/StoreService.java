@@ -32,7 +32,7 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store
@@ -104,4 +104,5 @@ public interface StoreService {
 	  * @return Store 방문할 매장 객체
 	  */
 	 Store viewStore(String storeId, Authentication authentication);
+	 
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 $(document).ready(function(){
 	$("#optionCategoryList").on("click",function(){
 		
-	
+		
 		var p2 = document.createElement("input");
 		p2.setAttribute("name","optionCategoryList");
 		var txt = document.createTextNode($("#optionCategory").val());
@@ -45,6 +46,12 @@ $(document).ready(function(){
 				</td>
 			</tr>
 		</table>
+		
+		결제 방식 선택<br />
+		<c:forEach items="${requestScope.paymentOptionList }" var="list">
+			<input type="checkbox" name="paymentIdList" value="${list.paymentId }"/>${list.paymentMethod }&nbsp;&nbsp;&nbsp;
+		</c:forEach>
+		
 	
 		<table>	
 			<tr>

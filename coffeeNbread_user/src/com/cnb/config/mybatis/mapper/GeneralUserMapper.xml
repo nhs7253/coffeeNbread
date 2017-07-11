@@ -64,6 +64,12 @@
 		WHERE user_id = #{userId}
 	</update>
 	
+	<update id="updateGeneralUserByUserIdToStoreId" parameterType="map">
+		UPDATE general_user 
+		SET store_id = #{storeId}
+		WHERE user_id = #{userId}		
+	</update>
+	
 	<select id="selectGeneralUserList" resultMap="GeneralUser-resultmap">
 		SELECT <include refid="all-column"/>
 		FROM general_user

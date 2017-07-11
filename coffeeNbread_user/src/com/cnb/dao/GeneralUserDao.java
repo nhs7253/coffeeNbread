@@ -119,4 +119,12 @@ public interface GeneralUserDao {
 	 * @return int - 검색 결과 개수
 	 */
 	int selectGeneralUserListBySelectToKeywordJoinStoreCount(String select, String keyword);
+	
+	/**
+	 * 유저 객체에 매장을 추가 ID를 추가
+	 * @param userId 해당 유저 ID
+	 * @param storeId 추가할 매장 ID
+	 * @return int 처리 개수
+	 */
+	int updateGeneralUserByUserIdToStoreId(String userId, String storeId);
 }

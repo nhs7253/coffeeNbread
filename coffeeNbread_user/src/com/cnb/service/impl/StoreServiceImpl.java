@@ -7,8 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cnb.dao.GeneralUserDao;
 import com.cnb.dao.StoreDao;
+import com.cnb.dao.StorePaymentOptionListDao;
 import com.cnb.dao.StoreVisitHistoryDao;
 import com.cnb.dao.UserPreferenceStoreDao;
 import com.cnb.exception.DuplicatedOptionCategoryNameException;
@@ -27,6 +30,7 @@ import com.cnb.vo.NoticeBoardContents;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
+import com.cnb.vo.StorePaymentOptionList;
 import com.cnb.vo.StorePicture;
 import com.cnb.vo.StoreVisitHistory;
 import com.cnb.vo.UserPreferenceStore;
@@ -50,11 +54,17 @@ public class StoreServiceImpl implements StoreService{
 	private StorePictureService storePictureService;
 	
 	@Autowired
-	UserAndStoreService userAndStoreService;
+	private UserAndStoreService userAndStoreService;
 	
+	@Autowired
+	private GeneralUserDao generalUserDao;
+	
+	@Autowired
+	StorePaymentOptionListDao storePaymentOptionListDao;
 	
 	@Override
-	public void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
+	@Transactional(rollbackFor=Exception.class)
+	public void addStore(Store store, List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
 		//storeId 중복확인
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
@@ -65,12 +75,24 @@ public class StoreServiceImpl implements StoreService{
 		//매장 분류 추가
 		optionCategoryService.addOptionCategory(optionCategory);
 
-		
 		//매장 사진 추가 
 		storePictureService.addStorePicture(storePicture);
 		
+		//로그인한 유저에 매장 ID 추가
+		generalUserDao.updateGeneralUserByUserIdToStoreId(userId, store.getStoreId());
 		
-		
+		if(paymentIdList!=null){
+			//매장 지원 결제 내역
+			StorePaymentOptionList storePaymentOptionList = new StorePaymentOptionList();
+			storePaymentOptionList.setStoreId(store.getStoreId());
+			for(int i=0;i<paymentIdList.size();i++){
+				storePaymentOptionList.setPaymentId(paymentIdList.get(i));
+				
+				System.out.println("서비스 = " + storePaymentOptionList);
+				
+				storePaymentOptionListDao.insertStorePaymentOptionList(storePaymentOptionList);
+			}
+		}
 		
 	}
 
@@ -80,6 +102,7 @@ public class StoreServiceImpl implements StoreService{
 		
 	}*/
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException {
 		 if(storedao.selectStoreById(store.getStoreId())==null){
 			 storedao.updateStore(store);

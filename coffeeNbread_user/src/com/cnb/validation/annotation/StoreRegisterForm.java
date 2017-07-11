@@ -52,7 +52,7 @@ public class StoreRegisterForm implements Serializable{
 	private List<OptionDetail> optionDetailList;
 	private List<String> storeCategoryList;
 
-	
+	private List<String> paymentIdList;
 	
 	public String getOriginalName() {
 		return originalName;
@@ -162,6 +162,12 @@ public class StoreRegisterForm implements Serializable{
 	}
 	public void setStorePicture(MultipartFile storePicture) {
 		this.storePicture = storePicture;
+	}
+	public List<String> getPaymentIdList() {
+		return paymentIdList;
+	}
+	public void setPaymentIdList(List<String> paymentIdList) {
+		this.paymentIdList = paymentIdList;
 	}
 
 	
