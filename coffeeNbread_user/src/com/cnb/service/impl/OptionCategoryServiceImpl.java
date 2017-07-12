@@ -60,6 +60,7 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	}
 
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public int removeOptionCategory(String storeId,int optionId) {
 		//소분류 있을 경우 소분류 삭제 후 대분류 삭제 
 		if(detailDao.selectOptionDetailListByOptionCategory(storeId, optionId).size()>0){

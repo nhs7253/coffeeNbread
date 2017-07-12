@@ -47,7 +47,7 @@ public interface StoreService {
 	 * @param storeId
 	 * 
 	 */
-	int removeStoretById(String storeId);
+	int removeStoretById(String storeId, String userId);
 	
 	
 	/**

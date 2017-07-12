@@ -153,9 +153,9 @@ public class StoreController {
 	public String modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
 			BindingResult errors, HttpServletRequest request) throws IllegalStateException, IOException {
 		
-		  HttpSession session = request.getSession();
-		  Store store = new Store();
-		  BeanUtils.copyProperties(storeRegisterForm, store);
+		HttpSession session = request.getSession();
+		Store store = new Store();
+		BeanUtils.copyProperties(storeRegisterForm, store);
 		 
 /*
 		HttpSession session = request.getSession();
@@ -183,11 +183,9 @@ public class StoreController {
 
 		// System.out.println(list.get(0).toString());
 		if (list == null) {
-
 			String storePicture = store.getStorePictureList().get(0).toString();
 			List<StorePicture> storePictureList = new ArrayList<StorePicture>();
 			storePictureList.add(new StorePicture(storePicture, storeRegisterForm.getStoreId()));
-
 		}
 
 		// 업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
@@ -197,7 +195,6 @@ public class StoreController {
 				imageName.add(mFile.getOriginalFilename());
 				mFile.transferTo(new File(destDir, mFile.getOriginalFilename())); // 예외
 																					// 던짐
-
 			}
 		}
 
@@ -238,7 +235,7 @@ public class StoreController {
 		
 		Store store = (Store) session.getAttribute("storeInfo");
 
-		storeService.removeStoretById(store.getStoreId());
+		storeService.removeStoretById(store.getStoreId(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		session.removeAttribute("storeInfo");
 		return "store/store_register.tiles";
 
@@ -297,6 +294,18 @@ public class StoreController {
 	public ModelAndView callStoreRegisterController(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("store/store_register.tiles"); 
+		modelAndView.addObject("paymentOptionList", paymentOptionListService.findpaymentOptionList());
+		return modelAndView;
+	}
+	
+	/**
+	 * 플랫폼에서 지원하는 결제 목록을 매장 수정 폼에 뿌려주는 컨트롤러
+	 * @return 반환 경로 및 뿌려줄 객체
+	 */
+	@RequestMapping("/user/callStoreModifyController")
+	public ModelAndView callStoreModifyController(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("store/store_modify.tiles"); 
 		modelAndView.addObject("paymentOptionList", paymentOptionListService.findpaymentOptionList());
 		return modelAndView;
 	}

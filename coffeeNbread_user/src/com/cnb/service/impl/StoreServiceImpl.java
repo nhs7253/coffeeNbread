@@ -13,6 +13,7 @@ import com.cnb.dao.GeneralUserDao;
 import com.cnb.dao.StoreDao;
 import com.cnb.dao.StorePaymentOptionListDao;
 import com.cnb.dao.StoreVisitHistoryDao;
+import com.cnb.dao.UserAuthorityDao;
 import com.cnb.dao.UserPreferenceStoreDao;
 import com.cnb.exception.DuplicatedOptionCategoryNameException;
 import com.cnb.exception.DuplicatedStoreCategorytNameException;
@@ -33,6 +34,7 @@ import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePaymentOptionList;
 import com.cnb.vo.StorePicture;
 import com.cnb.vo.StoreVisitHistory;
+import com.cnb.vo.UserAuthority;
 import com.cnb.vo.UserPreferenceStore;
 
 @Service
@@ -60,7 +62,10 @@ public class StoreServiceImpl implements StoreService{
 	private GeneralUserDao generalUserDao;
 	
 	@Autowired
-	StorePaymentOptionListDao storePaymentOptionListDao;
+	private StorePaymentOptionListDao storePaymentOptionListDao;
+	
+	@Autowired
+	private UserAuthorityDao userAuthorityDao;
 	
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -86,10 +91,7 @@ public class StoreServiceImpl implements StoreService{
 			StorePaymentOptionList storePaymentOptionList = new StorePaymentOptionList();
 			storePaymentOptionList.setStoreId(store.getStoreId());
 			for(int i=0;i<paymentIdList.size();i++){
-				storePaymentOptionList.setPaymentId(paymentIdList.get(i));
-				
-				System.out.println("서비스 = " + storePaymentOptionList);
-				
+				storePaymentOptionList.setPaymentId(paymentIdList.get(i));				
 				storePaymentOptionListDao.insertStorePaymentOptionList(storePaymentOptionList);
 			}
 		}
@@ -113,17 +115,18 @@ public class StoreServiceImpl implements StoreService{
 		 optionCategoryService.modifyOptionCategory(optionCategory);
 		 
 		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
-		 
-		 
-		 
+
 	}
 		
 	@Override
-	public int removeStoretById(String storeId) {
+	@Transactional(rollbackFor=Exception.class)
+	public int removeStoretById(String storeId, String userId) {
 		optionCategoryService.removeOptionCategoryByStoreId(storeId);
 		storePictureService.removeStorePictureById(storeId);
+		//로그인한 유저에 매장 ID 추가
+		generalUserDao.updateGeneralUserByUserIdToStoreId(userId, null);
 		int cnt = storedao.deleteStoreById(storeId);
-
+		userAuthorityDao.updateUserAuthorityByUserId(new UserAuthority(userId, "ROLE_CNB_USER"));
 		return cnt;
 		
 	}
