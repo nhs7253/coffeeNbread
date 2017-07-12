@@ -45,7 +45,7 @@ public class StorePictureServiceImpl implements StorePictureService {
 	
 
 	@Override
-
+	@Transactional(rollbackFor=Exception.class)
 	public int modifyStorePictureByStorePicture(StorePicture storePictureVO)
 			throws StorePictureNotFoundException {
 		if(dao.selectStorePictureByStoreIdAndStorePicture(storePictureVO.getStorePicture(), storePictureVO.getStoreId())!=null){

@@ -48,6 +48,7 @@
 		<table>
 			<tr class="form-group">
 				<th>매장 분류</th>
+
 				<td><c:forEach items="${sessionScope.store.optionCategoryList}"
 						var="optionCategoryList">
 						<input type="text" name="optionCategoryList" id="optionCategory"
@@ -68,13 +69,46 @@
 				<td id="selectOC"></td>
 			</tr>
 
-			<tr class="form-group">
-				<th>매장 ID</th>
+		</table>
+			<br />
+			결제 방식 선택<br />
+			<c:forEach items="${requestScope.paymentOptionList }" var="list">
+				<input type="checkbox" name="paymentIdList" value="${list.paymentId }"/>${list.paymentMethod }&nbsp;&nbsp;&nbsp;
+			</c:forEach>
+			
+			<table>
+			<tr>
+				<th>매장 이름</th>
+				<td><input type="text" name="storeName"
+					value="${sessionScope.storeInfo.storeName}"></td>
+			</tr>
+			<tr>
+				<th>매장 번호</th>
+				<td><input type="tel" name="storePhone"
+					value="${sessionScope.storeInfo.storePhone}"></td>
+			</tr>
+			<tr>
+				<th>매장 메일</th>
+				<td><input type="email" name="storeEmail"
+					value="${sessionScope.storeInfo.storeEmail }"></td>
+			</tr>
+			<tr>
+				<th>open 시간</th>
+				<td><input type="date" name = "storeOpen" value="<fmt:formatDate value="${sessionScope.storeInfo.storeOpen }"
+						type="time" pattern="hh:mm" />"></td>
+			</tr>
+			<tr>
+				<th>close 시간</th>
+				<td><input type="date" name="storeClose" value="<fmt:formatDate value="${sessionScope.storeInfo.storeClose }"
+						type="time" pattern="hh:mm" />"></td>
+			</tr>
+			<tr>
+				<th id = "selectSP">매장 사진</th>
+				<td id = "storePicture">
+			<img src="/coffeeNbread_user/up_image/${sessionScope.storeInfo.storePictureList}" width="300px">
+				<button type="button" id="modifystorePicture">수정하기</button>
 
-				<td><div class="col-xs-10">
-						<input type="text" name="storeId"
-							value="${sessionScope.store.storeId}" readonly="readonly">
-					</div>
+
 				</td>
 			</tr>
 			<tr class="form-group">
@@ -129,8 +163,7 @@
 			</tr>
 			<tr>
 				<th>매장 소개</th>
-				<td><textarea name="storeIntro" rows="5" cols="50"
-						value="${sessionScope.store.storeIntro}"></textarea></td>
+				<td><textarea name="storeIntro" rows="5" cols="50" >${sessionScope.storeInfo.storeIntro}</textarea></td>
 			</tr>
 
 			<tr>

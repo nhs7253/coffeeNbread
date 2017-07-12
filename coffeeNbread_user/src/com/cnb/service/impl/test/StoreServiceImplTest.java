@@ -107,7 +107,7 @@ public class StoreServiceImplTest {
 	*/
 		
 		//매장 삭제 
-		service.removeStoretById("s-7");
+	//	service.removeStoretById("s-7");
 		System.out.println("-------------------완료 ---------------");
 	}
 

@@ -228,16 +228,16 @@
 						FROM store
 						<choose>
 							<when test="select == 'storeName'">
-								WHERE store_name LIKE '%'||#{keyword}||'%'
+								WHERE store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeIntro'">
-								WHERE store_intro LIKE '%'||#{keyword}||'%'
+								WHERE store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeAddress'">
-								WHERE store_address LIKE '%'||#{keyword}||'%'
+								WHERE store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeCategory'">
-								WHERE store_category LIKE '%'||#{keyword}||'%'
+								WHERE store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<otherwise>
 								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
@@ -255,16 +255,16 @@
 		FROM store
 		<choose>
 			<when test="select == 'storeName'">
-				WHERE store_name LIKE '%'||#{keyword}||'%'
+				WHERE store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeIntro'">
-				WHERE store_intro LIKE '%'||#{keyword}||'%'
+				WHERE store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeAddress'">
-				WHERE store_address LIKE '%'||#{keyword}||'%'
+				WHERE store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeCategory'">
-				WHERE store_category LIKE '%'||#{keyword}||'%'
+				WHERE store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<otherwise>
 				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->

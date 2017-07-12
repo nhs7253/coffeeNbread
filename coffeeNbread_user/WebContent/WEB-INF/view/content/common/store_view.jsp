@@ -23,7 +23,7 @@
 		매장 닫는 시간 : <input type="text" value="${requestScope.store.storeCloseFormat }" disabled><br>
 		<p/>
 		
-		<form action="${initParam.rootPath}/store/store_modify.do"  >
+		<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
 			<input type="submit" value="수정">
 		</form>
 		<form action="${initParam.rootPath }/removeStoreController.do">
