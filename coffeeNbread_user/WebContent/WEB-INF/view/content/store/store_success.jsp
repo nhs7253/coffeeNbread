@@ -68,10 +68,12 @@
 			</tr>
 		</table>
 			<form action="${initParam.rootPath}/store/store_modify.do"  >
-				<input type="submit" value="수정">
+				<button type="submit" >수정</button>
 			</form>
 			<form action="${initParam.rootPath }/removeStoreController.do">
-				<input type="submit" value="삭제">
+			
+				<button type="submit" >삭제</button>
+		
 			</form>
 			
 </body>
