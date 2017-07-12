@@ -160,4 +160,5 @@ public class ShoppingBasketProductDaoImpl implements ShoppingBasketProductDao {
 		return session.selectOne(makeSql("selectProductPriceByUserIdAndStoreId"), info);
 	}
 
+
 }

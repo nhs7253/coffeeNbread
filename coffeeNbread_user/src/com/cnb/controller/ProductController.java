@@ -173,8 +173,6 @@ public class ProductController {
 
 			Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
 			
-			
-			
 			modelAndView.setViewName("store/product_list.tiles");
 			modelAndView.addObject("list", map.get("list"));
 			modelAndView.addObject("pageBean", map.get("pageBean"));
@@ -183,6 +181,28 @@ public class ProductController {
 			return modelAndView;
 		}
 	
+		//유저가 보는 제품 목록 조회
+				@RequestMapping("/user/userFindProductListController")
+				public ModelAndView userFindProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
+					
+					ModelAndView modelAndView = new ModelAndView();
+					
+					if(errors.hasErrors()) {
+						modelAndView.setViewName("index.tiles");
+						return modelAndView;
+					}
+
+					Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
+					
+					modelAndView.setViewName("user/user_product_list.tiles");
+					modelAndView.addObject("list", map.get("list"));
+					modelAndView.addObject("pageBean", map.get("pageBean"));
+					modelAndView.addObject("storeId", productFindForm.getStoreId());
+					
+					return modelAndView;
+				}
+		
+		
 //	//제품 목록 조회
 //	@RequestMapping("findProductListController")
 //	public ModelAndView findProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
@@ -203,62 +223,120 @@ public class ProductController {
 //		
 //		return modelAndView;
 //	}
-
-	//제품 목록 조회 - 제품 종류/제품명/판매여부
-	@RequestMapping("findProductListByMethod")
-	public ModelAndView findProductListByMethod(@ModelAttribute("productFindByMethod") @Valid ProductFindByMethodForm productFindByMethodForm, BindingResult errors) {
 		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		if(errors.hasErrors()) {
-			modelAndView.setViewName("store/product_list.tiles");
-			return modelAndView;
-		}
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		if(productFindByMethodForm.getMethod().equals("productCategory")) {	//종류로 조회
-			map = service.findProductListByCategory(productFindByMethodForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productFindByMethodForm.getMethodContent());
-
-		}else if(productFindByMethodForm.getMethod().equals("productName")) {	//제품명으로 조회
-			map = service.findProductListByName(productFindByMethodForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productFindByMethodForm.getMethodContent());
+		//제품 목록 조회 - 제품 종류/제품명/판매여부
+		@RequestMapping("findProductListByMethod")
+		public ModelAndView findProductListByMethod(@ModelAttribute("productFindByMethod") @Valid ProductFindByMethodForm productFindByMethodForm, BindingResult errors, String storeId) {
 			
-		}else if(productFindByMethodForm.getMethod().equals("sellingOption")) {	//판매여부로 조회
-			String sellingOption = productFindByMethodForm.getMethodContent().toUpperCase();
-			map = service.findProductListBySellingOption(productFindByMethodForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), sellingOption);
-		}
-		modelAndView.setViewName("store/product_list.tiles");
-		modelAndView.addObject("list", map.get("list"));
-		modelAndView.addObject("pageBean", map.get("pageBean"));
-		
-		modelAndView.addObject("method", productFindByMethodForm.getMethod());
-		modelAndView.addObject("methodContent", productFindByMethodForm.getMethodContent());
-		modelAndView.addObject("storeId", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		return modelAndView;
-	}
-	
-	
-	//제품 상세 조회
-	@RequestMapping("findProductDetailController")
-	public ModelAndView findProductDetailController(@RequestParam(value="productId", required=false) String productId) {
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		if(productId == null) {
+
+			
+			ModelAndView modelAndView = new ModelAndView();
+			
+			if(errors.hasErrors()) {
+				modelAndView.setViewName("store/product_list.tiles");
+				return modelAndView;
+			}
+			
+			Map<String, Object> map = new HashMap<>();
+			
+			if(productFindByMethodForm.getMethod().equals("productCategory")) {	//종류로 조회
+				map = service.findProductListByCategory(productFindByMethodForm.getPage(), storeId, productFindByMethodForm.getMethodContent());
+
+			}else if(productFindByMethodForm.getMethod().equals("productName")) {	//제품명으로 조회
+				map = service.findProductListByName(productFindByMethodForm.getPage(), storeId, productFindByMethodForm.getMethodContent());
+				
+			}else if(productFindByMethodForm.getMethod().equals("sellingOption")) {	//판매여부로 조회
+				String sellingOption = productFindByMethodForm.getMethodContent().toUpperCase();
+				map = service.findProductListBySellingOption(productFindByMethodForm.getPage(), storeId, sellingOption);
+			}
+			
+			
 			modelAndView.setViewName("store/product_list.tiles");
+			modelAndView.addObject("list", map.get("list"));
+			modelAndView.addObject("pageBean", map.get("pageBean"));
+			
+			modelAndView.addObject("method", productFindByMethodForm.getMethod());
+			modelAndView.addObject("methodContent", productFindByMethodForm.getMethodContent());
+			modelAndView.addObject("storeId", storeId);
 			return modelAndView;
 		}
-		
-		Product product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId);
-		ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(productId, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		
-		product.setProductPicture(productPicture.getProductPicture());
-		
-		modelAndView.setViewName("store/product_detail.tiles");
-		modelAndView.addObject("product", product);
-		
-		return modelAndView;
-	}	
+
+//	//제품 목록 조회 - 제품 종류/제품명/판매여부
+//	@RequestMapping("findProductListByMethod")
+//	public ModelAndView findProductListByMethod(@ModelAttribute("productFindByMethod") @Valid ProductFindByMethodForm productFindByMethodForm, BindingResult errors) {
+//		
+//		ModelAndView modelAndView = new ModelAndView();
+//		
+//		if(errors.hasErrors()) {
+//			modelAndView.setViewName("store/product_list.tiles");
+//			return modelAndView;
+//		}
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		
+//		if(productFindByMethodForm.getMethod().equals("productCategory")) {	//종류로 조회
+//			map = service.findProductListByCategory(productFindByMethodForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productFindByMethodForm.getMethodContent());
+//
+//		}else if(productFindByMethodForm.getMethod().equals("productName")) {	//제품명으로 조회
+//			map = service.findProductListByName(productFindByMethodForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productFindByMethodForm.getMethodContent());
+//			
+//		}else if(productFindByMethodForm.getMethod().equals("sellingOption")) {	//판매여부로 조회
+//			String sellingOption = productFindByMethodForm.getMethodContent().toUpperCase();
+//			map = service.findProductListBySellingOption(productFindByMethodForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), sellingOption);
+//		}
+//		modelAndView.setViewName("store/product_list.tiles");
+//		modelAndView.addObject("list", map.get("list"));
+//		modelAndView.addObject("pageBean", map.get("pageBean"));
+//		
+//		modelAndView.addObject("method", productFindByMethodForm.getMethod());
+//		modelAndView.addObject("methodContent", productFindByMethodForm.getMethodContent());
+//		modelAndView.addObject("storeId", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+//		return modelAndView;
+//	}
+	
+		//제품 상세 조회
+		@RequestMapping("findProductDetailController")
+		public ModelAndView findProductDetailController(@RequestParam(value="productId", required=false) String productId, String StoreId) {
+			
+			ModelAndView modelAndView = new ModelAndView();
+			
+			if(productId == null) {
+				modelAndView.setViewName("store/product_list.tiles");
+				return modelAndView;
+			}
+			
+			Product product = service.findProductById(StoreId, productId);
+			ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(productId, StoreId);
+			
+			product.setProductPicture(productPicture.getProductPicture());
+			
+			modelAndView.setViewName("store/product_detail.tiles");
+			modelAndView.addObject("product", product);
+			
+			return modelAndView;
+		}	
+	
+//	//제품 상세 조회
+//	@RequestMapping("findProductDetailController")
+//	public ModelAndView findProductDetailController(@RequestParam(value="productId", required=false) String productId) {
+//		
+//		ModelAndView modelAndView = new ModelAndView();
+//		
+//		if(productId == null) {
+//			modelAndView.setViewName("store/product_list.tiles");
+//			return modelAndView;
+//		}
+//		
+//		Product product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId);
+//		ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(productId, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+//		
+//		product.setProductPicture(productPicture.getProductPicture());
+//		
+//		modelAndView.setViewName("store/product_detail.tiles");
+//		modelAndView.addObject("product", product);
+//		
+//		return modelAndView;
+//	}	
 	
 	//삭제할 제품 선택
 	@RequestMapping("selectRemoveProductController")

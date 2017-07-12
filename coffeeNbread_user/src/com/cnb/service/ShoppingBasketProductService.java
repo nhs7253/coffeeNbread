@@ -1,5 +1,6 @@
 package com.cnb.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
@@ -71,5 +72,11 @@ public interface ShoppingBasketProductService {
 	  * 
 	  */
 	 int findProductPrice(String storeId,String userId,String productId);
+	 
+/*
+	 HashMap<String, Object> userFindProductList(int page,String userId, String storeId) ;
+	 
+	 
+*/
 	 
 }

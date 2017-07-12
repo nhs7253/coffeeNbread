@@ -55,6 +55,10 @@
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
 	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
+	
+	
+	
+	
 </sec:authorize>
 
 

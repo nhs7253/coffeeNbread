@@ -4,40 +4,46 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.cnb.vo.OptionCategory;
+import com.cnb.vo.Product;
 
 public class PaymentDetailsForm implements Serializable {
 	
 	
-	@NotNull
+	
 	private int paymentNo;
 	
-	@NotEmpty
+	
 	private String paymentOption;
 	
 	private Date tradeDate;
 	
-	@NotEmpty
+	
 	private String sellMethod;
 	
-	@NotNull
+	 //controller에서 작업.
 	private int reservationOrderCount;
 	
-	@NotEmpty
+	
 	private String userId;
 	
-	@NotEmpty
+	
 	private String productId;
 	
-	@NotEmpty
+	
+	private List<String> productIdList;
+	
+	
+	public List<String> getProductIdList() {
+		return productIdList;
+	}
+
+	public void setProductIdList(List<String> productIdList) {
+		this.productIdList = productIdList;
+	}
+
 	private String storeId;
 	
-	@NotNull
+	
 	private int produtctTradeCount;
 
 	public int getPaymentNo() {

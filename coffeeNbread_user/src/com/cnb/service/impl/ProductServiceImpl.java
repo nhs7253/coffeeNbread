@@ -11,6 +11,7 @@ import com.cnb.dao.OptionDetailDao;
 import com.cnb.dao.ProductDao;
 import com.cnb.dao.ProductGapDao;
 import com.cnb.dao.ProductPictureDao;
+import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.exception.DuplicatedProductIdOrProductNameException;
 import com.cnb.exception.DuplicatedProductPictureException;
 import com.cnb.exception.ProductNotFoundException;
@@ -20,6 +21,7 @@ import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
 import com.cnb.vo.ProductGap;
 import com.cnb.vo.ProductPicture;
+import com.cnb.vo.ShoppingBasketProduct;
 
 /*
  * 최민희
@@ -40,6 +42,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Autowired
 	private ProductPictureDao productPictureDao;
+	
+	@Autowired
+	private ShoppingBasketProductDao shoppingBasketProductDao;
 	
 	@Override
 	public int addProduct(Product product,OptionDetail optionDetail) throws DuplicatedProductIdOrProductNameException, DuplicatedProductPictureException {
@@ -157,7 +162,6 @@ public class ProductServiceImpl implements ProductService {
 		map.put("pageBean", pageBean);
 		
 		List<Product> list = dao.selectProductList(storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
-		
 		map.put("list", list);
 		return map;
 	}

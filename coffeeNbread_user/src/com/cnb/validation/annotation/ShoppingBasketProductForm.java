@@ -14,7 +14,7 @@ import com.cnb.vo.Product;
 import com.cnb.vo.Store;
 
 public class ShoppingBasketProductForm implements Serializable {
-	@NotEmpty
+	
 	private String userId;
 	
 	@NotEmpty
@@ -22,11 +22,15 @@ public class ShoppingBasketProductForm implements Serializable {
 	
 	@NotEmpty
 	private String productId;
+		
+	@Override
+	public String toString() {
+		return "ShoppingBasketProductForm [userId=" + userId + ", storeId=" + storeId + ", productId=" + productId
+				+ ", productCount=" + productCount + ", productStoreId=" + productStoreId + ", generalUser="
+				+ generalUser + ", store=" + store + ", product=" + product + "]";
+	}
+	private int productCount;  //제품개수
 	
-	@NotNull
-	private int productCount;
-	
-	@NotEmpty
 	private String productStoreId;  //-----> 실제로는 storeId랑 같은데 일단 넣어둠. 
 	
  	private GeneralUser generalUser;
@@ -40,6 +44,7 @@ public class ShoppingBasketProductForm implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
 	public String getStoreId() {
 		return storeId;
 	}
@@ -78,6 +83,9 @@ public class ShoppingBasketProductForm implements Serializable {
 	}
 	public Product getProduct() {
 		return product;
+	}
+	public ShoppingBasketProductForm() {
+		super();
 	}
 	public void setProduct(Product product) {
 		this.product = product;

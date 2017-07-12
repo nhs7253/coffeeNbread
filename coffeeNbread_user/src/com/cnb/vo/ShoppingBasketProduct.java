@@ -25,6 +25,14 @@ public class ShoppingBasketProduct implements Serializable{
 	
 	
 	
+	
+	public ShoppingBasketProduct(String userId, String storeId, String productId, int productCount) {
+		super();
+		this.userId = userId;
+		this.storeId = storeId;
+		this.productId = productId;
+		this.productCount = productCount;
+	}
 	public ShoppingBasketProduct(String userId, String storeId, String productId, int productCount,
 			String productStoreId) {
 		super();

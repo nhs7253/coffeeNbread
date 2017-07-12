@@ -49,31 +49,33 @@ public class PaymentDetailsController {
 	private ShoppingBasketProductService sbpService;
 
 	// 결제완료 버튼 눌러야 들어가는 것.
-	@RequestMapping("/user/addPaymentDetailsController")
-	/**
+	/*@RequestMapping("/user/addPaymentDetailsController")
+	*//**
 	 * 결제내역 등록.
 	 * 
 	 * @param paymentDetailsform
 	 * @param errors
 	 * @return
-	 */
-
-	// 즐겨찾는카드번호에서 카드 입력후 결제내역에 등록될 controller
+	 *//*
+*/
+	/*// 즐겨찾는카드번호에서 카드 입력후 결제내역에 등록될 controller
 	public String addPaymentDetailsController(
-			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors) {
+			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform,
+			BindingResult errors
+			) {
 
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (errors.hasErrors()) {
 			return "user/payment_register.tiles"; // 에러 발생
 		}
-
+        List<Product> productList=null;
+        productList
 		PaymentDetails paymentDetails = new PaymentDetails();
 		BeanUtils.copyProperties(paymentDetailsform, paymentDetails);
 
 		paymentDetails.setProductTradeCount(0);
 		paymentDetails.setSellMethod("r");
-		paymentDetails.setPaymentOption("c"); // 일단 카드로만 해놓음. 나중에 관리자가 추가하는거 봐서
-												// service만들계획.
+		paymentDetails.setPaymentOption("c"); 
 		paymentDetails.setUserId(generalUser.getUserId());
 		paymentDetails.setTradeDate(new Date());
 
@@ -89,7 +91,7 @@ public class PaymentDetailsController {
 
 		}
 		return "user/payment_success.tiles"; // 결제 성공페이지.
-	}
+	}*/
 
 	// 유저가 결제한 결제내역 보기. - 페이징 필요할듯. - 페이징 추가.
 	@RequestMapping("/user/findPaymentDetailsController")
@@ -100,11 +102,7 @@ public class PaymentDetailsController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (errors.hasErrors()) {
-			modelAndView.setViewName("user/payment_fail.tiles"); // 결제 내역눌렀을때 만약
-																	// 요청파라미터값 잘
-																	// 안넘어왔을떄
-																	// 어디로 갈지는
-																	// 추후 생각.
+			modelAndView.setViewName("user/payment_fail.tiles"); //임시로 해둠.
 			return modelAndView; // 에러 발생
 		}
 		Map<String, Object> map = new HashMap<>();
@@ -112,8 +110,7 @@ public class PaymentDetailsController {
 				paymentDetailsViewform.getStoreId(),
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 
-		modelAndView.setViewName("user/paymentDetails_list.tiles"); // 결제 내역보여주는
-																	// 페이지.
+		modelAndView.setViewName("user/paymentDetails_list.tiles"); 
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("storeId", paymentDetailsViewform.getStoreId());

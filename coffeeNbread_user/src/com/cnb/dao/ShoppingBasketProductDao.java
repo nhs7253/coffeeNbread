@@ -108,12 +108,9 @@ public interface ShoppingBasketProductDao {
      
      
      /*---------------------------------------------페이징 ----------------------------------------*/
-     /**
-     * 유저가 매장에 넣은 장바구니 목록 개수조회 - int 형
-     * @param userId
-     * @param storeId
-     * @return
-     */
+
+    
+    	
  	int selectShoppingBasketProductCountForPagingCount(String userId, String storeId,int startIndex, int endIndex );
 	
  	   

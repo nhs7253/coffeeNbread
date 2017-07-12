@@ -4,7 +4,7 @@
 <mapper namespace="com.cnb.config.mybatis.mapper.PaymentDetailsMapper">
 	<!-- PaymentDetailMapper 테이블 관련 mapper + 결제 내역 추가 + 결제내역들 조회 -->
 
-	
+
 	<sql id="select-paymentDetails">
 		SELECT payment_no,
 		payment_option,
@@ -37,7 +37,7 @@
 			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-store-productPicture-resultmap" />
 	</resultMap>
 
-    <!-- insert -->
+	<!-- insert -->
 	<insert id="insertPaymentDetails" parameterType="com.cnb.vo.PaymentDetails">
 		<selectKey keyProperty="paymentNo" resultType="_int" order="BEFORE">
 			SELECT payment_no_seq.nextval FROM dual
@@ -55,30 +55,21 @@
 	</insert>
 
 
-	<!--결제내역 목록 전체 페이징 원함. 매장별로도 검색가능. -->
-	<select id="countSelectPaymentDetailsByUserIdAndStoreId" parameterType="map"
-		resultType="_int">
+	<!--결제내역 목록 전체 페이징 원함. 매장별로도 검색가능-storeId가 있다면 가능.. -->
+	<select id="countSelectPaymentDetailsByUserIdAndStoreId"
+		parameterType="map" resultType="_int">
 
 		SELECT COUNT(*)
 		FROM payment_details
 		where user_id=#{userId}
-		<choose>
-			<when test="storeId == null">
-				and store_id Is NuLL
-			</when>
-			<when test="storeId != null">
-				and store_id=#{storeId}
-			</when>
-			<otherwise>
-				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
-			</otherwise>
-		</choose>
+		AND store_id=#{storeId}
 	</select>
 
 
-	<!--결제내역 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회 매장아이디 있으면 매장별 조회- 매장없으면 매장없이 조회.유저의 결제내역은 어디서든 볼수있게 .-->
-	<select id="selectPaymentDetailsListByUserIdAndStoreId" resultMap="paymentDetails-product-store-resultmap"
-		parameterType="map">
+	<!--결제내역 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회 매장아이디 있으면 매장별 조회- 매장없으면 매장없이 조회.유저의 
+		결제내역은 어디서든 볼수있게 . -->
+	<select id="selectPaymentDetailsListByUserIdAndStoreId"
+		resultMap="paymentDetails-product-store-resultmap" parameterType="map">
 
 		SELECT payment_no,
 		store_name,
@@ -88,7 +79,7 @@
 		payment_option,
 		reservation_order_count,
 		product_price,
-		trade_date,
+		trade_date
 
 		FROM(
 		SELECT rownum rnum,
@@ -100,7 +91,7 @@
 		payment_option,
 		reservation_order_count,
 		product_price,
-		trade_date,
+		trade_date
 		FROM(
 		SELECT
 		pd.payment_no,
@@ -115,17 +106,7 @@
 		FROM payment_details pd, product p,
 		product_picture pp,
 		WHERE pd.user_id = #{userId}
-		<choose>
-			<when test="storeId == null">
-				and store_id Is NuLL
-			</when>
-			<when test="storeId != null">
-				and store_id=#{storeId}
-			</when>
-			<otherwise>
-				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
-			</otherwise>
-		</choose>
+	    and s.store_id=#{storeId}
 		)
 		WHERE rownum &lt;= #{endIndex}
 		)

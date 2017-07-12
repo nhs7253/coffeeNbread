@@ -35,15 +35,19 @@ public class ShoppingBasketProductDaoImplTest {
 	   
     System.out.println("--------장바구니 목록 조회------");
       System.out.println(dao.selectShoppingBasketProductList("s-1", "u-1")); 
-    /*  
+   
+  System.out.println("---------장바구니 목록 카운트");    
+      System.out.println(dao.updateShoppingBasketProductCount(new ShoppingBasketProduct("khjsuccess6808","s-1","p-1",7)));
+      
+      /*  
      System.out.println("------장바구니 목록 카운트 수정------");     
      System.out.println(dao.updateShoppingBasketProductCount(new ShoppingBasketProduct("u-1","s-7","p-18",100,"s-7") ));
       System.out.println("---------장바구니 목록 삭제------");
        System.out.println(dao.deleteShoppingBasketProductByProductIdAndUserId("p-20", "u-1"));
     */
     
-      System.out.println("--------- 장바구니 목록 등록-------");
-      System.out.println(dao.insertShoppingBasketProduct(new ShoppingBasketProduct("u-1","s-1","p-1",10,"s-7"))); 
+//      System.out.println("--------- 장바구니 목록 등록-------");
+//      System.out.println(dao.insertShoppingBasketProduct(new ShoppingBasketProduct("u-1","s-1","p-1",10,"s-7"))); 
       
    /*
       System.out.println("----------장바구니 목록 리스트 조회-------");

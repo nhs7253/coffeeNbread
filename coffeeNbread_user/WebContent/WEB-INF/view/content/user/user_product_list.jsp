@@ -1,4 +1,4 @@
-	<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -20,24 +20,7 @@ td {
 
 <h2>제품 목록</h2>
 
-<form action="${initParam.rootPath }/findProductListByMethod.do"
-	method="post">
-	<sec:csrfInput />
-	<%-- csrf 토큰 --%>
-	<select name="method">
-		<option value="productCategory">제품 종류</option>
-		<option value="productName">제품 이름</option>
-		<option value="sellingOption">판매 여부(Y/N)</option>
-	</select> <input type="text" name="methodContent" /> <input type="submit"
-		value="검색" />
-</form>
 
-<form action="${initParam.rootPath }/findProductListController.do"
-	method="post">
-	<sec:csrfInput />
-	<%-- csrf 토큰 --%>
-	<input type="submit" value="전체조회" />
-</form>
 
 <p>
 <table>
@@ -46,7 +29,6 @@ td {
 			<th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
 			<th>&nbsp;&nbsp;제품명&nbsp;&nbsp;</th>
 			<th>&nbsp;&nbsp;가격&nbsp;&nbsp;</th>
-			<th>&nbsp;&nbsp;판매여부&nbsp;&nbsp;</th>
 			<th>&nbsp;&nbsp;제품개수&nbsp;&nbsp;</th>
 			<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 		</tr>
@@ -59,32 +41,33 @@ td {
 				<td><a
 					href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
 				<td>${product.productPrice }&nbsp;&nbsp;</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
+				
 				<td>
 					<form
 						action="${initParam.rootPath }/user/addShoppingBasketProductController.do"
 						method="post">
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
-						<input type="number" min="0" name="productCount"> <input
-							type="hidden" value="${product.storeId }" name="storeId">
-						<button name="productId" value="${ product.productId }">장바구니</button>
+						<input type="number" min="0" name="productCount"> 
+						<input type="hidden" value="${product.storeId }" name="storeId">
+						<input type="hidden" value="${product.productId }" name="productId">
+						<input type="submit" value="장바구니">
 					</form>
 				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-	
-     <form
-	action="${initParam.rootPath }/user/ViewShoppingBasketProductController.do" method="post">
+
+
+   <form
+	action="${initParam.rootPath }/user/ViewShoppingBasketProductController.do"
+	method="post">
 	<sec:csrfInput />
 	<%-- csrf 토큰 --%>
 	<input type="hidden" value="${requestScope.list[0].storeId }" name="storeId"/>
 	<input type="submit" value="장바구니 목록 조회" />
    </form>
-
-
 
 <p>
 

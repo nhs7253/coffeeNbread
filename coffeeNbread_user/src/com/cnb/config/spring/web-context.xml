@@ -62,6 +62,8 @@
 	<mvc:view-controller path="/admin/notice_board_update_form.do" view-name="admin/notice_board_update_form.tiles"/>
 	
 	
+	<!-- 결제내역 폼 -->
+	<mvc:view-controller path="/user/payment_view.do" view-name="user/payment_view.tiles"/>
 	
 
 		
@@ -105,8 +107,9 @@
 	<mvc:view-controller path="/store/product_detail.do" view-name="store/product_detail.tiles"/>
 	
 	
-
+   <!--유저가 보는 제품 목록폼  -->
 	
+	<mvc:view-controller path="/user/userFindProductListController.do" view-name="store/product_detail.tiles"/>
 	
 	
 	

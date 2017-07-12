@@ -1,5 +1,6 @@
 package com.cnb.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
 import com.cnb.exception.addShoppingCountZeroException;
 import com.cnb.service.ShoppingBasketProductService;
+import com.cnb.util.PagingBean;
+import com.cnb.vo.NoticeBoardContents;
+import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
@@ -76,31 +80,51 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 		// shoppingBasketProduct에는 userid, storeId,productStoreId(권한으로 세션처리함),
 		// 제품, 제품개수등등 세션에서 가져옴
 
-		// 유저가 매장에서 등록한 장바구니 목록들. 
-		List<ShoppingBasketProduct> sbpList = shoppingBasketProductDao
-				.selectShoppingBasketProductList(shoppingBasketProduct.getStoreId(), shoppingBasketProduct.getUserId());
+		System.out.println("addShoppingBasketProduct = " + shoppingBasketProduct);
 
-		if (shoppingBasketProduct.getProductCount() == 0) {
-			throw new addShoppingCountZeroException("제품 개수를 입력하십시오");
-		} else {
-			if (sbpList != null) {
-				for (int i = 0; i < sbpList.size(); i++) {
+		// shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
 
-					if (sbpList.get(i).getProductId().equals(shoppingBasketProduct.getProductId())) {
+		// 유저가 매장에서 등록한 장바구니 목록들.
 
-						sbpList.get(i).setProductCount(
-								sbpList.get(i).getProductCount() + shoppingBasketProduct.getProductCount());
-						shoppingBasketProductDao.updateShoppingBasketProductCount(sbpList.get(i));
-					} else {
-						shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
-					}
+		// 유저가 매장에서 그 제품을 넣었냐 라고 물어봐야함.
+		ShoppingBasketProduct sbp = shoppingBasketProductDao.selectShoppingBasketProductByProductId(
+				shoppingBasketProduct.getUserId(), shoppingBasketProduct.getStoreId(),
+				shoppingBasketProduct.getProductId());
+		System.out.println("sbp:" + sbp);
 
-				}
-			} else {
+		
+			if (sbp==null) {
+				
 				shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
+				
+			} else {
+				sbp.setProductCount(sbp.getProductCount() + shoppingBasketProduct.getProductCount());
+				shoppingBasketProductDao.updateShoppingBasketProductCount(sbp);
 			}
+
 		}
-	}
+
+		/*
+		 * if (shoppingBasketProduct.getProductCount() == 0) {
+		 * 
+		 * } else { System.out.println("여기 까지 옴");
+		 * System.out.println(sbpList!=null); if (sbpList != null) {
+		 * System.out.println("하나 더 있네 : " + sbpList.size()); for (int i = 0; i
+		 * < sbpList.size(); i++) { System.out.println("행방 불명"); if
+		 * (sbpList.get(i).getProductId().equals(shoppingBasketProduct.
+		 * getProductId())) { System.out.println("다음다음");
+		 * sbpList.get(i).setProductCount( sbpList.get(i).getProductCount() +
+		 * shoppingBasketProduct.getProductCount());
+		 * shoppingBasketProductDao.updateShoppingBasketProductCount(sbpList.get
+		 * (i)); System.out.println("새로운 제품"); } else {
+		 * shoppingBasketProductDao.insertShoppingBasketProduct(
+		 * shoppingBasketProduct); System.out.println("추가된 제품"); }
+		 * 
+		 * } System.out.println("마지막"); } else {
+		 * shoppingBasketProductDao.insertShoppingBasketProduct(
+		 * shoppingBasketProduct); System.out.println("새로운 제품2"); } }
+		 */
+	
 
 	/**
 	 * 장바구니에서 결제페이지 넘어갈때 총가격 부를수 있는 서비스.
@@ -112,12 +136,14 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	public int findAllProductPrice(String storeId, String userId) {
 		List<ShoppingBasketProduct> list = null;
 		int totalPrice = 0;
-		list = shoppingBasketProductDao.selectShoppingBasketProductList(storeId, userId);
-
+		list = shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId);
+         System.out.println("Service:"+list);
+         System.out.println("list.size:"+list.size());
 		for (int i = 0; i < list.size(); i++) {
-
+               System.out.println(list.get(i).getProduct().getProductPrice()*list.get(i).getProductCount());
 			totalPrice += list.get(i).getProduct().getProductPrice() * list.get(i).getProductCount();
 		}
+		System.out.println("totalPrice:"+totalPrice);
 		return totalPrice;
 	}
 
@@ -132,4 +158,18 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 		return price;
 	}
 
+	/*
+	 * @Override public HashMap<String, Object> userFindProductList(int
+	 * page,String userId, String storeId) { HashMap<String, Object> map = new
+	 * HashMap<>();
+	 * 
+	 * //item 수 int totalCount = shoppingBasketProductDao.;
+	 * 
+	 * PagingBean pageBean = new PagingBean(totalCount, page);
+	 * map.put("pageBean", pageBean);
+	 * 
+	 * List<Product> list = dao.selectProductList(storeId,
+	 * pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+	 * map.put("list", list); return map; }
+	 */
 }
