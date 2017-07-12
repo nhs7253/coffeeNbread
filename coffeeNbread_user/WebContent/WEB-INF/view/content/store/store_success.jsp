@@ -17,7 +17,7 @@
 			<tr>
 				<th>매장 분류</th>
 				<td>
-				<c:forEach items="${sessionScope.store.optionCategoryList}" var="optionCategoryList">
+				<c:forEach items="${sessionScope.storeInfo.optionCategoryList}" var="optionCategoryList">
 							${optionCategoryList}
 				</c:forEach>
 				</td>
@@ -25,32 +25,32 @@
 			<tr>
 				<th>매장 ID</th>
 
-				<td>${sessionScope.store.storeId}</td>
+				<td>${sessionScope.storeInfo.storeId}</td>
 			</tr>
 			<tr>
 				<th>매장 이름</th>
-				<td>${sessionScope.store.storeName}</td>
+				<td>${sessionScope.storeInfo.storeName}</td>
 			</tr>
 			<tr>
 				<th>매장 번호</th>
-				<td>${sessionScope.store.storePhone}</td>
+				<td>${sessionScope.storeInfo.storePhone}</td>
 			</tr>
 			<tr>
 				<th>매장 메일</th>
-				<td>${sessionScope.store.storeEmail }</td>
+				<td>${sessionScope.storeInfo.storeEmail }</td>
 			</tr>
 			<tr>
 				<th>open 시간</th>
-				<td><fmt:formatDate value="${sessionScope.store.storeOpen }" type = "time" pattern="hh:mm"/></td>
+				<td><fmt:formatDate value="${sessionScope.storeInfo.storeOpen }" type = "time" pattern="hh:mm"/></td>
 			</tr>
 			<tr>
 				<th>close 시간</th>
-				<td><fmt:formatDate value="${sessionScope.store.storeClose }" type = "time" pattern="hh:mm"/></td>
+				<td><fmt:formatDate value="${sessionScope.storeInfo.storeClose }" type = "time" pattern="hh:mm"/></td>
 			</tr>
 			<tr>
 				<th>매장 사진</th>
 				<td>
-				<c:forEach items="${sessionScope.store.storePictureList}" var="fileName">
+				<c:forEach items="${sessionScope.storeInfo.storePictureList}" var="fileName">
 					<img src="/coffeeNbread_user/up_image/${fileName}" width="300px">
 				</c:forEach>
 			</tr>
@@ -60,7 +60,7 @@
 			</tr>
 			<tr>
 				<th>매장 소개</th>
-				<td>${sessionScope.store.storeIntro }</td>
+				<td>${sessionScope.storeInfo.storeIntro }</td>
 			</tr>
 
 			<tr>

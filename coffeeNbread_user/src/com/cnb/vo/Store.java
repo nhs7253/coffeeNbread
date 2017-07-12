@@ -72,6 +72,7 @@ public class Store implements Serializable{
 	 * 매장카테고리를 저정할 인스턴수변수 선언 
 	 ***************************************************/
 	private List<StoreCategory> storeCategoryList;
+	private List<StorePaymentOptionList> StorePaymentOptionList;
 	
 	public Store(){}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
@@ -179,6 +180,31 @@ public class Store implements Serializable{
 		this.storeCategoryList = storeCategoryList;
 	}
 	
+	
+	
+	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
+			String storeEmail, String storeCategory, int storeHits, Date storeOpen, Date storeClose,
+			String storePermission, List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
+			List<OptionCategory> optionCategoryList, List<OptionDetail> optionDetailList,
+			List<StoreCategory> storeCategoryList, List<com.cnb.vo.StorePaymentOptionList> storePaymentOptionList) {
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeIntro = storeIntro;
+		this.storePhone = storePhone;
+		this.storeAddress = storeAddress;
+		this.storeEmail = storeEmail;
+		this.storeCategory = storeCategory;
+		this.storeHits = storeHits;
+		this.storeOpen = storeOpen;
+		this.storeClose = storeClose;
+		this.storePermission = storePermission;
+		this.storePictureList = storePictureList;
+		this.storeEventList = storeEventList;
+		this.optionCategoryList = optionCategoryList;
+		this.optionDetailList = optionDetailList;
+		this.storeCategoryList = storeCategoryList;
+		this.StorePaymentOptionList = storePaymentOptionList;
+	}
 	/**
 	 * JSP에서 storeOpenFormat로 호출 - storeOpen를 지정 포멧으로 반환한다.
 	 * @return HH-mm형식의 DATE 문자열 - ex - (20:15)
@@ -290,10 +316,17 @@ public class Store implements Serializable{
 	public void setStoreCategoryList(List<StoreCategory> storeCategoryList) {
 		this.storeCategoryList = storeCategoryList;
 	}
+	public List<StorePaymentOptionList> getStorePaymentOptionList() {
+		return StorePaymentOptionList;
+	}
+	public void setStorePaymentOptionList(List<StorePaymentOptionList> storePaymentOptionList) {
+		StorePaymentOptionList = storePaymentOptionList;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((StorePaymentOptionList == null) ? 0 : StorePaymentOptionList.hashCode());
 		result = prime * result + ((optionCategoryList == null) ? 0 : optionCategoryList.hashCode());
 		result = prime * result + ((optionDetailList == null) ? 0 : optionDetailList.hashCode());
 		result = prime * result + ((storeAddress == null) ? 0 : storeAddress.hashCode());
@@ -321,6 +354,11 @@ public class Store implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Store other = (Store) obj;
+		if (StorePaymentOptionList == null) {
+			if (other.StorePaymentOptionList != null)
+				return false;
+		} else if (!StorePaymentOptionList.equals(other.StorePaymentOptionList))
+			return false;
 		if (optionCategoryList == null) {
 			if (other.optionCategoryList != null)
 				return false;
@@ -402,12 +440,29 @@ public class Store implements Serializable{
 	}
 	@Override
 	public String toString() {
+		final int maxLen = 10;
 		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
 				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeCategory="
 				+ storeCategory + ", storeHits=" + storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose
-				+ ", storePermission=" + storePermission + ", storePictureList=" + storePictureList
-				+ ", storeEventList=" + storeEventList + ", optionCategoryList=" + optionCategoryList
-				+ ", optionDetailList=" + optionDetailList + ", storeCategoryList=" + storeCategoryList + "]";
+				+ ", storePermission=" + storePermission + ", storePictureList="
+				+ (storePictureList != null ? storePictureList.subList(0, Math.min(storePictureList.size(), maxLen))
+						: null)
+				+ ", storeEventList="
+				+ (storeEventList != null ? storeEventList.subList(0, Math.min(storeEventList.size(), maxLen)) : null)
+				+ ", optionCategoryList="
+				+ (optionCategoryList != null
+						? optionCategoryList.subList(0, Math.min(optionCategoryList.size(), maxLen)) : null)
+				+ ", optionDetailList="
+				+ (optionDetailList != null ? optionDetailList.subList(0, Math.min(optionDetailList.size(), maxLen))
+						: null)
+				+ ", storeCategoryList="
+				+ (storeCategoryList != null ? storeCategoryList.subList(0, Math.min(storeCategoryList.size(), maxLen))
+						: null)
+				+ ", StorePaymentOptionList="
+				+ (StorePaymentOptionList != null
+						? StorePaymentOptionList.subList(0, Math.min(StorePaymentOptionList.size(), maxLen)) : null)
+				+ "]";
 	}
+	
 	
 }

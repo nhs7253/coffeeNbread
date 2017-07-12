@@ -76,15 +76,16 @@ public class StoreController {
 	 * @throws Exception
 	 */
 	@RequestMapping("addStoreController")
-	public String addStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
+	public ModelAndView addStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
 			BindingResult errors, HttpServletRequest request, ModelMap map) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		
 		if (errors.hasErrors()) {
-			return "store/store_register.tiles";
+			modelAndView.setViewName("index.tiles"); 
+			return modelAndView;
 		}
 		
-		
-		System.out.println("storeRegisterForm.getPaymentIdList() = " + storeRegisterForm.getPaymentIdList());
-
+	
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 		
@@ -124,19 +125,23 @@ public class StoreController {
 
 		StorePicture storePicture = new StorePicture(imageName.get(0), storeRegisterForm.getStoreId());
 
-		System.out.println("store = " + store);
 
 		// 세션으로 묶음
 		HttpSession session = request.getSession();
-		session.setAttribute("store", store);
+		Store storeRetrun = null;
 		try {
-			storeService.addStore(store, oclist, storePicture, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), storeRegisterForm.getPaymentIdList());
+			storeRetrun = storeService.addStore(store, oclist, storePicture, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), storeRegisterForm.getPaymentIdList());
+			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | DuplicatedOptionCategoryNameException
 				| DuplicatedStoreCategorytNameException | DuplicatedStorePictureException e) {
 			System.out.println(e.getMessage());
+			modelAndView.setViewName("redirect:/user/callStoreRegisterController.do"); 
+			return modelAndView;
 		}
-		return "store/store_success.tiles";
-
+		modelAndView.setViewName("common/store_view.tiles"); 
+		modelAndView.addObject("store", storeRetrun);
+		
+		return modelAndView;
 	}
 
 	/**
@@ -150,18 +155,32 @@ public class StoreController {
 	 * @throws IllegalStateException
 	 */
 	@RequestMapping("modifyStoreController")
-	public String modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
+	public ModelAndView modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
 			BindingResult errors, HttpServletRequest request) throws IllegalStateException, IOException {
 		
-		HttpSession session = request.getSession();
-		Store store = new Store();
-		BeanUtils.copyProperties(storeRegisterForm, store);
-		 
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if (errors.hasErrors()) {
+			modelAndView.setViewName("redirect:/common/viewStoreController.do?storeId="+((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId()); 
+			return modelAndView;
+		}
+		
+//		HttpSession session = request.getSession();
+//		Store store = new Store();
+		
+//		Store store = new Store();
+//		BeanUtils.copyProperties(storeRegisterForm, store);
+				 
 /*
-		HttpSession session = request.getSession();
+		
 
 		Store store = (Store) session.getAttribute("store");*/
+		HttpSession session = request.getSession();
+//		Store store = (Store) session.getAttribute("storeInfo");
+		Store store = new Store();
+		BeanUtils.copyProperties(storeRegisterForm, store);
 		
+		String storeCategory = "";
 		// 매장 분류 수정
 		List<String> optionCategoryList = new ArrayList<String>();
 		List<OptionCategory> oclist = new ArrayList<OptionCategory>();
@@ -171,8 +190,9 @@ public class StoreController {
 			OptionCategory optionCategoryList2 = new OptionCategory(optionCategoryList.get(i),
 					storeRegisterForm.getStoreId());
 			oclist.add(optionCategoryList2);
+			storeCategory += optionCategoryList2.getOptionCategory() +", ";
 		}
-		
+		store.setStoreCategory(storeCategory.substring(0, storeCategory.length()-2));
 		 
 		// 사진 수정 삭제 및 재업로드
 		// storePicture 등록
@@ -207,17 +227,26 @@ public class StoreController {
 			storePictureList.add(new StorePicture(imageName.get(i), storeRegisterForm.getStoreId()));
 		}
 
-		session.setAttribute("store", store);
+//		session.setAttribute("store", store);
 
 		// 수정하는 서비스 호출
+	
+		Store storeRetrun = null;
 		try {
-			storeService.modifyStore(store, oclist, storePictureList);
-		} catch (DuplicatedStoreIdException | StorePictureNotFoundException e) {
+			storeRetrun = storeService.modifyStore(store, oclist, storePictureList, storeRegisterForm.getPaymentIdList());
+			session.setAttribute("storeInfo", storeRetrun);
+		} catch (DuplicatedStoreIdException | StorePictureNotFoundException | DuplicatedOptionCategoryNameException e) {
 			System.out.println(e.getMessage());
-		}
+			modelAndView.setViewName("redirect:/user/callStoreModifyController.do"); 
+			return modelAndView;
+		}	
 
-		return "store/store_success.tiles";
 
+		modelAndView.setViewName("common/store_view.tiles"); 
+		modelAndView.addObject("store", storeRetrun);
+			
+		return modelAndView;
+		
 	}
 
 	/**
@@ -237,8 +266,8 @@ public class StoreController {
 
 		storeService.removeStoretById(store.getStoreId(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		session.removeAttribute("storeInfo");
-		return "store/store_register.tiles";
-
+		//return "redirect:/user/callStoreRegisterController.do";
+		return "index.tiles";
 	}
 	
 	/**
@@ -283,6 +312,7 @@ public class StoreController {
 		
 		
 		session.setAttribute("storeInfo", store);
+		
 		return modelAndView;
 	}
 	

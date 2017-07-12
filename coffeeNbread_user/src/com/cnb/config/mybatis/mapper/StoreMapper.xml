@@ -81,6 +81,13 @@
  	<collection property="storeCategoryList" resultMap="com.cnb.config.mybatis.mapper.StoreCategoryMapper.StoreCategory-resultmap"/>
  </resultMap>
  
+ <!-- 수정 중 -->
+ <resultMap type="com.cnb.vo.Store" id="store-storePicture-optionCategory-storePaymentOption-resultmap" extends="store-resultmap">
+ 	<collection property="storePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>
+ 	<collection property="optionCategoryList" resultMap="com.cnb.config.mybatis.mapper.OptionCategoryMapper.optionCategory-default"/>
+ 	<collection property="storePaymentOptionList" resultMap="com.cnb.config.mybatis.mapper.StorePaymentOptionListMapper.storePaymentOptionList-PaymentOptionList-resultmap"/>
+ </resultMap>
+ 
  <!--매장 등록 Store insert  -->
 	<insert id="insertStore" parameterType="com.cnb.vo.Store">
 		INSERT INTO store
@@ -272,7 +279,7 @@
 		</choose>
 	</select>
 	
-	<select id="selectStroeJoinPicture" resultMap="store-storePicture-resultmap" parameterType="string">
+	<select id="selectStroeJoinPicture" resultMap="store-storePicture-optionCategory-storePaymentOption-resultmap" parameterType="string">
 		SELECT  s.store_id,
 				s.store_name,
 				s.store_intro,
@@ -284,9 +291,16 @@
 				s.store_open,
 				s.store_close,
 				s.store_permission,
-				sp.store_picture
-		FROM store s,store_picture sp
-		WHERE s.store_id = sp.store_id(+)
+				sp.store_picture,
+				oc.option_id,
+				oc.option_category,
+				spo.payment_id,
+				po.payment_method
+		FROM store s,store_picture sp, option_category oc, store_payment_optionlist spo , payment_optionlist po
+		WHERE s.store_id = sp.store_id(+) 
+		AND s.store_id = oc.store_id(+)
+		AND s.store_id = spo.store_id(+)
+		AND spo.payment_id = po.payment_id(+)
 		AND s.store_id=#{value}
 	</select>
 
