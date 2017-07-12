@@ -15,18 +15,18 @@ $(document).ready(function(){
 <form action="${initParam.rootPath }/modifyProductController.do" method="POST" enctype="multipart/form-data">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 		<table>
-			<tr>
+			<tr class="form-group">
 				<th>제품 ID</th>
 				<td>${requestScope.product.productId }</td>
-				<td><input type="hidden" name="productId" value="${requestScope.product.productId }"></td>
+				<td><div class="col-xs-5"><input type="hidden" name="productId" value="${requestScope.product.productId }" class="form-control"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>제품 이름</th>
-				<td><input type="text" name="productName" value="${requestScope.product.productName }"></td>
+				<td><div class="col-xs-5"><input type="text" name="productName" value="${requestScope.product.productName }" class="form-control"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>제품 가격</th>
-				<td><input type="number" min="100" name="productPrice" value="${requestScope.product.productPrice }"></td>
+				<td><div class="col-xs-5"><input type="number" min="100" name="productPrice" value="${requestScope.product.productPrice }" class="form-control"></div></td>
 			</tr>
 			<tr>
 				<th>제품 상세</th>
@@ -39,13 +39,13 @@ $(document).ready(function(){
 				<input type="checkbox" name="sellingOption" value="N" <c:if test="${requestScope.product.sellingOption eq 'N'}">checked="checked"</c:if>>판매안함
 				</td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>금일 제품 개수</th>
-				<td><input type="number" min="0" name="todayProductCount" value="${requestScope.product.todayProductCount }"></td>
+				<td><input type="number" min="0" name="todayProductCount" value="${requestScope.product.todayProductCount }" class="form-control"></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>추천 제품 개수</th>
-				<td><input type="number" min="0" name="recommendProductCount" value="${requestScope.product.recommendProductCount }"></td>
+				<td><input type="number" min="0" name="recommendProductCount" value="${requestScope.product.recommendProductCount }" class="form-control"></td>
 			</tr>
 			<tr>
 				<th>옵션</th>
