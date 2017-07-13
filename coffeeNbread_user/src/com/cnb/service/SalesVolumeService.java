@@ -4,7 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.cnb.vo.PaymentDetails;
+import com.cnb.vo.Product;
 
+/*
+ * 최민희
+ * 2017-07-10
+ * 수정
+ */
 /*
  * 최민희
  * 2017-07-04
@@ -68,4 +74,22 @@ public interface SalesVolumeService {
 	 * @param storeId, todayDate(오늘이 월요일인지 비교하기 위해), productCategory
 	 */
 	void findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate(String storeId, String productCategory, Date todayDate);
+	
+	/**
+	 * 제품증감폭으로 제품 조회 - Top3만 조회
+	 * @param storeId, identifyCode
+	 */
+	List<Product> findProductGapByIdentifyCode(String storeId, String identifyCode);
+	
+	/**
+	 * 상승세/하락세로 제품의 금일 제품 개수 수정 (today_product_count) - 상승세/하락세일 경우 5%로 조정
+	 * @param storeId, productId, identifyCode
+	 */
+	void modifyProductTodayCountByGap(String storeId, String productId, String identifyCode);
+	
+	/**
+	 * 각 제품마다 오늘 현장에서 팔린 개수 조회 - 현장 판매 시스템에 이용
+	 * @param storeId
+	 */
+	
 }

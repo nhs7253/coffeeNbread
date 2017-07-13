@@ -179,4 +179,10 @@ public class ProductServiceImpl implements ProductService {
 	public void findRemoveProduct(String storeId, List<String> productIdList) {
 		dao.deleteProductByProductList(storeId, productIdList);
 	}
+
+	@Override
+	public List<Product> findProductListNoPaging(String storeId) {
+		return dao.selectProductListNoPaging(storeId);
+	}
+	
 }

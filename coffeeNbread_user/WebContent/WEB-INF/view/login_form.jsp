@@ -454,7 +454,7 @@ body {
 </style>
 
 <script type="text/javascript"
-	src="/spring_mvc_tiles/resource/jquery/jquery-3.2.1.min.js"></script>
+	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.toggle').on('click', function() {

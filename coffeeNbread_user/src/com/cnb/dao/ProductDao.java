@@ -135,6 +135,7 @@ public interface ProductDao {
 	 */
 	int deleteProductByProductList(String storeId, List<String> productIdList);
 
+
 	
 	/**
 	 * 제품과 제품사진의 조인결과를 페이징 하지 않고 보여줌 (POS)
@@ -144,4 +145,11 @@ public interface ProductDao {
 	 * @return List<Product> 검색된 제품과 제품 사진 목록들
 	 */
 	List<Product> selectProductListToPOS(String storeId, String select, String keyword);
+
+	/**
+	 * 1개의 매장에 있는 모든 제품 정보 select - 페이징x
+	 * @param storeId
+	 * @return 조회된 제품 정보
+	 */
+	List<Product> selectProductListNoPaging(String storeId);
 }

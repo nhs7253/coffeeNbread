@@ -88,6 +88,15 @@ public interface StoreService {
 		 * @return list
 		 */
 	 List<Store> findOpionCategoryNDetailByIdList(String storeId);
+
+	 
+	 /**
+		 * 모든 매장 아이디 select
+		 * @param 
+		 * @return list
+		 */
+	 List<String> findAllStoreIdList(); 
+
 	 
 	 /**
 	 * 유저가 입력한 키워드를 통해 조회한 매장목록을 페이징하여 보여주는 Service

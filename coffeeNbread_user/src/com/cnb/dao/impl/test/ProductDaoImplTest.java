@@ -64,7 +64,7 @@ public class ProductDaoImplTest {
 		
 		System.out.println("4 : " + dao.selectProductListToPOS("s-4", "productName", ""));
 	}
-     
+    
 	public static void main(String[] args) throws IOException {
 		ProductDaoImplTest pd = (ProductDaoImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("productDaoImplTest");
 		pd.examTest();

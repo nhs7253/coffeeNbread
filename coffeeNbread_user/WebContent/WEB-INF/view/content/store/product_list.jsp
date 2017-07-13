@@ -48,31 +48,31 @@ ${requestScope.list }
 <p>
 
 <form action="${initParam.rootPath }/selectRemoveProductController.do" method="post">
-   <sec:csrfInput/><%-- csrf 토큰 --%>
-   <table class="table table-hover">
-      <thead>
-         <tr>
-            <th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;제품명&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;가격&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;판매여부&nbsp;&nbsp;</th>
-            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-         </tr>
-      </thead>
-      <tbody>
-         <%-- 전체 제품 목록 --%>
-         <c:forEach items="${requestScope.list }" var="product">
-         <tr>
-            <td>${product.productCategory }&nbsp;</td>
-            <td><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}&storeId=${product.storeId}">${product.productName }&nbsp;</a></td>
-            <td>${product.productPrice }&nbsp;&nbsp;</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
-            <td><input type="checkbox" name="productIdList" value="${product.productId}"></td>
-         </tr>
-         </c:forEach>
-      </tbody>
-   </table>
-      <button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+	<sec:csrfInput/><%-- csrf 토큰 --%>
+	<table>
+		<thead>
+			<tr>
+				<th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;제품명&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;가격&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;판매여부&nbsp;&nbsp;</th>
+				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%-- 전체 제품 목록 --%>
+			<c:forEach items="${requestScope.list }" var="product">
+			<tr>
+				<td align="center">${product.productCategory }&nbsp;</td>
+				<td align="center"><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
+				<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
+				<td align="center"><input type="checkbox" name="productIdList" value="${product.productId}"></td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<input type="submit" value="삭제" />
 </form>
 
 <p>

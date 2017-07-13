@@ -257,6 +257,14 @@
 			WHERE rnum >= #{startIndex}
 	</select>
 	
+
+	<!-- 모든 매장 id 조회 -->
+	<select id="selectAllStoreId" resultType="string">
+		SELECT  store_id
+		FROM	store
+	</select>
+	
+
 	<select id="selectStoreBySelectAndKeywordPagingCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*)
 		FROM store
@@ -303,5 +311,4 @@
 		AND spo.payment_id = po.payment_id(+)
 		AND s.store_id=#{value}
 	</select>
-
 </mapper>

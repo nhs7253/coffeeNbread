@@ -78,6 +78,11 @@ public class StoreDaoImpl implements StoreDao{
 	}
 
 	@Override
+	public List<String> selectAllStoreIdList() {
+		return session.selectList(makeSqlId("selectAllStoreId"));
+	}
+	
+	@Override
 	public List<Store> selectStoreBySelectAndKeywordPagingList(String select, String keyword, int startIndex, int endIndex) {
 		Map<String, String> input = new HashMap<String, String>();
 		input.put("select", select);
@@ -108,3 +113,4 @@ public class StoreDaoImpl implements StoreDao{
 		return session.update(makeSqlId("updateStorePermission"), input);
 	}
 }
+

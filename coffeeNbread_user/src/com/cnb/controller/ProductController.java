@@ -35,6 +35,16 @@ import com.cnb.vo.ProductPicture;
 
 /*
  * 최민희
+ * 2017-07-09
+ * 수정
+ */
+/*
+ * 최민희
+ * 2017-07-08
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-07-07
  * 수정
  */
@@ -130,10 +140,6 @@ public class ProductController {
 			productRegisterForm.getProductPicture().transferTo(dest);
 			map.addAttribute("fileName", fileName);
 		}
-		
-		System.out.println("modifyProductController - productId : " + product.getProductId());
-		System.out.println("modifyProductController - storeId : " + ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		System.out.println("modifyProductController - fileName : " + fileName);	//새로 선택한 사진
 		
 		ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(product.getProductId(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
 		productPicture.setProductPicture(fileName);

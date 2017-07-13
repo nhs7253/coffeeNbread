@@ -158,4 +158,9 @@ public class ProductDaoImpl implements ProductDao {
 		input.put("keyword", keyword);
 		return session.selectList(makeSqlId("selectProductListToPOS"), input);
 	}
+	
+	@Override
+	public List<Product> selectProductListNoPaging(String storeId) {
+		return session.selectList(makeSqlId("selectProductListNoPaging"), storeId);
+	}
 }

@@ -4,12 +4,21 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-		
+	<!-- 스케쥴러 사용하기 위해 task 추가함 -->	
 		
 	<context:component-scan base-package="com.cnb.controller"/>
+	
+	<!-- 스케쥴러파일이 존재하는 패키지 설정 --> 
+	<context:component-scan base-package="com.crontab" /> 
+	
+	<!-- 해당 태그들은 크론탭을 설정에 필요한 태그들 --> 
+	<task:scheduler id="jobScheduler" pool-size="10" /> 
+	<task:annotation-driven scheduler="jobScheduler" />
 	
 	<!-- controller -->
 	
@@ -112,8 +121,20 @@
 	<mvc:view-controller path="/store/product_list.do" view-name="store/product_list.tiles"/>
 	<!-- 제품 상세 폼 -->
 	<mvc:view-controller path="/store/product_detail.do" view-name="store/product_detail.tiles"/>
+	<!-- 판매량 조회 폼 -->
+	<mvc:view-controller path="/store/salesVolume_view.do" view-name="store/salesVolume_view.tiles"/>
+	<!-- 예약 현황 조회 폼 -->
+	<mvc:view-controller path="/store/reservation_list.do" view-name="store/reservation_list.tiles"/>
+	<!-- 예약 상세 조회 품 -->
+	<mvc:view-controller path="/store/reservation_detail/do" view-name="store/reservation_detail.tiles"/>	
+	<!-- 포스(현장 판매 시스템) 폼 -->
+	<mvc:view-controller path="/store/product_pos.do" view-name="store/product_pos.tiles"/>
 	
 	
+	<!--전체 레시피게시판 조회  -->
+	<mvc:view-controller path="/common/recipeBoard_find.do" view-name="common/recipeBoard_find.tiles"/>
+
+
    <!--유저가 보는 제품 목록폼  -->
 	<mvc:view-controller path="/user/userFindProductListController.do" view-name="store/product_detail.tiles"/>
 	
@@ -134,10 +155,7 @@
 	<!--  -->
 	<mvc:view-controller path="/request2.do" view-name="request2"/>
 	<mvc:view-controller path="/response2.do" view-name="response2"/>
-	
-	
-	
-	
+
 			
 	<!-- TilesConfigurer 빈으로 등록 : Tiles설정파일을 등록하는 빈 -->
 	

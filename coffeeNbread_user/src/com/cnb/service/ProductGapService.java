@@ -37,4 +37,9 @@ public interface ProductGapService {
 	 */
 	HashMap<String, Object> findProductGapListByIdentifyCodeByStoreIdAndIdentifyCode(int page, String storeId, String identifyCode);
 	
+	/**
+	 * 한 제품의 증감 식별코드 조회
+	 * @param storeId, identifyCode
+	 */
+	String findIdentifyCodeByProductId(String storeId, String productId);
 }

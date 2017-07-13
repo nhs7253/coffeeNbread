@@ -80,7 +80,13 @@ public interface StoreDao {
 	 List<Store> selectOpionCategoryNDetailByIdList(String storeId);
 	 
 	 /**
-	 * 매장목록을 페이징 하여, 그 범위 만큼 내용을 반환  (paging) - content
+		 * 모든 매장 아이디 select
+		 * @param 
+		 * @return list
+		 */
+	 List<String> selectAllStoreIdList(); 
+	 
+	 /* 매장목록을 페이징 하여, 그 범위 만큼 내용을 반환  (paging) - content
 	 * @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), 카테고리(storeCategory)
 	 * @param keyword 검색할 키워드
 	 * @param startIndex 시작 컬럼 번호
@@ -111,4 +117,5 @@ public interface StoreDao {
 	 * @return int 처리 개수
 	 */
 	int updateStorePermission(String storeId, String storePermission);
+	
 }

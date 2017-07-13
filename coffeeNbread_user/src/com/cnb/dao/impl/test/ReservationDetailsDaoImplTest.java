@@ -3,6 +3,7 @@ package com.cnb.dao.impl.test;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -43,7 +44,7 @@ public class ReservationDetailsDaoImplTest {
 	private PaymentDetailsDao pdDao;
 	
 	public void Test() {
-
+/*
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		
 		System.out.println("유저가 예약 내역 삽입"); 
@@ -54,7 +55,7 @@ public class ReservationDetailsDaoImplTest {
 		System.out.println(dao.updateReservationConfirmDate
 				(new ReservationDetails(0,pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getTradeDate(),
 						pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getReservationOrderCount(),new Date(),new Date(),"p-18","s-7","u-1")));
-		
+		*/
 		/*System.out.println("===============Count===================");
 		System.out.println("매장의 전체 예약수 : " + dao.selectReservationDetailsListCountByStoreId("s-1"));
 		System.out.println("유저의 전체 예약수 : " + dao.selectReservationDetailsListCountByUserId("u-1"));
@@ -110,7 +111,11 @@ public class ReservationDetailsDaoImplTest {
 			System.out.println("이상발견");
 		}*/
 		
+//		System.out.println("예약 번호로 조회");
+//		System.out.println(dao.selectReservationDetailsByReservationNo("s-1", 3));
 		
+		 List list4 = dao.selectReservationDetailsListByStoreId("s-1", 1, 4);
+		 System.out.println(list4);
 	}
 		
 	public static void main(String[] args) throws IOException {
