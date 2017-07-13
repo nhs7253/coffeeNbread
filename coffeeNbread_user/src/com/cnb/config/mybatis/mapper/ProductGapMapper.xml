@@ -141,10 +141,18 @@
 							AND	   g.product_id = p.product_id
 							AND	   g.store_id = #{storeId}
 							AND	   g.identify_code = #{identifyCode}
+							ORDER BY g.product_gap DESC
 					) 
 					WHERE rownum <= #{endIndex}
 			)
 			WHERE rnum >= #{startIndex}
 		]]>
+	</select>
+	
+	<select id="findIdentifyCodeByProductId"  parameterType="map" resultType="string">
+		SELECT  identify_code
+		FROM 	product_gap
+		WHERE	store_id = #{storeId}
+		AND		product_id = #{productId}	
 	</select>
 </mapper>

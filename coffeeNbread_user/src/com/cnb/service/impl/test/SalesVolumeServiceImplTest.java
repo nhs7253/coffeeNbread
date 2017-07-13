@@ -92,22 +92,22 @@ public class SalesVolumeServiceImplTest {
 		} 
 		
 		System.out.println("------제품 종류------");
-		List list7 = service.findSalesVolumeByStoreIdAndProductCategory("s-1", "빵");
+		List list7 = service.findSalesVolumeByStoreIdAndProductCategory("s-1", "커피");
 		System.out.println(list7);
 		
 		System.out.println("------제품명------");
-		List list8 = service.findSalesVolumeByStoreIdAndProductName("s-1", "제품1");
+		List list8 = service.findSalesVolumeByStoreIdAndProductName("s-1", "검정깨고구마");
 		System.out.println(list8);
 
-		System.out.println("------예상생산량 (제품종류)------");
+		System.out.println("------추천 생산량 (제품종류)------");
 		System.out.println(service.findRecommendSalesVolumeByStoreIdAndTodayDateAndMethod("s-1", "productCategory", "빵"));
 		
-		System.out.println("------예상생산량 (제품명)------");
-		System.out.println(service.findRecommendSalesVolumeByStoreIdAndTodayDateAndMethod("s-1", "productName", "제품3"));
+		System.out.println("------추천 생산량 (제품명)------");
+		System.out.println(service.findRecommendSalesVolumeByStoreIdAndTodayDateAndMethod("s-1", "productName", "소보루빵"));
 
 		System.out.println("-----비율 비교 후 상승/하락세 정보 update-----");
 		try {
-			service.findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate("s-1", "빵", dt.parse("2017-07-05"));
+			service.findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate("s-1", "빵", dt.parse("2017-07-11"));
 		} catch (ParseException e) {
 			System.out.println("이상 발생");
 		}

@@ -71,4 +71,14 @@ public class ProductGapDaoImpl implements ProductGapDao {
 		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("selectProductGapListByIdentifyCodeByStoreIdAndIdentifyCode"), info);
 	}
+
+	@Override
+	public String selectIdentifyCodeByProductId(String storeId, String productId) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productId", productId);
+		return session.selectOne(makeSqlId("findIdentifyCodeByProductId"), info);
+	}
+	
+	
 }

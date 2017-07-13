@@ -7,6 +7,16 @@ import com.cnb.vo.ReservationDetails;
 
 /*
  * 최민희
+ * 2017-07-12
+ * 수정
+ */
+/*
+ * 최민희
+ * 2017-07-11
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-06-29 수정
  * selectReservationDetailsListByStoreId 추가
  * selectReservationDetailsListByStoreIdAndProductHopeTime 추가
@@ -21,9 +31,7 @@ import com.cnb.vo.ReservationDetails;
  * @author minhee
  *
  */
-public interface ReservationDetailsDao {
-	
-	
+public interface ReservationDetailsDao {	
 
 	/**
 	 * 매장에서 예약확인하면 그 시각을 예약확인테이블에 제품별로 확인시각 넣어줌.
@@ -32,10 +40,7 @@ public interface ReservationDetailsDao {
 	 * @return
 	 */
 	int updateReservationConfirmDate(ReservationDetails reservationDetails);
-	
-	
-	
-	
+
 	
 	/**
 	 * 1개의 예약 정보 insert
@@ -105,4 +110,24 @@ public interface ReservationDetailsDao {
 	List<ReservationDetails> selectReservationDetailsListByStoreIdAndProductHopeTime(String storeId, Date productHopeTime, int startIndex, int endIndex);
 
 	
+	/**
+	 * 한 매장에서 예약시간, 예약자로 상세 예약 정보 조회 
+	 * @param storeId, reservationTime, userId
+	 * @return 조회된 예약 상세 정보
+	 */
+	List<ReservationDetails> selectReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId);
+
+	/**
+	 * 선택한 예약내역들을 delete
+	 * @param storeId, reservationDetails
+	 * @return 삭제된 제품 개수
+	 */
+	int deleteReservationDetails(String storeId, ReservationDetails reservation);
+
+	/**
+	 * reservationNo로 예약 내역 조회
+	 * @param storeId, reservationNo
+	 * @return 삭제된 제품 개수
+	 */
+	ReservationDetails selectReservationDetailsByReservationNo(String storeId, int reservationNo);
 }

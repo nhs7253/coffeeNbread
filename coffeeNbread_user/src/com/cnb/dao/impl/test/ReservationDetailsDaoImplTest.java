@@ -3,6 +3,7 @@ package com.cnb.dao.impl.test;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -43,12 +44,15 @@ public class ReservationDetailsDaoImplTest {
 	private PaymentDetailsDao pdDao;
 	
 	public void Test() {
+/*<<<<<<< HEAD
 		
 		  
 		System.out.println(dao.selectReservationDetailsListByUserId("u-1", 1, 1000));
 		
 		
-/*
+=======
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
+
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		
 		System.out.println("유저가 예약 내역 삽입"); 
@@ -59,8 +63,13 @@ public class ReservationDetailsDaoImplTest {
 		System.out.println(dao.updateReservationConfirmDate
 				(new ReservationDetails(0,pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getTradeDate(),
 						pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getReservationOrderCount(),new Date(),new Date(),"p-18","s-7","u-1")));
+<<<<<<< HEAD
 		
 */		/*System.out.println("===============Count===================");
+=======
+		*/
+		/*System.out.println("===============Count===================");
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 		System.out.println("매장의 전체 예약수 : " + dao.selectReservationDetailsListCountByStoreId("s-1"));
 		System.out.println("유저의 전체 예약수 : " + dao.selectReservationDetailsListCountByUserId("u-1"));
 		System.out.println("매장에서 유저아이디로 조회한 에약 수 : " + dao.selectReservationDetailsListCountByMethod("s-1", "userId", "u-1"));
@@ -115,7 +124,11 @@ public class ReservationDetailsDaoImplTest {
 			System.out.println("이상발견");
 		}*/
 		
+//		System.out.println("예약 번호로 조회");
+//		System.out.println(dao.selectReservationDetailsByReservationNo("s-1", 3));
 		
+		 List list4 = dao.selectReservationDetailsListByStoreId("s-1", 1, 4);
+		 System.out.println(list4);
 	}
 		
 	public static void main(String[] args) throws IOException {

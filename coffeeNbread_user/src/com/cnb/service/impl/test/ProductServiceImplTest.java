@@ -55,7 +55,7 @@ public class ProductServiceImplTest {
 			System.err.println(e.getMessage());
 		}
 */
-		
+/*		
 		//제품 조회
 		System.out.println("==========조회==========");
 		
@@ -79,7 +79,7 @@ public class ProductServiceImplTest {
 			   }
 		   	}
 		}	
-		
+		*/
 	/*	
 		//제품명으로 제품 조회
 		System.out.println("==========제품명==========");
@@ -119,7 +119,7 @@ public class ProductServiceImplTest {
 		}	
 		*/
 		
-		//한 매장의 모든 제품 조회
+/*		//한 매장의 모든 제품 조회
 		System.out.println("==========모든 종류==========");
 		HashMap<String, Object> map3 = service.findProductList(page, storeId);
 		Iterator iterator3 = map3.entrySet().iterator();
@@ -134,5 +134,9 @@ public class ProductServiceImplTest {
 			   }
 		   }
 		}
+		*/
+		
+		System.out.println("------------페이징 없이 제품 목록 조회 ---------------");
+		System.out.println(service.findProductListNoPaging("s-1"));
 	}
 }

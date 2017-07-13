@@ -3,6 +3,7 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,7 +40,7 @@ public class GeneralUser implements Serializable{
 	private String userAddress;
 	private String userActiveState;
 	private String storeId;
-	
+
 	private Store store;
 	
 	public GeneralUser() {
@@ -72,7 +73,6 @@ public class GeneralUser implements Serializable{
 		this.userActiveState = userActiveState;
 		this.storeId = storeId;
 	}
-	
 	
 	public GeneralUser(String userId, String userPw, String userName, Date userBirth, String userGender,
 			String userEmail, String userPhone, String userAddress, String userActiveState, String storeId,

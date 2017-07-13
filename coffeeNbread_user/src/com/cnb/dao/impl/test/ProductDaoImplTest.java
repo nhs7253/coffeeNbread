@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import com.cnb.dao.ProductDao;
 
 /*
+ * 노현식
+ * 2017-07-13
+ * POS용  selectProductListToPOS() 테스트
+ */
+/*
  * 최민희
  * 2017-07-01
  * 수정
@@ -56,8 +61,10 @@ public class ProductDaoImplTest {
 		//System.out.println("id : " + dao.selectProductListCountByMethod("s-1", "id", "p-2"));
 		//System.out.println("sellingOption : " + dao.selectProductListCountByMethod("s-1", "sellingOption", "Y"));
 		System.out.println("이상없음");
+		
+		System.out.println("4 : " + dao.selectProductListToPOS("s-4", "productName", ""));
 	}
-     
+    
 	public static void main(String[] args) throws IOException {
 		ProductDaoImplTest pd = (ProductDaoImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("productDaoImplTest");
 		pd.examTest();

@@ -26,6 +26,7 @@
 	<resultMap type="GeneralUser" id="GeneralUser-UserAuthority-resultmap" extends="GeneralUser-resultmap">
 		<association property="store" resultMap="com.cnb.config.mybatis.mapper.UserAuthorityMapper.UserAuthority-resultmap"/>
 	</resultMap>
+
 	
 	<insert id="insertGeneralUser" parameterType="GeneralUser">
 		INSERT INTO general_user VALUES(#{userId},
