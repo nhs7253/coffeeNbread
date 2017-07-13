@@ -9,6 +9,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 /*
  * 노현식
+ * 2017-07-10
+ * String storeCategory 추가
+ * 
+ * 노현식
  * 2017-07-04
  * getStoreOpenFormat(), getStoreCloseFormat() 추가
  * 
@@ -32,6 +36,7 @@ public class Store implements Serializable{
 	private String storePhone;
 	private String storeAddress;
 	private String storeEmail;
+	private String storeCategory;
 	private int storeHits;
 	@DateTimeFormat(pattern="hh:mm")
 	private Date storeOpen;
@@ -136,6 +141,44 @@ public class Store implements Serializable{
 		this.storeCategoryList = storeCategoryList;
 	}
 	
+	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
+			String storeEmail, String storeCategory, int storeHits, Date storeOpen, Date storeClose,
+			String storePermission) {
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeIntro = storeIntro;
+		this.storePhone = storePhone;
+		this.storeAddress = storeAddress;
+		this.storeEmail = storeEmail;
+		this.storeCategory = storeCategory;
+		this.storeHits = storeHits;
+		this.storeOpen = storeOpen;
+		this.storeClose = storeClose;
+		this.storePermission = storePermission;
+	}
+	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
+			String storeEmail, String storeCategory, int storeHits, Date storeOpen, Date storeClose,
+			String storePermission, List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
+			List<OptionCategory> optionCategoryList, List<OptionDetail> optionDetailList,
+			List<StoreCategory> storeCategoryList) {
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeIntro = storeIntro;
+		this.storePhone = storePhone;
+		this.storeAddress = storeAddress;
+		this.storeEmail = storeEmail;
+		this.storeCategory = storeCategory;
+		this.storeHits = storeHits;
+		this.storeOpen = storeOpen;
+		this.storeClose = storeClose;
+		this.storePermission = storePermission;
+		this.storePictureList = storePictureList;
+		this.storeEventList = storeEventList;
+		this.optionCategoryList = optionCategoryList;
+		this.optionDetailList = optionDetailList;
+		this.storeCategoryList = storeCategoryList;
+	}
+	
 	/**
 	 * JSP에서 storeOpenFormat로 호출 - storeOpen를 지정 포멧으로 반환한다.
 	 * @return HH-mm형식의 DATE 문자열 - ex - (20:15)
@@ -151,8 +194,6 @@ public class Store implements Serializable{
 	public String getStoreCloseFormat(){
 		return new SimpleDateFormat("HH:mm").format(storeClose);
 	}
-	
-	
 	public String getStoreId() {
 		return storeId;
 	}
@@ -188,6 +229,12 @@ public class Store implements Serializable{
 	}
 	public void setStoreEmail(String storeEmail) {
 		this.storeEmail = storeEmail;
+	}
+	public String getStoreCategory() {
+		return storeCategory;
+	}
+	public void setStoreCategory(String storeCategory) {
+		this.storeCategory = storeCategory;
 	}
 	public int getStoreHits() {
 		return storeHits;
@@ -243,16 +290,6 @@ public class Store implements Serializable{
 	public void setStoreCategoryList(List<StoreCategory> storeCategoryList) {
 		this.storeCategoryList = storeCategoryList;
 	}
-	
-	@Override
-	public String toString() {
-		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
-				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeHits="
-				+ storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose + ", storePermission="
-				+ storePermission + ", storePictureList=" + storePictureList + ", storeEventList=" + storeEventList
-				+ ", optionCategoryList=" + optionCategoryList + ", optionDetailList=" + optionDetailList
-				+ ", storeCategoryList=" + storeCategoryList + "]";
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -260,6 +297,7 @@ public class Store implements Serializable{
 		result = prime * result + ((optionCategoryList == null) ? 0 : optionCategoryList.hashCode());
 		result = prime * result + ((optionDetailList == null) ? 0 : optionDetailList.hashCode());
 		result = prime * result + ((storeAddress == null) ? 0 : storeAddress.hashCode());
+		result = prime * result + ((storeCategory == null) ? 0 : storeCategory.hashCode());
 		result = prime * result + ((storeCategoryList == null) ? 0 : storeCategoryList.hashCode());
 		result = prime * result + ((storeClose == null) ? 0 : storeClose.hashCode());
 		result = prime * result + ((storeEmail == null) ? 0 : storeEmail.hashCode());
@@ -297,6 +335,11 @@ public class Store implements Serializable{
 			if (other.storeAddress != null)
 				return false;
 		} else if (!storeAddress.equals(other.storeAddress))
+			return false;
+		if (storeCategory == null) {
+			if (other.storeCategory != null)
+				return false;
+		} else if (!storeCategory.equals(other.storeCategory))
 			return false;
 		if (storeCategoryList == null) {
 			if (other.storeCategoryList != null)
@@ -357,6 +400,14 @@ public class Store implements Serializable{
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
+				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeCategory="
+				+ storeCategory + ", storeHits=" + storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose
+				+ ", storePermission=" + storePermission + ", storePictureList=" + storePictureList
+				+ ", storeEventList=" + storeEventList + ", optionCategoryList=" + optionCategoryList
+				+ ", optionDetailList=" + optionDetailList + ", storeCategoryList=" + storeCategoryList + "]";
+	}
 	
-
 }

@@ -33,12 +33,16 @@
 	<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
 	<li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
 	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
-	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=service-qna-s-1">매장 Q&A 글쓰기</a></li>
+	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li>
+	<li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
 </sec:authorize>
 
+
+<li><a href="${initParam.rootPath }/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
+<li><a href="${initParam.rootPath }/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
 <li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do">Q&A 게시판 목록</a></li>
-<li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=service-qna-s-1">매장 Q&A 게시판 목록</a></li>
+<li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=s-1">매장 Q&A 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do">공지사항 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">매장 목록</a></li>
 
@@ -52,20 +56,20 @@
 
 
 <%-- 매장 관리자 --%>
-<sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
 	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
-	
-	
-	
-	
+	<li><a href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내 제품 목록 조회</a></li>
 </sec:authorize>
 
 
+<li><a href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
 
+<li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do">유저 결제내역 확인</a></li>
 
-<li><a href="${initParam.rootPath}/selectStoreController.do">매장 조회</a></li>
+<li><a href="${initParam.rootPath }/user/findReservationDetailsController.do">유저 예약내역 확인</a></li>
+
 </ul>
 
 

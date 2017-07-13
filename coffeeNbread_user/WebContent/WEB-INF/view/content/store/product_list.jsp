@@ -20,16 +20,20 @@ td {
 
 <h2>제품 목록</h2>
 
-<form action="${initParam.rootPath }/findProductListByMethod.do"
-	method="post">
-	<sec:csrfInput />
-	<%-- csrf 토큰 --%>
+
+
+
+<form action="${initParam.rootPath }/findProductListByMethod.do" method="post">
+	<sec:csrfInput/><%-- csrf 토큰 --%>
 	<select name="method">
 		<option value="productCategory">제품 종류</option>
 		<option value="productName">제품 이름</option>
 		<option value="sellingOption">판매 여부(Y/N)</option>
-	</select> <input type="text" name="methodContent" /> <input type="submit"
-		value="검색" />
+
+	</select>
+	<input type="hidden" name="storeId" value="${param.storeId}"/>
+	<input type="text" name="methodContent" />
+	<input type="submit" value="검색" />
 </form>
 
 <form action="${initParam.rootPath }/findProductListController.do"
@@ -56,8 +60,8 @@ td {
 		<c:forEach items="${requestScope.list }" var="product">
 			<tr>
 				<td>${product.productCategory }&nbsp;</td>
-				<td><a
-					href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
+
+				<td><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}&storeId=${product.storeId}">${product.productName }&nbsp;</a></td>
 				<td>${product.productPrice }&nbsp;&nbsp;</td>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
 				<td>

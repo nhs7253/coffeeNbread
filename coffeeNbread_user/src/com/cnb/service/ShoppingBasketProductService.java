@@ -51,7 +51,7 @@ public interface ShoppingBasketProductService {
 	
 	
 	
-	void addShoppingBasketProduct(ShoppingBasketProduct shoppingBasketProduct)throws addShoppingCountZeroException;
+	ShoppingBasketProduct addShoppingBasketProduct(ShoppingBasketProduct shoppingBasketProduct)throws addShoppingCountZeroException;
 	
 	
 	

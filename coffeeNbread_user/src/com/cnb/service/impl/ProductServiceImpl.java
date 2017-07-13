@@ -100,9 +100,10 @@ public class ProductServiceImpl implements ProductService {
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-		
+
 		List<Product> list = dao.selectProductListByCategory(storeId, productCategory, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		map.put("list", list);
+		
 		return map;
 	}
 

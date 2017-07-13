@@ -32,7 +32,7 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store
@@ -47,7 +47,7 @@ public interface StoreService {
 	 * @param storeId
 	 * 
 	 */
-	int removeStoretById(String storeId);
+	int removeStoretById(String storeId, String userId);
 	
 	
 	/**
@@ -90,7 +90,7 @@ public interface StoreService {
 	 
 	 /**
 	 * 유저가 입력한 키워드를 통해 조회한 매장목록을 페이징하여 보여주는 Service
-	 * @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress)
+	 * @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), 카테고리(storeCategory)
 	 * @param keyword 검색할 키워드
 	 * @param page 보려는 페이지 번호
 	 * @return Map<String, Object> 페이징을 위한 정보 결과
@@ -104,4 +104,5 @@ public interface StoreService {
 	  * @return Store 방문할 매장 객체
 	  */
 	 Store viewStore(String storeId, Authentication authentication);
+	 
 }

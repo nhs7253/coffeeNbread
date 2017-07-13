@@ -80,7 +80,6 @@
 		reservation_order_count,
 		product_price,
 		trade_date
-
 		FROM(
 		SELECT rownum rnum,
 		payment_no,
@@ -102,9 +101,9 @@
 		pd.payment_option,
 		pd.reservation_order_count,
 		p.product_price,
-		pd.trade_date,
+		pd.trade_date
 		FROM payment_details pd, product p,
-		product_picture pp,
+		product_picture pp,store s
 		WHERE pd.user_id = #{userId}
 	    and s.store_id=#{storeId}
 		)

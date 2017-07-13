@@ -36,14 +36,27 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 	private StoreDao sDao;
 
 
-	
-	
+	@Override
+	public void addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList,Date productHopeTime) {
+		
+		for(int i=0;i<paymentDetailsList.size();i++){
+			
+			dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetailsList.get(i).getReservationOrderCount(),null,productHopeTime,paymentDetailsList.get(i).getUserId(),paymentDetailsList.get(i).getProductId(),paymentDetailsList.get(i).getStoreId()));
+		
+		}
+		
+	}
 	
 
-	@Override
+/*	@Override
 	public int addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList) {
+		
+		for(int i=0;i<paymentDetailsList.size();i++){
+			
+			dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetailsList.get(i).getReservationOrderCount(),null,));
+		}
 		return 0;
-	}
+	}*/
 
 	@Override
 	public HashMap<String, Object> findReservationDetailsListByUserIdAndStoreId(int page, String storeId,
@@ -54,10 +67,8 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 
 		// item 수
 		int totalCount = dao.selectReservationDetailsListCountByMethod(storeId, method, methodContent);
-
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-
 		List<ReservationDetails> list = dao.selectReservationDetailsListByUserIdAndStoreId(storeId, userId,
 				pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		map.put("list", list);

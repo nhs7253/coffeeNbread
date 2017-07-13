@@ -23,6 +23,12 @@
 		매장 닫는 시간 : <input type="text" value="${requestScope.store.storeCloseFormat }" disabled><br>
 		<p/>
 		
+		<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
+			<input type="submit" value="수정">
+		</form>
+		<form action="${initParam.rootPath }/removeStoreController.do">
+			<input type="submit" value="삭제">
+		</form>
 		
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 			<form action="${initParam.rootPath }/user/addStoreBookmarkController.do" method="post">
@@ -38,6 +44,8 @@
 			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
 			<input type="submit" value="제품 목록">
 		</form>
+		
+		
 				
 		<form action="${initParam.rootPath }/user/userFindProductListController.do" method="post">
 			<sec:csrfInput/>

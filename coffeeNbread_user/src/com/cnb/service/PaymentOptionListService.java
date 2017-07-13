@@ -20,16 +20,14 @@ public interface PaymentOptionListService {
 	/**
 	 * 플렛폼에서 지원할 1개의 결제 방법을 추가
 	 * @param paymentOptionList
-	 * @return
 	 */
-	int addPaymentOptionList(PaymentOptionList paymentOptionList);
+	void addPaymentOptionList(PaymentOptionList paymentOptionList);
 	
 	/**
 	 * 플렛폼에서 지원하던 1개의 결제 방법을 삭제
 	 * @param paymentId
-	 * @return
 	 */
-	int removePaymentOptionListByPaymentId(String paymentId);
+	void removePaymentOptionListByPaymentId(String paymentId);
 	
 	/**
 	 * 지원하는 모든 결제 방법을 보여줌

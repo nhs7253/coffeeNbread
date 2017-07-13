@@ -24,14 +24,21 @@ public interface PaymentDetailsService {
 	
 	
 	
-	
-	/**
+/*	
+	*//**
 	 * 유저아이디와 해당 매장아이디로 조회한 장바구니 물품들 다 결제내역테이블에 등록.
 	 * 
 	 * @param shoppingBasketProduct
-	 */
+	 *//*
 	void addPaymentDetails(List<ShoppingBasketProduct> shoppingBasketProduct) throws NullShoppingBasketProductException;
-
+*/
+	
+	
+	void addPaymentDetails(PaymentDetails paymentDetails)throws NullShoppingBasketProductException;
+	
+	
+	
+	
 	/**
 	 * 장바구니에 담긴 목록을 조회한 다음 제품아이디를 통해 모든 가격 보여줄떄 필요.
 	 * 

@@ -26,8 +26,9 @@
 	<!-- 403 권한 없음 에러 페이지 -->
 	<mvc:view-controller path="/error/access_denied.do" view-name="error/access_denied.tiles"/>
 	<!-- 로그인 폼 -->	
-	<mvc:view-controller path="/login_form.do" view-name="login_form.tiles"/>
-	<!-- 회원 가입 폼 -->
+	<mvc:view-controller path="/login_form.do" view-name="login_form"/>
+	
+ 	<!-- 회원 가입 폼 -->
 	<mvc:view-controller path="/add_user_form.do" view-name="user/add_user_form.tiles"/>
 	<!-- 회원 정보 변경 폼 -->
 	<mvc:view-controller path="/user/update_profile_form.do" view-name="user/update_profile_form.tiles"/>
@@ -35,6 +36,12 @@
 	<mvc:view-controller path="/user/mypage.do" view-name="user/mypage.tiles"/>
 	<!-- 유저 탈퇴 폼 -->
 	<mvc:view-controller path="/user/remove_user_form.do" view-name="user/remove_user_form.tiles"/>
+	
+	
+	
+	
+	<!-- 매장 관리 목록 -->
+	<mvc:view-controller path="/store_manage_list.do" view-name="store_manage_list.tiles"/>
 	
 	<!-- 북마크 조회 폼 -->
 	<mvc:view-controller path="/user/storeBookmark_list.do" view-name="user/storeBookmark_list.tiles"/>
@@ -108,11 +115,20 @@
 	
 	
    <!--유저가 보는 제품 목록폼  -->
-	
 	<mvc:view-controller path="/user/userFindProductListController.do" view-name="store/product_detail.tiles"/>
 	
+	<!--결제 성공 페이지 폼 -->
+	<mvc:view-controller path="user/payment_success.do" view-name="user/payment_success.tiles"/>
 	
+	<!--유저가 결제내역 확인폼  -->
+	<mvc:view-controller path="user/user_payment_List.do" view-name="user/user_payment_List.tiles"/>
 	
+
+	<!-- 플렛폼 지원 결제 방법 목록 -->
+	<mvc:view-controller path="/payment_option_list.do" view-name="payment_option_list.tiles"/>
+	<!-- 플렛폼 지원 결제 방법 등록 폼 -->
+	<mvc:view-controller path="/payment_option_register_form.do" view-name="payment_option_register_form.tiles"/>
+
 	
 	<!-- bean -->
 	<!--  -->

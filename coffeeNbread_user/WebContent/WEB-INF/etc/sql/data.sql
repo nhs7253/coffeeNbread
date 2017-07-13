@@ -2,25 +2,35 @@
 SELECT *FROM GENERAL_USER
 DELETE FROM GENERAL_USER
 
-/* 노현식 - 2017-07-03 수정 */  
-INSERT INTO GENERAL_USER VALUES('u-1','pw-1','user1',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
-INSERT INTO GENERAL_USER VALUES('u-2','pw-2','user2',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
-INSERT INTO GENERAL_USER VALUES('u-3','pw-3','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
-INSERT INTO GENERAL_USER VALUES('u-4','pw-4','user4',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
-INSERT INTO GENERAL_USER VALUES('u-5','pw5','user5',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y','s-1');
+/* 노현식 - 2017-07-03 수정 */  /* 비밀번호 1111 */
+INSERT INTO GENERAL_USER VALUES('u-1','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','user1',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-2','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','user2',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-3','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','user3',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-4','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','user4',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-5','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','user5',to_date('20160803', 'yyyy-mm-dd'),'남','user2@naver.com','010-0000-0000','주소2','Y','s-1');
 
+/* 권한 추가 
+ * 관리자 - ROLE_CNB_ADMIN
+ * 매점 - ROLE_CNB_STORE
+ * 일반 유저 - ROLE_CNB_USER*/
+
+INSERT INTO user_authority VALUES('u-1', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('u-2', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('u-3', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('u-4', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('u-5', 'ROLE_CNB_USER');
 
 /* 매장 */
 SELECT *FROM STORE
 DELETE FROM STORE
-
-INSERT INTO STORE VALUES('s-1','매장1','매장소개글1','010-0000-0000','매장주소1','매장1@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-2','매장2','매장소개글2','010-0000-0000','매장주소2','매장2@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-3','매장3','매장소개글3','010-0000-0000','매장주소3','매장3@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-4','매장4','매장소개글4','010-0000-0000','매장주소4','매장4@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-5','매장5','매장소개글5','010-0000-0000','매장주소5','매장5@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-6','매장6','매장소개글6','010-0000-0000','매장주소6','매장6@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-7','매장7','매장소개글7','010-0000-0000','매장주소7','매장7@email.com',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+/* 노현식 - 2017-07-10 수정 */ 
+INSERT INTO STORE VALUES('s-1','매장1','매장소개글1','010-0000-0000','매장주소1','매장1@email.com', '빵',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+INSERT INTO STORE VALUES('s-2','매장2','매장소개글2','010-0000-0000','매장주소2','매장2@email.com', '커피',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+INSERT INTO STORE VALUES('s-3','매장3','매장소개글3','010-0000-0000','매장주소3','매장3@email.com', '커피, 빵',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+INSERT INTO STORE VALUES('s-4','매장4','매장소개글4','010-0000-0000','매장주소4','매장4@email.com', '빵, 커피',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+INSERT INTO STORE VALUES('s-5','매장5','매장소개글5','010-0000-0000','매장주소5','매장5@email.com', '커피',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+INSERT INTO STORE VALUES('s-6','매장6','매장소개글6','010-0000-0000','매장주소6','매장6@email.com', '빵',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
+INSERT INTO STORE VALUES('s-7','매장7','매장소개글7','010-0000-0000','매장주소7','매장7@email.com', '빵, 커피, 쿠키',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
 
 
 /* 제품 */
@@ -51,7 +61,9 @@ INSERT INTO PRODUCT VALUES('p-20','s-7','제품20',5000,'빵','제품설명글20
 /* 김형주 - 2017-07-01 추가 */
 INSERT INTO PRODUCT VALUES('p-21','s-7','제품21',5000,'빵','제품설명글20','Y',500,1000);--s-7 -> p-21까지
 
-
+ * 관리자 - ROLE_CNB_ADMIN
+ * 매점 - ROLE_CNB_STORE
+ * 일반 유저 - ROLE_CNB_USER
 
 /* 장바구니 물품 */
 select*from SHOPPING_BASKET_PRODUCT
@@ -201,6 +213,9 @@ INSERT INTO EVENT_PRODUCT VALUES('p-2', 's-1', 3);
 INSERT INTO PAYMENT_OPTIONLIST VALUES('c','카드');
 INSERT INTO PAYMENT_OPTIONLIST VALUES('p','현금');
 
+INSERT INTO STORE_PAYMENT_OPTIONlIST VALUES('s-1','c')
+INSERT INTO STORE_PAYMENT_OPTIONlIST VALUES('s-1','p')
+
 /* 매장 결제 종류 */   -- 예약만 가능한 매장만   'c' 로 넣어야 함. 
 SELECT *FROM STORE_PAYMENT_OPTIONLIST;
 DELETE FROM STORE_PAYMENT_OPTIONLIST;
@@ -292,4 +307,80 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 		
 		
 		
+	INSERT INTO  store_visit_history VALUES(1, #{userId}, #{storeId})
+	
+	
+	INSERT INTO bookmark_card_num VALUES('TEST_CARD','u-1')
+
+	
+	
+	
+	SELECT payment_no,
+		store_name,
+		pp.product_picture,
+		product_name,
+		sell_method,
+		payment_option,
+		reservation_order_count,
+		product_price,
+		trade_date
+
+		FROM(
+		SELECT rownum rnum,
+		payment_no,
+		store_name
+		pp.product_picture,
+		product_name,
+		sell_method,
+		payment_option,
+		reservation_order_count,
+		product_price,
+		trade_date
+		FROM(
+		SELECT
+		pd.payment_no,
+		s.store_name,
+		pp.product_picture,
+		p.product_name,
+		pd.sell_method,
+		pd.payment_option,
+		pd.reservation_order_count,
+		p.product_price,
+		pd.trade_date
+		FROM payment_details pd, product p,
+		product_picture pp,store s
+		WHERE pd.store_id=s.store_id
+		and p.store_id=s.store_id
+	    and pd.user_id='u-1'
+		)
+		WHERE rownum <=1000
+		)
+		WHERE rnum >= 1
+	
+	
+		SELECT
+		pd.payment_no,
+		s.store_name,
+		pp.product_picture,
+		p.product_name,
+		po.payment_method,
+		pd.reservation_order_count,
+		p.product_price,
+		pd.trade_date
+		FROM payment_details pd, product p,
+		product_picture pp,store s,payment_optionList po,store_payment_optionList spo
+        WHERE pd.store_id=s.store_id
+		and p.store_id=s.store_id
+		and p.product_id=pp.product_id
+	    and pd.store_id=s.store_id
+		and po.payment_id=spo.payment_id
+		and pp.product_id=p.product_id
+		and pd.user_id='u-1'
+	
+	
+	
+	select *from store_payment_optionList
+	
+	
+	
 	

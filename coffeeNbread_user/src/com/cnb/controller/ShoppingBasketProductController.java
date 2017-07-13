@@ -18,13 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
 import com.cnb.exception.addShoppingCountZeroException;
-import com.cnb.service.ProductService;
 import com.cnb.service.ShoppingBasketProductService;
-import com.cnb.validation.annotation.ProductRegisterForm;
 import com.cnb.validation.annotation.ShoppingBasketProductForm;
 import com.cnb.validation.annotation.ShoppingBasketProductViewForm;
 import com.cnb.vo.GeneralUser;
-import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
@@ -45,13 +42,20 @@ public class ShoppingBasketProductController {
 			@ModelAttribute("shoppingBasketProduct") @Valid ShoppingBasketProductForm shoppingBasketProductForm,
 			BindingResult errors, HttpServletRequest request) {
 
-		System.err.println(shoppingBasketProductForm);
+		System.err.println("shoppingBasketProductForm:"+shoppingBasketProductForm);
+		;
+
 		System.out.println("errorCount : " + errors.getErrorCount());
 		if (errors.hasErrors()) {
 			System.out.println("---------------------------오류발생------------------");
 			return "redirect:/user/userFindProductListController.do?storeId=" + shoppingBasketProductForm.getStoreId();
 
 		}
+		
+	
+		
+		
+		
 		ShoppingBasketProduct shoppingBasketProduct = new ShoppingBasketProduct();
 		BeanUtils.copyProperties(shoppingBasketProductForm, shoppingBasketProduct);
 		System.out.println("shoppingBasketProduct:" + shoppingBasketProduct);

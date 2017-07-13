@@ -13,9 +13,10 @@
 		INSERT INTO store_payment_optionlist VALUES (
 										     #{storeId},
 										     #{paymentId}
-										       
 										        )
 	</insert>
+
+	
   
 	<!--delete -->
     <delete id="deleteStorePaymentOptionListByStoreIdAndPaymentId" parameterType="map">

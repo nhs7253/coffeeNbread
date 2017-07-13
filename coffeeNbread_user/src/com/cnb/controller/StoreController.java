@@ -32,16 +32,23 @@ import com.cnb.exception.DuplicatedStoreIdException;
 import com.cnb.exception.DuplicatedStorePictureException;
 import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.exception.UserManageException;
+import com.cnb.service.PaymentOptionListService;
 import com.cnb.service.StoreService;
 import com.cnb.validation.annotation.NoticeBoardContentsViewForm;
 import com.cnb.validation.annotation.StoreRegisterForm;
 import com.cnb.validation.annotation.StoreViewForm;
+import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
 
-/*이진영
+/*
+ * 노현식
+ * 2017-07-11
+ * StorePaymentOptionList 관련 업데이트
+ * 
+ * 이진영
  * 2017-07-06
  * storeCategory controller 추가
  * optionCategory controller 추가
@@ -55,7 +62,10 @@ import com.cnb.vo.StorePicture;
 public class StoreController {
 
 	@Autowired
-	private StoreService service;
+	private StoreService storeService;
+	 
+	@Autowired
+	private PaymentOptionListService paymentOptionListService;
 
 	/**
 	 * Store 매장 전체를 등록하는 Controller
@@ -71,12 +81,14 @@ public class StoreController {
 		if (errors.hasErrors()) {
 			return "store/store_register.tiles";
 		}
+		
+		
+		System.out.println("storeRegisterForm.getPaymentIdList() = " + storeRegisterForm.getPaymentIdList());
 
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
-
-		System.out.println("store = " + store);
 		
+		String storeCategory = "";
 	
 		  // optionCategory 등록
 		  List<String> optionCategoryList = new ArrayList<String>();
@@ -85,9 +97,12 @@ public class StoreController {
 			  optionCategoryList.add(storeRegisterForm.getOptionCategoryList().get(i));
 			 OptionCategory optionCategoryList2 = new OptionCategory(optionCategoryList.get(i),storeRegisterForm.getStoreId());
 			 oclist.add(optionCategoryList2);
+			 storeCategory += optionCategoryList2.getOptionCategory() +", ";
 		  }
-		 
-	
+		  
+		store.setStoreCategory(storeCategory.substring(0, storeCategory.length()-2));
+
+		
 		// storePicture 등록
 		String destDir = request.getServletContext().getRealPath("/up_image");
 
@@ -115,7 +130,7 @@ public class StoreController {
 		HttpSession session = request.getSession();
 		session.setAttribute("store", store);
 		try {
-			service.addStore(store, oclist, storePicture);
+			storeService.addStore(store, oclist, storePicture, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), storeRegisterForm.getPaymentIdList());
 		} catch (DuplicatedStoreIdException | DuplicatedOptionCategoryNameException
 				| DuplicatedStoreCategorytNameException | DuplicatedStorePictureException e) {
 			System.out.println(e.getMessage());
@@ -138,9 +153,9 @@ public class StoreController {
 	public String modifyStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
 			BindingResult errors, HttpServletRequest request) throws IllegalStateException, IOException {
 		
-		  HttpSession session = request.getSession();
-		  Store store = new Store();
-		  BeanUtils.copyProperties(storeRegisterForm, store);
+		HttpSession session = request.getSession();
+		Store store = new Store();
+		BeanUtils.copyProperties(storeRegisterForm, store);
 		 
 /*
 		HttpSession session = request.getSession();
@@ -168,11 +183,9 @@ public class StoreController {
 
 		// System.out.println(list.get(0).toString());
 		if (list == null) {
-
 			String storePicture = store.getStorePictureList().get(0).toString();
 			List<StorePicture> storePictureList = new ArrayList<StorePicture>();
 			storePictureList.add(new StorePicture(storePicture, storeRegisterForm.getStoreId()));
-
 		}
 
 		// 업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
@@ -182,7 +195,6 @@ public class StoreController {
 				imageName.add(mFile.getOriginalFilename());
 				mFile.transferTo(new File(destDir, mFile.getOriginalFilename())); // 예외
 																					// 던짐
-
 			}
 		}
 
@@ -199,7 +211,7 @@ public class StoreController {
 
 		// 수정하는 서비스 호출
 		try {
-			service.modifyStore(store, oclist, storePictureList);
+			storeService.modifyStore(store, oclist, storePictureList);
 		} catch (DuplicatedStoreIdException | StorePictureNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -218,21 +230,20 @@ public class StoreController {
 	 */
 	@RequestMapping("removeStoreController")
 	public String removeStoreController(@ModelAttribute("store") @Valid StoreRegisterForm storeRegisterForm,
-			BindingResult errors, HttpServletRequest request) {
+			BindingResult errors, HttpSession session) {
 
-		HttpSession session = request.getSession();
+		
+		Store store = (Store) session.getAttribute("storeInfo");
 
-		Store store = (Store) session.getAttribute("store");
-
-		service.removeStoretById(store.getStoreId());
-		session.removeAttribute("store");
+		storeService.removeStoretById(store.getStoreId(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
+		session.removeAttribute("storeInfo");
 		return "store/store_register.tiles";
 
 	}
 	
 	/**
 	 * 매장 목록을 페이징 하여 보여주는 컨드롤러
-	 * @param storeViewForm (select 검색 종류 -매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), keyword 검색 내용, 볼 페이지) 
+	 * @param storeViewForm (select 검색 종류 -매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), keyword 검색 내용, 카테고리(storeCategory)) 
 	 * @param errors 요청파라미터 에러
 	 * @return 반환 경로
 	 */
@@ -244,7 +255,7 @@ public class StoreController {
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 		
-		Map<String, Object> map = service.findStorePagingList(storeViewForm.getSelect(), storeViewForm.getKeyword(), storeViewForm.getPage());
+		Map<String, Object> map = storeService.findStorePagingList(storeViewForm.getSelect(), storeViewForm.getKeyword(), storeViewForm.getPage());
 		
 		modelAndView.setViewName("common/store_list.tiles");
 		modelAndView.addObject("list", map.get("list"));
@@ -265,7 +276,7 @@ public class StoreController {
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 	
-		Store store = service.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
+		Store store = storeService.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
 		
 		modelAndView.setViewName("common/store_view.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("store", store);
@@ -274,5 +285,28 @@ public class StoreController {
 		session.setAttribute("storeInfo", store);
 		return modelAndView;
 	}
-
+	
+	/**
+	 * 플랫폼에서 지원하는 결제 목록을 매장 등록 폼에 뿌려주는 컨트롤러
+	 * @return 반환 경로 및 뿌려줄 객체
+	 */
+	@RequestMapping("/user/callStoreRegisterController")
+	public ModelAndView callStoreRegisterController(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("store/store_register.tiles"); 
+		modelAndView.addObject("paymentOptionList", paymentOptionListService.findpaymentOptionList());
+		return modelAndView;
+	}
+	
+	/**
+	 * 플랫폼에서 지원하는 결제 목록을 매장 수정 폼에 뿌려주는 컨트롤러
+	 * @return 반환 경로 및 뿌려줄 객체
+	 */
+	@RequestMapping("/user/callStoreModifyController")
+	public ModelAndView callStoreModifyController(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("store/store_modify.tiles"); 
+		modelAndView.addObject("paymentOptionList", paymentOptionListService.findpaymentOptionList());
+		return modelAndView;
+	}
 }

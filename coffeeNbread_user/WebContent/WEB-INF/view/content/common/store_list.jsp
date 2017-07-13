@@ -28,6 +28,7 @@ td {
 			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>이름</option>
 			<option value="storeIntro" ${param.select eq "storeIntro" ? "selected" :""}>소개</option>
 			<option value="storeAddress" ${param.select eq "storeAddress" ? "selected" :""}>주소</option>
+			<option value="storeCategory" ${param.select eq "storeCategory" ? "selected" :""}>카테고리</option>
 		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
@@ -40,6 +41,7 @@ td {
 			<tr class="w3-blue">
 				<th>매장이름</th>
 				<th>주소</th>
+				<th>카테고리</th>
 				<th>여는 시간</th>
 				<th>닫는 시간</th>
 			</tr>
@@ -54,6 +56,7 @@ td {
 				<tr>
 					<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.storeId}">${list.storeName}</a></td>
 					<td>${list.storeAddress}</td>
+					<td>${list.storeCategory}</td>
 					<td>${list.storeOpenFormat}</td>
 					<td>${list.storeCloseFormat}</td>
 				</tr>

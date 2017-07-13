@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnb.dao.StorePictureDao;
 import com.cnb.exception.DuplicatedStorePictureException;
@@ -18,6 +19,7 @@ public class StorePictureServiceImpl implements StorePictureService {
 	private StorePictureDao dao;
 
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void addStorePicture(StorePicture storePicture) throws DuplicatedStorePictureException {
 		List<StorePicture> storePictureList2 = dao.selectStorePictureListByStoreId(storePicture.getStoreId());
 
@@ -43,7 +45,7 @@ public class StorePictureServiceImpl implements StorePictureService {
 	
 
 	@Override
-
+	@Transactional(rollbackFor=Exception.class)
 	public int modifyStorePictureByStorePicture(StorePicture storePictureVO)
 			throws StorePictureNotFoundException {
 		if(dao.selectStorePictureByStoreIdAndStorePicture(storePictureVO.getStorePicture(), storePictureVO.getStoreId())!=null){

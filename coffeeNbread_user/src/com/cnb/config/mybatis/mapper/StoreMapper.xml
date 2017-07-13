@@ -5,6 +5,10 @@
 
  <!-- 
  	노현식
+ 	2017-07-10
+ 	store_category 추가
+	 
+ 	노현식
  	2017-07-09
  	페이징 및 상세 관련 쿼리 추가
  	<sql id="all-column"> 추가
@@ -28,6 +32,7 @@
        store_phone,
        store_address,
        store_email,
+       store_category,
        store_hits,
        store_open,
        store_close,
@@ -43,11 +48,11 @@
  		<result column="store_phone" property="storePhone"/>
  		<result column="store_address" property="storeAddress"/>
  		<result column="store_email" property="storeEmail"/>
+ 		<result column="store_category" property="storeCategory"/>
  		<result column="store_hits" property="storeHits"/>
  		<result column="store_open" property="storeOpen"/>
  		<result column="store_close" property="storeClose"/>
  		<result column="store_permission" property="storePermission"/>
- 	
  	</resultMap>
  
  <resultMap type="com.cnb.vo.Store" id="Store-OptionCategory-OptionDetail-resultmap" extends="store-resultmap">
@@ -86,6 +91,7 @@
 			#{storePhone},
 			#{storeAddress},
 			#{storeEmail},
+			#{storeCategory},
 			#{storeHits},
 			#{storeOpen},
 			#{storeClose},
@@ -101,9 +107,17 @@
 			store_phone = #{storePhone},
 			store_address = #{storeAddress},
 			store_email = #{storeEmail},
+			store_category = #{storeCategory},
 			store_hits = #{storeHits},
 			store_open = #{storeOpen},
-			store_close = #{storeClose}
+			store_close = #{storeClose},
+			store_permission = #{storePermission}
+ 		WHERE store_id = #{storeId}
+ 	</update>
+ 	
+ 	 <update id="updateStorePermission" parameterType="map">
+ 		UPDATE store
+ 		SET store_permission = #{storePermission}
  		WHERE store_id = #{storeId}
  	</update>
  	
@@ -115,6 +129,7 @@
 				s.store_phone,
 				s.store_address,
 				s.store_email,
+				s.store_category,
 				s.store_hits,
 				s.store_open,
 				s.store_close,
@@ -164,6 +179,7 @@
 			store_phone,
 			store_address,
 			store_email,
+			store_category,
 			store_hits,
 			store_open,
 			store_close,
@@ -182,6 +198,7 @@
 			s.store_phone,
 			s.store_address,
 			s.store_email,
+			s.store_category,
 			s.store_hits,
 			s.store_open,
 			s.store_close,
@@ -211,13 +228,16 @@
 						FROM store
 						<choose>
 							<when test="select == 'storeName'">
-								WHERE store_name LIKE '%'||#{keyword}||'%'
+								WHERE store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeIntro'">
-								WHERE store_intro LIKE '%'||#{keyword}||'%'
+								WHERE store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeAddress'">
-								WHERE store_address LIKE '%'||#{keyword}||'%'
+								WHERE store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+							</when>
+							<when test="select == 'storeCategory'">
+								WHERE store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<otherwise>
 								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
@@ -235,13 +255,16 @@
 		FROM store
 		<choose>
 			<when test="select == 'storeName'">
-				WHERE store_name LIKE '%'||#{keyword}||'%'
+				WHERE store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeIntro'">
-				WHERE store_intro LIKE '%'||#{keyword}||'%'
+				WHERE store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeAddress'">
-				WHERE store_address LIKE '%'||#{keyword}||'%'
+				WHERE store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+			</when>
+			<when test="select == 'storeCategory'">
+				WHERE store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<otherwise>
 				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
@@ -256,9 +279,11 @@
 				s.store_phone,
 				s.store_address,
 				s.store_email,
+				s.store_category,
 				s.store_hits,
 				s.store_open,
 				s.store_close,
+				s.store_permission,
 				sp.store_picture
 		FROM store s,store_picture sp
 		WHERE s.store_id = sp.store_id(+)

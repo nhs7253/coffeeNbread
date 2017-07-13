@@ -81,7 +81,7 @@ public interface StoreDao {
 	 
 	 /**
 	 * 매장목록을 페이징 하여, 그 범위 만큼 내용을 반환  (paging) - content
-	 * @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress)
+	 * @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), 카테고리(storeCategory)
 	 * @param keyword 검색할 키워드
 	 * @param startIndex 시작 컬럼 번호
 	 * @param endIndex 끝 컬럼 번호
@@ -91,7 +91,7 @@ public interface StoreDao {
 	 
 	/**
 	* 매장목록을 페이징 하여, 매장목록 페이징을 위한 검색 결과 개수를 리턴 (paging) - count
-	* @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress)
+	* @param select 검색 종류 - 매장 이름(storeName), 매장 소개(storeIntro), 매장 주소(storeAddress), 카테고리(storeCategory)
 	* @param keyword 검색할 키워드
 	* @return int 검색 결과 개수
 	*/
@@ -103,4 +103,12 @@ public interface StoreDao {
 	 * @return 사진과 해당 매장 객체
 	 */
 	Store selectStroeJoinPicture(String storeId);
+	
+	/**
+	 * 매장 허가 여부 변경 기능을 제공
+	 * @param storeId 여부를 변경할 매장 ID
+	 * @param storePermission 변경 여부 사항
+	 * @return int 처리 개수
+	 */
+	int updateStorePermission(String storeId, String storePermission);
 }

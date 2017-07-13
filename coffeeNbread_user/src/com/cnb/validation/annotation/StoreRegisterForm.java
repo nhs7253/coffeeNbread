@@ -52,7 +52,7 @@ public class StoreRegisterForm implements Serializable{
 	private List<OptionDetail> optionDetailList;
 	private List<String> storeCategoryList;
 
-	
+	private List<String> paymentIdList;
 	
 	public String getOriginalName() {
 		return originalName;
@@ -162,6 +162,37 @@ public class StoreRegisterForm implements Serializable{
 	}
 	public void setStorePicture(MultipartFile storePicture) {
 		this.storePicture = storePicture;
+	}
+	public List<String> getPaymentIdList() {
+		return paymentIdList;
+	}
+	public void setPaymentIdList(List<String> paymentIdList) {
+		this.paymentIdList = paymentIdList;
+	}
+	@Override
+	public String toString() {
+		final int maxLen = 10;
+		return "StoreRegisterForm [originalName=" + originalName + ", saveName=" + saveName + ", storeId=" + storeId
+				+ ", storeName=" + storeName + ", storePicture=" + storePicture + ", storeIntro=" + storeIntro
+				+ ", storePhone=" + storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail
+				+ ", storeHits=" + storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose
+				+ ", storePermission=" + storePermission + ", storePictureList="
+				+ (storePictureList != null ? storePictureList.subList(0, Math.min(storePictureList.size(), maxLen))
+						: null)
+				+ ", storeEventList="
+				+ (storeEventList != null ? storeEventList.subList(0, Math.min(storeEventList.size(), maxLen)) : null)
+				+ ", optionCategoryList="
+				+ (optionCategoryList != null
+						? optionCategoryList.subList(0, Math.min(optionCategoryList.size(), maxLen)) : null)
+				+ ", optionDetailList="
+				+ (optionDetailList != null ? optionDetailList.subList(0, Math.min(optionDetailList.size(), maxLen))
+						: null)
+				+ ", storeCategoryList="
+				+ (storeCategoryList != null ? storeCategoryList.subList(0, Math.min(storeCategoryList.size(), maxLen))
+						: null)
+				+ ", paymentIdList="
+				+ (paymentIdList != null ? paymentIdList.subList(0, Math.min(paymentIdList.size(), maxLen)) : null)
+				+ "]";
 	}
 
 	

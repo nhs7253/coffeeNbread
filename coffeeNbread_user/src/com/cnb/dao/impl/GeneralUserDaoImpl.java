@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.GeneralUserDao;
 import com.cnb.vo.GeneralUser;
+import com.cnb.vo.Store;
 
 /*
  * 노현식
@@ -98,6 +99,32 @@ public class GeneralUserDaoImpl implements GeneralUserDao{
 		input.put("select", select);
 		input.put("keyword", keyword);
 		return session.selectOne(makeSqlId("selectGeneralUserListBySelectToKeywordCount"), input);
+	}
+
+	@Override
+	public List<GeneralUser> selectGeneralUserListBySelectToKeywordJoinStoreContent(String select, String keyword, int startIndex, int endIndex) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		input.put("startIndex", String.valueOf(startIndex));
+		input.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectGeneralUserListBySelectToKeywordJoinStoreContent"), input);
+	}
+
+	@Override
+	public int selectGeneralUserListBySelectToKeywordJoinStoreCount(String select, String keyword) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		return session.selectOne(makeSqlId("selectGeneralUserListBySelectToKeywordJoinStoreCount"), input);
+	}
+
+	@Override
+	public int updateGeneralUserByUserIdToStoreId(String userId, String storeId) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("userId", userId);
+		input.put("storeId", storeId);
+		return session.update(makeSqlId("updateGeneralUserByUserIdToStoreId"), input);
 	}
 
 }

@@ -99,4 +99,12 @@ public class StoreDaoImpl implements StoreDao{
 	public Store selectStroeJoinPicture(String storeId) {
 		return session.selectOne(makeSqlId("selectStroeJoinPicture"),storeId);
 	}
+
+	@Override
+	public int updateStorePermission(String storeId, String storePermission) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("storeId", storeId);
+		input.put("storePermission", storePermission);
+		return session.update(makeSqlId("updateStorePermission"), input);
+	}
 }

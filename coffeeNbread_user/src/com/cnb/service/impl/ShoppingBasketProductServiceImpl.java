@@ -74,7 +74,7 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	 * @throws addShoppingCountZeroException
 	 */
 	@Override
-	public void addShoppingBasketProduct(ShoppingBasketProduct shoppingBasketProduct)
+	public ShoppingBasketProduct addShoppingBasketProduct(ShoppingBasketProduct shoppingBasketProduct)
 			throws addShoppingCountZeroException {
 
 		// shoppingBasketProduct에는 userid, storeId,productStoreId(권한으로 세션처리함),
@@ -96,10 +96,11 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 			if (sbp==null) {
 				
 				shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
-				
+				return shoppingBasketProduct;
 			} else {
 				sbp.setProductCount(sbp.getProductCount() + shoppingBasketProduct.getProductCount());
 				shoppingBasketProductDao.updateShoppingBasketProductCount(sbp);
+				return sbp;
 			}
 
 		}

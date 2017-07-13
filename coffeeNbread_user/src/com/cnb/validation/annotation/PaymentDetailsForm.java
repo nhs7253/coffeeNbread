@@ -1,12 +1,11 @@
 package com.cnb.validation.annotation;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.cnb.vo.Product;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public class PaymentDetailsForm implements Serializable {
+public class PaymentDetailsForm{
 	
 	
 	
@@ -21,7 +20,7 @@ public class PaymentDetailsForm implements Serializable {
 	private String sellMethod;
 	
 	 //controller에서 작업.
-	private int reservationOrderCount;
+	private List<Integer> reservationOrderCount;
 	
 	
 	private String userId;
@@ -32,20 +31,10 @@ public class PaymentDetailsForm implements Serializable {
 	
 	private List<String> productIdList;
 	
-	
-	public List<String> getProductIdList() {
-		return productIdList;
-	}
-
-	public void setProductIdList(List<String> productIdList) {
-		this.productIdList = productIdList;
-	}
-
-	private String storeId;
-	
-	
-	private int produtctTradeCount;
-
+    private List<String> storeIdList;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date productHopeTime;
+    
 	public int getPaymentNo() {
 		return paymentNo;
 	}
@@ -78,11 +67,11 @@ public class PaymentDetailsForm implements Serializable {
 		this.sellMethod = sellMethod;
 	}
 
-	public int getReservationOrderCount() {
+	public List<Integer> getReservationOrderCount() {
 		return reservationOrderCount;
 	}
 
-	public void setReservationOrderCount(int reservationOrderCount) {
+	public void setReservationOrderCount(List<Integer> reservationOrderCount) {
 		this.reservationOrderCount = reservationOrderCount;
 	}
 
@@ -102,24 +91,40 @@ public class PaymentDetailsForm implements Serializable {
 		this.productId = productId;
 	}
 
-	public String getStoreId() {
-		return storeId;
+	public List<String> getProductIdList() {
+		return productIdList;
 	}
 
-	public void setStoreId(String storeId) {
-		this.storeId = storeId;
+	public void setProductIdList(List<String> productIdList) {
+		this.productIdList = productIdList;
 	}
 
-	public int getProdutctTradeCount() {
-		return produtctTradeCount;
+	public List<String> getStoreIdList() {
+		return storeIdList;
 	}
 
-	public void setProdutctTradeCount(int produtctTradeCount) {
-		this.produtctTradeCount = produtctTradeCount;
+	public void setStoreIdList(List<String> storeIdList) {
+		this.storeIdList = storeIdList;
 	}
-	
-	
-	
+
+
+
+	public Date getProductHopeTime() {
+		return productHopeTime;
+	}
+
+	public void setProductHopeTime(Date productHopeTime) {
+		this.productHopeTime = productHopeTime;
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentDetailsForm [paymentNo=" + paymentNo + ", paymentOption=" + paymentOption + ", tradeDate="
+				+ tradeDate + ", sellMethod=" + sellMethod + ", reservationOrderCount=" + reservationOrderCount
+				+ ", userId=" + userId + ", productId=" + productId + ", productIdList=" + productIdList
+				+ ", storeIdList=" + storeIdList + ", productHopeTime=" + productHopeTime + "]";
+	}	
+
 	
 	
 }
