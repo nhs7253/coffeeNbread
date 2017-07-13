@@ -45,6 +45,10 @@ public interface StorePaymentOptionListDao {
 	 */
 	List<StorePaymentOptionList> selectStorePaymentOptionListByStoreId(String storeId);
 	
-	
-	
+	/**
+	 * 매장 결제 종류 모두 삭제
+	 * @param storeId
+	 * @return
+	 */
+	int deleteStorePaymentOptionListByStoreId(String storeId);
 }

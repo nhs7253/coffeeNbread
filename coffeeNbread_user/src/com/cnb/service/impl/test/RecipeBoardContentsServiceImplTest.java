@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.cnb.exception.ContentsNotFoundException;
 import com.cnb.exception.UserManageException;
 import com.cnb.service.RecipeBoardContentsService;
 import com.cnb.vo.RecipeBoardContents;
@@ -22,7 +23,7 @@ public class RecipeBoardContentsServiceImplTest {
 	@Autowired
 	private RecipeBoardContentsService rbcService;
 
-	public void Test() {
+	public void Test() throws ContentsNotFoundException {
 
 /*		System.out.println("-----------레시판 댓글 등록 서비스--------------");
 		List<RecipeBoardContents> list = Arrays.asList(
@@ -41,8 +42,8 @@ public class RecipeBoardContentsServiceImplTest {
 	/* rbcService.addRecipeBoardContents(new RecipeBoardContents(0,"0707내역","0707제목",new Date(),0,"0707사진",0,"u-1","s-1"));*/
 		/*rbcService.addRecipeBoardContents(new RecipeBoardContents(0, "레시판 댓글내역 추가6", "레시판 제목 추가6", new Date(), 0, "사진", 0, "u-1"));*/
 
-
-		/*
+       System.out.println("------------");
+		 /*
 		 * System.out.
 		 * println("------------------레시판 게시글 업데이트 확인 ----------------------");
 		 * rbcService.modifyRecipeBoardContents( new
@@ -115,7 +116,7 @@ public class RecipeBoardContentsServiceImplTest {
 		System.out.println("유저가 전체게시판에서 자신이 쓴글 방법별로 검색.");
 		
 		
-			HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndMethod(page, "u-1", "", "");
+			HashMap<String, Object> map1 = rbcService.findRecipeBoardContentsByUserIdAndMethod(page, "", "", "");
 				Iterator iterator1 = map1.entrySet().iterator();
 				while (iterator1.hasNext()) {
 					
@@ -156,7 +157,7 @@ public class RecipeBoardContentsServiceImplTest {
 		
 	}
 
-	public static void main(String[] args) throws UserManageException {
+	public static void main(String[] args) throws UserManageException, ContentsNotFoundException {
 
 		RecipeBoardContentsServiceImplTest rbc = (RecipeBoardContentsServiceImplTest) new ClassPathXmlApplicationContext(
 				"com/cnb/config/spring/model-context.xml").getBean("recipeBoardContentsServiceImplTest");

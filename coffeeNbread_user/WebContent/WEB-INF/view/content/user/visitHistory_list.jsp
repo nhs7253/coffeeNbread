@@ -53,18 +53,17 @@ td {
 				<%-- ######################################################
 																조회된 item 출력 
 					###################################################### --%>
-				<c:forEach items="${requestScope.list }" var="bokmark">
-	
+				<c:forEach items="${requestScope.list }" var="list">
 					<tr>
-						<td>${bokmark.store.storeId}</td>
-						<td>${bokmark.store.storeName}</td>
-						<td>${bokmark.store.storePhone}</td>
-						<td>${bokmark.store.storeAddress}</td>
-						<td>${bokmark.store.storeEmail}</td>
-						<td>${bokmark.store.storeHits}</td>
-						<td>${bokmark.store.storeOpenFormat}</td>
-						<td>${bokmark.store.storeCloseFormat}</td>
-						<td><input type="checkbox" name="storeIdList" value="${bokmark.store.storeId}"></td>
+						<td>${list.store.storeId}</td>
+						<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
+						<td>${list.store.storePhone}</td>
+						<td>${list.store.storeAddress}</td>
+						<td>${list.store.storeEmail}</td>
+						<td>${list.store.storeHits}</td>
+						<td>${list.store.storeOpenFormat}</td>
+						<td>${list.store.storeCloseFormat}</td>
+						<td><input type="checkbox" name="storeIdList" value="${list.store.storeId}"></td>
 					</tr>
 				</c:forEach>
 	

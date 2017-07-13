@@ -33,8 +33,11 @@ public class ShoppingBasketProductServiceImplTest {
 	public void Test() throws UserManageException, EmptyShoppingBasketProductListException,
 			EmptyShoppingBasketProductListByProductNameException, NoUpdateShoppingBasketProductException {
 		System.out.println("-----------장바구니 목록 조회--------"); 
-	System.out.println(service.findShoppingBasketProductListByStoreIdAndUserId("s-7","u-1"));
-//
+	/*System.out.println(service.findShoppingBasketProductListByStoreIdAndUserId("s-1","khjsuccess6808"));
+
+	System.out.println(service.findShoppingBasketProductListByStoreIdAndUserId("s-1", "khjsuccess6808"));
+*/	System.out.println(service.findShoppingBasketProductList("s-1", "khjsuccess6808"));
+	//
 //		System.out.println("--------- 장바구니 목록중 제품명 부분일치해서 해당되는 장바구니 목록 리턴 ---------");
 //		
  //    	System.out.println(service.findShoppingBasketProductByProductNameAndUserIdAndStoreId("20", "u-1", "s-7"));
@@ -43,15 +46,15 @@ public class ShoppingBasketProductServiceImplTest {
 //		
 //
 //		
-//		System.out.println("---------장바구니 카운트개수 수정-------");  --테스트완료
+	System.out.println("---------장바구니 카운트개수 수정-------"); 
 //		
-//		System.out.println(service.modifyShoppingBasketProduct(new ShoppingBasketProduct("u-1","s-7","p-18",15,"s-7")));
+	System.out.println(service.modifyShoppingBasketProduct(new ShoppingBasketProduct("khjsuccess6808","s-1","p-1",15,"s-1")));
 //	
 //			
 //		System.out.println("--------------장바구니 목록 삭제-----------"); --테스트 완료.
 //		System.out.println(service.deleteShoppingBasketProductByProductIdAndUserId("p-1", "u-1"));
 		
-		
+		/*
 		System.out.println("-----------장바구니 등록 서비스--------------");                
 		List<ShoppingBasketProduct> list=Arrays.asList(
 				new ShoppingBasketProduct("u-1","s-7","p-18",500,"s-7"),
@@ -63,7 +66,7 @@ public class ShoppingBasketProductServiceImplTest {
 				);
 		    
 		     service.addShoppingBasketProduct(list);
-			System.out.println("------------이상 없음----------------");
+			System.out.println("------------이상 없음----------------");*/
 	}
 
 	public static void main(String[] args) throws UserManageException, EmptyShoppingBasketProductListException,

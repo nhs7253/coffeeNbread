@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<div class="container" style="font-size: 20px;">
+<%-- <div class="container" style="font-size: 20px;">
 	<div class="row">
 		<div class="col-sm-12">
 			<h1>본인정보 조회결과</h1>
@@ -39,15 +39,53 @@
 	
 	<div class="row" style="margin-top:20px">
 		<div class="col-sm-12">
-			<a href="${initParam.rootPath }/user/update_profile_form.do" class="btn btn-default">정보수정</a>
+			<a href="${initParam.rootPath }/user/update_profile_form.do" class="btn pull-left"><i class="glyphicon glyphicon-pencil"></i>정보수정</a>
 		</div>
 	</div>
-</div>
+</div> --%>
+
+<table class="table" style="width:300px">
+	<tr><!-- colspan="6" -->
+		<th style="text-align:center;vertical-align:top"  >my page</th>
+	</tr>
+	<tr class="form-group">
+		<th>사용자 ID</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.userId"/></div><td>
+	</tr>
+	
+	<tr class="form-group">
+		<th>기존 패스워드</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.userName"/></div><td>
+	</tr>
+	
+	<tr class="form-group">
+		<th>변경할 패스워드</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.birthFormat"/></div></td>
+	</tr>
+	<tr class="form-group">
+		<th>이름</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.userGender"/></div></td>
+	</tr>
+	<tr class="form-group">
+		<th>생일</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.userEmail"/></div></td>
+	</tr>
+	<tr class="form-group">
+		<th>성별</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.userPhone"/></div>
+	</tr>
+	<tr class="form-group">
+		<th>이메일 주소</th>
+		<td><div class="col-xs-10"><sec:authentication property="principal.userAddress"/></div>
+	</tr>
+	
 
 
 
 
 
+
+</table>
 
 
 

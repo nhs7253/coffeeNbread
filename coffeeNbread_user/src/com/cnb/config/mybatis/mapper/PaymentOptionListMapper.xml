@@ -7,6 +7,13 @@
 	 payment_optionList
 	
 	  -->
+	  
+	 <!-- resultMap -->
+	<resultMap id="paymentOptionList-resultmap" type="PaymentOptionList">
+		<result column="payment_id" property="paymentId"/>
+		<result column="payment_method" property="paymentMethod"/>
+	</resultMap>
+	
 	
 	<!-- insert -->
 	<insert id="insertPaymentOptionList" parameterType="PaymentOptionList">
@@ -22,15 +29,13 @@
 	</delete>
 	
 	
-	<!-- resultMap -->
-	<resultMap id="paymentOptionList-resultmap" type="PaymentOptionList">
-		<result column="payment_id" property="paymentId"/>
-		<result column="payment_method" property="paymentMethod"/>
-	</resultMap>
+
 	
 	
-	
-	
+	<select id="paymentOptionListAll" resultMap="paymentOptionList-resultmap">
+		SELECT payment_id, payment_method
+		FROM payment_optionlist
+	</select>
 	
 	
 	

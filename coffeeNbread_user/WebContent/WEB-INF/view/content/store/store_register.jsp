@@ -1,5 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,14 +12,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript"
+	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
 	$("#optionCategoryList").on("click",function(){
 		
-	
+		
 		var p2 = document.createElement("input");
 		p2.setAttribute("name","optionCategoryList");
+		p2.setAttribute("class", "form-control");
 		var txt = document.createTextNode($("#optionCategory").val());
 		p2.appendChild(txt);
 	
@@ -22,63 +30,83 @@ $(document).ready(function(){
 		input.appendChild(p2);
 		
 	
+
 		});//end of storeCategoryList
 
-	
 	});//end of document
-	
-
-
-
 </script>
 <body>
-	<form action="${initParam.rootPath }/addStoreController.do" method="post" enctype="multipart/form-data">
-		<sec:csrfInput/><%-- csrf 토큰 --%>
+	<form action="${initParam.rootPath }/addStoreController.do"
+		method="post" enctype="multipart/form-data">
+		<sec:csrfInput />
+		<%-- csrf 토큰 --%>
 		<table >
-			<tr >
-				<th>매장 분류</th>
-				<td><input type="text" name="optionCategoryList" id="optionCategory"><button type="button"  id="optionCategoryList">추가하기</button></td>
-			</tr>
-			<tr><th></th>
-				<td id="selectSC">
-				
+			<tr class="form-group">
+				<th>매장 분류 </th>
+				<td><input type="text" name="optionCategoryList"
+					id="optionCategory" class="form-control">
+					
 				</td>
+				<td>
+				<button type="button" id="optionCategoryList"
+					class="btn btn-default btn-circle">
+					<i class="glyphicon glyphicon-plus"></i>
+				</button>
+				</td>
+				
+
+			</tr>
+		
+			<tr class="form-group">
+				<th></th>
+				<td id="selectSC"></td>
 			</tr>
 		</table>
+
+
+		
+		
+		결제 방식 선택<br />
+		<c:forEach items="${requestScope.paymentOptionList }" var="list">
+			<input type="checkbox" name="paymentIdList" value="${list.paymentId }"/>${list.paymentMethod }&nbsp;&nbsp;&nbsp;
+		</c:forEach>
+		
 	
 		<table>	
-			<tr>
+			<tr  class="form-group">
 				<th>매장 ID</th>
 
-				<td><input type="text" name="storeId" ></td>
+				<td><div class="col-xs-10"><input type="text" name="storeId" class="form-control"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 이름</th>
-				<td><input type="text" name="storeName" ></td>
+				<td><div class="col-xs-10"><input type="text" name="storeName" class="form-control"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 번호</th>
-				<td><input type="tel" name="storePhone" ></td>
+				<td><div class="col-xs-10"><input type="tel" name="storePhone" class="form-control"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 메일</th>
-				<td><input type="email" name="storeEmail"></td>
+				<td><div class="col-xs-10"><input type="email" name="storeEmail" class="form-control"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>open 시간</th>
-				<td><input type="date" name="storeOpen" ></td>
+				<td><div class="col-xs-5">
+				<input type="date" name="storeOpen" class="form-control">
+					</div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>close 시간</th>
-				<td><input type="date" name="storeClose"  ></td>
+				<td><div class="col-xs-5"><input type="date" name="storeClose" class="form-control"></div></td>
 			</tr>
 			<tr>
 				<th>매장 사진</th>
 				<td><input type="file" name="storePictureList"></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 위치</th>
-				<td><input type="text" name="storeAddress"></td>
+				<td><input type="text" name="storeAddress" class="form-control"></td>
 			</tr>
 			<tr>
 				<th>매장 소개</th>
@@ -86,9 +114,14 @@ $(document).ready(function(){
 			</tr>
 
 			<tr>
-				<td colspan="2"><input type="submit" value="등록"></td>
+				<td colspan="2">
+				<button type="submit"
+						class="btn btn-default btn-circle">
+						<i class="glyphicon glyphicon-ok"></i> 등록
+				</button></td>
 			</tr>
 		</table>
+
 	</form>
 </body>
 </html>

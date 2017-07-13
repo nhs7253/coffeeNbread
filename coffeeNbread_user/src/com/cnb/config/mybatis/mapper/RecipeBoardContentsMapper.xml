@@ -31,9 +31,12 @@
 		recipe_board_contents
 		SET recipe_board_content = #{recipeBoardContent},
 		recipe_board_title = #{recipeBoardTitle},
-		recipe_board_date =
-		#{recipeBoardDate},
-		recipe_board_picture = #{recipeBoardPicture}
+		recipe_board_date =#{recipeBoardDate},
+		recipe_board_picture = #{recipeBoardPicture},
+		recipe_board_hits=#{recipeBoardHits},
+		recommend_count=#{recommendCount},
+		user_id=#{userId},
+		store_id=#{storeId}
 		WHERE
 		recipe_board_no = #{recipeBoardNo}
 	</update>
@@ -105,6 +108,8 @@
 		<result column="recipe_board_picture" property="recipeBoardPicture" />
 		<result column="recipe_board_hits" property="recipeBoardHits" />
 		<result column="recommend_count" property="recommendCount" />
+		<result column="user_id" property="userId" />
+		<result column="store_id" property="storeId" />
 
 		<association property="store"
 			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
@@ -135,6 +140,7 @@
 				recipe_board_contents
 				WHERE
 				recipe_board_content like '%'||#{keyword}||'%'
+				
 
 			</when>
 			<when test="method == 'recipeBoardTitle'">
@@ -162,7 +168,7 @@
 				FROM
 				recipe_board_contents
 				WHERE
-				recommendCount = #{keyword}
+				recommend_Count = #{keyword}
 
 			</when>
 			<when test="select =='recipeBoardDate'">
@@ -185,7 +191,7 @@
 
 
 
-	<!--전체 레시피게시글에서 방법과 방법내용으로 찾는 개수 -->
+	<!--전체 레시피게시글에서 매장별 방법과 방법내용으로 찾는 개수 -->
 	<select id="countSelectRecipeBoardContentsByStoreIdAndMethod"
 		parameterType="map" resultType="_int">
 		<choose>
@@ -414,8 +420,8 @@
 		s.store_name
 		FROM recipe_board_contents
 		rbc, store s
-		Where rbc.store_id=s.store_id
-
+		Where rbc.store_id=s.store_id(+)
+         
 		<choose>
 			<when test="select == 'recipeBoardDate'">
 				order by recipe_board_date desc
@@ -424,18 +430,23 @@
 			<when test="select == 'recipeBoardTitle'">
 				And recipe_board_title like
 				'%'||#{keyword}||'%'
+				order by recipe_board_date desc
 			</when>
 			<when test="select == 'recipeBoardHits'">
 				order by recipe_board_hits desc
 			</when>
 			<when test="select == 'recipeBoardContent'">
 				and recipe_board_content like '%'||#{keyword}||'%'
+				order by recipe_board_date desc
 			</when>
 
 			<when test="select == 'recommendCount'">
 				order by recommend_count desc
 			</when>
+             <otherwise> 
 
+			    
+			</otherwise>
 		</choose>
 		)
 		WHERE rownum &lt;= #{endIndex}
@@ -554,7 +565,8 @@
 		<choose>
 			<when test="select == 'recipeBoardDate'">
 
-				And recipe_board_date= #{methodContent}
+				And recipe_board_date= #{keyword}
+				oreder by recipe_board_date desc
 			</when>
 			<when test="select == 'recipeBoardTitle'">
 				And recipe_board_title like '%'||#{keyword}||'%'
@@ -570,6 +582,7 @@
 				order by recommend_count desc
 			</when>
             
+       
 		</choose>
 		)
 		WHERE rownum &lt;= #{endIndex}

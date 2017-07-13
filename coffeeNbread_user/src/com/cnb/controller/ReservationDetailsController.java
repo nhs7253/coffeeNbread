@@ -1,11 +1,14 @@
 package com.cnb.controller;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import com.cnb.service.ProductService;
 import com.cnb.service.ReservationDetailsService;
 import com.cnb.validation.annotation.FindReservationDetailsForm;
 import com.cnb.validation.annotation.ReservationDetailsSelectForDeleteForm;
+import com.cnb.validation.annotation.ReservationDetailsViewForm;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.Product;
 import com.cnb.vo.ReservationDetails;
@@ -44,6 +48,9 @@ public class ReservationDetailsController {
 	
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private ReservationDetailsService rdService;
 	
 	//매장의 모든 예약 내역 조회
 	@RequestMapping("findReservationDetailsController")
@@ -159,5 +166,29 @@ public class ReservationDetailsController {
 		service.findRemoveReservationDetails(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), reservationList);
 		return "redirect:/findReservationDetailsController.do";
 	}
-	
+
+
+	// 유저가 예약한 예약내역 보기. - 페이징 필요할듯. - 페이징 추가.
+	@RequestMapping("/user/findReservationDetailsController")
+	public ModelAndView findReservationDetailsController(
+			@ModelAttribute("reservationDetails") @Valid ReservationDetailsViewForm reservationDetailsViewForm,
+			BindingResult errors, HttpServletRequest request)  {
+
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("reservationDetailsViewForm:" + reservationDetailsViewForm);
+		if (errors.hasErrors()) {
+			modelAndView.setViewName("user/payment_fail.tiles"); // 임시로 해둠.
+			return modelAndView; // 에러 발생
+		}
+		Map<String, Object> map = new HashMap<>();
+         map =   rdService.findReservationDetailsListByUserId(reservationDetailsViewForm.getPage(),((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId() );
+		System.out.println("뽑으려는 것 :"+map.get("list"));
+		modelAndView.setViewName("user/user_payment_List.tiles");
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("pageBean", map.get("pageBean"));
+		
+		return modelAndView;
+
+	}
 }
+

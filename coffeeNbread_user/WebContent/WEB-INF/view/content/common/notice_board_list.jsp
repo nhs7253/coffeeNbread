@@ -25,7 +25,7 @@ td {
 
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post">
 		<select name="select">
-			<option value="title" ${param.select eq "userId" ? "selected" :""}>제목</option>
+			<option value="title" ${param.select eq "title" ? "selected" :""}>제목</option>
 			<option value="content" ${param.select eq "content" ? "selected" :""}>내용</option>
 			<option value="titleAndcontent" ${param.select eq "titleAndcontent" ? "selected" :""}>제목+내용</option>
 		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />

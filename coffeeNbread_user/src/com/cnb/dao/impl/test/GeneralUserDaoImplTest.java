@@ -142,7 +142,9 @@ public class GeneralUserDaoImplTest {
 		System.out.println("deleteGeneralUserByUserId 후 조회");
 		System.out.println(dao.selectGeneralUserList());
 		
+		System.out.println("********************");
 		
+		System.out.println(dao.selectGeneralUserListBySelectToKeywordJoinStoreContent("userId","",1,10));
 		
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}

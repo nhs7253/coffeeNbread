@@ -45,46 +45,28 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 	@Autowired
 	private StoreDao sDao;
 
-	/**
-	 * 매장의 오픈시간과 닫은시간안에 제품수령시간을 적는다면 그떄 가능, 아니면 안됨.
-	 * 
-	 * @throws NotInsertTradeDateException
-	 */
 
-	public void addUserHopedGetProductDate(List<PaymentDetails> paymentDetailsList, String userId, String storeId,
-			Date tradeHopeDate) throws NotInsertTradeDateException {
-
-		Store store = sDao.selectStoreById(storeId);
-		paymentDetailsList = pdDao.selectPaymentDetailsListByUserIdAndStoreId(userId, storeId);
-		System.out.println("paymentDetailsList:" + paymentDetailsList);
-		/* 원하는 제품수령시간이 매장의 닫는시간 이후거나 , 매장의 오픈시간 이전이면 예외 생성 */
-		if (tradeHopeDate.compareTo(store.getStoreClose()) > 0 || tradeHopeDate.compareTo(store.getStoreOpen()) < 0) {
-			throw new NotInsertTradeDateException("매장 운영시간에 맞지 않아 수령할수있는 시간이아닙니다.");
-		}
-		for (int i = 0; i < paymentDetailsList.size(); i++) {
-          /* update로 수정해야 함. */
-			dao.insertReservationDetails(new ReservationDetails(0, paymentDetailsList.get(i).getTradeDate(),
-					paymentDetailsList.get(i).getReservationOrderCount(), null, tradeHopeDate,
-					paymentDetailsList.get(i).getUserId(), paymentDetailsList.get(i).getProductId(),
-					paymentDetailsList.get(i).getStoreId()));
+	@Override
+	public void addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList,Date productHopeTime) {
+		
+		for(int i=0;i<paymentDetailsList.size();i++){
+			
+			dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetailsList.get(i).getReservationOrderCount(),null,productHopeTime,paymentDetailsList.get(i).getUserId(),paymentDetailsList.get(i).getProductId(),paymentDetailsList.get(i).getStoreId()));
+		
 		}
 		
 	}
 	
-	
-	
-	
-/*    예약확인내역에서 매장에서 확인하기 전에는 수령희망시간 수정 가능 
-	@Override
-	public int modifyReservationDetails(List<PaymentDetails> paymentDetailsList,ReservationDetails reservationDetails) {
 
-		return 0;
-	}
-*/
-	@Override
+/*	@Override
 	public int addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList) {
+		
+		for(int i=0;i<paymentDetailsList.size();i++){
+			
+			dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetailsList.get(i).getReservationOrderCount(),null,));
+		}
 		return 0;
-	}
+	}*/
 
 	@Override
 	public HashMap<String, Object> findReservationDetailsListByUserIdAndStoreId(int page, String storeId,
@@ -95,10 +77,8 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 
 		// item 수
 		int totalCount = dao.selectReservationDetailsListCountByMethod(storeId, method, methodContent);
-
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-
 		List<ReservationDetails> list = dao.selectReservationDetailsListByUserIdAndStoreId(storeId, userId,
 				pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 		map.put("list", list);

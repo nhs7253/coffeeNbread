@@ -1,5 +1,7 @@
 package com.cnb.dao.impl;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,6 +41,12 @@ public class PaymentOptionListDaoImpl implements PaymentOptionListDao {
 	@Override
 	public int deletePaymentOptionListByPaymentId(String paymentId) {
 		return session.insert(makeSqlId("deletePaymentOptionListByPaymentId"), paymentId);
+	}
+
+
+	@Override
+	public List<PaymentOptionList> paymentOptionListAll() {
+		return session.selectList(makeSqlId("paymentOptionListAll"));
 	}
 	
 }

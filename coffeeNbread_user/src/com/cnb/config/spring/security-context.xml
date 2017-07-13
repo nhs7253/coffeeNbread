@@ -37,6 +37,8 @@
 				    
 			logout : 로그아웃 관련 설정
 					- logout-url="로그아웃처리 요청 url"
+					
+			authentication-success-handler-ref="" => 로그인 성공시 이동할 컨트롤러 지정가능 (로그인 성공시 Session 사용)
 	 -->
 	<http>
 	

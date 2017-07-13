@@ -40,8 +40,8 @@ public class GeneralUser implements Serializable{
 	private String userAddress;
 	private String userActiveState;
 	private String storeId;
-	
-	
+
+	private Store store;
 	
 	public GeneralUser() {
 	}
@@ -73,7 +73,22 @@ public class GeneralUser implements Serializable{
 		this.userActiveState = userActiveState;
 		this.storeId = storeId;
 	}
-
+	
+	public GeneralUser(String userId, String userPw, String userName, Date userBirth, String userGender,
+			String userEmail, String userPhone, String userAddress, String userActiveState, String storeId,
+			Store store) {
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userGender = userGender;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userAddress = userAddress;
+		this.userActiveState = userActiveState;
+		this.storeId = storeId;
+		this.store = store;
+	}
 
 	/**
 	 * sec:authentication를 통해 JSP에서 yyyy-MM-dd형식으로 DATE 타입을 문자열로 출력
@@ -165,11 +180,19 @@ public class GeneralUser implements Serializable{
 		this.storeId = storeId;
 	}
 
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		result = prime * result + ((userActiveState == null) ? 0 : userActiveState.hashCode());
 		result = prime * result + ((userAddress == null) ? 0 : userAddress.hashCode());
@@ -192,6 +215,11 @@ public class GeneralUser implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		GeneralUser other = (GeneralUser) obj;
+		if (store == null) {
+			if (other.store != null)
+				return false;
+		} else if (!store.equals(other.store))
+			return false;
 		if (storeId == null) {
 			if (other.storeId != null)
 				return false;
@@ -250,6 +278,8 @@ public class GeneralUser implements Serializable{
 		return "GeneralUser [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userBirth="
 				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userPhone=" + userPhone
 				+ ", userAddress=" + userAddress + ", userActiveState=" + userActiveState + ", storeId=" + storeId
-				+ "]";
+				+ ", store=" + store + "]";
 	}
+
+	
 }

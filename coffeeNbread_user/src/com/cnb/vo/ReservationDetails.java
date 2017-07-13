@@ -16,14 +16,14 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 초기 구현
  */
 public class ReservationDetails implements Serializable {
-	private int reservationNo;	//PRIMARY KEY
+	private int reservationNo;	//PRIMARY KEY //예약 넘버
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private Date reservationTime;
-	private int reservationCount;
+	private Date reservationTime; //예약시간
+	private int reservationCount;  //예약개수
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private Date reservationConfirm;
+	private Date reservationConfirm; //예약 확인여부
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private Date productHopeTime;
+	private Date productHopeTime; //예약 원하는 수령희망시간.
 	
 	/*********************************************************************
 	 * 부모 테이블 : ReservationDetails, 자식 테이블 : GeneralUser

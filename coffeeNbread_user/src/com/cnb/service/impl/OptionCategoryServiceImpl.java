@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnb.dao.OptionCategoryDao;
 import com.cnb.dao.OptionDetailDao;
@@ -25,6 +26,7 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	private OptionDetailDao detailDao;
 	
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void addOptionCategory(List<OptionCategory> optionCategoryList) throws DuplicatedOptionCategoryNameException {
 		List<OptionCategory> optionCategoryList2 = dao.selectOptionCategoryListByStoreId(optionCategoryList.get(0).getStoreId());
 				
@@ -45,19 +47,15 @@ public class OptionCategoryServiceImpl implements OptionCategoryService{
 	}
 
 	@Override
-	public void modifyOptionCategory(List<OptionCategory> optionCategoryList) {
-	/*	//소분류 있을 경우 소분류 삭제 후 수정
-		for(int i = 0;i<optionCategoryList.size();i++){
-		if(detailDao.select(optionCategoryList.get(i).getStoreId()).size()>0){
-			detailDao.deleteOptionDetail(optionCategoryList.get(i).getStoreId(), optionCategoryList.get(i).getOptionId());
-			dao.updateOptionCategory(optionCategoryList.get(i));
-		}else{
-		 dao.updateOptionCategory(optionCategoryList.get(i));
-		}
-		}*/
+	@Transactional(rollbackFor=Exception.class)
+	public void modifyOptionCategory(List<OptionCategory> optionCategoryList, String storeId) throws DuplicatedOptionCategoryNameException {
+		//소분류 있을 경우 소분류 삭제 후 수정
+		dao.deleteOptionCategoryByStoreId(storeId);
+		addOptionCategory(optionCategoryList);
 	}
 
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public int removeOptionCategory(String storeId,int optionId) {
 		//소분류 있을 경우 소분류 삭제 후 대분류 삭제 
 		if(detailDao.selectOptionDetailListByOptionCategory(storeId, optionId).size()>0){

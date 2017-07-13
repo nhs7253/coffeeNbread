@@ -112,11 +112,11 @@ public class NoticeBoardContentsController {
 	
 	/**
 	 * 공지사항 목록을 페이징 하여 보여주는 컨드롤러
-	 * @param noticeBoardContentsViewForm (select 검색 종류 - 글 제목(title), 글 내용(content), 제목 + 내용(titleAndcontent) keyword 검색 내용, 볼 페이지) 
+	 * @param noticeBoardContentsViewForm (select 검색 종류 - 글 제목(title), 글 내용(content), 제목 + 내용(titleAndcontent), keyword 검색 내용, 볼 페이지) 
 	 * @param errors 요청파라미터 에러
 	 * @return 반환 경로
 	 */
-	@RequestMapping("/common/findNoticeBoardContentsPagingListController")
+	@RequestMapping("/common/findNoticeBoardContentsPagingListControllerr")
 	public ModelAndView findNoticeBoardContentsPagingListController(@ModelAttribute("noticeBoardContentsView") @Valid NoticeBoardContentsViewForm noticeBoardContentsViewForm, BindingResult errors){
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -150,7 +150,7 @@ public class NoticeBoardContentsController {
 			modelAndView.setViewName("redirect:/common/findNoticeBoardContentsPagingListController.do");
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
-		NoticeBoardContents noticeBoardContents;
+		NoticeBoardContents noticeBoardContents = null;
 		try {
 			noticeBoardContents = noticeBoardContentsService.viewNoticeBoardContentsByNoticeBoardNoService(noticeBoardNo);
 		} catch (ContentsNotFoundException e) {
