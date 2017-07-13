@@ -10,69 +10,77 @@
 <title>Insert title here</title>
 </head>
 
-<body> 내 매장 정보
+<body> 
 
 
-<table>
-			<tr>
+<table  class="table" style="width:300px">
+			<tr><!-- colspan="6" -->
+				<th style="text-align:center;vertical-align:top"  >MY STORE</th>
+			</tr>
+			<tr class="form-group">
 				<th>매장 분류</th>
-				<td>
+				<td ><div class="col-xs-5">
 				<c:forEach items="${sessionScope.store.optionCategoryList}" var="optionCategoryList">
 							${optionCategoryList}
-				</c:forEach>
+				</c:forEach></div>
 				</td>
 			</tr>			
-			<tr>
+			<tr class="form-group">
 				<th>매장 ID</th>
 
-				<td>${sessionScope.store.storeId}</td>
+				<td><div class="col-xs-5">${sessionScope.store.storeId}</div></td>
+				
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 이름</th>
-				<td>${sessionScope.store.storeName}</td>
+				<td><div class="col-xs-5">${sessionScope.store.storeName}</div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 번호</th>
-				<td>${sessionScope.store.storePhone}</td>
+				<td><div class="col-xs-5">${sessionScope.store.storePhone}</div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 메일</th>
-				<td>${sessionScope.store.storeEmail }</td>
+				<td><div class="col-xs-5">${sessionScope.store.storeEmail }</div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>open 시간</th>
-				<td><fmt:formatDate value="${sessionScope.store.storeOpen }" type = "time" pattern="hh:mm"/></td>
+				<td><div class="col-xs-5"><fmt:formatDate value="${sessionScope.store.storeOpen }" type = "time" pattern="hh:mm"/></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>close 시간</th>
-				<td><fmt:formatDate value="${sessionScope.store.storeClose }" type = "time" pattern="hh:mm"/></td>
+				<td><div class="col-xs-5"><fmt:formatDate value="${sessionScope.store.storeClose }" type = "time" pattern="hh:mm"/></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 사진</th>
-				<td>
+				<td><div class="col-xs-5">
 				<c:forEach items="${sessionScope.store.storePictureList}" var="fileName">
 					<img src="/coffeeNbread_user/up_image/${fileName}" width="300px">
-				</c:forEach>
+				</c:forEach></div>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 위치</th>
-				<td></td>
+				<td><div class="col-xs-5"></div></td>
 			</tr>
-			<tr>
+			<tr class="form-group">
 				<th>매장 소개</th>
-				<td>${sessionScope.store.storeIntro }</td>
+				<td><div class="col-xs-5">${sessionScope.store.storeIntro }</div></td>
 			</tr>
 
-			<tr>
-				<td colspan="2"><input type="button" value="확인"></td>
+			<tr class="form-group">
+				<td colspan="2"><button type="submit" class="btn"><i class="glyphicon glyphicon-ok"></i>확인</button></td>
 			</tr>
 		</table>
+		
+		
 			<form action="${initParam.rootPath}/store/store_modify.do"  >
-				<button type="submit" >수정</button>
+				
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-pencil"></i>수정</button>
+				
 			</form>
 			<form action="${initParam.rootPath }/removeStoreController.do">
 			
-				<button type="submit" >삭제</button>
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 		
 			</form>
 			

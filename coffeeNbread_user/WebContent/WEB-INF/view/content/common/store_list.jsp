@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-</head>
-<body>
+
 	
 <style type="text/css">
 table, td {
@@ -19,26 +18,32 @@ td {
    padding: 5px; /* //td 간 간격 */
 }
 </style>
-	<h2>공지사항 게시판</h2>
+<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+
+	<h2>STORE LIST</h2>
 
 
-
-	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post">
-		<select name="select">
+<div class="container">
+<div id="quick-access">
+	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
+		<div class="form-group">
+		<select name="select" class="form-control">
 			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>이름</option>
 			<option value="storeIntro" ${param.select eq "storeIntro" ? "selected" :""}>소개</option>
 			<option value="storeAddress" ${param.select eq "storeAddress" ? "selected" :""}>주소</option>
 			<option value="storeCategory" ${param.select eq "storeCategory" ? "selected" :""}>카테고리</option>
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
+		</select> <input type="text" name="keyword" class="form-control"/></div><button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
+	</div>
+</div>
 	<br>
 
 
 	
-	<table class="w3-table-all">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue">
+			<tr class="form-group">
 				<th>매장이름</th>
 				<th>주소</th>
 				<th>카테고리</th>
@@ -53,7 +58,7 @@ td {
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
 
-				<tr>
+				<tr class="form-group">
 					<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.storeId}">${list.storeName}</a></td>
 					<td>${list.storeAddress}</td>
 					<td>${list.storeCategory}</td>

@@ -1,43 +1,59 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
 table, td {
-   border: 1px solid black;
+	border: 1px solid black;
 }
 
 table {
-   width: 700px;
-   border-collapse: collapse;
+	width: 700px;
+	border-collapse: collapse;
 }
 
 td {
-   padding: 5px; /* //td 간 간격 */
+	padding: 5px; /* //td 간 간격 */
 }
 </style>
+<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
 </head>
 <body>
 
-	<h2>매장 목록</h2>
-	
+	<h2>STORE_MANAGE_LIST</h2>
 
+	<div class="container">
+		<div id="quick-access">
+			<form action="${initParam.rootPath }/userManagementListController.do"
+				method="post" class="form-inline quick-search-form" role="form">
+				<div class="form-group">
+					<select name="select" class="form-control">
+						<option value="userId"
+							${param.select eq "userId" ? "selected" :""}>유저 아이디</option>
+						<option value="userName"
+							${param.select eq "userName" ? "selected" :""}>유저 이름</option>
+						<option value="storeId"
+							${param.select eq "storeId" ? "selected" :""}>매장 아이디</option>
+						<option value="storeName"
+							${param.select eq "storeName" ? "selected" :""}>매장 이름</option>
+					</select> <input type="text" name="keyword" class="form-control" />
+				</div>
+				<button type="submit" class="btn btn-custom">
+					<i class="glyphicon glyphicon-search"></i>검색
+				</button>
 
-	<form action="${initParam.rootPath }/userManagementListController.do" method="post">
-		<select name="select">
-			<option value="userId" ${param.select eq "userId" ? "selected" :""}>유저 아이디</option>
-			<option value="userName" ${param.select eq "userName" ? "selected" :""}>유저 이름</option> 
-			<option value="storeId" ${param.select eq "storeId" ? "selected" :""}>매장 아이디</option>
-			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>매장 이름</option>   
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	</form>
+				<sec:csrfInput />
+				<%-- csrf 토큰 --%>
+			</form>
+		</div>
+	</div>
 	<br>
 
-	<table class="w3-table-all">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue">
+			<tr class="form-group">
 				<th>유저 아이디</th>
 				<th>유저 이름</th>
 				<th>매장아이디</th>
@@ -57,7 +73,7 @@ td {
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
 
-				<tr>
+				<tr class="form-group">
 					<td>${list.userId}</td>
 					<td>${list.userName}</td>
 					<td>${list.storeId}</td>
@@ -68,12 +84,18 @@ td {
 					<td>${list.store.storeCategory }</td>
 					<td>${list.store.storePermission }</td>
 					<td>
-						<form action="${initParam.rootPath }/storeApproveController.do" method="post">
-							<input type="hidden" value="${list.userId }" name="userId"/>
-							<input type="hidden" value="${list.storeId }" name="storeId"/>
-							<input type="hidden" value="${list.store.storePermission }" name="storePermission"/>
-							<input type="submit" value="변경" />
-							<sec:csrfInput/><%-- csrf 토큰 --%>
+						<form action="${initParam.rootPath }/storeApproveController.do"
+							method="post">
+							<input type="hidden" value="${list.userId }" name="userId" /> <input
+								type="hidden" value="${list.storeId }" name="storeId" /> <input
+								type="hidden" value="${list.store.storePermission }"
+								name="storePermission" />
+							<button type="submit" class="btn">
+								<i class="glyphicon glyphicon-pencil"></i>변경
+							</button>
+
+							<sec:csrfInput />
+							<%-- csrf 토큰 --%>
 						</form>
 					</td>
 				</tr>
@@ -82,7 +104,7 @@ td {
 		</tbody>
 	</table>
 
-	
+
 
 
 
@@ -159,6 +181,3 @@ td {
 		<a
 			href="${initParam.rootPath }/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
-
-
-

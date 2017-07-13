@@ -15,34 +15,41 @@ table {
 td {
    padding: 5px; /*td 간 간격 */
 }
-</style>
 
-<h2>제품 목록</h2> 
+</style>
+<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+<h2>PRODUCT LIST</h2> 
 
 ${requestScope.list }
-
-<form action="${initParam.rootPath }/findProductListByMethod.do" method="post">
+<div class="container">
+<div id="quick-access">
+<form action="${initParam.rootPath }/findProductListByMethod.do" method="post" class="form-inline quick-search-form" role="form">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-	<select name="method">
+	<div class="form-group">
+	<select name="method" class="form-control">
 		<option value="productCategory">제품 종류</option>
 		<option value="productName">제품 이름</option>
 		<option value="sellingOption">판매 여부(Y/N)</option>
 	</select>
 	<input type="hidden" name="storeId" value="${param.storeId}"/>
-	<input type="text" name="methodContent" />
-	<input type="submit" value="검색" />
+	<input type="text" name="methodContent" class="form-control"/>
+	</div>
+	<button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
 </form>
+</div>
+</div>
 
 <form  action="${initParam.rootPath }/findProductListController.do" method="post">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-	<input type="submit" value="전체조회" />
+	<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>전체조회</button>
+	
 </form>
 
 <p>
 
 <form action="${initParam.rootPath }/selectRemoveProductController.do" method="post">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-	<table>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
@@ -65,7 +72,7 @@ ${requestScope.list }
 			</c:forEach>
 		</tbody>
 	</table>
-	<input type="submit" value="삭제" />
+		<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 </form>
 
 <p>
