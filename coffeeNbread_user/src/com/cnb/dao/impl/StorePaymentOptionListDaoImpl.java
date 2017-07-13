@@ -53,6 +53,11 @@ public class StorePaymentOptionListDaoImpl implements StorePaymentOptionListDao{
 
 	}
 
+	@Override
+	public int deleteStorePaymentOptionListByStoreId(String storeId) {
+		return session.delete(makeSqlId("deleteStorePaymentOptionListByStoreId"), storeId);
+	}
+
 	
 
 	

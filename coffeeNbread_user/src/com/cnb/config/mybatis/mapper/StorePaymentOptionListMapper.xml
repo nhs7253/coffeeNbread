@@ -23,6 +23,9 @@
 		DELETE FROM store_payment_optionlist WHERE store_id = #{storeId} AND payment_id = #{paymentId}
 	</delete>
 	
+	 <delete id="deleteStorePaymentOptionListByStoreId" parameterType="string">
+		DELETE FROM store_payment_optionlist WHERE store_id = #{value}
+	</delete>
 
 
   <resultMap id="storePaymentOptionList-resultmap" type="StorePaymentOptionList">

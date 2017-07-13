@@ -54,6 +54,8 @@ public class StoreRegisterForm implements Serializable{
 
 	private List<String> paymentIdList;
 	
+	
+	
 	public String getOriginalName() {
 		return originalName;
 	}
