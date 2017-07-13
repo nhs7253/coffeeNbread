@@ -306,81 +306,43 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),2,'');
 		
 		
-		
-	INSERT INTO  store_visit_history VALUES(1, #{userId}, #{storeId})
-	
-	
-	INSERT INTO bookmark_card_num VALUES('TEST_CARD','u-1')
-
-	
-	
-	
-	SELECT payment_no,
-		store_name,
-		pp.product_picture,
-		product_name,
-		sell_method,
-		payment_option,
-		reservation_order_count,
-		product_price,
-		trade_date
-
-		FROM(
-		SELECT rownum rnum,
-		payment_no,
-		store_name
-		pp.product_picture,
-		product_name,
-		sell_method,
-		payment_option,
-		reservation_order_count,
-		product_price,
-		trade_date
-		FROM(
-		SELECT
-		pd.payment_no,
-		s.store_name,
-		pp.product_picture,
-		p.product_name,
-		pd.sell_method,
-		pd.payment_option,
-		pd.reservation_order_count,
-		p.product_price,
-		pd.trade_date
-		FROM payment_details pd, product p,
-		product_picture pp,store s
-		WHERE pd.store_id=s.store_id
-		and p.store_id=s.store_id
-	    and pd.user_id='u-1'
-		)
-		WHERE rownum <=1000
-		)
-		WHERE rnum >= 1
-	
-	
-		SELECT
-		pd.payment_no,
-		s.store_name,
-		pp.product_picture,
-		p.product_name,
-		po.payment_method,
-		pd.reservation_order_count,
-		p.product_price,
-		pd.trade_date
-		FROM payment_details pd, product p,
-		product_picture pp,store s,payment_optionList po,store_payment_optionList spo
-        WHERE pd.store_id=s.store_id
-		and p.store_id=s.store_id
-		and p.product_id=pp.product_id
-	    and pd.store_id=s.store_id
-		and po.payment_id=spo.payment_id
-		and pp.product_id=p.product_id
-		and pd.user_id='u-1'
-	
-	
-	
-	select *from store_payment_optionList
-	
-	
-	
-	
+			SELECT  reservation_no,
+					reservation_time,
+					reservation_count,
+					reservation_confirm,
+					product_hope_time,
+					product_id,
+					store_id,
+					product_name,
+					store_name,
+					user_id
+			FROM(
+					SELECT  rownum rnum,
+							reservation_no,
+							reservation_time,
+							reservation_count,
+							reservation_confirm,
+							product_hope_time,
+							product_id,
+							store_id,
+							product_name,
+							store_name,
+							user_id
+					FROM(
+							SELECT  rd.reservation_no,
+									rd.reservation_time,
+									rd.reservation_count,
+									rd.reservation_confirm,
+									rd.product_hope_time,
+									rd.product_id,
+									rd.store_id,
+									p.product_name,
+									s.store_name,
+									rd.user_id
+							FROM	reservation_details rd ,store s, product p
+							where  rd.user_id = 'u-1'
+							
+					) 
+					WHERE rownum <=1000
+			)
+			WHERE rnum >= 1

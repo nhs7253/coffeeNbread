@@ -100,13 +100,10 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 	@Override
 	public HashMap<String, Object> findReservationDetailsListByUserId(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();
-
 		// item 수
 		int totalCount = dao.selectReservationDetailsListCountByUserId(userId);
-
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-
 		List<ReservationDetails> list = dao.selectReservationDetailsListByUserId(userId, pageBean.getBeginItemInPage(),
 				pageBean.getEndItemInPage());
 		map.put("list", list);

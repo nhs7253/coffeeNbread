@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cnb.exception.NullShoppingBasketProductException;
 import com.cnb.exception.ProductNotFoundException;
+import com.cnb.service.GeneralUserService;
 import com.cnb.service.PaymentDetailsService;
 import com.cnb.service.ReservationDetailsService;
 import com.cnb.service.ShoppingBasketProductService;
@@ -44,19 +45,23 @@ public class PaymentDetailsController {
 	private ShoppingBasketProductService sbpService;
 
 	@Autowired
+	private GeneralUserService generalUserService;
+	
+	@Autowired
 	private ReservationDetailsService rdService;
 
 	// 결제완료 버튼 눌러야 들어가는 것.
 	@RequestMapping("/user/addPaymentDetailsController")
 
 	// 즐겨찾는카드번호에서 카드 입력후 결제내역에 등록될 controller
-	public String addPaymentDetailsController(
+	public ModelAndView addPaymentDetailsController(
 			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors) {
-
+        ModelAndView modelAndView=new ModelAndView();
 		System.out.println("paymentDetailsform:" + paymentDetailsform);
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (errors.hasErrors()) {
-			return "user/payment_view.tiles"; // 에러 발생
+			modelAndView.setViewName("index.tiles");
+			return modelAndView; // 에러 발생
 		}
 		List<PaymentDetails> paymentDetailsList = new ArrayList<PaymentDetails>();
 
@@ -76,7 +81,7 @@ public class PaymentDetailsController {
 			paymentDetails.setPaymentOption("c");
 			paymentDetails.setUserId(generalUser.getUserId());
 			paymentDetails.setTradeDate(new Date());
-     
+     		 
 			try {
 				System.out.println("----추가----");
 				paymentDetailsList.add(paymentDetails);
@@ -84,12 +89,18 @@ public class PaymentDetailsController {
 
 			} catch (NullShoppingBasketProductException e) {
 				// TODO Auto-generated catch block
-				return "user/payment_view.tiles"; // 결제하는 페이지
+				modelAndView.setViewName("user/payment_view.tiles");
+				return modelAndView;
 			}
 		}
+		modelAndView.addObject("userName",generalUserService.findUser(generalUser.getUserId()).getUserName());
+		modelAndView.addObject("storeId", paymentDetailsform.getStoreIdList().get(0));
+		modelAndView.setViewName("user/payment_success.tiles");
+
 		// 예약내역 넣기.
-	rdService.addReservationDetailsByPaymentDetails(paymentDetailsList,paymentDetailsform.getProductHopeTime());
-		return "user/user_payment_List.tiles"; // 결제 성공페이지.
+	  rdService.addReservationDetailsByPaymentDetails(paymentDetailsList,paymentDetailsform.getProductHopeTime());
+		
+	  return modelAndView; // 결제 성공페이지.
 	}
 
 	// 유저가 결제한 결제내역 보기. - 페이징 필요할듯. - 페이징 추가.

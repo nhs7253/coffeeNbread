@@ -25,15 +25,18 @@ td {
 
 
 
+
+
+	
+	<h2>${requestScope.userName }님의 결제내역</h2>
+
+
 <form
 	action="${initParam.rootPath }/user/findReservationDetailsController.do">
+	<input type="hidden" value="${requestScope.storeId }">
 	<input type="submit" value="예약내역확인" />
 	<sec:csrfInput />
 </form>
-
-	<h2>결제성공</h2>
-	<h2>${requestScope.list[0].userId }님의 예약 현황</h2>
-
 
 <br>
 
@@ -42,9 +45,9 @@ td {
 		<thead>
 			<tr class="w3-blue">
 				<th>예약번호</th>
+				<th>예약매장</th>
 				<th>예약시간</th>
-				<th>매장이름</th>
-				<th>제품이름</th>
+				<th>예약한 제품</th>
 				<th>예약개수</th>
 				<th>제품수령희망시간</th>
 				<th>예약확인유무</th>
@@ -60,9 +63,9 @@ td {
 
 				<tr>
 					<td>${list.reservationNo}</td>
+				 	<td>${list.store.storeName }</td>		
 					<td>${list.reservationTime}</td>
-					<td>${list.storeName }</td>
-					<td>${list.productName}</td>
+					<td>${list.product.productName}</td> 
 					<td>${list.reservationCount}</td>
 					<td>${list.productHopeTime}</td>
 					<td>${list.reservationConfirm}</td>

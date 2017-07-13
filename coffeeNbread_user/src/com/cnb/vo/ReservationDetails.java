@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 /*
  * 최민희
  * 2017-06-28 수정
@@ -16,46 +17,77 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 초기 구현
  */
 public class ReservationDetails implements Serializable {
-	private int reservationNo;	//PRIMARY KEY //예약 넘버
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private Date reservationTime; //예약시간
-	private int reservationCount;  //예약개수
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private Date reservationConfirm; //예약 확인여부
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	private Date productHopeTime; //예약 원하는 수령희망시간.
-	
+	private int reservationNo; // PRIMARY KEY //예약 넘버
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date reservationTime; // 예약시간
+	private int reservationCount; // 예약개수
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date reservationConfirm; // 예약 확인여부
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date productHopeTime; // 예약 원하는 수령희망시간.
+
 	/*********************************************************************
-	 * 부모 테이블 : ReservationDetails, 자식 테이블 : GeneralUser
-	 * 1개의 예약 정보는 한 명의 사용자에 소속되어있다.
-	 * 예약자 정보를 저장할 Instance 변수를 선언해야 한다.
+	 * 부모 테이블 : ReservationDetails, 자식 테이블 : GeneralUser 1개의 예약 정보는 한 명의 사용자에
+	 * 소속되어있다. 예약자 정보를 저장할 Instance 변수를 선언해야 한다.
 	 *********************************************************************/
-	private String userId;		//FORIEGN KEY
+	private String userId; // FORIEGN KEY
 	private GeneralUser generalUser;
-	
+
 	/*********************************************************************
-	 * 부모 테이블 : ReservationDetails, 자식 테이블 : Product
- 	 * 1개의 예약 정보에 여러개의 제품들이 포함된다.
+	 * 부모 테이블 : ReservationDetails, 자식 테이블 : Product 1개의 예약 정보에 여러개의 제품들이 포함된다.
 	 * 제품들 정보를 저장할 Instance 변수를 선언해야 한다.
 	 *********************************************************************/
-	private String productId;	//FORIEGN KEY
+	private String productId; // FORIEGN KEY
 	private List<Product> productList;
-	
+
 	/*********************************************************************
-	 * 부모 테이블 : ReservationDetails, 자식 테이블 : Store 
-	 * 1개의 예약 정보는 한 매장에 소속되어있다.
-	 * 매장 정보를 저장할 Instance 변수를 선언해야 한다.
+	 * 부모 테이블 : ReservationDetails, 자식 테이블 : Store 1개의 예약 정보는 한 매장에 소속되어있다. 매장
+	 * 정보를 저장할 Instance 변수를 선언해야 한다.
 	 *********************************************************************/
-	private String storeId;		//FORIEGN KEY
+	private String storeId; // FORIEGN KEY
 	private Store store;
-	
+
+	private Product product;
+
 	public ReservationDetails() {
 		super();
 	}
 
-	
-	
-	
+	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
+			Date productHopeTime, String userId, GeneralUser generalUser, String productId, String storeId, Store store,
+			Product product) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationTime = reservationTime;
+		this.reservationCount = reservationCount;
+		this.reservationConfirm = reservationConfirm;
+		this.productHopeTime = productHopeTime;
+		this.userId = userId;
+		this.generalUser = generalUser;
+		this.productId = productId;
+		this.storeId = storeId;
+		this.store = store;
+		this.product = product;
+	}
+
+	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
+			Date productHopeTime, String userId, GeneralUser generalUser, String productId, List<Product> productList,
+			String storeId, Store store, Product product) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationTime = reservationTime;
+		this.reservationCount = reservationCount;
+		this.reservationConfirm = reservationConfirm;
+		this.productHopeTime = productHopeTime;
+		this.userId = userId;
+		this.generalUser = generalUser;
+		this.productId = productId;
+		this.productList = productList;
+		this.storeId = storeId;
+		this.store = store;
+		this.product = product;
+	}
+
 	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
 			Date productHopeTime, String userId, String productId, String storeId) {
 		super();
@@ -68,11 +100,6 @@ public class ReservationDetails implements Serializable {
 		this.productId = productId;
 		this.storeId = storeId;
 	}
-
-
-
-
-
 
 	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
 			Date productHopeTime, String userId, GeneralUser generalUser, String productId, List<Product> productList,
@@ -155,13 +182,47 @@ public class ReservationDetails implements Serializable {
 		this.userId = userId;
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	
+	
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
+	}
+
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
 	@Override
 	public String toString() {
 		return "ReservationDetails [reservationNo=" + reservationNo + ", reservationTime=" + reservationTime
 				+ ", reservationCount=" + reservationCount + ", reservationConfirm=" + reservationConfirm
 				+ ", productHopeTime=" + productHopeTime + ", userId=" + userId + ", generalUser=" + generalUser
 				+ ", productId=" + productId + ", productList=" + productList + ", storeId=" + storeId + ", store="
-				+ store + "]";
+				+ store + ", product=" + product + "]";
 	}
 
 	@Override
