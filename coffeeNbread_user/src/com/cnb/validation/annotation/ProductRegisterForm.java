@@ -44,6 +44,7 @@ public class ProductRegisterForm implements Serializable {
 	private String optionCategoryString;
 	private String optionCategoryDetail;
 	
+
 	private String OriginalProductPicture;
 	private MultipartFile productPicture;
 	private List<MultipartFile> productPictureList;

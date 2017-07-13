@@ -31,7 +31,7 @@ public class BookMarkCardNumDaoImpl implements BookMarkCardNumDao{
 
 	@Override
 	public int insertCardNum(BookMarkCardNum bookMarkCardNum) {
-		
+		System.out.println("insertCardNum = " + bookMarkCardNum);
 	return session.insert(makeSqlId("insertCardNum"), bookMarkCardNum);
 
 	}

@@ -45,7 +45,7 @@ public interface BoardReplyService {
     * 레시피 게시판의 번호로 들어가서 댓글번호로  댓글 지우기.
     * @return
     */
-	int removeBoardReplyToRecipeBoardNo(int replyNo, int recipeBoardNo) ;
+	int removeBoardReplyToRecipeBoardNo(int replyNo, int recipeBoardNo,String replyName,String userId)throws BoardReplyException ;
 	
 	/**
 	 * qna게시판의 번호로 들어가서  댓글번호로 댓글 지우기.

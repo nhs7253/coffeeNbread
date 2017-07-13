@@ -64,8 +64,12 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 
 	/* 레시피 게시판에 댓글 삭제 */
 	@Override
-	public int removeBoardReplyToRecipeBoardNo(int replyNo, int recipeBoardNo) {
+	public int removeBoardReplyToRecipeBoardNo(int replyNo, int recipeBoardNo,String replyName,String userId)throws BoardReplyException {
 		
+		if(!userId.equals(replyName)){
+			System.out.println(userId + " = " + replyName);
+			throw new BoardReplyException("삭제 권한이 없습니다.");
+		}
 		return dao.deleteBoardReplyByRecipeBoardNo(replyNo, recipeBoardNo);
 	}
 

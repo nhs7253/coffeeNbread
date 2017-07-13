@@ -213,6 +213,9 @@ INSERT INTO EVENT_PRODUCT VALUES('p-2', 's-1', 3);
 INSERT INTO PAYMENT_OPTIONLIST VALUES('c','카드');
 INSERT INTO PAYMENT_OPTIONLIST VALUES('p','현금');
 
+INSERT INTO STORE_PAYMENT_OPTIONlIST VALUES('s-1','c')
+INSERT INTO STORE_PAYMENT_OPTIONlIST VALUES('s-1','p')
+
 /* 매장 결제 종류 */   -- 예약만 가능한 매장만   'c' 로 넣어야 함. 
 SELECT *FROM STORE_PAYMENT_OPTIONLIST;
 DELETE FROM STORE_PAYMENT_OPTIONLIST;
@@ -286,12 +289,6 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글23', '레시피제목23', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-2','s-6');
 
 
-
-
-
-
-
-
 /* qna board 목록 */		
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자1', '문의글제목1', '내용 1',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, '문의글작성자2', '문의글제목2', '내용 2',10, TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'Y');
@@ -310,96 +307,80 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 		
 		
 		
-		select*from RECIPE_BOARD_CONTENTS
-		
-		SELECT COUNT(recipe_board_no)
-				FROM recipe_board_contents
-				WHERE user_id='u-1'
-				
-				
-				
-				
-				
-		SELECT recipe_board_no,
-		recipe_board_content,
-		recipe_board_title,
-		recipe_board_date,
-		recipe_board_hits,
-		recipe_board_picture,
-		recommend_count,
-		store_id,
-		store_name
+	INSERT INTO  store_visit_history VALUES(1, #{userId}, #{storeId})
+	
+	
+	INSERT INTO bookmark_card_num VALUES('TEST_CARD','u-1')
+
+	
+	
+	
+	SELECT payment_no,
+		store_name,
+		pp.product_picture,
+		product_name,
+		sell_method,
+		payment_option,
+		reservation_order_count,
+		product_price,
+		trade_date
+
 		FROM(
 		SELECT rownum rnum,
-		recipe_board_no,
-		recipe_board_content,
-		recipe_board_title,
-		recipe_board_date,
-		recipe_board_hits,
-		recipe_board_picture,
-		recommend_count,
-		store_id,
+		payment_no,
 		store_name
-
+		pp.product_picture,
+		product_name,
+		sell_method,
+		payment_option,
+		reservation_order_count,
+		product_price,
+		trade_date
 		FROM(
-		select rbc.recipe_board_no,
-		rbc.recipe_board_content,
-		rbc.recipe_board_title,
-		rbc.recipe_board_date,
-		rbc.recipe_board_hits,
-		rbc.recipe_board_picture,
-		rbc.recommend_count,
-		s.store_id,
-		s.store_name
-		FROM recipe_board_contents
-		rbc, store s
-		Where rbc.user_id='u-1'
-		And rbc.store_id=s.store_id(+)		
-				
-				
-				
-						)
-		WHERE rownum <= 100
+		SELECT
+		pd.payment_no,
+		s.store_name,
+		pp.product_picture,
+		p.product_name,
+		pd.sell_method,
+		pd.payment_option,
+		pd.reservation_order_count,
+		p.product_price,
+		pd.trade_date
+		FROM payment_details pd, product p,
+		product_picture pp,store s
+		WHERE pd.store_id=s.store_id
+		and p.store_id=s.store_id
+	    and pd.user_id='u-1'
+		)
+		WHERE rownum <=1000
 		)
 		WHERE rnum >= 1
-
-				
-		SELECT recipe_board_no,
-		recipe_board_content,
-		recipe_board_title,
-		recipe_board_date,
-		recipe_board_hits,
-		recipe_board_picture,
-		recommend_count,
-		store_id,
-		store_name
-		FROM(
-		SELECT rownum rnum,
-		recipe_board_no,
-		recipe_board_content,
-		recipe_board_title,
-		recipe_board_date,
-		recipe_board_hits,
-		recipe_board_picture,
-		recommend_count,
-		store_id,
-		store_name
-
-		FROM(
-		select rbc.recipe_board_no,
-		rbc.recipe_board_content,
-		rbc.recipe_board_title,
-		rbc.recipe_board_date,
-		rbc.recipe_board_hits,
-		rbc.recipe_board_picture,
-		rbc.recommend_count,
-		s.store_id,
-		s.store_name
-		FROM recipe_board_contents
-		rbc, store s
-		Where rbc.user_id='u-1'
-		And rbc.store_id=s.store_id(+)
-					)
-		WHERE rownum <= 100
-		)
-		WHERE rnum >= 1
+	
+	
+		SELECT
+		pd.payment_no,
+		s.store_name,
+		pp.product_picture,
+		p.product_name,
+		po.payment_method,
+		pd.reservation_order_count,
+		p.product_price,
+		pd.trade_date
+		FROM payment_details pd, product p,
+		product_picture pp,store s,payment_optionList po,store_payment_optionList spo
+        WHERE pd.store_id=s.store_id
+		and p.store_id=s.store_id
+		and p.product_id=pp.product_id
+	    and pd.store_id=s.store_id
+		and po.payment_id=spo.payment_id
+		and pp.product_id=p.product_id
+		and pd.user_id='u-1'
+	
+	
+	
+	select *from store_payment_optionList
+	
+	
+	
+	

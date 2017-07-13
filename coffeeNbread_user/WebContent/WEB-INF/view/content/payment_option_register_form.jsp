@@ -1,15 +1,29 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 
 
 
-<h1>플랫폼 지원 결제 목록 등록</h1><hr><br>
+<h1>플랫폼 지원 결제 목록 등록</h1>
+<hr>
+<br>
 
-<form action="${initParam.rootPath }/addPaymentOptionListController.do" method="post">
-	<sec:csrfInput/>
-	아이디 : <input type="text" name="paymentId" required><br>
-	방법 : <input type="text" name="paymentMethod" required><br>
-	<input type="submit" value="등록">
+<form action="${initParam.rootPath }/addPaymentOptionListController.do"
+	method="post">
+	<sec:csrfInput />
+	<table>	
+	<tr  class="form-group">
+	<th>아이디 </th>
+	<td><input type="text" name="paymentId" required class="form-control"></td>
+	</tr>
+	 <tr  class="form-group">
+	 <th>방법</th>
+	  <td><input type="text" name="paymentMethod" required class="form-control"></td>
+	  </tr>
+	</table>
+	<button type="submit" class="btn btn-default btn-circle">
+		<i class="glyphicon glyphicon-ok"></i> 등록
+	</button>
 </form>
 

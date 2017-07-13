@@ -126,4 +126,97 @@ public class BoardReplyController {
 	
 	
 	/***********************   Q&A  *********************************/
+	
+	
+	
+	
+	/*************************Recipe 게시판 댓글*******************************/
+		@RequestMapping("/user/addBoardReplyToRecipeBoardNoController")
+		
+		String addBoardReplyToRecipeBoardNoController(int recipeBoardNo, String replyContent ,@RequestParam(value="storeId",required=false) String storeId){
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
+			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
+//			BoardReply boardReply = new BoardReply(replyContent, generalUser.getUserId(), new Date(), recipeBoardNo);
+			BoardReply boardReply = new BoardReply(0, replyContent, generalUser.getUserId(), new Date(), recipeBoardNo);
+			
+			boardReplyService.addBoardReplyToRecipeBoardNo(boardReply);
+			
+			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId;
+		}
+
+		
+		@RequestMapping("/user/modifyBoardReplyToRecipeBoardNoController")
+		/**
+		 * Recipe 게시판의 1개의 댓글을 수정해 주는 컨트롤러
+		 * @return String - 응답 경로
+		 */
+		String modifyBoardReplyToRecipeBoardNoController(Integer replyNo, int recipeBoardNo, String replyContent, @RequestParam(value="storeId",required=false) String storeId){
+			
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
+			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
+			BoardReply boardReply = new BoardReply(replyNo, replyContent, generalUser.getUserId(), new Date(), recipeBoardNo);
+			
+			boardReplyService.modifyBoardReplyToRecipeBoardNo(boardReply);
+			
+			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId;
+		}
+		
+		@RequestMapping("/user/modifyBoardReplySettigToRecipeController")
+		/**
+		 * Recipe 게시판의 1개의 댓글을 수정하기 위해 셋팅과 권한처리를 해주는 컨트롤러
+		 * @param replyNo
+		 * @param recipeBoardNo
+		 * @param userId
+		 * @param storeId
+		 * @param request
+		 * @return
+		 */
+		String modifyBoardReplySettigControllerToRecipeBoard(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId, HttpServletRequest request){
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
+			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
+
+			try {
+				request.setAttribute("boardReply", boardReplyService.findBoardReplyModifySetting(replyNo, generalUser.getUserId(), replyName));
+				request.setAttribute("storeId", storeId);
+			} catch (BoardReplyException e) {
+				return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId;
+			}
+
+			return "user/reply_update_form.tiles";
+		}
+		
+		
+		
+		@RequestMapping("/user/removeRecipeBoardContents")
+		/**
+		 * Recipe게시판의 1개의 댓글을 삭제해 주는 컨트롤러
+		 * @return String - 응답 경로
+		 */
+		String removeBoardReplyToRecipeBoardNoController(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId){
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
+			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
+			System.out.println("111111111111111111111111111");
+			try {
+				boardReplyService.removeBoardReplyToRecipeBoardNo(replyNo, recipeBoardNo, replyName, generalUser.getUserId());
+			} catch (BoardReplyException e) {
+				return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId;
+			}
+			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

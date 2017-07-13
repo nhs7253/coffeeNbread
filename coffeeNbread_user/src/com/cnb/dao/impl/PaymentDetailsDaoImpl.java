@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.PaymentDetailsDao;
 import com.cnb.vo.PaymentDetails;
+import com.cnb.vo.RecipeBoardContents;
 import com.cnb.vo.ShoppingBasketProduct;
 
 
@@ -53,24 +54,53 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 		return session.insert(makeSqlId("insertPaymentDetails"), paymentDetails);
 	}
 
-	@Override
+/*	@Override
 	public List<PaymentDetails> selectPaymentDetailsListByUserIdAndStoreId(String userId,String storeId){
 		Map<String, String> info = new HashMap<>();
 		info.put("userId", userId);
 		info.put("storeId", storeId);
 		return session.selectList(makeSqlId("selectPaymentDetailsListByUserIdAndStoreId"), info);
 	}
+*/
+	
 
-	public List<ShoppingBasketProduct> selectAllProductPriceByUserIdAndStoreId(String userId, String storeId) {
-
-		Map<String, String> info = new HashMap<>();
-		info.put("userId", userId);
-		info.put("storeId", storeId);
-		return session.selectList("com.cnb.config.mybatis.mapper.ShoppingBasketProductMapper.selectAllProductPriceByUserIdAndStoreId", info);
-
+	@Override
+	public List<PaymentDetails> selectPaymentDetailsListByUserId(String userId) {
+		return session.selectList(makeSqlId("selectPaymentDetailsListByUserId"), userId);
 	}
 
+ 
+   /**
+    * 유저가 결제한 결제내역들 개수 페이징 -매장아이디가 null이라면 빼고 조회
+    */
+	@Override
+	public int countSelectPaymentDetailsByUserIdAndStoreId(String userId, String storeId) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		return session.selectOne(makeSqlId("countSelectPaymentDetailsByUserIdAndStoreId"), info);
+	}
 
+	/**
+	 * 유저아이디로 결제내역에 있는 제품들 조회 -매장아이디가 null이라면 빼고 조회 
+	 */
+	@Override
+	public List<PaymentDetails> selectPaymentDetailsListByUserIdAndStoreId(String userId, String storeId,
+			int startIndex, int endIndex) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		info.put("startIndex", String.valueOf(startIndex));
+		info.put("endIndex", String.valueOf(endIndex));
+		return session.selectList(makeSqlId("selectPaymentDetailsListByUserIdAndStoreId"), info);
+	}
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public List<PaymentDetails> selectPaymentDetailsListByStoreIdAndProductId(String storeId, String productId) {
 		Map<String, String> info = new HashMap<>();
@@ -174,12 +204,8 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 
 	}
 
-	/**
-	 * 유저아이디로 결제내역에 있는 제품들 조회
-	 */
-	@Override
-	public List<PaymentDetails> selectPaymentDetailsListByUserId(String userId) {
-		return session.selectList(makeSqlId("selectPaymentDetailsListByUserId"), userId);
-	}
+
+
+
 	
 }
