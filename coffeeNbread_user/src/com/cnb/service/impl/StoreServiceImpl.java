@@ -69,7 +69,7 @@ public class StoreServiceImpl implements StoreService{
 	
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void addStore(Store store, List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
+	public Store addStore(Store store, List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
 		//storeId 중복확인
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
@@ -95,6 +95,13 @@ public class StoreServiceImpl implements StoreService{
 				storePaymentOptionListDao.insertStorePaymentOptionList(storePaymentOptionList);
 			}
 		}
+		Store st = storedao.selectStroeJoinPicture(store.getStoreId());
+		
+		
+		System.out.println("stststs = " + st);
+		
+		return storedao.selectStroeJoinPicture(store.getStoreId());
+		
 		
 	}
 
@@ -105,17 +112,31 @@ public class StoreServiceImpl implements StoreService{
 	}*/
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException {
-		 if(storedao.selectStoreById(store.getStoreId())==null){
+	public Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException {
+		 if(storedao.selectStoreById(store.getStoreId())!=null){
+			 System.out.println("modifyStore = " + optionCategory);
 			 storedao.updateStore(store);
 		 }else{
-				throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
+				throw new DuplicatedStoreIdException(store.getStoreId()+" 는 없는 ID입니다.");
 		 }
 		 
-		 optionCategoryService.modifyOptionCategory(optionCategory);
+		 optionCategoryService.modifyOptionCategory(optionCategory, store.getStoreId());
 		 
 		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
-
+		 
+		 if(paymentIdList!=null){
+				//매장 지원 결제 내역
+			storePaymentOptionListDao.deleteStorePaymentOptionListByStoreId(store.getStoreId());
+			StorePaymentOptionList storePaymentOptionList = new StorePaymentOptionList();
+			storePaymentOptionList.setStoreId(store.getStoreId());
+			for(int i=0;i<paymentIdList.size();i++){
+				storePaymentOptionList.setPaymentId(paymentIdList.get(i));				
+				storePaymentOptionListDao.insertStorePaymentOptionList(storePaymentOptionList);
+			}
+		}else{
+			storePaymentOptionListDao.deleteStorePaymentOptionListByStoreId(store.getStoreId());
+		}
+		 return storedao.selectStroeJoinPicture(store.getStoreId());
 	}
 		
 	@Override

@@ -40,7 +40,7 @@ $(document).ready(function(){
 		method="post" enctype="multipart/form-data">
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
-		<table>
+		<table >
 			<tr class="form-group">
 				<th>매장 분류 </th>
 				<td><input type="text" name="optionCategoryList"

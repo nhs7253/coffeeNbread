@@ -32,15 +32,16 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	 void addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	Store addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store
 	 * @throws DuplicatedStoreIdException 
 	 * @throws StorePictureNotFoundException 
+	 * @throws DuplicatedOptionCategoryNameException 
 	 *
 	 */
-	void modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture) throws DuplicatedStoreIdException, StorePictureNotFoundException;
+	Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException;
 	
 	/**
 	 * 매장삭제

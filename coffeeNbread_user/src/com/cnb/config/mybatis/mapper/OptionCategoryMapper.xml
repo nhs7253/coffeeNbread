@@ -5,10 +5,13 @@
 
 <!-- 옵션 카테고리 resultMap -->
 
-	<resultMap type="com.cnb.vo.OptionCategory" id="optionCategory-resultmap">
-		<id column="store_id" property="storeId"/>
+	<resultMap type="com.cnb.vo.OptionCategory" id="optionCategory-default">
  		<result column="option_id" property="optionId"/>
  		<result column="option_category" property="optionCategory"/>
+	</resultMap>
+	
+	<resultMap type="com.cnb.vo.OptionCategory" id="optionCategory-resultmap" extends="optionCategory-default">
+		<id column="store_id" property="storeId"/>
 	</resultMap>
 	
 <!-- 옵션 카테고리 디테일 resultMap -->	

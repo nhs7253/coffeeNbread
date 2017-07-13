@@ -88,3 +88,27 @@ WHERE qna_board_title LIKE '%'||#{keyword}||'%' AND qnaStoreId IS NULL AND qnaBo
 					WHERE rownum <= 3
 			)
 			WHERE rnum >= 1
+
+			
+			SELECT  s.store_id,
+				s.store_name,
+				s.store_intro,
+				s.store_phone,
+				s.store_address,
+				s.store_email,
+				s.store_category,
+				s.store_hits,
+				s.store_open,
+				s.store_close,
+				s.store_permission,
+				sp.store_picture,
+				oc.option_id,
+				oc.option_category,
+				spo.payment_id,
+				po.payment_method
+		FROM store s,store_picture sp, option_category oc, store_payment_optionlist spo , payment_optionlist po
+		WHERE s.store_id = sp.store_id(+) 
+		AND s.store_id = oc.store_id(+)
+		AND s.store_id = spo.store_id(+)
+		AND spo.payment_id = po.payment_id(+)
+		AND s.store_id='wejfio'
