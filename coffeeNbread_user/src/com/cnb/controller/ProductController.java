@@ -173,8 +173,6 @@ public class ProductController {
 
 			Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
 			
-			
-			
 			modelAndView.setViewName("store/product_list.tiles");
 			modelAndView.addObject("list", map.get("list"));
 			modelAndView.addObject("pageBean", map.get("pageBean"));
@@ -183,6 +181,28 @@ public class ProductController {
 			return modelAndView;
 		}
 	
+		//유저가 보는 제품 목록 조회
+				@RequestMapping("/user/userFindProductListController")
+				public ModelAndView userFindProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
+					
+					ModelAndView modelAndView = new ModelAndView();
+					
+					if(errors.hasErrors()) {
+						modelAndView.setViewName("index.tiles");
+						return modelAndView;
+					}
+
+					Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
+					
+					modelAndView.setViewName("user/user_product_list.tiles");
+					modelAndView.addObject("list", map.get("list"));
+					modelAndView.addObject("pageBean", map.get("pageBean"));
+					modelAndView.addObject("storeId", productFindForm.getStoreId());
+					
+					return modelAndView;
+				}
+		
+		
 //	//제품 목록 조회
 //	@RequestMapping("findProductListController")
 //	public ModelAndView findProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {

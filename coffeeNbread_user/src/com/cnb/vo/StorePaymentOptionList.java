@@ -6,6 +6,9 @@ import java.io.Serializable;
 * 2017-06-29 생성
 * 생성
 */
+
+
+//매장별 가지고 있는 paymentOption들 설정.  //관리자가 paymentOption을 더 설정할수록 ,  매장입장에서는 매장
 public class StorePaymentOptionList implements Serializable{
 
 	

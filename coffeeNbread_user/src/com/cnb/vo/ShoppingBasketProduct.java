@@ -11,11 +11,11 @@ import java.util.Date;
  * 초기 구현
  */
 public class ShoppingBasketProduct implements Serializable{
-	private String userId;
-	private String storeId;
-	private String productId;
+	private String userId;  //pk ,foreign key
+	private String storeId; //pk ,foreign key
+	private String productId;//pk,foreign key
 	private int productCount;
-	private String productStoreId;
+	private String productStoreId; //pk
 	
 	private GeneralUser generalUser;
 	private Store store;
@@ -25,6 +25,14 @@ public class ShoppingBasketProduct implements Serializable{
 	
 	
 	
+	
+	public ShoppingBasketProduct(String userId, String storeId, String productId, int productCount) {
+		super();
+		this.userId = userId;
+		this.storeId = storeId;
+		this.productId = productId;
+		this.productCount = productCount;
+	}
 	public ShoppingBasketProduct(String userId, String storeId, String productId, int productCount,
 			String productStoreId) {
 		super();

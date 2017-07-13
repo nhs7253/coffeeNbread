@@ -41,6 +41,7 @@ public class QnaBoardContentsController {
 	private QnaBoardContentsService qnaBoardContentsService;
 	
 	
+
 	@RequestMapping("/user/addQnaBoardContentsController")
 	/**
 	 * Q&A 게시글을 등록해 주는 컨트롤러
@@ -49,15 +50,14 @@ public class QnaBoardContentsController {
 	 * @return String 응답 경로
 	 */
 	public String addQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors){
-		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+
 		
+	
+		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		if(errors.hasErrors()){
 			return "user/QnA_board_register_form.tiles"; //에러 발생
 		}
-		
-		
 		QnaBoardContents qnaBoardContents = new QnaBoardContents();
-		
 		BeanUtils.copyProperties(qnaBoardContentsForm, qnaBoardContents);
 		
 		

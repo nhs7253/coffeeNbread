@@ -36,14 +36,16 @@ public class BookMarkCardNumServiceImpl implements BookMarkCardNumService {
 			dao.insertCardNum(bookMarkCardNum);
 		} else {
 			for (int i = 0; i < bookMarkCardNumList.size(); i++) {
+				
 				if (bookMarkCardNumList.get(i).equals(bookMarkCardNum)) {
 					throw new BookCardNumDuplicationException(
 							String.format("카드번호 %s 는  이미 등록 되있습니다.", bookMarkCardNum.getCardNum()));
-				} else {
-					dao.insertCardNum(bookMarkCardNum);
 				}
+				
 			}
+			dao.insertCardNum(bookMarkCardNum);
 		}
+		
 	}
 
 	@Override

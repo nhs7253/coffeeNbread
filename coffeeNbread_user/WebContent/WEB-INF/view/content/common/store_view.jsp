@@ -47,6 +47,10 @@
 		
 		
 				
-		
+		<form action="${initParam.rootPath }/user/userFindProductListController.do" method="post">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
+			<input type="submit" value="유저가 보는 제품 목록">
+		</form>
 
 	

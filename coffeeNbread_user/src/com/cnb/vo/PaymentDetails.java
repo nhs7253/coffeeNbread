@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
+/*
+ * 김형주
+ * 2017-07-09  vo주석 달기- 확인차
+ * 
+ */
 
 
 /*
@@ -15,19 +19,23 @@ import java.util.List;
 public class PaymentDetails implements Serializable{
 
 	
-	private int paymentNo;
-	private String paymentOption;
-	private Date tradeDate;
-	private String sellMethod;
-	private int reservationOrderCount;
-	private String userId;
-	private String productId;
-	private String storeId;
+	private int paymentNo;  //primary key
+	private String paymentOption; //지불방식: = 현장에서는 카드, 현금,  예약에서는 - 카드만.
+	private Date tradeDate;    //거래날짜 = 예약은 주문날짜 , 현장은 현장거래날짜.
+	private String sellMethod;  //판매방식:= 예약: r , 현장: f
+	private int reservationOrderCount;  //예약개수
+	private String userId;     // 유저  -Foreign key
+	private String productId; //제품 - foreign key
+ 	private String storeId;   //매장 -foreign key
 	private int productTradeCount;
 	
-	private List<Product> productList;
-	
-	
+	private Product product;  //제품과 조인하기위해 
+    private Store store;  //매장과 조인하기위해.
+    
+    
+    
+    
+    
 	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
 			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount) {
 		super();
@@ -41,11 +49,9 @@ public class PaymentDetails implements Serializable{
 		this.storeId = storeId;
 		this.productTradeCount = productTradeCount;
 	}
-	
-	
 	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
 			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount,
-			List<Product> productList) {
+			Product product, Store store) {
 		super();
 		this.paymentNo = paymentNo;
 		this.paymentOption = paymentOption;
@@ -56,10 +62,9 @@ public class PaymentDetails implements Serializable{
 		this.productId = productId;
 		this.storeId = storeId;
 		this.productTradeCount = productTradeCount;
-		this.productList = productList;
+		this.product = product;
+		this.store = store;
 	}
-
-
 	public PaymentDetails() {
 		super();
 	}
@@ -117,24 +122,37 @@ public class PaymentDetails implements Serializable{
 	public void setProductTradeCount(int productTradeCount) {
 		this.productTradeCount = productTradeCount;
 	}
-	public List<Product> getProductList() {
-		return productList;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductList(List<Product> productList) {
-		this.productList = productList;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-
-
+	public Store getStore() {
+		return store;
+	}
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	@Override
+	public String toString() {
+		return "PaymentDetails [paymentNo=" + paymentNo + ", paymentOption=" + paymentOption + ", tradeDate="
+				+ tradeDate + ", sellMethod=" + sellMethod + ", reservationOrderCount=" + reservationOrderCount
+				+ ", userId=" + userId + ", productId=" + productId + ", storeId=" + storeId + ", productTradeCount="
+				+ productTradeCount + ", product=" + product + ", store=" + store + "]";
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + paymentNo;
 		result = prime * result + ((paymentOption == null) ? 0 : paymentOption.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + productTradeCount;
 		result = prime * result + reservationOrderCount;
 		result = prime * result + ((sellMethod == null) ? 0 : sellMethod.hashCode());
+		result = prime * result + ((store == null) ? 0 : store.hashCode());
 		result = prime * result + ((storeId == null) ? 0 : storeId.hashCode());
 		result = prime * result + ((tradeDate == null) ? 0 : tradeDate.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
@@ -156,6 +174,11 @@ public class PaymentDetails implements Serializable{
 				return false;
 		} else if (!paymentOption.equals(other.paymentOption))
 			return false;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
+			return false;
 		if (productId == null) {
 			if (other.productId != null)
 				return false;
@@ -169,6 +192,11 @@ public class PaymentDetails implements Serializable{
 			if (other.sellMethod != null)
 				return false;
 		} else if (!sellMethod.equals(other.sellMethod))
+			return false;
+		if (store == null) {
+			if (other.store != null)
+				return false;
+		} else if (!store.equals(other.store))
 			return false;
 		if (storeId == null) {
 			if (other.storeId != null)
@@ -186,13 +214,6 @@ public class PaymentDetails implements Serializable{
 		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
-	}
-	@Override
-	public String toString() {
-		return "PaymentDetails [paymentNo=" + paymentNo + ", paymentOption=" + paymentOption + ", tradeDate="
-				+ tradeDate + ", sellMethod=" + sellMethod + ", reservationOrderCount=" + reservationOrderCount
-				+ ", userId=" + userId + ", productId=" + productId + ", storeId=" + storeId + ", productTradeCount="
-				+ productTradeCount + "]";
 	}
 	
 	

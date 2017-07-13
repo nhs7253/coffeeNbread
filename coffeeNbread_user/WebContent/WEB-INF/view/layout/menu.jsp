@@ -81,8 +81,13 @@
 <li><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do">공지사항 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">매장 목록</a></li>
 
+
+
+<li><a href="${initParam.rootPath }/user/ViewShoppingBasketProductController.do">장바구니 목록</a></li>
+
 <%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 </ul>
+
 
 <li  data-toggle="collapse" data-target="#store" class="collapsed active">
                   <a href="#"> 매장관리자  <span class="arrow"></span></a>
@@ -98,6 +103,12 @@
 
 <li><a href="${initParam.rootPath }/common/findRecipeBoardContentsBySelectToKeyword.do">전체 레시피 게시판 </a></li>
 <li><a href="${initParam.rootPath }/addStoreController.do">매장 등록</a></li>
+
+
+<li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do">유저 결제내역 확인</a></li>
+
+<li><a href="${initParam.rootPath }/user/findReservationDetailsController.do">유저 예약내역 확인</a></li>
+
 </ul>
 
 </ul>

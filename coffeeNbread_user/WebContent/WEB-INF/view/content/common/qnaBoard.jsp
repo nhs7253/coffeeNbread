@@ -18,6 +18,7 @@ table {
 td {
    padding: 5px; /* //td 간 간격 */
 }
+
 </style>
 	<h2>${sessionScope.storeName } Q&A 게시판</h2>
 

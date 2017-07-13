@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.cnb.exception.BookCardNumDuplicationException;
 import com.cnb.exception.DeleteBookMarkException;
 import com.cnb.service.BookMarkCardNumService;
+import com.cnb.vo.BookMarkCardNum;
 
 /*
  * 김형주 
@@ -25,15 +26,15 @@ public class BookMarkCardNumServiceImplTest {
      /*  즐겨찾는 카드  새로 등록하는 서비스 */
 	   public void Test() {
 		   
-		   /*System.out.println("--------------------카드번호 새로 등록 --------------");
+		 
 		   try{
 		    service.addBookMarkCardNum(new BookMarkCardNum("card-15","u-3"));
 		   // service.addBookMarkCardNum(new BookMarkCardNum("card-13","u-1"));
 		   }catch(BookCardNumDuplicationException e){
 			   System.out.println(e.getMessage());
-		   }*/
+		   }
 		   
-		   
+		/*   
 	       System.out.println("--------------------카드번호 삭제 -------------------");
 		   try{
 			   
@@ -47,7 +48,7 @@ public class BookMarkCardNumServiceImplTest {
 		    service.findBookMarkCardNumListByUserId("u-1");
 		 
 		   
-		   
+		   */
 		   
 	   }
 	 

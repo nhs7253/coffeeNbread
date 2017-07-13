@@ -3,14 +3,23 @@ package com.cnb.vo;
 import java.io.Serializable;
 
 /*
+ * 김형주
+ * 2017-07-09
+ *  변수당 주석 달기.
+ * 
+ */
+
+
+
+/*
  * 김형주 
  * 2017-06-29PaymentDetailsDao 생성
  * 초기 구현
  */
 public class PaymentOptionList implements Serializable{
 	
-	private String paymentId;
-	private String paymentMethod;
+	private String paymentId;         // 'c'  또는  'p'
+	private String paymentMethod; // '카드' 또는 '현금'
 	
 	public PaymentOptionList(String paymentId, String paymentMethod) {
 		this.paymentId = paymentId;

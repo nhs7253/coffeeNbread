@@ -34,9 +34,12 @@ public class PaymentDetailsServiceImplTest {
  	public void Test() throws UserManageException {
 		
 		
-		System.out.println("------------결제내역 테이블 추가 전 조회--------------");
+
+ 		
+/* 		
+ 		System.out.println("------------결제내역 테이블 추가 전 조회--------------");
 		System.out.println(service.findPaymentDetailsListByStoreIdAndUserId("s-7", "u-1"));
-		
+		*/
 		
 	      System.out.println("-----------결제테이블 조회----");
 	      
@@ -47,13 +50,20 @@ public class PaymentDetailsServiceImplTest {
 					new ShoppingBasketProduct("u-1","s-7","p-21",4,"s-7")
 
 					);
+	      
+	  	      
+	      
+	      
+	      
+	      
+	      
 	 //   sbpservice.addShoppingBasketProduct(list);
 	      
 	   //  service.addPaymentDetails(sbpservice.findShoppingBasketProductList("s-7", "u-1"));
-	
+/*	
  	    System.out.println("--------------결제테이블 추가후 조회------------");
  	    System.out.println(service.findPaymentDetailsListByStoreIdAndUserId("s-7", "u-1"));
-
+*/
  	  
  	    System.out.println("------------ 총금액 조회---------------------");
  	    System.out.println(service.findAllProductPrice(list));
