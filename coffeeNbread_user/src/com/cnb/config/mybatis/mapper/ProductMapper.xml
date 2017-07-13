@@ -388,5 +388,29 @@
 			</choose>
 		</where>
 	</delete>
+	
+	<select id="selectProductListToPOS" parameterType="map" resultMap="product-productPicture-resultmap">
+		SELECT p.product_id,
+			   p.store_id,
+			   product_name,
+			   product_price,
+			   product_category,
+			   product_detail,
+			   selling_option,
+			   today_product_count,
+			   recommend_product_count,
+			   product_picture
+		FROM product p, product_picture pp 
+		WHERE p.product_id = pp.product_id AND p.store_id = #{storeId}
+		<choose>
+			<when test="select == 'productName'">
+				AND product_name LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'productCategory'">
+				AND product_category LIKE '%'||#{keyword}||'%'
+			</when>
+		</choose>
+		ORDER BY product_name
+	</select>
 
 </mapper>

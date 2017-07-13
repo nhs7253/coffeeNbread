@@ -112,3 +112,45 @@ WHERE qna_board_title LIKE '%'||#{keyword}||'%' AND qnaStoreId IS NULL AND qnaBo
 		AND s.store_id = spo.store_id(+)
 		AND spo.payment_id = po.payment_id(+)
 		AND s.store_id='wejfio'
+		
+		
+		
+		
+		
+		<id column="product_id" property="productId"/>
+ 		<result column="store_id" property="storeId"/>
+ 		<result column="product_name" property="productName"/>
+		<result column="product_price" property="productPrice"/>
+		<result column="product_category" property="productCategory"/>
+		<result column="product_detail" property="productDetail"/>
+		<result column="selling_option" property="sellingOption"/>
+		<result column="today_product_count" property="todayProductCount"/>
+		<result column="recommend_product_count" property="recommendProductCount"/>
+		
+		
+		<resultMap type="com.cnb.vo.ProductPicture" id="productPicture-resultmap">
+		<id column="product_picture" property="productPicture"/>
+		<result column="product_id" property="productId"/>
+		<result column="store_id" property="storeId"/>
+	</resultMap>
+	 
+	SELECT p.product_id,
+		   p.store_id,
+		   product_name,
+		   product_price,
+		   product_category,
+		   product_detail,
+		   selling_option,
+		   today_product_count,
+		   recommend_product_count,
+		   product_picture
+	FROM product p, product_picture pp 
+	WHERE p.product_id = pp.product_id AND p.store_id = 's-4'
+	ORDER BY product_name
+	
+	
+	
+	SELECT *
+	FROM product p, product_picture pp 
+	WHERE p.product_id = pp.product_id AND p.store_id = 's-4'
+	ORDER BY product_name

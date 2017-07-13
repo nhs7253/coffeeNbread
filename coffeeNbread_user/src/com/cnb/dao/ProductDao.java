@@ -5,6 +5,11 @@ import java.util.List;
 import com.cnb.vo.Product;
 
 /*
+ * 노현식
+ * 2017-07-13
+ * POS용  selectProductListToPOS() 추가
+ */
+/*
  * 최민희
  * 2017-07-09
  * 수정
@@ -130,4 +135,13 @@ public interface ProductDao {
 	 */
 	int deleteProductByProductList(String storeId, List<String> productIdList);
 
+	
+	/**
+	 * 제품과 제품사진의 조인결과를 페이징 하지 않고 보여줌 (POS)
+	 * @param storeId 제품들을 가진 매장 ID
+	 * @param select - productName(제품 이름), productCategory(제품 종류) 
+	 * @param keyword 검색할 내용
+	 * @return List<Product> 검색된 제품과 제품 사진 목록들
+	 */
+	List<Product> selectProductListToPOS(String storeId, String select, String keyword);
 }

@@ -10,6 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import com.cnb.dao.ProductDao;
 import com.cnb.vo.Product;
+
+/*
+ * 노현식
+ * 2017-07-13
+ * POS용  selectProductListToPOS() 추가
+ */
 /*
  * 최민희
  * 2017-07-01
@@ -142,5 +148,14 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("storeId", storeId);
 		info.put("productIdList", productIdList);
 		return session.delete(makeSqlId("deleteProductByProductList"), info);
+	}
+
+	@Override
+	public List<Product> selectProductListToPOS(String storeId, String select, String keyword) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("storeId", storeId);
+		input.put("select", select);
+		input.put("keyword", keyword);
+		return session.selectList(makeSqlId("selectProductListToPOS"), input);
 	}
 }
