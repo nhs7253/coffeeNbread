@@ -26,7 +26,7 @@
 
 
 <%--회원/관리자 공통 메뉴 /member로 시작 --%>
-<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')">
 	<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
 	<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자 탈퇴</a></li>
 	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
@@ -36,19 +36,21 @@
 	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=service-qna-s-1">매장 Q&A 글쓰기</a></li>
 </sec:authorize>
 
+<%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
 <li><a href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do">Q&A 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=service-qna-s-1">매장 Q&A 게시판 목록</a></li>
 <li><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do">공지사항 게시판 목록</a></li>
 
 
-<%--인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴) --%>
-
-
 <%-- 매장 관리자 --%>
+<%-- 매장만의 권한으로 바꿔줘야함 --%>
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
 	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
+	<li><a href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량 조회</a></li>
+	<li><a href="${initParam.rootPath }/findReservationDetailsController.do">예약 현황 조회</a></li>
+	<li><a href="${initParam.rootPath }/findProductListForPosController.do">현장 판매 시스템</a></li>
 </sec:authorize>
 
 

@@ -95,5 +95,9 @@ public interface ProductService {
 	 */
 	void findRemoveProduct(String storeId, List<String> productIdList);
 
-
+	/**
+	 * 1개의 매장에 있는 모든 제품들 조회 - 페이징x
+	 * @param
+	 */
+	List<Product> findProductListNoPaging(String storeId);
 }

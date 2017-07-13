@@ -143,4 +143,9 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("productIdList", productIdList);
 		return session.delete(makeSqlId("deleteProductByProductList"), info);
 	}
+
+	@Override
+	public List<Product> selectProductListNoPaging(String storeId) {
+		return session.selectList(makeSqlId("selectProductListNoPaging"), storeId);
+	}
 }

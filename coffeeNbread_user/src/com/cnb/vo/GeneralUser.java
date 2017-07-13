@@ -3,6 +3,7 @@ package com.cnb.vo;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,6 +41,8 @@ public class GeneralUser implements Serializable{
 	private String userActiveState;
 	private String storeId;
 	
+	
+	
 	public GeneralUser() {
 	}
 
@@ -70,7 +73,8 @@ public class GeneralUser implements Serializable{
 		this.userActiveState = userActiveState;
 		this.storeId = storeId;
 	}
-	
+
+
 	/**
 	 * sec:authentication를 통해 JSP에서 yyyy-MM-dd형식으로 DATE 타입을 문자열로 출력
 	 * <sec:authentication property="principal.userName"/>
@@ -160,6 +164,7 @@ public class GeneralUser implements Serializable{
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
+
 
 	@Override
 	public int hashCode() {

@@ -85,4 +85,11 @@ public interface StoreService {
 		 */
 	 List<Store> findOpionCategoryNDetailByIdList(String storeId);
 
+	 
+	 /**
+		 * 모든 매장 아이디 select
+		 * @param 
+		 * @return list
+		 */
+	 List<String> findAllStoreIdList(); 
 }

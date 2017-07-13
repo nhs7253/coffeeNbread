@@ -130,4 +130,10 @@ public interface ProductDao {
 	 */
 	int deleteProductByProductList(String storeId, List<String> productIdList);
 
+	/**
+	 * 1개의 매장에 있는 모든 제품 정보 select - 페이징x
+	 * @param storeId
+	 * @return 조회된 제품 정보
+	 */
+	List<Product> selectProductListNoPaging(String storeId);
 }

@@ -209,6 +209,7 @@
 				WHERE pd.store_id = #{storeId}
 				AND	  p.product_category = #{productCategory}
 				AND	  pd.product_id = p.product_id
+				AND	  pd.trade_date = TRUNC(SYSDATE)
 				GROUP BY pd.product_id, p.product_category
 				ORDER BY pd.product_id ASC					
 		]]>		
@@ -222,8 +223,9 @@
 					p.product_name
 			FROM	payment_details pd, product p
 			WHERE pd.store_id = #{storeId}
-			AND	  p.product_name = #{productName}
+			AND	  p.product_name LIKE '%'||#{productName}||'%'
 			AND	  pd.product_id = p.product_id
+			AND	  pd.trade_date = TRUNC(SYSDATE)
 			GROUP BY pd.product_id, p.product_name
 			ORDER BY pd.product_id ASC				
 		]]>		
@@ -273,8 +275,7 @@
 			 				 p.product_category
 	 				  FROM	payment_details pd, product p
 	  				  WHERE pd.store_id = #{storeId}
-					  AND	  p.product_category = #{productCategory}
-					  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) FROM DUAL)
+					  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) -1 FROM DUAL)
 					  AND	  pd.trade_date >= (SELECT TRUNC(SYSDATE) - 6 FROM DUAL)
 					  AND	  pd.product_id = p.product_id
 	 				  GROUP BY pd.product_id, p.product_category
@@ -293,8 +294,7 @@
 			 				 p.product_category
 	 				  FROM	payment_details pd, product p
 	  				  WHERE pd.store_id = #{storeId}
-					  AND	  p.product_category = #{productCategory}
-					  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) FROM DUAL)
+					  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) -1 FROM DUAL)
 					  AND	  pd.trade_date >= (SELECT MIN(trade_date)FROM payment_details)
 					  AND	  pd.product_id = p.product_id
 	 				  GROUP BY pd.product_id, p.product_category

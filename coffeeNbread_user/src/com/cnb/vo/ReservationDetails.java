@@ -49,6 +49,9 @@ public class ReservationDetails implements Serializable {
 	private String storeId;		//FORIEGN KEY
 	private Store store;
 	
+	
+	private List<GeneralUser> generalUserList;
+	
 	public ReservationDetails() {
 		super();
 	}
@@ -89,6 +92,24 @@ public class ReservationDetails implements Serializable {
 		this.productList = productList;
 		this.storeId = storeId;
 		this.store = store;
+	}
+
+	public ReservationDetails(int reservationNo, Date reservationTime, int reservationCount, Date reservationConfirm,
+			Date productHopeTime, String userId, GeneralUser generalUser, String productId, List<Product> productList,
+			String storeId, Store store, List<GeneralUser> generalUserList) {
+		super();
+		this.reservationNo = reservationNo;
+		this.reservationTime = reservationTime;
+		this.reservationCount = reservationCount;
+		this.reservationConfirm = reservationConfirm;
+		this.productHopeTime = productHopeTime;
+		this.userId = userId;
+		this.generalUser = generalUser;
+		this.productId = productId;
+		this.productList = productList;
+		this.storeId = storeId;
+		this.store = store;
+		this.generalUserList = generalUserList;
 	}
 
 	public int getReservationNo() {
@@ -154,6 +175,38 @@ public class ReservationDetails implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
+	}
+
+	public List<Product> getProductList() {
+		return productList;
+	}
+	
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+	
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public List<GeneralUser> getGeneralUserList() {
+		return generalUserList;
+	}
+
+	public void setGeneralUserList(List<GeneralUser> generalUserList) {
+		this.generalUserList = generalUserList;
+	}
 
 	@Override
 	public String toString() {
@@ -161,7 +214,7 @@ public class ReservationDetails implements Serializable {
 				+ ", reservationCount=" + reservationCount + ", reservationConfirm=" + reservationConfirm
 				+ ", productHopeTime=" + productHopeTime + ", userId=" + userId + ", generalUser=" + generalUser
 				+ ", productId=" + productId + ", productList=" + productList + ", storeId=" + storeId + ", store="
-				+ store + "]";
+				+ store + ", generalUserList=" + generalUserList + "]";
 	}
 
 	@Override

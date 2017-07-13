@@ -57,7 +57,7 @@ public class ProductDaoImplTest {
 		//System.out.println("sellingOption : " + dao.selectProductListCountByMethod("s-1", "sellingOption", "Y"));
 		System.out.println("이상없음");
 	}
-     
+    
 	public static void main(String[] args) throws IOException {
 		ProductDaoImplTest pd = (ProductDaoImplTest)new ClassPathXmlApplicationContext("com/cnb/config/spring/model-context.xml").getBean("productDaoImplTest");
 		pd.examTest();

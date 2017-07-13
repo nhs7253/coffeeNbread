@@ -69,4 +69,10 @@ public class StoreDaoImpl implements StoreDao{
 	public List<Store> selectOpionCategoryNDetailByIdList(String storeId) {
 		return session.selectList(makeSqlId("selectOpionCategoryNDetailById"),storeId);
 	}
+
+	@Override
+	public List<String> selectAllStoreIdList() {
+		return session.selectList(makeSqlId("selectAllStoreId"));
+	}
 }
+

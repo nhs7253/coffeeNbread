@@ -16,6 +16,7 @@
 		<result column="user_active_state" property="userActiveState"/>
 		<result column="store_id" property="storeId"/>
 	</resultMap>
+
 	
 	<insert id="insertGeneralUser" parameterType="GeneralUser">
 		INSERT INTO general_user VALUES(#{userId},

@@ -7,6 +7,16 @@ import java.util.List;
 import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.ReservationDetails;
 
+/*
+ * 최민희
+ * 2017-07-12
+ * 수정
+ */
+/*
+ * 최민희
+ * 2017-07-11
+ * 수정
+ */
 /*김형주
  * 2017-07-03
  * 기능 추가
@@ -70,5 +80,29 @@ public interface ReservationDetailsService {
 	 */
 	HashMap<String, Object> findReservationDetailsListByStoreIdAndProductHopeTime(int page, String storeId, Date productHopeTime);
 
+	/**
+	 * 한 매장에서 예약시간, 예약자로 상세 예약 정보 조회 
+	 * @param storeId, productHopeTime, userId
+	 */
+	List<ReservationDetails> findReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId);
+	
+	/**
+	 * 한 매장에서 같은 유저가 같은 시간에 구매한 예약 내역들의 확인 유무 시간 수정
+	 * @param reservationList
+	 */
+	void modifyReservationConfirmDate(List<ReservationDetails> reservationList);
+	
+	/**
+	 * 선택한 예약 내역들을 삭제 
+	 * @param storeId 삭제를 요청하는 매장 ID
+	 * @param reservationDetailsList 삭제 당할 예약 내역의 목록
+	 */
+	void findRemoveReservationDetails(String storeId, List<ReservationDetails> reservationDetailsList);
 
+	/**
+	 * eservationNo로 예약 내역 조회
+	 * @param storeId 삭제를 요청하는 매장 ID
+	 * @param reservationNo 삭제 당할 예약 내역의 번호
+	 */
+	ReservationDetails findReservationDetailsByReservationNo(String storeId, int reservationNo);
 }

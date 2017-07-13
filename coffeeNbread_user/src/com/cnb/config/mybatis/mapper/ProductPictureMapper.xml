@@ -50,7 +50,7 @@
 	<!-- resultMap -->
 	<resultMap type="com.cnb.vo.ProductPicture" id="productPicture-resultmap">
 		<id column="product_picture" property="productPicture"/>
-		<result column="picture_id" property="productId"/>
+		<result column="product_id" property="productId"/>
 		<result column="store_id" property="storeId"/>
 	</resultMap>
 

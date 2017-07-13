@@ -118,5 +118,9 @@ public class StoreServiceImpl implements StoreService{
 		return storedao.selectOpionCategoryNDetailByIdList(storeId);
 	}
 
-
+	@Override
+	public List<String> findAllStoreIdList() {
+		return storedao.selectAllStoreIdList();
+	}
+	
 }

@@ -2,12 +2,15 @@ package com.cnb.service.impl.test;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.service.ProductGapService;
+import com.cnb.service.ProductService;
+import com.cnb.vo.Product;
 
 /*
  * 최민희
@@ -21,7 +24,7 @@ public class ProductGapServiceImplTest {
 		
 		//TODO Spring 컨테이너로 부터 ProductService bean 가져오기
 		ProductGapService service =  (ProductGapService)ctx.getBean("productGapServiceImpl");
-		
+		ProductService productService = (ProductService)ctx.getBean("productServiceImpl");
 		
 		//제품 증감폭 등록
 		System.out.println("=============등록============");
@@ -32,7 +35,7 @@ public class ProductGapServiceImplTest {
 		System.out.println("=============수정=============");
 		//service.modifyProductGap(new ProductGap("D", "5", "p-9", "s-3"));
 		
-		//제품 증감폭 조회
+/*		//제품 증감폭 조회
 		System.out.println("=============조회==============");
 		int page = 1;
 		
@@ -68,6 +71,16 @@ public class ProductGapServiceImplTest {
 		   }
 		}
 		
+		*/
+		System.out.println("============테스트============");
+		List<Product> productList = productService.findProductListNoPaging("s-1");
+		
+		for(int i=0; i<productList.size(); i++) {		
+			String identifyCode = service.findIdentifyCodeByProductId("s-1", productList.get(i).getProductId());
+			System.out.println(identifyCode);
+			System.out.println((int)Math.round(15*1.05));
+			System.out.println((int)Math.floor(28*0.95));
+		}
 		System.out.println("이상 없음");
 	}
 }

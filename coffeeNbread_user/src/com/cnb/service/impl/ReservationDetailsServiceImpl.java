@@ -20,6 +20,16 @@ import com.cnb.vo.Store;
 
 /*
  * 최민희
+ * 2017-07-12
+ * 수정
+ */
+/*
+ * 최민희
+ * 2017-07-11
+ * 수정
+ */
+/*
+ * 최민희
  * 2017-07-01
  * 생성
  */
@@ -143,8 +153,11 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
 
-		List<ReservationDetails> list = dao.selectReservationDetailsListByStoreId(storeId,
-				pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		List<ReservationDetails> list = dao.selectReservationDetailsListByStoreId(storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+				
+		System.out.println(totalCount);
+		System.out.println("service : " + list);
+		System.out.println("confirm : " + list.get(0).getReservationConfirm());
 		map.put("list", list);
 		return map;
 	}
@@ -174,13 +187,34 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 
 	}
 
-
-
-
 	@Override
 	public int addReservationDetails(ReservationDetails reservationDetails) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public List<ReservationDetails> findReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId) {
+		return dao.selectReservationDetailByStoreIdAndReservationTimeAndUserId(storeId, reservationTime, userId);
+	}
+
+
+	@Override
+	public void modifyReservationConfirmDate(List<ReservationDetails> reservationList) {
+		for(int i=0; i<reservationList.size(); i++) {
+			dao.updateReservationConfirmDate(reservationList.get(i));
+		}
+	}
+
+	@Override
+	public void findRemoveReservationDetails(String storeId, List<ReservationDetails> reservationDetailsList) {
+		for(int i=0; i<reservationDetailsList.size(); i++){
+			dao.deleteReservationDetails(storeId, reservationDetailsList.get(i));
+		}
+	}
+
+	@Override
+	public ReservationDetails findReservationDetailsByReservationNo(String storeId, int reservationNo) {
+		return dao.selectReservationDetailsByReservationNo(storeId, reservationNo);
+	}
 }

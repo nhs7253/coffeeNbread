@@ -181,7 +181,10 @@
 	</delete>
 	
 	
-	
-	    
+	<!-- 모든 매장 id 조회 -->
+	<select id="selectAllStoreId" resultType="string">
+		SELECT  store_id
+		FROM	store
+	</select>
 	
 </mapper>

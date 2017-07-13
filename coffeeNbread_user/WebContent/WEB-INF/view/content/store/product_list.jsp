@@ -53,11 +53,11 @@ td {
 			<%-- 전체 제품 목록 --%>
 			<c:forEach items="${requestScope.list }" var="product">
 			<tr>
-				<td>${product.productCategory }&nbsp;</td>
-				<td><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
-				<td>${product.productPrice }&nbsp;&nbsp;</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
-				<td><input type="checkbox" name="productIdList" value="${product.productId}"></td>
+				<td align="center">${product.productCategory }&nbsp;</td>
+				<td align="center"><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
+				<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
+				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
+				<td align="center"><input type="checkbox" name="productIdList" value="${product.productId}"></td>
 			</tr>
 			</c:forEach>
 		</tbody>
