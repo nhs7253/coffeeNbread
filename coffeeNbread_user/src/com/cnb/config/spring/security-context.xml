@@ -60,6 +60,7 @@
 						login-processing-url="/login.do"
 						username-parameter="userId"
 						password-parameter="userPassword"
+						always-use-default-target="false"
 						authentication-failure-handler-ref="loginFailHandler"
 						default-target-url="/index.do"/>
 		<logout logout-url="/logout.do" logout-success-url="/index.do"/>

@@ -1,5 +1,6 @@
 package com.cnb.dao.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,16 @@ import org.springframework.stereotype.Repository;
 import com.cnb.dao.ReservationDetailsDao;
 import com.cnb.vo.ReservationDetails;
 
+/*
+ * 최민희
+ * 2017-07-12
+ * 수정
+ */
+/*
+ * 최민희
+ * 2017-07-11
+ * 수정
+ */
 /*
  * 최민희
  * 2017-07-02
@@ -113,7 +124,33 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	public int updateReservationConfirmDate(ReservationDetails reservationDetails) {
 		return session.update(makeSqlId("updateReservationConfirmDate"), reservationDetails);
 	}
-
 	
+	@Override
+	public List<ReservationDetails> selectReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId,Date reservationTime, String userId) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("reservationTime", reservationTime);
+		info.put("userId", userId);
+		return session.selectList(makeSqlId("selectReservationDetailByStoreIdAndReservationTimeAndUserId"), info);
+	}
 	
+	@Override
+	public int deleteReservationDetails(String storeId, ReservationDetails reservation) {
+		Map<String, Object> info = new HashMap<>();
+		
+		info.put("storeId", storeId);
+		info.put("reservationTime", reservation.getReservationTime());
+		info.put("reservationConfirm", reservation.getReservationConfirm());
+		info.put("productHopeTime", reservation.getProductHopeTime());
+		info.put("userId", reservation.getUserId());
+		return session.delete(makeSqlId("deleteReservationDetails"), info);
+	}
+	
+	@Override
+	public ReservationDetails selectReservationDetailsByReservationNo(String storeId, int reservationNo) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("reservationNo", reservationNo);
+		return session.selectOne(makeSqlId("selectReservationDetailsByReservationNo"), info);
+	}
 }

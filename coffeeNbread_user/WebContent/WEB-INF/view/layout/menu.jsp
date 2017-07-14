@@ -63,8 +63,7 @@
 		</ul>
 
 		<li class="has-children notifications active"><a href="#0">admin<span
-				class="count">1</span></a>
-
+				class="count">1</span></a> <%-- <<<<<<< HEAD
 			<ul>
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<li><a
@@ -72,9 +71,91 @@
 							등록</a></li>
 				</sec:authorize>
 			</ul></li>
-<ul>
-		<li class="has-children comments"><a href="#0">회원/관리자 공통 메뉴 </a>
+		<ul>
+			<li class="has-children comments"><a href="#0">회원/관리자 공통 메뉴
+			</a> =======
+			<li data-toggle="collapse" data-target="#common"
+				class="collapsed active"><a href="#"> 관리자 공통메뉴 <span
+					class="arrow"></span></a></li>
+			<ul class="sub-menu collapse" id="common">
+				회원/관리자 공통 메뉴 /member로 시작
+				<sec:authorize
+					access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')">
+					<li><a href="${initParam.rootPath }/user/mypage.do">사용자
+							정보조회</a></li>
+					<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자
+							탈퇴</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크
+							목록 조회</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저
+							방문 내역 조회</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저
+							추천 매장 조회</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A
+							글쓰기</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장
+							Q&A 글쓰기</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/callStoreRegisterController.do">매장
+							등록</a></li>
 
+					<li><a
+						href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
+				</sec:authorize>
+
+
+				인증 관련 없는 메뉴 (로그인 하던 말던 똑같이 나올 메뉴)
+				<li><a
+					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자
+						목록</a></li>
+				<li><a
+					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do">Q&A
+						게시판 목록</a></li>
+				<li><a
+					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=service-qna-s-1">매장
+						Q&A 게시판 목록</a></li>
+				<li><a
+					href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do">공지사항
+						게시판 목록</a></li>
+
+
+				매장 관리자
+				매장만의 권한으로 바꿔줘야함
+				<sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
+					<li><a
+						href="${initParam.rootPath }/findOptionCategoryController.do">제품
+							등록</a></li>
+					<li><a
+						href="${initParam.rootPath }/findProductListController.do">제품
+							목록</a></li>
+					<li><a
+						href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량
+							조회</a></li>
+					<li><a
+						href="${initParam.rootPath }/findReservationDetailsController.do">예약
+							현황 조회</a></li>
+					<li><a
+						href="${initParam.rootPath }/findProductListForPosController.do">현장
+							판매 시스템</a></li>
+				</sec:authorize>
+
+
+				<li><a
+					href="${initParam.rootPath }/common//findRecipeBoardContentsBySelectToKeyword.do">전체
+						레시피 게시판 </a></li>
+				<li><a href="${initParam.rootPath }/addStoreController.do">매장
+						등록</a></li>
+				<li><a href="${initParam.rootPath}/ selectStoreController.do">매장
+						조회</a></li>
+			</ul>
+			>>>>>>> branch 'master' of
+			https://github.com/nhs7253/coffeeNbread.git
+ --%><li class="has-children comments"><a href="#0">회원/관리자 공통 메뉴 </a>
 			<ul>
 				<!-- 				회원/관리자 공통 메뉴 /member로 시작
  -->
@@ -101,11 +182,14 @@
 					<li><a
 						href="${initParam.rootPath }/user/callStoreRegisterController.do">매장
 							등록</a></li>
+					<li><a
+						href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
 				</sec:authorize>
-			</ul></li>
-		
+			</ul>
+			</li>
 
-		
+
+
 			<li class="cd-label">Secondary</li>
 			<li class="has-children bookmarks"><a href="#0">인증관련없는 메뉴</a>
 
@@ -165,26 +249,41 @@
 				</ul></li>
 		</ul>
 
+		<!-- <<<<<<< HEAD -->
 		<ul>
 			<li class="cd-label">Action</li>
 			<li class="action-btn"><a href="#0">+ Button</a></li>
 		</ul>
 	</nav>
+	<%-- =======
 
+<li  data-toggle="collapse" data-target="#store" class="collapsed active">
+                  <a href="#"> 매장관리자  <span class="arrow"></span></a>
+</li>
+<ul class="sub-menu collapse" id="store">
+매장 관리자
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')">
+	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
+	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
+	<li><a href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내 제품 목록 조회</a></li>
+</sec:authorize>
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
+ --%>
 	<div class="content-wrapper">
 		<h1></h1>
 	</div>
 	<!-- .content-wrapper --> </main>
 	<!-- .cd-main-content -->
-<script type="text/javascript">
-	function logout(){
-		document.getElementById("logoutForm").submit();
-	}
-</script>
-<form id="logoutForm" action="${initParam.rootPath }/logout.do" method="post" style="display:none">
-    <sec:csrfInput/>
-</form>
-	
+	<script type="text/javascript">
+		function logout() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
+	<form id="logoutForm" action="${initParam.rootPath }/logout.do"
+		method="post" style="display: none">
+		<sec:csrfInput />
+	</form>
+
 </body>
 </html>
 

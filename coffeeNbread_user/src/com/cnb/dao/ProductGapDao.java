@@ -65,4 +65,10 @@ public interface ProductGapDao {
 	 */
 	List<ProductGap> selectProductGapListByIdentifyCodeByStoreIdAndIdentifyCode(String storeId, String identifyCode, int startIndex, int endIndex);
 	
+	/**
+	 * 한 제품의 증감 식별코드 조회
+	 * @param storeId, productId
+	 * @return 조회된 증감 식별코드
+	 */
+	String selectIdentifyCodeByProductId(String storeId, String productId);
 }

@@ -183,6 +183,11 @@ public class StoreServiceImpl implements StoreService{
 	}
 
 	@Override
+	public List<String> findAllStoreIdList() {
+		return storedao.selectAllStoreIdList();
+	}
+	
+	@Override
 	public Map<String, Object> findStorePagingList(String select, String keyword, int page) {
 		Map<String, Object> map = new HashMap<>();
 		int tatalCount = storedao.selectStoreBySelectAndKeywordPagingCount(select, keyword);
@@ -207,6 +212,5 @@ public class StoreServiceImpl implements StoreService{
 		storedao.updateStore(store);
 		return store;
 	}
-	
 	
 }

@@ -62,4 +62,10 @@ public class ProductGapServiceImpl implements ProductGapService {
 		map.put("list", list);
 		return map;
 	}
+
+	@Override
+	public String findIdentifyCodeByProductId(String storeId, String productId) {
+		return dao.selectIdentifyCodeByProductId(storeId, productId);
+	}
+	
 }
