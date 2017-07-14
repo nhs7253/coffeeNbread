@@ -24,7 +24,39 @@ public class ProductServiceImplTest {
 		//TODO Spring 컨테이너로 부터 ProductService bean 가져오기
 		ProductService service =  (ProductService)ctx.getBean("productServiceImpl");
 
-		//제품 등록
+		
+		
+		HashMap<String, Object> map1 = service.findProductListByMethod(1, "s-1", "productCategory", "빵");
+		
+
+		
+		
+		
+		
+		/*Iterator iterator1 = map1.entrySet().iterator();
+		
+		while (iterator1.hasNext()) {
+		   Entry entry1 = (Entry)iterator1.next();
+		   if(entry1.getKey().equals("list")){
+			   if(entry1.getValue() == null) {
+				  
+				   System.out.println();
+			   }else{
+				   System.out.println(entry1.getValue());				   
+			   }
+		   	}
+		}	
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+	/*	//제품 등록
 		//겹치는 거 없는 경우
 		Product p1 = new Product("p-41", "s-2", "제품41", 3000, "빵", "제품설명글30", "N", 100, 10);
 		//제품 아이디 겹치는 경우
@@ -33,7 +65,7 @@ public class ProductServiceImplTest {
 		Product p3 = new Product("p-32", "s-2", "제품1", 3000, "빵", "제품설명글32", "N", 100, 10);
 
 		OptionDetail op1 = new OptionDetail("s-2","p-40",3,"디4");
-
+*/
 /*		
 		try {
 			//service.addProduct(p1);
@@ -135,8 +167,8 @@ public class ProductServiceImplTest {
 		   }
 		}
 		*/
-		
+		/*
 		System.out.println("------------페이징 없이 제품 목록 조회 ---------------");
-		System.out.println(service.findProductListNoPaging("s-1"));
+		System.out.println(service.findProductListNoPaging("s-1"));*/
 	}
 }

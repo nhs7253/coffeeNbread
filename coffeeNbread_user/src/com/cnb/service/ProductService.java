@@ -100,4 +100,23 @@ public interface ProductService {
 	 * @param
 	 */
 	List<Product> findProductListNoPaging(String storeId);
+	
+	
+	/**
+	 * 1의 매장에있는 제품카테고리와 제품명을 기준으로 조회- 페이징
+	 * 
+	 */
+	
+	HashMap<String, Object> findProductListByMethod(int page,String storeId,String select, String keyword);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

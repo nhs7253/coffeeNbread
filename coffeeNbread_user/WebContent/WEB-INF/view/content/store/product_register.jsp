@@ -64,7 +64,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="submit" class="btn btn-default btn-circle">
+				<button type="submit" class="btn btn-custom">
 					<i class="glyphicon glyphicon-ok"></i> 등록
 				</button>
 			</td>

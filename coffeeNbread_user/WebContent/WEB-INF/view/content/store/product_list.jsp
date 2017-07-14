@@ -17,7 +17,7 @@ td {
 }
 
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 <h2>PRODUCT LIST</h2> 
 
 ${requestScope.list }
@@ -41,15 +41,16 @@ ${requestScope.list }
 
 <form  action="${initParam.rootPath }/findProductListController.do" method="post">
    <sec:csrfInput/><%-- csrf 토큰 --%>
-   <button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>전체조회</button>
+   <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-list"></i>전체조회</button>
    
 </form>
 
 <p>
 
+
 <form action="${initParam.rootPath }/selectRemoveProductController.do" method="post">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-	<table>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
@@ -72,7 +73,8 @@ ${requestScope.list }
 			</c:forEach>
 		</tbody>
 	</table>
-	<input type="submit" value="삭제" />
+      <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+
 </form>
 
 <p>

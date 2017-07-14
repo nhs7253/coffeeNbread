@@ -167,24 +167,32 @@ public class ReservationDetailsController {
 		return "redirect:/findReservationDetailsController.do";
 	}
 
+	@Autowired
+	private GeneralUserService generalUserService;
 
 	// 유저가 예약한 예약내역 보기. - 페이징 필요할듯. - 페이징 추가.
 	@RequestMapping("/user/findReservationDetailsController")
 	public ModelAndView findReservationDetailsController(
 			@ModelAttribute("reservationDetails") @Valid ReservationDetailsViewForm reservationDetailsViewForm,
 			BindingResult errors, HttpServletRequest request)  {
-
-		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("reservationDetailsViewForm:" + reservationDetailsViewForm);
+         System.out.println("-----------reservation---------------진입");
+        ModelAndView modelAndView = new ModelAndView();
 		if (errors.hasErrors()) {
-			modelAndView.setViewName("user/payment_fail.tiles"); // 임시로 해둠.
+			System.out.println("-----------------오류발생----------------");
+			modelAndView.setViewName("index.tiles"); // 임시로 해둠.
 			return modelAndView; // 에러 발생
 		}
 		Map<String, Object> map = new HashMap<>();
-         map =   rdService.findReservationDetailsListByUserId(reservationDetailsViewForm.getPage(),((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId() );
+       map=rdService.findReservationDetailsListByUserId(reservationDetailsViewForm.getPage(), ((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());                
 		System.out.println("뽑으려는 것 :"+map.get("list"));
-		modelAndView.setViewName("user/user_payment_List.tiles");
-		modelAndView.addObject("list", map.get("list"));
+	  modelAndView.setViewName("user/user_reservation_List.tiles");
+	modelAndView.addObject("list", map.get("list"));
+		//유저이름 보내기
+	GeneralUser generalUser=generalUserService.findUser(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
+
+	modelAndView.addObject("userName",generalUser.getUserName() );
+ 
+		//pageBean
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		
 		return modelAndView;

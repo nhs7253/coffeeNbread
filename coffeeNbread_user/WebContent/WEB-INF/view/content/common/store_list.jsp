@@ -19,6 +19,7 @@ td {
 }
 </style>
 
+
 <style>
     .wrap {text-align: left; overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
@@ -34,6 +35,10 @@ td {
 </style>
 
 <link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+
+
+<!-- <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
+ -->
 
 	<h2>STORE LIST</h2>
 

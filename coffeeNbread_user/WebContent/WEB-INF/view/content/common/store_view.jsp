@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 
 
 </head>
 <body>
+
 
 	<h1>매장 상세</h1><hr><br>
 	
@@ -93,4 +95,3 @@
 		infowindow.open(map, marker); 
 		</script>
 
-	

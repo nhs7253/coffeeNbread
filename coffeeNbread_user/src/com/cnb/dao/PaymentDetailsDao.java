@@ -62,7 +62,7 @@ public interface PaymentDetailsDao {
 	 * @param storeId
 	 * @return
 	 */
-	int countSelectPaymentDetailsByUserIdAndStoreId(String userId, String storeId);
+	int countSelectPaymentDetailsByUserId(String userId);
 
 	/**
 	 * 유저가 결제한 내역들 조회 - 매장아이디가 null이라면 매장아이디 빼고 조회.
@@ -75,7 +75,7 @@ public interface PaymentDetailsDao {
 	 * @param endIndex
 	 * @return
 	 */
-	List<PaymentDetails> selectPaymentDetailsListByUserIdAndStoreId(String userId, String storeId,
+	List<PaymentDetails> findSelectPaymentDetailsListByUserId(String userId,
 			 int startIndex, int endIndex);
 
 /*

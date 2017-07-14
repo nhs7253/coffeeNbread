@@ -91,41 +91,38 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 				shoppingBasketProduct.getUserId(), shoppingBasketProduct.getStoreId(),
 				shoppingBasketProduct.getProductId());
 		System.out.println("sbp:" + sbp);
+		if (sbp == null) {
 
-		
-			if (sbp==null) {
-				
-				shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
-				return shoppingBasketProduct;
-			} else {
-				sbp.setProductCount(sbp.getProductCount() + shoppingBasketProduct.getProductCount());
-				shoppingBasketProductDao.updateShoppingBasketProductCount(sbp);
-				return sbp;
-			}
-
+			shoppingBasketProductDao.insertShoppingBasketProduct(shoppingBasketProduct);
+			return shoppingBasketProduct;
+		} else {
+			sbp.setProductCount(sbp.getProductCount() + shoppingBasketProduct.getProductCount());
+			shoppingBasketProductDao.updateShoppingBasketProductCount(sbp);
+			return sbp;
 		}
 
-		/*
-		 * if (shoppingBasketProduct.getProductCount() == 0) {
-		 * 
-		 * } else { System.out.println("여기 까지 옴");
-		 * System.out.println(sbpList!=null); if (sbpList != null) {
-		 * System.out.println("하나 더 있네 : " + sbpList.size()); for (int i = 0; i
-		 * < sbpList.size(); i++) { System.out.println("행방 불명"); if
-		 * (sbpList.get(i).getProductId().equals(shoppingBasketProduct.
-		 * getProductId())) { System.out.println("다음다음");
-		 * sbpList.get(i).setProductCount( sbpList.get(i).getProductCount() +
-		 * shoppingBasketProduct.getProductCount());
-		 * shoppingBasketProductDao.updateShoppingBasketProductCount(sbpList.get
-		 * (i)); System.out.println("새로운 제품"); } else {
-		 * shoppingBasketProductDao.insertShoppingBasketProduct(
-		 * shoppingBasketProduct); System.out.println("추가된 제품"); }
-		 * 
-		 * } System.out.println("마지막"); } else {
-		 * shoppingBasketProductDao.insertShoppingBasketProduct(
-		 * shoppingBasketProduct); System.out.println("새로운 제품2"); } }
-		 */
-	
+	}
+
+	/*
+	 * if (shoppingBasketProduct.getProductCount() == 0) {
+	 * 
+	 * } else { System.out.println("여기 까지 옴");
+	 * System.out.println(sbpList!=null); if (sbpList != null) {
+	 * System.out.println("하나 더 있네 : " + sbpList.size()); for (int i = 0; i <
+	 * sbpList.size(); i++) { System.out.println("행방 불명"); if
+	 * (sbpList.get(i).getProductId().equals(shoppingBasketProduct.
+	 * getProductId())) { System.out.println("다음다음");
+	 * sbpList.get(i).setProductCount( sbpList.get(i).getProductCount() +
+	 * shoppingBasketProduct.getProductCount());
+	 * shoppingBasketProductDao.updateShoppingBasketProductCount(sbpList.get
+	 * (i)); System.out.println("새로운 제품"); } else {
+	 * shoppingBasketProductDao.insertShoppingBasketProduct(
+	 * shoppingBasketProduct); System.out.println("추가된 제품"); }
+	 * 
+	 * } System.out.println("마지막"); } else {
+	 * shoppingBasketProductDao.insertShoppingBasketProduct(
+	 * shoppingBasketProduct); System.out.println("새로운 제품2"); } }
+	 */
 
 	/**
 	 * 장바구니에서 결제페이지 넘어갈때 총가격 부를수 있는 서비스.
@@ -138,13 +135,13 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 		List<ShoppingBasketProduct> list = null;
 		int totalPrice = 0;
 		list = shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId);
-         System.out.println("Service:"+list);
-         System.out.println("list.size:"+list.size());
+		System.out.println("Service:" + list);
+		System.out.println("list.size:" + list.size());
 		for (int i = 0; i < list.size(); i++) {
-               System.out.println(list.get(i).getProduct().getProductPrice()*list.get(i).getProductCount());
+			System.out.println(list.get(i).getProduct().getProductPrice() * list.get(i).getProductCount());
 			totalPrice += list.get(i).getProduct().getProductPrice() * list.get(i).getProductCount();
 		}
-		System.out.println("totalPrice:"+totalPrice);
+		System.out.println("totalPrice:" + totalPrice);
 		return totalPrice;
 	}
 

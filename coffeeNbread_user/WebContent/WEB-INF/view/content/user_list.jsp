@@ -17,7 +17,6 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
 </head>
 <body>

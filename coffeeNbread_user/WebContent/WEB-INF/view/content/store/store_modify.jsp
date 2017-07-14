@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
-   uri="http://www.springframework.org/security/tags"%>
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,82 +11,89 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript"
-   src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
-   $(document).ready(function() {
-      $("#optionCategoryList").on("click", function() {
+	$(document).ready(function() {
+		$("#optionCategoryList").on("click", function() {
 
-         var p2 = document.createElement("input");
-         p2.setAttribute("name", "optionCategoryList");
-         p2.setAttribute("class", "form-control");
-         var txt = document.createTextNode($("#optionCategory").val());
-         p2.appendChild(txt);
+			var p2 = document.createElement("input");
+			p2.setAttribute("name", "optionCategoryList");
+			p2.setAttribute("class", "form-control");
+			var txt = document.createTextNode($("#optionCategory").val());
+			p2.appendChild(txt);
 
-         var input = document.getElementById("selectSC");
-         input.appendChild(p2);
+			var input = document.getElementById("selectSC");
+			input.appendChild(p2);
 
-      });//end of storeCategoryList
+		});//end of storeCategoryList
 
-      $("#modifystorePicture").on("click", function() {
+		$("#modifystorePicture").on("click", function() {
 
-         $("#storePicture").empty();
+			$("#storePicture").empty();
 
-         var p2 = document.createElement("input");
-         p2.setAttribute("type", "file");
-         p2.setAttribute("name", "storePictureList");
-         var input = document.getElementById("storePicture");
-         input.appendChild(p2);
+			var p2 = document.createElement("input");
+			p2.setAttribute("type", "file");
+			p2.setAttribute("name", "storePictureList");
+			var input = document.getElementById("storePicture");
+			input.appendChild(p2);
 
-      })//end of storePicture
+		})//end of storePicture
 
-   });//end of document
+	});//end of document
 </script>
 
-	
+
 
 <body>
 
-   <form action="${initParam.rootPath }/modifyStoreController.do"
-      method="post" enctype="multipart/form-data">
-      <sec:csrfInput />
-      <table>
-         <tr class="form-group">
-            <th>매장 분류</th>
-            <td>
-            	<c:forEach items="${sessionScope.storeInfo.optionCategoryList}" var="optionCategoryList">
-                  <input type="text" name="optionCategoryList" id="optionCategory"
-                     value="${optionCategoryList.optionCategory}" class="form-control">
-                </c:forEach>
-           	</td>
-            <td>
-               <button type="button" id="optionCategoryList"
-                  class="btn btn-default btn-circle">
-                  <i class="glyphicon glyphicon-plus"></i>
-               </button>
-            </td>
-         <tr>
-            <th></th>
-            <td id="selectSC"></td>
-         </tr>
-         <tr>
-            <th></th>
-            <td id="selectOC"></td>
-         </tr>
+	<form action="${initParam.rootPath }/modifyStoreController.do"
+		method="post" enctype="multipart/form-data">
+		<sec:csrfInput />
+		<table>
+			<tr class="form-group">
+				<th>매장 분류</th>
+				<td><c:forEach
+						items="${sessionScope.storeInfo.optionCategoryList}"
+						var="optionCategoryList">
+						<input type="text" name="optionCategoryList" id="optionCategory"
+							value="${optionCategoryList.optionCategory}" class="form-control">
+					</c:forEach></td>
+				<td>
+					<button type="button" id="optionCategoryList"
+						class="btn btn-default btn-circle">
+						<i class="glyphicon glyphicon-plus"></i>
+					</button>
+				</td>
 			<tr>
-				<td><input type="hidden" name="storeId" value="${sessionScope.storeInfo.storeId}"></td>
-				<td><input type="hidden" name="storePermission" value="${sessionScope.storeInfo.storePermission}"></td>
-			</tr>         
-         
-			결제 방식 선택<br />
+				<th></th>
+				<td id="selectSC"></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td id="selectOC"></td>
+			</tr>
+			<tr>
+				<td><input type="hidden" name="storeId"
+					value="${sessionScope.storeInfo.storeId}"></td>
+				<td><input type="hidden" name="storePermission"
+					value="${sessionScope.storeInfo.storePermission}"></td>
+			</tr>
+
+			결제 방식 선택
+			<br />
 			<c:forEach items="${requestScope.paymentOptionList }" var="list">
-				<c:forEach items="${sessionScope.storeInfo.storePaymentOptionList }" var="storeInfo">
+				<c:forEach items="${sessionScope.storeInfo.storePaymentOptionList }"
+					var="storeInfo">
 					<c:if test="${list.paymentId  == storeInfo.paymentId }">
-						<c:set scope="page" var="checked" value="true"/>
+						<c:set scope="page" var="checked" value="true" />
 					</c:if>
 				</c:forEach>
-				<input type="checkbox" name="paymentIdList" value="${list.paymentId }" ${pageScope.checked == 'true' ? "checked='checked'" :""}/>${list.paymentMethod }&nbsp;&nbsp;&nbsp;
-				<c:set scope="page" var="checked" value="false"/>
+				<input type="checkbox" name="paymentIdList"
+					value="${list.paymentId }"
+					${pageScope.checked == 'true' ? "checked='checked'" :""} />${list.paymentMethod }&nbsp;&nbsp;&nbsp;
+				<c:set scope="page" var="checked" value="false" />
 			</c:forEach>
+
        
          <tr class="form-group">
             <th>매장 이름</th>
@@ -158,11 +165,14 @@
             <td><textarea name="storeIntro" rows="5" cols="50" >${sessionScope.storeInfo.storeIntro}</textarea></td>
          </tr>
 
-         <tr>
-            <td colspan="2"><button type="submit">확인</button></td>
-         </tr>
-      </table>
-   </form>
+
+			<tr>
+				<td colspan="2"><button type="submit" class="btn btn-custom">
+						<i class="glyphicon glyphicon-ok"></i>확인
+					</button></td>
+			</tr>
+		</table>
+	</form>
 </body>
 
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
