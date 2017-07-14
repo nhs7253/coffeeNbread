@@ -143,7 +143,7 @@
 
 
    <!--유저가 보는 제품 목록폼  -->
-	<mvc:view-controller path="/user/userFindProductListController.do" view-name="store/product_detail.tiles"/>
+	<mvc:view-controller path="/user/user_findProduct_List.do" view-name="user/user_findProduct_List.tiles"/>
 	
 
 	

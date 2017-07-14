@@ -60,6 +60,8 @@ public class ProductDaoImpl implements ProductDao {
 		return session.selectOne(makeSqlId("selectProductListCount"), storeId);
 	}
 
+	
+	/*  //-유저가 보는 방법별로 페이징 - 카테고리, 제품명
 	@Override
 	public int selectProductListCountByMethod(String storeId, String method, String methodContent) {
 		Map<String, String> info = new HashMap<>();
@@ -67,7 +69,47 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("method", method);
 		info.put("methodContent", methodContent);
 		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
+	}*/
+	
+	
+	@Override
+	public int selectProductListCountByMethod(String storeId, String select, String keyword) {
+		Map<String, String> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("select", select);
+		info.put("keyword", keyword);
+		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//-유저가 보는 방법별로 페이징한 List
+	@Override
+	public List<Product> selectProductListPagingByMethod(String select, String keyword, String storeId, int startIndex, int endIndex) {
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("select", select);
+		input.put("keyword", keyword);
+		input.put("storeId", storeId);
+		input.put("startIndex", String.valueOf(startIndex));
+		input.put("endIndex", String.valueOf(endIndex));		
+		return session.selectList(makeSqlId("selectProductListPagingByMethod"), input);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public List<Product> selectProductListByCategory(String storeId, String productCategory, int startIndex, int endIndex) {

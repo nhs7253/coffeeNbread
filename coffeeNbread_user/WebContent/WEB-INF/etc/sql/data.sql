@@ -334,4 +334,13 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),'',2);
 INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),2,'');
 		
-		
+
+
+
+	SELECT COUNT(product_id)
+				FROM product
+				WHERE product_category LIKE '빵'
+				AND	  store_id = 's-1'
+   
+
+select*from product

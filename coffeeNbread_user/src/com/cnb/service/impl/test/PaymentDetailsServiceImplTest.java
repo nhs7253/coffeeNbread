@@ -41,17 +41,17 @@ public class PaymentDetailsServiceImplTest {
 		System.out.println(service.findPaymentDetailsListByStoreIdAndUserId("s-7", "u-1"));
 		*/
 		
-	      System.out.println("-----------결제테이블 조회----");
+	    System.out.println("-----------결제테이블 조회----");
 	      
-	      List<ShoppingBasketProduct> list=Arrays.asList(
+	    /* List<ShoppingBasketProduct> list=Arrays.asList(
 					new ShoppingBasketProduct("u-1","s-7","p-18",4,"s-7"),
 					new ShoppingBasketProduct("u-1","s-7","p-19",4,"s-7"),
 					new ShoppingBasketProduct("u-1","s-7","p-20",4,"s-7"),
 					new ShoppingBasketProduct("u-1","s-7","p-21",4,"s-7")
 
 					);
-	      
-	  	      
+	      */
+	      System.out.println(service.findPaymentDetailsListByUserId(1, "u-1"));
 	      
 	      
 	      
@@ -65,7 +65,7 @@ public class PaymentDetailsServiceImplTest {
  	    System.out.println(service.findPaymentDetailsListByStoreIdAndUserId("s-7", "u-1"));
 */
  	  
- 	    System.out.println("------------ 총금액 조회---------------------");
+ 	   /* System.out.println("------------ 총금액 조회---------------------");
  	    System.out.println(service.findAllProductPrice(list));
  	    
  	    System.out.println("-------------------------------------------");
@@ -83,7 +83,7 @@ public class PaymentDetailsServiceImplTest {
  	    
  	    System.out.println("-------------------------------------------");
  	    System.out.println("한 매장의 특정 제품의 현장 결제 내역 조회 - 판매시스템(포스)에 사용");
- 	    System.out.println(service.findPaymentDetailsListByStoreIdAndProductIdAndSellMethod("s-1", "p-1", "f"));
+ 	    System.out.println(service.findPaymentDetailsListByStoreIdAndProductIdAndSellMethod("s-1", "p-1", "f"));*/
  	    
  	}
 

@@ -17,28 +17,90 @@
 
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
+
+  
+/*   input {
+  border: 1px solid #bcbcbc;
+  border-radius: 0px;
+  -webkit-appearance: none; */
 }
+
 
 table {
-	width: 700px;
-	border-collapse: collapse;
-}
-
-td {
-	padding: 5px; /* //td 간 간격 */
-}
-
-
+     width: 100%;
+    height: 200px;
+    
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+  }
+  th {
+    background-color: #bbdefb;
+  }
+  td {
+    background-color: #e3f2fd;
+  }
+  
+  <html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      #jb-container {
+        width: 940px;
+        margin: 10px auto;
+        padding: 20px;
+        border: 1px solid #bcbcbc;
+      }
+      #jb-header {
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #bcbcbc;
+      }
+      #jb-content {
+        width: 580px;
+        padding: 20px;
+        margin-bottom: 20px;
+        float: left;
+        border: 1px solid #bcbcbc;
+      }
+      #jb-sidebar {
+        width: 260px;
+        padding: 20px;
+        margin-bottom: 20px;
+        float: right;
+        border: 1px solid #bcbcbc;
+      }
+      #jb-footer {
+        clear: both;
+        padding: 20px;
+        border: 1px solid #bcbcbc;
+      }
+      @media ( max-width: 480px ) {
+        #jb-container {
+          width: auto;
+        }
+        #jb-content {
+          float: none;
+          width: auto;
+        }
+        #jb-sidebar {
+          float: none;
+          width: auto;
+        }
+      }
+    </style>
 </style>
 </head>
 <body>
 
 
 	<h2>전체 게시판 목록</h2>
-
-
 
 
 

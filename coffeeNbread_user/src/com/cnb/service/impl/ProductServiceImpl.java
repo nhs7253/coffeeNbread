@@ -21,6 +21,7 @@ import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
 import com.cnb.vo.ProductGap;
 import com.cnb.vo.ProductPicture;
+import com.cnb.vo.RecipeBoardContents;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
@@ -167,6 +168,37 @@ public class ProductServiceImpl implements ProductService {
 		return map;
 	}
 	
+	
+	/* 유저가 제품목록 보기 */
+	@Override
+	public HashMap<String, Object> findProductListByMethod(int page,String storeId,String select, String keyword) {
+		HashMap<String, Object> map = new HashMap<>();
+		
+		//item 수                          
+		int totalCount = dao.selectProductListCountByMethod(storeId, select, keyword);
+		PagingBean pageBean = new PagingBean(totalCount, page);
+		map.put("pageBean", pageBean);
+		
+		System.out.println("----------------------");
+		System.out.println(page+"----");
+		System.out.println(storeId+"----");
+		System.out.println(select+"----");
+		System.out.println(keyword+"----");
+		System.out.println("----------------------");
+		
+		//List<Product> list = dao.selectProductListPagingByMethod("category","빵", "s-1", pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+       List<Product> list = dao.selectProductListPagingByMethod(select, keyword, storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+		System.out.println("service-list:"+list);
+		
+		map.put("list", list);
+		
+		System.out.println("service-list:"+map);
+		return map;
+	}
+	
+	
+
+	
 	@Override
 	public void removeOptionDetail(Product product, OptionDetail optionDetail) {
 		if(dao.selectProductBySellingOption(product.getStoreId(),"N", product.getProductName())!=null){
@@ -184,5 +216,6 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> findProductListNoPaging(String storeId) {
 		return dao.selectProductListNoPaging(storeId);
 	}
-	
+
+
 }

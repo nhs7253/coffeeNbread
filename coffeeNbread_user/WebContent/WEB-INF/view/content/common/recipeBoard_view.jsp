@@ -43,7 +43,7 @@
 
 
 
-	<table class="w3-table-all">
+	<table  class="table table-striped table-bordered table-hover">
 		<tbody>
 
 			<c:forEach items="${requestScope.list }" var="list">
