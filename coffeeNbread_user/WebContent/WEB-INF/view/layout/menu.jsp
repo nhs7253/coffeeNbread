@@ -66,6 +66,8 @@
 	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
 	<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li>
 	<li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
+	
+	<li><a href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
 </sec:authorize>
 
 
@@ -117,7 +119,7 @@
 </li>
 <ul class="sub-menu collapse" id="store">
 <%-- 매장 관리자 --%>
-<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
 	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
 	<li><a href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내 제품 목록 조회</a></li>

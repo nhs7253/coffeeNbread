@@ -2,7 +2,9 @@ package com.cnb.service;
 
 import java.util.List;
 
+import com.cnb.vo.PaymentDetails;
 import com.cnb.vo.Product;
+import com.cnb.vo.StorePaymentOptionList;
 
 /*
  * 노현식
@@ -23,4 +25,16 @@ public interface PointOfSalesService {
 	 */
 	List<Product> findProductListToPOSService(String storeId, String select, String keyword);
 	
+	/**
+	 * POS에서 결제가 끝나 그 내역을 남기기 위한 서비스
+	 * @param paymentDetailsList
+	 */
+	void paymentExecuteService(List<PaymentDetails> paymentDetailsList);
+	
+	/**
+	 * 해당 매장에서 지원하는 결제 항목을 보여주는 서비스
+	 * @param storeId 해당 항목을 보고자 하는 매장의 ID
+	 * @return List<StorePaymentOptionList> 지원하는 결제 서비스 목록
+	 */
+	List<StorePaymentOptionList> findStorePaymentOptionListByStoreIdService(String storeId);
 }
