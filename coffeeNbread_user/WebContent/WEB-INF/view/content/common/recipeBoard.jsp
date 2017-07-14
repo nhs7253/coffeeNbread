@@ -27,6 +27,7 @@
 
 
 table {
+<<<<<<< HEAD
      width: 100%;
     height: 200px;
     
@@ -95,7 +96,7 @@ table {
         }
       }
     </style>
-</style>
+
 </head>
 <body>
 
@@ -104,41 +105,52 @@ table {
 
 
 
+	<div class="container">
+		<div id="quick-access">
+			<form
+				action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"
+				method="post" class="form-inline quick-search-form" role="form">
+				<div class="form-group">
+				<select name="select" class="form-control">
+					<option value="recipeBoardTitle"
+						${param.select eq "recipeBoardTitle" ? "selected" :""}>제목</option>
+					<option value="recipeBoardContent"
+						${param.select eq "recipeBoardContent" ? "selected" :""}>내용</option>
+					<option value="recipeBoardDate"
+						${param.select eq "recipeBoardDate" ? "selected" :""}>최신
+						날짜순</option>
+					<option value="recipeBoardHits"
+						${param.select eq "recipeBoardHits" ? "selected" :""}>조회순</option>
+					<option value="recommendCount"
+						${param.select eq "recommendCount" ? "selected" :""}>추천순</option>
+					<option value="userId" ${param.select eq "userId" ? "selected" :""}>내가
+						쓴글</option>
 
-	<form
-		action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"
-		method="post">
-		<select name="select">
-			<option value="recipeBoardTitle"
-				${param.select eq "recipeBoardTitle" ? "selected" :""}>제목</option>
-			<option value="recipeBoardContent"
-				${param.select eq "recipeBoardContent" ? "selected" :""}>내용</option>
-			<option value="recipeBoardDate"
-				${param.select eq "recipeBoardDate" ? "selected" :""}>최신
-				날짜순</option>
-			<option value="recipeBoardHits"
-				${param.select eq "recipeBoardHits" ? "selected" :""}>조회순</option>
-			<option value="recommendCount"
-				${param.select eq "recommendCount" ? "selected" :""}>추천순</option>
-			<option value="userId" ${param.select eq "userId" ? "selected" :""}>내가
-				쓴글</option>
+				</select> <input type="text" name="keyword" class="form-control" />
+				</div>
+				<button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-search"></i>검색
+				</button>
 
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
-
-		<sec:csrfInput />
-		<%-- csrf 토큰 --%>
-	</form>
+				<sec:csrfInput />
+				<%-- csrf 토큰 --%>
+			</form>
+		</div>
+	</div>
 	<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
-	<input type="button" value="글쓰기" /></a>
+		<button type="submit" class="btn-custom">
+			<i class="glyphicon glyphicon-ok"></i>글쓰기
+		</button>
+	</a>
 	<br>
 
 
 
 
 
-   
 
-	<table class="w3-table-all"  >
+
+	<table class="w3-table-all">
 		<thead>
 			<tr class="w3-blue">
 				<th>글번호</th>
@@ -166,22 +178,24 @@ table {
 				<tr>
 					<td>${list.recipeBoardNo}</td>
 					<c:forEach items="${list.recipeBoardPicture }" var="fileName">
-					     <td> <img src="${initParam.rootPath }/up_image/${fileName }" width="100px" height="100px"></td>
-				        </c:forEach>
-					<td><a href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}">${list.recipeBoardTitle}</a></td>
+						<td><img src="${initParam.rootPath }/up_image/${fileName }"
+							width="100px" height="100px"></td>
+					</c:forEach>
+					<td><a
+						href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}">${list.recipeBoardTitle}</a></td>
 					<td>${list.recipeBoardContent}</td>
 					<td>${list.recipeBoardDate}</td>
 					<td>${list.recipeBoardHits}</td>
 					<td>${list.recommendCount}</td>
-					 
-		
-				 
+
+
+
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
-    
+
 	<p>
 		<%--######################################################
 															페이징 처리

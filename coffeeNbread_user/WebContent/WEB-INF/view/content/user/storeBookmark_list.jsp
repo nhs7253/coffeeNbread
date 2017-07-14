@@ -33,7 +33,7 @@ td {
 				<div class="form-group col-xs-2">
 					<input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
+				<button type="submit" class="btn-custom">
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
 				<sec:csrfInput />
@@ -48,7 +48,7 @@ td {
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>아이디</th>
@@ -86,7 +86,7 @@ td {
 
 			</tbody>
 		</table>
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+				<button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 	</form>
 
 

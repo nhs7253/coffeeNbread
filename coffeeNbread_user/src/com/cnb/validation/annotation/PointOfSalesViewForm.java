@@ -9,7 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class PointOfSalesViewForm{
 	
-	@NotEmpty
 	private String storeId;
 	@NotEmpty
 	private String select= "productName";

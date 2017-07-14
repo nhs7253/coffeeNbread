@@ -13,6 +13,9 @@ CREATE TABLE store (
 	store_permission CHAR(1) NOT NULL  /* 매장 허가여부  */
 );
 
+alter table payment_details modify user_id  null;
+alter table payment_details modify STORE_ID  NOT null;
+
 /* 매장 */
 SELECT *FROM STORE
 DELETE FROM STORE

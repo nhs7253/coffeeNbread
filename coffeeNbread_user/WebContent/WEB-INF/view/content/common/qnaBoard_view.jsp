@@ -23,7 +23,7 @@
 			<sec:csrfInput/>
 			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
 			<input type="hidden" name="qnaBoardWriter" value="${requestScope.content.qnaBoardWriter }"/>
-			<input type="submit" value="수정">
+      <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-pencil"></i>수정</button>
 		</form>
 		
 		<form action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
@@ -31,7 +31,7 @@
 			<input type="hidden" name="qnaBoardNo" value="${requestScope.content.qnaBoardNo }"/>
 			<input type="hidden" name="qnaStoreId" value="${requestScope.content.qnaStoreId }"/>
 			<input type="hidden" name="qnaBoardWriter" value="${requestScope.content.qnaBoardWriter }"/>
-			<input type="submit" value="삭제">
+      <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 		</form>
 	
 

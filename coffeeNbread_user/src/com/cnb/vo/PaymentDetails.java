@@ -38,7 +38,6 @@ public class PaymentDetails implements Serializable{
     
 	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
 			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount) {
-		super();
 		this.paymentNo = paymentNo;
 		this.paymentOption = paymentOption;
 		this.tradeDate = tradeDate;
@@ -52,7 +51,6 @@ public class PaymentDetails implements Serializable{
 	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
 			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount,
 			Product product, Store store) {
-		super();
 		this.paymentNo = paymentNo;
 		this.paymentOption = paymentOption;
 		this.tradeDate = tradeDate;
@@ -66,7 +64,29 @@ public class PaymentDetails implements Serializable{
 		this.store = store;
 	}
 	public PaymentDetails() {
-		super();
+	}
+	
+	/**
+	 * 사용 추천
+	 * @param paymentOption
+	 * @param tradeDate
+	 * @param sellMethod
+	 * @param reservationOrderCount
+	 * @param userId
+	 * @param productId
+	 * @param storeId
+	 * @param productTradeCount
+	 */
+	public PaymentDetails(String paymentOption, Date tradeDate, String sellMethod, int reservationOrderCount,
+			String userId, String productId, String storeId, int productTradeCount) {
+		this.paymentOption = paymentOption;
+		this.tradeDate = tradeDate;
+		this.sellMethod = sellMethod;
+		this.reservationOrderCount = reservationOrderCount;
+		this.userId = userId;
+		this.productId = productId;
+		this.storeId = storeId;
+		this.productTradeCount = productTradeCount;
 	}
 	public int getPaymentNo() {
 		return paymentNo;

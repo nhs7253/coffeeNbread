@@ -92,8 +92,9 @@ td {
 
 
 
-	<table class="w3-table-all">
+	<table class="table table-hover">
 		<thead>
+
 			<tr class="w3-blue">
 				<td>제품카테고리</td>
 				<td>제품사진</td>
@@ -101,6 +102,7 @@ td {
 				<td>가격</td>
 				<td>개수</td>
 				<td>삭제</td>
+
 			</tr>
 		</thead>
 		<tbody>
