@@ -43,6 +43,6 @@
 		<td><div class="col-xs-10"><input type="text" name="userAddress" id="address" class="form-control" value='<sec:authentication property="principal.userAddress"/>'></div></td>
 	</tr>
 	</table>
-	<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>수정 완료</button>
+	<button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-ok"></i>수정 완료</button>
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 </form>

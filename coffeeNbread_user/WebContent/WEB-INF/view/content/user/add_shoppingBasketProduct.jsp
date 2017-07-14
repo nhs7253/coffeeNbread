@@ -10,7 +10,10 @@
 			 <input type="hidden" name="qnaBoardNo" value=" ${requestScope.boardReply.qnaBoardNo }"/>
 			 <input type="hidden" name="qnaStoreId" value=" ${requestScope.qnaStoreId }"/>
 			 <input type="hidden" name="replyName" value="${requestScope.boardReply.replyName }"/>
-			 <input type="submit" value="수정 하기">
+			 
+			 <button type="submit" class="btn btn-custom">
+			<i class="glyphicon glyphicon-pencil"></i>수정
+		</button>
 		</form>
 		
 		

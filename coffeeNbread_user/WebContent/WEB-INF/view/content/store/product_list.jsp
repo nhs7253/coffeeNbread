@@ -41,7 +41,7 @@ ${requestScope.list }
 
 <form  action="${initParam.rootPath }/findProductListController.do" method="post">
    <sec:csrfInput/><%-- csrf 토큰 --%>
-   <button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>전체조회</button>
+   <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-list"></i>전체조회</button>
    
 </form>
 
@@ -72,7 +72,7 @@ ${requestScope.list }
          </c:forEach>
       </tbody>
    </table>
-      <button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+      <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 </form>
 
 <p>

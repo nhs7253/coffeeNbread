@@ -23,9 +23,9 @@ td {
 
 	<h2>유저 추천 가게 목록</h2>
 
-		<table class="w3-table-all">
+		<table class="table table-hover">
 			<thead>
-				<tr class="w3-blue"> 
+				<tr > 
 					<th>아이디</th>
 					<th>이름</th>
 					<th>전화번호</th>

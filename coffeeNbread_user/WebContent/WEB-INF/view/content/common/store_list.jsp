@@ -18,8 +18,8 @@ td {
    padding: 5px; /* //td 간 간격 */
 }
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
-
+<!-- <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
+ -->
 	<h2>STORE LIST</h2>
 
 

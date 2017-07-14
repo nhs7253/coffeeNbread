@@ -28,9 +28,9 @@ td {
 
 
 
-	<table class="w3-table-all">
+	<table class="table table-hover">
 		<thead>
-			<tr class="w3-blue">
+			<tr >
 				<th>제품카테고리</th>
 				<th>제품사진</th>
 				<th>제품명</th>
