@@ -61,6 +61,7 @@
 		<tr>
 			<th>제품 사진</th>
 			<td><input type="file" name="productPicture"></td>
+		</tr>
 		<tr>
 			<td colspan="2">
 				<button type="submit" class="btn btn-default btn-circle">

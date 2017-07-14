@@ -66,7 +66,7 @@
  		<result column="product_id" property="productId"/>
 		<result column="option_id" property="optionId"/>
 		<result column="option_category_detail" property="optionCategoryDetail"/></collection>
- </resultMap>
+ 	</resultMap>
  	
  <resultMap type="com.cnb.vo.Store" id="store-storePicture-resultmap" extends="store-resultmap">
  	<collection property="storePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>	
@@ -82,12 +82,19 @@
  </resultMap>
  
  <!-- 수정 중 -->
- <resultMap type="com.cnb.vo.Store" id="store-storePicture-optionCategory-storePaymentOption-resultmap" extends="store-resultmap">
+ <resultMap type="com.cnb.vo.Store" id="store-storePicture-optionCategory-storePaymentOption-storePosition-resultmap" extends="store-resultmap">
+ 	<association property="storePosition" resultMap="com.cnb.config.mybatis.mapper.StorePositionMapper.StorePosition-resultmap"/>
  	<collection property="storePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>
  	<collection property="optionCategoryList" resultMap="com.cnb.config.mybatis.mapper.OptionCategoryMapper.optionCategory-default"/>
  	<collection property="storePaymentOptionList" resultMap="com.cnb.config.mybatis.mapper.StorePaymentOptionListMapper.storePaymentOptionList-PaymentOptionList-resultmap"/>
  </resultMap>
  
+  <resultMap type="com.cnb.vo.Store" id="store-storePosition-StorePicture-resultmap" extends="store-resultmap">
+ 	<association property="storePosition" resultMap="com.cnb.config.mybatis.mapper.StorePositionMapper.StorePosition-resultmap"/>
+ 	<collection property="storePictureList" resultMap="com.cnb.config.mybatis.mapper.StorePictureMapper.storePicture-resultmap"/>
+  </resultMap>
+ 
+
  <!--매장 등록 Store insert  -->
 	<insert id="insertStore" parameterType="com.cnb.vo.Store">
 		INSERT INTO store
@@ -225,26 +232,67 @@
 		WHERE store_id=#{storeId}
 	</delete>
 	
-	<select id="selectStoreBySelectAndKeywordPagingList" parameterType="map" resultMap="store-resultmap">
-			SELECT <include refid="all-column"/>
+	<select id="selectStoreBySelectAndKeywordPagingList" parameterType="map" resultMap="store-storePosition-StorePicture-resultmap">
+			SELECT store_id,
+       			   store_name,
+       			   store_intro,
+       			   store_phone,
+       			   store_address,
+       			   store_email,
+       			   store_category,
+       			   store_hits,
+       			   store_open,
+       			   store_close,
+       			   store_permission,
+       			   store_picture,
+       			   x,
+       			   y
 			FROM(
 					SELECT rownum rnum, 
-	  					   <include refid="all-column"/>
+	  					   store_id,
+       					   store_name,
+                           store_intro,
+       					   store_phone,
+       					   store_address,
+       					   store_email,
+       					   store_category,
+       					   store_hits,
+       					   store_open,
+       					   store_close,
+       					   store_permission,
+       					   store_picture,
+       					   x,
+       					   y
 					FROM(
-						SELECT <include refid="all-column"/>
-						FROM store
+						SELECT s.store_id,
+       						   store_name,
+                               store_intro,
+       						   store_phone,
+       						   store_address,
+       						   store_email,
+       						   store_category,
+      						   store_hits,
+      						   store_open,
+       						   store_close,
+       						   store_permission,
+       						   store_picture,
+       						   x,
+							   y
+						FROM store s, store_position sps, store_picture sp
+						WHERE s.store_id = sps.store_id(+)
+						AND s.store_id = sp.store_id(+)
 						<choose>
 							<when test="select == 'storeName'">
-								WHERE store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+								AND store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeIntro'">
-								WHERE store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+								AND store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeAddress'">
-								WHERE store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+								AND store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<when test="select == 'storeCategory'">
-								WHERE store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+								AND store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 							</when>
 							<otherwise>
 								1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
@@ -267,19 +315,21 @@
 
 	<select id="selectStoreBySelectAndKeywordPagingCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*)
-		FROM store
+		FROM store s, store_position sps, store_picture sp
+		WHERE s.store_id = sps.store_id(+)
+		AND s.store_id = sp.store_id(+)
 		<choose>
 			<when test="select == 'storeName'">
-				WHERE store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+				AND store_name LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeIntro'">
-				WHERE store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+				AND store_intro LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeAddress'">
-				WHERE store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+				AND store_address LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<when test="select == 'storeCategory'">
-				WHERE store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
+				AND store_category LIKE '%'||#{keyword}||'%' AND store_permission = 'Y'
 			</when>
 			<otherwise>
 				1 = -1	<!-- 아무것도 select안되게 거짓 조건 설정 -->
@@ -287,7 +337,7 @@
 		</choose>
 	</select>
 	
-	<select id="selectStroeJoinPicture" resultMap="store-storePicture-optionCategory-storePaymentOption-resultmap" parameterType="string">
+	<select id="selectStroeJoinPicture" resultMap="store-storePicture-optionCategory-storePaymentOption-storePosition-resultmap" parameterType="string">
 		SELECT  s.store_id,
 				s.store_name,
 				s.store_intro,
@@ -303,9 +353,12 @@
 				oc.option_id,
 				oc.option_category,
 				spo.payment_id,
-				po.payment_method
-		FROM store s,store_picture sp, option_category oc, store_payment_optionlist spo , payment_optionlist po
-		WHERE s.store_id = sp.store_id(+) 
+				po.payment_method,
+				sps.x,
+				sps.y
+		FROM store s, store_picture sp, option_category oc, store_payment_optionlist spo , payment_optionlist po, store_position sps
+		WHERE s.store_id = sps.store_id
+		AND s.store_id = sp.store_id(+) 
 		AND s.store_id = oc.store_id(+)
 		AND s.store_id = spo.store_id(+)
 		AND spo.payment_id = po.payment_id(+)

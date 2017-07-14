@@ -74,6 +74,8 @@ public class Store implements Serializable{
 	private List<StoreCategory> storeCategoryList;
 	private List<StorePaymentOptionList> StorePaymentOptionList;
 	
+	private StorePosition storePosition;
+	
 	public Store(){}
 	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
 			String storeEmail, int storeHits, Date storeOpen, Date storeClose, String storePermission) {
@@ -205,6 +207,34 @@ public class Store implements Serializable{
 		this.storeCategoryList = storeCategoryList;
 		this.StorePaymentOptionList = storePaymentOptionList;
 	}
+	
+	
+	
+	public Store(String storeId, String storeName, String storeIntro, String storePhone, String storeAddress,
+			String storeEmail, String storeCategory, int storeHits, Date storeOpen, Date storeClose,
+			String storePermission, List<StorePicture> storePictureList, List<StoreEvent> storeEventList,
+			List<OptionCategory> optionCategoryList, List<OptionDetail> optionDetailList,
+			List<StoreCategory> storeCategoryList, List<com.cnb.vo.StorePaymentOptionList> storePaymentOptionList,
+			StorePosition storePosition) {
+		this.storeId = storeId;
+		this.storeName = storeName;
+		this.storeIntro = storeIntro;
+		this.storePhone = storePhone;
+		this.storeAddress = storeAddress;
+		this.storeEmail = storeEmail;
+		this.storeCategory = storeCategory;
+		this.storeHits = storeHits;
+		this.storeOpen = storeOpen;
+		this.storeClose = storeClose;
+		this.storePermission = storePermission;
+		this.storePictureList = storePictureList;
+		this.storeEventList = storeEventList;
+		this.optionCategoryList = optionCategoryList;
+		this.optionDetailList = optionDetailList;
+		this.storeCategoryList = storeCategoryList;
+		StorePaymentOptionList = storePaymentOptionList;
+		this.storePosition = storePosition;
+	}
 	/**
 	 * JSP에서 storeOpenFormat로 호출 - storeOpen를 지정 포멧으로 반환한다.
 	 * @return HH-mm형식의 DATE 문자열 - ex - (20:15)
@@ -322,6 +352,12 @@ public class Store implements Serializable{
 	public void setStorePaymentOptionList(List<StorePaymentOptionList> storePaymentOptionList) {
 		StorePaymentOptionList = storePaymentOptionList;
 	}
+	public StorePosition getStorePosition() {
+		return storePosition;
+	}
+	public void setStorePosition(StorePosition storePosition) {
+		this.storePosition = storePosition;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -343,6 +379,7 @@ public class Store implements Serializable{
 		result = prime * result + ((storePermission == null) ? 0 : storePermission.hashCode());
 		result = prime * result + ((storePhone == null) ? 0 : storePhone.hashCode());
 		result = prime * result + ((storePictureList == null) ? 0 : storePictureList.hashCode());
+		result = prime * result + ((storePosition == null) ? 0 : storePosition.hashCode());
 		return result;
 	}
 	@Override
@@ -436,33 +473,21 @@ public class Store implements Serializable{
 				return false;
 		} else if (!storePictureList.equals(other.storePictureList))
 			return false;
+		if (storePosition == null) {
+			if (other.storePosition != null)
+				return false;
+		} else if (!storePosition.equals(other.storePosition))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		final int maxLen = 10;
 		return "Store [storeId=" + storeId + ", storeName=" + storeName + ", storeIntro=" + storeIntro + ", storePhone="
 				+ storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail + ", storeCategory="
 				+ storeCategory + ", storeHits=" + storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose
-				+ ", storePermission=" + storePermission + ", storePictureList="
-				+ (storePictureList != null ? storePictureList.subList(0, Math.min(storePictureList.size(), maxLen))
-						: null)
-				+ ", storeEventList="
-				+ (storeEventList != null ? storeEventList.subList(0, Math.min(storeEventList.size(), maxLen)) : null)
-				+ ", optionCategoryList="
-				+ (optionCategoryList != null
-						? optionCategoryList.subList(0, Math.min(optionCategoryList.size(), maxLen)) : null)
-				+ ", optionDetailList="
-				+ (optionDetailList != null ? optionDetailList.subList(0, Math.min(optionDetailList.size(), maxLen))
-						: null)
-				+ ", storeCategoryList="
-				+ (storeCategoryList != null ? storeCategoryList.subList(0, Math.min(storeCategoryList.size(), maxLen))
-						: null)
-				+ ", StorePaymentOptionList="
-				+ (StorePaymentOptionList != null
-						? StorePaymentOptionList.subList(0, Math.min(StorePaymentOptionList.size(), maxLen)) : null)
-				+ "]";
+				+ ", storePermission=" + storePermission + ", storePictureList=" + storePictureList
+				+ ", storeEventList=" + storeEventList + ", optionCategoryList=" + optionCategoryList
+				+ ", optionDetailList=" + optionDetailList + ", storeCategoryList=" + storeCategoryList
+				+ ", StorePaymentOptionList=" + StorePaymentOptionList + ", storePosition=" + storePosition + "]";
 	}
-	
-	
 }

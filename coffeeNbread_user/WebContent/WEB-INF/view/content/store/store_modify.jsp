@@ -112,7 +112,7 @@
          <tr class="form-group">
             <th>open 시간</th>
             <td><div class="col-xs-5">
-                  <input type="date" name="storeOpen"
+                  <input type="text" name="storeOpen"
                      value="<fmt:formatDate value="${sessionScope.storeInfo.storeOpen }"
                   type="time" pattern="hh:mm" />"
                      class="form-control">
@@ -121,7 +121,7 @@
          <tr class="form-group">
             <th>close 시간</th>
             <td><div class="col-xs-5">
-                  <input type="date" name="storeClose"
+                  <input type="text" name="storeClose"
                      value="<fmt:formatDate value="${sessionScope.storeInfo.storeClose }"
                   type="time" pattern="hh:mm" />"
                      class="form-control">
@@ -129,15 +129,29 @@
          </tr>
          <tr>
             <th id="selectSP">매장 사진</th>
-            <td id="storePicture"><img
-               src="/coffeeNbread_user/up_image/${sessionScope.storeInfo.storePictureList}"
-               width="300px">
-               <button type="button" id="modifystorePicture">수정하기</button></td>
+            <td id="storePicture">
+	            <c:if test="${!empty sessionScope.storeInfo.storePictureList[0].storePicture }">
+					<img src="${initParam.rootPath }/up_image/${sessionScope.storeInfo.storePictureList[0].storePicture }" alt="" /><br />
+				</c:if>
+	           
+	            <button type="button" id="modifystorePicture">수정하기</button>
+            </td>
          </tr>
-       		 <tr class="form-group">
-				<th>매장 위치</th>
-				<td><input type="text" name="storeAddress" class="form-control" value="${sessionScope.storeInfo.storeAddress}"></td>
-			</tr>
+         
+       	 <tr class="form-group">
+			<th>매장 위치</th>
+			<td><input type="text" name="storeAddress" class="form-control" value="${sessionScope.storeInfo.storeAddress}"></td>
+		</tr>
+		
+		<tr>
+			<th>매장 좌표</th>
+			<td>
+				<div id="map" style="width:100%;height:350px;"></div>
+				<div id="clickLatlng"></div>
+				<input type="hidden" name="X" id="X" value="">
+				<input type="hidden" name="Y" id="Y" value="">			
+			</td>
+		</tr>
 			
          <tr>
             <th>매장 소개</th>
@@ -150,4 +164,44 @@
       </table>
    </form>
 </body>
+
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new daum.maps.LatLng(${sessionScope.storeInfo.storePosition.x}, ${sessionScope.storeInfo.storePosition.y}), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 지도를 클릭한 위치에 표출할 마커입니다
+var marker = new daum.maps.Marker({ 
+    // 지도 중심좌표에 마커를 생성합니다 
+    position: map.getCenter() 
+}); 
+// 지도에 마커를 표시합니다
+marker.setMap(map);
+
+// 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    var latlng = mouseEvent.latLng; 
+    
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    marker.setPosition(latlng);
+    
+    document.getElementById('X').setAttribute('value', latlng.getLat());
+    document.getElementById('Y').setAttribute('value', latlng.getLng());
+    
+    var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+    message += '경도는 ' + latlng.getLng() + ' 입니다';
+    
+    var resultDiv = document.getElementById('clickLatlng'); 
+    resultDiv.innerHTML = message;
+    
+});
+</script>
 </html>

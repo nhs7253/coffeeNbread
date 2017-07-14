@@ -6,7 +6,7 @@
 
 </head>
 <body>
-	 
+
 	<h1>매장 상세</h1><hr><br>
 	
 		매장명 : <input type="text" value="${requestScope.store.storeName }" disabled class="form-control"><br>
@@ -21,6 +21,8 @@
 		매장 이메일 : <input type="text" value="${requestScope.store.storeEmail }" disabled class="form-control"><br>
 		매장 여는 시간 : <input type="text" value="${requestScope.store.storeOpenFormat }" disabled class="form-control"><br>
 		매장 닫는 시간 : <input type="text" value="${requestScope.store.storeCloseFormat }" disabled class="form-control"><br>
+		매장 위치 : <br />
+		<div id="map" style="width:100%;height:350px;"></div>
 		<p/>
 		
 		<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
@@ -52,5 +54,43 @@
 			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
 			<input type="submit" value="유저가 보는 제품 목록">
 		</form>
+		
+		
+		
+		
+		
+		<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+		<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+		
+		var map = new daum.maps.Map(mapContainer, mapOption);
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }); 
+		
+		// 마커를 생성합니다
+		var marker = new daum.maps.Marker({
+		    position: markerPosition
+		});
+		
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		var iwContent = '<div style="padding:5px; text-align:center;">${requestScope.store.storeName }</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwPosition = new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }); //인포윈도우 표시 위치입니다
+		
+		// 인포윈도우를 생성합니다
+		var infowindow = new daum.maps.InfoWindow({
+		    position : iwPosition, 
+		    content : iwContent 
+		});
+		  
+		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+		infowindow.open(map, marker); 
+		</script>
 
 	
