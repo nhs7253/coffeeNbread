@@ -19,7 +19,8 @@ td {
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 <h2>PRODUCT LIST</h2> 
-
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 ${requestScope.list }
 <div class="container">
 <div id="quick-access">
@@ -75,7 +76,8 @@ ${requestScope.list }
 	</table>
       <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 
-</form>
+</form></div>
+<div class="col-sm-1"></div>
 
 <p>
 

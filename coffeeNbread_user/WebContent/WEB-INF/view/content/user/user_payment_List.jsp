@@ -32,6 +32,8 @@ td {
 
   
 
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 <br>
 
 	
@@ -70,8 +72,8 @@ td {
 			</c:forEach>
 
 		</tbody>
-	</table>
-
+	</table></div>
+<div class="col-sm-1"></div>
 	
 
 

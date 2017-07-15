@@ -45,7 +45,9 @@
 
 
 <body>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 	<form action="${initParam.rootPath }/modifyStoreController.do"
 		method="post" enctype="multipart/form-data">
 		<sec:csrfInput />
@@ -172,7 +174,7 @@
 					</button></td>
 			</tr>
 		</table>
-	</form>
+	</form></div><div class="col-sm-1"></div>
 </body>
 
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>

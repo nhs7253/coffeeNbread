@@ -21,6 +21,8 @@ td {
 <h2>PRODUCT_LIST</h2>
 
 
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 
 <p>
 <table>
@@ -73,7 +75,8 @@ td {
 	<button type="submit" class="btn-custom">
 		<i class="glyphicon glyphicon-search"></i>장바구니 목록 조회
 	</button>
-</form>
+</form></div>
+<div class="col-sm-1"></div>
 
 <p>
 

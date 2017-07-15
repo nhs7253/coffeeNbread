@@ -10,6 +10,9 @@
 <hr>
 <br>
 
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 
 <form action="${initParam.rootPath }/user/modifyRecipeBoardContents.do"
 	method="post" enctype="multipart/form-data">
@@ -36,3 +39,5 @@
 	</p>
 </form>
 
+		</div>
+			<div class="col-sm-1"></div>

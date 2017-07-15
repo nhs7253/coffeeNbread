@@ -10,7 +10,8 @@
 
 
 	<h1>매장 상세</h1><hr><br>
-	
+	<div class="col-sm-1"></div>
+<div class="col-sm-10">
 		매장명 : <input type="text" value="${requestScope.store.storeName }" disabled class="form-control"><br>
 		<c:if test="${!empty requestScope.store.storePictureList[0].storePicture }">
 			<img src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }" alt="" /><br />
@@ -56,8 +57,8 @@
 			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
 			<input type="submit" value="유저가 보는 제품 목록">
 		</form>
-		
-		
+		</div>
+		<div class="col-sm-1"></div>
 		
 		
 		

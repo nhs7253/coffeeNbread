@@ -47,37 +47,35 @@
 	
 		<div class="col-sm-10">
 <table class="table" style="width:300px">
-	<tr><!-- colspan="6" -->
-		<th style="text-align:center;vertical-align:top"  >my page</th>
-	</tr>
+	
 	<tr class="form-group">
 		<th>사용자 ID</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.userId"/></div><td>
 	</tr>
 	
 	<tr class="form-group">
-		<th>기존 패스워드</th>
+		<th>이름</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.userName"/></div><td>
 	</tr>
 	
 	<tr class="form-group">
-		<th>변경할 패스워드</th>
+		<th>생일</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.birthFormat"/></div></td>
 	</tr>
 	<tr class="form-group">
-		<th>이름</th>
+		<th>성별</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.userGender"/></div></td>
 	</tr>
 	<tr class="form-group">
-		<th>생일</th>
+		<th>이메일주소</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.userEmail"/></div></td>
 	</tr>
 	<tr class="form-group">
-		<th>성별</th>
+		<th>전화번호</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.userPhone"/></div>
 	</tr>
 	<tr class="form-group">
-		<th>이메일 주소</th>
+		<th>주소</th>
 		<td><div class="col-xs-10"><sec:authentication property="principal.userAddress"/></div>
 	</tr>
 	

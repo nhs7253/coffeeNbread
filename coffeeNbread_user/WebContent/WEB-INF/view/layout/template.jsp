@@ -60,7 +60,7 @@
 		<!-- 내용 -->
 		
 		<div  class="col-sm-10 ">
-			
+			<br><br><br><br><br>
 			<tiles:insertAttribute name="content"/>
 		</div>
 		
