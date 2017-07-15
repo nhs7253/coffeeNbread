@@ -1,6 +1,7 @@
 package com.cnb.validation.annotation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class StoreRegisterForm implements Serializable{
 	@DateTimeFormat(pattern="hh:mm")
 	private Date storeClose;
 	private String storePermission="N";
-	private List<MultipartFile> storePictureList;
+	private List<MultipartFile> storePictureList = new ArrayList<>();
 	private List<StoreEvent> storeEventList;
 	
 	private List<String> optionCategoryList;
