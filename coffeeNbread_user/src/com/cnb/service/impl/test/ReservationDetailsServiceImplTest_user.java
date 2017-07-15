@@ -24,6 +24,9 @@ public class ReservationDetailsServiceImplTest_user {
 */
 		
 		System.out.println("------------u-1이 예약한 내역등록----------------------");
+		System.out.println(rdService.findReservationDetailsListByUserId(1, "u-1"));
+		
+		
 		/*rdService.addReservationDetails(pdService.findPaymentDetailsListByUserId("u-1"));*/
 		/*
 		 * System.out.println("-----------결제테이블 조회----");

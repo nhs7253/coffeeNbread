@@ -182,7 +182,7 @@ CREATE TABLE payment_details (
 	reservation_order_count NUMBER(4) NOT NULL, /* 주문판매량 */
 	user_id VARCHAR2(30), /* 유저아이디 */
 	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
+	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */   -- 매장아이디 NOT NULL로 변경 - 2017-07-13
 	product_trade_count NUMBER(4) NOT NULL, /* 거래제품개수 */
 	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE SET NULL,
 	FOREIGN KEY(user_id) REFERENCES general_user(user_id),
@@ -485,6 +485,5 @@ DROP SEQUENCE option_id_seq;
 DROP SEQUENCE store_visit_history_no_seq;
 
 
-	
 
 

@@ -3,6 +3,7 @@ package com.cnb.dao;
 import java.util.List;
 
 import com.cnb.vo.Product;
+import com.cnb.vo.QnaBoardContents;
 
 /*
  * 노현식
@@ -152,4 +153,13 @@ public interface ProductDao {
 	 * @return 조회된 제품 정보
 	 */
 	List<Product> selectProductListNoPaging(String storeId);
+	
+	
+	/**
+	 * 1개의 매장에있는 제품들  방법별로 페이징
+	 */
+	List<Product> selectProductListPagingByMethod(String select, String keyword, String storeId, int startIndex, int endIndex);
+	
+	
+	
 }

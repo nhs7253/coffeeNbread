@@ -23,24 +23,22 @@ td {
 
 
 	<h2>BOOKMARK</h2>
-
-
-	<div class="container">
-		<div id="quick-access">
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+	
 			<form
 				action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do"
 				method="post">
 				<div class="form-group col-xs-2">
 					<input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
+				<button type="submit" class="btn-custom">
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-		</div>
-	</div>
+	
 	<br>
 	<form
 		action="${initParam.rootPath }/user/selectRemoveStoreBookmarkController.do"
@@ -48,7 +46,7 @@ td {
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>아이디</th>
@@ -86,7 +84,7 @@ td {
 
 			</tbody>
 		</table>
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+				<button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 	</form>
 
 
@@ -165,3 +163,5 @@ td {
 		<a
 			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
+				</div>
+			<div class="col-sm-1"></div>

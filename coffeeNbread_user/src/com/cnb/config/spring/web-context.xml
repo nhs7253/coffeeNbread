@@ -80,8 +80,15 @@
 	
 	<!-- 결제내역 폼 -->
 	<mvc:view-controller path="/user/payment_view.do" view-name="user/payment_view.tiles"/>
-	
-
+	<!--결제 성공 페이지 폼 -->
+	<mvc:view-controller path="user/payment_success.do" view-name="user/payment_success.tiles"/>
+	<!--유저가 결제내역 확인폼  -->
+	<mvc:view-controller path="user/user_payment_List.do" view-name="user/user_payment_List.tiles"/>
+    <!--유저의 예약내역 확인폼  -->
+	<mvc:view-controller path="user/user_reservation_List.do" view-name="user/user_reservation_List.tiles"/>
+		
+		
+		
 		
 	<!--전체 레시피게시판 조회  -->
 	<mvc:view-controller path="/common/recipeBoard.do" view-name="common/recipeBoard.tiles"/>
@@ -110,6 +117,10 @@
 	<!-- 매장 상세 페이지 -->
 	<mvc:view-controller path="/common/store_view.do" view-name="common/store_view.tiles"/>
 	
+	<!-- POS 메인 -->
+	<mvc:view-controller path="/store/POS.do" view-name="store/POS.tiles"/>	
+	<!-- POS 결제 방식 선택 폼 -->
+	<mvc:view-controller path="/store/POS_payment_view.do" view-name="store/POS_payment_view.tiles"/>	
 	
 	<!-- 제품 등록 폼 -->
 	<mvc:view-controller path="/store/product_register.do" view-name="store/product_register.tiles"/>
@@ -127,8 +138,7 @@
 	<mvc:view-controller path="/store/reservation_list.do" view-name="store/reservation_list.tiles"/>
 	<!-- 예약 상세 조회 품 -->
 	<mvc:view-controller path="/store/reservation_detail/do" view-name="store/reservation_detail.tiles"/>	
-	<!-- 포스(현장 판매 시스템) 폼 -->
-	<mvc:view-controller path="/store/product_pos.do" view-name="store/product_pos.tiles"/>
+
 	
 	
 	<!--전체 레시피게시판 조회  -->
@@ -136,13 +146,9 @@
 
 
    <!--유저가 보는 제품 목록폼  -->
-	<mvc:view-controller path="/user/userFindProductListController.do" view-name="store/product_detail.tiles"/>
+	<mvc:view-controller path="/user/user_findProduct_List.do" view-name="user/user_findProduct_List.tiles"/>
 	
-	<!--결제 성공 페이지 폼 -->
-	<mvc:view-controller path="user/payment_success.do" view-name="user/payment_success.tiles"/>
-	
-	<!--유저가 결제내역 확인폼  -->
-	<mvc:view-controller path="user/user_payment_List.do" view-name="user/user_payment_List.tiles"/>
+
 	
 
 	<!-- 플렛폼 지원 결제 방법 목록 -->

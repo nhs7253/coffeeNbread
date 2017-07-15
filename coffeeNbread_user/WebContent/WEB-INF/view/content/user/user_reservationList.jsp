@@ -35,7 +35,7 @@ td {
 
 <h2>결제성공</h2>
 
- <form
+<form
 	action="${initParam.rootPath }/user/findReservationDetailsController.do">
 	<input type="hidden" name="storeId"> <input type="hidden"
 		name="productId">
@@ -55,9 +55,7 @@ td {
 	</thead>
 	<tbody>
 
-		######################################################
-																조회된 item 출력 
-					######################################################
+
 		<c:forEach items="${requestScope.shoppingBasketProductList }"
 			var="list">
 
@@ -90,15 +88,19 @@ td {
 	action="${initParam.rootPath }/user/addBookMarkCardNumController.do">
 	<sec:csrfInput />
 	<input type="tel" size="20" name="cardNum"
-		value="${requestScope.cardNum }" /> <input type="submit"
-		value="카드번호 등록">
+		value="${requestScope.cardNum }" /> 
+	<button type="submit" class="btn-custom">
+		<i class="glyphicon glyphicon-plus"></i>카드번호 등록
+	</button>
 </form>
 
 
 <form
 	action="${initParam.rootPath }/user/findBookMarkCardNumController.do">
 	<sec:csrfInput />
-	<input type="submit" value="등록한 카드번호 조회">
+	<button type="submit" class="btn-custom">
+		<i class="glyphicon glyphicon-search"></i>등록한 카드번호 조회
+	</button>
 </form>
 
 <select name="bookMarkCardNum" id="card_id">
@@ -121,11 +123,12 @@ td {
 		var="list">
 		<input type="hidden" name="productIdList"
 			value="${list.product.productId }" />
-		 <input type="hidden" name="reservationOrderCount"
-		    value="${list.productCount }"/>	
-		 <input type="hidden" name="storeId"
-		  value="${list[0].storeId}">   
+		<input type="hidden" name="reservationOrderCount"
+			value="${list.productCount }" />
+		<input type="hidden" name="storeId" value="${list[0].storeId}">
 	</c:forEach>
-	<input type="submit" value="결제하기">
+	<button type="submit" class="btn-custom">
+		<i class="glyphicon glyphicon-credit-card"></i>결제
+	</button>
 </form>
- --%>
+--%>

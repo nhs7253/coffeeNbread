@@ -6,7 +6,7 @@
 		<label for="password">탈퇴를 위해 패스워드를 입력하세요</label>
 		<input type="password" name="password" id="password" class="form-control">
 	</div>
-	<button type="submit" class="btn btn-default">탈퇴</button>
+	<button type="submit" class="btn btn-custom">탈퇴</button>
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 </form>
 

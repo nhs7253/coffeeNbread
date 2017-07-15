@@ -2,130 +2,199 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cnb.config.mybatis.mapper.ProductMapper">
-	<!-- 
-		Product 테이블 관련 mapper
-		+ 제품 등록
-		+ 제품 수정
-		+ 전체 제품 수 조회
-		+ 여러 조건으로 제품 수 조회
-		+ 제품 종류로 제품 조회
-		+ 제품명으로 제품 조회
-		+ 제품 아이디로 제품 조회
-		+ 판매 여부로 제품 조회
-		+ 제품 정보로 제품 조회 (picturePicture)
-		+ 한 매장의 모든 제품 조회
-		+ 선택된 제품들 삭제
-	 -->
-	
+	<!-- Product 테이블 관련 mapper + 제품 등록 + 제품 수정 + 전체 제품 수 조회 + 여러 조건으로 제품 수 조회 
+		+ 제품 종류로 제품 조회 + 제품명으로 제품 조회 + 제품 아이디로 제품 조회 + 판매 여부로 제품 조회 + 제품 정보로 제품 조회 
+		(picturePicture) + 한 매장의 모든 제품 조회 + 선택된 제품들 삭제 -->
+
 	<!-- insert -->
 	<insert id="insertProduct" parameterType="product">
-		INSERT INTO product VALUES (
-									#{productId},
-									#{storeId},
-									#{productName},
-									#{productPrice},
-									#{productCategory},
-									#{productDetail},
-									#{sellingOption},
-									#{todayProductCount},
-									#{recommendProductCount} )
+		INSERT INTO product
+		VALUES (
+		#{productId},
+		#{storeId},
+		#{productName},
+		#{productPrice},
+		#{productCategory},
+		#{productDetail},
+		#{sellingOption},
+		#{todayProductCount},
+		#{recommendProductCount} )
 	</insert>
-	
-	
+
+
 	<!-- update -->
 	<update id="updateProduct" parameterType="product">
-		UPDATE 	product
-		SET		product_name = #{productName},
-				product_price = #{productPrice},
-				product_category = #{productCategory},
-				product_detail = #{productDetail},
-				selling_option = #{sellingOption},
-				today_product_count = #{todayProductCount},
-				recommend_product_count = #{recommendProductCount} 
-		WHERE	product_id = #{productId} AND store_id = #{storeId}	
-	</update>	
-	
-	
+		UPDATE product
+		SET
+		product_name = #{productName},
+		product_price = #{productPrice},
+		product_category = #{productCategory},
+		product_detail =
+		#{productDetail},
+		selling_option = #{sellingOption},
+		today_product_count = #{todayProductCount},
+		recommend_product_count =
+		#{recommendProductCount}
+		WHERE product_id = #{productId} AND store_id =
+		#{storeId}
+	</update>
+
+
 	<!-- select -->
 	<sql id="select-product-productPicture">
-		SELECT  p.product_id,
-				p.store_id,
-				p.product_name,
-				p.product_price,
-				p.product_category,
-				p.product_detail,
-				p.selling_option,
-				p.today_product_count,
-				p.recommend_product_count,
-				pp.product_picture
-		FROM	product p, product_picture pp
+		SELECT p.product_id,
+		p.store_id,
+		p.product_name,
+		p.product_price,
+		p.product_category,
+		p.product_detail,
+		p.selling_option,
+		p.today_product_count,
+		p.recommend_product_count,
+		pp.product_picture
+		FROM product p, product_picture pp
 	</sql>
-	
+
 	<!-- resultMap -->
 	<resultMap type="com.cnb.vo.Product" id="product-resultmap">
- 		<id column="product_id" property="productId"/>
- 		<result column="store_id" property="storeId"/>
- 		<result column="product_name" property="productName"/>
-		<result column="product_price" property="productPrice"/>
-		<result column="product_category" property="productCategory"/>
-		<result column="product_detail" property="productDetail"/>
-		<result column="selling_option" property="sellingOption"/>
-		<result column="today_product_count" property="todayProductCount"/>
-		<result column="recommend_product_count" property="recommendProductCount"/>
+		<id column="product_id" property="productId" />
+		<result column="store_id" property="storeId" />
+		<result column="product_name" property="productName" />
+		<result column="product_price" property="productPrice" />
+		<result column="product_category" property="productCategory" />
+		<result column="product_detail" property="productDetail" />
+		<result column="selling_option" property="sellingOption" />
+		<result column="today_product_count" property="todayProductCount" />
+		<result column="recommend_product_count" property="recommendProductCount" />
 	</resultMap>
-	
-	
-	<resultMap type="product" id="product-productPicture-resultmap" extends="product-resultmap">
- 		<collection property="productPictureList" resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap"/>
- 	</resultMap>
-	
-		
- 	<resultMap type="product" id="product-store-productPicture-resultmap" extends="product-productPicture-resultmap">
-	        
-	       	<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap"/>
-  	</resultMap>
-	 
-	
+
+
+	<resultMap type="product" id="product-productPicture-resultmap"
+		extends="product-resultmap">
+		<collection property="productPictureList"
+			resultMap="com.cnb.config.mybatis.mapper.ProductPictureMapper.productPicture-resultmap" />
+	</resultMap>
+
+
+	<resultMap type="product" id="product-store-productPicture-resultmap"
+		extends="product-productPicture-resultmap">
+
+		<association property="store"
+			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
+	</resultMap>
+
+
 	<!-- selectProductListCount -->
-	<select id="selectProductListCount" parameterType="string" resultType="int">
+	<select id="selectProductListCount" parameterType="string"
+		resultType="int">
 		SELECT COUNT(*)
 		FROM product
 		WHERE store_id = #{value}
 	</select>
 
 
+
+
+
+	<!--유저가 볼떄 개수 -->
 	<!-- selectProductListCountByMethod -->
-	<select id="selectProductListCountByMethod" parameterType="hashmap" resultType="_int">
+	<select id="selectProductListCountByMethod" parameterType="hashmap"
+		resultType="_int">
 		<choose>
-			<when test="method == 'category'">
-			<![CDATA[
+			<when test="select == 'productCategory'">
+
 				SELECT COUNT(product_id)
 				FROM product
-				WHERE product_category LIKE '%'||#{methodContent}||'%'
-				AND	  store_id = #{storeId}
-			]]>
+				WHERE product_category LIKE '%'||#{keyword}||'%'
+				AND store_id = #{storeId}
+
 			</when>
-			<when test="method == 'name'">
-			<![CDATA[
+			<when test="select == 'productName'">
+
 				SELECT COUNT(product_id)
 				FROM product
-				WHERE product_name LIKE '%'||#{methodContent}||'%'
-				AND	  store_id = #{storeId}
-			]]>
+				WHERE product_name LIKE '%'||#{keyword}||'%'
+				AND store_id = #{storeId}
+
 			</when>
-			<otherwise> <!-- method == 'sellingOption' -->
-			<![CDATA[
-				SELECT COUNT(product_id)
-				FROM product
-				WHERE selling_option = #{methodContent}
-				AND	  store_id = #{storeId}
-			]]>
-			</otherwise>
+
 		</choose>
 	</select>
-	
+
+
+
+	<!--유저가 볼떄 리스트 개수. -->
 	<!-- selectProductListByCategory -->
-	<select id="selectProductListByCategory" resultMap="product-productPicture-resultmap" parameterType="map">
+	<select id="selectProductListPagingByMethod" resultMap="product-productPicture-resultmap"
+		parameterType="map">
+
+		SELECT product_id,
+		store_id,
+		product_name,
+		product_price,
+		product_category,
+		product_detail,
+		selling_option,
+		today_product_count,
+		recommend_product_count,
+		product_picture
+		FROM(
+		SELECT rownum rnum,
+		product_id,
+		store_id,
+		product_name,
+		product_price,
+		product_category,
+		product_detail,
+		selling_option,
+		today_product_count,
+		recommend_product_count,
+		product_picture
+		FROM(
+		SELECT p.product_id,
+		p.store_id,
+		p.product_name,
+		p.product_price,
+		p.product_category,
+		p.product_detail,
+		p.selling_option,
+		p.today_product_count,
+		p.recommend_product_count,
+		pp.product_picture
+		FROM product p,
+		product_picture pp
+		WHERE p.store_id = #{storeId}
+		AND p.store_id =
+		pp.store_id(+)
+		AND p.product_id = pp.product_id(+)
+
+		<choose>
+			<when test="select == 'productCategory'">
+				and p.product_category like '%'||#{keyword}||'%'
+				ORDER BY
+				p.product_name ASC
+			</when>
+			<when test="select == 'productName'">
+				and p.product_name like '%'||#{keyword}||'%'
+
+
+			</when>
+		</choose>
+		)
+		WHERE rownum &lt;= #{endIndex}
+		)
+		WHERE rnum >= #{startIndex}
+
+	</select>
+
+
+
+
+
+
+	<!-- selectProductListByCategory -->
+	<select id="selectProductListByCategory" resultMap="product-productPicture-resultmap"
+		parameterType="map">
 		<![CDATA[
 			SELECT  product_id,
 					store_id,
@@ -172,9 +241,10 @@
 			WHERE rnum >= #{startIndex}
 		]]>
 	</select>
-	
+
 	<!-- selectProductListByCategoryNoPaging -->
-	<select id="selectProductListByCategoryNoPaging" resultMap="product-productPicture-resultmap" parameterType="map">
+	<select id="selectProductListByCategoryNoPaging" resultMap="product-productPicture-resultmap"
+		parameterType="map">
 		<![CDATA[
 			SELECT  p.product_id,
 					p.store_id,
@@ -194,9 +264,10 @@
 			ORDER BY p.product_name ASC
 		]]>
 	</select>
-	
+
 	<!-- selectProductListByName -->
-	<select id="selectProductListByName" resultMap="product-productPicture-resultmap" parameterType="map">
+	<select id="selectProductListByName" resultMap="product-productPicture-resultmap"
+		parameterType="map">
 		<![CDATA[
 			SELECT  product_id,
 					store_id,
@@ -243,29 +314,38 @@
 			WHERE rnum >= #{startIndex}
 		]]>
 	</select>
-	
+
 	<!-- selectProductByName -->
-	<select id="selectProductByName" resultMap="product-productPicture-resultmap" parameterType="map">
-		<include refid="select-product-productPicture"/>
-		WHERE p.store_id = #{storeId} 
-		AND   p.product_name = #{productName}
-		AND	  p.store_id = pp.store_id
-		AND   p.product_id = pp.product_id
-		ORDER BY p.product_name ASC
+	<select id="selectProductByName" resultMap="product-productPicture-resultmap"
+		parameterType="map">
+		<include refid="select-product-productPicture" />
+		WHERE p.store_id = #{storeId}
+		AND p.product_name = #{productName}
+		AND
+		p.store_id = pp.store_id
+		AND
+		p.product_id = pp.product_id
+		ORDER BY
+		p.product_name ASC
 	</select>
-	
+
 	<!-- selectProductById -->
-	<select id="selectProductById" resultMap="product-productPicture-resultmap" parameterType="map">
-		<include refid="select-product-productPicture"/>
-		WHERE p.store_id = #{storeId} 
-		AND   p.product_id = #{productId}
-		AND	  p.store_id = pp.store_id(+)
-		AND   p.product_id = pp.product_id(+)
-		ORDER BY p.product_name ASC
+	<select id="selectProductById" resultMap="product-productPicture-resultmap"
+		parameterType="map">
+		<include refid="select-product-productPicture" />
+		WHERE p.store_id = #{storeId}
+		AND p.product_id = #{productId}
+		AND
+		p.store_id = pp.store_id(+)
+		AND
+		p.product_id = pp.product_id(+)
+		ORDER BY
+		p.product_name ASC
 	</select>
 
 	<!-- selectProductListBySellingOption -->
-	<select id="selectProductListBySellingOption" resultMap="product-productPicture-resultmap" parameterType="map">
+	<select id="selectProductListBySellingOption" resultMap="product-productPicture-resultmap"
+		parameterType="map">
 		<![CDATA[
 			SELECT  product_id,
 					store_id,
@@ -312,20 +392,22 @@
 			WHERE rnum >= #{startIndex}
 		]]>
 	</select>
-	
+
 	<!-- selectProductPictureListByProductPictureAndStoreId -->
-	<select id="selectProductPictureListByProductPictureAndStoreId" resultMap="product-productPicture-resultmap" parameterType="map">
-		<include refid="select-product-productPicture"/>
-		WHERE p.store_id = #{storeId} 
-		AND   p.product_picture = #{productPicture}
-		AND	  p.store_id = pp.store_id(+)
-		AND   p.product_id = pp.product_id(+)
+	<select id="selectProductPictureListByProductPictureAndStoreId"
+		resultMap="product-productPicture-resultmap" parameterType="map">
+		<include refid="select-product-productPicture" />
+		WHERE p.store_id = #{storeId}
+		AND p.product_picture = #{productPicture}
+		AND p.store_id = pp.store_id(+)
+		AND p.product_id = pp.product_id(+)
 	</select>
-	
-	
-	
+
+
+
 	<!-- selectProductList -->
-	<select id="selectProductList" resultMap="product-productPicture-resultmap" parameterType="map">
+	<select id="selectProductList" resultMap="product-productPicture-resultmap"
+		parameterType="map">
 		<![CDATA[
 			SELECT  product_id,
 					store_id,
@@ -378,29 +460,32 @@
 			<choose>
 				<when test="productIdList != null and productIdList.size() > 0">
 					store_id = #{storeId} AND product_id IN
-					<foreach collection="productIdList" open="(" close=")" separator="," item="productIdList">
+					<foreach collection="productIdList" open="(" close=")"
+						separator="," item="productIdList">
 						#{productIdList}
 					</foreach>
 				</when>
 				<otherwise>
-				 	1 = -1
+					1 = -1
 				</otherwise>
 			</choose>
 		</where>
 	</delete>
-	
-	<select id="selectProductListToPOS" parameterType="map" resultMap="product-productPicture-resultmap">
+
+	<select id="selectProductListToPOS" parameterType="map"
+		resultMap="product-productPicture-resultmap">
 		SELECT p.product_id,
-			   p.store_id,
-			   product_name,
-			   product_price,
-			   product_category,
-			   product_detail,
-			   selling_option,
-			   today_product_count,
-			   recommend_product_count,
-			   product_picture
-		FROM product p, product_picture pp 
+		p.store_id,
+		product_name,
+		product_price,
+		product_category,
+		product_detail,
+		selling_option,
+		today_product_count,
+		recommend_product_count,
+		product_picture
+		FROM product p, product_picture
+		pp
 		WHERE p.product_id = pp.product_id AND p.store_id = #{storeId}
 		<choose>
 			<when test="select == 'productName'">
@@ -414,7 +499,8 @@
 	</select>
 
 	<!-- selectProductListNoPaging -->
-	<select id="selectProductListNoPaging" resultMap="product-productPicture-resultmap" parameterType="map">
+	<select id="selectProductListNoPaging" resultMap="product-productPicture-resultmap"
+		parameterType="map">
 		<![CDATA[
 			SELECT  p.product_id,
 					p.store_id,

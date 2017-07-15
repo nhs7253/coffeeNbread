@@ -18,7 +18,7 @@ td {
 }
 </style>
 
-<h2>제품 목록</h2>
+<h2>PRODUCT_LIST</h2>
 
 
 
@@ -41,17 +41,20 @@ td {
 				<td><a
 					href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
 				<td>${product.productPrice }&nbsp;&nbsp;</td>
-				
+
 				<td>
-					<form
-						action="${initParam.rootPath }/user/addShoppingBasketProductController.do"
-						method="post">
+                 <form
+						action="${initParam.rootPath }/user/addShoppingBasketProductController.do" onsubmit="return confirm('장바구니에 넣으시겠습니까?');"
+						id=form method="post">						
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
-						<input type="number" min="0" name="productCount"> 
-						<input type="hidden" value="${product.storeId }" name="storeId">
-						<input type="hidden" value="${product.productId }" name="productId">
-						<input type="submit" value="장바구니">
+						<input type="number" min="0" name="productCount"> <input
+							type="hidden" value="${product.storeId }" name="storeId">
+						<input type="hidden" value="${product.productId }"
+							name="productId"> 
+							<button type="submit" class="btn-custom">
+								<i class="glyphicon glyphicon-shopping-cart"></i>장바구니
+							</button>
 					</form>
 				</td>
 			</tr>
@@ -60,14 +63,17 @@ td {
 </table>
 
 
-   <form
+<form
 	action="${initParam.rootPath }/user/ViewShoppingBasketProductController.do"
 	method="post">
 	<sec:csrfInput />
 	<%-- csrf 토큰 --%>
-	<input type="hidden" value="${requestScope.list[0].storeId }" name="storeId"/>
-	<input type="submit" value="장바구니 목록 조회" />
-   </form>
+	<input type="hidden" value="${requestScope.list[0].storeId }"
+		name="storeId" /> 
+	<button type="submit" class="btn-custom">
+		<i class="glyphicon glyphicon-search"></i>장바구니 목록 조회
+	</button>
+</form>
 
 <p>
 

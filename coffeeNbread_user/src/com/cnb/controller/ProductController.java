@@ -28,6 +28,7 @@ import com.cnb.validation.annotation.ProductFindByMethodForm;
 import com.cnb.validation.annotation.ProductFindForm;
 import com.cnb.validation.annotation.ProductRegisterForm;
 import com.cnb.validation.annotation.ProductSelectForDeleteForm;
+import com.cnb.validation.annotation.ReserSalesViewForm;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionDetail;
 import com.cnb.vo.Product;
@@ -186,9 +187,9 @@ public class ProductController {
 			
 			return modelAndView;
 		}
-	
+	///////////////////--------------------일단 지우지 말아주세요~~ 테스트 중입니다.
 		//유저가 보는 제품 목록 조회
-				@RequestMapping("/user/userFindProductListController")
+				/*@RequestMapping("/user/userFindProductListController")
 				public ModelAndView userFindProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
 					
 					ModelAndView modelAndView = new ModelAndView();
@@ -206,7 +207,48 @@ public class ProductController {
 					modelAndView.addObject("storeId", productFindForm.getStoreId());
 					
 					return modelAndView;
-				}
+				}*/
+		
+		   
+		
+	@RequestMapping("/user/userFindProductListController")
+		public ModelAndView userFindProductListController(@ModelAttribute("productFind") @Valid ReserSalesViewForm reserSalesViewForm, BindingResult errors) {
+			
+			ModelAndView modelAndView = new ModelAndView();
+		System.out.println("reserSalesViewForm:"+reserSalesViewForm);
+		
+			if(errors.hasErrors()) {
+				modelAndView.setViewName("index.tiles");
+				return modelAndView;
+			}
+			//여기서 select, keyword필요.  
+			Map<String, Object> map =service.findProductListByMethod(reserSalesViewForm.getPage(),reserSalesViewForm.getStoreId() , reserSalesViewForm.getSelect(), reserSalesViewForm.getKeyword());
+		
+		  
+			System.out.println("controller-map:"+map);
+			System.out.println("controller- -----:"+reserSalesViewForm.getSelect());
+			System.out.println("controller- -----:"+reserSalesViewForm.getKeyword());
+			modelAndView.setViewName("user/user_findProduct_List.tiles");
+			modelAndView.addObject("list", map.get("list"));
+			System.out.println("list:"+map.get("list"));
+			modelAndView.addObject("pageBean", map.get("pageBean"));
+			modelAndView.addObject("storeId", reserSalesViewForm.getStoreId());
+			
+			return modelAndView;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	//제품 목록 조회

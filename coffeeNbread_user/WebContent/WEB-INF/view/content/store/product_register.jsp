@@ -17,6 +17,7 @@
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />
 	<%-- csrf 토큰 --%>
+	<br><br><br><br>
 	<table>
 		<tr class="form-group">
 			<th>제품 ID</th>
@@ -61,9 +62,10 @@
 		<tr>
 			<th>제품 사진</th>
 			<td><input type="file" name="productPicture"></td>
+		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="submit" class="btn btn-default btn-circle">
+				<button type="submit" class="btn btn-custom">
 					<i class="glyphicon glyphicon-ok"></i> 등록
 				</button>
 			</td>

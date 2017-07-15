@@ -1,22 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 </head>
 <body>
-	
-
-	<h2>유저 목록</h2>
 
 
+	<h2>USER_LIST___</h2>
 
-	<form action="${initParam.rootPath }/findUserListBySelectToKeywordController.do" method="post">
-		<select name="select">
-			<option value="userId" ${param.select eq "userId" ? "selected" :""}>아이디</option>
-			<option value="userName" ${param.select eq "userName" ? "selected" :""}>이름</option>   
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	</form>
+
+	<div class="container">
+		<div id="quick-access">
+			<form
+				action="${initParam.rootPath }/findUserListBySelectToKeywordController.do"
+				method="post">
+				<div class="form-group">
+					<select name="select" class="form-control">
+						<option value="userId"
+							${param.select eq "userId" ? "selected" :""}>아이디</option>
+						<option value="userName"
+							${param.select eq "userName" ? "selected" :""}>이름</option>
+					</select> <input type="text" name="keyword" class="form-control" />
+				</div>
+				<button type="submit" class="btn btn-custom">
+					<i class="glyphicon glyphicon-search"></i>검색
+				</button>
+				<sec:csrfInput />
+				<%-- csrf 토큰 --%>
+			</form>
+		</div>
+	</div>
 	<br>
 
 	<table class="w3-table-all">
@@ -56,7 +70,7 @@
 		</tbody>
 	</table>
 
-	
+
 
 
 
@@ -133,6 +147,3 @@
 		<a
 			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
-
-
-

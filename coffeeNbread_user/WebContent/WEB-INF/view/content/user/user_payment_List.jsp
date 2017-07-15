@@ -25,15 +25,12 @@ td {
 
 
 
-<form
-	action="${initParam.rootPath }/user/findReservationDetailsController.do">
-	<input type="submit" value="예약내역확인" />
-	<sec:csrfInput />
-</form>
 
-	<h2>결제성공</h2>
-	<h2>${requestScope.list[0].userId }님의 예약 현황</h2>
 
+	
+	<h2>${requestScope.userName }님의 결제 현황</h2>
+
+  
 
 <br>
 
@@ -41,13 +38,15 @@ td {
 	<table class="w3-table-all">
 		<thead>
 			<tr class="w3-blue">
-				<th>예약번호</th>
-				<th>예약시간</th>
-				<th>매장이름</th>
+				<th>결제번호</th>
+				<th>매장이름 </th>
 				<th>제품이름</th>
-				<th>예약개수</th>
-				<th>제품수령희망시간</th>
-				<th>예약확인유무</th>
+				<th>판매방식</th>
+				<th>결제방식</th>
+				<th>결제개수</th>
+				<th>제품가격</th>
+				<th>제품거래시간</th>
+				
 				
 			</tr>
 		</thead>
@@ -59,13 +58,14 @@ td {
 			<c:forEach items="${requestScope.list }" var="list">
 
 				<tr>
-					<td>${list.reservationNo}</td>
-					<td>${list.reservationTime}</td>
-					<td>${list.storeName }</td>
-					<td>${list.productName}</td>
-					<td>${list.reservationCount}</td>
-					<td>${list.productHopeTime}</td>
-					<td>${list.reservationConfirm}</td>
+					<td>${list.paymentNo}</td>
+				 	<td>${list.store.storeName}</td>		
+					<td>${list.product.productName}</td>
+					<td>${list.sellMethod}</td> 
+					<td>${list.paymentOption}</td>
+					<td>${list.reservationOrderCount}</td>
+					<td>${list.product.productPrice}</td>
+					<td>${list.tradeDate }</td>
 				</tr>
 			</c:forEach>
 
@@ -83,7 +83,7 @@ td {
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/user/findReservationDetailsController.do?page=1">첫페이지</a>
+			href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=1">첫페이지</a>
 
 
 		<!--
@@ -94,7 +94,7 @@ td {
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/user/findReservationDetailsController.do?page=${requestScope.pageBean.beginPage-1}">◀</a>
+					href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.beginPage-1}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -117,7 +117,7 @@ td {
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/user/findReservationDetailsController.do?page=${page}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${page}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -135,7 +135,7 @@ td {
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/user/findReservationDetailsController.do?page=${requestScope.pageBean.endPage+1}">▶</a>
+					href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.endPage+1}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -147,6 +147,6 @@ td {
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/user/findReservationDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
+			href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
 			페이지</a>
 

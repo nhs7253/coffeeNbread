@@ -22,15 +22,23 @@ td {
 	<h2>공지사항 게시판</h2>
 
 
-
-	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post">
-		<select name="select">
+<div class="container">
+		<div id="quick-access">
+	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
+		<div class="form-group">
+		<select name="select"  class="form-control">
 			<option value="title" ${param.select eq "title" ? "selected" :""}>제목</option>
 			<option value="content" ${param.select eq "content" ? "selected" :""}>내용</option>
 			<option value="titleAndcontent" ${param.select eq "titleAndcontent" ? "selected" :""}>제목+내용</option>
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
+		</select> <input type="text" name="keyword"  class="form-control"/>
+		</div>
+		 <button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-search"></i>검색
+				</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
+		</div>
+	</div>
 	<br>
 
 

@@ -43,7 +43,9 @@
 		</div>
 	</div>
 </div> --%>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 <table class="table" style="width:300px">
 	<tr><!-- colspan="6" -->
 		<th style="text-align:center;vertical-align:top"  >my page</th>
@@ -86,6 +88,7 @@
 
 
 </table>
-
+		</div>
+			<div class="col-sm-1"></div>
 
 

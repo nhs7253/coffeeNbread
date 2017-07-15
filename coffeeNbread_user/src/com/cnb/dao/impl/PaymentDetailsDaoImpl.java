@@ -74,26 +74,27 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
     * 유저가 결제한 결제내역들 개수 페이징 -매장아이디가 null이라면 빼고 조회
     */
 	@Override
-	public int countSelectPaymentDetailsByUserIdAndStoreId(String userId, String storeId) {
+	public int countSelectPaymentDetailsByUserId(String userId) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
-		info.put("storeId", storeId);
-		return session.selectOne(makeSqlId("countSelectPaymentDetailsByUserIdAndStoreId"), info);
+		
+		return session.selectOne(makeSqlId("countSelectPaymentDetailsByUserId"), info);
 	}
 
 	/**
 	 * 유저아이디로 결제내역에 있는 제품들 조회 -매장아이디가 null이라면 빼고 조회 
 	 */
 	@Override
-	public List<PaymentDetails> selectPaymentDetailsListByUserIdAndStoreId(String userId, String storeId,
+	public List<PaymentDetails> findSelectPaymentDetailsListByUserId(String userId,
 			int startIndex, int endIndex) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
-		info.put("storeId", storeId);
 		info.put("startIndex", String.valueOf(startIndex));
 		info.put("endIndex", String.valueOf(endIndex));
-		return session.selectList(makeSqlId("selectPaymentDetailsListByUserIdAndStoreId"), info);
+		return session.selectList(makeSqlId("findSelectPaymentDetailsListByUserId"), info);
 	}
+	
+	
 	
 	
 	

@@ -1,42 +1,57 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
 table, td {
-   border: 1px solid black;
+	border: 1px solid black;
 }
 
 table {
-   width: 700px;
-   border-collapse: collapse;
+	width: 700px;
+	border-collapse: collapse;
+	
 }
 
 td {
-   padding: 5px; /* //td 간 간격 */
+	padding: 5px; /* //td 간 간격 */
 }
+
 </style>
 
 </head>
 <body>
+
+
+	<h2>USER_VISIT_HISTORY</h2>
+
+<div class="col-sm-1"></div>
 	
-
-	<h2>유저 방문 기록 목록</h2>
-
-
-
-	<form action="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do" method="post">
-		<input type="text" name="keyword" /> 
-		<input type="submit" value="검색" />
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	</form>
+		<div class="col-sm-10">
+			<form
+				action="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do"
+				method="post" class="form-inline quick-search-form" role="form">
+				<div class="form-group">
+					<input type="text" name="keyword" class="form-control" />
+				</div>
+				<button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-search"></i>검색
+				</button>
+				<sec:csrfInput />
+				<%-- csrf 토큰 --%>
+			</form>
+	
 	<br>
-	<form action="${initParam.rootPath }/user/selectRemoveStoreVisitHistoryController.do" method="post">
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	
-		<table class="w3-table-all">
+	<form
+		action="${initParam.rootPath }/user/selectRemoveStoreVisitHistoryController.do"
+		method="post">
+		<sec:csrfInput />
+		<%-- csrf 토큰 --%>
+
+		<table class="table">
 			<thead>
-				<tr class="w3-blue"> 
+				<tr class="form-group">
 					<th>아이디</th>
 					<th>이름</th>
 					<th>전화번호</th>
@@ -49,29 +64,33 @@ td {
 				</tr>
 			</thead>
 			<tbody>
-	
+
 				<%-- ######################################################
 																조회된 item 출력 
 					###################################################### --%>
 				<c:forEach items="${requestScope.list }" var="list">
-					<tr>
+					<tr class="">
 						<td>${list.store.storeId}</td>
-						<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
+						<td><a
+							href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
 						<td>${list.store.storePhone}</td>
 						<td>${list.store.storeAddress}</td>
 						<td>${list.store.storeEmail}</td>
 						<td>${list.store.storeHits}</td>
 						<td>${list.store.storeOpenFormat}</td>
 						<td>${list.store.storeCloseFormat}</td>
-						<td><input type="checkbox" name="storeIdList" value="${list.store.storeId}"></td>
+						<td><input type="checkbox" name="storeIdList"
+							value="${list.store.storeId}"></td>
 					</tr>
 				</c:forEach>
-	
+
 			</tbody>
 		</table>
-		<input type="submit" value="삭제" />
+		<button type="submit" class="btn-custom">
+			<i class="glyphicon glyphicon-trash"></i>삭제
+		</button>
 	</form>
-	
+
 
 
 
@@ -115,7 +134,8 @@ td {
 			<c:choose>
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
-					<a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${page}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+					<a
+						href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${page}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -147,6 +167,5 @@ td {
 		<a
 			href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
-
-
-
+			</div>
+			<div class="col-sm-1"></div>
