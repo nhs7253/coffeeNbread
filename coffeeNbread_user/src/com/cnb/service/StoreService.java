@@ -16,6 +16,7 @@ import com.cnb.vo.Product;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
+import com.cnb.vo.StorePosition;
 
 /*
  * 이진영
@@ -32,7 +33,7 @@ public interface StoreService {
 	 * @throws DuplicatedStoreCategorytNameException 
 	 * @throws DuplicatedStorePictureException 
 	 */
-	Store addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
+	Store addStore(Store store,List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList, StorePosition storePosition) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException;
 	/**
 	 * 매장수정
 	 * @param store
@@ -41,7 +42,7 @@ public interface StoreService {
 	 * @throws DuplicatedOptionCategoryNameException 
 	 *
 	 */
-	Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException;
+	Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList, StorePosition storePosition) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException;
 	
 	/**
 	 * 매장삭제

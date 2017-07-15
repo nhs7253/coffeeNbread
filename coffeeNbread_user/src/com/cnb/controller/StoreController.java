@@ -42,6 +42,7 @@ import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
+import com.cnb.vo.StorePosition;
 
 /*
  * 노현식
@@ -124,13 +125,18 @@ public class StoreController {
 		// 경로는 고정, 파일은 여러개 -> 파일 이름 저장
 
 		StorePicture storePicture = new StorePicture(imageName.get(0), storeRegisterForm.getStoreId());
-
+		
 
 		// 세션으로 묶음
 		HttpSession session = request.getSession();
 		Store storeRetrun = null;
 		try {
-			storeRetrun = storeService.addStore(store, oclist, storePicture, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), storeRegisterForm.getPaymentIdList());
+			storeRetrun = storeService.addStore(store, 
+												oclist, 
+												storePicture, 
+												((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), 
+												storeRegisterForm.getPaymentIdList(),
+												new StorePosition(storeRegisterForm.getStoreId(),storeRegisterForm.getX() ,storeRegisterForm.getY()));
 			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | DuplicatedOptionCategoryNameException
 				| DuplicatedStoreCategorytNameException | DuplicatedStorePictureException e) {
@@ -180,6 +186,7 @@ public class StoreController {
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 		
+		
 		String storeCategory = "";
 		// 매장 분류 수정
 		List<String> optionCategoryList = new ArrayList<String>();
@@ -199,41 +206,44 @@ public class StoreController {
 		String destDir = request.getServletContext().getRealPath("/up_image");
 
 		List<MultipartFile> list = storeRegisterForm.getStorePictureList();
-		ArrayList<String> imageName = new ArrayList<>();// 업로드된 파일명을 저장할 list
-
-		// System.out.println(list.get(0).toString());
-		if (list == null) {
-			String storePicture = store.getStorePictureList().get(0).toString();
-			List<StorePicture> storePictureList = new ArrayList<StorePicture>();
-			storePictureList.add(new StorePicture(storePicture, storeRegisterForm.getStoreId()));
-		}
-
-		// 업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
-		for (int i = 0; i < list.size(); i++) {
-			MultipartFile mFile = list.get(i);
-			if (mFile != null && !mFile.isEmpty()) { // 업로드된 파일이 있는 경우
-				imageName.add(mFile.getOriginalFilename());
-				mFile.transferTo(new File(destDir, mFile.getOriginalFilename())); // 예외
-																					// 던짐
+		
+		List<StorePicture> storePictureList = null;
+		if(list.size() > 0){
+			ArrayList<String> imageName = new ArrayList<>();// 업로드된 파일명을 저장할 list
+	
+			// System.out.println(list.get(0).toString());
+//			if (list == null) {
+//				String storePicture = store.getStorePictureList().get(0).toString();
+//				List<StorePicture> storePictureList = new ArrayList<StorePicture>();
+//				storePictureList.add(new StorePicture(storePicture, storeRegisterForm.getStoreId()));
+//			}
+	
+			// 업로드된 파일의 정보(파일명) 조회, 파일 이동 처리 - 반복문 필요
+			for (int i = 0; i < list.size(); i++) {
+				MultipartFile mFile = list.get(i);
+				if (mFile != null && !mFile.isEmpty()) { // 업로드된 파일이 있는 경우
+					imageName.add(mFile.getOriginalFilename());
+					mFile.transferTo(new File(destDir, mFile.getOriginalFilename())); // 예외
+																						// 던짐
+				}
+			}
+	
+			// 다른 경로로 이동 -> 경로 변경
+			// 경로는 고정, 파일은 여러개 -> 파일 이름 저장
+	
+			// 사진 객체로
+			storePictureList = new ArrayList<StorePicture>();
+			for (int i = 0; i < imageName.size(); i++) {
+				storePictureList.add(new StorePicture(imageName.get(i), storeRegisterForm.getStoreId()));
 			}
 		}
-
-		// 다른 경로로 이동 -> 경로 변경
-		// 경로는 고정, 파일은 여러개 -> 파일 이름 저장
-
-		// 사진 객체로
-		List<StorePicture> storePictureList = new ArrayList<StorePicture>();
-		for (int i = 0; i < imageName.size(); i++) {
-			storePictureList.add(new StorePicture(imageName.get(i), storeRegisterForm.getStoreId()));
-		}
-
 //		session.setAttribute("store", store);
 
 		// 수정하는 서비스 호출
 	
 		Store storeRetrun = null;
 		try {
-			storeRetrun = storeService.modifyStore(store, oclist, storePictureList, storeRegisterForm.getPaymentIdList());
+			storeRetrun = storeService.modifyStore(store, oclist, storePictureList, storeRegisterForm.getPaymentIdList(), new StorePosition(storeRegisterForm.getStoreId(),storeRegisterForm.getX() ,storeRegisterForm.getY()));
 			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | StorePictureNotFoundException | DuplicatedOptionCategoryNameException e) {
 			System.out.println(e.getMessage());
@@ -305,6 +315,7 @@ public class StoreController {
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 	
+		
 		Store store = storeService.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
 		
 		modelAndView.setViewName("common/store_view.tiles"); //성공 시 이동할 경로

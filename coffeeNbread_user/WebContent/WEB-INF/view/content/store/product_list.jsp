@@ -4,7 +4,7 @@
 
 <style type="text/css">
 table, td {
-   border: 1px solid black;
+
 }
 
 table {
@@ -19,7 +19,8 @@ td {
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 <h2>PRODUCT LIST</h2> 
-
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 ${requestScope.list }
 <div class="container">
 <div id="quick-access">
@@ -65,7 +66,7 @@ ${requestScope.list }
 			<c:forEach items="${requestScope.list }" var="product">
 			<tr>
 				<td align="center">${product.productCategory }&nbsp;</td>
-				<td align="center"><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
+				<td align="center"><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}&storeId=${product.storeId}">${product.productName }&nbsp;</a></td>
 				<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
 				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
 				<td align="center"><input type="checkbox" name="productIdList" value="${product.productId}"></td>
@@ -187,4 +188,5 @@ ${requestScope.list }
 
    <!-- 마지막 페이지로 이동 -->
    <a href="${initParam.rootPath }/findProductListController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
-</c:if>
+</c:if></div>
+<div class="col-sm-1"></div>

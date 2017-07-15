@@ -191,6 +191,10 @@ FROM payment_details
 			)
 		WHERE reservation_no = 3
 		
-		
-		SELECT  store_id
-		FROM	store
+		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count, product_id
+		FROM payment_details
+		WHERE store_id = 's-1'
+		AND trade_date = '2017-07-15'
+		AND product_id = 'p-1'
+		GROUP BY product_id
+		ORDER BY product_id ASC		

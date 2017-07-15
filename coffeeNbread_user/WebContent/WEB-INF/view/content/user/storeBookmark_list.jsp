@@ -5,7 +5,7 @@
 
 <style type="text/css">
 table, td {
-	border: 1px solid black;
+	
 }
 
 table {
@@ -23,10 +23,10 @@ td {
 
 
 	<h2>BOOKMARK</h2>
-
-
-	<div class="container">
-		<div id="quick-access">
+	<br><br><br>
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+	
 			<form
 				action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do"
 				method="post">
@@ -39,8 +39,7 @@ td {
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-		</div>
-	</div>
+	
 	<br>
 	<form
 		action="${initParam.rootPath }/user/selectRemoveStoreBookmarkController.do"
@@ -165,3 +164,5 @@ td {
 		<a
 			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
+				</div>
+			<div class="col-sm-1"></div>

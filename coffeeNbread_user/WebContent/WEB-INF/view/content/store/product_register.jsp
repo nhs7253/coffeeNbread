@@ -12,11 +12,14 @@
 		});
 	});
 </script>
-
+<h2>PRODUCT_REGISTER</h2>
+	<div class="col-sm-1"></div>
+<div class="col-sm-10">
 <form action="${initParam.rootPath }/addProductController.do"
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />
 	<%-- csrf 토큰 --%>
+	<br><br><br><br>
 	<table>
 		<tr class="form-group">
 			<th>제품 ID</th>
@@ -61,6 +64,7 @@
 		<tr>
 			<th>제품 사진</th>
 			<td><input type="file" name="productPicture"></td>
+		</tr>
 		<tr>
 			<td colspan="2">
 				<button type="submit" class="btn btn-custom">
@@ -69,4 +73,4 @@
 			</td>
 		</tr>
 	</table>
-</form>
+</form></div><div class="col-sm-1"></div>

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cnb.dao.GeneralUserDao;
 import com.cnb.dao.StoreDao;
 import com.cnb.dao.StorePaymentOptionListDao;
+import com.cnb.dao.StorePositionDao;
 import com.cnb.dao.StoreVisitHistoryDao;
 import com.cnb.dao.UserAuthorityDao;
 import com.cnb.dao.UserPreferenceStoreDao;
@@ -33,6 +34,7 @@ import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePaymentOptionList;
 import com.cnb.vo.StorePicture;
+import com.cnb.vo.StorePosition;
 import com.cnb.vo.StoreVisitHistory;
 import com.cnb.vo.UserAuthority;
 import com.cnb.vo.UserPreferenceStore;
@@ -47,7 +49,7 @@ public class StoreServiceImpl implements StoreService{
 	private StoreVisitHistoryDao storeVisitHistoryDao;
 	
 	@Autowired
-	private StoreCategoryService storeCategoryService;
+	private StorePositionDao storePositionDao;
 	
 	@Autowired 
 	private OptionCategoryService optionCategoryService;
@@ -69,7 +71,7 @@ public class StoreServiceImpl implements StoreService{
 	
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public Store addStore(Store store, List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
+	public Store addStore(Store store, List<OptionCategory> optionCategory,StorePicture storePicture, String userId, List<String> paymentIdList, StorePosition storePosition) throws DuplicatedStoreIdException, DuplicatedOptionCategoryNameException, DuplicatedStoreCategorytNameException, DuplicatedStorePictureException{
 		//storeId 중복확인
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
@@ -95,10 +97,7 @@ public class StoreServiceImpl implements StoreService{
 				storePaymentOptionListDao.insertStorePaymentOptionList(storePaymentOptionList);
 			}
 		}
-		Store st = storedao.selectStroeJoinPicture(store.getStoreId());
-		
-		
-		System.out.println("stststs = " + st);
+		storePositionDao.insertStorePosition(storePosition);
 		
 		return storedao.selectStroeJoinPicture(store.getStoreId());
 		
@@ -112,9 +111,8 @@ public class StoreServiceImpl implements StoreService{
 	}*/
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException {
+	public Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList, StorePosition storePosition) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException {
 		 if(storedao.selectStoreById(store.getStoreId())!=null){
-			 System.out.println("modifyStore = " + optionCategory);
 			 storedao.updateStore(store);
 		 }else{
 				throw new DuplicatedStoreIdException(store.getStoreId()+" 는 없는 ID입니다.");
@@ -122,7 +120,13 @@ public class StoreServiceImpl implements StoreService{
 		 
 		 optionCategoryService.modifyOptionCategory(optionCategory, store.getStoreId());
 		 
-		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
+		 if(storePicture != null){
+			 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
+			 storePositionDao.updateStorePosition(storePosition);
+		 }
+		 
+	
+		 
 		 
 		 if(paymentIdList!=null){
 				//매장 지원 결제 내역

@@ -50,6 +50,7 @@ public class StorePictureServiceImpl implements StorePictureService {
 			throws StorePictureNotFoundException {
 		if(dao.selectStorePictureByStoreIdAndStorePicture(storePictureVO.getStorePicture(), storePictureVO.getStoreId())!=null){
 			dao.deleteStorePicture(dao.selectStorePictureByStoreIdAndStorePicture(storePictureVO.getStorePicture(), storePictureVO.getStoreId()));
+			System.out.println("삭제됨");
 			return dao.updateStorePictureByStorePicture(storePictureVO);
 		}
 		return dao.updateStorePictureByStorePicture(storePictureVO);

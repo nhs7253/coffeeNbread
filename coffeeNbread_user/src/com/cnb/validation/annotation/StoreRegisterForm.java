@@ -1,6 +1,7 @@
 package com.cnb.validation.annotation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class StoreRegisterForm implements Serializable{
 	@DateTimeFormat(pattern="hh:mm")
 	private Date storeClose;
 	private String storePermission="N";
-	private List<MultipartFile> storePictureList;
+	private List<MultipartFile> storePictureList = new ArrayList<>();
 	private List<StoreEvent> storeEventList;
 	
 	private List<String> optionCategoryList;
@@ -54,7 +55,8 @@ public class StoreRegisterForm implements Serializable{
 
 	private List<String> paymentIdList;
 	
-	
+	private String X;
+	private String Y;
 	
 	public String getOriginalName() {
 		return originalName;
@@ -171,31 +173,31 @@ public class StoreRegisterForm implements Serializable{
 	public void setPaymentIdList(List<String> paymentIdList) {
 		this.paymentIdList = paymentIdList;
 	}
+	public String getX() {
+		return X;
+	}
+	public void setX(String x) {
+		X = x;
+	}
+	public String getY() {
+		return Y;
+	}
+	public void setY(String y) {
+		Y = y;
+	}
 	@Override
 	public String toString() {
-		final int maxLen = 10;
 		return "StoreRegisterForm [originalName=" + originalName + ", saveName=" + saveName + ", storeId=" + storeId
 				+ ", storeName=" + storeName + ", storePicture=" + storePicture + ", storeIntro=" + storeIntro
 				+ ", storePhone=" + storePhone + ", storeAddress=" + storeAddress + ", storeEmail=" + storeEmail
 				+ ", storeHits=" + storeHits + ", storeOpen=" + storeOpen + ", storeClose=" + storeClose
-				+ ", storePermission=" + storePermission + ", storePictureList="
-				+ (storePictureList != null ? storePictureList.subList(0, Math.min(storePictureList.size(), maxLen))
-						: null)
-				+ ", storeEventList="
-				+ (storeEventList != null ? storeEventList.subList(0, Math.min(storeEventList.size(), maxLen)) : null)
-				+ ", optionCategoryList="
-				+ (optionCategoryList != null
-						? optionCategoryList.subList(0, Math.min(optionCategoryList.size(), maxLen)) : null)
-				+ ", optionDetailList="
-				+ (optionDetailList != null ? optionDetailList.subList(0, Math.min(optionDetailList.size(), maxLen))
-						: null)
-				+ ", storeCategoryList="
-				+ (storeCategoryList != null ? storeCategoryList.subList(0, Math.min(storeCategoryList.size(), maxLen))
-						: null)
-				+ ", paymentIdList="
-				+ (paymentIdList != null ? paymentIdList.subList(0, Math.min(paymentIdList.size(), maxLen)) : null)
-				+ "]";
+				+ ", storePermission=" + storePermission + ", storePictureList=" + storePictureList
+				+ ", storeEventList=" + storeEventList + ", optionCategoryList=" + optionCategoryList
+				+ ", optionDetailList=" + optionDetailList + ", storeCategoryList=" + storeCategoryList
+				+ ", paymentIdList=" + paymentIdList + ", X=" + X + ", Y=" + Y + "]";
 	}
+	
+	
 
 	
 	

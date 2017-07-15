@@ -54,6 +54,8 @@ td {
 </script>
 <h2>제품목록조회(예약)</h2>
 
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 <div class="container">
 	<div id="quick-access">
 		<form
@@ -138,8 +140,14 @@ td {
 
 		</div>
 </form>
+
 	</c:forEach>
 
   
+
+</div>
+<div class="col-sm-1"></div>
+
+
 
 <p>

@@ -6,7 +6,7 @@
 	
 <style type="text/css">
 table, td {
-   border: 1px solid black;
+   
 }
 
 table {
@@ -18,13 +18,36 @@ td {
    padding: 5px; /* //td 간 간격 */
 }
 </style>
+
+
+<style>
+    .wrap {text-align: left; overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info .link {color: #5085BB;}
+</style>
+
+<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+
+
 <!-- <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
  -->
+
 	<h2>STORE LIST</h2>
 
 
-<div class="container">
-<div id="quick-access">
+<br><br>
+<div class="col-sm-2"></div>
+
+<div class="col-sm-8">
+
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 		<div class="form-group">
 		<select name="select" class="form-control">
@@ -35,9 +58,170 @@ td {
 		</select> <input type="text" name="keyword" class="form-control"/></div><button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
-	</div>
-</div>
-	<br>
+
+	
+	<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(37.40207145053021, 127.10662597538649),
+			level: 3
+		};
+
+		var map = new daum.maps.Map(container, options);
+		
+		// HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+		if (navigator.geolocation) {
+		    
+		    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+		    navigator.geolocation.getCurrentPosition(function(position) {
+		        
+		        var lat = position.coords.latitude, // 위도
+		            lon = position.coords.longitude; // 경도
+		        
+		        var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+		            message = '<div style="padding:5px;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+		        
+		        // 마커와 인포윈도우를 표시합니다
+		        displayMarker(locPosition, message);
+		            
+		      });
+		    
+		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+		    
+		    var locPosition = new daum.maps.LatLng(37.40207145053021, 127.10662597538649),    
+		        message = '현재 위치를 파악할 수 없습니다'
+		        
+		    displayMarker(locPosition, message);
+		}
+			
+		
+		var positions = [
+			<c:forEach items="${requestScope.list }" var="list" begin="0" varStatus="status">
+				<c:choose>
+					<c:when test="${status.last}">
+						{
+							content: '<div class="wrap">' + 
+				            '    <div class="info">' + 
+				            '        <div class="title">' + 
+				            '            ${list.storeName}' + 
+				            '        </div>' + 
+				            '        <div class="body">' + 
+				            '            <div class="img">' +
+				            '                <img src="${initParam.rootPath }/up_image/${list.storePictureList[0].storePicture }" width="73" height="70">' +
+				            '           </div>' + 
+				            '            <div class="desc">' + 
+				            '                <div class="ellipsis">${list.storeIntro}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storeCategory}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storeAddress}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storePhone}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storeEmail}</div>' + 
+				            '            </div>' + 
+				            '        </div>' + 
+				            '    </div>' +    
+				            '</div>', 
+					        latlng: new daum.maps.LatLng(${list.storePosition.x}, ${list.storePosition.y})
+				 		}   
+					</c:when>
+					<c:otherwise>
+						{
+							content: '<div class="wrap">' + 
+				            '    <div class="info">' + 
+				            '        <div class="title">' + 
+				            '            ${list.storeName}' + 
+				            '        </div>' + 
+				            '        <div class="body">' + 
+				            '            <div class="img">' +
+				            '                <img src="${initParam.rootPath }/up_image/${list.storePictureList[0].storePicture }" width="73" height="70">' +
+				            '           </div>' + 
+				            '            <div class="desc">' + 
+				            '                <div class="ellipsis">${list.storeIntro}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storeCategory}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storeAddress}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storePhone}</div>' + 
+				            '                <div class="jibun ellipsis">${list.storeEmail}</div>' + 
+				            '            </div>' + 
+				            '        </div>' + 
+				            '    </div>' +    
+				            '</div>', 
+						    latlng: new daum.maps.LatLng(${list.storePosition.x}, ${list.storePosition.y})
+					 	}, 
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		];
+		
+		
+		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+		function displayMarker(locPosition, message) {
+
+		    // 마커를 생성합니다
+		    var marker = new daum.maps.Marker({  
+		        map: map, 
+		        position: locPosition
+		    }); 
+		    
+		    var iwContent = message, // 인포윈도우에 표시할 내용
+		        iwRemoveable = true;
+
+		    // 인포윈도우를 생성합니다
+		    var infowindow = new daum.maps.InfoWindow({
+		        content : iwContent,
+		        removable : iwRemoveable
+		    });
+		    
+		    // 인포윈도우를 마커위에 표시합니다 
+		    infowindow.open(map, marker);
+		    
+		    for (var i = 0; i < positions.length; i ++) {
+			    // 마커를 생성합니다
+			    var marker = new daum.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng // 마커의 위치
+			    });
+
+			    // 마커에 표시할 인포윈도우를 생성합니다 
+			    var infowindow = new daum.maps.InfoWindow({
+			        content: positions[i].content, // 인포윈도우에 표시할 내용
+				    position: marker.getPosition()  
+			    });
+			    
+		
+
+			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			    daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+			    daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			}
+		    
+		    // 지도 중심좌표를 접속위치로 변경합니다
+		    map.setCenter(locPosition);      
+		}    	
+		// 마커 위에 커스텀오버레이를 표시합니다
+		// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+			
+		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		}
+		
+	</script>
+	
+	<p/>
+	
+	
+	
 
 
 	
@@ -156,4 +340,5 @@ td {
 				<sec:csrfInput/>
 				<input type="submit" value="등록">
 			</form>
-		</sec:authorize>
+		</sec:authorize></div>
+<div class="col-sm-2"></div>

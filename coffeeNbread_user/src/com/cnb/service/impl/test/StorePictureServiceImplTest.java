@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.exception.DuplicatedStorePictureException;
+import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.service.StorePictureService;
 import com.cnb.vo.StorePicture;
 
@@ -38,16 +39,16 @@ public class StorePictureServiceImplTest {
 		System.err.println(e.getMessage());
 	}*/
 	
-	/*	
+		
 	//매장 사진 수정
-	StorePicture p2 = new StorePicture("매장사진수정2","s-2");
+	StorePicture p2 = new StorePicture("매장사진수정2","아이디이");
 	try{
 		
-		System.out.println(service.modifyStorePictureByStorePicture(p2,"매장사진수정1"));
+		System.out.println(service.modifyStorePictureByStorePicture(p2));
 		System.out.println("수정완료");
 	}catch(StorePictureNotFoundException e){
 		System.err.println(e.getMessage());
-	}*/
+	}
 	
 	
 	//매장사진 삭제

@@ -5,7 +5,7 @@
 
 <style type="text/css">
 table, td {
-	border: 1px solid black;
+
 }
 
 table {
@@ -17,17 +17,19 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
 </head>
 <body>
 
 
 	<h2>플랫폼 지원 결제 목록</h2>
-
-	<table class="w3-table-all">
+	<br><br><br>
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue">
+			<tr >
 				<th>아이디</th>
 				<th>방법</th>
 				<th>삭제</th>
@@ -67,4 +69,5 @@ td {
 		</button>
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
-	</form>
+	</form></div>
+	<div class="col-sm-1"></div>
