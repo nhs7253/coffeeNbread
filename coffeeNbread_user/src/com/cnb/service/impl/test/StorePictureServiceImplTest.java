@@ -41,7 +41,7 @@ public class StorePictureServiceImplTest {
 	
 		
 	//매장 사진 수정
-	StorePicture p2 = new StorePicture("매장사진수정2","iddddd");
+	StorePicture p2 = new StorePicture("매장사진수정2","아이디이");
 	try{
 		
 		System.out.println(service.modifyStorePictureByStorePicture(p2));
