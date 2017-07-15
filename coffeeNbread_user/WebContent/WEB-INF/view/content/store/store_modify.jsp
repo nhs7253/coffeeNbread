@@ -155,8 +155,8 @@
 			<td>
 				<div id="map" style="width:100%;height:350px;"></div>
 				<div id="clickLatlng"></div>
-				<input type="hidden" name="X" id="X" value="">
-				<input type="hidden" name="Y" id="Y" value="">			
+				<input type="hidden" name="X" id="X" value="${sessionScope.storeInfo.storePosition.x}">
+				<input type="hidden" name="Y" id="Y" value="${sessionScope.storeInfo.storePosition.y}">			
 			</td>
 		</tr>
 			
