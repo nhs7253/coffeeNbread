@@ -8,7 +8,7 @@
 
 	<style type="text/css">
 table, td {
-	border: 1px solid black;
+	
 }
 
 table {
@@ -28,7 +28,7 @@ td {
 	
 			<form
 				action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
-				method="post">
+				method="post" class="form-inline quick-search-form" role="form">
 				<div class="form-group">
 					<select name="select" class="form-control col-xs-2">
 						<option value="title">제목</option>

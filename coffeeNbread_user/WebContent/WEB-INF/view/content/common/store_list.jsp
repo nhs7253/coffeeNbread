@@ -6,7 +6,7 @@
 	
 <style type="text/css">
 table, td {
-   border: 1px solid black;
+   
 }
 
 table {
@@ -43,9 +43,11 @@ td {
 	<h2>STORE LIST</h2>
 
 
+<br><br>
+<div class="col-sm-1"></div>
 
-<div class="container">
-<div id="quick-access">
+<div class="col-sm-10">
+
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 		<div class="form-group">
 		<select name="select" class="form-control">
@@ -56,8 +58,7 @@ td {
 		</select> <input type="text" name="keyword" class="form-control"/></div><button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
-	</div>
-</div>
+
 	
 	<div id="map" style="width:500px;height:400px;"></div>
 	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
@@ -339,4 +340,5 @@ td {
 				<sec:csrfInput/>
 				<input type="submit" value="등록">
 			</form>
-		</sec:authorize>
+		</sec:authorize></div>
+<div class="col-sm-1"></div>
