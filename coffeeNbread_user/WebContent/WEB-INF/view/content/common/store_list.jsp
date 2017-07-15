@@ -44,9 +44,9 @@ td {
 
 
 <br><br>
-<div class="col-sm-1"></div>
+<div class="col-sm-2"></div>
 
-<div class="col-sm-10">
+<div class="col-sm-8">
 
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 		<div class="form-group">
@@ -341,4 +341,4 @@ td {
 				<input type="submit" value="등록">
 			</form>
 		</sec:authorize></div>
-<div class="col-sm-1"></div>
+<div class="col-sm-2"></div>
