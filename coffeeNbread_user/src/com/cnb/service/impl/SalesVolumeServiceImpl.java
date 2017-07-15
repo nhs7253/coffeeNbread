@@ -127,52 +127,70 @@ public class SalesVolumeServiceImpl implements SalesVolumeService {
 		List listAll = productPaymentDao.selectTotalSalesVolumeForAllDays(storeId, productCategory, todayDate);	//~어제
 		List list7Days = productPaymentDao.selectTotalSalesVolumeFor7Days(storeId, productCategory, todayDate);	//일주일전~어제
 
+		
 		String s = "";
+
 		for(int i=0; i < listAll.size(); i++)
 		{			
-			for (int j = 0; j < list7Days.size(); j++) { 
-				Map mapAll = (HashMap) listAll.get(i);
-				Map map7Days = (HashMap) list7Days.get(j);
+			Map mapAll = (HashMap) listAll.get(i);
+			Set keyAll = mapAll.keySet();
+			Iterator iterator1 = keyAll.iterator();
 
-				Set key7Days = map7Days.keySet();
-				Set keyAll = mapAll.keySet();
+			if (list7Days.size() == 0) {
+				// 현재 productId를 저장 후 해당 아이디의 증감폭을 D으로 바꿈 - 7Days에서 제품아이디가 같은 걸
+				// 찾지 못한 경우에는 일주일동안 팔린게 없다는 뜻이므로 D으로 지정되게 하기 위함
+				s = String.valueOf(mapAll.get("PRODUCT_ID"));
+				Double gapDoubleFirst = (Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT")))));
+				String gapFirst = String.format("%.2f", gapDoubleFirst);
 
-				Iterator iterator1 = keyAll.iterator();
-				Iterator iterator2 = key7Days.iterator();
+				productGapDao.updateProductGap(new ProductGap("D", gapFirst, s, storeId));
+			} else {
+				for (int j = 0; j < list7Days.size(); j++) {
+					Map map7Days = (HashMap) list7Days.get(j);
 
-				String keyName1 = (String) iterator1.next();
-				String valueName1 = String.valueOf(mapAll.get(keyName1));
+					Set key7Days = map7Days.keySet();
 
-				String keyName2 = (String) iterator2.next();
-				String valueName2 = String.valueOf(map7Days.get(keyName2));
+					Iterator iterator2 = key7Days.iterator();
 
-				//만약 AllDays의 제품아이디값과 7Days의 제품아이디 값이 같다면 비율 비교
-				if (keyName2.equals("RESERVATION_ORDER_COUNT")) {
-				
-					//현재 productId를 저장 후 해당 아이디의 증감폭을 D으로 바꿈 - 7Days에서 제품아이디가 같은 걸 찾지 못한 경우에는 일주일동안 팔린게 없다는 뜻이므로 D으로 지정되게 하기 위함
-					s = String.valueOf(mapAll.get("PRODUCT_ID"));
-					Double gapDoubleFirst = (Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT")))));
-					String gapFirst = String.format("%.2f", gapDoubleFirst);
-					
-					productGapDao.updateProductGap(new ProductGap("D", gapFirst, s, storeId));
-					
-					if (String.valueOf(mapAll.get("PRODUCT_ID")).equals(String.valueOf(map7Days.get("PRODUCT_ID")))) {
-						if ((Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT"))))) > (Double.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))))) {
-							// 전체 > 일주일 -> 하락세 (D)
-							Double gapDouble = (Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT"))))) - (Double.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))));
-							String gap = String.format("%.2f", gapDouble);
-							productGapDao.updateProductGap(new ProductGap("D", gap, (String.valueOf(mapAll.get("PRODUCT_ID"))), storeId));
-							break;
-						} else if ((Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT"))))) < (Double.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))))) {
-							// 전체 < 일주일 -> 상승세 (U)
-							Double gapDouble = (Double.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT"))))) - (Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT")))));
-							String gap = String.format("%.2f", gapDouble);
-							productGapDao.updateProductGap(new ProductGap("U", gap, (String.valueOf(mapAll.get("PRODUCT_ID"))), storeId));
-							break;
-						} else {
-							// 전체 = 일주일 -> 유지 (K)
-							productGapDao.updateProductGap(new ProductGap("K", "0", (String.valueOf(mapAll.get("PRODUCT_ID"))), storeId));
-							break;
+					String keyName1 = (String) iterator1.next();
+					String valueName1 = String.valueOf(mapAll.get(keyName1));
+
+					String keyName2 = (String) iterator2.next();
+					String valueName2 = String.valueOf(map7Days.get(keyName2));
+
+					// 만약 AllDays의 제품아이디값과 7Days의 제품아이디 값이 같다면 비율 비교
+					if (keyName2.equals("RESERVATION_ORDER_COUNT")) {
+
+						if (String.valueOf(mapAll.get("PRODUCT_ID"))
+								.equals(String.valueOf(map7Days.get("PRODUCT_ID")))) {
+							if ((Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT"))))) > (Double
+									.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))))) {
+								// 전체 > 일주일 -> 하락세 (D)
+								Double gapDouble = (Double
+										.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT")))))
+										- (Double.parseDouble(
+												(String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))));
+								String gap = String.format("%.2f", gapDouble);
+								productGapDao.updateProductGap(
+										new ProductGap("D", gap, (String.valueOf(mapAll.get("PRODUCT_ID"))), storeId));
+								break;
+							} else if ((Double
+									.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT"))))) < (Double
+											.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))))) {
+								// 전체 < 일주일 -> 상승세 (U)
+								Double gapDouble = (Double
+										.parseDouble((String.valueOf(map7Days.get("RESERVATION_ORDER_COUNT")))))
+										- (Double.parseDouble((String.valueOf(mapAll.get("RESERVATION_ORDER_COUNT")))));
+								String gap = String.format("%.2f", gapDouble);
+								productGapDao.updateProductGap(
+										new ProductGap("U", gap, (String.valueOf(mapAll.get("PRODUCT_ID"))), storeId));
+								break;
+							} else {
+								// 전체 = 일주일 -> 유지 (K)
+								productGapDao.updateProductGap(
+										new ProductGap("K", "0", (String.valueOf(mapAll.get("PRODUCT_ID"))), storeId));
+								break;
+							}
 						}
 					}
 				}
@@ -198,6 +216,7 @@ public class SalesVolumeServiceImpl implements SalesVolumeService {
 	@Override
 	public void modifyProductTodayCountByGap(String storeId, String productId, String identifyCode) {
 		Product product = productDao.selectProductById(storeId, productId);
+		System.out.println("SalesVolumeServiceImpl : " + product);
 		if(identifyCode.equals("U")) {	//상승세일 경우 *1.05 -> 올림
 			productDao.updateProduct(new Product(productId, storeId, product.getProductName(), product.getProductPrice(), product.getProductCategory(), product.getProductDetail(), product.getSellingOption(), (int)Math.round(product.getTodayProductCount()*1.05), product.getRecommendProductCount()));
 		}else if(identifyCode.equals("D")) {	//하락세일 경우 *0.95 -> 버림

@@ -122,12 +122,24 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170710'
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170710', 'yyyy-mm-dd'),'r',20,'u-1','b5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170706', 'yyyy-mm-dd'),'r',5,'u-1','ck1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
 
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160906', 'yyyy-mm-dd'),'r',0,'u-1','b1','s-1',20);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170625', 'yyyy-mm-dd'),'r',20,'u-1','c1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170506', 'yyyy-mm-dd'),'r',15,'u-1','c1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170306', 'yyyy-mm-dd'),'r',0,'u-1','ck1','s-1',5);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170306', 'yyyy-mm-dd'),'r',0,'u-1','b4','s-1',20);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160810', 'yyyy-mm-dd'),'r',0,'u-1','b3','s-1',45);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160906', 'yyyy-mm-dd'),'f',10,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170625', 'yyyy-mm-dd'),'r',20,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170506', 'yyyy-mm-dd'),'r',15,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170306', 'yyyy-mm-dd'),'f',0,'u-10','p-1','s-1',5);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170306', 'yyyy-mm-dd'),'f',0,'u-10','p-3','s-1',20);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160810', 'yyyy-mm-dd'),'f',0,'u-10','p-4','s-1',5);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160910', 'yyyy-mm-dd'),'r',5,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20161110', 'yyyy-mm-dd'),'r',5,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170210', 'yyyy-mm-dd'),'r',5,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170404', 'yyyy-mm-dd'),'r',5,'u-10','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-2','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915', 'yyyy-mm-dd'),'r',5,'u-10','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 
 /* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
 /* 예약 내역에는 날짜 뿐만 아니라 시간도 들어가있어야 하지 않나..? */  /* 결제 내역에있는 r -에 해당되는 내용만 가져와야 함 */
@@ -144,15 +156,31 @@ INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170604', 'yyyy-mm-dd'),4,null,to_date('20170804','yyyy-mm-dd'),'ck1','s-1','u-11');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170703', 'yyyy-mm-dd'),4,null,to_date('20170712','yyyy-mm-dd'),'b1','s-1','u-11');
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170703', 'yyyy-mm-dd'),4,null,to_date('20170712','yyyy-mm-dd'),'b3','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170705', 'yyyy-mm-dd'),4,null,to_date('20170711','yyyy-mm-dd'),'b3','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170705', 'yyyy-mm-dd'),4,null,to_date('20170711','yyyy-mm-dd'),'c2','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170710', 'yyyy-mm-dd'),4,null,to_date('20170713','yyyy-mm-dd'),'ck1','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170710', 'yyyy-mm-dd'),4,null,to_date('20170713','yyyy-mm-dd'),'b1','s-1','u-11');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170705', 'yyyy-mm-dd'),4,null,to_date('20170711','yyyy-mm-dd'),'p-1','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170705', 'yyyy-mm-dd'),4,null,to_date('20170711','yyyy-mm-dd'),'p-2','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170710', 'yyyy-mm-dd'),4,null,to_date('20170713','yyyy-mm-dd'),'p-3','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170710', 'yyyy-mm-dd'),4,null,to_date('20170713','yyyy-mm-dd'),'p-4','s-1','u-10');
 
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170707', 'yyyy-mm-dd'),4,null,to_date('20170712','yyyy-mm-dd'),'b3','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170707', 'yyyy-mm-dd'),4,null,to_date('20170712','yyyy-mm-dd'),'c2','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170512', 'yyyy-mm-dd'),4,null,to_date('20170717','yyyy-mm-dd'),'ck1','s-1','u-11');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170612', 'yyyy-mm-dd'),4,null,to_date('20170717','yyyy-mm-dd'),'b1','s-1','u-11');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160906', 'yyyy-mm-dd'),10,null,to_date('20170712','yyyy-mm-dd'),'p-1','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170625', 'yyyy-mm-dd'),20,null,to_date('20170712','yyyy-mm-dd'),'p-3','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170506', 'yyyy-mm-dd'),15,null,to_date('20170717','yyyy-mm-dd'),'p-1','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170612', 'yyyy-mm-dd'),4,null,to_date('20170717','yyyy-mm-dd'),'p-5','s-1','u-10');
+
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20160910', 'yyyy-mm-dd'),5,null,to_date('20170715','yyyy-mm-dd'),'p-1','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20161110', 'yyyy-mm-dd'),5,null,to_date('20170714','yyyy-mm-dd'),'p-1','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170210', 'yyyy-mm-dd'),5,null,to_date('20170713','yyyy-mm-dd'),'p-3','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170404', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170504', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20150504', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20150104', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20130504', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20140504', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20120204', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20130604', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20181004', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20110504', 'yyyy-mm-dd'),5,null,to_date('20170712','yyyy-mm-dd'),'p-4','s-1','u-10');
+
 
 
 CREATE SEQUENCE reservation_no_seq;
@@ -192,13 +220,13 @@ INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'공지6',
 SELECT * FROM PRODUCT_GAP;
 DELETE FROM PRODUCT_GAP;
 
-INSERT INTO PRODUCT_GAP VALUES('D', '1', 'p-1', 's-1');
-INSERT INTO PRODUCT_GAP VALUES('K', '2', 'p-2', 's-1');
+INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-3', 's-1');
+INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-4', 's-1');
 INSERT INTO PRODUCT_GAP VALUES('U', '3', 'p-7', 's-2');
 INSERT INTO PRODUCT_GAP VALUES('D', '4', 'p-8', 's-2');
 INSERT INTO PRODUCT_GAP VALUES('U', '5', 'p-9', 's-3');
 INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-20', 's-1');
-INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-4', 's-1');
+INSERT INTO PRODUCT_GAP VALUES('K', '0', 'p-5', 's-1');
 
 
 /* 매장 사진 */
@@ -342,8 +370,6 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 	INSERT INTO bookmark_card_num VALUES('TEST_CARD','u-1')
 
 	
-	
-	
 	SELECT payment_no,
 		store_name,
 		pp.product_picture,
@@ -385,8 +411,6 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 		WHERE rownum <=1000
 		)
 		WHERE rnum >= 1
-<<<<<<< HEAD
-
 				
 		SELECT recipe_board_no,
 		recipe_board_content,
@@ -428,11 +452,7 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 		)
 		WHERE rnum >= 1
 		
-		
-		
-		
-		
-		
+			
 		SELECT  rownum reservation_no,
 					reservation_time,
 					reservation_confirm,
@@ -497,4 +517,12 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
 	
 	select *from store_payment_optionList
 	
+	INSERT INTO OPTION_CATEGORY VALUES(1, 's-1', '빵');
+	INSERT INTO OPTION_CATEGORY VALUES(2, 's-1', '커피');
+
 	
+	INSERT INTO OPTION_DETAIL VALUES('s-1', 'p-1', 1, '제품1');
+	INSERT INTO OPTION_DETAIL VALUES('s-1', 'p-2', 1, '제품2');
+	INSERT INTO OPTION_DETAIL VALUES('s-1', 'p-3', 2, '제품3');
+	INSERT INTO OPTION_DETAIL VALUES('s-1', 'p-4', 2, '제품4');
+	INSERT INTO OPTION_DETAIL VALUES('s-1', 'p-5', 1, '제품5');

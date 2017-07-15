@@ -64,7 +64,7 @@ ${requestScope.list }
 			<c:forEach items="${requestScope.list }" var="product">
 			<tr>
 				<td align="center">${product.productCategory }&nbsp;</td>
-				<td align="center"><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}">${product.productName }&nbsp;</a></td>
+				<td align="center"><a href="${initParam.rootPath }/findProductDetailController.do?productId=${product.productId}&storeId=${product.storeId}">${product.productName }&nbsp;</a></td>
 				<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
 				<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;${product.sellingOption }&nbsp;</td>
 				<td align="center"><input type="checkbox" name="productIdList" value="${product.productId}"></td>

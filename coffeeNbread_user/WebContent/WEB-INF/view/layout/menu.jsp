@@ -78,9 +78,9 @@
 
 <%-- 매장 관리자 --%>
 <%-- 매장만의 권한으로 바꿔줘야함 --%>
-<sec:authorize access="hasAnyRole('ROLE_CNB_USER')">
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
-	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
+	<li><a href="${initParam.rootPath }/findProductListManagerController.do">제품 목록</a></li>
 	<li><a href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량 조회</a></li>
 	<li><a href="${initParam.rootPath }/findReservationDetailsController.do">예약 현황 조회</a></li>
 	<li><a href="${initParam.rootPath }/findProductListForPosController.do">현장 판매 시스템</a></li>
@@ -119,7 +119,7 @@
 <%-- 매장 관리자 --%>
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 	<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
-	<li><a href="${initParam.rootPath }/findProductListController.do">제품 목록</a></li>
+	<li><a href="${initParam.rootPath }/findProductListManagerController.do">제품 목록</a></li>
 	<li><a href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내 제품 목록 조회</a></li>
 </sec:authorize>
 

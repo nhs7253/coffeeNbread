@@ -19,14 +19,14 @@ public class OptionCategoryServiceImplTest {
 		OptionCategoryService service =  (OptionCategoryService)ctx.getBean("optionCategoryServiceImpl");
 	
 	
-		
+/*		
 		//option category 등록
 		
 		OptionCategory oc1 = new OptionCategory(7,"s-2","대분류100");
 		List<OptionCategory> list = new ArrayList<OptionCategory>();
 		list.add(new OptionCategory (17,"s-2","대"));
 		list.add(new OptionCategory (18,"s-2","대2"));
-		/*try{
+		try{
 			service.addOptionCategory(list);
 			System.out.println("등록 성공");
 		} catch (DuplicatedOptionCategoryNameException e) {
@@ -45,9 +45,11 @@ public class OptionCategoryServiceImplTest {
 			service.removeOptionCategory("s-2",9);
 			System.out.println("삭제완료");
 	
-	*/
+	*//*
 			service.removeOptionCategoryByStoreId("매장아이디");
-			System.out.println("완료!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println("완료!!!!!!!!!!!!!!!!!!!!!");*/
+		
+		System.out.println(service.findOptionCategoryList("s-1"));
 
 	}
 }

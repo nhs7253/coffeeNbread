@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
 
 <style type="text/css">
 table, td {
@@ -23,7 +27,7 @@ td {
 <script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".alarm").on("click", function(){
+	$(".alarm").on("click", function(to, text){
 		var btn = this;
 		$.ajax({
 			"url":"/coffeeNbread_user/changeReservationConfirmByClickButtonController.do",
@@ -32,6 +36,10 @@ $(document).ready(function(){
 			"success":function(value){
 				$(btn).parent().text(value);
 				$(btn).remove();
+				var url = "http://api.coolsms.co.kr/sendmsg?user=minhee310&password=cmh0310&to=" + $(".alarm").prev().prev().prev().val() + "&from=01099506219&text=" + $(".alarm").prev().prev().val();
+				window.open(url,"alarmMessage","width=500, height=400 resizable=no");
+				alarm.submit();
+				window.close();
 			}
 		});
 	});
@@ -41,6 +49,9 @@ $(document).ready(function(){
 
 </script>
 
+</head>
+	<body>
+	
 <h2 id="h2">예약 현황 조회</h2> 
 
 <br>
@@ -69,6 +80,8 @@ $(document).ready(function(){
 			<td align="center"><fmt:formatDate value="${reservationDetails.reservationTime }" pattern="yyyy-MM-dd"/></td>
 			<td align="center"><fmt:formatDate value="${reservationDetails.productHopeTime }" pattern="yyyy-MM-dd"/></td>
 			<td id="timeTd${status.index}" align="center">
+				<input type="hidden" id="to" value="${phoneNumList[status.index] }"/>
+				<input type="hidden" id="text" value="${userNameList[status.index] }님의 예약이 확인되었습니다"/>
 				<input type="hidden" id="time" value="<fmt:formatDate value='${reservationDetails.reservationTime }' pattern='yyyy-MM-dd'/>"/>
 				<c:if test="${empty reservationDetails.reservationConfirm}">
 					<input class="alarm" type="button" value="알림 전송"/>
@@ -76,14 +89,13 @@ $(document).ready(function(){
 				<c:if test="${!empty reservationDetails.reservationConfirm}">
 					<fmt:formatDate value='${reservationDetails.reservationConfirm }' pattern='yyyy-MM-dd'/>
 				</c:if>
-			</td>
+			</td>			
 		</tr>
 		</c:forEach>
 	</tbody>
 </table>
 </form>
 
-		
 <br><br>
 
 	<%--######################################################
@@ -139,3 +151,6 @@ $(document).ready(function(){
 	<!-- 마지막 페이지로 이동 -->
 	<a href="${initParam.rootPath }/findReservationDetailsController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
 
+
+</body>
+</html>

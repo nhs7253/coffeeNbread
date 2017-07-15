@@ -1,6 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
 table, td {
@@ -16,9 +18,29 @@ td {
 }
 </style>
 
-<h4 style="font-weight:bold">판매량</h4>
-
+<!-- JQPLOT보다 jquery가 먼저 지정되야함 -->
 <script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+<!-- JQ-PLOT의 CSS를 설정 -->  
+<link rel="stylesheet" type="text/css" href="/coffeeNbread_user/resource/jqplot/jquery.jqplot.css"/>  
+<!-- JQ-PLOT의 기본 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jquery.jqplot.js"/></script>
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/excanvas.js"></script>
+<!-- Highlighter(마우스 접근시 데이터정보 표시) 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.highlighter.js"/></script>  
+<!-- 좌표에 관한 정보나 Zoom 기능 사용시 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.cursor.js"/></script> 
+<!-- 막대그래프 -->
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.barRenderer.js"/></script>
+<!-- 축의 데이터를 날짜형태로 입력하기 위해서 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.dateAxisRenderer.js"/></script>  
+<!-- 축의 데이터의 Label Option을 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.canvasAxisLabelRenderer.js"/></script>  
+<!-- Legend(Line에대한 간단한 범례)의 Option을 설정  -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.enhancedLegendRenderer.js"/></script>  
+<!-- 축의 데이터를 순서에 상관없이 자동정렬을 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.categoryAxisRenderer.js"/></script>  
+<!-- 축의 데이터 표현설정과 그래프위의 점의 Option을 설정 -->  
+<script type="text/javascript" src="/coffeeNbread_user/resource/jqplot/jqplot.canvasAxisTickRenderer.js"/></script> 
 <script type="text/javascript">
 $(document).ready(function(){
 	$('input[type="checkbox"]').on("click", function(){
@@ -26,6 +48,7 @@ $(document).ready(function(){
 	});
 	
 	$("#total").on("click", function(){
+		$("#graph").nextAll("#chart").remove();
 		$("#br2").prevAll("#optionId").remove();
 		$("#br2").prevAll("#optionName").remove();
 		$("#br2").prevAll('input[type="button"]').remove();
@@ -41,7 +64,7 @@ $(document).ready(function(){
 				$("#tbody").remove();
 				$("#table").append("<tbody id='tbody'><tr id='tr1'><td id='td1' width='70' align='center' style='font-weight:bold; background-color:LemonChiffon'>제품명</td>");
 				values = list.productNameList;
-	
+								
 				var txt = "";
 				$.each(values, function(index, value){
 					txt += "<td align='center'>" + value + "</td>";
@@ -56,11 +79,65 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
 	
 	$("#date").on("click", function(){
+		$("#graph").nextAll("#chart").remove();
 		$("#br2").prevAll("#optionId").remove();
 		$("#br2").prevAll("#optionName").remove();
 		$("#br3").prevAll('input[type="button"]').remove();
@@ -79,6 +156,7 @@ $(document).ready(function(){
 	});
 	
 	$("#category").on("click", function(){
+		$("#graph").nextAll("#chart").remove();
 		$("#br1").prevAll('input[type="button"]').remove();
 		$("#br1").prevAll('input[type="date"]').remove();
 		$("#br3").prevAll('input[type="button"]').remove();
@@ -104,6 +182,7 @@ $(document).ready(function(){
 	});
 	
 	$("#name").on("click", function(){
+		$("#graph").nextAll("#chart").remove();
 		$("#br1").prevAll('input[type="button"]').remove();
 		$("#br1").prevAll('input[type="date"]').remove();
 		$("#br2").prevAll("#optionId").remove();
@@ -140,6 +219,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -169,6 +301,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -198,6 +383,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -227,6 +465,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -256,6 +547,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -285,6 +629,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -314,6 +711,59 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
@@ -343,12 +793,67 @@ $(document).ready(function(){
 					txt += "<td align='center'>" + value + "</td>";
 				});
 				$("#td2").after(txt);
+				
+				$("#graph").nextAll("#chart").remove();
+				$("#graph").after("<div id='chart'></div>");
+				
+				var name = list.productNameList;
+				var count = list.countList;
+			
+				var graph = [];
+				for(var i=0; i<name.length; i++) {
+					graph.push([name[i], count[i]]);
+				}
+				var plot = $.jqplot('chart', [graph],{
+					animate: true,
+					animateReplot: true,
+					title: "판매량 그래프",
+					series: [
+						{
+							label : "판매량",
+							renderer: $.jqplot.BarRenderer,
+							pointLabels: {
+								show: true,
+								stackedValue: true
+							},
+							rendererOptions: {
+								animation: {
+									speed:2500
+								},
+								barWidth: 40,
+								barPadding: -15,
+								barMagin: 0,
+								varyBarColor: true
+							}
+						}
+					],
+					axes: {
+						xaxis: {
+							renderer:$.jqplot.CategoryAxisRenderer,
+							label: "제품명"
+						},
+						yaxis: {
+							min: 0,
+							max: 50,
+ 							tickOptions: {
+								formatString: '%d'
+							},
+							label: "판매량"
+						}
+					},
+					highlighter: {
+						show: false
+					}
+					
+				});
 			}
 		});
 	});
-	
 });
+
 </script>
+
+<h4 style="font-weight:bold">판매량</h4>
 
 <input type="checkbox" name="choice" id="total" value="total">오늘 전체&nbsp;&nbsp;<br id=br0>
 <input type="checkbox" name="choice" id="date" value="date">날짜별&nbsp;&nbsp;<br id=br1>
@@ -359,19 +864,25 @@ $(document).ready(function(){
 <table id="table">
 	<tbody id="tbody">
 		<tr id="tr1">
-			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">제품명</td>
+			<td id="productNameList" width="70" align="center" style="font-weight:bold; background-color:LemonChiffon"><input type="hidden" value="${requestScope.productNameList }"/>제품명</td>
 			<c:forEach items="${requestScope.productNameList }" var="string">
 				<td align="center">${string }</td>
 			</c:forEach>
 		</tr>
 		<tr id="tr2">
-			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">판매량</td>
+			<td id="countList" width="70" align="center" style="font-weight:bold; background-color:LemonChiffon"><input type="hidden" value="${requestScope.countList }"/>판매량</td>
 			<c:forEach items="${requestScope.countList }" var="string">
 				<td align="center">${string }</td>
 			</c:forEach>
 		</tr>
 	</tbody>
 </table>
+
+<br id="graph">
+
+
+<div id="chart"></div>  
+
 
 <br><br>
 
@@ -382,7 +893,11 @@ $(document).ready(function(){
 		<tr>
 			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">상승세</td>
 			<c:forEach items="${requestScope.upProductList }" var="product">
-				<td align="center">${product.productName }</td>
+				<td id="up" align="center">
+				<input type="hidden" value="${product.productId}"/>
+				<input type="hidden" value="${product.storeId }"/>
+				${product.productName }
+				</td>
 			</c:forEach>
 		</tr>
 	</tbody>
@@ -395,7 +910,11 @@ $(document).ready(function(){
 		<tr>
 			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">하락세</td>
 			<c:forEach items="${requestScope.downProductList }" var="product">
-				<td align="center">${product.productName }</td>
+				<td id="down" align="center">
+				<input type="hidden" value="${product.productId}"/>
+				<input type="hidden" value="${product.storeId }"/>
+				${product.productName }
+				</td>
 			</c:forEach>
 		</tr>
 	</tbody>
@@ -408,11 +927,16 @@ $(document).ready(function(){
 		<tr>
 			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">유지중</td>
 			<c:forEach items="${requestScope.keepProductList }" var="product">
-				<td align="center">${product.productName }</td>
+				<td id="keep" align="center">
+				<input type="hidden" value="${product.productId}"/>
+				<input type="hidden" value="${product.storeId }"/>
+				${product.productName }
+				</td>
 			</c:forEach>
 		</tr>
 	</tbody>
 </table>
+
 <br><br>
 
 <h4 style="font-weight:bold">예상 생산량</h4>
