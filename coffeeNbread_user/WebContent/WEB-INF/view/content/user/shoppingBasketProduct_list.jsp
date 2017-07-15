@@ -7,69 +7,39 @@
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 
 <script type="text/javascript">
- /* $(document).ready(function(){
-	 $("#btn_delete").on("click", function(){
+/*   $(document).ready(function(){
 	
-	 $.ajax({
-			alert('aaaa');
-
-			"url":"/coffeeNbread_user/user/removeShoppingBasketProductController.do",
-			"data":{"productId":$("#btn_delete").val()},
-			/* "success":function(){
-				$(btn).parent.remove(); */
+	  $(".submitBtn").on("click",function() {
 			
-		}); 
-	 });
-	});
-	 
- 
-	 
-});  */
- 
-/* 	$("#btn_delete").on("click", function(){
-		alert("성공");
-		//var btn = this;
-		var $this = $(this);
-		var id = $(this).parent().prev().prev().text();
-		alert('확인');
-		alert(id);	 */
-		
-		
-		 
-
-	/*   $(document).ready(function() {
-
-		$("input#btn").on("click", function() {
-
-			alert('aaaaa');
-			$.ajax({
-				url : "/coffeeNbread_user/user/removeShoppingBasketProductController.do",
+		  var btn = this;
+   		  var productId= $(btn).prev().val();
+	        alert(productId);	
+   		    $.ajax({
 				
-				data : {"id" : $("#id").val()},
-				beforeSend:function(){
-				   if(!$("#id").val()){
-					   alert("값을 넣으세요");
-					   return false;
-				   }	
-				},
-				success: function(txt){
-					alert(txt);
-				//	$("#result").html();//기존거 지우고 변경
-				    $("#result").empty().append(txt);
-					//$("#result").append(txt);//추가
-				},
-				error:function(){
-					alert("오류가 발생했습니다.");
-				}
-			
-
-			});
-		})
-	}); */
-	
+				 url : "/coffeeNbread_user/user/removeShoppingBasketProductController.do",
+				data : {"productId" :productId} 
+				
+				
+			}); 
+		});
+  }); */
 
 </script>
-
+	<script type="text/javascript">
+			$(document).ready(function(){
+				/* $(".count").on("change",function(){
+					
+					document.getElementById( "productCount" ).setAttribute( 'value', this.value);
+				}); */
+				$(".updateBtn").on("click", function(){
+					
+					var uForm = document.getElementById("updateForm");
+					uForm.productCount.value = $(this).parent().prev().children(".count").val();
+					uForm.productId.value = $(this).prev().text();
+					uForm.submit();
+				});
+			});//ready 
+		</script>
 
 <style type="text/css">
 table, td {
@@ -101,11 +71,12 @@ td {
 				<td>제품명</td>
 				<td>가격</td>
 				<td>개수</td>
+				<td>수정</td>
 				<td>삭제</td>
 
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="tbody">
 
 			<%-- ######################################################
 																조회된 item 출력 
@@ -118,43 +89,55 @@ td {
 					<td>${list.product.productPicture}</td>
 					<td>${list.product.productName}</td>
 					<td>${list.product.productPrice}</td>
-					<td><input type="number" min="0" name="productCount"
-						value="${list.productCount}"></td>
+					<td><input type="number" min="0" value="${list.productCount}" class="count"></td>
+					<td>
+						  <span style="display: none;">${list.product.productId }</span>
+						  <button type="button" class="updateBtn">
+						  	<i class="glyphicon glyphicon-trash"></i>수정
+						  </button>
+					</td>
+					
 					<td>
 						<form
 							action="${initParam.rootPath }/user/removeShoppingBasketProductController.do"
 							method="post">
 							<sec:csrfInput />
 							<%-- csrf 토큰 --%>
-							<%-- <input type="hidden" value="${product.storeId }" name="storeId"> --%>
-							<button id="btn_delete" name="productId"
-								value="${list.product.productId }">삭제</button>
+						<input  type="hidden" name="productId" value="${list.product.productId }"/>
+						<button type="submit" class="submitBtn">
+						<i class="glyphicon glyphicon-trash"></i>삭제
+						
+						</button>
 						</form>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-
-	<form
-		action="${initParam.rootPath }/user/findAllProductPriceController.do"
-		method="post">
+<hr>
+<hr>
+<br>
+  <br>
+  <br>
+  <br>
+  
+	
+    <button type="submit" class="productBtn">총금액</button>
+		   <input type="text" value="${requestScope.totalPrice }">
+    
+    <hr>
+    <br>
+       
+           
+           
+          
+     <button type="button" id="btn">결제페이지로 이동</button>
+     <form action="${initParam.rootPath }/user/modifyShoppingBasketProductCount.do" method="post" id="updateForm">
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
-		<input type="hidden"
-			value="${requestScope.shoppingBasketProductList[0].storeId }"
-			name="storeId" />
-		<c:forEach items="${requestScope.shoppingBasketProductList }"
-			var="List">
-			<input type="hidden" name="productId"
-				value="${requestScope.product.productId }">
-		</c:forEach>
-		<input type="text" name="id" id="id">
-		<button type="button" id="btn">결제페이지로 이동</button>
+	  <input  type="hidden" name="productCount" />
+	  <input  type="hidden" name="productId" />
 	</form>
-
-
 </body>
 
 

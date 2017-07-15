@@ -103,6 +103,22 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 
 	}
 
+	
+	/* 장바구니에 있는 제품들 개수 수정. */
+	@Override
+	public ShoppingBasketProduct findShoppingBasketProduct(String userId,String storeId, String productId)
+		 {
+                return shoppingBasketProductDao.selectShoppingBasketProductByProductId(userId, storeId, productId);
+		 }
+
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * if (shoppingBasketProduct.getProductCount() == 0) {
 	 * 
@@ -124,6 +140,27 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	 * shoppingBasketProduct); System.out.println("새로운 제품2"); } }
 	 */
 
+	
+	/* 장바구니에있는 목록중 제품아이디로 찾기 */
+	
+	
+	
+ 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 장바구니에서 결제페이지 넘어갈때 총가격 부를수 있는 서비스.
 	 * 

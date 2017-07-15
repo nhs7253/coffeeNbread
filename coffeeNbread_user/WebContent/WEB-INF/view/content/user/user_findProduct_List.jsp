@@ -24,7 +24,33 @@ td {
 		$(".curruntProductCount").on("change", function() {
 
 		});
-	});//ready
+		/*
+		$(".btn-custom").on("click",function() {
+			
+		
+			 var btn = this;
+      		 var productId= $(btn).prev().prev().val();
+      		 
+      		 var storeId=$(btn).prev().val();
+      		 var productCount=$(btn).parent().parent().prev().first().first().val();
+      		 alert(productId+' '+storeId);
+      		   
+	 		$.ajax({
+				
+			    alert("ajax");
+				 url : "/coffeeNbread_user/user/addShoppingBasketProductController.do",
+				data : {"productId" :productId,"storeId":storeId ,"productCount":productCount},  
+				beforeSend : function() {
+					if (productCount.val()==0) {
+					alert("제품을 선택해주세요!!");
+					return false;
+					}
+					} 
+				
+			});
+		});
+		*/
+	});
 </script>
 <h2>제품목록조회(예약)</h2>
 
@@ -52,19 +78,31 @@ td {
 	</div>
 </div>
 
+<form
+	action="${initParam.rootPath }/user/ViewShoppingBasketProductController.do"
+	method="post">
+	<sec:csrfInput />
+	<%-- csrf 토큰 --%>
+	<input type="hidden" value="${sessionScope.storeId }"
+		name="storeId" /> 
+	<button type="submit" class="btn-custom">
+		<i class="glyphicon glyphicon-search"></i>장바구니 목록 조회
+	</button>
+   </form>
 
 
 <p>
-<form
-	action="${initParam.rootPath }/user/userFindProductListController.do"
-	method="post" class="form-inline quick-search-form" role="form">
-	<sec:csrfInput />
+
 	<%-- csrf 토큰 --%>
 
 
 
 	<c:forEach items="${requestScope.list }" var="product">
-		<div style="width: 25%; height: 300px; float: left;">
+	<form
+	action="${initParam.rootPath }/user/addShoppingBasketProductController.do"
+	method="post" class="form-inline quick-search-form" role="form">
+	<sec:csrfInput />
+		<div style="width: 25%; height: 320px; float: left;">
 			<table>
 				<tr>
 					<td align="center"><img
@@ -78,30 +116,30 @@ td {
 					<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
-					<td align="center"><input type="number"
-						name="productTradeCountList" class="curruntProductCount" value="0" />
+					<td align="center">
+					<input type="number" name="productCount" class="productCount" value="0" />
 					</td>
 				</tr>
 
 				<tr>
 					<td align="center">
-
-						<button type="submit" class="btn btn-custom">장바구니</button>
+						<input  type="hidden" name="productId" value="${product.productId }"/>
+						<input  type="hidden" name="storeId" value="${product.storeId }"/>
+						<button type="submit" class="btn-custom">
+							<i class="glyphicon glyphicon-shopping-cart"></i>장바구니
+							
+						</button>
 
 					</td>
 				</tr>
 			</table>
-			<input type="hidden" name="productIdList"
-				value="${product.productId }" /> <input type="hidden"
-				name="productNameList" value="${product.productName }" /> <input
-				type="hidden" name="productPriceList"
-				value="${product.productPrice }" />
+
 
 
 		</div>
-	</c:forEach>
 </form>
+	</c:forEach>
 
-
+  
 
 <p>
