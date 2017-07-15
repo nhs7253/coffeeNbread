@@ -225,4 +225,9 @@ public class SalesVolumeServiceImpl implements SalesVolumeService {
 			productDao.updateProduct(new Product(productId, storeId, product.getProductName(), product.getProductPrice(), product.getProductCategory(), product.getProductDetail(), product.getSellingOption(), product.getTodayProductCount()*1, product.getRecommendProductCount()));
 		}
 	}
+
+	@Override
+	public int findSalesVolumeByStoreIdAndProductIdAndTradeDate(String storeId, String productId, Date tradeDate) {
+		return productPaymentDao.selectSalesVolumeByStoreIdAndProductIdAndTradeDate(storeId, productId, tradeDate);
+	}
 }

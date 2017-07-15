@@ -849,6 +849,10 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$("#down").on("click", function(){
+		alert("하락세입니다");
+	});
 });
 
 </script>

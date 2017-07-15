@@ -172,6 +172,15 @@
 		ORDER BY product_id ASC
 	</select>
 
+	<!-- selectSalesVolumeByStoreIdAndProductIdAndTradeDate -->
+	<select id="selectSalesVolumeByStoreIdAndProductIdAndTradeDate" resultType="int" parameterType="map">
+		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count
+		FROM payment_details
+		WHERE store_id = #{storeId}
+		AND trade_date = #{tradeDate}
+		AND product_id = #{productId}
+	</select>
+
 	<!-- selectPaymentDetailsListByStoreIdAndMethod -->
 	<select id="selectPaymentDetailsListByStoreIdAndMethod"
 		resultType="hashmap" parameterType="map">
