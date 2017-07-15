@@ -5,7 +5,7 @@
 
 <style type="text/css">
 table, td {
-	border: 1px solid black;
+	
 }
 
 table {
@@ -23,7 +23,7 @@ td {
 
 
 	<h2>USER_LIST _</h2>
-
+<br><br>
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">

@@ -1,5 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
+table {
+	width: 800;
+	border-collapse: collapse;
+}
+
+th {
+	width: 200px;
+	text-ailgn:center;
+}
+
+td {
+	width: 400px;
+	/* padding: 10px; */ /*td 간 간격 */
+}
+</style>
 <h2>PRODUCT_DETAIL</h2>
 
 	<div class="col-sm-1"></div>

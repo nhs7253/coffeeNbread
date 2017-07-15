@@ -361,3 +361,12 @@ INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DA
  --Qna 게시판에 있는 댓글
 INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),'',2);
 INSERT INTO board_reply VALUES(reply_no_seq.nextval, '댓글 1', 'user-1', TO_DATE('2017-06-26', 'yyyy-mm-dd'),2,'');
+
+
+--payment_optionlist
+INSERT INTO payment_optionlist VALUES('1','카드');
+INSERT INTO payment_optionlist VALUES('2','현금');
+INSERT INTO payment_optionlist VALUES('3','카카오페이');
+
+--general_user
+
