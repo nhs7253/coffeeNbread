@@ -91,6 +91,9 @@ td {
 
 
 
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 
 	<table class="table table-hover">
 		<thead>
@@ -154,6 +157,8 @@ td {
 		<button type="button" id="btn">결제페이지로 이동</button>
 	</form>
 
+		</div>
+			<div class="col-sm-1"></div>
 
 </body>
 
