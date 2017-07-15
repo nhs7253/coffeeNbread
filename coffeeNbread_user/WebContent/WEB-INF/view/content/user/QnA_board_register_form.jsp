@@ -8,7 +8,9 @@
 <h1>게시글 작성</h1>
 <hr>
 <br>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 
 <form
 	action="${initParam.rootPath }/user/addQnaBoardContentsController.do"
@@ -23,5 +25,5 @@
 			<i class="glyphicon glyphicon-ok"></i>등록
 		</button>
 	</p>
-</form>
-
+</form></div>
+<div class="col-sm-1"></div>

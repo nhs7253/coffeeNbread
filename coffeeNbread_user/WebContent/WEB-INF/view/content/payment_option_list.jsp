@@ -24,10 +24,12 @@ td {
 
 
 	<h2>플랫폼 지원 결제 목록</h2>
-
-	<table class="w3-table-all">
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue">
+			<tr >
 				<th>아이디</th>
 				<th>방법</th>
 				<th>삭제</th>
@@ -67,4 +69,5 @@ td {
 		</button>
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
-	</form>
+	</form></div>
+	<div class="col-sm-1"></div>

@@ -22,14 +22,15 @@ td {
 </style>
 	<h2>${sessionScope.storeName }Q&A BOARD</h2>
 
-
-	<div class="container">
-		<div id="quick-access">
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
+	
 			<form
 				action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
 				method="post">
 				<div class="form-group">
-					<select name="select" class="form-control">
+					<select name="select" class="form-control col-xs-2">
 						<option value="title">제목</option>
 						<option value="content">내용</option>
 						<option value="titleAndcontent">제목+내용</option>
@@ -41,8 +42,7 @@ td {
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-			</div>
-			</div>
+			
 			<br>
 
 
@@ -155,4 +155,5 @@ td {
 				<!-- 마지막 페이지로 이동 -->
 				<a
 					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
-					페이지</a>
+					페이지</a></div>
+	<div class="col-sm-1"></div>

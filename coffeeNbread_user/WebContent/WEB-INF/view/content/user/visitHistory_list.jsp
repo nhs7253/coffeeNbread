@@ -11,11 +11,13 @@ table, td {
 table {
 	width: 700px;
 	border-collapse: collapse;
+	
 }
 
 td {
 	padding: 5px; /* //td 간 간격 */
 }
+
 </style>
 
 </head>
@@ -24,9 +26,9 @@ td {
 
 	<h2>USER_VISIT_HISTORY</h2>
 
-
-	<div class="container">
-		<div id="quick-access">
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 			<form
 				action="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -39,8 +41,7 @@ td {
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-		</div>
-	</div>
+	
 	<br>
 	<form
 		action="${initParam.rootPath }/user/selectRemoveStoreVisitHistoryController.do"
@@ -166,3 +167,5 @@ td {
 		<a
 			href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
+			</div>
+			<div class="col-sm-1"></div>

@@ -19,11 +19,11 @@
 
 
 	<!-- update -->
-	<update id="updateStorePictureByStorePicture" parameterType="map">
+	<update id="updateStorePictureByStorePicture" parameterType="string">
 		UPDATE store_picture
-		SET	   store_picture = #{storePictureByVO}
-		WHERE  store_id = #{storeIdByVO}
-		AND	   store_picture = #{storePicture}
+		SET	   store_picture = #{storePicture}
+		WHERE  store_id = #{storeId}
+		
 	</update>
 	
 	

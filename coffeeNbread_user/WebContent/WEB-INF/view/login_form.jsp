@@ -373,12 +373,13 @@ body {
   content: '\f067';
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
+  font-size: 30px;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-transform: translate(0, 0);
           transform: translate(0, 0);
+           content: 'register'
 }
 .card.alt .title,
 .card.alt .input-container,

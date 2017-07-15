@@ -36,10 +36,14 @@ $(document).ready(function(){
 	});//end of document
 </script>
 <body>
+
+<div class="container">
+<div id="quick-access">
 	<form action="${initParam.rootPath }/addStoreController.do"
 		method="post" enctype="multipart/form-data">
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
+		<br><br><br><br>
 		<table >
 			<tr class="form-group">
 				<th>매장 분류 </th>
@@ -123,5 +127,7 @@ $(document).ready(function(){
 		</table>
 
 	</form>
+	</div></div>
+	
 </body>
 </html>

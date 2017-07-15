@@ -33,11 +33,7 @@ public class StorePictureDaoImpl implements StorePictureDao {
 
 	@Override
 	public int updateStorePictureByStorePicture(StorePicture storePictureVO) {
-		Map<String, String> info = new HashMap<>();
-		info.put("storePictureByVO", storePictureVO.getStorePicture());
-		info.put("storeIdByVO", storePictureVO.getStoreId());
-	
-		return session.update(makeSqlId("updateStorePictureByStorePicture"), info);
+		return session.update(makeSqlId("updateStorePictureByStorePicture"), storePictureVO);
 	}
 
 	@Override

@@ -23,7 +23,9 @@ td {
 <body>
 
 	<h2>STORE_MANAGE_LIST</h2>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 	<div class="container">
 		<div id="quick-access">
 			<form action="${initParam.rootPath }/userManagementListController.do"
@@ -180,4 +182,5 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
+			페이지</a></div>
+	<div class="col-sm-1"></div>

@@ -17,6 +17,7 @@
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />
 	<%-- csrf 토큰 --%>
+	<br><br><br><br>
 	<table>
 		<tr class="form-group">
 			<th>제품 ID</th>

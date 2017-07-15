@@ -54,15 +54,16 @@
 	<%--메인 body --%>
 	<section class="row content">
 		<%-- 메뉴 --%>
-		<nav class="col-sm-4  ">
+		<nav class="col-sm-2">
 			<tiles:insertAttribute name="menu"/>
 		</nav>
 		<!-- 내용 -->
-		<section  class="col-sm-8 whole">
+		
+		<div  class="col-sm-10 ">
 			
 			<tiles:insertAttribute name="content"/>
-		</section>
-	
+		</div>
+		
 	</section>
 </div>
 </body>

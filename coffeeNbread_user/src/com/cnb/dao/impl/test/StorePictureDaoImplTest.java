@@ -25,8 +25,10 @@ public class StorePictureDaoImplTest {
 	}
 	
 	public void examTest() {
+		StorePicture sp = new StorePicture("매장사진16", "iddddd");
 		//System.out.println(dao.insertStorePicture(new StorePicture("매장사진17", "s-2")));
-		//System.out.println(dao.updateStorePictureByStorePicture(new StorePicture("매장사진12", "s-2"), "매장사진120"));
+		System.out.println(dao.updateStorePictureByStorePicture(sp));
+		System.out.println(sp.getStoreId() + "  "+ sp.getStorePicture());
 		//System.out.println(dao.deleteStorePicture(new StorePicture("매장사진17", "s-2")));
 		//System.out.println(dao.selectStorePictureListByStoreId("s-2"));
 		//System.out.println(dao.selectStorePictureByStoreIdAndStorePicture("매장사진1", "s-2"));
