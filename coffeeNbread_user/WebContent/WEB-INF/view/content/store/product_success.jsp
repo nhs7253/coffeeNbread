@@ -42,7 +42,7 @@
 			</tr>
 			<tr class="form-group">
 				<th>제품 사진</th>
-				<td><img src="/coffeeNbread_user/up_image/${requestScope.fileName}" width="300px"></td>
+				<td><img src="/coffeeNbread_user/up_image/${requestScope.product.productPictureList[0].productPicture}" width="300px"></td>
 			</tr>
 		</table></div>
 <div class="col-sm-1"></div>

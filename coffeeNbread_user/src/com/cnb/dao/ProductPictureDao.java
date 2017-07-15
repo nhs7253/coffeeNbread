@@ -1,9 +1,5 @@
 package com.cnb.dao;
 
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import com.cnb.vo.ProductPicture;
 
 /*
