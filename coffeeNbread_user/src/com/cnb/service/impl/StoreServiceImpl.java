@@ -122,7 +122,7 @@ public class StoreServiceImpl implements StoreService{
 		 optionCategoryService.modifyOptionCategory(optionCategory, store.getStoreId());
 		 
 		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
-		 
+		 System.out.println("매개변수 sp"+storePicture.get(0));
 		 storePositionDao.updateStorePosition(storePosition);
 		 
 		 if(paymentIdList!=null){
