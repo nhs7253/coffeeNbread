@@ -140,7 +140,6 @@
 	            <c:if test="${!empty sessionScope.storeInfo.storePictureList[0].storePicture }">
 					<img src="${initParam.rootPath }/up_image/${sessionScope.storeInfo.storePictureList[0].storePicture }" alt="" /><br />
 				</c:if>
-	           
 	            <button type="button" id="modifystorePicture">수정하기</button>
             </td>
          </tr>

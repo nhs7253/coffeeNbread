@@ -113,7 +113,6 @@ public class StoreServiceImpl implements StoreService{
 	@Transactional(rollbackFor=Exception.class)
 	public Store modifyStore(Store store,List<OptionCategory> optionCategory,List<StorePicture> storePicture, List<String> paymentIdList, StorePosition storePosition) throws DuplicatedStoreIdException, StorePictureNotFoundException, DuplicatedOptionCategoryNameException {
 		 if(storedao.selectStoreById(store.getStoreId())!=null){
-			 System.out.println("modifyStore = " + optionCategory);
 			 storedao.updateStore(store);
 		 }else{
 				throw new DuplicatedStoreIdException(store.getStoreId()+" 는 없는 ID입니다.");
@@ -121,9 +120,13 @@ public class StoreServiceImpl implements StoreService{
 		 
 		 optionCategoryService.modifyOptionCategory(optionCategory, store.getStoreId());
 		 
-		 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
-		 System.out.println("매개변수 sp"+storePicture.get(0));
-		 storePositionDao.updateStorePosition(storePosition);
+		 if(storePicture != null){
+			 storePictureService.modifyStorePictureByStorePicture(storePicture.get(0));
+			 storePositionDao.updateStorePosition(storePosition);
+		 }
+		 
+	
+		 
 		 
 		 if(paymentIdList!=null){
 				//매장 지원 결제 내역
