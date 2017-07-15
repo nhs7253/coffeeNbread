@@ -59,8 +59,8 @@
 		</nav>
 		<!-- 내용 -->
 		
-		<div  class="col-sm-10 ">
-			<br><br><br><br><br>
+		<div  class="col-sm-10 " style=padding-top:75px; >
+			
 			<tiles:insertAttribute name="content"/>
 		</div>
 		

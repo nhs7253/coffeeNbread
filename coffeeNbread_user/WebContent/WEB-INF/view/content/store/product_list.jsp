@@ -76,8 +76,7 @@ ${requestScope.list }
 	</table>
       <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 
-</form></div>
-<div class="col-sm-1"></div>
+</form>
 
 <p>
 
@@ -189,4 +188,5 @@ ${requestScope.list }
 
    <!-- 마지막 페이지로 이동 -->
    <a href="${initParam.rootPath }/findProductListController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
-</c:if>
+</c:if></div>
+<div class="col-sm-1"></div>
