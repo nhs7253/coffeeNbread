@@ -151,14 +151,23 @@
 	<!-- 한 제품 당 주문 판매량 + 거래 제품 개수는 reservation_order_count로 모아서 보여주는 걸로!!! -->
 	<select id="selectPaymentDetailsListByStoreIdAndTradeDate"
 		resultType="hashmap" parameterType="map">
-		SELECT SUM(reservation_order_count
-		+ product_trade_count) reservation_order_count,
-		product_id
-		FROM
-		payment_details
+		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count, product_id
+		FROM payment_details
 		WHERE store_id = #{storeId}
-		AND trade_date =
-		#{tradeDate}
+		AND trade_date = #{tradeDate}
+		GROUP BY product_id
+		ORDER BY product_id ASC
+	</select>
+
+
+	<!-- selectPaymentDetailsListByStoreIdAndTradeDateAndProductId -->
+	<select id="selectPaymentDetailsListByStoreIdAndTradeDateAndProductId"
+		resultType="hashmap" parameterType="map">
+		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count, product_id
+		FROM payment_details
+		WHERE store_id = #{storeId}
+		AND trade_date = #{tradeDate}
+		AND product_id = #{productId}
 		GROUP BY product_id
 		ORDER BY product_id ASC
 	</select>

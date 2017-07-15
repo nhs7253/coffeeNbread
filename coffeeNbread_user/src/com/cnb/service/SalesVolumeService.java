@@ -87,9 +87,6 @@ public interface SalesVolumeService {
 	 */
 	void modifyProductTodayCountByGap(String storeId, String productId, String identifyCode);
 	
-	/**
-	 * 각 제품마다 오늘 현장에서 팔린 개수 조회 - 현장 판매 시스템에 이용
-	 * @param storeId
-	 */
+	
 	
 }

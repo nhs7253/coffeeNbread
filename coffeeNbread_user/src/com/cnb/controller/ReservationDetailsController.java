@@ -68,6 +68,8 @@ public class ReservationDetailsController {
 		List reservationList = (List)map.get("list");
 			
 		List<String> userNameList = new ArrayList<>();
+		List<String> phoneNumList = new ArrayList<>();
+		
 		
 		for(int i=0; i<reservationList.size(); i++) {
 //			((ReservationDetails)reservationList.get(i)).setReservationConfirm(findReservationDetailsForm.getReservationConfirm());
@@ -75,11 +77,15 @@ public class ReservationDetailsController {
 			GeneralUser user = userService.findUser(((ReservationDetails)reservationList.get(i)).getUserId());
 			String userName = user.getUserName();
 			userNameList.add(userName);
+			
+			String phoneNum = user.getUserPhone();
+			phoneNumList.add(phoneNum);
 		}
 		
 		modelAndView.setViewName("store/reservation_list.tiles");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("userNameList", userNameList);
+		modelAndView.addObject("phoneNumList", phoneNumList);
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		
 		return modelAndView;

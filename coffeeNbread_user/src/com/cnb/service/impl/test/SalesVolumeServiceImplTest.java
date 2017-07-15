@@ -107,7 +107,7 @@ public class SalesVolumeServiceImplTest {
 
 		System.out.println("-----비율 비교 후 상승/하락세 정보 update-----");
 		try {
-			service.findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate("s-1", "빵", dt.parse("2017-07-11"));
+			service.findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate("s-1", "빵", dt.parse("2017-07-13"));
 		} catch (ParseException e) {
 			System.out.println("이상 발생");
 		}
