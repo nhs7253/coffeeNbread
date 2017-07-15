@@ -5,7 +5,7 @@
 
 <style type="text/css">
 table, td {
-	border: 1px solid black;
+	
 }
 
 table {
@@ -25,7 +25,7 @@ td {
 
 
 	<h2>USER_VISIT_HISTORY</h2>
-
+<br><br>
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
@@ -49,7 +49,7 @@ td {
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 
-		<table class="table">
+		<table class="table table-hover">
 			<thead>
 				<tr class="form-group">
 					<th>아이디</th>

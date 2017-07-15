@@ -14,6 +14,9 @@
 </script>
 
 <h2>제품 정보 수정</h2>
+
+	<div class="col-sm-1"></div>
+<div class="col-sm-10">
 <form action="${initParam.rootPath }/modifyProductController.do"
 	method="POST" enctype="multipart/form-data">
 	<sec:csrfInput />
@@ -95,4 +98,5 @@
 			</td>
 		</tr>
 	</table>
-</form>
+</form></div>
+<div class="col-sm-1"></div>

@@ -251,32 +251,30 @@ public class ProductController {
 		
 		
 		
-//	//제품 목록 조회
-//	@RequestMapping("findProductListController")
-//	public ModelAndView findProductListController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//		
-//		if(errors.hasErrors()) {
-//			modelAndView.setViewName("index.tiles");
-//			return modelAndView;
-//		}
-//
-//		Map<String, Object> map = service.findProductList(productFindForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-//		
-//		modelAndView.setViewName("store/product_list.tiles");
-//		modelAndView.addObject("list", map.get("list"));
-//		modelAndView.addObject("pageBean", map.get("pageBean"));
-//		modelAndView.addObject("storeId", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-//		
-//		return modelAndView;
-//	}
+	//제품 목록 조회
+	@RequestMapping("findProductListManagerController")
+	public ModelAndView findProductListManagerController(@ModelAttribute("productFind") @Valid ProductFindForm productFindForm, BindingResult errors) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(errors.hasErrors()) {
+			modelAndView.setViewName("index.tiles");
+			return modelAndView;
+		}
+
+		Map<String, Object> map = service.findProductList(productFindForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		
+		modelAndView.setViewName("store/product_list.tiles");
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("pageBean", map.get("pageBean"));
+		modelAndView.addObject("storeId", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		
+		return modelAndView;
+	}
 		
 		//제품 목록 조회 - 제품 종류/제품명/판매여부
 		@RequestMapping("findProductListByMethod")
 		public ModelAndView findProductListByMethod(@ModelAttribute("productFindByMethod") @Valid ProductFindByMethodForm productFindByMethodForm, BindingResult errors, String storeId) {
-			
-
 			
 			ModelAndView modelAndView = new ModelAndView();
 			
@@ -344,7 +342,7 @@ public class ProductController {
 	
 		//제품 상세 조회
 		@RequestMapping("findProductDetailController")
-		public ModelAndView findProductDetailController(@RequestParam(value="productId", required=false) String productId, String StoreId) {
+		public ModelAndView findProductDetailController(@RequestParam(value="productId", required=false) String productId, @RequestParam(value="storeId", required=false) String storeId) {
 			
 			ModelAndView modelAndView = new ModelAndView();
 			
@@ -353,8 +351,9 @@ public class ProductController {
 				return modelAndView;
 			}
 			
-			Product product = service.findProductById(StoreId, productId);
-			ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(productId, StoreId);
+			Product product = service.findProductById(storeId, productId);
+			
+			ProductPicture productPicture = productPictureService.findProductPictureByProductIdAndStoreId(productId, storeId);
 			
 			product.setProductPicture(productPicture.getProductPicture());
 			

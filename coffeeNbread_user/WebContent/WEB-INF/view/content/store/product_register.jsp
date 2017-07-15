@@ -12,7 +12,9 @@
 		});
 	});
 </script>
-
+<h2>PRODUCT_REGISTER</h2>
+	<div class="col-sm-1"></div>
+<div class="col-sm-10">
 <form action="${initParam.rootPath }/addProductController.do"
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />
@@ -71,4 +73,4 @@
 			</td>
 		</tr>
 	</table>
-</form>
+</form></div><div class="col-sm-1"></div>

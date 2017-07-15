@@ -109,7 +109,7 @@ Header
     height: 55px;
   }
 }
-
+/* 
 .cd-logo {
   float: left;
   display: block;
@@ -123,7 +123,7 @@ Header
     margin: 16px 0 0 36px;
   }
 }
-
+ */
 .cd-nav-trigger {
   /* navigation trigger - visible on mobile devices only */
   float: right;

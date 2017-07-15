@@ -2,6 +2,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <h2>정보 수정 가입</h2>
+
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+	
 <form action="${initParam.rootPath }/user/modifyUserController.do" method="post">
 	<table>
 	<tr class="form-group">
@@ -45,4 +49,4 @@
 	</table>
 	<button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-ok"></i>수정 완료</button>
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-</form>
+</form></div><div class="col-sm-1"></div>

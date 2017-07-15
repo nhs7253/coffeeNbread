@@ -9,7 +9,7 @@
 
 <body>
  <header class="cd-main-header">
- <a href="#0" class="cd-logo"><img src="/SRC2/flynavi/img/cd-logo.svg" alt="Logo"></a>
+
  
 		<a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 
@@ -18,10 +18,7 @@
 				<li><a href="#0">Tour</a></li>
 				<li><a href="#0">Support</a></li>
 				<li class="has-children account">
-					<a href="#0">
-						<img src="/SRC2/flynavi/img/cd-avatar.png" alt="avatar">
-						Account
-					</a>
+					<a>Account</a>
 
 					<ul>
 

@@ -34,7 +34,9 @@ td {
 
 
 <h2>결제 페이지</h2>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 <form
 	action="${initParam.rootPath }/user/findAllProductPriceController.do">
 	<input type="hidden" name="storeId"> <input type="hidden"
@@ -136,4 +138,5 @@ td {
 	<br>
 	<br>
 	<input type="submit" value="결제하기">
-</form>
+</form></div>
+<div class="col-sm-1"></div>

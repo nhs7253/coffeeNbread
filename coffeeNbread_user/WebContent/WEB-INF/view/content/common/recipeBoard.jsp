@@ -105,8 +105,10 @@ table {
 
 
 
-	<div class="container">
-		<div id="quick-access">
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
+	
 			<form
 				action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -135,8 +137,7 @@ table {
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-		</div>
-	</div>
+	
 	<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
 		<button type="submit" class="btn-custom">
 			<i class="glyphicon glyphicon-ok"></i>글쓰기
@@ -150,9 +151,9 @@ table {
 
 
 
-	<table class="w3-table-all">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue">
+			<tr >
 				<th>글번호</th>
 				<th>사진</th>
 				<th>제목</th>
@@ -195,7 +196,6 @@ table {
 
 		</tbody>
 	</table>
-
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -267,4 +267,5 @@ table {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
-			페이지</a>
+			페이지</a></div>
+<div class="col-sm-1"></div>

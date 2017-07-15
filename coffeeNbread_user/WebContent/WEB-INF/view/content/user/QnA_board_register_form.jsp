@@ -18,7 +18,7 @@
 	<sec:csrfInput />
 	제목 : <input type="text" name="qnaBoardTitle" required> 비밀글<input
 		type="checkbox" name="qnaBoardSecret" value="Y"><br> 내용<br>
-	<textarea rows="20" cols="100" name="qnaBoardContent" required></textarea>
+	<textarea rows="15" cols="100" name="qnaBoardContent" required></textarea>
 	<input type="hidden" name="qnaStoreId" value="${param.storeId }" />
 	<p>
 		<button type="submit" class="btn btn-custom">

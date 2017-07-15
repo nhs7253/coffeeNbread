@@ -8,7 +8,9 @@
 <h1>플랫폼 지원 결제 목록 등록</h1>
 <hr>
 <br>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
 <form action="${initParam.rootPath }/addPaymentOptionListController.do"
 	method="post">
 	<sec:csrfInput />
@@ -25,5 +27,5 @@
 	<button type="submit" class="btn btn-default btn-circle">
 		<i class="glyphicon glyphicon-ok"></i> 등록
 	</button>
-</form>
+</form></div><div class="col-sm-1"></div>
 
