@@ -128,6 +128,7 @@ td {
 		    value="${list.productCount }"/>	
 		  <input type="hidden" name="storeIdList"
 		  value="${list.store.storeId}"> 
+		  
 	</c:forEach>
 	  제품 수령희망시간
 	  <input type="date" name="productHopeTime"/> 

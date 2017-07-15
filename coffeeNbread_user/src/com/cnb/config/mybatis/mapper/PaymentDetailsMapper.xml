@@ -56,24 +56,23 @@
 
 
 	<!--결제내역 목록 전체 페이징 원함. 매장별로도 검색가능-storeId가 있다면 가능.. -->
-	<select id="countSelectPaymentDetailsByUserIdAndStoreId"
+	<select id="countSelectPaymentDetailsByUserId"
 		parameterType="map" resultType="_int">
 
 		SELECT COUNT(*)
 		FROM payment_details
 		where user_id=#{userId}
-		AND store_id=#{storeId}
+		
 	</select>
 
 
 	<!--결제내역 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회 매장아이디 있으면 매장별 조회- 매장없으면 매장없이 조회.유저의 
 		결제내역은 어디서든 볼수있게 . -->
-	<select id="selectPaymentDetailsListByUserIdAndStoreId"
+	<select id="findSelectPaymentDetailsListByUserId"
 		resultMap="paymentDetails-product-store-resultmap" parameterType="map">
 
-		SELECT payment_no,
+	SELECT payment_no,
 		store_name,
-		pp.product_picture,
 		product_name,
 		sell_method,
 		payment_option,
@@ -83,8 +82,7 @@
 		FROM(
 		SELECT rownum rnum,
 		payment_no,
-		store_name
-		pp.product_picture,
+		store_name,
 		product_name,
 		sell_method,
 		payment_option,
@@ -95,19 +93,18 @@
 		SELECT
 		pd.payment_no,
 		s.store_name,
-		pp.product_picture,
 		p.product_name,
 		pd.sell_method,
 		pd.payment_option,
 		pd.reservation_order_count,
 		p.product_price,
 		pd.trade_date
-		FROM payment_details pd, product p,
-		product_picture pp,store s
-		WHERE pd.user_id = #{userId}
-	    and s.store_id=#{storeId}
+		FROM payment_details pd, product p, store s
+		where pd.product_id=p.product_id and s.store_id = p.store_id
+		and pd.user_id = #{userId}
+	    
 		)
-		WHERE rownum &lt;= #{endIndex}
+		WHERE rownum &lt;=#{endIndex}
 		)
 		WHERE rnum >= #{startIndex}
 

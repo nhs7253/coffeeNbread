@@ -6,6 +6,70 @@
 <script type="text/javascript"
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 
+<script type="text/javascript">
+ /* $(document).ready(function(){
+	 $("#btn_delete").on("click", function(){
+	
+	 $.ajax({
+			alert('aaaa');
+
+			"url":"/coffeeNbread_user/user/removeShoppingBasketProductController.do",
+			"data":{"productId":$("#btn_delete").val()},
+			/* "success":function(){
+				$(btn).parent.remove(); */
+			
+		}); 
+	 });
+	});
+	 
+ 
+	 
+});  */
+ 
+/* 	$("#btn_delete").on("click", function(){
+		alert("성공");
+		//var btn = this;
+		var $this = $(this);
+		var id = $(this).parent().prev().prev().text();
+		alert('확인');
+		alert(id);	 */
+		
+		
+		 
+
+	/*   $(document).ready(function() {
+
+		$("input#btn").on("click", function() {
+
+			alert('aaaaa');
+			$.ajax({
+				url : "/coffeeNbread_user/user/removeShoppingBasketProductController.do",
+				
+				data : {"id" : $("#id").val()},
+				beforeSend:function(){
+				   if(!$("#id").val()){
+					   alert("값을 넣으세요");
+					   return false;
+				   }	
+				},
+				success: function(txt){
+					alert(txt);
+				//	$("#result").html();//기존거 지우고 변경
+				    $("#result").empty().append(txt);
+					//$("#result").append(txt);//추가
+				},
+				error:function(){
+					alert("오류가 발생했습니다.");
+				}
+			
+
+			});
+		})
+	}); */
+	
+
+</script>
+
 
 <style type="text/css">
 table, td {
@@ -30,13 +94,15 @@ td {
 
 	<table class="table table-hover">
 		<thead>
-			<tr >
-				<th>제품카테고리</th>
-				<th>제품사진</th>
-				<th>제품명</th>
-				<th>가격</th>
-				<th>개수</th>
-				<th>삭제</th>
+
+			<tr class="w3-blue">
+				<td>제품카테고리</td>
+				<td>제품사진</td>
+				<td>제품명</td>
+				<td>가격</td>
+				<td>개수</td>
+				<td>삭제</td>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -78,11 +144,14 @@ td {
 		<%-- csrf 토큰 --%>
 		<input type="hidden"
 			value="${requestScope.shoppingBasketProductList[0].storeId }"
-			name="storeId" /> 
-			<c:forEach items="${requestScope.shoppingBasketProductList }" var="List">
-			  <input type="hidden"  name="productId" value="${requestScope.product.productId }">
-			</c:forEach>
-			<input type="submit" value="결제페이지로 이동 " />
+			name="storeId" />
+		<c:forEach items="${requestScope.shoppingBasketProductList }"
+			var="List">
+			<input type="hidden" name="productId"
+				value="${requestScope.product.productId }">
+		</c:forEach>
+		<input type="text" name="id" id="id">
+		<button type="button" id="btn">결제페이지로 이동</button>
 	</form>
 
 

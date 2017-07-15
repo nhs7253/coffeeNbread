@@ -1,172 +1,236 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cnb.config.mybatis.mapper.ReservationDetailsMapper">
-	<!-- 
-		ReservationDetails 테이블 관련 mapper
-		+ 예약정보 등록
-		+ 매장의 전체 예약 수 조회
-		+ 유저의 전체 예약 수 조회
-		+ 여러 조건으로 예약 수 조회
-		+ 매장아이디 & 유저아이디로 예약정보 조회
-		+ 유저아이디로 예약정보 조회
-		+ 매장아이디 & 예약시간으로 예약정보 조회
-		+ 매장아이디로 예약정보 조회
-		+ 매장아이디 & 제품수령희망시간으로 예약정보 조회
-	 -->
-	 
+	<!-- ReservationDetails 테이블 관련 mapper + 예약정보 등록 + 매장의 전체 예약 수 조회 + 유저의 전체 
+		예약 수 조회 + 여러 조건으로 예약 수 조회 + 매장아이디 & 유저아이디로 예약정보 조회 + 유저아이디로 예약정보 조회 + 매장아이디 
+		& 예약시간으로 예약정보 조회 + 매장아이디로 예약정보 조회 + 매장아이디 & 제품수령희망시간으로 예약정보 조회 -->
+
 	<!-- insert -->
 	<insert id="insertReservationDetails" parameterType="reservationDetails">
-		<selectKey keyProperty="reservationNo" resultType="_int" order="BEFORE">
+		<selectKey keyProperty="reservationNo" resultType="_int"
+			order="BEFORE">
 			SELECT reservation_no_seq.nextval FROM dual
 		</selectKey>
 		INSERT INTO reservation_details VALUES (
-											#{reservationNo},
-											#{reservationTime},
-											#{reservationCount},
-											#{reservationConfirm},
-											#{productHopeTime},
-											#{productId},
-											#{storeId},
-											#{userId}	)
+		#{reservationNo},
+		#{reservationTime},
+		#{reservationCount},
+		#{reservationConfirm},
+		#{productHopeTime},
+		#{productId},
+		#{storeId},
+		#{userId} )
 	</insert>
-	
+
+
 	<update id="updateReservationConfirmDate" parameterType="com.cnb.vo.ReservationDetails">
-		UPDATE  reservation_details
-		SET 	reservation_confirm = #{reservationConfirm}
-		WHERE 	product_id = #{productId}
-		AND  	store_id = #{storeId}
-		AND		user_id = #{userId} 
-		AND	  	reservation_no = #{reservationNo}
-		AND    	reservation_time = #{reservationTime}
-		AND    	reservation_count = #{reservationCount}
-		AND   	product_hope_time = #{productHopeTime} 
+		UPDATE
+		reservation_details
+		SET reservation_confirm = #{reservationConfirm}
+		WHERE product_id = #{productId}
+		AND store_id = #{storeId}
+		AND user_id =#{userId}
+		AND reservation_no = #{reservationNo}
+		AND reservation_time =#{reservationTime}
+		AND reservation_count = #{reservationCount}
+		AND product_hope_time = #{productHopeTime}
 	</update>
-	 
+
 	<delete id="deleteReservationDetails" parameterType="map">
-		DELETE FROM reservation_details
-		WHERE  store_id = #{storeId}
-		AND	   reservation_time = #{reservationTime}
-		AND	   product_hope_time = #{productHopeTime}
-		AND	   user_id = #{userId}
+		DELETE FROM
+		reservation_details
+		WHERE store_id = #{storeId}
+		AND reservation_time =
+		#{reservationTime}
+		AND product_hope_time = #{productHopeTime}
+		AND
+		user_id = #{userId}
 	</delete>
-	
-	<!-- select -->
-	<sql id="select-reservationDetails">
-		SELECT  reservation_no,
-				reservation_time,
-				reservation_count,
-				reservation_confirm,
-				product_hope_time,
-				product_id,
-				store_id,
-				user_id
-		FROM	reservation_details
-	</sql>
-	 
+
+
+
 	<sql id="select-reservationDetails-generalUser">
-		SELECT  r.reservation_no,
-				r.reservation_time,
-				r.reservation_count,
-				r.reservation_confirm,
-				r.product_hope_time,
-				u.user_name,
-				u.user_email,
-				u.user_phone
-		FROM	reservation_details r, general_user u
+		SELECT r.reservation_no,
+		r.reservation_time,
+		r.reservation_count,
+		r.reservation_confirm,
+		r.product_hope_time,
+		u.user_name,
+		u.user_email,
+		u.user_phone
+		FROM reservation_details r,
+		general_user u
 	</sql>
 
-	
+
 	<!-- resultMap -->
 	<resultMap type="com.cnb.vo.ReservationDetails" id="reservationDetails-resultmap">
-		<id column="reservation_no" property="reservationNo"/>
-		<result column="reservation_time" property="reservationTime"/>
-		<result column="reservation_count" property="reservationCount"/>
-		<result column="reservation_confirm" property="reservationConfirm"/>
-		<result column="product_hope_time" property="productHopeTime"/>
-		<result column="product_id" property="productId"/>
-		<result column="store_id" property="storeId"/>
-		<result column="user_id" property="userId"/>
+
+		<id column="reservation_no" property="reservationNo" />
+		<result column="reservation_time" property="reservationTime" />
+		<result column="reservation_count" property="reservationCount" />
+		<result column="reservation_confirm" property="reservationConfirm" />
+		<result column="product_hope_time" property="productHopeTime" />
+		<result column="product_id" property="productId" />
+		<result column="store_id" property="storeId" />
+		<result column="user_id" property="userId" />
 	</resultMap>
 
-	<resultMap type="ReservationDetails" id="reservationDetails-generalUser-resultmap" extends="reservationDetails-resultmap">
-		<collection property="generalUserList" resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap"/>
-	</resultMap> 
-	
-	<!-- selectReservationDetailsListCountByStoreId --> 
-	<select id="selectReservationDetailsListCountByStoreId" parameterType="string" resultType="int">
+
+
+	<!-- resultMap -->
+	<resultMap type="com.cnb.vo.ReservationDetails" id="reservationDetails-store-product-resultmap"
+		extends="reservationDetails-resultmap">
+		<association property="store"
+			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
+		<association property="product"
+			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap" />
+	</resultMap>
+
+
+
+
+
+
+
+
+	<resultMap type="ReservationDetails" id="reservationDetails-generalUser-resultmap"
+		extends="reservationDetails-resultmap">
+		<collection property="generalUserList"
+			resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap" />
+	</resultMap>
+
+	<!-- selectReservationDetailsListCountByStoreId -->
+	<select id="selectReservationDetailsListCountByStoreId"
+		parameterType="string" resultType="int">
 		SELECT COUNT(reservation_time)
 		FROM(
-				SELECT  r.reservation_time,
-						r.reservation_confirm,
-						r.product_hope_time,
-						u.user_id,
-						u.user_name,
-						u.user_email,
-						u.user_phone
-				FROM	reservation_details r, general_user u
-				WHERE 	r.store_id = #{value}
-				AND		r.user_id = u.user_id
-				GROUP BY r.reservation_time,
-					   	 r.reservation_confirm,
-						 r.product_hope_time,
-						 u.user_id,
-						 u.user_name,
-						 u.user_email,
-						 u.user_phone
-				)
+		SELECT r.reservation_time,
+		r.reservation_confirm,
+		r.product_hope_time,
+		u.user_id,
+		u.user_name,
+		u.user_email,
+		u.user_phone
+		FROM
+		reservation_details r, general_user u
+		WHERE r.store_id = #{value}
+		AND
+		r.user_id = u.user_id
+		GROUP BY r.reservation_time,
+		r.reservation_confirm,
+		r.product_hope_time,
+		u.user_id,
+		u.user_name,
+		u.user_email,
+		u.user_phone
+		)
 	</select>
-	
+
 	<!-- selectReservationDetailsListCountByUserId -->
-	<select id="selectReservationDetailsListCountByUserId" parameterType="string" resultType="int">
+	<select id="selectReservationDetailsListCountByUserId"
+		parameterType="string" resultType="int">
 		SELECT COUNT(*)
-		FROM   reservation_details
-		WHERE  user_id = #{value}
-	</select>	 
-	 
+		FROM
+		reservation_details
+		WHERE user_id = #{value}
+	</select>
+
 	<!-- selectReservationDetailsListCountByMethod -->
-	<select id="selectReservationDetailsListCountByMethod" parameterType="hashmap" resultType="_int">
+	<select id="selectReservationDetailsListCountByMethod"
+		parameterType="hashmap" resultType="_int">
 		<choose>
 			<when test="method == 'userId'">
-			<![CDATA[
-				SELECT COUNT(reservation_no)
-				FROM reservation_details
-				WHERE user_id = #{methodContent}
-				AND	  store_id = #{storeId}
-			]]>
+         <![CDATA[
+            SELECT COUNT(reservation_no)
+            FROM reservation_details
+            WHERE user_id = #{methodContent}
+            AND     store_id = #{storeId}
+         ]]>
 			</when>
 			<when test="method == 'reservationTime'">
-			<![CDATA[
-				SELECT COUNT(reservation_no)
-				FROM reservation_details
-				WHERE reservation_time = #{methodContent}
-				AND	  store_id = #{storeId}
-			]]>
+         <![CDATA[
+            SELECT COUNT(reservation_no)
+            FROM reservation_details
+            WHERE reservation_time = #{methodContent}
+            AND     store_id = #{storeId}
+         ]]>
 			</when>
 			<otherwise> <!-- method == 'productHopeTime' -->
-			<![CDATA[
-				SELECT COUNT(reservation_no)
-				FROM reservation_details
-				WHERE product_hope_time = #{methodContent}
-				AND	  store_id = #{storeId}
-			]]>
+         <![CDATA[
+            SELECT COUNT(reservation_no)
+            FROM reservation_details
+            WHERE product_hope_time = #{methodContent}
+            AND     store_id = #{storeId}
+         ]]>
 			</otherwise>
 		</choose>
 	</select>
-	
-	
+
 	<!-- selectReservationDetailsListByUserIdAndStoreId -->
-	<select id="selectReservationDetailsListByUserIdAndStoreId" resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+	<select id="selectReservationDetailsListByUserIdAndStoreId"
+		resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+      <![CDATA[
+         SELECT  reservation_no,
+               reservation_time,
+               reservation_count,
+               reservation_confirm,
+               product_hope_time,
+               product_id,
+               user_id,
+               user_name,
+               user_email,
+               user_phone
+         FROM(
+               SELECT  rownum rnum,
+                     reservation_no,
+                     reservation_time,
+                     reservation_count,
+                     reservation_confirm,
+                     product_hope_time,
+                     product_id,
+                     user_id,
+                     user_name,
+                     user_email,
+                     user_phone
+               FROM(
+                     SELECT  r.reservation_no,
+                           r.reservation_time,
+                           r.reservation_count,
+                           r.reservation_confirm,
+                           r.product_hope_time,
+                           r.product_id,
+                           u.user_id,
+                           u.user_name,
+                           u.user_email,
+                           u.user_phone
+                     FROM   reservation_details r, general_user u
+                     WHERE    r.store_id = #{storeId}
+                     AND       r.user_id = #{userId}
+                     AND    r.user_id = u.user_id
+               ) 
+               WHERE rownum <= #{endIndex}
+         )
+         WHERE rnum >= #{startIndex}
+      ]]>
+	</select>
+
+
+
+	<!--유저아이디로 예약내역 조회. -->
+	<select id="selectReservationDetailsListByUserId" resultMap="reservationDetails-store-product-resultmap"
+		parameterType="map">
 		<![CDATA[
-			SELECT  reservation_no,
+					SELECT  reservation_no,
 					reservation_time,
 					reservation_count,
 					reservation_confirm,
 					product_hope_time,
 					product_id,
-					user_id,
-					user_name,
-					user_email,
-					user_phone
+					store_id,
+					product_name,
+					store_name,
+					user_id
 			FROM(
 					SELECT  rownum rnum,
 							reservation_no,
@@ -175,82 +239,40 @@
 							reservation_confirm,
 							product_hope_time,
 							product_id,
-							user_id,
-							user_name,
-							user_email,
-							user_phone
+							store_id,
+							product_name,
+							store_name,
+							user_id
 					FROM(
-							SELECT  r.reservation_no,
-									r.reservation_time,
-									r.reservation_count,
-									r.reservation_confirm,
-									r.product_hope_time,
-									r.product_id,
-									u.user_id,
-									u.user_name,
-									u.user_email,
-									u.user_phone
-							FROM	reservation_details r, general_user u
-							WHERE 	r.store_id = #{storeId}
-							AND	    r.user_id = #{userId}
-							AND 	r.user_id = u.user_id
+							SELECT  rd.reservation_no,
+									rd.reservation_time,
+									rd.reservation_count,
+									rd.reservation_confirm,
+									rd.product_hope_time,
+									rd.product_id,
+									rd.store_id,
+									p.product_name,
+									s.store_name,
+									rd.user_id
+							FROM	reservation_details rd ,store s, product p
+							where  rd.user_id = #{userId}
+							
 					) 
-					WHERE rownum <= #{endIndex}
+					WHERE rownum <=#{endIndex}
 			)
 			WHERE rnum >= #{startIndex}
 		]]>
 	</select>
-	 
-	<!--6.29 김형주 기능 추가  --> 
-	<!-- selectReservationDetailsListByUserId -->
-	<select id="selectReservationDetailsListByUserId" resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
-		<![CDATA[
-			SELECT  reservation_no,
-					reservation_time,
-					reservation_count,
-					reservation_confirm,
-					product_hope_time,
-					product_id,
-					user_id,
-					user_name,
-					user_email,
-					user_phone
-			FROM(
-					SELECT  rownum rnum,
-							reservation_no,
-							reservation_time,
-							reservation_count,
-							reservation_confirm,
-							product_hope_time,
-							product_id,
-							user_id,
-							user_name,
-							user_email,
-							user_phone
-					FROM(
-							SELECT  r.reservation_no,
-									r.reservation_time,
-									r.reservation_count,
-									r.reservation_confirm,
-									r.product_hope_time,
-									r.product_id,
-									u.user_id,
-									u.user_name,
-									u.user_email,
-									u.user_phone
-							FROM	reservation_details r, general_user u
-							WHERE   r.user_id = #{userId}
-							AND 	r.user_id = u.user_id
-					) 
-					WHERE rownum <= #{endIndex}
-			)
-			WHERE rnum >= #{startIndex}
-		]]>
-	</select> 
-	 
-	 
-	<!-- selectReservationDetailsListByStoreIdAndReservationTime -->
-	<select id="selectReservationDetailsListByStoreIdAndReservationTime" resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+
+
+
+
+
+
+	<select id="selectReservationDetailsListByStoreIdAndReservationTime"
+		resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+		>>>>>>> branch 'master' of
+		https://github.com/nhs7253/coffeeNbread.git
 		<![CDATA[
 			SELECT  reservation_no,
 					reservation_time,
@@ -296,8 +318,12 @@
 		]]>
 	</select>
 
-	<!-- selectReservationDetailsListByStoreId -->
-	<select id="selectReservationDetailsListByStoreId" resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+
+
+
+		<select id="selectReservationDetailsListByStoreId" resultMap="reservationDetails-generalUser-resultmap"
+			parameterType="map">
+		
 		<![CDATA[
 			SELECT  rownum reservation_no,
 					reservation_time,
@@ -340,10 +366,11 @@
 			)
 			WHERE rnum >= #{startIndex}
 		]]>
-	</select>
-	
-	<!-- selectReservationDetailsByReservationNo -->
-	<select id="selectReservationDetailsByReservationNo" resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+		</select>
+
+		<!-- selectReservationDetailsByReservationNo -->
+		<select id="selectReservationDetailsByReservationNo" resultMap="reservationDetails-generalUser-resultmap"
+			parameterType="map">
 		<![CDATA[
 		SELECT reservation_time,
 			   reservation_confirm,
@@ -394,11 +421,14 @@
 		)
 		WHERE reservation_no = #{reservationNo}
 		]]>
-	</select>
-	
-	
-	<!-- selectReservationDetailsListByStoreIdAndProductHopeTime -->
-	<select id="selectReservationDetailsListByStoreIdAndProductHopeTime" resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+		</select>
+
+
+
+
+		<select id="selectReservationDetailsListByStoreIdAndProductHopeTime"
+			resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
+
 		<![CDATA[
 			SELECT  reservation_no,
 					reservation_time,
@@ -443,10 +473,11 @@
 			)
 			WHERE rnum >= #{startIndex}
 		]]>
-	</select>
+		</select>
 
-	<!-- selectReservationDetailByStoreIdAndReservationTimeAndUserId -->
-	<select id="selectReservationDetailByStoreIdAndReservationTimeAndUserId" resultMap="reservationDetails-resultmap" parameterType="map">
+		<!-- selectReservationDetailByStoreIdAndReservationTimeAndUserId -->
+		<select id="selectReservationDetailByStoreIdAndReservationTimeAndUserId"
+			resultMap="reservationDetails-resultmap" parameterType="map">
 			<![CDATA[
 				SELECT  reservation_no,
 						reservation_time,
@@ -461,5 +492,5 @@
 				AND reservation_time = #{reservationTime}
 				AND user_id = #{userId}
 		]]>
-	</select>
+		</select>
 </mapper>

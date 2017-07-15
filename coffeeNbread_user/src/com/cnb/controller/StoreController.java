@@ -42,6 +42,7 @@ import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
 import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePicture;
+import com.cnb.vo.StorePosition;
 
 /*
  * 노현식
@@ -124,13 +125,18 @@ public class StoreController {
 		// 경로는 고정, 파일은 여러개 -> 파일 이름 저장
 
 		StorePicture storePicture = new StorePicture(imageName.get(0), storeRegisterForm.getStoreId());
-
+		
 
 		// 세션으로 묶음
 		HttpSession session = request.getSession();
 		Store storeRetrun = null;
 		try {
-			storeRetrun = storeService.addStore(store, oclist, storePicture, ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), storeRegisterForm.getPaymentIdList());
+			storeRetrun = storeService.addStore(store, 
+												oclist, 
+												storePicture, 
+												((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(), 
+												storeRegisterForm.getPaymentIdList(),
+												new StorePosition(storeRegisterForm.getStoreId(),storeRegisterForm.getX() ,storeRegisterForm.getY()));
 			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | DuplicatedOptionCategoryNameException
 				| DuplicatedStoreCategorytNameException | DuplicatedStorePictureException e) {
@@ -233,7 +239,7 @@ public class StoreController {
 	
 		Store storeRetrun = null;
 		try {
-			storeRetrun = storeService.modifyStore(store, oclist, storePictureList, storeRegisterForm.getPaymentIdList());
+			storeRetrun = storeService.modifyStore(store, oclist, storePictureList, storeRegisterForm.getPaymentIdList(), new StorePosition(storeRegisterForm.getStoreId(),storeRegisterForm.getX() ,storeRegisterForm.getY()));
 			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | StorePictureNotFoundException | DuplicatedOptionCategoryNameException e) {
 			System.out.println(e.getMessage());

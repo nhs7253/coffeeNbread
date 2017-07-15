@@ -46,7 +46,7 @@ public class PaymentDetailsDaoImplTest {
       /*  System.out.println(dao.selectPaymentDetailsListByUserIdAndStoreId("u-1", "s-1"));
 */
 	
-        
+    System.out.println( dao.selectPaymentDetailsListByUserId("u-1"));
         // 유저입장에서 장바구니에있는걸 결제내역 테이블에 넣을것.
 	
         

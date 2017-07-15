@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
 import com.cnb.exception.addShoppingCountZeroException;
 import com.cnb.service.ShoppingBasketProductService;
+import com.cnb.validation.annotation.MultiRowTarget;
 import com.cnb.validation.annotation.ShoppingBasketProductForm;
 import com.cnb.validation.annotation.ShoppingBasketProductViewForm;
 import com.cnb.vo.GeneralUser;
@@ -43,19 +44,11 @@ public class ShoppingBasketProductController {
 			BindingResult errors, HttpServletRequest request) {
 
 		System.err.println("shoppingBasketProductForm:"+shoppingBasketProductForm);
-		;
-
 		System.out.println("errorCount : " + errors.getErrorCount());
 		if (errors.hasErrors()) {
 			System.out.println("---------------------------오류발생------------------");
 			return "redirect:/user/userFindProductListController.do?storeId=" + shoppingBasketProductForm.getStoreId();
-
 		}
-		
-	
-		
-		
-		
 		ShoppingBasketProduct shoppingBasketProduct = new ShoppingBasketProduct();
 		BeanUtils.copyProperties(shoppingBasketProductForm, shoppingBasketProduct);
 		System.out.println("shoppingBasketProduct:" + shoppingBasketProduct);
@@ -64,20 +57,44 @@ public class ShoppingBasketProductController {
 		shoppingBasketProduct.setProductCount(shoppingBasketProductForm.getProductCount());
 		shoppingBasketProduct.setProductStoreId(shoppingBasketProductForm.getStoreId());
 
+		try {
+			service.addShoppingBasketProduct(shoppingBasketProduct);
+		} catch (addShoppingCountZeroException e) {
+			return "redirect:/findProductListController.do?storeId=" + shoppingBasketProductForm.getStoreId()+"productCount="+shoppingBasketProductForm.getProductCount();
+
+		}
+		     return "redirect:/findProductListController.do?storeId=" + shoppingBasketProductForm.getStoreId()+"productCount="+shoppingBasketProductForm.getProductCount();
+	}
+	
+
+/*	@RequestMapping("/user/addShoppingBasketProductController")
+	public String addShoppingBasketProductController(@ModelAttribute MultiRowTarget targets,
+			BindingResult errors, HttpServletRequest request) {
+
+		System.out.println("------add진입 1----------");
+		System.out.println("MultiRowTargets의 targets:" + targets);
+		if (errors.hasErrors()) {
+			System.out.println("---------------------------오류발생------------------");
+			for(int i=0;i<targets.getTargets().size();i++){
+				targets.getTargets()[0].productCount;
+			}
+		}
+		
 		// 객체에서 담은 것 카피 해서 넣기.
 		// -------조회한 매장(storeId, productStoreId)-> 요청파라미터.에 담겨서 옴.
 		// -------등록하려는 제품정보.(productId) -> 제품에 대한 정보는 세션에 담겨서옴.
 		// -------등록하려는 제품의 개수(productCount)-> 제품에대한 개수
-		try {
-			System.out.println("----------------------------------4");
-			service.addShoppingBasketProduct(shoppingBasketProduct);
-			System.out.println("--------------------------5----------------------");
-		} catch (addShoppingCountZeroException e) {
-			return "redirect:/user/userFindProductListController.do?storeId=" + shoppingBasketProductForm.getStoreId();
-
-		}
-		return "redirect:/user/userFindProductListController.do?storeId=" + shoppingBasketProductForm.getStoreId();// 장바구니등록이
-	}
+		
+		 try { System.out.println("----------------------------------4");
+		 service.addShoppingBasketProduct(shoppingBasketProduct);
+		  System.out.println(
+		  "--------------------------5----------------------"); } catch
+		 (addShoppingCountZeroException e) { return
+		  "redirect:/user/userFindProductListController.do?storeId="+
+		 shoppingBasketProductForm.getStoreId(); }
+		 
+		return "redirect:/user/userFindProductListController.do";
+	}*/
 
 	// 장바구니 폼 이동. ==> 장바구니는 페이징안하고 스크롤로 내려서 보는걸로 선택. 개수 수정되도 원래거에서 수정되는것이므로 양이
 	// 적어서 페이징 할필요 못느낌.
@@ -133,14 +150,7 @@ public class ShoppingBasketProductController {
 			modelAndView.setViewName("user/shoppingBasketProduct_list.tiles");
 			return modelAndView; // 개수 수정. -장바구니 원래 폼으로 이동.
 		}
-		
-		System.out.println("개수 확인 입니다. " + shoppingBasketProductViewForm);
 
-		System.out.println("shoppingBasketProductViewForm.getStoreId():" + shoppingBasketProductViewForm.getStoreId());
-		System.out.println(
-				"((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId():"
-						+ ((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-								.getUserId());
 		List<ShoppingBasketProduct> shopppingBasketProductList = service
 				.findShoppingBasketProductListByStoreIdAndUserId(shoppingBasketProductViewForm.getStoreId(),
 						((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
@@ -168,10 +178,11 @@ public class ShoppingBasketProductController {
 		for (int i = 0; i < sbpList.size(); i++) {
 
 			try {
-				System.out.println("shoppingBasketProductViewForm.getProductCount():"+shoppingBasketProductViewForm.getProductCount());
+				System.out.println("shoppingBasketProductViewForm.getProductCount():"
+						+ shoppingBasketProductViewForm.getProductCount());
 				shopppingBasketProductList.get(i).setProductCount(i);
-				//(shoppingBasketProductViewForm.getProductCount());
- 				service.modifyShoppingBasketProduct(shoppingBasketProduct);
+				// (shoppingBasketProductViewForm.getProductCount());
+				service.modifyShoppingBasketProduct(shoppingBasketProduct);
 			} catch (NoUpdateShoppingBasketProductException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -179,7 +190,7 @@ public class ShoppingBasketProductController {
 		}
 		System.out.println("------------------------------------------");
 		modelAndView.setViewName("user/payment_view.tiles");
-		modelAndView.addObject("shopppingBasketProductList", shopppingBasketProductList); 
+		modelAndView.addObject("shopppingBasketProductList", shopppingBasketProductList);
 		return modelAndView;
 
 	}
@@ -196,6 +207,7 @@ public class ShoppingBasketProductController {
 	public String removeShoppingBasketProductController(@RequestParam(value = "productId") String productId) {
 
 		System.out.println("-------------remove 1----------------");
+		System.out.println("------------------productId:" + productId);
 		// 어차피 제품아이디는 개별적으로 다르기때문에 매장을 따로 둘필요 없음.
 		service.deleteShoppingBasketProductByProductIdAndUserId(productId,
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
@@ -214,13 +226,14 @@ public class ShoppingBasketProductController {
 	@RequestMapping("/user/findAllProductPriceController")
 
 	// 꼭있어야할 name: productId
-	public ModelAndView findAllProductPriceController(@RequestParam(value = "storeId") String storeId ,  @RequestParam(value = "productId") String productId) {
-       System.out.println("---------총금액 1--------------");
+	public ModelAndView findAllProductPriceController(@RequestParam(value = "storeId") String storeId,
+			@RequestParam(value = "productId") String productId) {
+		System.out.println("---------총금액 1--------------");
 		ModelAndView modelAndView = new ModelAndView();
 		// 어차피 제품아이디는 개별적으로 다르기때문에 매장을 따로 둘필요 없음.
-      System.out.println("---------총금액 2---------------");
+		System.out.println("---------총금액 2---------------");
 		// -요청파라미터: storeId필요
-   //매장아이디만 보내주면 여기서 유저아이디 세팅해서 장바구니에 넣어진거 계산함.
+		// 매장아이디만 보내주면 여기서 유저아이디 세팅해서 장바구니에 넣어진거 계산함.
 		int totalPrice = service.findAllProductPrice(storeId,
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		List<ShoppingBasketProduct> shoppingBasketProductList = service.findShoppingBasketProductListByStoreIdAndUserId(
@@ -229,9 +242,9 @@ public class ShoppingBasketProductController {
 		int productTotalPrice = service.findProductPrice(storeId,
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId(),
 				productId);
-		
-		System.out.println("controller에서의 productId:"+productId);
-		System.out.println("totalPrice:"+totalPrice);
+
+		System.out.println("controller에서의 productId:" + productId);
+		System.out.println("totalPrice:" + totalPrice);
 		// 총 가격 구하고 다시 원래자리.
 		System.out.println("----------------총금액 3------------------");
 		modelAndView.setViewName("user/payment_view.tiles");

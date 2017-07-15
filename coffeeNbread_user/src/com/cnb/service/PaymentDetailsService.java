@@ -46,8 +46,7 @@ public interface PaymentDetailsService {
 	 */
 	int findAllProductPrice(List<ShoppingBasketProduct> shoppingBasketProduct);
 
-	HashMap<String, Object> findPaymentDetailsListByStoreIdAndUserId(int page, String storeId,
-			String userId);
+	HashMap<String, Object> findPaymentDetailsListByUserId(int page,	String userId);
 	
 	
 	

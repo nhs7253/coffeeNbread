@@ -55,8 +55,7 @@ td {
 	</thead>
 	<tbody>
 
-		###################################################### 조회된 item 출력
-		######################################################
+
 		<c:forEach items="${requestScope.shoppingBasketProductList }"
 			var="list">
 

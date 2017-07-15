@@ -44,7 +44,15 @@ public class ReservationDetailsDaoImplTest {
 	private PaymentDetailsDao pdDao;
 	
 	public void Test() {
-/*
+/*<<<<<<< HEAD
+		
+		  
+		System.out.println(dao.selectReservationDetailsListByUserId("u-1", 1, 1000));
+		
+		
+=======
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
+
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		
 		System.out.println("유저가 예약 내역 삽입"); 
@@ -55,8 +63,13 @@ public class ReservationDetailsDaoImplTest {
 		System.out.println(dao.updateReservationConfirmDate
 				(new ReservationDetails(0,pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getTradeDate(),
 						pdDao.selectPaymentDetailsByStoreIdAndProductId("s-7", "p-18").getReservationOrderCount(),new Date(),new Date(),"p-18","s-7","u-1")));
+<<<<<<< HEAD
+		
+*/		/*System.out.println("===============Count===================");
+=======
 		*/
 		/*System.out.println("===============Count===================");
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 		System.out.println("매장의 전체 예약수 : " + dao.selectReservationDetailsListCountByStoreId("s-1"));
 		System.out.println("유저의 전체 예약수 : " + dao.selectReservationDetailsListCountByUserId("u-1"));
 		System.out.println("매장에서 유저아이디로 조회한 에약 수 : " + dao.selectReservationDetailsListCountByMethod("s-1", "userId", "u-1"));

@@ -43,9 +43,9 @@ td {
 				<td>${product.productPrice }&nbsp;&nbsp;</td>
 
 				<td>
-					<form
-						action="${initParam.rootPath }/user/addShoppingBasketProductController.do"
-						method="post">
+                 <form
+						action="${initParam.rootPath }/user/addShoppingBasketProductController.do" onsubmit="return confirm('장바구니에 넣으시겠습니까?');"
+						id=form method="post">						
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
 						<input type="number" min="0" name="productCount"> <input
