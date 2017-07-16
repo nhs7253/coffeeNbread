@@ -203,6 +203,9 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 		info.put("storeId", storeId);
 		info.put("productId", productId);
 		info.put("tradeDate", tradeDate);
+		if(session.selectOne(makeSqlId("selectSalesVolumeByStoreIdAndProductIdAndTradeDate"), info) == null){
+			return 0;
+		}
 		return session.selectOne(makeSqlId("selectSalesVolumeByStoreIdAndProductIdAndTradeDate"), info);
 	}
 }

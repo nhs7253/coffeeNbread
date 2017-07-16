@@ -136,6 +136,9 @@ public class SalesVolumeServiceImpl implements SalesVolumeService {
 			Set keyAll = mapAll.keySet();
 			Iterator iterator1 = keyAll.iterator();
 
+			String keyName1 = (String) iterator1.next();
+			String valueName1 = String.valueOf(mapAll.get(keyName1));
+
 			if (list7Days.size() == 0) {
 				// 현재 productId를 저장 후 해당 아이디의 증감폭을 D으로 바꿈 - 7Days에서 제품아이디가 같은 걸
 				// 찾지 못한 경우에는 일주일동안 팔린게 없다는 뜻이므로 D으로 지정되게 하기 위함
@@ -146,14 +149,10 @@ public class SalesVolumeServiceImpl implements SalesVolumeService {
 				productGapDao.updateProductGap(new ProductGap("D", gapFirst, s, storeId));
 			} else {
 				for (int j = 0; j < list7Days.size(); j++) {
+					
 					Map map7Days = (HashMap) list7Days.get(j);
-
 					Set key7Days = map7Days.keySet();
-
 					Iterator iterator2 = key7Days.iterator();
-
-					String keyName1 = (String) iterator1.next();
-					String valueName1 = String.valueOf(mapAll.get(keyName1));
 
 					String keyName2 = (String) iterator2.next();
 					String valueName2 = String.valueOf(map7Days.get(keyName2));

@@ -15,8 +15,19 @@ table {
 td {
    padding: 5px; /*td 간 간격 */
 }
-
 </style>
+
+<script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#optionId").on("change", function(){
+		if($("#optionId option:selected").val() == 'productCategory' ){
+			alert("제품 종류");
+		}
+	});
+});
+</script>
+
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 <h2>PRODUCT LIST</h2> 
 <div class="col-sm-1"></div>
@@ -27,7 +38,8 @@ ${requestScope.list }
 <form action="${initParam.rootPath }/findProductListByMethod.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
    <div class="form-group">
-   <select name="method" class="form-control">
+   <select id="optionId" name="method" class="form-control">
+   	  <option>옵션</option>
       <option value="productCategory">제품 종류</option>
       <option value="productName">제품 이름</option>
       <option value="sellingOption">판매 여부(Y/N)</option>
@@ -40,7 +52,7 @@ ${requestScope.list }
 </div>
 </div>
 
-<form  action="${initParam.rootPath }/findProductListController.do" method="post">
+<form  action="${initParam.rootPath }/findProductListManagerController.do" method="post">
    <sec:csrfInput/><%-- csrf 토큰 --%>
    <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-list"></i>전체조회</button>
    
@@ -140,7 +152,7 @@ ${requestScope.list }
                   전체 조회 페이징 처리
       ###################################################### --%>
    <!-- 첫페이지로 이동 -->
-   <a href="${initParam.rootPath }/findProductListController.do?page=1&storeId=${requestScope.storeId}">첫페이지</a>
+   <a href="${initParam.rootPath }/findProductListManagerController.do?page=1&storeId=${requestScope.storeId}">첫페이지</a>
 
    <!--
       이전 페이지 그룹 처리.
@@ -149,7 +161,7 @@ ${requestScope.list }
    <c:choose>
       <c:when test="${requestScope.pageBean.previousPageGroup}">
          <!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
-         <a href="${initParam.rootPath }/findProductListController.do?page=${requestScope.pageBean.beginPage-1}&storeId=${requestScope.storeId}">◀</a>
+         <a href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.beginPage-1}&storeId=${requestScope.storeId}">◀</a>
       </c:when>
       <c:otherwise>
          ◀
@@ -165,7 +177,7 @@ ${requestScope.list }
       <c:choose>
          <c:when test="${page != requestScope.pageBean.page}">
          <!-- 현재페이지가 아니라면 -->
-            <a href="${initParam.rootPath }/findProductListController.do?page=${page}&storeId=${requestScope.storeId}">${page }&nbsp;&nbsp;</a>
+            <a href="${initParam.rootPath }/findProductListManagerController.do?page=${page}&storeId=${requestScope.storeId}">${page }&nbsp;&nbsp;</a>
          </c:when>
          <c:otherwise>
             [${page}]&nbsp;&nbsp;
@@ -179,7 +191,7 @@ ${requestScope.list }
     -->
    <c:choose>
       <c:when test="${requestScope.pageBean.nextPageGroup}">
-         <a href="${initParam.rootPath }/findProductListController.do?page=${requestScope.pageBean.endPage+1}&storeId=${requestScope.storeId}">▶</a>
+         <a href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.endPage+1}&storeId=${requestScope.storeId}">▶</a>
       </c:when>
       <c:otherwise>
          ▶
@@ -187,6 +199,6 @@ ${requestScope.list }
    </c:choose>
 
    <!-- 마지막 페이지로 이동 -->
-   <a href="${initParam.rootPath }/findProductListController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
+   <a href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
 </c:if></div>
 <div class="col-sm-1"></div>

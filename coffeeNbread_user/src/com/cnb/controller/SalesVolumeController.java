@@ -30,7 +30,6 @@ import com.cnb.service.SalesVolumeService;
 import com.cnb.service.StoreService;
 import com.cnb.validation.annotation.ProductFindFormForPos;
 import com.cnb.validation.annotation.TodaySalesVolumeForm;
-import com.cnb.validation.annotation.WeekSalesVolumeForm;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Product;
@@ -175,7 +174,7 @@ public class SalesVolumeController {
 				}
 			}
 		}
-
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("productNameList", productNameList);
 		map.put("countList", countList);
@@ -394,50 +393,54 @@ public class SalesVolumeController {
 
 	//상승세/하락세 그래프를 위한 일주일치 값
 	@RequestMapping("findSalesVolumeWeekController")
-	public ModelAndView findSalesVolumeWeekController(@ModelAttribute("weekSalesVolume") @Valid WeekSalesVolumeForm weekSalesVolumeForm, BindingResult errors) throws ParseException {
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (errors.hasErrors()) {
-			modelAndView.setViewName("index.tiles");
-			return modelAndView;
-		}
+	@ResponseBody
+	public Object findSalesVolumeWeekController(String productId) throws ParseException {
 
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		
 		List<Integer> countList = new ArrayList<>();
-
+		List<String> dateList = new ArrayList<>();
+		
 		//1일전
-		int one = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-1)));
+		int one = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-1)));
 		countList.add(one);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-1));
 		
 		//2일전
-		int two = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-2)));
+		int two = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-2)));
 		countList.add(two);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-2));
 		
 		//3일전
-		int three = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-3)));
+		int three = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-3)));
 		countList.add(three);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-3));
 
 		//4일전
-		int four = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-4)));
+		int four = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-4)));
 		countList.add(four);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-4));
 
 		//5일전
-		int five = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-5)));
+		int five = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-5)));
 		countList.add(five);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-5));
 
 		//6일전
-		int six = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-6)));
+		int six = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-6)));
 		countList.add(six);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-6));
 
 		//7일전
-		int seven = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), weekSalesVolumeForm.getProductId(), dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-7)));
+		int seven = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-7)));
 		countList.add(seven);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-7));
 
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("countList", countList);
+		map.put("dateList", dateList);
 
-		modelAndView.setViewName("store/salesVolume_view.tiles");
-		modelAndView.addObject("countList", countList);
-		return modelAndView;
+		return map;
 	}
 }

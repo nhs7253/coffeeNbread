@@ -37,9 +37,9 @@ $(document).ready(function(){
 				$(btn).parent().text(value);
 				$(btn).remove();
 				var url = "http://api.coolsms.co.kr/sendmsg?user=minhee310&password=cmh0310&to=" + $(".alarm").prev().prev().prev().val() + "&from=01099506219&text=" + $(".alarm").prev().prev().val();
-				window.open(url,"alarmMessage","width=500, height=400 resizable=no");
-				alarm.submit();
-				window.close();
+				window.open(url,"alarmMessage","width=500, height=400 resizable=no").close();
+				//alarm.submit();
+				//window.close();
 			}
 		});
 	});

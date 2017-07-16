@@ -231,7 +231,7 @@
 						href="${initParam.rootPath }/findOptionCategoryController.do">제품
 							등록</a></li>
 					<li><a
-						href="${initParam.rootPath }/findProductListController.do">제품
+						href="${initParam.rootPath }/findProductListManagerController.do">제품
 							목록</a></li>
 					<li><a
 						href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내
