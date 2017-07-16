@@ -54,7 +54,7 @@
 	<%--메인 body --%>
 	<section class="row content">
 		<%-- 메뉴 --%>
-		<nav class="col-sm-2">
+		<nav class="col-sm-2 ">
 			<tiles:insertAttribute name="menu"/>
 		</nav>
 		<!-- 내용 -->

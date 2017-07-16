@@ -1,7 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<style>
 
+td {
+	padding: 5px; /* //td 간 간격 */
+}
+</style>
 <h2>제품 상세</h2>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">

@@ -4,7 +4,7 @@
 
 <style type="text/css">
 table, td {
-   border: 1px solid black;
+  
 }
 
 table {
@@ -27,9 +27,8 @@ td {
 			});//ready 
 		</script>
 <h2>POS</h2> 
-
-<div class="container">
-<div id="quick-access">
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 <form action="${initParam.rootPath }/store/findProductListToPOSController.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
    <div class="form-group">
@@ -42,8 +41,7 @@ td {
    </div>
    <button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
 </form>
-</div>
-</div>
+
 
 
 
@@ -85,7 +83,7 @@ td {
 	</c:forEach>
 	<button type="submit" class="btn btn-custom">결제</button>
 </form>
-	
-	
+	</div>
+	<div class="col-sm-1"></div>
 
 <p>

@@ -5,7 +5,7 @@
 
 <style type="text/css">
 table, td {
-	border: 1px solid black;
+
 }
 
 table {
@@ -17,13 +17,13 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
 </head>
 <body>
 
 
 	<h2>플랫폼 지원 결제 목록</h2>
+	<br><br><br>
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">

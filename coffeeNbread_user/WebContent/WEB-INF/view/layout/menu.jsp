@@ -33,7 +33,10 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
 	rel='stylesheet' type='text/css'>
+<style>
 
+
+</style>
 
 
 </head>
@@ -233,9 +236,7 @@
 					<li><a
 						href="${initParam.rootPath }/findProductListManagerController.do">제품
 							목록</a></li>
-					<li><a
-						href="${initParam.rootPath}/selectStoreController.do?storeId=<sec:authentication property="principal.storeId"/>">내
-							제품 목록 조회</a></li>
+					
 				</sec:authorize>
 
 
