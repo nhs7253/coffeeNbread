@@ -18,8 +18,7 @@
 <link rel="stylesheet"
 	href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 
-<script
-	src="${initParam.rootPath }/resource/bootstrap/js/jquery-3.1.0.min.js"></script>
+<script src="${initParam.rootPath }/resource/bootstrap/js/jquery-3.1.0.min.js"></script>
 <script src="${initParam.rootPath }/resource/bootstrap/js/demo.js"></script>
 <script
 	src="${initParam.rootPath }/resource/bootstrap/js/material.min.js"></script>

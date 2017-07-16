@@ -1,6 +1,5 @@
 package com.cnb.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,6 @@ import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.exception.NoUpdateShoppingBasketProductException;
 import com.cnb.exception.addShoppingCountZeroException;
 import com.cnb.service.ShoppingBasketProductService;
-import com.cnb.util.PagingBean;
-import com.cnb.vo.NoticeBoardContents;
-import com.cnb.vo.Product;
 import com.cnb.vo.ShoppingBasketProduct;
 
 /*
@@ -38,7 +34,15 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	 */
 	@Override
 	public List<ShoppingBasketProduct> findShoppingBasketProductListByStoreIdAndUserId(String storeId, String userId) {
+		
+		
+		System.out.println("findShoppingBasketProductListByStoreIdAndUserId = " + storeId);
+		
+		System.out.println("findShoppingBasketProductListByStoreIdAndUserId = " + userId);
+		
+		System.out.println("하하하하 = "  + shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId));
 
+		
 		return shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId);
 	}
 

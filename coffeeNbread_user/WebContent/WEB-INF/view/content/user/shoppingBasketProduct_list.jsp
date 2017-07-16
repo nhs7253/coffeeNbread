@@ -7,37 +7,27 @@
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 
 <script type="text/javascript">
-/*   $(document).ready(function(){
-	
-	  $(".submitBtn").on("click",function() {
-			
-		  var btn = this;
-   		  var productId= $(btn).prev().val();
-	        alert(productId);	
-   		    $.ajax({
-				
-				 url : "/coffeeNbread_user/user/removeShoppingBasketProductController.do",
-				data : {"productId" :productId} 
-				
-				
-			}); 
-		});
-  }); */
+function button_event(){
+	if (confirm("정말 삭제하시겠습니까??") == true){    /
+	    document.form.submit();
+	}else{   //취소
+	    return;
+	}
+	}
+
+
 
 </script>
-	<script type="text/javascript">
+<script type="text/javascript">
 			$(document).ready(function(){
-				/* $(".count").on("change",function(){
-					
-					document.getElementById( "productCount" ).setAttribute( 'value', this.value);
-				}); */
+				
 				$(".updateBtn").on("click", function(){
 					
 					var uForm = document.getElementById("updateForm");
 					uForm.productCount.value = $(this).parent().prev().children(".count").val();
 					uForm.productId.value = $(this).prev().text();
 					uForm.submit();
-				});
+				});  
 			});//ready 
 		</script>
 
@@ -54,12 +44,30 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
+
+
+
+hr.animated-gradient {
+   height: 3px;
+   border: 3px inset #d2d0d1;
+   text-align: center;
+   background-color: red;
+   background: -moz-linear-gradient(left top, red, red);
+   background: -webkit-gradient(linear, left top, right bottom, from(red), to(red));
+   -webkit-animation-name: animated-gradient;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-direction: alternate;
+   -webkit-animation-duration: 1.0s;
+   -webkit-animation-timing-function: ease-in-out;
+}
+
 </style>
 <body>
 
-	<h2>장바구니 목록</h2>
-
-
+	<center><h2>SHOPPING_LIST</h2></center>
+	<br>
+	<br>
+  <hr color="red" size="10" class="animated-gradient">
 
 <div class="col-sm-1"></div>
 	
@@ -67,7 +75,7 @@ td {
 
 	<table class="table table-hover">
 		<thead>
-
+   
 			<tr class="w3-blue">
 				<td>제품카테고리</td>
 				<td>제품사진</td>
@@ -107,7 +115,7 @@ td {
 							<sec:csrfInput />
 							<%-- csrf 토큰 --%>
 						<input  type="hidden" name="productId" value="${list.product.productId }"/>
-						<button type="submit" class="submitBtn">
+						<button type="submit" class="submitBtn" onclick="button_event()">
 						<i class="glyphicon glyphicon-trash"></i>삭제
 						
 						</button>
@@ -133,8 +141,17 @@ td {
        
            
            
-          
-     <button type="button" id="btn">결제페이지로 이동</button>
+       <a href="${initParam.rootPath }/user/paymentProcessController.do">
+        
+		<button type="submit" class="btn-custom">
+			<i class="glyphicon glyphicon-ok"></i>결제페이지로 이동
+		</button>
+	   </a>   
+ 
+    
+    
+    
+    
      <form action="${initParam.rootPath }/user/modifyShoppingBasketProductCount.do" method="post" id="updateForm">
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -20,15 +20,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cnb.exception.NullShoppingBasketProductException;
 import com.cnb.exception.ProductNotFoundException;
+import com.cnb.service.BookMarkCardNumService;
 import com.cnb.service.GeneralUserService;
 import com.cnb.service.PaymentDetailsService;
 import com.cnb.service.ReservationDetailsService;
 import com.cnb.service.ShoppingBasketProductService;
+import com.cnb.service.StorePaymentOptionListService;
 import com.cnb.validation.annotation.PaymentDetailsForm;
 import com.cnb.validation.annotation.PaymentDetailsViewForm;
+import com.cnb.vo.BookMarkCardNum;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.PaymentDetails;
-import com.cnb.vo.ReservationDetails;
+import com.cnb.vo.ShoppingBasketProduct;
+import com.cnb.vo.Store;
+import com.cnb.vo.StorePaymentOptionList;
 
 /*
  * 김형주
@@ -46,7 +51,15 @@ public class PaymentDetailsController {
 
 	@Autowired
 	private ReservationDetailsService rdService;
+	
+	@Autowired
+	private StorePaymentOptionListService spoService;
 
+	@Autowired
+	private BookMarkCardNumService  bmService;
+	
+	@Autowired
+	private ShoppingBasketProductService  sbpService;
 	// 결제완료 버튼 눌러야 들어가는 것.
 	@RequestMapping("/user/addPaymentDetailsController")
 
@@ -103,7 +116,7 @@ public class PaymentDetailsController {
 	@RequestMapping("/user/findPaymentDetailsController")
 	public ModelAndView findPaymentDetailsController(
 			@ModelAttribute("paymentDetails") @Valid PaymentDetailsViewForm paymentDetailsViewform,
-			BindingResult errors, HttpServletRequest request) throws ProductNotFoundException, Exception {
+			BindingResult errors, HttpSession session) throws ProductNotFoundException, Exception {
      System.out.println("--------결제 내역 진입 1--------------");
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	
@@ -128,4 +141,47 @@ public class PaymentDetailsController {
 
 	}
 
+	// 유저가 결제할때 등록할떄 적용했던 매장 결제option 가지고 보여준다.
+	// 유저가 등록한 카드까지 같이 넘긴다.
+		@RequestMapping("/user/paymentProcessController")
+		public ModelAndView paymentProcessController(
+				@ModelAttribute("paymentDetails") @Valid PaymentDetailsViewForm paymentDetailsViewform,
+				BindingResult errors, HttpSession session) throws ProductNotFoundException, Exception {
+	     System.out.println("--------결제 과정 진입1--------------");
+			GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		    ModelAndView modelAndView = new ModelAndView();
+			System.out.println("paymentDetailsViewform:" + paymentDetailsViewform);
+			if (errors.hasErrors()) {
+				modelAndView.setViewName("user/shoppingBasketProduct_list.tiles"); // 임시로 해둠.
+				return modelAndView; // 에러 발생
+			}
+		     System.out.println("--------결제 과정 진입 2--------------");
+
+			Map<String, Object> map = new HashMap<>();
+			//매장이 가지고 있는 결제 수단 들 가져오기. - session에 해당되는 것
+			String storeId = ((Store) session.getAttribute("storeInfo")).getStoreId();
+			  List<StorePaymentOptionList> spoList=  spoService.findStorePaymentOptionList(storeId); //매장이 가지고 있는 결제목록.
+			  
+			 //기존 유저가 등록해놓은 즐겨찾는 카드번호  
+			 List<BookMarkCardNum>bmList= bmService.findBookMarkCardNumListByUserId(generalUser.getUserId());
+           
+			//내가 매장에서 최종적으로 넣어둔 제품목록의 가격 한번더 불러옴.
+			int totalPrice=sbpService.findAllProductPrice(storeId, generalUser.getUserId());
+			
+			//내가 최종적으로 결제한 목록들 보여줌.
+			List<ShoppingBasketProduct>sbpList=sbpService.findShoppingBasketProductListByStoreIdAndUserId(storeId, generalUser.getUserId());
+/*			map = service.findPaymentDetailsListByUserId(paymentDetailsViewform.getPage(), generalUser.getUserId());
+ */		   System.out.println("sbpList:"+sbpList);
+			System.out.println("---------결제과정 진입 3----------------");
+			modelAndView.setViewName("user/user_payment_process.tiles");
+			modelAndView.addObject("userName", generalUserService.findUser(generalUser.getUserId()).getUserName());
+			modelAndView.addObject("spoList", spoList);
+			modelAndView.addObject("bmlist", bmList);
+			modelAndView.addObject("totalPrice", totalPrice);
+			modelAndView.addObject("sbpList", sbpList);
+			return modelAndView;
+
+		}
+	
+	
 }

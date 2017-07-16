@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -73,7 +74,7 @@ public class ShoppingBasketProductController {
 	@RequestMapping("/user/ViewShoppingBasketProductController")
 	public ModelAndView ViewShoppingBasketProductController(
 			@ModelAttribute("shoppingBasketProduct") @Valid ShoppingBasketProductViewForm shoppingBasketProductViewForm,
-			BindingResult errors, HttpServletRequest request) {
+			BindingResult errors, HttpSession session) {
 
 		ModelAndView modelAndView = new ModelAndView();
 		// 요청파라미터를 잘못불렀을때 일어나는 보여줄 view
@@ -97,17 +98,24 @@ public class ShoppingBasketProductController {
 		 * getStoreId());
 		 */
 
-		String storeId = ((Store) request.getSession().getAttribute("storeInfo")).getStoreId();
+		String storeId = ((Store) session.getAttribute("storeInfo")).getStoreId();
+		
+		System.out.println("ViewShoppingBasketProductController-storeId - " + storeId);
+		
+		
 		shoppingBasketProductViewForm.setStoreId(storeId);
 
 		shoppingBasketProduct.setProductId(shoppingBasketProductViewForm.getProductId());
+		shoppingBasketProduct.setStoreId(shoppingBasketProductViewForm.getStoreId());
 		System.out.println("shoppingBasketProduct:" + shoppingBasketProduct);
-
+  
 		// 유저가 매장에서 등록한 장바구니 목록들 찾기.
 		System.out.println("View--:" + shoppingBasketProduct);
+		
 		List<ShoppingBasketProduct> shoppingBasketProductList = service.findShoppingBasketProductListByStoreIdAndUserId(
 				shoppingBasketProductViewForm.getStoreId(),
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
+		
 		int totalPrice = service.findAllProductPrice(storeId,
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		

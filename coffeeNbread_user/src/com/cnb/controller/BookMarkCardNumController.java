@@ -46,14 +46,15 @@ public class BookMarkCardNumController {
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		System.out.println("-----즐겨찾는 카드번호 ----:"+cardNum);
 	    bookMarkCardNum.setCardNum(cardNum);
+	    System.out.println("cardNum:"+cardNum);
 		try {
 			service.addBookMarkCardNum(bookMarkCardNum);
 		} catch (BookCardNumDuplicationException e) {
 
 			e.printStackTrace();
-			return "user/payment_view.tiles"; // 만약 중복된거 입력한다하더라도 결제폼으로 보여줌.
+			return "redirect:/user/paymentProcessController.do?"; // 만약 중복된거 입력한다하더라도 결제폼으로 보여줌.
 		}
-		return "user/payment_view.tiles";
+		return "redirect:/user/paymentProcessController.do?cardNum="+cardNum;
 	}
 
 	@RequestMapping("/user/removeBookMarkCardNumController")
@@ -74,21 +75,21 @@ public class BookMarkCardNumController {
 	}
 
 	
-	
+/*	
 	@RequestMapping("/user/findBookMarkCardNumController")
 
-	public ModelAndView findBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum) {
+	public String findBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		GeneralUser generalUser = (GeneralUser) authentication.getPrincipal();
       ModelAndView modelAndView=new ModelAndView();
 	List<BookMarkCardNum> bookMarkCardNumList=service.findBookMarkCardNumListByUserId(generalUser.getUserId());
 		
-	    modelAndView.setViewName("user/payment_view.tiles"); 
+	    modelAndView.setViewName("user/user_payment_process.tiles"); 
 		modelAndView.addObject("bookMarkCardNumList",bookMarkCardNumList);
 		return modelAndView;
 	    
 	    
-	}
+	}*/
 	
 	
 	

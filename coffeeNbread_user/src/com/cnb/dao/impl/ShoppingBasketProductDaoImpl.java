@@ -45,6 +45,9 @@ public class ShoppingBasketProductDaoImpl implements ShoppingBasketProductDao {
 		Map<String, String> info = new HashMap<>();
 		info.put("userId", userId);
 		info.put("storeId", storeId);
+		
+		System.out.println("selectShoppingBasketProductListByStoreIdAndUserId = " + info);
+		
 		return session.selectList(makeSql("selectShoppingBasketProductListByStoreIdAndUserId"), info);
 
 	}

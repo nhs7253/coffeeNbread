@@ -28,3 +28,30 @@ SET user_authority = 'CNB_STORE'
 WHERE user_id = '1';
 
 
+		select
+		sbp.store_id,
+		s.store_name,
+		p.product_price,
+		pp.product_picture,
+		p.product_category,
+		p.product_name,
+		p.product_id,
+		sbp.product_count
+		from store s, product p, product_picture pp, shopping_basket_product sbp
+		where s.store_id(+)=p.store_id
+		and pp.product_id(+)=p.product_id
+		and sbp.product_id(+)=p.product_id
+		and sbp.user_id ='u-1'
+		and sbp.store_id='s-10000000'
+		
+		
+		
+		장바구니-  p-18 u-1 s-100000
+		        p-19
+		        p-21
+		and sbp.store_id='s-10000000'
+		
+		
+		SELECT *
+		FROM shopping_basket_product
+		WHERE store_id='s-10000000'

@@ -73,7 +73,7 @@ td {
 				</select> <input type="hidden" name="storeId" value="${param.storeId}" /> <input
 					type="text" name="keyword" class="form-control" />
 			</div>
-			<button type="submit" class="btn btn-custom">
+			 <button type="submit" class="btn btn-custom">
 				<i class="glyphicon glyphicon-search"></i>검색
 			</button>
 		</form>
