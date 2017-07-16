@@ -21,8 +21,14 @@ td {
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#optionId").on("change", function(){
-		if($("#optionId option:selected").val() == 'productCategory' ){
+		if($("#optionId option:selected").val() == 'productCategory'){
 			alert("제품 종류");
+		}
+		if($("#optionId option:selected").val() == 'productName'){
+			alert("제품 이름");
+		}
+		if($("#optionId option:selected").val() == 'sellingOption'){
+			alert("판매 여부");
 		}
 	});
 });
