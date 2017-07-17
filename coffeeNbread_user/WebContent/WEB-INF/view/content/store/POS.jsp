@@ -52,7 +52,7 @@ td {
 
 	
 	<c:forEach items="${requestScope.list }" var="product">
-		<div>
+		<div style="width: 25%; height: 320px; float: left;">
 			<table>
 				<tr>
 					<td align="center">
