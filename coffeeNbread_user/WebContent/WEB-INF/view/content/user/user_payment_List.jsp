@@ -8,9 +8,7 @@
 <!--결제하기 누르면 결제내역에 등록  -->
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
-}
+
 
 table {
 	width: 500px;
@@ -37,9 +35,9 @@ td {
 <br>
 
 	
-	<table class="w3-table-all">
+	<table class="table table-hover">
 		<thead>
-			<tr class="w3-blue">
+			<tr >
 				<th>결제번호</th>
 				<th>매장이름 </th>
 				<th>제품이름</th>
@@ -72,8 +70,7 @@ td {
 			</c:forEach>
 
 		</tbody>
-	</table></div>
-<div class="col-sm-1"></div>
+	</table>
 	
 
 
@@ -151,4 +148,5 @@ td {
 		<a
 			href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
 			페이지</a>
-
+</div>
+<div class="col-sm-1"></div>
