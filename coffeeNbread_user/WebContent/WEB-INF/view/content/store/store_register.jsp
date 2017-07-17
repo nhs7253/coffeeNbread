@@ -14,6 +14,7 @@
 </head>
 <script type="text/javascript"
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+	
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -35,6 +36,18 @@ $(document).ready(function(){
 
 	});//end of document
 </script>
+<style>
+body{
+
+background-image:url(up_image/main2.jpg);
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+
+}
+
+
+</style>
 <body>
 <h2>STORE_REGISTER</h2>
 <div class="col-sm-2"></div>
@@ -80,7 +93,7 @@ $(document).ready(function(){
 			<tr  class="form-group">
 				<th>매장 ID</th>
 
-				<td><div class="col-xs-10"><input type="text" name="storeId" class="form-control"></div></td>
+				<td><div class="col-xs-10"><input type="text" name="storeId" class="form-control "></div></td>
 			</tr>
 			<tr class="form-group">
 				<th>매장 이름</th>

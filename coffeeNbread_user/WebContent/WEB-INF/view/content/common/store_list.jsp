@@ -34,11 +34,8 @@ td {
     .info .link {color: #5085BB;}
 </style>
 
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
-
-<!-- <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
- -->
 
 	<h2>STORE LIST</h2>
 

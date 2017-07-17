@@ -11,22 +11,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="${initParam.rootPath }/resource/bootstrap/css/demo.css">
-<link rel="stylesheet"
-	href="${initParam.rootPath }/resource/bootstrap/css/material-dashboard.css">
-<link rel="stylesheet"
-	href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
-
-<script
-	src="${initParam.rootPath }/resource/bootstrap/js/jquery-3.1.0.min.js"></script>
-<script src="${initParam.rootPath }/resource/bootstrap/js/demo.js"></script>
-<script
-	src="${initParam.rootPath }/resource/bootstrap/js/material.min.js"></script>
-<script
-	src="${initParam.rootPath }/resource/bootstrap/js/material-dashboard.js"></script>
-<script
-	src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -34,8 +18,6 @@
 	href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
 	rel='stylesheet' type='text/css'>
 <style>
-
-
 </style>
 
 
@@ -168,6 +150,10 @@
 							정보조회</a></li>
 					<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자
 							탈퇴</a></li>
+
+					<li><a
+						href="${initParam.rootPath }/user/update_profile_form.do">내정보
+							수정</a></li>
 					<li><a
 						href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크
 							목록 조회</a></li>
@@ -194,6 +180,10 @@
 					<li><a
 						href="${initParam.rootPath }/findReservationDetailsController.do">예약
 							현황 조회</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/findPaymentDetailsController">유저결제내역</a></li>
+					<li><a
+						href="${initParam.rootPath }/user/findReservationDetailsController">유저예약내역</a></li>
 				</sec:authorize>
 			</ul></li>
 
@@ -236,14 +226,14 @@
 					<li><a
 						href="${initParam.rootPath }/findProductListController.do">제품
 							목록</a></li>
-					
+
 				</sec:authorize>
 
 
 				<li><a
 					href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do">전체
 						레시피 게시판 </a></li>
-				
+
 			</ul></li>
 
 		<li class="has-children users"><a href="#0">일단 무시해주세요~~~~</a>

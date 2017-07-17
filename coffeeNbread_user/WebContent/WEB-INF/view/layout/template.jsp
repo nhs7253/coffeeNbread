@@ -12,13 +12,13 @@
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/reset.css">
 <link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/style.css">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/background_style.css">
 
  <script src="${initParam.rootPath }/resource/bootstrap/js/jquery-3.1.0.min.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/demo.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/material.min.js"></script>
   <script src="${initParam.rootPath }/resource/bootstrap/js/material-dashboard.js"></script> 
  <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
- <script src="${initParam.rootPath }/resource/bootstrap/js/jquery-2.1.4.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/jquery.menu-aim.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/main.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/modernizr.js"></script>
@@ -33,6 +33,7 @@
 .side, .content{
 	height:100%;
 	padding: 0px;
+	back-ground:yellow;
 }
 
 
@@ -41,6 +42,9 @@
 		height: auto;
 	}
 }
+
+
+
 </style>
 </head>
 <body>
@@ -51,7 +55,7 @@
 	    <tiles:insertAttribute name="head"/>
 	    
 	</header> 
-	<%--메인 body --%>
+	<%--메인 body --%> <!-- style=background-color:#E6E6E6; -->
 	<section class="row content">
 		<%-- 메뉴 --%>
 		<nav class="col-sm-2 ">
@@ -59,7 +63,7 @@
 		</nav>
 		<!-- 내용 -->
 		
-		<div  class="col-sm-10 " style=padding-top:75px; >
+		<div  class="col-sm-10 " style="padding-top:75px;" >
 			
 			<tiles:insertAttribute name="content"/>
 		</div>
