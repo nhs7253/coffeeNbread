@@ -44,6 +44,16 @@
 					<sec:authorize access="isAuthenticated()">
 						<li><a href="javascript:logout()">로그아웃</a>
 					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
+						<li><a href="${initParam.rootPath }/user/mypage.do">사용자
+								정보조회</a></li>
+						<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자
+								탈퇴</a></li>
+						<li><a
+							href="${initParam.rootPath }/user/update_profile_form.do">내
+								정보 수정</a></li>
+
+					</sec:authorize>
 					</ul>
 				</li>
 			</ul>
