@@ -116,7 +116,7 @@ public class NoticeBoardContentsController {
 	 * @param errors 요청파라미터 에러
 	 * @return 반환 경로
 	 */
-	@RequestMapping("/common/findNoticeBoardContentsPagingListControllerr")
+	@RequestMapping("/common/findNoticeBoardContentsPagingListController")
 	public ModelAndView findNoticeBoardContentsPagingListController(@ModelAttribute("noticeBoardContentsView") @Valid NoticeBoardContentsViewForm noticeBoardContentsViewForm, BindingResult errors){
 		
 		ModelAndView modelAndView = new ModelAndView();

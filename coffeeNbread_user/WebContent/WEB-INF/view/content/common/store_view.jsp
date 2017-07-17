@@ -58,6 +58,11 @@
 			<input type="submit" value="유저가 보는 제품 목록">
 		</form>
 		
+		<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" method="post">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
+			<input type="submit" value="매장  Q&A 게시판 목록">
+		</form>
 		
 		</div>
 		<div class="col-sm-2"></div>
