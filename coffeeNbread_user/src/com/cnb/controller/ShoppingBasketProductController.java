@@ -173,18 +173,6 @@ public class ShoppingBasketProductController {
 	}
 		
 	
-	// 유저아이디와 매장아이디로 장바구니 객체 리스트 뽑기
-
-		/*
-		 * List<ShoppingBasketProduct> shopppingBasketProductList =
-		 * service.findShoppingBasketProductListByStoreIdAndUserId(
-		 * shoppingBasketProductViewForm.getStoreId(), ((GeneralUser)
-		 * SecurityContextHolder.getContext().getAuthentication().getPrincipal()
-		 * ) .getUserId());
-		 * System.out.println("수정전 장바구니 객체 :"+shopppingBasketProductList);
-		 * 
-		 */
-
 
 
 	/**

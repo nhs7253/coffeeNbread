@@ -71,6 +71,15 @@ public interface ReservationDetailsDao {
 	 */
 	int selectReservationDetailsListCountByMethod(String storeId, String method, String methodContent);
 	
+	
+	/**
+	 *  2017-07-16 
+	 *  김형주 추가 
+	 *  페이징없이 유저가 매장에서 예약한 예약목록 보여주기 
+	 */
+	
+	List<ReservationDetails> selectReservationDetailsListNoPagingByUserIdAndStoreId(String userId,String storeId);
+	
 	/**
 	 * 예약자로 1개의 매장의 예약 정보 select
 	 * @param storeId, userId, startIndex, endIndex

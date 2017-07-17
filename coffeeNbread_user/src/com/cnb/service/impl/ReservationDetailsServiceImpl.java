@@ -194,4 +194,10 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 	public ReservationDetails findReservationDetailsByReservationNo(String storeId, int reservationNo) {
 		return dao.selectReservationDetailsByReservationNo(storeId, reservationNo);
 	}
+
+
+	@Override
+	public List<ReservationDetails> findReservationDetailsListNoPagingByUserIdAndStoreId(String userId, String storeId) {
+		return dao.selectReservationDetailsListNoPagingByUserIdAndStoreId(userId, storeId);
+	}
 }

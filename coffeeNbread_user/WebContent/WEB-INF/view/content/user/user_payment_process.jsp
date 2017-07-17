@@ -3,15 +3,6 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-
-
-
-
-
-
-
-
-
 <!--맨처음 제품 수령시간 적고  -->
 <!--그다음 카드 적고  -등록-->
 <!--결제하기 누르면 결제내역에 등록  -->
@@ -29,15 +20,21 @@ function myFunction() {
     } else {
         txt = "카드번호를 적어주세요!!";
     }
-    document.getElementById("demo").innerHTML = txt;
 }
 
-function popupOpen(){
-    var popUrl = "/coffeeNbread_user/user/popup.html";    //팝업창에 출력될 페이지 URL
-    var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=no,top=250,left=500;";    //팝업창 옵션(optoin)
-        window.open(popUrl,"",popOption);
-    }
-	
+function popupCardNumList(){
+	  
+	                  
+	  window.open("/coffeeNbread_user/view/content/user/cardNumList.jsp","카드번호 리스트","top=300,left=300,width=400,height=400,resizable=no");  //링크걸때 URL과 같다. 여기서는 그냥 절대경로로 넣은거고 상대경로로 해도 상관없음 
+}   
+
+
+function myFunction() {
+    confirm("결제하시겠습니까? ");
+}
+
+
+
 
 
 $(document).ready(function(){
@@ -46,7 +43,7 @@ $(document).ready(function(){
 		document.getElementById( "productCount" ).setAttribute( 'value', this.value);
 	}); */
 	$("#registerBtn").on("click", function(){
-		alert("aaaa");
+		
 		var aForm = document.getElementById("addCardNum");
 		alert(aForm);
 		document.getElementById( "card" ).setAttribute('value', this.value);
@@ -54,18 +51,21 @@ $(document).ready(function(){
 		alert(aForm.cardNum.value);
 		aForm.submit();
 	});
+
 	
-	$("#findCardList").on("click",function(){
-	
-		 alert("등록-1");
-	})
-  
 	/* 카드번호 등록 */
 	$("#card_id").on("change", function(){
 		document.getElementById( "card" ).setAttribute('value', this.value);
 	});
 	
-	
+/* 	
+	$("#payment").on("click", function(){
+		
+		var pForm = document.getElementById("payForm");
+		pForm.productHopeTime.value = $(this).prev().val();
+		alert(pForm.cardNum.value);
+		pForm.submit();
+	}); */
 	
 	
 	
@@ -93,7 +93,7 @@ td {
 <center><h2>${requestScope.userName }의 결제페이지</h2></center>
 
 <hr>
- <h4 >결제할 목록</h4>
+<caption>결제할 목록</caption>
 <table class="w3-table-all"   >
 	<thead>
 		<tr class="w3-blue" >
@@ -134,29 +134,42 @@ td {
 <p>
    결제 방법 선택 
    
+   <select  id="payment_method">
    <c:forEach var="list" items="${requestScope.spoList }">
-		<li value="${list }">${list}</li>
-	</c:forEach>
+	<option  value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
+   </c:forEach>
+	 </select>
 
 </p>
 
+<p>
+<%--  
+  제품수령 희망 시간:
+     --%>
+
+<p>
+<br>
+<br>
 
 
-  즐겨찾는 카드번호
-
-   <br>
-    <p>  
-      <input type="text" size="20" name="cardNum" id="card" value="${requestScope.cardNum }">
-       <button type="submit" onclick="myFunction()" id="registerBtn" >
-           <i class="glyphicon glyphicon-plus"></i>카드번호 등록 
-      </button>
+<br>
+<br>
+     
+    
+   
+    <br>
+      <input type="text" size="20" name="cardNum"  id="card" placeholder="카드번호를 입력해주세요." value="${requestScope.cardNum }">
+       <button type="submit"  id="registerBtn"  >
+           <i class="glyphicon glyphicon-plus"></i>카드번호 등록하기
+       </button> 
+      
     </p>    
 
-   
-   <p>		
-
-       <i class="glyphicon glyphicon-search"></i>등록한 카드번호 조회 
-   
+   <p>   
+        
+        <button type="submit" name="findCardNumList" id="findCardNum" >		
+         <i class="glyphicon glyphicon-search"></i>등록한 카드번호 목록.
+        </button> 
    </p>
    
 
@@ -168,37 +181,41 @@ td {
      </select>
    </p>
 
+   
 
-
-
-
-<form
-	action="${initParam.rootPath }/user/addPaymentDetailsController.do">
+<form action="${initParam.rootPath }/user/addPaymentDetailsController.do" id="payForm">
 	<sec:csrfInput />
-	<c:forEach items="${requestScope.shoppingBasketProductList }"
+	<c:forEach items="${requestScope.sbpList }"
 		var="list">
 		<input type="hidden" name="productIdList"
 			value="${list.product.productId }" />
 		<input type="hidden" name="reservationOrderCount"
 			value="${list.productCount }" />
-		<input type="hidden" name="storeId" value="${list[0].storeId}">
 	</c:forEach>
-	<button type="submit" class="btn-custom">
+	     <br>
+	     <br>
+ 
+
+ 
+	 제품수령희망시간.
+	  <label> <input type="text" name="productHopeTime" id="paytime" placeholder="ex)2017-07-21 10:30"></label>
+	    <br>
+	    <hr>
+		<button type="submit" id="payment" class="btn-custom" onclick="myFunction()" >
 		<i class="glyphicon glyphicon-credit-card"></i>결제
-	</button>
-</form>
+	   </button>
+</form>	
+        
 
 
 
-<form
-	action="${initParam.rootPath }/user/addBookMarkCardNumController.do" id="addCardNum">
+
+
+
+<form action="${initParam.rootPath }/user/addBookMarkCardNumController.do" id="addCardNum">
 	<sec:csrfInput />
 	<input type="hidden" name="cardNum"/>
 </form>
 
 
-<form
-	action="${initParam.rootPath }/user/findBookMarkCardNumController.do">
-	<sec:csrfInput />
-	
- </form>
+

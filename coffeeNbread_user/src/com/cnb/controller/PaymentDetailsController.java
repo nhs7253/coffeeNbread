@@ -1,5 +1,6 @@
 package com.cnb.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ import com.cnb.validation.annotation.PaymentDetailsViewForm;
 import com.cnb.vo.BookMarkCardNum;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.PaymentDetails;
+import com.cnb.vo.ReservationDetails;
 import com.cnb.vo.ShoppingBasketProduct;
 import com.cnb.vo.Store;
 import com.cnb.vo.StorePaymentOptionList;
@@ -60,13 +62,18 @@ public class PaymentDetailsController {
 	
 	@Autowired
 	private ShoppingBasketProductService  sbpService;
+	
+
+	
 	// 결제완료 버튼 눌러야 들어가는 것.
 	@RequestMapping("/user/addPaymentDetailsController")
 
 	// 즐겨찾는카드번호에서 카드 입력후 결제내역에 등록될 controller
 	public ModelAndView addPaymentDetailsController(
-			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors) {
+			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors,HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		
 		System.out.println("paymentDetailsform:" + paymentDetailsform);
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (errors.hasErrors()) {
@@ -79,10 +86,14 @@ public class PaymentDetailsController {
 		BeanUtils.copyProperties(paymentDetailsform, paymentDetails);
 		System.out.println("add-paymentDetailsform:" + paymentDetailsform);
 		System.out.println("add-paymentDetailsform:" + paymentDetailsform);
+		
+		String storeId = ((Store) session.getAttribute("storeInfo")).getStoreId();
+        
 
 		System.out.println("-------paymentDetailsform---:" + paymentDetailsform.getProductIdList().size());
 		for (int i = 0; i < paymentDetailsform.getProductIdList().size(); i++) {
-			paymentDetails.setStoreId(paymentDetailsform.getStoreIdList().get(i));
+			paymentDetails.setUserId(generalUser.getUserId());
+			paymentDetails.setStoreId(storeId);
 			paymentDetails.setProductId(paymentDetailsform.getProductIdList().get(i));
 			paymentDetails.setReservationOrderCount(paymentDetailsform.getReservationOrderCount().get(i));
 			paymentDetails.setProductTradeCount(0);
@@ -91,6 +102,7 @@ public class PaymentDetailsController {
 			paymentDetails.setUserId(generalUser.getUserId());
 			paymentDetails.setTradeDate(new Date());
 
+					
 			try {
 				System.out.println("----추가----");
 				paymentDetailsList.add(paymentDetails);
@@ -98,17 +110,20 @@ public class PaymentDetailsController {
 
 			} catch (NullShoppingBasketProductException e) {
 				// TODO Auto-generated catch block
-				modelAndView.setViewName("user/payment_view.tiles");
+				modelAndView.setViewName("user/user_payment_process.tiles");
 				return modelAndView;
 			}
+				rdService.addReservationDetailsByPaymentDetails(paymentDetailsList,paymentDetailsform.getProductHopeTime() );
+
 		}
+           
+	   
+		List<ReservationDetails>reservationList= rdService.findReservationDetailsListNoPagingByUserIdAndStoreId(generalUser.getUserId(), storeId);
 		modelAndView.addObject("userName", generalUserService.findUser(generalUser.getUserId()).getUserName());
-		modelAndView.addObject("storeId", paymentDetailsform.getStoreIdList().get(0));
+		modelAndView.addObject("reservationList", reservationList);
 		modelAndView.setViewName("user/payment_success.tiles");
-
-		// 예약내역 넣기.
-		rdService.addReservationDetailsByPaymentDetails(paymentDetailsList, paymentDetailsform.getProductHopeTime());
-
+		
+		
 		return modelAndView; // 결제 성공페이지.
 	}
 

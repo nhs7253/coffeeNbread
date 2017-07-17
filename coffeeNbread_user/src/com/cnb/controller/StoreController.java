@@ -86,7 +86,6 @@ public class StoreController {
 			return modelAndView;
 		}
 		
-	
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 		
