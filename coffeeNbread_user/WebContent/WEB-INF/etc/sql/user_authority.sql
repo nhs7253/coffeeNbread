@@ -28,21 +28,3 @@ SET user_authority = 'CNB_STORE'
 WHERE user_id = '1';
 
 
-
- SELECT         r.reservation_no,
-					r.reservation_time,
-					r.reservation_count,
-					r.reservation_confirm,
-					r.product_hope_time,
-					r.product_id,
-					s.store_id,
-					p.product_name,
-					s.store_name
-					
-		from		reservation_details r, store s, product p
-        where       r.product_id=p.product_id
-        and         s.store_id=p.store_id
-        and         r.store_id=s.store_id
-        and         r.user_id='u-1'
-        and         s.store_id='s-10000000'
-        order by     r.reservation_time desc
