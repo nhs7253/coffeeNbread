@@ -238,9 +238,9 @@ body {
 .card .input-container input {
 	outline: none;
 	z-index: 1;
-	position: relative;
+/* 	position: relative; */
 	background: none;
-	width: 100%;
+/* 	width: 100%; */
 	height: 54px;
 	border: 0;
 	color: #212121;
@@ -256,7 +256,7 @@ body {
 
 .card .input-container input:focus ~ .bar:before, .card .input-container input:focus 
 	~ .bar:after {
-	width: 50%;
+	 width: 50%; 
 }
 
 .card .input-container input:valid ~ label {
@@ -266,7 +266,7 @@ body {
 }
 
 .card .input-container label {
-	position: absolute;
+	 position: absolute; 
 	top: 0;
 	left: 0;
 	color: #757575;
@@ -278,11 +278,11 @@ body {
 }
 
 .card .input-container .bar {
-	position: absolute;
+ 	position: absolute; 
 	left: 0;
 	bottom: 0;
 	background: #757575;
-	width: 100%;
+ 	width: 100%; 
 	height: 1px;
 }
 
