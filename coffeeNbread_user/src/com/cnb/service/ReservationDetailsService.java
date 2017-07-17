@@ -1,5 +1,6 @@
 package com.cnb.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public interface ReservationDetailsService {
 	
 	
 	
-	void addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList, Date productHopeTime);
+	void addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList, Date simpleDateFormat);
 	
 	
 /*	
@@ -91,6 +92,17 @@ public interface ReservationDetailsService {
 	 * @param storeId, productHopeTime, userId
 	 */
 	List<ReservationDetails> findReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId);
+	
+
+	/**
+	 * 유저가 매장에서 구매했던 제품들의 예약 목록 보여주기
+	 * @param userId
+	 * @param storeId
+	 * @return
+	 */
+	List<ReservationDetails> findReservationDetailsListNoPagingByUserIdAndStoreId(String userId,String storeId);
+
+	
 	
 	/**
 	 * 한 매장에서 같은 유저가 같은 시간에 구매한 예약 내역들의 확인 유무 시간 수정
