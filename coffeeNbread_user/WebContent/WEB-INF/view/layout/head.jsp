@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!doctype html>
 <html>
 <head>
@@ -14,17 +16,34 @@
 		<a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 
 		<nav class="cd-nav">
+		
 			<ul class="cd-top-nav">
-				<li><a href="#0">Tour</a></li>
-				<li><a href="#0">Support</a></li>
+			<li><a href="${initParam.rootPath }/index.do">HOME</a></li>
+			<li><a >
+					<%-- sec:authoize - 현 사용자가 특정 권한이 있으면 몸체의 내용을 처리한다.
+	   access속성에 어떤 권한인지를 표현한다. - 스프링 시큐리티의 sprint EL  이용--%> <sec:authorize
+						access="isAuthenticated()">
+						<!-- Authentication의 getPrincipal() 호출 - User 리턴 -->
+						<sec:authentication property="principal.userName" /> 님 환영합니다.
+					</sec:authorize>(<sec:authentication property="authorities" />)
+				</a></li>
+				<li><a href="${initParam.rootPath }/user/mypage.do">MY PAGE</a></li>
+			<!-- 	<li><a href="#0">Support</a></li> -->
 				<li class="has-children account">
-					<a>Account</a>
+					<a>USER</a>
 
 					<ul>
-
-						<li><a href="#0">My Account</a></li>
-						<li><a href="#0">Edit Account</a></li>
-						<li><a href="#0">Logout</a></li>
+	<!--                인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴
+ -->
+					<sec:authorize access="!isAuthenticated()">
+						<li><a href="${initParam.rootPath }/login_form.do">로그인</a></li>
+						<li><a href="${initParam.rootPath }/add_user_form.do">회원가입</a></li>
+					</sec:authorize>
+					<!--                인증된(로그인한) 사용자 메뉴 : 인증 안된상태에서 안보여야 하는 메뉴
+ -->
+					<sec:authorize access="isAuthenticated()">
+						<li><a href="javascript:logout()">로그아웃</a>
+					</sec:authorize>
 					</ul>
 				</li>
 			</ul>

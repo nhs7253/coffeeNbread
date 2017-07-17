@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-table, td {
-  
-}
+
 
 table {
    width: 500px;
@@ -17,7 +15,7 @@ td {
 }
 
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
+<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
 	<script type="text/javascript">
 			$(document).ready(function(){
@@ -27,10 +25,11 @@ td {
 			});//ready 
 		</script>
 <h2>POS</h2> 
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
 <form action="${initParam.rootPath }/store/findProductListToPOSController.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
+   <div style="float:right">
    <div class="form-group">
    <select name="select" class="form-control">
       <option value="productName" ${param.select eq "productName" ? "selected" :""}>제품 이름</option>
@@ -40,6 +39,7 @@ td {
    <input type="text" name="keyword" class="form-control"/>
    </div>
    <button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
+</div>
 </form>
 
 
@@ -50,7 +50,6 @@ td {
 <form action="${initParam.rootPath }/store/movePaymentPageController.do" method="post" class="form-inline quick-search-form" role="form">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 
-	
 	
 	<c:forEach items="${requestScope.list }" var="product">
 		<div>
@@ -75,15 +74,19 @@ td {
 						<input type="number" name="productTradeCountList" class="curruntProductCount" value="0"/>
 					</td>
 				</tr>
+				
 			</table>
 			<input type="hidden" name="productIdList" value="${product.productId }"/>
 			<input type="hidden" name="productNameList" value="${product.productName }"/>
 			<input type="hidden" name="productPriceList" value="${product.productPrice }"/>
 		</div>
 	</c:forEach>
-	<button type="submit" class="btn btn-custom">결제</button>
+	
+
+	<div style="float:right">
+	<button type="submit" class="btn btn-custom">결제</button></div>
 </form>
 	</div>
-	<div class="col-sm-1"></div>
+	<div class="col-sm-2"></div>
 
 <p>

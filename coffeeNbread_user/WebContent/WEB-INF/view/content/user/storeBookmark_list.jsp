@@ -4,9 +4,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
-table, td {
-	
-}
 
 table {
 	width: 700px;
@@ -29,13 +26,14 @@ td {
 	
 			<form
 				action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do"
-				method="post">
-				<div class="form-group col-xs-2">
-					<input type="text" name="keyword" class="form-control" />
-				</div>
-				<button type="submit" class="btn-custom">
+				method="post" >
+				<div style="float:right">
+				<div class="form-group col-xs-8" >
+					<input type="text" name="keyword" class="form-control" /></div>
+				<button type="submit" class="btn-custom form-group col-xs-4" >
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
+				</div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
@@ -85,7 +83,7 @@ td {
 
 			</tbody>
 		</table>
-				<button type="submit" class="btn-custom"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+				<button type="submit" class="btn-custom" style="float:right"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 	</form>
 
 

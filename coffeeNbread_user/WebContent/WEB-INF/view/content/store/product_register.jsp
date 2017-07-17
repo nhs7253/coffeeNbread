@@ -5,6 +5,7 @@
 
 <script type="text/javascript"
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
+	
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('input[type="checkbox"]').on("click", function() {
@@ -12,9 +13,10 @@
 		});
 	});
 </script>
-<h2>PRODUCT_REGISTER</h2>
-	<div class="col-sm-1"></div>
-<div class="col-sm-10">
+
+<h2>PRODUCT_REGISTER_</h2>
+	<div class="col-sm-2"></div>
+<div class="col-sm-8">
 <form action="${initParam.rootPath }/addProductController.do"
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />
@@ -65,11 +67,11 @@
 			<th>제품 사진</th>
 			<td><input type="file" name="productPicture"></td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<button type="submit" class="btn btn-custom">
+		<tr><th></th>
+			<td ><div style="float:right">
+				<button type="submit" class="btn btn-custom" >
 					<i class="glyphicon glyphicon-ok"></i> 등록
-				</button>
+				</button></div>
 			</td>
 		</tr>
 	</table>
