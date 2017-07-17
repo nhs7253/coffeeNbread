@@ -34,8 +34,6 @@
 	href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
 	rel='stylesheet' type='text/css'>
 <style>
-
-
 </style>
 
 
@@ -62,6 +60,7 @@
 					<sec:authorize access="isAuthenticated()">
 						<li><a href="javascript:logout()">로그아웃</a>
 					</sec:authorize>
+					
 				</ul>
 		</ul>
 
@@ -169,6 +168,10 @@
 					<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자
 							탈퇴</a></li>
 					<li><a
+						href="${initParam.rootPath }/user/update_profile_form.do">내 정보
+							수정</a></li>
+
+					<li><a
 						href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크
 							목록 조회</a></li>
 					<li><a
@@ -194,6 +197,15 @@
 					<li><a
 						href="${initParam.rootPath }/findReservationDetailsController.do">예약
 							현황 조회</a></li>
+
+					<li><a
+						href="${initParam.rootPath }/user/findPaymentDetailsController.do">
+							회원 결제내역 조회</a></li>
+
+					<li><a
+						href="${initParam.rootPath }/user/findReservationDetailsController.do">
+							회원 예약내역 조회</a></li>
+
 				</sec:authorize>
 			</ul></li>
 
@@ -234,16 +246,16 @@
 						href="${initParam.rootPath }/findOptionCategoryController.do">제품
 							등록</a></li>
 					<li><a
-						href="${initParam.rootPath }/findProductListController.do">제품
+						href="${initParam.rootPath }/findProductListController.do?storeId=<sec:authentication property='principal.storeId'/>">제품
 							목록</a></li>
-					
+
 				</sec:authorize>
 
 
 				<li><a
 					href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do">전체
 						레시피 게시판 </a></li>
-				
+
 			</ul></li>
 
 		<li class="has-children users"><a href="#0">일단 무시해주세요~~~~</a>

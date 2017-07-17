@@ -57,6 +57,10 @@ td {
 							<button type="submit" class="btn-custom">
 								<i class="glyphicon glyphicon-shopping-cart"></i>장바구니
 							</button>
+			 <input type="hidden" name="productIdList" value="${product.productId }"/>
+			 <input type="hidden" name="productNameList" value="${product.productName }"/>
+			<input type="hidden" name="productPriceList" value="${product.productPrice }"/>	
+							
 					</form>
 				</td>
 			</tr>

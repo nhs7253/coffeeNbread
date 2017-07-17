@@ -86,7 +86,6 @@ public class StoreController {
 			return modelAndView;
 		}
 		
-	
 		Store store = new Store();
 		BeanUtils.copyProperties(storeRegisterForm, store);
 		
@@ -350,4 +349,8 @@ public class StoreController {
 		modelAndView.addObject("paymentOptionList", paymentOptionListService.findpaymentOptionList());
 		return modelAndView;
 	}
+	
+	
+
+	
 }

@@ -87,18 +87,59 @@
 			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-resultmap" />
 	</resultMap>
 
-
-
-
-
-
-
-
 	<resultMap type="ReservationDetails" id="reservationDetails-generalUser-resultmap"
 		extends="reservationDetails-resultmap">
 		<collection property="generalUserList"
 			resultMap="com.cnb.config.mybatis.mapper.GeneralUserMapper.GeneralUser-resultmap" />
 	</resultMap>
+
+
+     <!--유저가 해장 매장에서 예약한 내역찾기.  -->
+
+
+<select id="selectReservationDetailsListNoPagingByUserIdAndStoreId"
+		resultMap="reservationDetails-store-product-resultmap" parameterType="map">
+     SELECT         r.reservation_no,
+					r.reservation_time,
+					r.reservation_count,
+					r.reservation_confirm,
+					r.product_hope_time,
+					r.product_id,
+					s.store_id,
+					p.product_name,
+					s.store_name
+					
+		from		reservation_details r, store s, product p
+        where       r.product_id=p.product_id
+        and         s.store_id=p.store_id
+        and         r.store_id=s.store_id
+        and         r.user_id=#{userId}
+        and         s.store_id=#{storeId}
+        order by     r.reservation_time desc
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- selectReservationDetailsListCountByStoreId -->
 	<select id="selectReservationDetailsListCountByStoreId"
@@ -255,12 +296,16 @@
 									s.store_name,
 									rd.user_id
 							FROM	reservation_details rd ,store s, product p
-							where  rd.user_id = #{userId}
+							where   rd.product_id=p.product_id
+							and     rd.store_id=s.store_id
+							and      p.store_id=s.store_id
+							and      rd.user_id =#{userId}
+							order by rd.reservation_time desc
 							
 					) 
 					WHERE rownum <=#{endIndex}
 			)
-			WHERE rnum >= #{startIndex}
+			WHERE rnum >=#{startIndex}
 		]]>
 	</select>
 
@@ -271,8 +316,7 @@
 
 	<select id="selectReservationDetailsListByStoreIdAndReservationTime"
 		resultMap="reservationDetails-generalUser-resultmap" parameterType="map">
-		>>>>>>> branch 'master' of
-		https://github.com/nhs7253/coffeeNbread.git
+
 		<![CDATA[
 			SELECT  reservation_no,
 					reservation_time,

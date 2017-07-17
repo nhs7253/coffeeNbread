@@ -153,4 +153,12 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		info.put("reservationNo", reservationNo);
 		return session.selectOne(makeSqlId("selectReservationDetailsByReservationNo"), info);
 	}
+	@Override
+	public List<ReservationDetails> selectReservationDetailsListNoPagingByUserIdAndStoreId(String userId,
+			String storeId) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		return session.selectList(makeSqlId("selectReservationDetailsListNoPagingByUserIdAndStoreId"), info);
+	}
 }
