@@ -1,11 +1,12 @@
 package com.cnb.controller;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,7 +38,14 @@ public class BookMarkCardNumController {
 
 	/* 유저가 매장에서 카드를 입력 --- 카드num */
 	String addBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum) {
-
+      
+		
+		/*
+		if (errors.hasErrors()) {
+		   System.err.println("-----오류 발생-----");	
+			return "redirect:/user/paymentProcessController.do"; // 에러 발생
+		}*/
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
 		GeneralUser generalUser = (GeneralUser) authentication.getPrincipal();
 		BookMarkCardNum bookMarkCardNum = new BookMarkCardNum(cardNum, generalUser.getUserId());
@@ -46,14 +54,15 @@ public class BookMarkCardNumController {
 				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		System.out.println("-----즐겨찾는 카드번호 ----:"+cardNum);
 	    bookMarkCardNum.setCardNum(cardNum);
+	    System.out.println("cardNum:"+cardNum);
 		try {
 			service.addBookMarkCardNum(bookMarkCardNum);
 		} catch (BookCardNumDuplicationException e) {
 
 			e.printStackTrace();
-			return "user/payment_view.tiles"; // 만약 중복된거 입력한다하더라도 결제폼으로 보여줌.
+			return "redirect:/user/paymentProcessController.do?"; // 만약 중복된거 입력한다하더라도 결제폼으로 보여줌.
 		}
-		return "user/payment_view.tiles";
+		return "redirect:/user/paymentProcessController.do?cardNum="+cardNum;
 	}
 
 	@RequestMapping("/user/removeBookMarkCardNumController")
@@ -74,22 +83,7 @@ public class BookMarkCardNumController {
 	}
 
 	
-	
-	@RequestMapping("/user/findBookMarkCardNumController")
 
-	public ModelAndView findBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		GeneralUser generalUser = (GeneralUser) authentication.getPrincipal();
-      ModelAndView modelAndView=new ModelAndView();
-	List<BookMarkCardNum> bookMarkCardNumList=service.findBookMarkCardNumListByUserId(generalUser.getUserId());
-		
-	    modelAndView.setViewName("user/payment_view.tiles"); 
-		modelAndView.addObject("bookMarkCardNumList",bookMarkCardNumList);
-		return modelAndView;
-	    
-	    
-	}
-	
 	
 	
 }

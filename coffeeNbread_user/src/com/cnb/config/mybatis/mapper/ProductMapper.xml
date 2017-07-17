@@ -92,6 +92,35 @@
 		WHERE store_id = #{value}
 	</select>
 
+	<!-- selectProductListCountByMethodManager -->
+	<select id="selectProductListCountByMethodManager" parameterType="hashmap" resultType="_int">
+		<choose>
+			<when test="method == 'category'">
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product
+				WHERE product_category LIKE '%'||#{methodContent}||'%'
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<when test="method == 'name'">
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product
+				WHERE product_name LIKE '%'||#{methodContent}||'%'
+				AND	  store_id = #{storeId}
+			]]>
+			</when>
+			<otherwise> <!-- method == 'sellingOption' -->
+			<![CDATA[
+				SELECT COUNT(product_id)
+				FROM product
+				WHERE selling_option = #{methodContent}
+				AND	  store_id = #{storeId}
+			]]>
+			</otherwise>
+		</choose>
+	</select>
 
 
 

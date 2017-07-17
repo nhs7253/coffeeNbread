@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 
@@ -17,17 +18,23 @@
 <!--결제하기 누르면 결제내역에 등록  -->
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
+table, td,th{
+	border: 4px solid black;
+	
 }
 
-table {
-	width: 500px;
+table{
+	width:700px;
 	border-collapse: collapse;
 }
-
-td {
-	padding: 5px; /*td 간 간격 */
+td{
+	padding: 5px; /* //td 간 간격 */
+	
+}
+select{
+	width:150px;
+	height: 35px;
+	padding: 5px;
 }
 </style>
 
@@ -36,101 +43,50 @@ td {
 <h2>결제성공</h2>
 
 
+<h2>${requestScope.userName }님의예약 현황</h2>
 
 
 
+<br>
 
-<%-- <form
-	action="${initParam.rootPath }/user/findAllProductPriceController.do">
-	<input type="hidden" name="storeId"> <input type="hidden"
-		name="productId">
-	<sec:csrfInput />
-</form>
-결제할 목록
-<table class="w3-table-all">
+
+<table class="w3-table-all" width="90%" border="1" align="center" >
 	<thead>
 		<tr class="w3-blue">
-			<th>제품카테고리</th>
-			<th>제품사진</th>
-			<th>제품명</th>
-			<th>가격</th>
-			<th>개수</th>
+			<th>예약번호</th>
+			<th>예약매장</th>
+			<th>예약시간</th>
+			<th>예약한 제품</th>
+			<th>예약개수</th>
+			<th>제품수령희망시간</th>
+			<th>예약확인유무</th>
 
 		</tr>
 	</thead>
 	<tbody>
 
-		######################################################
-																조회된 item 출력 
-					######################################################
-		<c:forEach items="${requestScope.shoppingBasketProductList }"
-			var="list">
+		<%-- ######################################################
+															조회된 item 출력 
+				###################################################### --%>
+		<c:forEach items="${requestScope.reservationList }" var="list">
 
-			<tr id="sbp_id">
-				<td>${list.product.productCategory}</td>
-				<td>${list.product.productPicture}</td>
+			<tr>
+				<td>${list.reservationNo}</td>
+				<td>${list.store.storeName }</td>
+				<td><fmt:formatDate value="${list.reservationTime}"
+						pattern="yyyy년 MM월 dd일 hh시mm분" /></td>
 				<td>${list.product.productName}</td>
-				<td>${list.product.productPrice}</td>
-				<td>${list.productCount}</td>
-
+				<td>${list.reservationCount}</td>
+				<td><fmt:formatDate value="${list.productHopeTime}"
+						pattern="yyyy년 MM월 dd일 hh시mm분" /></td>
+				<td><fmt:formatDate value="${list.reservationConfirm}"
+						pattern="yyyy년 MM월 dd일 hh시mm분" /></td>
 			</tr>
 		</c:forEach>
+
 	</tbody>
 </table>
 
-<br>
-<br>
-
-<p>
-
-	총금액<input type="text" value="${requestScope.totalPrice }">
-</p>
+  
 
 
-즐겨찾는 카드번호
-
-
-
-<form
-	action="${initParam.rootPath }/user/addBookMarkCardNumController.do">
-	<sec:csrfInput />
-	<input type="tel" size="20" name="cardNum"
-		value="${requestScope.cardNum }" /> <input type="submit"
-		value="카드번호 등록">
-</form>
-
-
-<form
-	action="${initParam.rootPath }/user/findBookMarkCardNumController.do">
-	<sec:csrfInput />
-	<input type="submit" value="등록한 카드번호 조회">
-</form>
-
-<select name="bookMarkCardNum" id="card_id">
-
-	<c:forEach var="list" items="${requestScope.bookMarkCardNumList }">
-		<!--속성넘어온값의 변수명이 firstCategory라서.이건 list이므로 forEach  -->
-		<option value="${list.cardNum }">${list.cardNum }</option>
-	</c:forEach>
-</select>
-
-
-
-
-
-
-<form
-	action="${initParam.rootPath }/user/addPaymentDetailsController.do">
-	<sec:csrfInput />
-	<c:forEach items="${requestScope.shoppingBasketProductList }"
-		var="list">
-		<input type="hidden" name="productIdList"
-			value="${list.product.productId }" />
-		 <input type="hidden" name="reservationOrderCount"
-		    value="${list.productCount }"/>	
-		 <input type="hidden" name="storeId"
-		  value="${list[0].storeId}">   
-	</c:forEach>
-	<input type="submit" value="결제하기">
-</form>
- --%>

@@ -61,15 +61,14 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	
-	/*  //-유저가 보는 방법별로 페이징 - 카테고리, 제품명
 	@Override
-	public int selectProductListCountByMethod(String storeId, String method, String methodContent) {
+	public int selectProductListCountByMethodManager(String storeId, String method, String methodContent) {
 		Map<String, String> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("method", method);
 		info.put("methodContent", methodContent);
-		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
-	}*/
+		return session.selectOne(makeSqlId("selectProductListCountByMethodManager"), info);
+	}
 	
 	
 	@Override
@@ -80,15 +79,6 @@ public class ProductDaoImpl implements ProductDao {
 		info.put("keyword", keyword);
 		return session.selectOne(makeSqlId("selectProductListCountByMethod"), info);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

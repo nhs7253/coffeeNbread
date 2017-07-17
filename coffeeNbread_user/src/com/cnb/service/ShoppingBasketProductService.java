@@ -55,6 +55,22 @@ public interface ShoppingBasketProductService {
 	
 	
 	
+	
+	/**
+	 * 유저가 장바구니목록에 넣은것중 제품아이디로 찾기.
+	 * @param userId
+	 * @param storeId
+	 * @param productId
+	 * @return
+	 */
+	ShoppingBasketProduct findShoppingBasketProduct(String userId,String storeId, String productId);
+	
+	
+	
+	
+	
+	
+	
    /*
 	void addShoppingBasketProductList(List<ShoppingBasketProduct> shoppingBasketProduct);
 	*/

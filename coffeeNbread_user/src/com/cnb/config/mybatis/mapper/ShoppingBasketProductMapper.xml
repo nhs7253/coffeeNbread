@@ -83,14 +83,11 @@
 		sbp.product_count
 		from store s, product p,
 		product_picture pp, shopping_basket_product sbp
-		where
-		s.store_id=p.store_id
-		and pp.product_id=p.product_id
-		and
-		sbp.product_id=p.product_id
+		where s.store_id(+)=p.store_id
+		and pp.product_id(+)=p.product_id
+		and sbp.product_id(+)=p.product_id
 		and sbp.user_id =#{userId}
-		and
-		sbp.store_id=#{storeId}
+		and sbp.store_id=#{storeId}
 	</select>
 
 
@@ -373,6 +370,8 @@
 			WHERE rnum >= #{startIndex}
 		]]>
 	</select>
+
+
 
 
 

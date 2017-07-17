@@ -380,5 +380,11 @@ INSERT INTO payment_optionlist VALUES('1','카드');
 INSERT INTO payment_optionlist VALUES('2','현금');
 INSERT INTO payment_optionlist VALUES('3','카카오페이');
 
+
+INSERT INTO PAYMENT_OPTIONlIST VALUES('c','카드');
+INSERT INTO PAYMENT_OPTIONlIST VALUES('p','현금');
+INSERT INTO PAYMENT_OPTIONlIST VALUES('o','카카오페이');
+
 --general_user
+
 

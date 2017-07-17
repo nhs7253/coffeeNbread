@@ -97,7 +97,8 @@ public class ProductServiceImpl implements ProductService {
 		String methodContent = productCategory;
 		
 		//item 수
-		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		int totalCount = dao.selectProductListCountByMethodManager(storeId, method, methodContent);
+		System.out.println(totalCount);
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
@@ -115,7 +116,7 @@ public class ProductServiceImpl implements ProductService {
 		String methodContent = productName;
 		
 		//item 수
-		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		int totalCount = dao.selectProductListCountByMethodManager(storeId, method, methodContent);
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
@@ -143,7 +144,7 @@ public class ProductServiceImpl implements ProductService {
 		String methodContent = sellingOption;
 		
 		//item 수
-		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		int totalCount = dao.selectProductListCountByMethodManager(storeId, method, methodContent);
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
