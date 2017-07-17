@@ -4,7 +4,7 @@
 
 <style type="text/css">
 table, td {
-
+   border: 1px solid black;
 }
 
 table {
@@ -15,37 +15,18 @@ table {
 td {
    padding: 5px; /*td 간 간격 */
 }
+
 </style>
-
-<script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#optionId").on("change", function(){
-		if($("#optionId option:selected").val() == 'productCategory'){
-			alert("제품 종류");
-		}
-		if($("#optionId option:selected").val() == 'productName'){
-			alert("제품 이름");
-		}
-		if($("#optionId option:selected").val() == 'sellingOption'){
-			alert("판매 여부");
-		}
-	});
-});
-</script>
-
-<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
+<link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 <h2>PRODUCT LIST</h2> 
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+
 ${requestScope.list }
 <div class="container">
 <div id="quick-access">
 <form action="${initParam.rootPath }/findProductListByMethod.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
    <div class="form-group">
-   <select id="optionId" name="method" class="form-control">
-   	  <option>옵션</option>
+   <select name="method" class="form-control">
       <option value="productCategory">제품 종류</option>
       <option value="productName">제품 이름</option>
       <option value="sellingOption">판매 여부(Y/N)</option>
@@ -60,7 +41,7 @@ ${requestScope.list }
 
 <form  action="${initParam.rootPath }/findProductListManagerController.do" method="post">
    <sec:csrfInput/><%-- csrf 토큰 --%>
-   <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-list"></i>전체조회</button>
+   <button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>전체조회</button>
    
 </form>
 
