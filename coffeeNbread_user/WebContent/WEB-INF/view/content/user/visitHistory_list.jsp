@@ -26,9 +26,9 @@ td {
 
 	<h2>USER_VISIT_HISTORY</h2>
 <br><br>
-<div class="col-sm-1"></div>
+
 	
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 			<form
 				action="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -171,4 +171,4 @@ td {
 			href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a></center>
 			</div>
-			<div class="col-sm-1"></div>
+			

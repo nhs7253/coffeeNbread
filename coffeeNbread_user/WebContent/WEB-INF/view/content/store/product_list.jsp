@@ -4,13 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
-	form
-	{
-	display
-	:
-	inline
+form {
+	display: inline
 }
 
 table {
@@ -98,8 +93,10 @@ td {
 		</div>
 	</form>
 
-	<p>
+	<center>
 	
+	<p>
+
 		<c:if test="${requestScope.method ne null}">
 			<%--######################################################
             		종류/이름/판매여부로 조회할 때 페이징 처리
@@ -205,21 +202,22 @@ td {
 			</c:forEach>
 
 
-<!-- 
+			<!-- 
     		다음페이지 그룹으로 이동
     	  	만약에 다음페이지 그룹이 있으면 링크 처리 없으면 화살표만 나오도록 처리
     	-->
-<c:choose>
-	<c:when test="${requestScope.pageBean.nextPageGroup}">
-		<a
-			href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.endPage+1}&storeId=${requestScope.storeId}">▶</a>
-	</c:when>
-	<c:otherwise>
+			<c:choose>
+				<c:when test="${requestScope.pageBean.nextPageGroup}">
+					<a
+						href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.endPage+1}&storeId=${requestScope.storeId}">▶</a>
+				</c:when>
+				<c:otherwise>
 	         	▶
       		</c:otherwise>
-</c:choose>
+			</c:choose>
 
-<!-- 마지막 페이지로 이동 -->
-<a
-	href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
-</c:if><div class="col-sm-1"></div>
+			<!-- 마지막 페이지로 이동 -->
+			<a
+				href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
+		</c:if></center>
+	<div class="col-sm-1"></div>

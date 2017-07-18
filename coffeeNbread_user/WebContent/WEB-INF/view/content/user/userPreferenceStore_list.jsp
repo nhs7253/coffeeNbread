@@ -23,9 +23,9 @@ td {
 
 	<h2>유저 추천 가게 목록</h2>
 	<br><br><br>
-<div class="col-sm-1"></div>
+
 	
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 		<table class="table table-hover">
 			<thead>
 				<tr > 
@@ -60,5 +60,5 @@ td {
 			</tbody>
 		</table>
 		</div>
-<div class="col-sm-1"></div>
+
 

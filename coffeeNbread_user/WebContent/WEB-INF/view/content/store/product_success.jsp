@@ -5,7 +5,10 @@
 	text-ailgn: center;
 }
 </style>
-<h2>PRODUCT_DETAIL</h2>
+<h2>PRODUCT_SUCCESS</h2>
+<br>
+<br>
+<br><br>
 <br>
 <br>
 <div class="col-sm-2"></div>

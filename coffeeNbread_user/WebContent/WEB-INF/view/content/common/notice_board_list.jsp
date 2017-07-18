@@ -6,9 +6,7 @@
 <body>
 	
 <style type="text/css">
-table, td {
-   border: 1px solid black;
-}
+
 
 table {
    width: 700px;
@@ -20,32 +18,45 @@ td {
 }
 </style>
 	<h2>공지사항 게시판</h2>
-
+<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
+		
 
 <div class="container">
 		<div id="quick-access">
+		
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
-		<div class="form-group">
-		<select name="select"  class="form-control">
-			<option value="title" ${param.select eq "title" ? "selected" :""}>제목</option>
-			<option value="content" ${param.select eq "content" ? "selected" :""}>내용</option>
-			<option value="titleAndcontent" ${param.select eq "titleAndcontent" ? "selected" :""}>제목+내용</option>
-		</select> <input type="text" name="keyword"  class="form-control"/>
-		</div>
-		 <button type="submit" class="btn-custom">
-					<i class="glyphicon glyphicon-search"></i>검색
-				</button>
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	</form>
-		</div>
+					
+						<div class="form-group">
+							<select name="select" class="form-control">
+								<option value="title"
+									${param.select eq "title" ? "selected" :""}>제목</option>
+								<option value="content"
+									${param.select eq "content" ? "selected" :""}>내용</option>
+								<option value="titleAndcontent"
+									${param.select eq "titleAndcontent" ? "selected" :""}>제목+내용</option>
+							</select> <input type="text" name="keyword" class="form-control" />
+						</div>
+						<button type="submit" class="btn">
+							<i class="glyphicon glyphicon-search"></i>검색
+						</button>
+						<sec:csrfInput />
+						<%-- csrf 토큰 --%>
+					
+				</form>
+		
+	
 	</div>
+		</div>
+	
 	<br>
 
 
 	
-	<table class="w3-table-all">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue">
+			<tr >
 				<th>글번호</th>
 				<th>제목</th>
 				<th>작성일시</th>
@@ -74,7 +85,7 @@ td {
 
 
 
-
+<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -149,11 +160,16 @@ td {
 			페이지</a>
 
 		<p/>
-		
+	
 		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
 		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
 			<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
 				<sec:csrfInput/>
-				<input type="submit" value="등록">
+					<button type="submit" class="btn">
+					<i class="glyphicon glyphicon-ok"></i>등록
+				</button>
 			</form>
 		</sec:authorize>
+</div><div class="col-sm-1"></div>
+	
+		
