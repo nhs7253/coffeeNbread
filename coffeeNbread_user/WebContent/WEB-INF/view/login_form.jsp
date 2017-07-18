@@ -592,8 +592,8 @@ keyframes buttonFadeInUp { 0% {
 						<div class="close"></div>
 					</h1>
 
-					<div class="content">
-						<div class="container-fluid">
+				<!-- 	<div class="content">
+						<div class="container-fluid"> -->
 									<div class="row">
 								<div class="col-sm-2"></div>
 				<div class="col-md-8">
@@ -679,7 +679,7 @@ keyframes buttonFadeInUp { 0% {
 								</div>
 							</form></div>
 						</div>
-					</div></div>
+					
 				</div>
 			</div>
 		</div>
