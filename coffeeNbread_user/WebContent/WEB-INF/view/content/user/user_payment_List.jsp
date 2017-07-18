@@ -22,7 +22,7 @@ td {
 
 
 
-
+${requestScope.list }
 
 	
 	<h2>${requestScope.userName }님의 결제 현황</h2>
@@ -55,18 +55,17 @@ td {
 															조회된 item 출력 
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
-
 				<tr>
 					<td>${list.paymentNo}</td>
 				 	<td>${list.store.storeName}</td>		
 					<td>${list.product.productName}</td>
-					<td>${list.sellMethod}</td> 
-					<td>${list.paymentOption}</td>
+					<td>${list.sellMethod eq 'r' ? "예약" : "현장"}</td> 
+					<td>${sessionScope.storeInfo.storePaymentOptionList[0].paymentOptionList.paymentMethod }</td>
 					<td>${list.reservationOrderCount}</td>
 					<td>${list.product.productPrice}</td>
 					<td>${list.tradeDate }</td>
 				</tr>
-			</c:forEach>
+			</c:forEach>	
 
 		</tbody>
 	</table>

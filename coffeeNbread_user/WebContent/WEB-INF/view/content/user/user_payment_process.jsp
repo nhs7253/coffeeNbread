@@ -40,10 +40,8 @@
 		$("#registerBtn").on("click", function() {
 
 			var aForm = document.getElementById("addCardNum");
-			alert(aForm);
 			document.getElementById("card").setAttribute('value', this.value);
 			aForm.cardNum.value = $(this).prev().val();
-			alert(aForm.cardNum.value);
 			aForm.submit();
 		});
 
@@ -52,14 +50,7 @@
 			document.getElementById("card").setAttribute('value', this.value);
 		});
 
-		/* 	
-		 $("#payment").on("click", function(){
-		
-		 var pForm = document.getElementById("payForm");
-		 pForm.productHopeTime.value = $(this).prev().val();
-		 alert(pForm.cardNum.value);
-		 pForm.submit();
-		 }); */
+
 
 	});
 </script>
@@ -123,17 +114,11 @@ td {
 		<hr> 
 		<input type="text"
 			size="20" name="cardNum" id="card" placeholder="카드번호를 입력해주세요."
-			value="${requestScope.cardNum }">
+			value="">
 		<button type="submit" id="registerBtn">
 			<i class="glyphicon glyphicon-plus"></i>카드번호 등록
 		</button>
-		<div style="float: right">
-	결제 방법 선택 <select id="payment_method">
-				<c:forEach var="list" items="${requestScope.spoList }">
-					<option value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
-				</c:forEach>
-			</select></div>
-     </div>
+	
 	
 	<br>
     <div>
@@ -155,10 +140,18 @@ td {
 
    
 
-<form
-		action="${initParam.rootPath }/user/addPaymentDetailsController.do"
+<form  	action="${initParam.rootPath }/user/addPaymentDetailsController.do"
 		id="payForm">
 	<sec:csrfInput />
+		<div style="float: right">
+	결제 방법 선택 <select id="payment_method" name="paymentOption">
+				<c:forEach var="list" items="${requestScope.spoList }">
+					<option value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
+				</c:forEach>
+			</select></div>
+     </div>
+	
+	
 	<c:forEach items="${requestScope.sbpList }" var="list">
 		<input type="hidden" name="productIdList"
 				value="${list.product.productId }" />
