@@ -194,6 +194,12 @@
 					<li><a
 						href="${initParam.rootPath }/findReservationDetailsController.do">예약
 							현황 조회</a></li>
+							
+						<li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do">
+					회원 결제내역 조회</a></li>	
+					
+					<li><a href="${initParam.rootPath }/user/findReservationDetailsController.do">
+					회원 예약내역 조회</a></li>				
 				</sec:authorize>
 			</ul></li>
 
