@@ -27,34 +27,28 @@ td {
 <script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	alert($(".alarm").prev().prev().prev().val());
-	alert($(".alarm").prev().prev().val());
-	
 	$(".alarm").on("click", function(to, text){
 		var btn = this;
 		$.ajax({
 			"url":"/coffeeNbread_user/changeReservationConfirmByClickButtonController.do",
 			"type":"GET",
-			"data":{"userId":$("#confirm").val(), "reservationTime":$(".alarm").prev().val()},
+			"data":{"userId":$(".alarm").prev().prev().prev().prev().val(), "reservationTime":$(".alarm").prev().val()},
 			"success":function(value){
+				alert($(".alarm").prev().prev().prev().val() + "로 확인 문자를 보내겠습니다.");
 				$(btn).parent().text(value);
 				$(btn).remove();
 				var url = "http://api.coolsms.co.kr/sendmsg?user=clzlsejzn&password=clzls1994&to=" + $(".alarm").prev().prev().prev().val() + "&from=01094080923&text=" + $(".alarm").prev().prev().val();
-				window.open(url,"alarmMessage","width=500, height=400 resizable=no").close();
-				//alarm.submit();
-				//window.close();
+				window.open(url,"alarmMessage","width=500, height=400 resizable=no");
 			}
 		});
 	});
-	
-	
 });
 
 </script>
 
 </head>
 	<body>
-	
+
 <h2 id="h2">예약 현황 조회</h2> 
 <br>
 
@@ -78,18 +72,19 @@ $(document).ready(function(){
 				<input type="checkbox" name="reservationNoList" value="${reservationDetails.reservationNo }"/>	
 			</td>
 			<td align="center">${reservationDetails.reservationNo }<input id="confirm" type="hidden" value="${reservationDetails.userId}"/></td>
-			<td align="center"><a href="${initParam.rootPath }/findReservationDetailController.do?userId=${reservationDetails.userId}&reservationTime=<fmt:formatDate value="${reservationDetails.reservationTime }" pattern="yyyy-MM-dd"/>">${userNameList[status.index] }</a></td>
-			<td align="center"><fmt:formatDate value="${reservationDetails.reservationTime }" pattern="yyyy-MM-dd"/></td>
-			<td align="center"><fmt:formatDate value="${reservationDetails.productHopeTime }" pattern="yyyy-MM-dd"/></td>
+			<td align="center"><a href="${initParam.rootPath }/findReservationDetailController.do?userId=${reservationDetails.userId}&reservationTime=<fmt:formatDate value="${reservationDetails.reservationTime }" pattern="yyyy-MM-dd HH:mm"/>">${userNameList[status.index] }</a></td>
+			<td align="center"><fmt:formatDate value="${reservationDetails.reservationTime }" pattern="yyyy-MM-dd HH:mm"/></td>
+			<td align="center"><fmt:formatDate value="${reservationDetails.productHopeTime }" pattern="yyyy-MM-dd HH:mm"/></td>
 			<td id="timeTd${status.index}" align="center">
+				<input type="hidden" id="to" value="${userIdList[status.index] }"/>
 				<input type="hidden" id="to" value="${phoneNumList[status.index] }"/>
 				<input type="hidden" id="text" value="${userNameList[status.index] }님의 예약이 확인되었습니다"/>
-				<input type="hidden" id="time" value="<fmt:formatDate value='${reservationDetails.reservationTime }' pattern='yyyy-MM-dd'/>"/>
+				<input type="hidden" id="time" value="<fmt:formatDate value="${reservationDetails.reservationTime }" pattern="yyyy-MM-dd HH:mm"/>"/>
 				<c:if test="${empty reservationDetails.reservationConfirm}">
 					<input class="alarm" type="button" value="알림 전송"/>
 				</c:if>
 				<c:if test="${!empty reservationDetails.reservationConfirm}">
-					<fmt:formatDate value='${reservationDetails.reservationConfirm }' pattern='yyyy-MM-dd'/>
+					<fmt:formatDate value="${reservationDetails.reservationConfirm }" pattern="yyyy-MM-dd HH:mm"/>
 				</c:if>
 			</td>			
 		</tr>

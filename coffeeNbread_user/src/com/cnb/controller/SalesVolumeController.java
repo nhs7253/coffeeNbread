@@ -291,7 +291,7 @@ public class SalesVolumeController {
 	public Object findSalesVolumeTotalController() throws ParseException {
 
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-
+		
 		List list = service.findSalesVolumeByStoreIdAndTodayDate(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(),  dt.parse((new Date().getYear()+1900) + "-" + (new Date().getMonth()+1) + "-" + new Date().getDate()));
 		
 		List<String> productNameList = new ArrayList<>();
@@ -336,7 +336,7 @@ public class SalesVolumeController {
 	 *  <task:scheduler id="jobScheduler" pool-size="10" /> 
 	 *  <task:annotation-driven scheduler="jobScheduler" />
 	 */
-	@Scheduled(cron = "0 25 19 * * *") //초 분 시 일 월 요일 (*=모든)
+	@Scheduled(cron = "0 30 18 * * *") //초 분 시 일 월 요일 (*=모든)
 	public void changeMakeVolumeEveryDay() {
 		//상승세&하락세에 따라서 5%씩 증감하도록 함
 		//모든 제품 목록 조회

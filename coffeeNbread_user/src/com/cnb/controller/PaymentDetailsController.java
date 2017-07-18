@@ -77,6 +77,7 @@ public class PaymentDetailsController {
 		System.out.println("paymentDetailsform:" + paymentDetailsform);
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (errors.hasErrors()) {
+			System.out.println("에러 : " + errors.getAllErrors());
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; // 에러 발생
 		}

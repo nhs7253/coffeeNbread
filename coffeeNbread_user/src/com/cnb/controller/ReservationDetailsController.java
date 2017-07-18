@@ -1,11 +1,14 @@
 package com.cnb.controller;
 
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,12 +72,15 @@ public class ReservationDetailsController {
 			
 		List<String> userNameList = new ArrayList<>();
 		List<String> phoneNumList = new ArrayList<>();
-		
+		List<String> userIdList = new ArrayList<>();
 		
 		for(int i=0; i<reservationList.size(); i++) {
 //			((ReservationDetails)reservationList.get(i)).setReservationConfirm(findReservationDetailsForm.getReservationConfirm());
 			
 			GeneralUser user = userService.findUser(((ReservationDetails)reservationList.get(i)).getUserId());
+			
+			userIdList.add(((ReservationDetails)reservationList.get(i)).getUserId());
+			
 			String userName = user.getUserName();
 			userNameList.add(userName);
 			
@@ -84,6 +90,7 @@ public class ReservationDetailsController {
 		
 		modelAndView.setViewName("store/reservation_list.tiles");
 		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("userIdList", userIdList);
 		modelAndView.addObject("userNameList", userNameList);
 		modelAndView.addObject("phoneNumList", phoneNumList);
 		modelAndView.addObject("pageBean", map.get("pageBean"));
@@ -93,7 +100,7 @@ public class ReservationDetailsController {
 	
 	//예약자로 예약 상세 내용 조회
 	@RequestMapping("findReservationDetailController")
-	public ModelAndView findReservationDetailController(@RequestParam(value="userId", required=false) String userId, @RequestParam(value="reservationTime", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date reservationTime) {
+	public ModelAndView findReservationDetailController(@RequestParam(value="userId", required=false) String userId, @RequestParam(value="reservationTime", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date reservationTime) {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -102,11 +109,13 @@ public class ReservationDetailsController {
 			return modelAndView;
 		}
 		
+		System.out.println("예약상세 시간 : " + reservationTime);	//KST
+
 		List<ReservationDetails> reservationDetail = service.findReservationDetailByStoreIdAndReservationTimeAndUserId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), reservationTime, userId);
-		
+
 		GeneralUser user = userService.findUser(reservationDetail.get(0).getUserId());
 		String userName = user.getUserName();
-
+		
 		Date time = reservationDetail.get(0).getReservationTime();
 
 		List<String> productNameList = new ArrayList<>();
@@ -133,9 +142,16 @@ public class ReservationDetailsController {
 	//알림전송 버튼 클릭시 해당 예약 내역의 확인 유무를 현재 시간으로 바꿔줌
 	@RequestMapping("changeReservationConfirmByClickButtonController")
 	@ResponseBody
-	public Object changeReservationConfirmByClickButtonController(@RequestParam(value="userId", required=false) String userId, @RequestParam(value="reservationTime", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date reservationTime) {
+	public Object changeReservationConfirmByClickButtonController(@RequestParam(value="userId", required=false) String userId, @RequestParam(value="reservationTime", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date reservationTime) {
+		
+		System.out.println("알람전송 시간 : " + reservationTime);	//KST
+		System.out.println("알람전송 유저 : " + userId);
+		System.out.println("알람전송 매장 : " + ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
 		
 		List<ReservationDetails> reservationDetails = service.findReservationDetailByStoreIdAndReservationTimeAndUserId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), reservationTime, userId);
+		
+		System.out.println("알람전송 : " + reservationDetails);
+		
 		for(int i=0; i<reservationDetails.size(); i++) {
 			reservationDetails.get(i).setReservationConfirm(new Date());
 		}
@@ -143,7 +159,7 @@ public class ReservationDetailsController {
 		service.modifyReservationConfirmDate(reservationDetails);
 		
 		Date confirmTime = reservationDetails.get(0).getReservationConfirm();
-		String cofirmTimeString = new SimpleDateFormat("yyyy-MM-dd").format(confirmTime);
+		String cofirmTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(confirmTime);
 		
 		return cofirmTimeString;
 	}

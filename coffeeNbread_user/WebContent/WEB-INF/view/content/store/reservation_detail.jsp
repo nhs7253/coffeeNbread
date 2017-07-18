@@ -12,7 +12,7 @@
 	</tr>
 	<tr>
 		<th>예약 시간</th>
-		<td>&nbsp;&nbsp;<fmt:formatDate value="${requestScope.time }" pattern="yyyy-MM-dd"/></td>
+		<td>&nbsp;&nbsp;<fmt:formatDate value="${requestScope.time }" pattern="yyyy-MM-dd HH:mm"/></td>
 	</tr>
 	<tr>
 		<th>제품명</th>
@@ -28,7 +28,7 @@
 	</tr>		
 	<tr>
 		<th>수령 희망 시간</th>
-		<td>&nbsp;&nbsp;<fmt:formatDate value="${requestScope.hopeTime }" pattern="yyyy-MM-dd"/></td>
+		<td>&nbsp;&nbsp;<fmt:formatDate value="${requestScope.hopeTime }" pattern="yyyy-MM-dd HH:mm"/></td>
 	</tr>
 </table>
 

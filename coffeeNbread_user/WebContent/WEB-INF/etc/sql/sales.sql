@@ -211,3 +211,27 @@ FROM payment_details
 				FROM product
 				WHERE product_category LIKE '빵'
 				AND	  store_id = 's-1'
+				
+				
+				SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
+						product_id
+				FROM	payment_details 
+				WHERE store_id = 's1'
+				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -1) FROM DUAL)
+				GROUP BY product_id
+				ORDER BY product_id ASC		
+				
+				
+				SELECT  reservation_no,
+						reservation_time,
+						reservation_count,
+						reservation_confirm,
+						product_hope_time,
+						product_id,
+						store_id,
+						user_id
+				FROM	reservation_details
+				WHERE	store_id = 's1'
+				AND 	to_char(reservation_time, 'yyyy-MM-dd HH:mi')  = '2017-07-18 11:09'
+				AND 	user_id = 'u-2'

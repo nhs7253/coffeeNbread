@@ -1,6 +1,7 @@
 package com.cnb.dao.impl.test;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -126,9 +127,17 @@ public class ReservationDetailsDaoImplTest {
 		
 //		System.out.println("예약 번호로 조회");
 //		System.out.println(dao.selectReservationDetailsByReservationNo("s-1", 3));
-		
+/*		
 		 List list4 = dao.selectReservationDetailsListByStoreId("s-1", 1, 4);
 		 System.out.println(list4);
+		 
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		 try {
+			System.out.println(dao.selectReservationDetailByStoreIdAndReservationTimeAndUserId("s1", dt.parse("2017-07-18 11:19"), "u-2"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 		
 	public static void main(String[] args) throws IOException {
