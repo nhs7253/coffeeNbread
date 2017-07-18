@@ -2,16 +2,11 @@ package com.cnb.service.impl.test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cnb.service.SalesVolumeService;
-import com.cnb.vo.PaymentDetails;
 
 /*
  * 최민희
@@ -32,7 +27,7 @@ public class SalesVolumeServiceImplTest {
 		SalesVolumeService service =  (SalesVolumeService)ctx.getBean("salesVolumeServiceImpl");
 		
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-	
+/*	
 		System.out.println("===================조회=================");
 		System.out.println("------오늘------");
 		try {
@@ -104,12 +99,19 @@ public class SalesVolumeServiceImplTest {
 		
 		System.out.println("------추천 생산량 (제품명)------");
 		System.out.println(service.findRecommendSalesVolumeByStoreIdAndTodayDateAndMethod("s-1", "productName", "소보루빵"));
-
+*/
 		System.out.println("-----비율 비교 후 상승/하락세 정보 update-----");
 		try {
-			service.findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate("s-1", "빵", dt.parse("2017-07-13"));
+			service.findTotalSalesVolumeByStoreIdAndProductCategoryAndTodayDate("s-1", "빵", dt.parse("2017-07-15"));
 		} catch (ParseException e) {
 			System.out.println("이상 발생");
+		}
+		
+		try {
+			System.out.println(service.findSalesVolumeByStoreIdAndProductIdAndTradeDate("s-1", "p-3", dt.parse("2017-07-13")));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

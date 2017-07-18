@@ -30,7 +30,6 @@ import com.cnb.service.SalesVolumeService;
 import com.cnb.service.StoreService;
 import com.cnb.validation.annotation.ProductFindFormForPos;
 import com.cnb.validation.annotation.TodaySalesVolumeForm;
-import com.cnb.validation.annotation.WeekSalesVolumeForm;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Product;
@@ -175,7 +174,7 @@ public class SalesVolumeController {
 				}
 			}
 		}
-
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("productNameList", productNameList);
 		map.put("countList", countList);
@@ -394,83 +393,54 @@ public class SalesVolumeController {
 
 	//상승세/하락세 그래프를 위한 일주일치 값
 	@RequestMapping("findSalesVolumeWeekController")
-	public ModelAndView findSalesVolumeWeekController(@ModelAttribute("weekSalesVolume") @Valid WeekSalesVolumeForm weekSalesVolumeForm, BindingResult errors) throws ParseException {
-
-		ModelAndView modelAndView = new ModelAndView();
-
-		if (errors.hasErrors()) {
-			modelAndView.setViewName("index.tiles");
-			return modelAndView;
-		}
+	@ResponseBody
+	public Object findSalesVolumeWeekController(String productId) throws ParseException {
 
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
-
-		List list = service.findSalesVolumeByStoreIdAndTodayDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(),
-																dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()));
 		
-		// 카테고리 가져오기
-		List<OptionCategory> optionList = optionCategoryService.findOptionCategoryList(
-				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		List<Integer> countList = new ArrayList<>();
+		List<String> dateList = new ArrayList<>();
+		
+		//1일전
+		int one = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-1)));
+		countList.add(one);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-1));
+		
+		//2일전
+		int two = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-2)));
+		countList.add(two);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-2));
+		
+		//3일전
+		int three = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-3)));
+		countList.add(three);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-3));
 
-		// 상승세 제품 목록 - 전체
-		List<Product> upProductList = service.findProductGapByIdentifyCode(
-				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(),
-				"U");
+		//4일전
+		int four = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-4)));
+		countList.add(four);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-4));
 
-		// 하락세 제품 목록 - 전체
-		List<Product> downProductList = service.findProductGapByIdentifyCode(
-				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(),
-				"D");
+		//5일전
+		int five = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-5)));
+		countList.add(five);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-5));
 
-		// 유지 제품 목록 - 전체
-		List<Product> keepProductList = service.findProductGapByIdentifyCode(
-				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(),
-				"K");
+		//6일전
+		int six = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-6)));
+		countList.add(six);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-6));
 
-		// 모든 제품 목록 조회
-		List<Product> productList = productService.findProductListNoPaging(
-				((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
+		//7일전
+		int seven = service.findSalesVolumeByStoreIdAndProductIdAndTradeDate(((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productId, dt.parse((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-7)));
+		countList.add(seven);
+		dateList.add((new Date().getYear() + 1900) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-7));
 
-		// 모든 제품의 오늘 예상 생산량 조회
-		List<String> allProductNameList = new ArrayList<>();
-		List<String> todayCountList = new ArrayList<>();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("countList", countList);
+		map.put("dateList", dateList);
 
-		for (int i = 0; i < productList.size(); i++) {
-			allProductNameList.add(productList.get(i).getProductName());
-			todayCountList.add(String.valueOf(productList.get(i).getTodayProductCount()));
-		}
-
-		List<String> productNameList = new ArrayList<>();
-		List<String> countList = new ArrayList<>();
-
-		for (int i = 0; i < list.size(); i++) {
-			Map map = (HashMap) list.get(i);
-			Set key = map.keySet();
-
-			Iterator iterator = key.iterator();
-
-			while (iterator.hasNext()) {
-				String keyName = (String) iterator.next();
-				if (keyName.equals("RESERVATION_ORDER_COUNT")) {
-					countList.add(String.valueOf(map.get("RESERVATION_ORDER_COUNT")));
-				} else if (keyName.equals("PRODUCT_ID")) {
-					String productName = productService.findProductById(
-							((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal())
-									.getStoreId(),
-							String.valueOf(map.get("PRODUCT_ID"))).getProductName();
-					productNameList.add(productName);
-				}
-			}
-		}
-
-		modelAndView.setViewName("store/salesVolume_view.tiles");
-		modelAndView.addObject("productNameList", productNameList);
-		modelAndView.addObject("countList", countList);
-		modelAndView.addObject("upProductList", upProductList);
-		modelAndView.addObject("downProductList", downProductList);
-		modelAndView.addObject("keepProductList", keepProductList);
-		modelAndView.addObject("allProductNameList", allProductNameList);
-		modelAndView.addObject("todayCountList", todayCountList);
-		return modelAndView;
+		return map;
 	}
 }

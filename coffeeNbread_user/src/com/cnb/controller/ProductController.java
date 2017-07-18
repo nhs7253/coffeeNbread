@@ -157,6 +157,7 @@ public class ProductController {
 			product.setProductCategory(productRegisterForm.getOptionCategoryString());
 			
 			service.modifyProduct(product, optionDetail, fileName);
+			product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productRegisterForm.getProductId());
 		} catch (DuplicatedProductPictureException e) {
 			modelAndView.setViewName("store/product_update.tiles");
 			return modelAndView;
@@ -177,7 +178,7 @@ public class ProductController {
 				modelAndView.setViewName("index.tiles");
 				return modelAndView;
 			}
-
+			productFindForm.setStoreId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
 			Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
 			
 			modelAndView.setViewName("store/product_list.tiles");
@@ -236,20 +237,6 @@ public class ProductController {
 			
 			return modelAndView;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	//제품 목록 조회
 	@RequestMapping("findProductListManagerController")
@@ -389,10 +376,11 @@ public class ProductController {
 	@RequestMapping("selectRemoveProductController")
 	public String selectRemoveProductController(@ModelAttribute("productSelectForDelete") @Valid ProductSelectForDeleteForm productSelectForDeleteForm, BindingResult errors) {
 		if(errors.hasErrors()) {
-			return "redirect:/findProductListController.do";
+			return "redirect:/findProductListController.do?storeId="+productSelectForDeleteForm.getStoreId();
 		}
+		
 		service.findRemoveProduct(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productSelectForDeleteForm.getProductIdList());
-		return "redirect:/findProductListController.do";
+		return "redirect:/findProductListController.do?storeId="+productSelectForDeleteForm.getStoreId();
 	}
 }
 

@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
 <!--맨처음 제품 수령시간 적고  -->
 <!--그다음 카드 적고  -등록-->
 <!--결제하기 누르면 결제내역에 등록  -->

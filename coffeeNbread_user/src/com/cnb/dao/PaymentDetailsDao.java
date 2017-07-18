@@ -195,4 +195,10 @@ public interface PaymentDetailsDao {
 	 * @return
 	 */
 	List<PaymentDetails> selectPaymentDetailsListByUserId(String userId);
+	
+	/**
+	 * 매장아이디, 제품아이디, 날짜로 판매 개수 조회 (한 제품의 특정 날짜(하루) 판매개수 조회)
+	 * @param storeId, productId, tradeDate
+	 */
+	int selectSalesVolumeByStoreIdAndProductIdAndTradeDate(String storeId, String productId, Date tradeDate);
 }

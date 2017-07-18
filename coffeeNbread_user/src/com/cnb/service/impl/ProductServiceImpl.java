@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int modifyProduct(Product product, OptionDetail optionDetail, String fileName) throws ProductNotFoundException, DuplicatedProductPictureException{
-		
+
 		if(dao.selectProductById(product.getStoreId(), product.getProductId()) == null) {
 			throw new ProductNotFoundException(String.format("ID가 %s 인 제품이 없습니다.", product.getProductId()));
 		}else{
@@ -84,7 +84,11 @@ public class ProductServiceImpl implements ProductService {
 			if(productPictureDao.selectProductPictureListByProductPictureAndStoreId(product.getProductPicture() ,product.getStoreId()) != null) {
 				throw new DuplicatedProductPictureException("제품 사진이 중복되었습니다.");
 			}else{			
-				productPictureDao.updateProductPictureByProductPicture(fileName, product.getProductId(), product.getStoreId());
+				if(fileName.trim().isEmpty()){
+					productPictureDao.updateProductPictureByProductPicture(productPictureDao.selectProductPictureByProductIdAndStoreId(product.getProductId(), product.getStoreId()).getProductPicture(), product.getProductId(), product.getStoreId());
+				}else{
+					productPictureDao.updateProductPictureByProductPicture(fileName, product.getProductId(), product.getStoreId());
+				}
 			}
 			return cnt;
 		}
@@ -97,7 +101,8 @@ public class ProductServiceImpl implements ProductService {
 		String methodContent = productCategory;
 		
 		//item 수
-		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		int totalCount = dao.selectProductListCountByMethodManager(storeId, method, methodContent);
+		System.out.println(totalCount);
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
@@ -115,7 +120,7 @@ public class ProductServiceImpl implements ProductService {
 		String methodContent = productName;
 		
 		//item 수
-		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		int totalCount = dao.selectProductListCountByMethodManager(storeId, method, methodContent);
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
@@ -143,7 +148,7 @@ public class ProductServiceImpl implements ProductService {
 		String methodContent = sellingOption;
 		
 		//item 수
-		int totalCount = dao.selectProductListCountByMethod(storeId, method, methodContent);
+		int totalCount = dao.selectProductListCountByMethodManager(storeId, method, methodContent);
 		
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);

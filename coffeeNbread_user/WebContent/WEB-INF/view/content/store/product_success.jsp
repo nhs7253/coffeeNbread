@@ -31,7 +31,7 @@
 		</tr>
 		<tr class="form-group">
 			<th>제품 이름</th>
-			<td><div class="col-xs-10">${requestScope.product.productName}></div></td>
+			<td><div class="col-xs-10">${requestScope.product.productName}</div></td>
 		</tr>
 		<tr class="form-group">
 			<th>제품 가격</th>
@@ -45,7 +45,6 @@
 			<th>판매 여부</th>
 			<td><div class="col-xs-10">${requestScope.product.sellingOption}</div></td>
 		</tr>
-
 		<tr class="form-group">
 			<th>금일 제품 개수</th>
 			<td><div class="col-xs-10">${requestScope.product.todayProductCount}</div></td>
@@ -54,10 +53,6 @@
 			<th>추천 제품 개수</th>
 			<td><div class="col-xs-10">${requestScope.product.recommendProductCount}</div></td>
 		</tr>
-		<tr class="form-group">
-			<th>옵션</th>
-			<td><div class="col-xs-10">${requestScope.product.productCategory}</div></td>
-		</tr>
 		<tr>
 			<th></th>
 			<td></td>
@@ -65,3 +60,4 @@
 	</table>
 </div>
 <div class="col-sm-2"></div>
+

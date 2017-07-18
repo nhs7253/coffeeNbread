@@ -68,14 +68,17 @@ public interface ProductDao {
 	 * @return 조회된 제품 수
 	 */
 	int selectProductListCount(String storeId);
+	
 
 	/** 
 	 * 여러 조건으로 조회된 제품 수 (Paging 용 count) - method : category, name, sellingOption
 	 * @param storeId, method, methodContent
 	 * @return 조회된 제품 수
 	 */
-	int selectProductListCountByMethod(String storeId, String method, String methodContent);
+	int selectProductListCountByMethodManager(String storeId, String method, String methodContent);
 	
+	int selectProductListCountByMethod(String storeId, String select, String keyword);
+
 	/**
 	 * 제품 종류로 1개의 매장에 있는 제품 정보들 select
 	 * @param storeId, productCategory, startIndex, endIndex

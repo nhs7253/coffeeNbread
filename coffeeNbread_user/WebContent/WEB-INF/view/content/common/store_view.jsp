@@ -76,6 +76,7 @@ form {
 				<td ><div class="col-xs-10">
 						<textarea rows="10" cols="60" disabled>
 		 	${requestScope.store.storeIntro }
+
 		 </textarea></div>
 					</td>
 			</tr>
@@ -92,6 +93,8 @@ form {
 			</button>
 		</form>
 
+
+
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 			<form
 				action="${initParam.rootPath }/user/addStoreBookmarkController.do"
@@ -106,6 +109,7 @@ form {
 				</button>
 			</form>
 		</sec:authorize>
+
 <br>
 		<form action="${initParam.rootPath }/findProductListController.do"
 			method="post">
@@ -115,8 +119,10 @@ form {
 				<button type="submit" class="btn">
 						<i class="glyphicon glyphicon-list"></i>제품 목록
 					</button>
+
 				
 		</form>
+
 
 
 
@@ -139,6 +145,7 @@ form {
 	<script type="text/javascript"
 		src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
 	<script>
+
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
 		        center: new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표

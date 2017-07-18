@@ -94,14 +94,6 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 		return session.selectList(makeSqlId("findSelectPaymentDetailsListByUserId"), info);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public List<PaymentDetails> selectPaymentDetailsListByStoreIdAndProductId(String storeId, String productId) {
 		Map<String, String> info = new HashMap<>();
@@ -205,8 +197,15 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 
 	}
 
-
-
-
-	
+	@Override
+	public int selectSalesVolumeByStoreIdAndProductIdAndTradeDate(String storeId, String productId, Date tradeDate) {
+		Map<String, Object> info = new HashMap<>();
+		info.put("storeId", storeId);
+		info.put("productId", productId);
+		info.put("tradeDate", tradeDate);
+		if(session.selectOne(makeSqlId("selectSalesVolumeByStoreIdAndProductIdAndTradeDate"), info) == null){
+			return 0;
+		}
+		return session.selectOne(makeSqlId("selectSalesVolumeByStoreIdAndProductIdAndTradeDate"), info);
+	}
 }

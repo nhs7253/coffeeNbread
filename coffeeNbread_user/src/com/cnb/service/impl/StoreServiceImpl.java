@@ -210,6 +210,7 @@ public class StoreServiceImpl implements StoreService{
 			userAndStoreService.addUserPreferenceStore(new UserPreferenceStore(((GeneralUser)authentication.getPrincipal()).getUserId(), storeId));
 		}
 		Store store = storedao.selectStroeJoinPicture(storeId);
+		System.out.println("storeId:"+storeId);
 		int hits = store.getStoreHits();
 		store.setStoreHits(hits+1);
 				

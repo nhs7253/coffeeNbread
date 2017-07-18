@@ -296,12 +296,16 @@
 									s.store_name,
 									rd.user_id
 							FROM	reservation_details rd ,store s, product p
-							where  rd.user_id = #{userId}
+							where   rd.product_id=p.product_id
+							and     rd.store_id=s.store_id
+							and      p.store_id=s.store_id
+							and      rd.user_id =#{userId}
+							order by rd.reservation_time desc
 							
 					) 
 					WHERE rownum <=#{endIndex}
 			)
-			WHERE rnum >= #{startIndex}
+			WHERE rnum >=#{startIndex}
 		]]>
 	</select>
 
