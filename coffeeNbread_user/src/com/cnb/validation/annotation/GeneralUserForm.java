@@ -96,4 +96,13 @@ public class GeneralUserForm implements Serializable{
 	public void setStore_id(String store_id) {
 		this.store_id = store_id;
 	}
+	@Override
+	public String toString() {
+		return "GeneralUserForm [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userBirth="
+				+ userBirth + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userPhone=" + userPhone
+				+ ", userAddress=" + userAddress + ", userActiveState=" + userActiveState + ", store_id=" + store_id
+				+ "]";
+	}
+	
+	
 }
