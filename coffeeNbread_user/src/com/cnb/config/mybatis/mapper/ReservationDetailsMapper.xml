@@ -94,7 +94,7 @@
 	</resultMap>
 
 
-     <!--유저가 해장 매장에서 예약한 내역찾기.  -->
+     <!--유저가 해당 매장에서 예약한 내역찾기.  -->
 
 
 <select id="selectReservationDetailsListNoPagingByUserIdAndStoreId"
@@ -300,7 +300,7 @@
 							and     rd.store_id=s.store_id
 							and      p.store_id=s.store_id
 							and      rd.user_id =#{userId}
-							order by rd.reservation_time desc
+							order by rd.product_hope_time desc, p.product_name
 							
 					) 
 					WHERE rownum <=#{endIndex}

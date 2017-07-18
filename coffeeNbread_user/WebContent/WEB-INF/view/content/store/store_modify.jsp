@@ -45,29 +45,50 @@
 
 
 <body>
-<div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
-	<form action="${initParam.rootPath }/modifyStoreController.do"
-		method="post" enctype="multipart/form-data">
-		<sec:csrfInput />
-		<table>
-			<tr class="form-group">
-				<th>매장 분류</th>
-				<td><c:forEach
-						items="${sessionScope.storeInfo.optionCategoryList}"
-						var="optionCategoryList">
-						<input type="text" name="optionCategoryList" id="optionCategory"
-							value="${optionCategoryList.optionCategory}" class="form-control">
-					</c:forEach></td>
-				<td>
-					<button type="button" id="optionCategoryList"
-						class="btn btn-default btn-circle">
-						<i class="glyphicon glyphicon-plus"></i>
-					</button>
-				</td>
-			<tr>
-				<th></th>
+	<div class="col-sm-1"></div>
+	<div class="col-sm-10">
+		<div class="col-sm-5">
+			<br>
+			<a id="storePicture"> <c:if
+					test="${!empty sessionScope.storeInfo.storePictureList[0].storePicture }">
+					<img
+						src="${initParam.rootPath }/up_image/${sessionScope.storeInfo.storePictureList[0].storePicture }"
+						alt="" width="300px" />
+					<br />
+				</c:if>
+				<button type="button" id="modifystorePicture">수정하기</button>
+			</a>
+			<div id="map" style="width: 100%; height: 350px;"></div>
+			<div id="clickLatlng"></div>
+			<input type="hidden" name="X" id="X"
+				value="${sessionScope.storeInfo.storePosition.x}"> <input
+				type="hidden" name="Y" id="Y"
+				value="${sessionScope.storeInfo.storePosition.y}">
+
+		</div>
+		<div class="col-sm-7">
+		<br><br><br><br><br><br>
+			<form action="${initParam.rootPath }/modifyStoreController.do"
+				method="post" enctype="multipart/form-data">
+				<sec:csrfInput />
+				<table>
+					<tr class="form-group">
+						<th>매장 분류</th>
+						<td><c:forEach
+								items="${sessionScope.storeInfo.optionCategoryList}"
+								var="optionCategoryList">
+								<input type="text" name="optionCategoryList" id="optionCategory"
+									value="${optionCategoryList.optionCategory}"
+									class="form-control">
+							</c:forEach></td>
+						<td>
+							<button type="button" id="optionCategoryList"
+								class="btn btn-default btn-circle">
+								<i class="glyphicon glyphicon-plus"></i>
+							</button>
+						</td>
+						<tr>
+						<th></th>
 				<td id="selectSC"></td>
 			</tr>
 			<tr>
@@ -76,107 +97,101 @@
 			</tr>
 			<tr>
 				<td><input type="hidden" name="storeId"
-					value="${sessionScope.storeInfo.storeId}"></td>
+							value="${sessionScope.storeInfo.storeId}"></td>
 				<td><input type="hidden" name="storePermission"
-					value="${sessionScope.storeInfo.storePermission}"></td>
+							value="${sessionScope.storeInfo.storePermission}"></td>
 			</tr>
 
 			결제 방식 선택
-			<br />
+		
 			<c:forEach items="${requestScope.paymentOptionList }" var="list">
 				<c:forEach items="${sessionScope.storeInfo.storePaymentOptionList }"
-					var="storeInfo">
+							var="storeInfo">
 					<c:if test="${list.paymentId  == storeInfo.paymentId }">
 						<c:set scope="page" var="checked" value="true" />
 					</c:if>
 				</c:forEach>
 				<input type="checkbox" name="paymentIdList"
-					value="${list.paymentId }"
-					${pageScope.checked == 'true' ? "checked='checked'" :""} />${list.paymentMethod }&nbsp;&nbsp;&nbsp;
+							value="${list.paymentId }"
+							${pageScope.checked == 'true' ? "checked='checked'" :""} />${list.paymentMethod }&nbsp;&nbsp;&nbsp;
 				<c:set scope="page" var="checked" value="false" />
 			</c:forEach>
 
        
          <tr class="form-group">
             <th>매장 이름</th>
-            <td><div class="col-xs-10">
+            <td width="10px">
                   <input type="text" name="storeName"
-                     value="${sessionScope.storeInfo.storeName}" class="form-control">
-               </div></td>
-         </tr>
-         <tr class="form-group">
+									value="${sessionScope.storeInfo.storeName}"
+									class="form-control ">
+               </td>
+					</tr>
+					
+         
+					<tr class="form-group">
             <th>매장 번호</th>
-            <td><div class="col-xs-10">
+            <td><a class="col-xs-10">
                   <input type="tel" name="storePhone"
-                     value="${sessionScope.storeInfo.storePhone}" class="form-control">
-               </div></td>
+									value="${sessionScope.storeInfo.storePhone}"
+									class="form-control">
+               </a></td>
          </tr>
          <tr class="form-group">
             <th>매장 메일</th>
-            <td><div class="col-xs-10">
+            <td><a class="col-xs-10">
                   <input type="email" name="storeEmail"
-                     value="${sessionScope.storeInfo.storeEmail }" class="form-control">
-               </div></td>
+									value="${sessionScope.storeInfo.storeEmail }"
+									class="form-control">
+               </a></td>
          </tr>
          <tr class="form-group">
             <th>open 시간</th>
-            <td><div class="col-xs-5">
+            <td><a class="col-xs-5">
                   <input type="text" name="storeOpen"
-                     value="<fmt:formatDate value="${sessionScope.storeInfo.storeOpen }"
+									value="<fmt:formatDate value="${sessionScope.storeInfo.storeOpen }"
                   type="time" pattern="hh:mm" />"
-                     class="form-control">
-               </div></td>
+									class="form-control">
+               </a></td>
          </tr>
          <tr class="form-group">
             <th>close 시간</th>
-            <td><div class="col-xs-5">
+            <td><a class="col-xs-5">
                   <input type="text" name="storeClose"
-                     value="<fmt:formatDate value="${sessionScope.storeInfo.storeClose }"
+									value="<fmt:formatDate value="${sessionScope.storeInfo.storeClose }"
                   type="time" pattern="hh:mm" />"
-                     class="form-control">
-               </div></td>
+									class="form-control">
+               </a></td>
          </tr>
-         <tr>
-            <th id="selectSP">매장 사진</th>
-            <td id="storePicture">
-	            <c:if test="${!empty sessionScope.storeInfo.storePictureList[0].storePicture }">
-					<img src="${initParam.rootPath }/up_image/${sessionScope.storeInfo.storePictureList[0].storePicture }" alt="" /><br />
-				</c:if>
-	            <button type="button" id="modifystorePicture">수정하기</button>
-            </td>
-         </tr>
+        
          
        	 <tr class="form-group">
 			<th>매장 위치</th>
-			<td><input type="text" name="storeAddress" class="form-control" value="${sessionScope.storeInfo.storeAddress}"></td>
+			<td><input type="text" name="storeAddress" class="form-control"
+							value="${sessionScope.storeInfo.storeAddress}"></td>
 		</tr>
 		
-		<tr>
-			<th>매장 좌표</th>
-			<td>
-				<div id="map" style="width:100%;height:350px;"></div>
-				<div id="clickLatlng"></div>
-				<input type="hidden" name="X" id="X" value="${sessionScope.storeInfo.storePosition.x}">
-				<input type="hidden" name="Y" id="Y" value="${sessionScope.storeInfo.storePosition.y}">			
-			</td>
-		</tr>
-			
+	
          <tr>
             <th>매장 소개</th>
-            <td><textarea name="storeIntro" rows="5" cols="50" >${sessionScope.storeInfo.storeIntro}</textarea></td>
+            <td><textarea name="storeIntro" rows="5" cols="50">${sessionScope.storeInfo.storeIntro}</textarea></td>
          </tr>
 
 
 			<tr>
-				<td colspan="2"><button type="submit" class="btn btn-custom">
+				<td colspan="2"><div style="float: right">
+				<button type="submit" class="btn btn-custom">
 						<i class="glyphicon glyphicon-ok"></i>확인
-					</button></td>
+					</button></div></td>
 			</tr>
 		</table>
-	</form></div><div class="col-sm-1"></div>
+	</form>
+		</div>
+	</div>
+	<div class="col-sm-1"></div>
 </body>
 
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+<script type="text/javascript"
+	src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 

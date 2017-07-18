@@ -113,7 +113,7 @@ td {
 
 			<tr id="sbp_id">
 				<td>${list.product.productCategory}</td>
-				<td>${list.product.productPicture}</td>
+				<td><img src="${initParam.rootPath }/up_image/${list.product.productPictureList[0].productPicture }" alt="" width="100" height="100"/></td>
 				<td>${list.product.productName}</td>
 				<td>${list.product.productPrice}</td>
 				<td>${list.productCount}</td>
@@ -131,14 +131,7 @@ td {
 </p>
 
 
-<p>
-   결제 방법 선택 
-   
-   <select  id="payment_method">
-   <c:forEach var="list" items="${requestScope.spoList }">
-	<option  value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
-   </c:forEach>
-	 </select>
+
 
 </p>
 
@@ -194,7 +187,15 @@ td {
 	</c:forEach>
 	     <br>
 	     <br>
- 
+ 	<p>
+   결제 방법 선택 
+   
+   <select  id="payment_method" name="paymentOption">
+   <c:forEach var="list" items="${requestScope.spoList }">
+	<option  value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
+   </c:forEach>
+	 </select>
+	 <p/>
 
  
 	 제품수령희망시간.

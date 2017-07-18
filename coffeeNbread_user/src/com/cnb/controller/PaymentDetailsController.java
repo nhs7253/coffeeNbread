@@ -70,7 +70,7 @@ public class PaymentDetailsController {
 
 	// 즐겨찾는카드번호에서 카드 입력후 결제내역에 등록될 controller
 	public ModelAndView addPaymentDetailsController(
-			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors,HttpSession session) {
+			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
@@ -98,7 +98,7 @@ public class PaymentDetailsController {
 			paymentDetails.setReservationOrderCount(paymentDetailsform.getReservationOrderCount().get(i));
 			paymentDetails.setProductTradeCount(0);
 			paymentDetails.setSellMethod("r");
-			paymentDetails.setPaymentOption("c");
+			paymentDetails.setPaymentOption(paymentDetailsform.getPaymentOption());
 			paymentDetails.setUserId(generalUser.getUserId());
 			paymentDetails.setTradeDate(new Date());
 

@@ -34,30 +34,32 @@ td {
     .info .link {color: #5085BB;}
 </style>
 
-<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
 
 	<h2>STORE LIST</h2>
 
 
-<br><br>
-<div class="col-sm-2"></div>
 
-<div class="col-sm-8">
+<div class="col-sm-1"></div>
 
+<div class="col-sm-10">
+<div style="float:right">
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
+		<div style="flaot:right">
 		<div class="form-group">
 		<select name="select" class="form-control">
 			<option value="storeName" ${param.select eq "storeName" ? "selected" :""}>이름</option>
 			<option value="storeIntro" ${param.select eq "storeIntro" ? "selected" :""}>소개</option>
 			<option value="storeAddress" ${param.select eq "storeAddress" ? "selected" :""}>주소</option>
 			<option value="storeCategory" ${param.select eq "storeCategory" ? "selected" :""}>카테고리</option>
-		</select> <input type="text" name="keyword" class="form-control"/></div><button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
+		</select>
+		 <input type="text" name="keyword" class="form-control"/></div>
+		 <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i>검색</button>
+		</div>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
-
-	
-	<div id="map" style="width:500px;height:400px;"></div>
+</div>
+	<div id="map" style="width:600px;height:300px;margin:auto;"></div>
 	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
 	<script>
 		var container = document.getElementById('map');
@@ -253,7 +255,7 @@ td {
 
 	
 
-
+<center>
 
 
 	<p>
@@ -329,7 +331,7 @@ td {
 			href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
 
-		<p/>
+		<p/></center>
 		
 		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
 		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
@@ -338,4 +340,4 @@ td {
 				<input type="submit" value="등록">
 			</form>
 		</sec:authorize></div>
-<div class="col-sm-2"></div>
+<div class="col-sm-1"></div>

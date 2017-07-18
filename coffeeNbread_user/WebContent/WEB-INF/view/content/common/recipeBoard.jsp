@@ -35,15 +35,13 @@ table {
     border-collapse: collapse;
   }
   th, td {
-    border-bottom: 1px solid #444444;
+    border-bottom: 1px solid ;
     padding: 10px;
     text-align: center;
   }
-  th {
-    background-color: #bbdefb;
-  }
-  td {
-    background-color: #e3f2fd;
+  
+  form{
+  display:inline;
   }
   
   <html lang="ko">
@@ -101,14 +99,14 @@ table {
 <body>
 
 
-	<h2>전체 게시판 목록</h2>
+	<h2>RECIPE LIST</h2>
 
 
 
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
-	
+	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -130,7 +128,7 @@ table {
 
 				</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn-custom">
+				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
 
@@ -139,12 +137,16 @@ table {
 			</form>
 	
 	<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
-		<button type="submit" class="btn-custom">
+		<button type="submit" class="btn">
 			<i class="glyphicon glyphicon-ok"></i>글쓰기
 		</button>
 	</a>
+	
+	</div>
 	<br>
-
+	<br>
+	<br>
+	<br><br>
 
 
 
@@ -196,6 +198,7 @@ table {
 
 		</tbody>
 	</table>
+	<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -267,5 +270,5 @@ table {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
-			페이지</a></div>
+			페이지</a></p></center></div>
 <div class="col-sm-1"></div>

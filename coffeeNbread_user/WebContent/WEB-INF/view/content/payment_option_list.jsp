@@ -63,10 +63,10 @@ td {
 	</table>
 
 	<form action="${initParam.rootPath }/payment_option_register_form.do">
-
+<div style="float:right">
 		<button type="submit" class="btn btn-default btn-circle">
 			<i class="glyphicon glyphicon-ok"></i> 등록
-		</button>
+		</button></div>
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 	</form></div>
