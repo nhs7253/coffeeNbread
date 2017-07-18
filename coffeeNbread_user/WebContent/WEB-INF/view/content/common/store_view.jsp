@@ -88,19 +88,30 @@ td{
 			</tr>
 		</table>
 	<div style="float:right">
-		<form action="${initParam.rootPath}/user/callStoreModifyController.do">
-			<button type="submit" class="btn">
-				<i class="glyphicon glyphicon-pencil"></i>수정
-			</button>
-		</form>
-		<form action="${initParam.rootPath }/removeStoreController.do">
-			<button type="submit" class="btn">
-				<i class="glyphicon glyphicon-trash"></i>삭제
-			</button>
-		</form>
+	
+	
+
+	<!-- 본인만 보임 -->
+		<c:if test="${requestScope.authority }">
+		
+			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-pencil"></i>수정</button>
+			</form>
+			
+			<form action="${initParam.rootPath }/removeStoreController.do">
+					<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+			</form>
+			
+			<form action="${initParam.rootPath }/findProductListController.do" method="post">
+				<sec:csrfInput />
+				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>제품 관리</button>
+			</form>
+			
+		</c:if>
 
 
-
+		<!-- 회원만 보임 -->
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 			<form
 				action="${initParam.rootPath }/user/addStoreBookmarkController.do"
@@ -117,17 +128,7 @@ td{
 		</sec:authorize>
 
 <br>
-		<form action="${initParam.rootPath }/findProductListController.do"
-			method="post">
-			<sec:csrfInput />
-			<input type="hidden" name="storeId"
-				value="${requestScope.store.storeId }" /> 
-				<button type="submit" class="btn">
-						<i class="glyphicon glyphicon-list"></i>제품 목록
-					</button>
 
-				
-		</form>
 
 
 
@@ -139,7 +140,7 @@ td{
 			<input type="hidden" name="storeId"
 				value="${requestScope.store.storeId }" />
 				<button type="submit" class="btn">
-						<i class="glyphicon glyphicon-list"></i>유저가 보는 제품 목록
+						<i class="glyphicon glyphicon-list"></i>제품 목록
 					</button>
 				
 		</form>
