@@ -57,13 +57,14 @@ form {
 
 <div class="col-sm-2"></div>
 <div class="col-sm-8">
-<div class="container">
-	<div id="quick-access">
-	<div style="float:right">
-		<form
+		
+<div style="float:right">
+ <form
 			action="${initParam.rootPath }/user/userFindProductListController.do"
 			method="post" class="form-inline quick-search-form" role="form">
 			<sec:csrfInput />
+				
+			
 			<%-- csrf 토큰 --%>
 			<div class="form-group">
 				<select name="select" class="form-control">
@@ -89,9 +90,8 @@ form {
 	<button type="submit" class="btn">
 		<i class="glyphicon glyphicon-search"></i>장바구니 목록 조회
 	</button>
-   </form></div>
-	</div>
-</div></div>
+   </form></div></div>
+
 
 
 

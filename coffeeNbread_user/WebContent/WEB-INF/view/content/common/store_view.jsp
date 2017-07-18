@@ -7,34 +7,39 @@
 form {
 	display: inline
 }
+th{
+	 width:30%;
+}
+td{
+	 width:70%;
+}
 </style>
 
 
 </head>
 <body>
-
-
 	<h1>STORE_DETAIL</h1>
 	<hr>
 	<br>
-	<div class="col-sm-2"></div>
+	<div class="col-sm-1"></div>
 	
 	<div class="col-sm-4">
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
 			<img
 				src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }"
-				alt="" width="300px" />
-			<br />
+				alt="" width="100%" />
+			
 		</c:if>
-		<div id="map" style="width: 100%; height: 350px;"></div>
+		<div id="map" style="width: 100%; height: 250px;"></div>
 
 	</div>
-	<div class="col-sm-4">
-		<table class="table">
+	<div class="col-sm-6">
+	<br><br>
+		<table class="table" width="100%">
 			<tr class="form-group">
 				<th>매장명</th>
-				<td ><div class="col-xs-10">
+				<td><div class="col-xs-10">
 						${requestScope.store.storeName }
 					</div></td>
 			</tr>
@@ -42,28 +47,28 @@ form {
 			<tr class="form-group">
 			<th>매장 주소</th>
 				
-				<td ><div class="col-xs-10">
+				<td><div class="col-xs-10">
 						${requestScope.store.storeAddress }
 					</div></td>
 			</tr>
 			<tr class="form-group">
 			<th>매장 이메일</th>
 				
-				<td ><div class="col-xs-10">
+				<td><div class="col-xs-10">
 						${requestScope.store.storeEmail }
 					</div></td>
 			</tr>
 			<tr class="form-group">
 			<th>매장 여는 시간</th>
 				
-				<td ><div class="col-xs-10">
+				<td><div class="col-xs-10">
 						${requestScope.store.storeOpenFormat }
 					</div></td>
 			</tr>
 			<tr class="form-group">
 			<th>매장 닫는 시간</th>
 				
-				<td>
+				<td width="60%">
 					<div class="col-xs-10">
 						${requestScope.store.storeCloseFormat }
 					</div>
@@ -73,15 +78,16 @@ form {
 			<tr class="form-group">
 			<th>매장 소개</th>
 				
-				<td ><div class="col-xs-10">
-						<textarea rows="10" cols="60" disabled>
-		 	${requestScope.store.storeIntro }
-
-		 </textarea></div>
+				<td>
+				<div class="col-xs-10">
+						<textarea rows="15" cols="55" disabled>
+		 					${requestScope.store.storeIntro }
+						</textarea>
+				</div>
 					</td>
 			</tr>
-		</table></div>
-		<div style="float:right">
+		</table>
+	<div style="float:right">
 		<form action="${initParam.rootPath}/user/callStoreModifyController.do">
 			<button type="submit" class="btn">
 				<i class="glyphicon glyphicon-pencil"></i>수정
@@ -137,10 +143,10 @@ form {
 					</button>
 				
 		</form>
-
+	</div>
 </div>
 	
-	<div class="col-sm-2"></div>
+	<div class="col-sm-1"></div>
 
 	<script type="text/javascript"
 		src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>

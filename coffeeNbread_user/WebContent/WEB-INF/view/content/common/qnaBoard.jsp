@@ -7,8 +7,8 @@
 <body>
 
 	<style type="text/css">
-table, td {
-	
+form{
+display:inline;
 }
 
 table {
@@ -25,7 +25,7 @@ td {
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
-	
+	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -36,13 +36,21 @@ td {
 						<option value="titleAndcontent">제목+내용</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn-custom">
+				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
+				<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.list[0].storeId }"/>
+			<button type="submit" class="btn">
+					<i class="glyphicon glyphicon-pencil"></i>매장  Q&A 글쓰기
+				</button>
+	
+		</form>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-			
+			</div>
 			<br>
 
 
@@ -81,7 +89,7 @@ td {
 
 
 
-
+<center>
 
 
 			<p>
@@ -155,11 +163,7 @@ td {
 				<!-- 마지막 페이지로 이동 -->
 				<a
 					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
-					페이지</a></div>
-	<div class="col-sm-1"></div>
+					페이지</a></p></center>
 	
-		<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.list[0].storeId }"/>
-			<input type="submit" value="매장  Q&A 글쓰기">
-		</form>
+		</div>
+	<div class="col-sm-1"></div>

@@ -112,14 +112,14 @@ td {
 		</tbody>
 	</table>
 
-	<br> <br>
+	
 	
 
 		<%--  
   제품수령 희망 시간:
      --%>
 	<div>
-		<br> <br> <br> <br> <br>
+		<br> <br> <br> 
 		<hr> 
 		<input type="text"
 			size="20" name="cardNum" id="card" placeholder="카드번호를 입력해주세요."
@@ -177,7 +177,7 @@ td {
 	    <br>
 	    <hr>
 	  
-		<button type="submit" id="payment" class="btn-custom"
+		<button type="submit" id="payment" class="btn"
 			onclick="myFunction()" style="float: right">
 		<i class="glyphicon glyphicon-credit-card"></i>결제
 	   </button>

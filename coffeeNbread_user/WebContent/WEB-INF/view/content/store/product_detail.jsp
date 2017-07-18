@@ -2,20 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <style>
-
+form{
+ display:inline;
+}
 td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
 <h2>product_detail_</h2>
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
-<form  action="${initParam.rootPath }/findProductListManagerController.do" method="post" >
-	<sec:csrfInput/><%-- csrf 토큰 --%>
-	 <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-list"></i>제품 목록</button>
-	
-</form>
+<br><br><br><br><br>
+<div class="col-sm-2"></div>
+<div class="col-sm-4">
+		<img id="productImage" src="/coffeeNbread_user/up_image/${requestScope.product.productPicture}" width="300px">
 
+</div>
+<div class="col-sm-4">
 <table class="table">
 	<tr >
 		<th>제품 이름</th>
@@ -45,17 +46,19 @@ td {
 		<th>추천 제품 개수</th>
 		<td>${requestScope.product.recommendProductCount }</td>
 	</tr>
-	<tr >
-		<th>제품 사진</th>
-		<td><img id="productImage" src="/coffeeNbread_user/up_image/${requestScope.product.productPicture}" width="300px"></td>
-	</tr>		
+			
 </table>
-
+<div style="float:right">
 <form method=get action="${initParam.rootPath }/findOptionCategoryController.do">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 	<input type="hidden" name="productId" value="${requestScope.product.productId}"/>
-	<button type="submit" class="btn-custom"><i class="glyphicon glyphicon-pencil"></i>수정하기</button>
+	<button type="submit" class="btn"><i class="glyphicon glyphicon-pencil"></i>수정하기</button>
 
 </form>
+<form  action="${initParam.rootPath }/findProductListManagerController.do" method="post" >
+	<sec:csrfInput/><%-- csrf 토큰 --%>
+	 <button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>제품 목록</button>
+	
+</form></div>
 </div>
 <div class="col-sm-1"></div>

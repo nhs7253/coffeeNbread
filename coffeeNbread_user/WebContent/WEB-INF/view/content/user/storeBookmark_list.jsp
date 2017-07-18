@@ -21,8 +21,8 @@ td {
 
 	<h2>BOOKMARK</h2>
 	
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+
+<div class="col-sm-12">
 	
 			<form
 				action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do"
@@ -163,4 +163,4 @@ td {
 			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
 				</div></center></body>
-			<div class="col-sm-1"></div>
+			
