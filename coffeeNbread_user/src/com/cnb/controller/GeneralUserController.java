@@ -156,7 +156,7 @@ public class GeneralUserController {
 		}
 
 		try {
-			service.removeUser(((GeneralUser)authentication.getPrincipal()).getUserId());
+			service.removeUser(((GeneralUser)authentication.getPrincipal()).getUserId(), ((GeneralUser)authentication.getPrincipal()).getStoreId());
 		} catch (UserManageException e) {
 			return "index.tiles"; //에러 페이지 이동
 		}
@@ -173,7 +173,7 @@ public class GeneralUserController {
 	 * @param errors 요청 파라미터 체크
 	 * @return ModelAndView - 응답 경로, 페이징 결과 목록
 	 */
-	@RequestMapping("/findUserListBySelectToKeywordController")
+	@RequestMapping("/admin/findUserListBySelectToKeywordController")
 	public ModelAndView findUserListBySelectToKeywordController(@ModelAttribute("generalUserView") @Valid GeneralUserViewForm generalUserViewForm, BindingResult errors){
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -187,7 +187,7 @@ public class GeneralUserController {
 
 
 		
-		modelAndView.setViewName("user_list.tiles"); //성공 시 이동할 경로
+		modelAndView.setViewName("admin/user_list.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("keyword", generalUserViewForm.getKeyword());

@@ -43,9 +43,10 @@ public interface GeneralUserService {
 	/**
 	 * 해당 ID의 유저를 회원탈퇴 시키는 Service
 	 * @param userId 탈퇴하는 유저 ID
+	 * @param storeId 삭제할 매장 ID
 	 * @throws UserManageException 탈퇴 오류 발생
 	 */
-	void removeUser(String userId) throws UserManageException;
+	void removeUser(String userId, String storeId) throws UserManageException;
 	
 	/**
 	 * 유저가 입력한 키워드를 통해 조회한 데이터를 페이징하여 보여주는 Service

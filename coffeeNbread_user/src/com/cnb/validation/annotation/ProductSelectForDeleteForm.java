@@ -11,6 +11,7 @@ import java.util.List;
 public class ProductSelectForDeleteForm implements Serializable {
 	private String productId;
 	private List<String> productIdList;
+	private String storeId;
 	public String getProductId() {
 		return productId;
 	}
@@ -22,5 +23,11 @@ public class ProductSelectForDeleteForm implements Serializable {
 	}
 	public void setProductIdList(List<String> productIdList) {
 		this.productIdList = productIdList;
+	}
+	public String getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
 	}
 }

@@ -47,8 +47,7 @@ td {
 </form>
 
 	<p>
-	<form action="${initParam.rootPath }/selectRemoveProductController.do"
-		method="post">
+	<form action="${initParam.rootPath }/selectRemoveProductController.do" method="post">
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 		<table class="table table-hover">
@@ -76,6 +75,7 @@ td {
 			</tbody>
 		</table>
 		<div style="float: right">
+			<input type="hidden" name="storeId" value="${requestScope.list[0].storeId}"/>
 			<button type="submit" class="btn-custom">
 				<i class="glyphicon glyphicon-trash"></i>삭제
 			</button>

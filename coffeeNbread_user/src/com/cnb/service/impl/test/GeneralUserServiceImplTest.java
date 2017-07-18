@@ -58,7 +58,7 @@ public class GeneralUserServiceImplTest {
 		System.out.println(service.findUserListBySelectToKeyword("userId", "ServiceTestUser1", 1));
 		
 		
-		service.removeUser("ServiceTestUser1");
+		service.removeUser("ServiceTestUser1" ,"storeId");
 		System.out.println("service 사용 후");
 		System.out.println(service.findUserListBySelectToKeyword("userId", "Service", 1));
 		

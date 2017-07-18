@@ -204,15 +204,6 @@
 
 			<ul>
 				<li><a
-					href="${initParam.rootPath }/findpaymentOptionListController.do">플렛폼
-						지원 결제 목록</a></li>
-				<li><a
-					href="${initParam.rootPath }/userManagementListController.do">관리자
-						- 유저 매장 관리 목록</a></li>
-				<li><a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do">사용자
-						목록</a></li>
-				<li><a
 					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do">Q&A
 						게시판 목록</a></li>
 				<li><a
@@ -252,6 +243,12 @@
 				<li><a href="#0">All Users</a></li>
 				<li><a href="#0">Edit User</a></li>
 				<li><a href="#0">Add User</a></li>
+				<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+				<li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
+				<li><a href="${initParam.rootPath }/admin/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
+				<li><a href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
+				</sec:authorize>
+				
 			</ul></li>
 		</ul>
 
