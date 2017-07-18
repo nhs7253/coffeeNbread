@@ -46,11 +46,11 @@ public class PaymentDetailsDaoImplTest {
       /*  System.out.println(dao.selectPaymentDetailsListByUserIdAndStoreId("u-1", "s-1"));
 */
 	
-    System.out.println( dao.selectPaymentDetailsListByUserId("u-1"));
+//    System.out.println( dao.selectPaymentDetailsListByUserId("u-1"));
         // 유저입장에서 장바구니에있는걸 결제내역 테이블에 넣을것.
 	
         
-
+		System.out.println(dao.findSelectPaymentDetailsListByUserId("test", 1, 10));
 		 
 		 
 		 
@@ -152,6 +152,7 @@ public class PaymentDetailsDaoImplTest {
 		} catch (ParseException e) {
 			System.out.println("이상 발견");
 		}
+		
 		
 		
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!    이상 없음    !!!!!!!!!!!!!!!!!!!!!!!!!!!!");*/

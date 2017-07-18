@@ -22,9 +22,7 @@
 		type="checkbox" name="qnaBoardSecret" value="Y"
 		${requestScope.content.qnaBoardSecret eq "Y" ? "checked='checked'" :""}><br>
 	내용<br>
-	<textarea rows="20" cols="100" name="qnaBoardContent">
-	 	${requestScope.content.qnaBoardContent }
-	 </textarea>
+	<textarea rows="20" cols="100" name="qnaBoardContent">${requestScope.content.qnaBoardContent }</textarea>
 	<input type="hidden" name="qnaBoardNo"
 		value="${requestScope.content.qnaBoardNo }" />
 

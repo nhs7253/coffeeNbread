@@ -10,7 +10,7 @@
 	  
 	 <!-- resultMap -->
 	<resultMap id="paymentOptionList-resultmap" type="PaymentOptionList">
-		<result column="payment_id" property="paymentId"/>
+		<id column="payment_id" property="paymentId"/>
 		<result column="payment_method" property="paymentMethod"/>
 	</resultMap>
 	
