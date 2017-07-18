@@ -24,8 +24,10 @@
 	</div>
 	
 	<div class="form-group">
-		<label for="gender">성별</label>
-		<input type="text" name="userGender" id="gender" class="form-control">
+		<label for="gender">성별</label> <br />
+		<label><input type="radio" name="userGender" id="gender" value="남자" checked="checked">남자</label> &nbsp;&nbsp;&nbsp;
+		<label><input type="radio" name="userGender" id="gender" value="여자" >여자</label>
+		<hr />
 	</div>
 	
 	<div class="form-group">

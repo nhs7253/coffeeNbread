@@ -13,6 +13,7 @@ import com.cnb.dao.GeneralUserDao;
 import com.cnb.dao.UserAuthorityDao;
 import com.cnb.exception.UserManageException;
 import com.cnb.service.GeneralUserService;
+import com.cnb.service.StoreService;
 import com.cnb.util.PagingBean;
 import com.cnb.vo.GeneralUser;
 import com.cnb.vo.UserAuthority;
@@ -41,6 +42,9 @@ public class GeneralUserServiceImpl implements GeneralUserService{
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private StoreService storeService;
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
@@ -76,11 +80,15 @@ public class GeneralUserServiceImpl implements GeneralUserService{
 	}
 
 	@Override
-	public void removeUser(String userId) throws UserManageException {
+	@Transactional(rollbackFor=Exception.class)
+	public void removeUser(String userId, String storeId) throws UserManageException {
 		if(findUser(userId)== null){
 			throw new UserManageException("탈퇴 오류 발생");
 		}
 		generalUserDao.updateGeneralUserByUserIdToUserActiveState(userId); //유저 탈퇴
+		if(storeId != null){
+			storeService.removeStoretById(storeId, userId); //매장 제거
+		}
 	}
 
 	@Override

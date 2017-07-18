@@ -48,9 +48,7 @@
 	
 	
 	
-	
-	<!-- 매장 관리 목록 -->
-	<mvc:view-controller path="/store_manage_list.do" view-name="store_manage_list.tiles"/>
+
 	
 	<!-- 북마크 조회 폼 -->
 	<mvc:view-controller path="/user/storeBookmark_list.do" view-name="user/storeBookmark_list.tiles"/>
@@ -103,7 +101,7 @@
 	
 	<!-- 댓글 수정 폼 -->
 	<mvc:view-controller path="/user/reply_update_form.do" view-name="user/reply_update_form.tiles"/>
-	<mvc:view-controller path="/user_list.do" view-name="user_list.tiles"/>
+
 
 
 	<!-- 매장 등록 폼 -->
@@ -152,10 +150,14 @@
 	
 
 	<!-- 플렛폼 지원 결제 방법 목록 -->
-	<mvc:view-controller path="/payment_option_list.do" view-name="payment_option_list.tiles"/>
+	<mvc:view-controller path="/admin/payment_option_list.do" view-name="admin/payment_option_list.tiles"/>
 	<!-- 플렛폼 지원 결제 방법 등록 폼 -->
-	<mvc:view-controller path="/payment_option_register_form.do" view-name="payment_option_register_form.tiles"/>
-
+	<mvc:view-controller path="/admin/payment_option_register_form.do" view-name="admin/payment_option_register_form.tiles"/>
+	<!-- 유저 목록 -->
+	<mvc:view-controller path="/admin/user_list.do" view-name="admin/user_list.tiles"/>
+	<!-- 매장 관리 목록 -->
+	<mvc:view-controller path="/admin/store_manage_list.do" view-name="admin/store_manage_list.tiles"/>	
+	
 	
 	<!-- bean -->
 	<!--  -->

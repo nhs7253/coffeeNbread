@@ -388,4 +388,5 @@
 	 			ORDER BY product_id
 		]]>
 	</select>
+
 </mapper>

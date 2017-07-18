@@ -26,18 +26,19 @@ td {
 
 	<h2>USER_VISIT_HISTORY</h2>
 <br><br>
-<div class="col-sm-1"></div>
+
 	
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 			<form
 				action="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
+				<div style="float:right">
 				<div class="form-group">
 					<input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn-custom">
+				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
-				</button>
+				</button></div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
@@ -86,15 +87,17 @@ td {
 
 			</tbody>
 		</table>
-		<button type="submit" class="btn-custom">
+		<div style="float:right">
+		<button type="submit" class="btn">
 			<i class="glyphicon glyphicon-trash"></i>삭제
 		</button>
+		</div>
 	</form>
 
 
 
 
-
+<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -166,6 +169,6 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
+			페이지</a></center>
 			</div>
-			<div class="col-sm-1"></div>
+			

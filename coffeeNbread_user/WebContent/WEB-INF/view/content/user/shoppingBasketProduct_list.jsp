@@ -63,7 +63,7 @@ hr.animated-gradient {
 
 </style>
 <body>
-
+	
 	<center><h2>SHOPPING_LIST</h2></center>
 	<br>
 	<br>
@@ -97,7 +97,7 @@ hr.animated-gradient {
 
 				<tr id="sbp_id">
 					<td>${list.product.productCategory}</td>
-					<td>${list.product.productPicture}</td>
+					<td><img src="${initParam.rootPath }/up_image/${list.product.productPictureList[0].productPicture }" alt="" width="100" height="100"/></td>
 					<td>${list.product.productName}</td>
 					<td>${list.product.productPrice}</td>
 					<td><input type="number" min="0" value="${list.productCount}" class="count"></td>

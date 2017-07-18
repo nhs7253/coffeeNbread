@@ -30,6 +30,8 @@ td {
 			<form
 				action="${initParam.rootPath }/findUserListBySelectToKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
+				<div style="float:right">
+				
 				<div class="form-group">
 					<select name="select" class="form-control">
 						<option value="userId"
@@ -40,7 +42,7 @@ td {
 				</div>
 				<button type="submit" class="btn btn-custom">
 					<i class="glyphicon glyphicon-search"></i>검색
-				</button>
+				</button></div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
@@ -88,7 +90,7 @@ td {
 
 
 
-
+<center>
 
 	<p>
 		<%--######################################################
@@ -162,5 +164,5 @@ td {
 		<a
 			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
-			</div>
-			<div class="col-sm-1"></div>
+			</div></center>
+			<div class="col-sm-1"></div></body>

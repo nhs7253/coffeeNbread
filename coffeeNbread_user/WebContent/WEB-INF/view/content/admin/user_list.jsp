@@ -1,27 +1,56 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
+<style type="text/css">
+table, td {
+	
+}
+
+table {
+	width: 700px;
+	border-collapse: collapse;
+}
+
+td {
+	padding: 5px; /* //td 간 간격 */
+}
+</style>
 
 </head>
 <body>
+
+
+	<h2>전체 회원 정보</h2>
+<br><br>
+<div class="col-sm-1"></div>
 	
-
-	<h2>유저 목록</h2>
-
-
-
-	<form action="${initParam.rootPath }/findUserListBySelectToKeywordController.do" method="post">
-		<select name="select">
-			<option value="userId">아이디</option>
-			<option value="userName">이름</option>
-		</select> <input type="text" name="keyword" /> <input type="submit" value="검색" />
-		<sec:csrfInput/><%-- csrf 토큰 --%>
-	</form>
+		<div class="col-sm-10">
+			<form
+				action="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do"
+				method="post" class="form-inline quick-search-form" role="form">
+				<div class="form-group">
+					<select name="select" class="form-control">
+						<option value="userId"
+							${param.select eq "userId" ? "selected" :""}>아이디</option>
+						<option value="userName"
+							${param.select eq "userName" ? "selected" :""}>이름</option>
+					</select> <input type="text" name="keyword" class="form-control" />
+				</div>
+				<button type="submit" class="btn btn-custom">
+					<i class="glyphicon glyphicon-search"></i>검색
+				</button>
+				<sec:csrfInput />
+				<%-- csrf 토큰 --%>
+			</form>
+		
+	
 	<br>
 
-	<table class="w3-table-all">
+	<table class="table">
 		<thead>
-			<tr class="w3-blue"> 
+			<tr>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>생년월일</th>
@@ -31,6 +60,7 @@
 				<th>주소</th>
 				<th>활동 상태</th>
 				<th>매장아이디</th>
+				<th>탈퇴</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,13 +80,21 @@
 					<td>${user.userAddress}</td>
 					<td>${user.userActiveState}</td>
 					<td>${user.storeId}</td>
+					<td>
+						<form action="${initParam.rootPath }/admin/adminRemoveUserController.do" method="post">
+								<sec:csrfInput/>
+								<input type="hidden" name="storeId" value="${user.storeId }"/>
+								<input type="hidden" name="userId" value="${user.userId }"/>
+								<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
 
-	
+
 
 
 
@@ -67,7 +105,7 @@
 				###################################################### --%>
 		<!-- 첫페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
+			href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=1&select=${requestScope.select}&keyword=${requestScope.keyword}">첫페이지</a>
 
 
 		<!--
@@ -78,7 +116,7 @@
 			<c:when test="${requestScope.pageBean.previousPageGroup}">
 				<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 				<a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
+					href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.beginPage-1}&select=${requestScope.select}&keyword=${requestScope.keyword}">◀</a>
 			</c:when>
 			<c:otherwise>
 				◀
@@ -101,7 +139,7 @@
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -119,7 +157,7 @@
 		<c:choose>
 			<c:when test="${requestScope.pageBean.nextPageGroup}">
 				<a
-					href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
+					href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.endPage+1}&select=${requestScope.select}&keyword=${requestScope.keyword}">▶</a>
 			</c:when>
 			<c:otherwise>
 			▶
@@ -131,8 +169,7 @@
 
 		<!-- 마지막 페이지로 이동 -->
 		<a
-			href="${initParam.rootPath }/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
+			href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
-
-
-
+			</div>
+			<div class="col-sm-1"></div>

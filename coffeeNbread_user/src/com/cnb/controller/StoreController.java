@@ -316,9 +316,19 @@ public class StoreController {
 	
 		
 		Store store = storeService.viewStore(storeId, SecurityContextHolder.getContext().getAuthentication());
-		System.out.println("store:"+store);
 		modelAndView.setViewName("common/store_view.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("store", store);
+		
+	
+		if(!(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ROLE_CNB_ADMIN]") || 
+				SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ROLE_ANONYMOUS]"))){
+			String authority = ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId();
+			if(authority != null){
+				modelAndView.addObject("authority", authority.equals(storeId));
+			}
+		}
+		
+		
 		
 		
 		session.setAttribute("storeInfo", store);

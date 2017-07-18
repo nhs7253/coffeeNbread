@@ -34,15 +34,6 @@ public class ShoppingBasketProductServiceImpl implements ShoppingBasketProductSe
 	 */
 	@Override
 	public List<ShoppingBasketProduct> findShoppingBasketProductListByStoreIdAndUserId(String storeId, String userId) {
-		
-		
-		System.out.println("findShoppingBasketProductListByStoreIdAndUserId = " + storeId);
-		
-		System.out.println("findShoppingBasketProductListByStoreIdAndUserId = " + userId);
-		
-		System.out.println("하하하하 = "  + shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId));
-
-		
 		return shoppingBasketProductDao.selectShoppingBasketProductListByStoreIdAndUserId(storeId, userId);
 	}
 

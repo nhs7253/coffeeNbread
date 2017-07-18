@@ -10,74 +10,51 @@
 
 
 <script type="text/javascript">
+	var newWindow;
 
-var newWindow;
+	function myFunction() {
+		var txt;
+		if (confirm("등록하시겠습니까?") == true) {
+			txt = "카드번호가 등록이 되었습니다.";
+		} else {
+			txt = "카드번호를 적어주세요!!";
+		}
+	}
 
-function myFunction() {
-    var txt;
-    if (confirm("등록하시겠습니까?") == true) {
-        txt = "카드번호가 등록이 되었습니다.";
-    } else {
-        txt = "카드번호를 적어주세요!!";
-    }
-}
+	function popupCardNumList() {
 
-function popupCardNumList(){
-	  
-	                  
-	  window.open("/coffeeNbread_user/view/content/user/cardNumList.jsp","카드번호 리스트","top=300,left=300,width=400,height=400,resizable=no");  //링크걸때 URL과 같다. 여기서는 그냥 절대경로로 넣은거고 상대경로로 해도 상관없음 
-}   
+		window.open("/coffeeNbread_user/view/content/user/cardNumList.jsp",
+				"카드번호 리스트",
+				"top=300,left=300,width=400,height=400,resizable=no"); //링크걸때 URL과 같다. 여기서는 그냥 절대경로로 넣은거고 상대경로로 해도 상관없음 
+	}
+
+	function myFunction() {
+		confirm("결제하시겠습니까? ");
+	}
+
+	$(document).ready(function() {
+		/* $(".count").on("change",function(){
+			
+			document.getElementById( "productCount" ).setAttribute( 'value', this.value);
+		}); */
+		$("#registerBtn").on("click", function() {
+
+			var aForm = document.getElementById("addCardNum");
+			document.getElementById("card").setAttribute('value', this.value);
+			aForm.cardNum.value = $(this).prev().val();
+			aForm.submit();
+		});
+
+		/* 카드번호 등록 */
+		$("#card_id").on("change", function() {
+			document.getElementById("card").setAttribute('value', this.value);
+		});
 
 
-function myFunction() {
-    confirm("결제하시겠습니까? ");
-}
 
-
-
-
-
-$(document).ready(function(){
-	/* $(".count").on("change",function(){
-		
-		document.getElementById( "productCount" ).setAttribute( 'value', this.value);
-	}); */
-	$("#registerBtn").on("click", function(){
-		
-		var aForm = document.getElementById("addCardNum");
-		alert(aForm);
-		document.getElementById( "card" ).setAttribute('value', this.value);
-		aForm.cardNum.value = $(this).prev().val();
-		alert(aForm.cardNum.value);
-		aForm.submit();
 	});
-
-	
-	/* 카드번호 등록 */
-	$("#card_id").on("change", function(){
-		document.getElementById( "card" ).setAttribute('value', this.value);
-	});
-	
-/* 	
-	$("#payment").on("click", function(){
-		
-		var pForm = document.getElementById("payForm");
-		pForm.productHopeTime.value = $(this).prev().val();
-		alert(pForm.cardNum.value);
-		pForm.submit();
-	}); */
-	
-	
-	
-});
-
-
 </script>
-<style type="text/css" >
-table, td {
-	border: 1px solid black;
-}
-
+<style type="text/css">
 table {
 	width: 500px;
 	border-collapse: collapse;
@@ -88,122 +65,116 @@ td {
 }
 </style>
 
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 
 
-<center><h2>${requestScope.userName }의 결제페이지</h2></center>
+	<center>
+		<h2>${requestScope.userName }의결제페이지</h2>
+	</center>
 
-<hr>
-<caption>결제할 목록</caption>
-<table class="w3-table-all"   >
-	<thead>
-		<tr class="w3-blue" >
-			<th>제품카테고리</th>
-			<th>제품사진</th>
-			<th>제품명</th>
-			<th>가격</th>
-			<th>개수</th>
+	<hr>
 
-		</tr>
-	</thead>
-	<tbody>
-
-
-		<c:forEach items="${requestScope.sbpList }"
-			var="list">
-
-			<tr id="sbp_id">
-				<td>${list.product.productCategory}</td>
-				<td>${list.product.productPicture}</td>
-				<td>${list.product.productName}</td>
-				<td>${list.product.productPrice}</td>
-				<td>${list.productCount}</td>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>제품카테고리</th>
+				<th>제품사진</th>
+				<th>제품명</th>
+				<th>가격</th>
+				<th>개수</th>
 
 			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-
-<br>
-<br>
-
-<p>
-	총금액<input type="text"  value="${requestScope.totalPrice }">
-</p>
+		</thead>
+		<tbody>
 
 
-<p>
-   결제 방법 선택 
-   
-   <select  id="payment_method">
-   <c:forEach var="list" items="${requestScope.spoList }">
-	<option  value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
-   </c:forEach>
-	 </select>
+			<c:forEach items="${requestScope.sbpList }" var="list">
 
-</p>
+				<tr id="sbp_id">
+					<td>${list.product.productCategory}</td>
+					<td>${list.product.productPicture}</td>
+					<td>${list.product.productName}</td>
+					<td>${list.product.productPrice}</td>
+					<td>${list.productCount}</td>
 
-<p>
-<%--  
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
+	
+	
+
+		<%--  
   제품수령 희망 시간:
      --%>
-
-<p>
-<br>
-<br>
-
-
-<br>
-<br>
-     
-    
-   
-    <br>
-      <input type="text" size="20" name="cardNum"  id="card" placeholder="카드번호를 입력해주세요." value="${requestScope.cardNum }">
-       <button type="submit"  id="registerBtn"  >
-           <i class="glyphicon glyphicon-plus"></i>카드번호 등록하기
-       </button> 
-      
-    </p>    
-
-   <p>   
-        
-        <button type="submit" name="findCardNumList" id="findCardNum" >		
-         <i class="glyphicon glyphicon-search"></i>등록한 카드번호 목록.
-        </button> 
-   </p>
-   
-
-   <p>
+	<div>
+		<br> <br> <br> 
+		<hr> 
+		<input type="text"
+			size="20" name="cardNum" id="card" placeholder="카드번호를 입력해주세요."
+			value="">
+		<button type="submit" id="registerBtn">
+			<i class="glyphicon glyphicon-plus"></i>카드번호 등록
+		</button>
+	
+	
+	<br>
+    <div>
     <select name="bookMarkCardNum" id="card_id">
 	<c:forEach var="list" items="${requestScope.bmlist }">
 		<option value="${list.cardNum }">${list.cardNum }</option>
 	</c:forEach>
      </select>
-   </p>
+  
+        <button type="submit" name="findCardNumList" id="findCardNum">		
+         <i class="glyphicon glyphicon-list"></i>등록한 카드번호 목록
+        </button> 
+   <div style="float: right">
+		총금액 :<input type="text" value="${requestScope.totalPrice }" disabled>
+</div></div>
+    
 
    
 
-<form action="${initParam.rootPath }/user/addPaymentDetailsController.do" id="payForm">
+   
+
+<form  	action="${initParam.rootPath }/user/addPaymentDetailsController.do"
+		id="payForm">
 	<sec:csrfInput />
-	<c:forEach items="${requestScope.sbpList }"
-		var="list">
+		<div style="float: right">
+	결제 방법 선택 <select id="payment_method" name="paymentOption">
+				<c:forEach var="list" items="${requestScope.spoList }">
+					<option value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
+				</c:forEach>
+			</select></div>
+     </div>
+	
+	
+	<c:forEach items="${requestScope.sbpList }" var="list">
 		<input type="hidden" name="productIdList"
-			value="${list.product.productId }" />
+				value="${list.product.productId }" />
 		<input type="hidden" name="reservationOrderCount"
-			value="${list.productCount }" />
+				value="${list.productCount }" />
 	</c:forEach>
 	     <br>
 	     <br>
  
 
- 
-	 제품수령희망시간.
-	  <label> <input type="text" name="productHopeTime" id="paytime" placeholder="ex)2017-07-21 10:30"></label>
+ <div style="float: right">
+	 제품수령 희망시간
+	  <label> <input type="text" name="productHopeTime"
+			id="paytime" placeholder="ex)2017-07-21 10:30"></label>
+			</div>
 	    <br>
 	    <hr>
-		<button type="submit" id="payment" class="btn-custom" onclick="myFunction()" >
+	  
+		<button type="submit" id="payment" class="btn"
+			onclick="myFunction()" style="float: right">
 		<i class="glyphicon glyphicon-credit-card"></i>결제
 	   </button>
+	   <br><br>
 </form>	
         
 
@@ -212,10 +183,13 @@ td {
 
 
 
-<form action="${initParam.rootPath }/user/addBookMarkCardNumController.do" id="addCardNum">
+<form
+		action="${initParam.rootPath }/user/addBookMarkCardNumController.do"
+		id="addCardNum">
 	<sec:csrfInput />
-	<input type="hidden" name="cardNum"/>
+	<input type="hidden" name="cardNum" />
 </form>
 
-
+</div>
+<div class="col-sm-1"></div>
 

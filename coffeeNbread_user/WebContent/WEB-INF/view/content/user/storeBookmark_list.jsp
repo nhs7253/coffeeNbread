@@ -20,9 +20,9 @@ td {
 
 
 	<h2>BOOKMARK</h2>
-	<br><br><br>
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+	
+
+<div class="col-sm-12">
 	
 			<form
 				action="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do"
@@ -30,7 +30,7 @@ td {
 				<div style="float:right">
 				<div class="form-group col-xs-8" >
 					<input type="text" name="keyword" class="form-control" /></div>
-				<button type="submit" class="btn-custom form-group col-xs-4" >
+				<button type="submit" class="btn form-group col-xs-4" >
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
 				</div>
@@ -83,13 +83,13 @@ td {
 
 			</tbody>
 		</table>
-				<button type="submit" class="btn-custom" style="float:right"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+				<button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 	</form>
 
 
 
 
-
+<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -162,5 +162,5 @@ td {
 		<a
 			href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do?page=${requestScope.pageBean.totalPage}&keyword=${requestScope.keyword}">마지막
 			페이지</a>
-				</div>
-			<div class="col-sm-1"></div>
+				</div></center></body>
+			

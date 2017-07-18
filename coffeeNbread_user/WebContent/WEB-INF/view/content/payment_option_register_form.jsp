@@ -11,9 +11,13 @@
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
+		
 <form action="${initParam.rootPath }/addPaymentOptionListController.do"
 	method="post">
 	<sec:csrfInput />
+	<div class="col-sm-3"></div>
+	
+		<div class="col-sm-6">
 	<table>	
 	<tr  class="form-group">
 	<th>아이디 </th>
@@ -24,8 +28,11 @@
 	  <td><input type="text" name="paymentMethod" required class="form-control"></td>
 	  </tr>
 	</table>
+<div style="float:right">
 	<button type="submit" class="btn btn-default btn-circle">
 		<i class="glyphicon glyphicon-ok"></i> 등록
-	</button>
+	</button></div></div><div class="col-sm-3"></div>
+	
+		
 </form></div><div class="col-sm-1"></div>
 

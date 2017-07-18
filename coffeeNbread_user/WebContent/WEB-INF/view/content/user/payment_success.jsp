@@ -18,10 +18,7 @@
 <!--결제하기 누르면 결제내역에 등록  -->
 
 <style type="text/css">
-table, td,th{
-	border: 4px solid black;
-	
-}
+
 
 table{
 	width:700px;
@@ -41,6 +38,8 @@ select{
 
 
 <h2>결제성공</h2>
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
 
 
 <h2>${requestScope.userName }님의예약 현황</h2>
@@ -50,9 +49,9 @@ select{
 <br>
 
 
-<table class="w3-table-all" width="90%" border="1" align="center" >
+<table class="table" width="90%" border="1" align="center" >
 	<thead>
-		<tr class="w3-blue">
+		<tr >
 			<th>예약번호</th>
 			<th>예약매장</th>
 			<th>예약시간</th>
@@ -85,7 +84,9 @@ select{
 		</c:forEach>
 
 	</tbody>
-</table>
+</table></div>
+<div class="col-sm-1"></div>
+
 
   
 

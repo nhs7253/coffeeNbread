@@ -2,73 +2,157 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<style>
 
+form {
+	display: inline
+}
+th{
+	 width:30%;
+}
+td{
+	 width:70%;
+}
+</style>
 
 
 </head>
 <body>
-
-
-	<h1>STORE_DETAIL</h1><hr><br>
-	<div class="col-sm-2"></div>
-<div class="col-sm-8">
-		매장명 : <input type="text" value="${requestScope.store.storeName }" disabled class="form-control">
-		<c:if test="${!empty requestScope.store.storePictureList[0].storePicture }">
-			<img src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }" alt="" /><br />
+	<h1>STORE_DETAIL</h1>
+	<hr>
+	<br>
+	<div class="col-sm-1"></div>
+	
+	<div class="col-sm-4">
+		<c:if
+			test="${!empty requestScope.store.storePictureList[0].storePicture }">
+			<img
+				src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }"
+				alt="" width="100%" />
+			
 		</c:if>
-		매장 소개 :<br>
-		 <textarea rows="10" cols="60" disabled>
-		 	${requestScope.store.storeIntro }
-		 </textarea> <br />
-		매장 주소 : <input type="text" value="${requestScope.store.storeAddress }" disabled class="form-control">
-		매장 이메일 : <input type="text" value="${requestScope.store.storeEmail }" disabled class="form-control">
-		매장 여는 시간 : <input type="text" value="${requestScope.store.storeOpenFormat }" disabled class="form-control">
-		매장 닫는 시간 : <input type="text" value="${requestScope.store.storeCloseFormat }" disabled class="form-control">
-		매장 위치 : <br />
-		<div id="map" style="width:100%;height:350px;"></div>
-		<p/>
+		<div id="map" style="width: 100%; height: 250px;"></div>
+
+	</div>
+	<div class="col-sm-6">
+	<br><br>
+		<table class="table" width="100%">
+			<tr class="form-group">
+				<th>매장명</th>
+				<td><div class="col-xs-10">
+						${requestScope.store.storeName }
+					</div></td>
+			</tr>
+
+			<tr class="form-group">
+			<th>매장 주소</th>
+				
+				<td><div class="col-xs-10">
+						${requestScope.store.storeAddress }
+					</div></td>
+			</tr>
+			<tr class="form-group">
+			<th>매장 이메일</th>
+				
+				<td><div class="col-xs-10">
+						${requestScope.store.storeEmail }
+					</div></td>
+			</tr>
+			<tr class="form-group">
+			<th>매장 여는 시간</th>
+				
+				<td><div class="col-xs-10">
+						${requestScope.store.storeOpenFormat }
+					</div></td>
+			</tr>
+			<tr class="form-group">
+			<th>매장 닫는 시간</th>
+				
+				<td width="60%">
+					<div class="col-xs-10">
+						${requestScope.store.storeCloseFormat }
+					</div>
+				</td>
+			</tr>
+
+			<tr class="form-group">
+			<th>매장 소개</th>
+				
+				<td>
+				<div class="col-xs-10">
+						<textarea rows="15" cols="55" disabled>
+		 					${requestScope.store.storeIntro }
+						</textarea>
+				</div>
+					</td>
+			</tr>
+		</table>
+	<div style="float:right">
+	
+	
+
+	<!-- 본인만 보임 -->
+		<c:if test="${requestScope.authority }">
 		
-		<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
+			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
 				<button type="submit" class="btn"><i class="glyphicon glyphicon-pencil"></i>수정</button>
-		</form>
-		<form action="${initParam.rootPath }/removeStoreController.do">
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
-		</form>
-		
+			</form>
+			
+			<form action="${initParam.rootPath }/removeStoreController.do">
+					<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+			</form>
+			
+			<form action="${initParam.rootPath }/findProductListController.do" method="post">
+				<sec:csrfInput />
+				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>제품 관리</button>
+			</form>
+			
+		</c:if>
+
+
+		<!-- 회원만 보임 -->
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
-			<form action="${initParam.rootPath }/user/addStoreBookmarkController.do" method="post">
-				<sec:csrfInput/>
-				<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
-				<input type="hidden" name="userId" value="<sec:authentication property="principal.userId"/>"/>
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-plus"></i>북마크추가</button>
+			<form
+				action="${initParam.rootPath }/user/addStoreBookmarkController.do"
+				method="post">
+				<sec:csrfInput />
+				<input type="hidden" name="storeId"
+					value="${requestScope.store.storeId }" /> <input type="hidden"
+					name="userId"
+					value="<sec:authentication property="principal.userId"/>" />
+				<button type="submit" class="btn">
+					<i class="glyphicon glyphicon-plus"></i>북마크추가
+				</button>
 			</form>
 		</sec:authorize>
-		
-		<form action="${initParam.rootPath }/findProductListController.do" method="post">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
-			<input type="submit" value="제품 목록">
-		</form>
-		
-		
+
+<br>
+
+
+
+
+
+		<form
+			action="${initParam.rootPath }/user/userFindProductListController.do"
+			method="post">
+			<sec:csrfInput />
+			<input type="hidden" name="storeId"
+				value="${requestScope.store.storeId }" />
+				<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-list"></i>제품 목록
+					</button>
 				
-		<form action="${initParam.rootPath }/user/userFindProductListController.do" method="post">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
-			<input type="submit" value="유저가 보는 제품 목록">
 		</form>
-		
-		<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" method="post">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
-			<input type="submit" value="매장  Q&A 게시판 목록">
-		</form>
-		
-		</div>
-		<div class="col-sm-2"></div>
-		
-		<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
-		<script>
+	</div>
+</div>
+	
+	<div class="col-sm-1"></div>
+
+	<script type="text/javascript"
+		src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+	<script>
+
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
 		        center: new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표
@@ -100,4 +184,3 @@
 		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 		infowindow.open(map, marker); 
 		</script>
-

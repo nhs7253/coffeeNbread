@@ -76,18 +76,7 @@ public class StoreServiceImpl implements StoreService{
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
 		}
-		//store 추가
-		storedao.insertStore(store);
-		
-		//매장 분류 추가
-		optionCategoryService.addOptionCategory(optionCategory);
 
-		//매장 사진 추가 
-		storePictureService.addStorePicture(storePicture);
-		
-		//로그인한 유저에 매장 ID 추가
-		generalUserDao.updateGeneralUserByUserIdToStoreId(userId, store.getStoreId());
-		
 		if(paymentIdList!=null){
 			//매장 지원 결제 내역
 			StorePaymentOptionList storePaymentOptionList = new StorePaymentOptionList();
@@ -97,7 +86,19 @@ public class StoreServiceImpl implements StoreService{
 				storePaymentOptionListDao.insertStorePaymentOptionList(storePaymentOptionList);
 			}
 		}
+		//매장 사진 추가 
+		storePictureService.addStorePicture(storePicture);
+		
 		storePositionDao.insertStorePosition(storePosition);
+		
+		//store 추가
+		storedao.insertStore(store);
+				
+		//매장 분류 추가
+		optionCategoryService.addOptionCategory(optionCategory);
+
+		//로그인한 유저에 매장 ID 추가
+		generalUserDao.updateGeneralUserByUserIdToStoreId(userId, store.getStoreId());
 		
 		return storedao.selectStroeJoinPicture(store.getStoreId());
 		
