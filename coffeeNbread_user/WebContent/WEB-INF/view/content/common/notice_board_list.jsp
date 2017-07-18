@@ -48,7 +48,6 @@ td {
 			<tr class="w3-blue">
 				<th>글번호</th>
 				<th>제목</th>
-				<th>내용</th>
 				<th>작성일시</th>
 				<th>조회수</th>
 			</tr>
@@ -62,8 +61,7 @@ td {
 
 				<tr>
 					<td>${list.noticeBoardNo}</td>
-					<td>${list.noticeBoardTitle}</td>
-					<td><a href="${initParam.rootPath }/common/viewNoticeBoardContentsController.do?noticeBoardNo=${list.noticeBoardNo}">${list.noticeBoardContent}</a></td>
+					<td><a href="${initParam.rootPath }/common/viewNoticeBoardContentsController.do?noticeBoardNo=${list.noticeBoardNo}">${list.noticeBoardTitle}</a></td>
 					<td>${list.noticeBoardDateFormat}</td>
 					<td>${list.noticeBoardHits}</td>
 				</tr>
