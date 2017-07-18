@@ -42,7 +42,7 @@ td {
    <input type="text" name="keyword" class="form-control"/>
    </div>
    
-   <button type="submit" class="btn btn-custom"><i class="glyphicon glyphicon-search"></i>검색</button>
+   <button type="submit" class="btn "><i class="glyphicon glyphicon-search"></i>검색</button>
     
 </form>
 </div>
@@ -89,7 +89,7 @@ td {
 	
 
 	<div style="float:right,"clear:both">
-	<button type="submit" class="btn btn-custom">결제</button></div>
+	<button type="submit" class="btn">결제</button></div>
 </form>
 	</div>
 	<div class="col-sm-2"></div>

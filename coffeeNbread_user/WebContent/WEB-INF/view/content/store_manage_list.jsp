@@ -17,7 +17,6 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
 </head>
 <body>
@@ -27,6 +26,7 @@ td {
 	
 			<form action="${initParam.rootPath }/userManagementListController.do"
 				method="post" class="form-inline quick-search-form" role="form">
+				<div style="float:right">
 				<div class="form-group">
 					<select name="select" class="form-control">
 						<option value="userId"
@@ -39,10 +39,10 @@ td {
 							${param.select eq "storeName" ? "selected" :""}>매장 이름</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
+				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
-				</button>
-
+				</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
@@ -107,7 +107,7 @@ td {
 
 
 
-	<p>
+	<p><center>
 		<%--######################################################
 															페이징 처리
 				###################################################### --%>
@@ -178,4 +178,4 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
+			페이지</a></center></body>
