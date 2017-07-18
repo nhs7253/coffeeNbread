@@ -7,7 +7,7 @@
 <body>
 
 
-	<h2>USER_LIST___</h2>
+	<h2>유저 목록</h2>
 
 
 	<div class="container">

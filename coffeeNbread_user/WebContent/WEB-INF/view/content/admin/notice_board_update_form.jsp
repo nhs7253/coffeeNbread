@@ -11,9 +11,7 @@
 	<sec:csrfInput/>
 	제목 : <input type="text" name="noticeBoardTitle" value="${requestScope.noticeBoardContents.noticeBoardTitle }"><br>
 	내용<br>
-	 <textarea rows="20" cols="100" name="noticeBoardContent">
-	 	${requestScope.noticeBoardContents.noticeBoardContent }
-	 </textarea>
+	 <textarea rows="20" cols="100" name="noticeBoardContent">${requestScope.noticeBoardContents.noticeBoardContent }</textarea>
 	 <input type="hidden" name="noticeBoardNo" value="${requestScope.noticeBoardContents.noticeBoardNo }"/>
 	 
 	<p>
