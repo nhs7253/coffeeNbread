@@ -196,7 +196,6 @@ public class BoardReplyController {
 		String removeBoardReplyToRecipeBoardNoController(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId){
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
-			System.out.println("111111111111111111111111111");
 			try {
 				boardReplyService.removeBoardReplyToRecipeBoardNo(replyNo, recipeBoardNo, replyName, generalUser.getUserId());
 			} catch (BoardReplyException e) {

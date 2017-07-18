@@ -28,13 +28,24 @@
 		<div id="map" style="width:100%;height:350px;"></div>
 		<p/>
 		
-		<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
+		<!-- 본인만 보임 -->
+
+
+		<c:if test="${requestScope.authority }">
+			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
 				<button type="submit" class="btn"><i class="glyphicon glyphicon-pencil"></i>수정</button>
-		</form>
-		<form action="${initParam.rootPath }/removeStoreController.do">
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
-		</form>
-		
+			</form>
+			<form action="${initParam.rootPath }/removeStoreController.do">
+					<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+			</form>
+			<form action="${initParam.rootPath }/findProductListController.do" method="post">
+				<sec:csrfInput/>
+				<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
+				<input type="submit" value="제품 목록">
+			</form>
+		</c:if>
+
+		<!-- 로그인 시에만 보임 -->
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 			<form action="${initParam.rootPath }/user/addStoreBookmarkController.do" method="post">
 				<sec:csrfInput/>
@@ -43,14 +54,6 @@
 				<button type="submit" class="btn"><i class="glyphicon glyphicon-plus"></i>북마크추가</button>
 			</form>
 		</sec:authorize>
-		
-		<form action="${initParam.rootPath }/findProductListController.do" method="post">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.store.storeId }"/>
-			<input type="submit" value="제품 목록">
-		</form>
-		
-		
 				
 		<form action="${initParam.rootPath }/user/userFindProductListController.do" method="post">
 			<sec:csrfInput/>

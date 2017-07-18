@@ -390,10 +390,10 @@ public class ProductController {
 	@RequestMapping("selectRemoveProductController")
 	public String selectRemoveProductController(@ModelAttribute("productSelectForDelete") @Valid ProductSelectForDeleteForm productSelectForDeleteForm, BindingResult errors) {
 		if(errors.hasErrors()) {
-			return "redirect:/findProductListController.do";
+			return "redirect:/findProductListController.do?storeId="+productSelectForDeleteForm.getStoreId();
 		}
 		service.findRemoveProduct(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productSelectForDeleteForm.getProductIdList());
-		return "redirect:/findProductListController.do";
+		return "redirect:/findProductListController.do?storeId="+productSelectForDeleteForm.getStoreId();
 	}
 }
 
