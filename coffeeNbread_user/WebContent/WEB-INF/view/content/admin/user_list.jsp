@@ -60,6 +60,7 @@ td {
 				<th>주소</th>
 				<th>활동 상태</th>
 				<th>매장아이디</th>
+				<th>탈퇴</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -79,6 +80,14 @@ td {
 					<td>${user.userAddress}</td>
 					<td>${user.userActiveState}</td>
 					<td>${user.storeId}</td>
+					<td>
+						<form action="${initParam.rootPath }/admin/adminRemoveUserController.do" method="post">
+								<sec:csrfInput/>
+								<input type="hidden" name="storeId" value="${user.storeId }"/>
+								<input type="hidden" name="userId" value="${user.userId }"/>
+								<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 

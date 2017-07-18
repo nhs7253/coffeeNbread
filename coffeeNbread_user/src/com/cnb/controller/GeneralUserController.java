@@ -26,7 +26,6 @@ import com.cnb.service.GeneralUserService;
 import com.cnb.validation.annotation.GeneralUserForm;
 import com.cnb.validation.annotation.GeneralUserViewForm;
 import com.cnb.vo.GeneralUser;
-import com.cnb.vo.Product;
 
 /*
  * 노현식 
@@ -69,7 +68,6 @@ public class GeneralUserController {
 	 */
 	public String addUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors){
 		if(errors.hasErrors()){
-			System.err.println();
 			return "user/add_user_form.tiles"; //에러 발생 시 회원 가입 페이지로 이동
 		}
 		
@@ -113,6 +111,8 @@ public class GeneralUserController {
 		//BeanUtils.copyProperties(소스, 타켓); 
 		//소스(Form)에 있는 검증 끝난 요청 파라미터 값을 실사용을 위한 타겟(ex - generalUser)에 넣음
 		
+		
+		generalUser.setUserId(((GeneralUser)context.getAuthentication().getPrincipal()).getUserId());
 		generalUser.setUserActiveState("Y");
 		try {
 			service.modifyUser(generalUser);

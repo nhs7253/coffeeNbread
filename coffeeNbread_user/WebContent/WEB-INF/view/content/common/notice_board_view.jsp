@@ -50,6 +50,8 @@ display:inline;
 
 </table>
 	<p />
+
+<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
 <div style="float:right">
 	<form
 		action="${initParam.rootPath }/admin/modifySettingNoticeBoardContentsController.do"
@@ -72,4 +74,6 @@ display:inline;
 		<button type="submit" class="btn">
 			<i class="glyphicon glyphicon-trash"></i>삭제
 		</button>
-	</form>&nbsp;&nbsp;&nbsp;&nbsp;</div>	</div><div class="col-sm-2"></div>
+	</form>&nbsp;&nbsp;&nbsp;&nbsp;</div></sec:authorize>	</div><div class="col-sm-2"></div>
+	
+

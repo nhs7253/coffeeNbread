@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page import="org.springframework.security.core.Authentication, org.springframework.security.core.context.SecurityContextHolder, com.cnb.vo.GeneralUser"%>
 
 
 <body><div class="col-sm-1"></div>
@@ -32,7 +32,7 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group label-floating">
-											<label class="control-label">Username</label> <input
+											<label class="control-label">이름</label> <input
 												type="text" name="userName" id="name" class="form-control"
 												value='<sec:authentication property="principal.userName"/>'>
 										</div>
@@ -47,9 +47,12 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group label-floating">
-											<label class="control-label">성별</label> <input type="text"
-												name="userGender" id="gender" class="form-control"
-												value='<sec:authentication property="principal.userGender"/>'>
+											<label for="gender">성별</label> <br />
+											<%
+												pageContext.setAttribute("gender", ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserGender());
+											%>
+											<label><input type="radio" name="userGender" id="gender" value="남자" ${pageScope.gender eq "남자" ? "checked='checked'" :""}>남자</label> &nbsp;&nbsp;&nbsp;
+											<label><input type="radio" name="userGender" id="gender" value="여자" ${pageScope.gender eq "여자" ? "checked='checked'" :""}>여자</label>
 										</div>
 
 									</div>
