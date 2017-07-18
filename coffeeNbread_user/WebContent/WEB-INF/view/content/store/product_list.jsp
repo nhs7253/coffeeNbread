@@ -24,7 +24,6 @@ td {
 <h2>PRODUCT LIST</h2>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-매장 아이디 확인 : ${param.storeId}
 <form action="${initParam.rootPath }/findProductListByMethod.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
    <div class="form-group">
@@ -40,6 +39,8 @@ td {
 </form>
 </div>
 
+<br><br>
+
 <form  action="${initParam.rootPath }/findProductListManagerController.do" method="post">
    <sec:csrfInput/><%-- csrf 토큰 --%>
    <button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>전체조회</button>
@@ -51,16 +52,15 @@ td {
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
 		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>&nbsp;&nbsp;종류&nbsp;&nbsp;</th>
-					<th>&nbsp;&nbsp;제품명&nbsp;&nbsp;</th>
-					<th>&nbsp;&nbsp;가격&nbsp;&nbsp;</th>
-					<th>&nbsp;&nbsp;판매여부&nbsp;&nbsp;</th>
-					<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-				</tr>
-			</thead>
 			<tbody>
+				<tr>
+					<td align="center">종류</td>
+					<td align="center">제품명</td>
+					<td align="center">가격</td>
+					<td align="center">판매여부</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				</tr>
+			
 				<%-- 전체 제품 목록 --%>
 				<c:forEach items="${requestScope.list }" var="product">
 					<tr>

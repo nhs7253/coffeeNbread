@@ -27,6 +27,9 @@ td {
 <script type="text/javascript" src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	alert($(".alarm").prev().prev().prev().val());
+	alert($(".alarm").prev().prev().val());
+	
 	$(".alarm").on("click", function(to, text){
 		var btn = this;
 		$.ajax({
@@ -36,7 +39,7 @@ $(document).ready(function(){
 			"success":function(value){
 				$(btn).parent().text(value);
 				$(btn).remove();
-				var url = "http://api.coolsms.co.kr/sendmsg?user=nhs7253&password=zhtmxk156&to=" + $(".alarm").prev().prev().prev().val() + "&from=0319216219&text=" + $(".alarm").prev().prev().val();
+				var url = "http://api.coolsms.co.kr/sendmsg?user=clzlsejzn&password=clzls1994&to=" + $(".alarm").prev().prev().prev().val() + "&from=01094080923&text=" + $(".alarm").prev().prev().val();
 				window.open(url,"alarmMessage","width=500, height=400 resizable=no").close();
 				//alarm.submit();
 				//window.close();
@@ -53,7 +56,6 @@ $(document).ready(function(){
 	<body>
 	
 <h2 id="h2">예약 현황 조회</h2> 
-
 <br>
 
 <form action="${initParam.rootPath }/selectRemoveReservationDetailsController.do" method="post">

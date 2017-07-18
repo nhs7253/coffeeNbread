@@ -19,6 +19,7 @@ INSERT INTO user_authority VALUES('u-2', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('u-3', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('u-4', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('u-5', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
 
 /* 매장 */
 SELECT *FROM STORE
@@ -386,5 +387,41 @@ INSERT INTO PAYMENT_OPTIONlIST VALUES('p','현금');
 INSERT INTO PAYMENT_OPTIONlIST VALUES('o','카카오페이');
 
 --general_user
+                                                        -- 2017-07-17 김형주 추가
+----------------------------------------------------------------실 데이터-----------------------------------------------------------
 
+/* 매장 등록시 - 매장사진, 매장좌표 */
+
+INSERT INTO STORE VALUES('s-100','광주이디아','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
+                          , '062-372-4755','광주 서구 운천로 263에 위치한 광주이디아점입니다.','GwangjuEdiya@email.com','커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');
+                          
+INSERT INTO STORE VALUES('s-101','문정스타벅스','시애틀에 본사를 두고 있고 간단한 스낵과 무료 Wi-Fi를 제공하는 유명 커피 체인점입니다.저희 문정체인점은 매월스페셜메뉴가있으니 많은관심 부탁드립니다.','02-758-8860','서울특별시 송파구 가락2동 동남로 141','Munjung@email.com',
+                          '빵,커피',809,to_date('198009050800','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');                          
+                          
+INSERT INTO STORE VALUES('s-102','부산엔젤리너스','부산에서 제일맛있는 카페체인점으로 자부합니다.매주월요일마다 할인행사하고있습니다. 사이트를 참조하시면 더욱더 자세한내용을 얻으실수 있습니다.','051-314-3100',
+                         '부산 사상구 주례로10번길 110입니다.','BusanAngel@email.com','빵,커피',400,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');                          
+                          
+INSERT INTO STORE VALUES('s-103','영등포 할리스점','저희 매장을 방문해 주셔서 진심으로 감사드립니다.영등포역 근처에 위치하고있어 아침 9시부터 11시까지는 사람들이 붐비므로 참고하시길 바랍니다.최근 조회수가 제일 많은 매장으로 뽑히기도 했는데요. 그만큼 저희만의 특색있는 메뉴가 있으므로 참고하시기바랍니다.'
+                          , '070-4159-8897','서울 영등포구 경인로 847에 위치한 영등포 할리스점입니다.','hollys@email.com','빵',10340,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');                          
+                    
+                          
+INSERT INTO STORE VALUES('s-104','판교 더리터점','저희 매장을 방문해주셔서 감사합니다.판교테크노벨리에 위치해서 아침9시부터 11시까지는 직장인들이 많이 붐빕니다.그리고 저희 매출의 1등은 청포도에이드가 베스트에요',
+                            '031-724-2520','경기 성남시 분당구 대왕판교로 660 ,삼평동 670 유스페이스1 1층 146호','theliter@email.com', '빵',500,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');
+
+
+                            
+                            
+ 
+ 
+
+
+
+/* 매장 사진 */
+
+INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/광주이디아','s-100');
+INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/모노마포', 's-101');
+INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/부산백화점', 's-102');
+INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/부산카페',  's-103');
+INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/엔젤리너스', 's-104');
+INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/카페베네', 's-105');
 

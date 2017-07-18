@@ -177,7 +177,7 @@ public class ProductController {
 				modelAndView.setViewName("index.tiles");
 				return modelAndView;
 			}
-
+			productFindForm.setStoreId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
 			Map<String, Object> map = service.findProductList(productFindForm.getPage(), productFindForm.getStoreId());
 			
 			modelAndView.setViewName("store/product_list.tiles");
@@ -377,6 +377,7 @@ public class ProductController {
 		if(errors.hasErrors()) {
 			return "redirect:/findProductListController.do";
 		}
+		
 		service.findRemoveProduct(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productSelectForDeleteForm.getProductIdList());
 		return "redirect:/findProductListController.do";
 	}
