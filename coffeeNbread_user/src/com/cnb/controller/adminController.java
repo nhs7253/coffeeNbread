@@ -7,17 +7,23 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cnb.exception.UserManageException;
 import com.cnb.service.AdminService;
+import com.cnb.service.GeneralUserService;
 import com.cnb.service.PaymentOptionListService;
 import com.cnb.validation.annotation.PaymentOptionListForm;
 import com.cnb.validation.annotation.UserManagementListViewForm;
+import com.cnb.vo.GeneralUser;
 import com.cnb.vo.PaymentOptionList;
 
 /*
@@ -46,6 +52,9 @@ public class adminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private GeneralUserService generalUserService;
 	
 	@Autowired
 	private PaymentOptionListService paymentOptionListService;
@@ -135,4 +144,27 @@ public class adminController {
 		paymentOptionListService.removePaymentOptionListByPaymentId(paymentId);
 		return "redirect:/admin/findpaymentOptionListController.do";
 	}	
+	
+	/**
+	 * 로그인된 회원의 정보를 받아 해당 회원을 탈퇴 시키는 Controller
+	 * @param password 탈퇴할 회원의 비밀번호
+	 * @return String - 응답 경로
+	 */
+	@RequestMapping("/admin/adminRemoveUserController")
+	public String adminRemoveUserController(@RequestParam(value="userId",required=false) String userId, String storeId){
+		
+		if(userId == null){
+			
+			System.out.println("user = "+ userId);
+			return "redirect:/admin/findUserListBySelectToKeywordController.do"; //탈퇴 시도 실패
+		}
+
+		try {
+			generalUserService.removeUser(userId, storeId);
+		} catch (UserManageException e) {
+			return "redirect:/admin/findUserListBySelectToKeywordController.do"; //에러 페이지 이동
+		}
+
+		return "redirect:/admin/findUserListBySelectToKeywordController.do";
+	}
 }
