@@ -157,3 +157,9 @@ td {
 					href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}&storeId=${requestScope.storeId}">마지막
 					페이지</a></div>
 	<div class="col-sm-1"></div>
+	
+		<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.list[0].storeId }"/>
+			<input type="submit" value="매장  Q&A 글쓰기">
+		</form>

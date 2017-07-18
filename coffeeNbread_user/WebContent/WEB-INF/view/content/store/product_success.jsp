@@ -45,7 +45,6 @@
 			<th>판매 여부</th>
 			<td><div class="col-xs-10">${requestScope.product.sellingOption}</div></td>
 		</tr>
-
 		<tr class="form-group">
 			<th>금일 제품 개수</th>
 			<td><div class="col-xs-10">${requestScope.product.todayProductCount}</div></td>
@@ -61,3 +60,4 @@
 	</table>
 </div>
 <div class="col-sm-2"></div>
+

@@ -157,6 +157,7 @@ public class ProductController {
 			product.setProductCategory(productRegisterForm.getOptionCategoryString());
 			
 			service.modifyProduct(product, optionDetail, fileName);
+			product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productRegisterForm.getProductId());
 		} catch (DuplicatedProductPictureException e) {
 			modelAndView.setViewName("store/product_update.tiles");
 			return modelAndView;
