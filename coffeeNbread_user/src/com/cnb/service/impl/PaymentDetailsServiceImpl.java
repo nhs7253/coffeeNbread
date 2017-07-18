@@ -108,13 +108,13 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
 	public HashMap<String, Object> findPaymentDetailsListByUserId(int page, String userId) {
 		/* 유저가 등록한 결제내역 조회 - 페이징 */
 			HashMap<String, Object> map = new HashMap<>();
-
+			
 			// item 수
 			int totalCount = paymentDetailsDao.countSelectPaymentDetailsByUserId(userId);
 			PagingBean pageBean = new PagingBean(totalCount, page);
 			map.put("pageBean", pageBean);
-			List<PaymentDetails> list = paymentDetailsDao.findSelectPaymentDetailsListByUserId(userId,
-					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<PaymentDetails> list = paymentDetailsDao.findSelectPaymentDetailsListByUserId(userId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			
 			map.put("list", list);
 			return map;
 		}

@@ -22,9 +22,7 @@
 		disabled>
 	<br> 내용
 	<br>
-	<textarea rows="20" cols="100" disabled>
-		     	${requestScope.content.recipeBoardContent }
-		 </textarea>
+	<textarea rows="20" cols="100" disabled>${requestScope.content.recipeBoardContent }</textarea>
 
 	<p />
 

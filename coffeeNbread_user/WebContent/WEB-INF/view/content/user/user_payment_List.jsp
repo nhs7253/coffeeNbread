@@ -19,11 +19,6 @@ td {
 }
 </style>
 
-
-
-
-${requestScope.list }
-
 	
 	<h2>${requestScope.userName }님의 결제 현황</h2>
 
@@ -34,7 +29,7 @@ ${requestScope.list }
 <br>
 
 	
-	<table class="table table-hover">
+	<table class="table ">
 		<thead>
 			<tr >
 				<th>결제번호</th>
@@ -60,7 +55,7 @@ ${requestScope.list }
 				 	<td>${list.store.storeName}</td>		
 					<td>${list.product.productName}</td>
 					<td>${list.sellMethod eq 'r' ? "예약" : "현장"}</td> 
-					<td>${sessionScope.storeInfo.storePaymentOptionList[0].paymentOptionList.paymentMethod }</td>
+					<td>${list.paymentOptionList.paymentMethod }</td>
 					<td>${list.reservationOrderCount}</td>
 					<td>${list.product.productPrice}</td>
 					<td>${list.tradeDate }</td>
@@ -71,7 +66,7 @@ ${requestScope.list }
 	</table>
 	
 
-
+<center>
 
 
 	<p>
@@ -145,6 +140,6 @@ ${requestScope.list }
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
-			페이지</a>
+			페이지</a></p></center>
 </div>
 <div class="col-sm-1"></div>
