@@ -198,3 +198,16 @@ FROM payment_details
 		AND product_id = 'p-1'
 		GROUP BY product_id
 		ORDER BY product_id ASC		
+
+		
+		
+		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count
+		FROM payment_details
+		WHERE store_id = 's-1'
+		AND trade_date = '2017-07-15'
+		AND product_id = 'p-1'
+		
+		SELECT COUNT(product_id)
+				FROM product
+				WHERE product_category LIKE '빵'
+				AND	  store_id = 's-1'

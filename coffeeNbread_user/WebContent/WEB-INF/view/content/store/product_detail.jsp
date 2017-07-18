@@ -10,7 +10,7 @@ td {
 <h2>product_detail_</h2>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-<form  action="${initParam.rootPath }/findProductListController.do" method="post" >
+<form  action="${initParam.rootPath }/findProductListManagerController.do" method="post" >
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 	 <button type="submit" class="btn-custom"><i class="glyphicon glyphicon-list"></i>제품 목록</button>
 	

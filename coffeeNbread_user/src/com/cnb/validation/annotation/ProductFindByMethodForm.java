@@ -16,9 +16,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class ProductFindByMethodForm {
 	
 	@NotEmpty
-	private String method = "productCategory";
+	private String method;
 	
-	private String methodContent = null;
+	private String methodContent;
 
 	@NotNull
 	private int page = 1;

@@ -19,6 +19,7 @@ INSERT INTO user_authority VALUES('u-2', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('u-3', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('u-4', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('u-5', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
 
 /* 매장 */
 SELECT *FROM STORE
@@ -140,6 +141,18 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715'
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-10','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915', 'yyyy-mm-dd'),'r',5,'u-10','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+
+
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170713', 'yyyy-mm-dd'),'r',5,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',5,'u-10','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',5,'u-10','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170713', 'yyyy-mm-dd'),'r',8,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',25,'u-10','p-2','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',5,'u-10','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170713', 'yyyy-mm-dd'),'r',15,'u-10','p-2','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',5,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',3,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 
 /* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
 /* 예약 내역에는 날짜 뿐만 아니라 시간도 들어가있어야 하지 않나..? */  /* 결제 내역에있는 r -에 해당되는 내용만 가져와야 함 */
@@ -380,10 +393,14 @@ INSERT INTO PAYMENT_OPTIONlIST VALUES('o','카카오페이');
 /* 매장 등록시 - 매장사진, 매장좌표 */
 
 INSERT INTO STORE VALUES('s-100','광주이디아','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
-                          , '062-372-4755','광주 서구 운천로 263에 위치한 광주이디아점입니다.','GwangjuEdiya@email.com','커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');
+                          , '062-372-4755','광주 서구 운천로 263에 위치한 광주이디아점입니다.','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');
                           
 INSERT INTO STORE VALUES('s-101','문정스타벅스','시애틀에 본사를 두고 있고 간단한 스낵과 무료 Wi-Fi를 제공하는 유명 커피 체인점입니다.저희 문정체인점은 매월스페셜메뉴가있으니 많은관심 부탁드립니다.','02-758-8860','서울특별시 송파구 가락2동 동남로 141','Munjung@email.com',
                           '빵,커피',809,to_date('198009050800','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');                          
+
+                          
+                          
+                          
                           
 INSERT INTO STORE VALUES('s-102','부산엔젤리너스','부산에서 제일맛있는 카페체인점으로 자부합니다.매주월요일마다 할인행사하고있습니다. 사이트를 참조하시면 더욱더 자세한내용을 얻으실수 있습니다.','051-314-3100',
                          '부산 사상구 주례로10번길 110입니다.','BusanAngel@email.com','빵,커피',400,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');                          
@@ -397,10 +414,7 @@ INSERT INTO STORE VALUES('s-104','판교 더리터점','저희 매장을 방문�
 
 
                             
-                            
- 
- 
-
+   
 
 
 /* 매장 사진 */
@@ -411,4 +425,43 @@ INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/부산백화점', 's-102
 INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/부산카페',  's-103');
 INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/엔젤리너스', 's-104');
 INSERT INTO STORE_PICTURE VALUES ('up_image/store_image/카페베네', 's-105');
+
+
+
+/* 공지사항 */
+
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'서버상의 오류로 인하여 2017년 07월 22일 부득이하게 서버점검 할 예정이오니 이용에 불편함을끼쳐드려 죄송합니다.빠른시일내에 복구하겠습니다.','2017년 07월 22일 서버점검 예정이오니 양해부탁드립니다.',TO_DATE('2017-06-24', 'yyyy-mm-dd'),9);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'문정 스타벅스체인점이 내부공사로 인하여 2017년 07월 22일부터 29일까지 이용을 할수 없다고 합니다.','스타벅스 문정점 내부공사로 인하여 07월 22일~07월 29일까지 휴무',TO_DATE('2017-06-28', 'yyyy-mm-dd'),5);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'1.협약된 매장과 서버운영자간의 더 나은 소통을 위해 문자전송서비스 추가,2.회원이 매장에 레시피 게시판에 사진 여러장 넣을수 있는 기능 추가 ','2017년 말에 서버 업데이트 예정',TO_DATE('2017-07-30', 'yyyy-mm-dd'),10);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'최근에 탈퇴한 회원정보는 관리자가 갖고있는지에 관하여 많은 회원분들이 문의를 하였었는데요.저희는 회원이 탈퇴한 순간 정보를 바로지워지므로 걱정안하셔도 됩니다.','탈퇴한 회원 정보와 관련된 공지사항',TO_DATE('2017-09-30', 'yyyy-mm-dd'),50);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 더리터점에서 아이스 아메리카노가격 관련 공지사항',TO_DATE('2017-06-28', 'yyyy-mm-dd'),5);
+
+
+
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글12', '레시피제목12', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글13', '레시피제목13', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글14', '레시피제목14', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글15', '레시피제목15', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글17', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글18', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '레시피글16', '레시피제목16', TO_DATE('2017-06-26', 'yyyy-mm-dd'),10,'레시피사진',10,'u-1','s-7');
+
+
+
+
+
 

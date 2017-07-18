@@ -87,6 +87,9 @@ public interface SalesVolumeService {
 	 */
 	void modifyProductTodayCountByGap(String storeId, String productId, String identifyCode);
 	
-	
-	
+	/**
+	 * 매장아이디, 제품아이디, 날짜로 판매 개수 조회 - 상승세/하락세 그래프를 위한 일주일치 값
+	 * @param storeId, productId, tradeDate
+	 */
+	int findSalesVolumeByStoreIdAndProductIdAndTradeDate(String storeId, String productId, Date tradeDate);
 }
