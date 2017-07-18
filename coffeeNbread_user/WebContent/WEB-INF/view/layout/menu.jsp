@@ -163,41 +163,37 @@
          <ul>
             <!--             회원/관리자 공통 메뉴 /member로 시작
  -->
-            <sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
-               <li><a href="${initParam.rootPath }/user/mypage.do">사용자
-                     정보조회</a></li>
-               <li><a href="${initParam.rootPath }/user/update_profile_form.do">내 정보 수정</a></li>
-               <li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자
-                     탈퇴</a></li>
-               <li><a
-                  href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크
-                     목록 조회</a></li>
-               <li><a
-                  href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저
-                     방문 내역 조회</a></li>
-               <li><a
-                  href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저
-                     추천 매장 조회</a></li>
-               <li><a
-                  href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A
-                     글쓰기</a></li>
-               <li><a
-                  href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장
-                     Q&A 글쓰기</a></li>
-               <li><a
-                  href="${initParam.rootPath }/user/callStoreRegisterController.do">매장
-                     등록</a></li>
-               <li><a
-                  href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
-               <li><a
-                  href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량
-                     조회</a></li>
-               <li><a
-                  href="${initParam.rootPath }/findReservationDetailsController.do">예약
-                     현황 조회</a></li>
-            </sec:authorize>
-         </ul></li>
 
+				<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
+					<li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
+					
+					<li><a href="${initParam.rootPath }/user/update_profile_form.do">내 정보 수정</a></li>
+					
+					<li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자 탈퇴</a></li>
+					
+					<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
+					
+					<li><a href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
+				
+					<li><a href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량 조회</a></li>
+					
+					<li><a href="${initParam.rootPath }/findReservationDetailsController.do">예약 현황 조회</a></li>
+					
+					<li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do"> 회원 결제내역 조회</a></li>	
+				
+					<li><a href="${initParam.rootPath }/user/findReservationDetailsController.do"> 회원 예약내역 조회</a></li>				
+				</sec:authorize>
+			</ul></li>
 
 
       <li class="cd-label">Secondary</li>

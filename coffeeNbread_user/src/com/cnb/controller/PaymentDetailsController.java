@@ -113,11 +113,11 @@ public class PaymentDetailsController {
 				modelAndView.setViewName("user/user_payment_process.tiles");
 				return modelAndView;
 			}
-				rdService.addReservationDetailsByPaymentDetails(paymentDetailsList,paymentDetailsform.getProductHopeTime() );
 
 		}
            
-	   
+		rdService.addReservationDetailsByPaymentDetails(paymentDetailsList,paymentDetailsform.getProductHopeTime() );
+
 		List<ReservationDetails>reservationList= rdService.findReservationDetailsListNoPagingByUserIdAndStoreId(generalUser.getUserId(), storeId);
 		modelAndView.addObject("userName", generalUserService.findUser(generalUser.getUserId()).getUserName());
 		modelAndView.addObject("reservationList", reservationList);
