@@ -76,11 +76,8 @@
 	</resultMap>
 
 
-	<resultMap type="product" id="product-store-productPicture-resultmap"
-		extends="product-productPicture-resultmap">
-
-		<association property="store"
-			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
+	<resultMap type="product" id="product-store-productPicture-resultmap" extends="product-productPicture-resultmap">
+		<association property="store" resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
 	</resultMap>
 
 
