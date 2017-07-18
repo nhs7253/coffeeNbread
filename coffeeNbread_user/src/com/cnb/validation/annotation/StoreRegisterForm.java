@@ -28,19 +28,19 @@ public class StoreRegisterForm implements Serializable{
 	private String saveName; //UUID로 생성한 이름 - 파일명 중복을 피하기 위해
 	
 	@NotEmpty
-	private String storeId;
+	private String storeId; 
 	@NotEmpty
-	private String storeName;
-	private MultipartFile storePicture;
-	private String storeIntro;
+	private String storeName; 
+	private MultipartFile storePicture; 
+	private String storeIntro;  
 	@NotEmpty
-	private String storePhone;
-	private String storeAddress;
+	private String storePhone; 
+	private String storeAddress; 
 	@NotEmpty
-	private String storeEmail;
-	private int storeHits;
+	private String storeEmail; 
+	private int storeHits; 
 	@NotNull
-	@DateTimeFormat(pattern="hh:mm")
+	@DateTimeFormat(pattern="hh:mm") 
 	private Date storeOpen;
 	@NotNull
 	@DateTimeFormat(pattern="hh:mm")
