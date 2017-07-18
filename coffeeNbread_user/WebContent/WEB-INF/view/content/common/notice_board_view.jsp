@@ -22,26 +22,30 @@
 		 </textarea>
 
 	<p />
+	
+	<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+	     <form
+			action="${initParam.rootPath }/admin/modifySettingNoticeBoardContentsController.do"
+			method="post">
+			<sec:csrfInput />
+			<input type="hidden" name="noticeBoardNo"
+				value="${requestScope.noticeBoardContents.noticeBoardNo }" />
+			<button type="submit" class="btn-custom">
+				<i class="glyphicon glyphicon-pencil"></i>수정
+			</button>
+	
+		</form>
+	
+		<form
+			action="${initParam.rootPath }/admin/removeNoticeBoardContentsController.do"
+			method="post">
+			<sec:csrfInput />
+			<input type="hidden" name="noticeBoardNo"
+				value="${requestScope.noticeBoardContents.noticeBoardNo }" />
+			<button type="submit" class="btn-custom">
+				<i class="glyphicon glyphicon-trash"></i>삭제
+			</button>
+		</form>
+    </sec:authorize>
 
-	<form
-		action="${initParam.rootPath }/admin/modifySettingNoticeBoardContentsController.do"
-		method="post">
-		<sec:csrfInput />
-		<input type="hidden" name="noticeBoardNo"
-			value="${requestScope.noticeBoardContents.noticeBoardNo }" />
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-pencil"></i>수정
-		</button>
-
-	</form>
-
-	<form
-		action="${initParam.rootPath }/admin/removeNoticeBoardContentsController.do"
-		method="post">
-		<sec:csrfInput />
-		<input type="hidden" name="noticeBoardNo"
-			value="${requestScope.noticeBoardContents.noticeBoardNo }" />
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-trash"></i>삭제
-		</button>
-	</form>
+	
