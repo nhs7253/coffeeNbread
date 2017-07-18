@@ -4,9 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
-}
+
 
 table {
 	/* width: 500px; */
@@ -16,8 +14,11 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
+form {
+	display: inline
+}
 </style>
-<link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -52,12 +53,13 @@ td {
 		*/
 	});
 </script>
-<h2>제품목록조회(예약)</h2>
+<h2>제품목록조회(예약)_</h2>
 
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
 <div class="container">
 	<div id="quick-access">
+	<div style="float:right">
 		<form
 			action="${initParam.rootPath }/user/userFindProductListController.do"
 			method="post" class="form-inline quick-search-form" role="form">
@@ -73,24 +75,25 @@ td {
 				</select> <input type="hidden" name="storeId" value="${param.storeId}" /> <input
 					type="text" name="keyword" class="form-control" />
 			</div>
-			 <button type="submit" class="btn btn-custom">
+			 <button type="submit" class="btn">
 				<i class="glyphicon glyphicon-search"></i>검색
 			</button>
 		</form>
-	</div>
-</div>
-
-<form
+		<form
 	action="${initParam.rootPath }/user/ViewShoppingBasketProductController.do"
 	method="post">
 	<sec:csrfInput />
 	<%-- csrf 토큰 --%>
 	<input type="hidden" value="${sessionScope.storeId }"
 		name="storeId" /> 
-	<button type="submit" class="btn-custom">
+	<button type="submit" class="btn">
 		<i class="glyphicon glyphicon-search"></i>장바구니 목록 조회
 	</button>
-   </form>
+   </form></div>
+	</div>
+</div></div>
+
+
 
 
 <p>
@@ -127,9 +130,8 @@ td {
 					<td align="center">
 						<input  type="hidden" name="productId" value="${product.productId }"/>
 						<input  type="hidden" name="storeId" value="${product.storeId }"/>
-						<button type="submit" class="btn-custom">
+						<button type="submit" class="btn">
 							<i class="glyphicon glyphicon-shopping-cart"></i>장바구니
-							
 						</button>
 
 					</td>
@@ -146,7 +148,7 @@ td {
   
 
 </div>
-<div class="col-sm-1"></div>
+<div class="col-sm-2"></div>
 
 
 

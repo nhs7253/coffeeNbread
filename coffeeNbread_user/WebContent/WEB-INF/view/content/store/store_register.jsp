@@ -43,7 +43,7 @@ body {
 }
 </style>
 <body>
-	<h2>STORE_REGISTER</h2>
+<!-- 	<h2>STORE_REGISTER</h2> -->
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10">
 		<div class="content">
@@ -52,6 +52,10 @@ body {
 					<div class="col-sm-1"></div>
 					<div class="col-md-10">
 						<div class="card">
+									<div class="card-header" data-background-color="black">
+							<h4 class="title" style="text-align: center;">STORE_REGISTER</h4>
+
+						</div>
 							<div class="card-content">
 								<form action="${initParam.rootPath }/addStoreController.do"
 									method="post" enctype="multipart/form-data">
@@ -64,7 +68,7 @@ body {
 												<label class="control-label">매장 분류</label> <input
 													type="text" name="optionCategoryList" id="optionCategory"
 													class="form-control" style="width: 200px">
-												<div class="form-group label-floating" id="selectSC"></div>
+												<a class="form-group label-floating" id="selectSC" ></a>
 
 											</div></div>
 											<div class="col-md-3">
@@ -167,11 +171,11 @@ body {
 											<textarea name="storeIntro" rows="5" cols="90"></textarea>
 											</div></div></div>
 		
-											
+											<div style="float: right">
 												<button type="submit" class="btn btn-custom">
 													<i class="glyphicon glyphicon-ok"></i> 등록
 												</button>
-										
+										</div>
 								</form>
 							</div>
 						</div>

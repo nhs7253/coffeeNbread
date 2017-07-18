@@ -23,11 +23,12 @@ td {
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
 
-	
+	<div style="float:right">
 			<form action="${initParam.rootPath }/findProductListByMethod.do"
 				method="post" class="form-inline quick-search-form" role="form">
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
+				
 				<div class="form-group">
 					<select name="method" class="form-control">
 						<option value="productCategory">제품 종류</option>
@@ -36,9 +37,10 @@ td {
 					</select> <input type="hidden" name="storeId" value="${param.storeId}" /> <input
 						type="text" name="methodContent" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
+				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
+				
 			</form>
 	
 
@@ -46,12 +48,12 @@ td {
 		method="post">
 		<sec:csrfInput />
 		<%-- csrf 토큰 --%>
-		<button type="submit" class="btn-custom">
+		<button type="submit" class="btn">
 			<i class="glyphicon glyphicon-list"></i>전체조회
 		</button>
 
 	</form>
-
+</div>
 	<p>
 	<form action="${initParam.rootPath }/selectRemoveProductController.do"
 		method="post">
@@ -83,14 +85,14 @@ td {
 			</tbody>
 		</table>
 		<div style="float: right">
-			<button type="submit" class="btn-custom">
+			<button type="submit" class="btn">
 				<i class="glyphicon glyphicon-trash"></i>삭제
 			</button>
 		</div>
 	</form>
 
 	<p>
-
+<center>
 		<c:if test="${requestScope.method ne null}">
 			<%--######################################################
             종류/이름/판매여부로 조회할 때 페이징 처리
@@ -211,6 +213,6 @@ td {
 			<!-- 마지막 페이지로 이동 -->
 			<a
 				href="${initParam.rootPath }/findProductListController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
-		</c:if>
+		</c:if></center>
 </div>
 <div class="col-sm-1"></div>
