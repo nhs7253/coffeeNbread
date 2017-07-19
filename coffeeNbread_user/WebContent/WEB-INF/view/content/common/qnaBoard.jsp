@@ -20,11 +20,12 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-	<h2>${sessionScope.storeName }Q&A BOARD</h2>
-
+	
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
+		<h2>${sessionScope.storeName }Q&A BOARD</h2>
+		
 	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"

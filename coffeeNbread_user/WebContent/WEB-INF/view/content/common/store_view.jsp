@@ -18,12 +18,13 @@ td{
 
 </head>
 <body>
-	<h1>STORE_DETAIL</h1>
-	<hr>
-	<br>
+	
 	<div class="col-sm-1"></div>
 	
 	<div class="col-sm-4">
+	<h1>STORE_DETAIL</h1>
+	<hr>
+	<br>
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
 			<img
@@ -35,7 +36,7 @@ td{
 
 	</div>
 	<div class="col-sm-6">
-	<br><br>
+	<br><br><br><br><br><br>
 		<table class="table" width="100%">
 			<tr class="form-group">
 				<th>매장명</th>
@@ -103,7 +104,7 @@ td{
 			<form action="${initParam.rootPath }/findProductListController.do" method="post">
 				<sec:csrfInput />
 				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>제품 관리</button>
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>제품 관리</button><br>
 			</form>
 			
 		</c:if>
@@ -124,10 +125,6 @@ td{
 				</button>
 			</form>
 		</sec:authorize>
-
-<br>
-
-
 
 
 

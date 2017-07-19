@@ -21,7 +21,7 @@ td {
 </head>
 <body>
 
-	<h2>STORE_MANAGE_LIST</h2>
+	<h2>STORE_MANAGE_LISTfds</h2>
 <br>
 	
 			<form action="${initParam.rootPath }/userManagementListController.do"

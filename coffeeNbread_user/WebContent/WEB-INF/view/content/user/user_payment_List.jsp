@@ -20,15 +20,15 @@ td {
 </style>
 
 	
-	<h2>${requestScope.userName }님의 결제 현황</h2>
+	
 
   
-
+<br><br>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-<br>
 
-	
+	<center><h2>${requestScope.userName }님의 결제 현황</h2></center>
+	<br><br><br>
 	<table class="table ">
 		<thead>
 			<tr >

@@ -6,28 +6,37 @@
 
 <script type="text/javascript"> --%>
 
-<h1>게시글 작성_</h1>
-<hr>
-<br>
+
+
 
 
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
+		
+<br><div class="col-sm-2"></div>
+	
+		<div class="col-sm-8">
+		<h1>게시글 작성_</h1>
+		<hr>
 <form action="${initParam.rootPath }/user/addRecipeBoardContents.do"
 	method="post" enctype="multipart/form-data">
+	
 	<sec:csrfInput />
 
-	제목 : <input type="text" name="recipeBoardTitle" required> <br>
-	대표 사진:<input type="file" name="recipeBoardPicture"> 내용<br>
-	<textarea rows="20" cols="100" name="recipeBoardContent" required></textarea>
+	제목  <input type="text" name="recipeBoardTitle" required size="90"> <br>
+	사진<input type="file" name="recipeBoardPicture"> 
+	<textarea rows="20" cols="92" name="recipeBoardContent" required></textarea>
 	<input type="hidden" name="storeId" value="${param.storeId }" />
-	<p>
-		<button type="submit" class="btn btn-custom">
+	<br>
+		<button type="submit" class="btn btn-custom" style="float:right">
 			<i class="glyphicon glyphicon-ok"></i>등록
 		</button>
-	</p>
-
+	
+	
+	
 </form>
+</div>
+<div class="col-sm-2"></div>
 </div>
 <div class="col-sm-1"></div>

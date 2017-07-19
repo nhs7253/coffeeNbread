@@ -19,12 +19,12 @@ display:inline;
 
 
 
+	
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8">
 	<h1>공지사항 내용</h1>
 	<hr>
 	<br>
-	<div class="col-sm-2"></div>
-	<div class="col-sm-8">
-	
 <table class="table">
 <tr>
 <th>제목</th>

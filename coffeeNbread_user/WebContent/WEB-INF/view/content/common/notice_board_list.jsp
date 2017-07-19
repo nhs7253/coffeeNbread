@@ -17,17 +17,18 @@ td {
    padding: 5px; /* //td 간 간격 */
 }
 </style>
-	<h2>공지사항 게시판</h2>
+	
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
-		
+		<h2>공지사항 게시판</h2>
 
-<div class="container">
-		<div id="quick-access">
 		
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
-					
+					<div class="col-sm-1"></div>
+	
+		<div class="col-sm-10">
+					<div style="float:right">
 						<div class="form-group">
 							<select name="select" class="form-control">
 								<option value="title"
@@ -43,12 +44,11 @@ td {
 						</button>
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
-					
+					</div>
+					</div>
 				</form>
 		
 	
-	</div>
-		</div>
 	
 	<br>
 
@@ -57,10 +57,10 @@ td {
 	<table class="table">
 		<thead>
 			<tr >
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성일시</th>
-				<th>조회수</th>
+				<th style="text-align: center">글번호</th>
+				<th style="text-align: center">제목</th>
+				<th >작성일시</th>
+				<th style="text-align: center">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -71,10 +71,10 @@ td {
 			<c:forEach items="${requestScope.list }" var="list">
 
 				<tr>
-					<td>${list.noticeBoardNo}</td>
+					<td align=center>${list.noticeBoardNo}</td>
 					<td><a href="${initParam.rootPath }/common/viewNoticeBoardContentsController.do?noticeBoardNo=${list.noticeBoardNo}">${list.noticeBoardTitle}</a></td>
 					<td>${list.noticeBoardDateFormat}</td>
-					<td>${list.noticeBoardHits}</td>
+					<td align=center>${list.noticeBoardHits}</td>
 				</tr>
 			</c:forEach>
 
