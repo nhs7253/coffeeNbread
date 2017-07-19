@@ -48,74 +48,50 @@
    <nav class="cd-side-nav">
    <br><br>
       <ul>
-      
-         <li class="cd-label">Main</li>
-        
-     
-      
-      <li class="has-children comments" ><a href="#0" style="font-size:20px">STORE</a>
-         <ul>
-            <!--             회원/관리자 공통 메뉴 /member로 시작
- -->
-               <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
-
-            <sec:authorize access="hasAnyRole( 'CNB_USER')">
-               
-              
-                  <li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
-            </sec:authorize>
-            <sec:authorize access="hasAnyRole('CNB_STORE')">
-<%--                <li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
-            
-               <li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li> --%>
+        <li class="cd-label">Main</li>
+      <li class="has-children comments" ><a href="#0" style="font-size:20px"><span class="glyphicon glyphicon-for-sale"></span>&nbsp;&nbsp;STORE</a>
+        <ul>
+           <!-- 유저 권한 -->
+           <sec:authorize access="hasAnyRole( 'CNB_USER')">
+                 <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
+            <li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
+         </sec:authorize>
          
-               <li><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=<sec:authentication property='principal.storeId'/>">내 매장 보기</a></li>
-                              
-               
-                <li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
-                     
-                     <li><a href="${initParam.rootPath }/findProductListController.do?storeId=<sec:authentication property='principal.storeId'/>">제품  목록</a></li>
-               
-               <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=s-1">매장 Q&A 게시판</a></li>
-               
-               <li><a href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
-            
-               <li><a href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량 조회</a></li>
-               
-               <li><a href="${initParam.rootPath }/findReservationDetailsController.do">예약 현황 조회</a></li>
-               
-                  
-            </sec:authorize>
-         </ul></li>
-
+         <!-- 매장 관리자 권한 -->
+         <sec:authorize access="hasAnyRole('CNB_STORE')">
+            <%--<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
+               <li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li> --%>
+            <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
+            <li><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=<sec:authentication property='principal.storeId'/>">내 매장 보기</a></li>                  
+            <li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
+                  <li><a href="${initParam.rootPath }/findProductListController.do?storeId=<sec:authentication property='principal.storeId'/>">제품  목록</a></li>
+            <li><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do?storeId=s-1">매장 Q&A 게시판</a></li>
+            <li><a href="${initParam.rootPath }/store/findProductListToPOSController.do">POS</a></li>
+            <li><a href="${initParam.rootPath }/findSalesVolumeTodayController.do">판매량 조회</a></li>
+            <li><a href="${initParam.rootPath }/findReservationDetailsController.do">예약 현황 조회</a></li>
+         </sec:authorize>
+      </ul>
+      </li>
 
       <li class="cd-label">Secondary</li>
-      <br>
-      <li class="has-children bookmarks"><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do" style="font-size:20px">RECIPE</a>
-
-        </li>
+         <br>
+         <li class="has-children bookmarks"><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do" style="font-size:20px"><span class="glyphicon glyphicon-cutlery"></span>&nbsp;&nbsp;RECIPE</a></li>
         <br>
-      <li class="has-children images"><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" style="font-size:20px">공지사항</a>
-
-        
-<br>
-      <li class="has-children users"><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" style="font-size:20px">QnA</a>
-
-       </li>
-     
+         <li class="has-children images"><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" style="font-size:20px"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;&nbsp;공지사항</a>
       <br>
-      <sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+         <li class="has-children users"><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" style="font-size:20px">QnA</a></li>
+      <br>
+      
       <li class="has-children users"><a href="#0" style="font-size:20px">ADMIN</a>
-
-         <ul>
-    
-            
-               <li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
+      <ul>
+         <!-- 전체 관리자 권한 -->
+         <sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+             <li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
                <li><a href="${initParam.rootPath }/admin/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
                <li><a href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
-            
-            
-         </ul></li></sec:authorize>
+          </sec:authorize>
+       </ul>
+       </li>
   
      </ul>
    </nav>

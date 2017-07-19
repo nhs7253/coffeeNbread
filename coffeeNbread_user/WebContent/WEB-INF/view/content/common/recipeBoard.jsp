@@ -159,6 +159,7 @@ table {
 				<th>글번호</th>
 				<th>사진</th>
 				<th>제목</th>
+				<th>내용</th>
 				<th>작성일</th>
 				<th>조회수</th>
 				<th>추천순</th>
@@ -185,7 +186,7 @@ table {
 					</c:forEach>
 					<td><a
 						href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}">${list.recipeBoardTitle}</a></td>
-
+					<td>${list.recipeBoardContent}</td>
 					<td>${list.recipeBoardDate}</td>
 					<td>${list.recipeBoardHits}</td>
 					<td>${list.recommendCount}</td>

@@ -32,7 +32,9 @@ function button_event(){
 		</script>
 
 <style type="text/css">
-
+table, td {
+	border: 1px solid black;
+}
 
 table {
 	width: 500px;
@@ -74,7 +76,7 @@ hr.animated-gradient {
 	<table class="table table-hover">
 		<thead>
    
-			<tr>
+			<tr class="w3-blue">
 				<td>제품카테고리</td>
 				<td>제품사진</td>
 				<td>제품명</td>
@@ -130,21 +132,21 @@ hr.animated-gradient {
   <br>
   <br>
   
-	<div style="float:right">
+	
     <button type="submit" class="productBtn">총금액</button>
-		   <input type="text" value="${requestScope.totalPrice }" disabled>
-    </div>
+		   <input type="text" value="${requestScope.totalPrice }">
+    
     <hr>
     <br>
        
            
-           <div style="float:right">
+           
        <a href="${initParam.rootPath }/user/paymentProcessController.do">
         
 		<button type="submit" class="btn-custom">
 			<i class="glyphicon glyphicon-ok"></i>결제페이지로 이동
 		</button>
-	   </a></div>   
+	   </a>   
  
     
     

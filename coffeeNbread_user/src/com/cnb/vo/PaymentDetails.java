@@ -32,7 +32,7 @@ public class PaymentDetails implements Serializable{
 	private Product product;  //제품과 조인하기위해 
     private Store store;  //매장과 조인하기위해.
     
-    private PaymentOptionList paymentOptionList;
+    
     
     
     
@@ -87,25 +87,6 @@ public class PaymentDetails implements Serializable{
 		this.productId = productId;
 		this.storeId = storeId;
 		this.productTradeCount = productTradeCount;
-	}
-	
-	
-	
-	public PaymentDetails(int paymentNo, String paymentOption, Date tradeDate, String sellMethod,
-			int reservationOrderCount, String userId, String productId, String storeId, int productTradeCount,
-			Product product, Store store, PaymentOptionList paymentOptionList) {
-		this.paymentNo = paymentNo;
-		this.paymentOption = paymentOption;
-		this.tradeDate = tradeDate;
-		this.sellMethod = sellMethod;
-		this.reservationOrderCount = reservationOrderCount;
-		this.userId = userId;
-		this.productId = productId;
-		this.storeId = storeId;
-		this.productTradeCount = productTradeCount;
-		this.product = product;
-		this.store = store;
-		this.paymentOptionList = paymentOptionList;
 	}
 	public int getPaymentNo() {
 		return paymentNo;
@@ -173,22 +154,12 @@ public class PaymentDetails implements Serializable{
 	public void setStore(Store store) {
 		this.store = store;
 	}
-	
-	
-	
-	public PaymentOptionList getPaymentOptionList() {
-		return paymentOptionList;
-	}
-	public void setPaymentOptionList(PaymentOptionList paymentOptionList) {
-		this.paymentOptionList = paymentOptionList;
-	}
 	@Override
 	public String toString() {
 		return "PaymentDetails [paymentNo=" + paymentNo + ", paymentOption=" + paymentOption + ", tradeDate="
 				+ tradeDate + ", sellMethod=" + sellMethod + ", reservationOrderCount=" + reservationOrderCount
 				+ ", userId=" + userId + ", productId=" + productId + ", storeId=" + storeId + ", productTradeCount="
-				+ productTradeCount + ", product=" + product + ", store=" + store + ", paymentOptionList="
-				+ paymentOptionList + "]";
+				+ productTradeCount + ", product=" + product + ", store=" + store + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -196,7 +167,6 @@ public class PaymentDetails implements Serializable{
 		int result = 1;
 		result = prime * result + paymentNo;
 		result = prime * result + ((paymentOption == null) ? 0 : paymentOption.hashCode());
-		result = prime * result + ((paymentOptionList == null) ? 0 : paymentOptionList.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + productTradeCount;
@@ -223,11 +193,6 @@ public class PaymentDetails implements Serializable{
 			if (other.paymentOption != null)
 				return false;
 		} else if (!paymentOption.equals(other.paymentOption))
-			return false;
-		if (paymentOptionList == null) {
-			if (other.paymentOptionList != null)
-				return false;
-		} else if (!paymentOptionList.equals(other.paymentOptionList))
 			return false;
 		if (product == null) {
 			if (other.product != null)
@@ -270,7 +235,6 @@ public class PaymentDetails implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 	
