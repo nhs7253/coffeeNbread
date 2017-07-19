@@ -22,7 +22,9 @@ form {
 	<div class="col-sm-8">
 		제목 : <input type="text" value="${requestScope.content.qnaBoardTitle }"
 			disabled><br> 내용<br>
-		<textarea rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
+		<textarea rows="15" cols="100" disabled>
+		 	${requestScope.content.qnaBoardContent }
+		 </textarea>
 
 		<p />
 		<div style="float: right">

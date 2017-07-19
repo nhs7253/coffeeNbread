@@ -56,17 +56,6 @@
 							<li><a
 								href="${initParam.rootPath }/user/update_profile_form.do">내
 									정보 수정</a></li>
-							  
-               	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
-				
-					<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
-				
-					<li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
-              
-              		<li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do"> 회원 결제내역 조회</a></li>	
-				
-					<li><a href="${initParam.rootPath }/user/findReservationDetailsController.do"> 회원 예약내역 조회</a></li>	
-              
 
 						</sec:authorize>
 					</ul></li>
