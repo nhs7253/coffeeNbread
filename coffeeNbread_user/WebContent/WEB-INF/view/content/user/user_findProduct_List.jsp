@@ -122,7 +122,7 @@ form {
 				</tr>
 				<tr>
 					<td align="center">
-					<input type="number" name="productCount" class="productCount" value="0" />
+					<input type="number" name="productCount" class="productCount" min="0"  value="0" />
 					</td>
 				</tr>
 
