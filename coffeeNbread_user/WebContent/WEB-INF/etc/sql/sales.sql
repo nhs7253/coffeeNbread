@@ -235,3 +235,24 @@ FROM payment_details
 				WHERE	store_id = 's1'
 				AND 	to_char(reservation_time, 'yyyy-MM-dd HH:mi')  = '2017-07-18 11:09'
 				AND 	user_id = 'u-2'
+				
+				
+				
+				SELECT to_char('2017-07-18 20:42:11', 'yyyy-MM-dd HH24:mi')
+				FROM	reservation_details
+				
+				
+				SELECT  reservation_no,
+						reservation_time,
+						reservation_count,
+						reservation_confirm,
+						product_hope_time,
+						product_id,
+						store_id,
+						user_id
+				FROM	reservation_details
+				WHERE	store_id = 's1'
+				AND 	to_char(reservation_time, 'yyyy-MM-dd HH24:mi') = '2017-07-18 20:42'
+				AND 	user_id = 'u-1'
+				
+				("s1", "2017-07-18 20:42", "u-1"));

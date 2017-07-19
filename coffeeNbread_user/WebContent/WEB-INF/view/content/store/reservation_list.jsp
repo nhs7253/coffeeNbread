@@ -34,13 +34,12 @@ $(document).ready(function(){
 			"type":"GET",
 			"data":{"userId":$(".alarm").prev().prev().prev().prev().val(), "reservationTime":$(".alarm").prev().val()},
 			"success":function(value){
-				alert($(".alarm").prev().prev().prev().val() + "로 확인 문자를 보내겠습니다.");
 				$(btn).parent().text(value);
 				$(btn).remove();
-				var url = "http://api.coolsms.co.kr/sendmsg?user=clzlsejzn&password=clzls1994&to=" + $(".alarm").prev().prev().prev().val() + "&from=01094080923&text=" + $(".alarm").prev().prev().val();
+				var url = "http://api.coolsms.co.kr/sendmsg?user=nhs7253&password=zhtmxk156&to=" + $(".alarm").prev().prev().prev().val() + "&from=01037962472&text=" + $(".alarm").prev().prev().val();
 				window.open(url,"alarmMessage","width=500, height=400 resizable=no");
 			}
-		});
+		}); 
 	});
 });
 

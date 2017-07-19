@@ -138,6 +138,8 @@ public class ReservationDetailsDaoImplTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+//		System.out.println(dao.selectReservationDetailByStoreIdAndReservationTimeAndUserId("s1", "2017-07-18 20:42", "u-1"));
 	}
 		
 	public static void main(String[] args) throws IOException {

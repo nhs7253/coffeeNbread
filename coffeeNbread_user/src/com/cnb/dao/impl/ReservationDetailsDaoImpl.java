@@ -131,8 +131,10 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 		info.put("storeId", storeId);
 		info.put("reservationTime", reservationTime);
 		info.put("userId", userId);
+				
 		return session.selectList(makeSqlId("selectReservationDetailByStoreIdAndReservationTimeAndUserId"), info);
 	}
+	
 	
 	@Override
 	public int deleteReservationDetails(String storeId, ReservationDetails reservation) {

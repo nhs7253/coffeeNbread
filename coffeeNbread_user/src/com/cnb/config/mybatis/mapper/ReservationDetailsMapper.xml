@@ -533,7 +533,7 @@
 						user_id
 				FROM	reservation_details
 				WHERE	store_id = #{storeId} 
-				AND 	to_char(reservation_time, 'yyyy-MM-dd HH:mi')  = #{reservationTime}
+				AND 	to_char(reservation_time, 'yyyy-MM-dd HH24:mi')  = #{reservationTime}
 				AND 	user_id = #{userId}
 		]]>
 		</select>

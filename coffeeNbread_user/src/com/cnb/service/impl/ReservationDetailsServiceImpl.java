@@ -171,7 +171,7 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 	}
 
 	@Override
-	public List<ReservationDetails> findReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId) {
+	public List<ReservationDetails> findReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId) {		
 		return dao.selectReservationDetailByStoreIdAndReservationTimeAndUserId(storeId, reservationTime, userId);
 	}
 
