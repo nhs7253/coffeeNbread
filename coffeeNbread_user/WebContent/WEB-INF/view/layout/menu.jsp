@@ -60,12 +60,12 @@
  -->
 				   <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
 
-				<sec:authorize access="hasAnyRole( 'CNB_USER')">
+				<sec:authorize access="hasAnyRole( 'ROLE_CNB_USER')">
 					
 				  
 				   	<li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
 				</sec:authorize>
-				<sec:authorize access="hasAnyRole('CNB_STORE')">
+				<sec:authorize access="hasAnyRole('ROLE_CNB_STORE')">
 <%-- 					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
 				
 					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li> --%>
@@ -88,7 +88,6 @@
 						
 				</sec:authorize>
 			</ul></li>
-
 
 
 
