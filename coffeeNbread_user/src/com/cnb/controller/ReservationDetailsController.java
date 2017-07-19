@@ -68,11 +68,18 @@ public class ReservationDetailsController {
 		
 		Map<String, Object> map = service.findReservationDetailsListByStoreId(findReservationDetailsForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
 	
+		
+		
 		List reservationList = (List)map.get("list");
+		
+		
+		
+		
 			
 		List<String> userNameList = new ArrayList<>();
 		List<String> phoneNumList = new ArrayList<>();
 		List<String> userIdList = new ArrayList<>();
+		
 		
 		for(int i=0; i<reservationList.size(); i++) {
 //			((ReservationDetails)reservationList.get(i)).setReservationConfirm(findReservationDetailsForm.getReservationConfirm());

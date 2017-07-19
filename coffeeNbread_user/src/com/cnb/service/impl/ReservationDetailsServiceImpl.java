@@ -144,10 +144,7 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 		map.put("pageBean", pageBean);
 
 		List<ReservationDetails> list = dao.selectReservationDetailsListByStoreId(storeId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
-				
-		System.out.println(totalCount);
-		System.out.println("service : " + list);
-		System.out.println("confirm : " + list.get(0).getReservationConfirm());
+
 		map.put("list", list);
 		return map;
 	}
