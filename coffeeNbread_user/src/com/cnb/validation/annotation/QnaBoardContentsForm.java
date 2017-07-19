@@ -1,7 +1,5 @@
 package com.cnb.validation.annotation;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
@@ -14,11 +12,11 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 2017-07-06
  * 생성, 초기 구현
  */
-public class QnaBoardContentsForm implements Serializable {
+public class QnaBoardContentsForm{
 	
 	@NotNull
 	private int qnaBoardNo;		//PRIMARY KEY
-	private String qnaStoreId;
+	private String qnaStoreId = null;
 
 	private String qnaBoardWriter;
 	@NotEmpty
@@ -43,6 +41,9 @@ public class QnaBoardContentsForm implements Serializable {
 	}
 	public void setQnaStoreId(String qnaStoreId) {
 		this.qnaStoreId = qnaStoreId;
+		if(qnaStoreId == null || qnaStoreId.trim().isEmpty()){
+			this.qnaStoreId = null;
+		}
 	}
 	public String getQnaBoardWriter() {
 		return qnaBoardWriter;

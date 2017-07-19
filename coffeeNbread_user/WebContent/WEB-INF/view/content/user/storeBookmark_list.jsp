@@ -31,7 +31,7 @@ td {
 				<div class="form-group col-xs-8" >
 					<input type="text" name="keyword" class="form-control" /></div>
 				<button type="submit" class="btn form-group col-xs-4" >
-					<i class="glyphicon glyphicon-search"></i>검색
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>
 				</div>
 				<sec:csrfInput />
@@ -83,7 +83,7 @@ td {
 
 			</tbody>
 		</table>
-				<button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+				<button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-trash"></i>&nbsp;삭제</button>
 	</form>
 
 

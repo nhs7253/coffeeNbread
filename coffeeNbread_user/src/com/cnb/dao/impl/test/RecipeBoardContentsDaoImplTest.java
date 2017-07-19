@@ -30,15 +30,19 @@ public class RecipeBoardContentsDaoImplTest {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
 		
 	 // 레시피 글 등록과 수정 성공( 유저아이디와 매장아이디를 통해)			
-  		try {
-			dao.insertRecipeBoardContents(new RecipeBoardContents(10, "레시피글추천수높음", "레시피제목추천수높음", dt.parse("2017-06-30"), 12,"레시피사진",15,"u-1"));
-  		
-  			// 유저 입장에서 수정시 조회수는 그대로 유지
-  			//dao.updateRecipeBoardContents(new RecipeBoardContents(4,"레시피글7-수정", "레시피제목7-수정", dt.parse("2017-07-02"),"레시피사진","u-1","s-7"));
-  			
-		} catch (ParseException e) {
-			System.out.println("이상발견");
-		}
+//  		try {
+//			dao.insertRecipeBoardContents(new RecipeBoardContents(10, "레시피글추천수높음", "레시피제목추천수높음", dt.parse("2017-06-30"), 12,"레시피사진",15,"u-1"));
+//  		
+//  			// 유저 입장에서 수정시 조회수는 그대로 유지
+//  			//dao.updateRecipeBoardContents(new RecipeBoardContents(4,"레시피글7-수정", "레시피제목7-수정", dt.parse("2017-07-02"),"레시피사진","u-1","s-7"));
+//  			
+//		} catch (ParseException e) {
+//			System.out.println("이상발견");
+//		}
+		
+		
+		
+		System.out.println(dao.selectRecipeBoardContentsListByMethod("title", "", 1, 10));
 		
 		/*  레시피 글 삭제 */
 		/*dao.deleteRecipeBoardContentsByRecipeBoardNo("10");*/

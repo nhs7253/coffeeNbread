@@ -15,7 +15,6 @@ form {
 
 
 
-
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
 
@@ -48,33 +47,33 @@ form {
 		</center>
 		
 
-<%-- 
-	<form
-		action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
-		<sec:csrfInput />
-		<input type="hidden" name="recipeBoardNo"
-			value="${requestScope.content.recipeBoardNo }" /> <input
-			type="hidden" name="recipeBoardPicture"
-			value="${requestScope.content.recipeBoardPicture }" /> <input
-			type="hidden" name="userId" value="${requestScope.content.userId }" />
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-pencil"></i>수정
-		</button>
-	</form>
-
-	<form
-		action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
-		<sec:csrfInput />
-		<input type="hidden" name="recipeBoardNo"
-			value="${requestScope.content.recipeBoardNo }" /> <input
-			type="hidden" name="storeId" value="${requestScope.content.storeId }" />
-		<input type="hidden" name="userId"
-			value="${requestScope.content.userId }" />
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-trash"></i>삭제
-		</button>
-	</form>
- --%>
+ 		<c:if test="${requestScope.modifyAuthority }">
+			<form action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
+				<sec:csrfInput />
+				<input type="hidden" name="recipeBoardNo"
+					value="${requestScope.content.recipeBoardNo }" /> <input
+					type="hidden" name="recipeBoardPicture"
+					value="${requestScope.content.recipeBoardPicture }" /> <input
+					type="hidden" name="userId" value="${requestScope.content.userId }" />
+				<button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-pencil"></i>수정
+				</button>
+			</form>
+		</c:if>
+	
+ 		<c:if test="${requestScope.removeAuthority }">
+			<form action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
+				<sec:csrfInput />
+				<input type="hidden" name="recipeBoardNo"
+					value="${requestScope.content.recipeBoardNo }" /> <input
+					type="hidden" name="storeId" value="${requestScope.content.storeId }" />
+				<input type="hidden" name="userId"
+					value="${requestScope.content.userId }" />
+				<button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-trash"></i>삭제
+				</button>
+			</form>
+		</c:if>
 
 
 		<table class="table table-hover">
@@ -87,34 +86,35 @@ form {
 						<td>${list.replyName}</td>
 						<td>${list.replyRegDateFormat}</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="recipeBoardNo"
-									value="${requestScope.content.recipeBoardNo }" /> <input
-									type="hidden" name="storeId"
-									value=" ${requestScope.content.storeId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-pencil"></i>수정
-								</button>
-							</form>
+						
+								<form action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value="${list.replyNo }" />
+									<input type="hidden" name="userId" value="${list.replyName }" />
+									<input type="hidden" name="recipeBoardNo"
+										value="${requestScope.content.recipeBoardNo }" /> <input
+										type="hidden" name="storeId"
+										value="${requestScope.content.storeId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-pencil"></i>수정
+									</button>
+								</form>
 						</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="recipeBoardNo"
-									value="${requestScope.content.recipeBoardNo }" /> <input
-									type="hidden" name="storeId"
-									value="${requestScope.content.storeId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-trash"></i>삭제
-								</button>
-							</form>
+								<form action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value="${list.replyNo }" />
+									<input type="hidden" name="userId" value="${list.replyName }" />
+									<input type="hidden" name="recipeBoardNo"
+										value="${requestScope.content.recipeBoardNo }" /> <input
+										type="hidden" name="storeId"
+										value="${requestScope.content.storeId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-trash"></i>삭제
+									</button>
+								</form>
 						</td>
 					</tr>
 				</c:forEach>
@@ -124,22 +124,20 @@ form {
 		
 <div>&nbsp;&nbsp;댓글</div>
 
-		
-			<form
-				action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
-				<sec:csrfInput />
-				
-				<textarea rows="2" cols="80" name="replyContent" required></textarea>
-				<input type="hidden" name="recipeBoardNo"
-					value=" ${requestScope.content.recipeBoardNo }" /> 
-					<div style="float: right">
-					<input
-					type="hidden" name="storeId"
-					value=" ${requestScope.content.storeId }" /> <input type="submit"
-					value="댓글 쓰기">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
+				<form
+					action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
+					<sec:csrfInput />
 					
-					
-			</form>
+					<textarea rows="2" cols="80" name="replyContent" required></textarea>
+					<input type="hidden" name="recipeBoardNo"
+						value="${requestScope.content.recipeBoardNo }" /> 
+						<div style="float: right">
+						<input type="hidden" name="storeId" value="${requestScope.content.storeId }" />
+						<input type="hidden" name="userId" value="${requestScope.userId }" /> 
+						<input type="submit" value="댓글 쓰기">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				</form>
+			</sec:authorize>
 
 		
 		<div>
@@ -162,11 +160,11 @@ form {
 						<form
 							action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
 							<sec:csrfInput />
-							<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+							<input type="hidden" name="replyNo" value="${list.replyNo }" />
 							<input type="hidden" name="recipeBoardNo"
 								value="${requestScope.content.recipeBoardNo }" /> <input
 								type="hidden" name="storeId"
-								value=" ${requestScope.content.storeId }" /> <input
+								value="${requestScope.content.storeId }" /> <input
 								type="hidden" name="replyName" value="${list.replyName }" />
 							<button type="submit" class="btn-custom">
 								<i class="glyphicon glyphicon-pencil"></i>수정
@@ -177,7 +175,7 @@ form {
 						<form
 							action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
 							<sec:csrfInput />
-							<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+							<input type="hidden" name="replyNo" value="${list.replyNo }" />
 							<input type="hidden" name="recipeBoardNo"
 								value="${requestScope.content.recipeBoardNo }" /> <input
 								type="hidden" name="storeId"
@@ -201,7 +199,7 @@ form {
 				###################################################### --%>
 				<!-- 첫페이지로 이동 -->
 				<a
-					href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=1&recipeBoardNo=${requestScope.content.recipeBoardNo}">첫페이지</a>
+					href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=1&recipeBoardNo=${requestScope.content.recipeBoardNo}&userId=${requestScope.userId}">첫페이지</a>
 
 
 				<!--
@@ -212,7 +210,7 @@ form {
 					<c:when test="${requestScope.pageBean.previousPageGroup}">
 						<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 						<a
-							href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.beginPage-1}&recipeBoardNo=${requestScope.content.recipeBoardNo}">◀</a>
+							href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.beginPage-1}&recipeBoardNo=${requestScope.content.recipeBoardNo}&userId=${requestScope.userId}">◀</a>
 					</c:when>
 					<c:otherwise>
 				◀
@@ -235,7 +233,7 @@ form {
 						<c:when test="${page != requestScope.pageBean.page}">
 							<!-- 현재페이지가 아니라면 -->
 							<a
-								href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${page}&recipeBoardNo=${requestScope.content.recipeBoardNo}">${page }&nbsp;&nbsp;</a>
+								href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${page}&recipeBoardNo=${requestScope.content.recipeBoardNo}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
 						</c:when>
 						<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -253,7 +251,7 @@ form {
 				<c:choose>
 					<c:when test="${requestScope.pageBean.nextPageGroup}">
 						<a
-							href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.endPage+1}&recipeBoardNo=${requestScope.content.recipeBoardNo}">▶</a>
+							href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.endPage+1}&recipeBoardNo=${requestScope.content.recipeBoardNo}&userId=${requestScope.userId}">▶</a>
 					</c:when>
 					<c:otherwise>
 			▶
@@ -265,7 +263,7 @@ form {
 
 				<!-- 마지막 페이지로 이동 -->
 				<a
-					href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.recipeBoardNo}">마지막
+					href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&recipeBoardNo=${requestScope.content.recipeBoardNo}&userId=${requestScope.userId}">마지막
 					페이지</a>
 			
 		</center></div>

@@ -54,7 +54,7 @@ public class RecipeBoardContentsController {
 			@ModelAttribute("allUserView") @Valid RecipeBoardContentsViewForm recipeBoardContentsViewForm,
 			BindingResult errors) {
 		ModelAndView modelAndView = new ModelAndView();
-
+		
 		if (errors.hasErrors()) {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; // 에러 발생 시 이동할 경로
@@ -62,13 +62,14 @@ public class RecipeBoardContentsController {
 		Map<String, Object> map = recipeBoardService.findRecipeBoardContentsByMethod(
 				recipeBoardContentsViewForm.getPage(), recipeBoardContentsViewForm.getSelect(),
 				recipeBoardContentsViewForm.getKeyword());
-		System.out.println("map:" + map);
 		modelAndView.setViewName("common/recipeBoard.tiles"); // 성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("methodContent", recipeBoardContentsViewForm.getKeyword());
 		modelAndView.addObject("method", recipeBoardContentsViewForm.getSelect());
 		modelAndView.addObject("storeId", recipeBoardContentsViewForm.getStoreId());
+		modelAndView.addObject("userId", recipeBoardContentsViewForm.getUserId());
+		
 		return modelAndView;
 	}
 
@@ -106,7 +107,6 @@ public class RecipeBoardContentsController {
 		
     	map.addAttribute("recipeBoardTitle", recipeBoardContentsForm.getRecipeBoardTitle());
 		map.addAttribute("recipeBoardContent", recipeBoardContentsForm.getRecipeBoardContent());
-		System.out.println("recipeBoardContents:" + recipeBoardContents);
 		recipeBoardService.addRecipeBoardContents(recipeBoardContents);
 
 		return "index.tiles";
@@ -115,9 +115,22 @@ public class RecipeBoardContentsController {
 	//---------------------------------------------게시글 내용과 댓글목록.---------------------------------------------------
 	@RequestMapping("/common/viewRecipeBoardContentsByReplyListController")
 	public ModelAndView ViewRecipeBoardContentsByReplyListController(
-			@RequestParam(value = "recipeBoardNo", required = false) Integer recipeBoardNo, Integer page,
-		String storeId	) {
+			@RequestParam(value = "recipeBoardNo", required = false) Integer recipeBoardNo, Integer page, String storeId, String userId) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		
+		
+		boolean removeAuthority = false;
+		boolean modifyAuthority = false;
+		
+		//관리자, 매장 주인, 작성자라면 삭제 가능 // 본인만 수정 가능
+		if(!(authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]"))){
+			removeAuthority =  authentication.getAuthorities().toString().equals("[ROLE_CNB_ADMIN]") ||
+							   ((GeneralUser)authentication.getPrincipal()).getUserId().equals(userId);
+					
+			modifyAuthority = ((GeneralUser)authentication.getPrincipal()).getUserId().equals(userId);
+		}
+		
 
 		ModelAndView modelAndView = new ModelAndView();
 		if (recipeBoardNo == null) {
@@ -138,13 +151,17 @@ public class RecipeBoardContentsController {
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("content", map.get("content"));
-        System.out.println("modelAndView:"+modelAndView);
+		modelAndView.addObject("userId", userId);
+		modelAndView.addObject("removeAuthority", removeAuthority);
+		modelAndView.addObject("modifyAuthority", modifyAuthority);
+		
+		
+		
 		return modelAndView;
 	}
 
 	@RequestMapping("/user/removeRecipeBoardContentsController")
 	public String removeRecipeBoardContentsController(Integer recipeBoardNo, String userId, @RequestParam(value="storeId",required=false) String storeId){
-		System.out.println("aaaaaaaaaaaaaaaaaa");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	
 		
 		try {
@@ -168,18 +185,17 @@ public class RecipeBoardContentsController {
 	 */
 	public String modifyRecipeBoardContentsController(@ModelAttribute("recipeBoardContents") @Valid RecipeBoardContentsForm recipeBoardContentsForm, BindingResult errors, Integer recipeBoardNo) throws NotInputRecipeBoardPictureException{
 		if(errors.hasErrors()){
-			System.out.println("-------------오류 발생 ------------------");
-			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo; //에러 발생
+			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo + "&userId=" + recipeBoardContentsForm.getUserId(); //에러 발생
 		}
+				
 		RecipeBoardContents recipeBoardContents = new RecipeBoardContents();
 		BeanUtils.copyProperties(recipeBoardContentsForm, recipeBoardContents);
-		System.out.println("recipeBoardContents:"+recipeBoardContents);
 		try {
 			recipeBoardService.modifyRecipeBoardContents(recipeBoardNo,recipeBoardContents);
 		} catch (ContentsNotFoundException e) {
-			return "/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo;
+			return "/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo + "&userId=" + recipeBoardContentsForm.getUserId();
 		}
-		return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo;
+		return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo + "&userId=" + recipeBoardContentsForm.getUserId();
 	}
 	
 
@@ -200,6 +216,7 @@ public class RecipeBoardContentsController {
    	//수정자와 작성자가 서로 다를때 수정 못하게 하는것.
 		try {
 			request.setAttribute("content", recipeBoardService.findRecipeBoardContents(recipeBoardNo));
+			request.setAttribute("userId", userId);
 		} catch (ContentsNotFoundException e) {
 			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo;
 		}

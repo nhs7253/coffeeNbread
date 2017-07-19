@@ -31,6 +31,8 @@
 	 </textarea>
 	<input type="hidden" name="recipeBoardNo"
 		value="${requestScope.content.recipeBoardNo }" />
+	<input type="hidden" name="userId"
+	value="${requestScope.userId }" />
 
 	<p>
 		<button type="submit" class="btn-custom">

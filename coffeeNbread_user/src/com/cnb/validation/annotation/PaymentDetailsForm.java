@@ -1,15 +1,14 @@
 package com.cnb.validation.annotation;
 
-import java.text.SimpleDateFormat;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class PaymentDetailsForm{
+public class PaymentDetailsForm implements Serializable{
 	
-	
-	
+
 	private int paymentNo;
 	
 	
@@ -36,7 +35,7 @@ public class PaymentDetailsForm{
 
 
 
-@DateTimeFormat(pattern="yyyy-MM-dd hh:mm")
+@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date productHopeTime;
 
 

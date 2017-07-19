@@ -98,6 +98,14 @@ public class RecipeBoardContentsForm implements Serializable{
 		this.recommendCount = recommendCount;
 	}
 
+	@Override
+	public String toString() {
+		return "RecipeBoardContentsForm [recipeBoardNo=" + recipeBoardNo + ", recipeBoardContent=" + recipeBoardContent
+				+ ", recipeBoardTitle=" + recipeBoardTitle + ", recipeBoardDate=" + recipeBoardDate
+				+ ", recipeBoardHits=" + recipeBoardHits + ", recipeBoardPicture=" + recipeBoardPicture
+				+ ", recommendCount=" + recommendCount + ", userId=" + userId + "]";
+	}
+
 	
 	
 	

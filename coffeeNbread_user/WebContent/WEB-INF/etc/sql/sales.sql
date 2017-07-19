@@ -225,3 +225,88 @@ FROM payment_details
 				FROM product
 				WHERE product_category LIKE '빵'
 				AND	  store_id = 's-1'
+				
+				
+
+				SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
+						product_id
+				FROM	payment_details 
+				WHERE store_id = 's1'
+				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -1) FROM DUAL)
+				GROUP BY product_id
+				ORDER BY product_id ASC		
+				
+				
+				SELECT  reservation_no,
+						reservation_time,
+						reservation_count,
+						reservation_confirm,
+						product_hope_time,
+						product_id,
+						store_id,
+						user_id
+				FROM	reservation_details
+				WHERE	store_id = 's1'
+				AND 	to_char(reservation_time, 'yyyy-MM-dd HH:mi')  = '2017-07-18 11:09'
+				AND 	user_id = 'u-2'
+				
+				
+				
+				SELECT to_char('2017-07-18 20:42:11', 'yyyy-MM-dd HH24:mi')
+				FROM	reservation_details
+				
+				
+				SELECT  reservation_no,
+						reservation_time,
+						reservation_count,
+						reservation_confirm,
+						product_hope_time,
+						product_id,
+						store_id,
+						user_id
+				FROM	reservation_details
+				WHERE	store_id = 's1'
+				AND 	to_char(reservation_time, 'yyyy-MM-dd HH24:mi') = '2017-07-18 20:42'
+				AND 	user_id = 'u-1'
+				
+				("s1", "2017-07-18 20:42", "u-1"));
+
+				
+				
+				
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		user_id,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		user_id,
+		store_id,
+		store_name
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		rbc.user_id,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents rbc, store s
+		WHERE rbc.store_id=s.store_id(+)))

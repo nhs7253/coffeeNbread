@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	
 
 
 
@@ -43,43 +44,36 @@ td {
 
 
 	<table class="table table-hover">
-		<thead>
-			<tr >
-				<th>예약번호</th>
-				<th>예약매장</th>
-				<th>예약시간</th>
-				<th>예약한 제품</th>
-				<th>예약개수</th>
-				<th>제품수령희망시간</th>
-				<th>예약확인유무</th>
+		<tbody>
+			<tr>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약번호</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약매장</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약시간</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약한 제품</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약개수</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품수령희망시간</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약확인유무</td>
 				
 			</tr>
-		</thead>
-		<tbody>
-
 			<%-- ######################################################
-															조회된 item 출력 
+								조회된 item 출력 
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
-
 				<tr>
-					<td align=center>${list.reservationNo}</td>
-				 	<td>${list.store.storeName }</td>		
-					<td>${list.reservationTime}</td>
-					<td>${list.product.productName}</td> 
-					<td>${list.reservationCount}</td>
-					<td>${list.productHopeTime}</td>
-					<td>${list.reservationConfirm}</td>
+					<td align="center">${list.reservationNo}</td>
+				 	<td align="center">${list.store.storeName }</td>		
+					<td align="center"><fmt:formatDate value="${list.reservationTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+					<td align="center">${list.product.productName}</td> 
+					<td align="center">${list.reservationCount}</td>
+					<td align="center"><fmt:formatDate value="${list.productHopeTime}" pattern="yyyy-MM-dd HH:mm"/></td>
+					<td align="center">${list.reservationConfirm}</td>
 				</tr>
 			</c:forEach>
 
 		</tbody>
 	</table>
-
+</div>
 	
-
-
-
 <center>
 
 		<%--######################################################

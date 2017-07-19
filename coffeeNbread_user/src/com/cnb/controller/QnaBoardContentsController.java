@@ -50,8 +50,6 @@ public class QnaBoardContentsController {
 	 * @return String 응답 경로
 	 */
 	public String addQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors){
-
-		
 	
 		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		if(errors.hasErrors()){
@@ -100,21 +98,21 @@ public class QnaBoardContentsController {
 	 * @param qnaBoardNo 글 번호
 	 * @return String 응답 경로
 	 */
-	public String modifyQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo){
+	public String modifyQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo, String qnaBoardWriter){
 		if(errors.hasErrors()){
-			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo; //에러 발생
+			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo + "&qnaBoardWriter=" + qnaBoardWriter; //에러 발생
 		}
-		
+				
 		QnaBoardContents qnaBoardContents = new QnaBoardContents();
 		BeanUtils.copyProperties(qnaBoardContentsForm, qnaBoardContents);
 		
 		try {
 			qnaBoardContentsService.modifyQnaBoardContents(qnaBoardNo, qnaBoardContents);
 		} catch (ContentsNotFoundException e) {
-			return "/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
+			return "/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo + "&qnaBoardWriter=" + qnaBoardWriter;
 		}
 		
-		return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+qnaBoardNo;
+		return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+qnaBoardNo + "&qnaBoardWriter=" + qnaBoardWriter;
 	}
 	
 	@RequestMapping("/user/settingQnaBoardContentsController")
@@ -147,7 +145,7 @@ public class QnaBoardContentsController {
 	 * @param errors 요청 파라미터 에러 검증 결과  
 	 * @return - 응답 경로, 페이징 결과 목록
 	 */
-	public ModelAndView findQnaBoardContentsBySelectToKeywordController(@ModelAttribute("generalUserView") @Valid QnaBoardContentsViewForm qnaBoardContentsViewForm, BindingResult errors){
+	public ModelAndView findQnaBoardContentsBySelectToKeywordController(@ModelAttribute("qnaBoardContentsView") @Valid QnaBoardContentsViewForm qnaBoardContentsViewForm, BindingResult errors){
 
 		ModelAndView modelAndView = new ModelAndView();
 				
@@ -155,13 +153,14 @@ public class QnaBoardContentsController {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
-			
+					
 		//storeId 속성으로 받을 시, 수정 필요
 		Map<String, Object> map = qnaBoardContentsService.findQnaBoardContentsBySelectToKeyword(qnaBoardContentsViewForm.getSelect(), qnaBoardContentsViewForm.getKeyword(), qnaBoardContentsViewForm.getStoreId(), qnaBoardContentsViewForm.getPage());
 		
 		
 		modelAndView.setViewName("common/qnaBoard.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("storeId", qnaBoardContentsViewForm.getStoreId());
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("keyword", qnaBoardContentsViewForm.getKeyword());
 		modelAndView.addObject("select", qnaBoardContentsViewForm.getSelect());
@@ -178,9 +177,23 @@ public class QnaBoardContentsController {
 	 * @return ModelAndView -  응답 경로, 페이징 결과 목록
 	 */
 	@RequestMapping("/common/viewQnaBoardContentsByReplyListController")
-	public ModelAndView ViewQnaBoardContentsByReplyListController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, Integer page, String qnaStoreId){
+	public ModelAndView ViewQnaBoardContentsByReplyListController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, Integer page, String qnaStoreId, String qnaBoardWriter){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+						
+		boolean removeAuthority = false;
+		boolean modifyAuthority = false;
 		
+		//관리자, 매장 주인, 작성자라면 삭제 가능 // 본인만 수정 가능
+		if(!(authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]"))){
+			removeAuthority =  authentication.getAuthorities().toString().equals("[ROLE_CNB_ADMIN]") ||
+							   ((GeneralUser)authentication.getPrincipal()).getUserId().equals(qnaBoardWriter) ||
+							  (((GeneralUser)authentication.getPrincipal()).getStoreId() != null &&((GeneralUser)authentication.getPrincipal()).getStoreId().equals(qnaStoreId));
+
+			
+			modifyAuthority = ((GeneralUser)authentication.getPrincipal()).getUserId().equals(qnaBoardWriter);
+		}
+		
+
 		ModelAndView modelAndView = new ModelAndView();
 
 		if(qnaBoardNo == null){
@@ -199,7 +212,7 @@ public class QnaBoardContentsController {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; //에러 발생 시 이동할 경로
 		} catch (QnaBoardContentsAuthenticationException e) {
-			modelAndView.setViewName("redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId);
+			modelAndView.setViewName("redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId+"&qnaBoardWriter="+qnaBoardWriter);
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 
@@ -207,6 +220,9 @@ public class QnaBoardContentsController {
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("content", map.get("content"));
+		
+		modelAndView.addObject("removeAuthority", removeAuthority);
+		modelAndView.addObject("modifyAuthority", modifyAuthority);
 		
 		
 		return modelAndView;

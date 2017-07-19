@@ -139,4 +139,5 @@ public interface ReservationDetailsDao {
 	 * @return 삭제된 제품 개수
 	 */
 	ReservationDetails selectReservationDetailsByReservationNo(String storeId, int reservationNo);
+
 }

@@ -94,6 +94,7 @@
 		<result column="recipe_board_date" property="recipeBoardDate" />
 		<result column="recipe_board_picture" property="recipeBoardPicture" />
 		<result column="recipe_board_hits" property="recipeBoardHits" />
+		<result column="user_id" property="userId" />
 		<association property="store"
 			resultMap="com.cnb.config.mybatis.mapper.StoreMapper.store-resultmap" />
 	</resultMap>
@@ -394,6 +395,7 @@
 		recipe_board_hits,
 		recipe_board_picture,
 		recommend_count,
+		user_id,
 		store_id,
 		store_name
 		FROM(
@@ -405,6 +407,7 @@
 		recipe_board_hits,
 		recipe_board_picture,
 		recommend_count,
+		user_id,
 		store_id,
 		store_name
 
@@ -416,6 +419,7 @@
 		rbc.recipe_board_hits,
 		rbc.recipe_board_picture,
 		rbc.recommend_count,
+		rbc.user_id,
 		s.store_id,
 		s.store_name
 		FROM recipe_board_contents

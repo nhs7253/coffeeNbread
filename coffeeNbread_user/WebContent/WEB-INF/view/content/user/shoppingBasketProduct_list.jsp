@@ -32,9 +32,6 @@ function button_event(){
 		</script>
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
-}
 
 table {
 	width: 500px;
@@ -76,7 +73,7 @@ hr.animated-gradient {
 	<table class="table table-hover">
 		<thead>
    
-			<tr class="w3-blue">
+			<tr >
 				<td>제품카테고리</td>
 				<td>제품사진</td>
 				<td>제품명</td>
@@ -104,7 +101,7 @@ hr.animated-gradient {
 					<td>
 						  <span style="display: none;">${list.product.productId }</span>
 						  <button type="button" class="updateBtn">
-						  	<i class="glyphicon glyphicon-trash"></i>수정
+						  	<i class="glyphicon glyphicon-pencil"></i>
 						  </button>
 					</td>
 					
@@ -116,7 +113,7 @@ hr.animated-gradient {
 							<%-- csrf 토큰 --%>
 						<input  type="hidden" name="productId" value="${list.product.productId }"/>
 						<button type="submit" class="submitBtn" onclick="button_event()">
-						<i class="glyphicon glyphicon-trash"></i>삭제
+						<i class="glyphicon glyphicon-trash"></i>
 						
 						</button>
 						</form>
@@ -132,22 +129,19 @@ hr.animated-gradient {
   <br>
   <br>
   
-	
-    <button type="submit" class="productBtn">총금액</button>
-		   <input type="text" value="${requestScope.totalPrice }">
+	<div style="float:right">
+   총금액 <input type="text" value="${requestScope.totalPrice }" disabled>
     
     <hr>
     <br>
        
-           
-           
+           <div style="float:right">
        <a href="${initParam.rootPath }/user/paymentProcessController.do">
-        
 		<button type="submit" class="btn-custom">
 			<i class="glyphicon glyphicon-ok"></i>결제페이지로 이동
 		</button>
 	   </a>   
- 
+ </div>
     
     
     

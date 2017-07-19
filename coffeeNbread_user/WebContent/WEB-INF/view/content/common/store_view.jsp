@@ -137,10 +137,19 @@ td{
 			<input type="hidden" name="storeId"
 				value="${requestScope.store.storeId }" />
 				<button type="submit" class="btn">
-						<i class="glyphicon glyphicon-list"></i>제품 목록
-					</button>
-				
+					<i class="glyphicon glyphicon-list"></i>제품 목록
+				</button>
 		</form>
+		
+		<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" method="post">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.store.storeId }" />
+			<button type="submit" class="btn">
+					<i class="glyphicon glyphicon-list"></i>매장  Q&A 
+			</button>
+		</form>
+		
+		
 	</div>
 </div>
 	

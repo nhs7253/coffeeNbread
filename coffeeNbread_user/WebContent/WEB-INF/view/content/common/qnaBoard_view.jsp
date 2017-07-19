@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <style>
 form {
 	display: inline;
@@ -22,38 +21,38 @@ form {
 	<div class="col-sm-8">
 		제목 : <input type="text" value="${requestScope.content.qnaBoardTitle }"
 			disabled><br> 내용<br>
-		<textarea rows="15" cols="100" disabled>
-		 	${requestScope.content.qnaBoardContent }
-		 </textarea>
+		<textarea rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
 
 		<p />
 		<div style="float: right">
-			<form
-				action="${initParam.rootPath }/user/settingQnaBoardContentsController.do">
-				<sec:csrfInput />
-				<input type="hidden" name="qnaBoardNo"
-					value="${requestScope.content.qnaBoardNo }" /> <input
-					type="hidden" name="qnaBoardWriter"
-					value="${requestScope.content.qnaBoardWriter }" />
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-pencil"></i>수정
-				</button>
-			</form>
-
-			<form
-				action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
-				<sec:csrfInput />
-				<input type="hidden" name="qnaBoardNo"
-					value="${requestScope.content.qnaBoardNo }" /> <input
-					type="hidden" name="qnaStoreId"
-					value="${requestScope.content.qnaStoreId }" /> <input
-					type="hidden" name="qnaBoardWriter"
-					value="${requestScope.content.qnaBoardWriter }" />
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-trash"></i>삭제
-				</button>
-			</form>
-
+			<c:if test="${requestScope.modifyAuthority }">
+				<form
+					action="${initParam.rootPath }/user/settingQnaBoardContentsController.do">
+					<sec:csrfInput />
+					<input type="hidden" name="qnaBoardNo"
+						value="${requestScope.content.qnaBoardNo }" /> <input
+						type="hidden" name="qnaBoardWriter"
+						value="${requestScope.content.qnaBoardWriter }" />
+					<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-pencil"></i>수정
+					</button>
+				</form>
+			</c:if>
+			
+			<c:if test="${requestScope.removeAuthority }">
+				<form action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
+					<sec:csrfInput />
+					<input type="hidden" name="qnaBoardNo"
+						value="${requestScope.content.qnaBoardNo }" /> <input
+						type="hidden" name="qnaStoreId"
+						value="${requestScope.content.qnaStoreId }" /> <input
+						type="hidden" name="qnaBoardWriter"
+						value="${requestScope.content.qnaBoardWriter }" />
+					<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-trash"></i>삭제
+					</button>
+				</form>
+			</c:if>
 
 		</div>
 
@@ -72,36 +71,39 @@ form {
 						<td>${list.replyName}&nbsp;&nbsp;&nbsp;</td>
 						<td>${list.replyRegDateFormat}&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/modifyBoardReplySettigController.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="qnaBoardNo"
-									value="${requestScope.content.qnaBoardNo }" /> <input
-									type="hidden" name="qnaStoreId"
-									value=" ${requestScope.content.qnaStoreId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-pencil"></i>수정
-								</button>
-
-							</form>&nbsp;&nbsp;&nbsp;
+								<form action="${initParam.rootPath }/user/modifyBoardReplySettigController.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+									<input type="hidden" name="qnaBoardNo"
+										value="${requestScope.content.qnaBoardNo }" /> <input
+										type="hidden" name="qnaStoreId"
+										value=" ${requestScope.content.qnaStoreId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+										<input
+											type="hidden" name="qnaBoardWriter"
+										value="${requestScope.content.qnaBoardWriter }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-pencil"></i>수정
+									</button>
+								</form>&nbsp;&nbsp;&nbsp;
 						</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/removeBoardReplyToQnaBoardNoController.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="qnaBoardNo"
-									value="${requestScope.content.qnaBoardNo }" /> <input
-									type="hidden" name="qnaStoreId"
-									value="${requestScope.content.qnaStoreId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-trash"></i>삭제
-								</button>
-
-							</form>
+								<form action="${initParam.rootPath }/user/removeBoardReplyToQnaBoardNoController.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+									<input type="hidden" name="qnaBoardNo"
+										value="${requestScope.content.qnaBoardNo }" /> <input
+										type="hidden" name="qnaStoreId"
+										value="${requestScope.content.qnaStoreId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+										<input
+											type="hidden" name="qnaBoardWriter"
+											value="${requestScope.content.qnaBoardWriter }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-trash"></i>삭제
+									</button>
+								</form>
+							
 						</td>
 					</tr>
 				</c:forEach>
@@ -122,7 +124,7 @@ form {
 				###################################################### --%>
 				<!-- 첫페이지로 이동 -->
 				<a
-					href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=1&qnaBoardNo=${requestScope.content.qnaBoardNo}">첫페이지</a>
+					href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=1&qnaBoardNo=${requestScope.content.qnaBoardNo}&qnaBoardWriter=${requestScope.content.qnaBoardWriter }">첫페이지</a>
 
 
 				<!--
@@ -133,7 +135,7 @@ form {
 					<c:when test="${requestScope.pageBean.previousPageGroup}">
 						<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
 						<a
-							href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.beginPage-1}&qnaBoardNo=${requestScope.content.qnaBoardNo}">◀</a>
+							href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.beginPage-1}&qnaBoardNo=${requestScope.content.qnaBoardNo}&qnaBoardWriter=${requestScope.content.qnaBoardWriter }">◀</a>
 					</c:when>
 					<c:otherwise>
 				◀
@@ -156,7 +158,7 @@ form {
 						<c:when test="${page != requestScope.pageBean.page}">
 							<!-- 현재페이지가 아니라면 -->
 							<a
-								href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${page}&qnaBoardNo=${requestScope.content.qnaBoardNo}">${page }&nbsp;&nbsp;</a>
+								href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${page}&qnaBoardNo=${requestScope.content.qnaBoardNo}&qnaBoardWriter=${requestScope.content.qnaBoardWriter }">${page }&nbsp;&nbsp;</a>
 						</c:when>
 						<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -174,7 +176,7 @@ form {
 				<c:choose>
 					<c:when test="${requestScope.pageBean.nextPageGroup}">
 						<a
-							href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.endPage+1}&qnaBoardNo=${requestScope.content.qnaBoardNo}">▶</a>
+							href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.endPage+1}&qnaBoardNo=${requestScope.content.qnaBoardNo}&qnaBoardWriter=${requestScope.content.qnaBoardWriter }">▶</a>
 					</c:when>
 					<c:otherwise>
 			▶
@@ -186,23 +188,28 @@ form {
 
 				<!-- 마지막 페이지로 이동 -->
 				<a
-					href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.qnaBoardNo}">마지막
+					href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.qnaBoardNo}&qnaBoardWriter=${requestScope.content.qnaBoardWriter }">마지막
 					페이지</a>
 			<p />
 		</center>
-		<form
-			action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
-			<sec:csrfInput />
-			<textarea rows="5" cols="80" name="replyContent" required></textarea>
-			<input type="hidden" name="qnaBoardNo"
-				value=" ${requestScope.content.qnaBoardNo }" /> <input
-				type="hidden" name="qnaStoreId"
-				value=" ${requestScope.content.qnaStoreId }" />
-			<a><button type="submit" class="btn-custom">
-				<i class="glyphicon glyphicon-pencil"></i>댓글 쓰기
-			</button></a>
-
-
-		</form>
+		<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
+			<form
+				action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
+				<sec:csrfInput />
+				<textarea rows="5" cols="80" name="replyContent" required></textarea>
+				<input type="hidden" name="qnaBoardNo"
+					value="${requestScope.content.qnaBoardNo }" /> 
+				<input
+					type="hidden" name="qnaStoreId"
+					value="${requestScope.content.qnaStoreId }" />
+				<input
+					type="hidden" name="qnaBoardWriter"
+					value="${requestScope.content.qnaBoardWriter }" />
+				<a><button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-pencil"></i>댓글 쓰기
+				</button></a>
+			</form>
+		</sec:authorize>
+		
 	</div>
 	<div class="col-sm-2"></div>

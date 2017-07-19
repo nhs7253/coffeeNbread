@@ -28,6 +28,9 @@ public class StorePaymentOptionListDaoImplTest {
 		System.out.println("---------매장별 결제 수단 조회----------");
 		System.out.println(dao.selectStorePaymentOptionListByStoreId("s-10000000"));
 		
+		System.out.println(dao.insertStorePaymentOptionList(new StorePaymentOptionList("qqq", "A")));
+		
+		
 		/*System.out.println("----------예약만 가능했던 s-4 매장 현금 기능 추가 ----------");
 		System.out.println(dao.insertStorePaymentOptionList(new StorePaymentOptionList("s-4","p",new PaymentOptionList("p","현금"))));*/
 		

@@ -19,6 +19,8 @@ public class RecipeBoardContentsViewForm{
 	private String storeId = null;
 	private String userId=null;
 	
+	@NotNull
+	private int page = 1;
 	
 	
 	public String getUserId() {
@@ -47,8 +49,6 @@ public class RecipeBoardContentsViewForm{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	@NotNull
-	private int page = 1;
 
 	public String getSelect() {
 		return select;
