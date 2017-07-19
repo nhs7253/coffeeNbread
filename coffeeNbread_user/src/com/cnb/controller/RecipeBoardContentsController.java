@@ -54,7 +54,7 @@ public class RecipeBoardContentsController {
 			@ModelAttribute("allUserView") @Valid RecipeBoardContentsViewForm recipeBoardContentsViewForm,
 			BindingResult errors) {
 		ModelAndView modelAndView = new ModelAndView();
-
+		
 		if (errors.hasErrors()) {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; // 에러 발생 시 이동할 경로
@@ -68,6 +68,8 @@ public class RecipeBoardContentsController {
 		modelAndView.addObject("methodContent", recipeBoardContentsViewForm.getKeyword());
 		modelAndView.addObject("method", recipeBoardContentsViewForm.getSelect());
 		modelAndView.addObject("storeId", recipeBoardContentsViewForm.getStoreId());
+		modelAndView.addObject("userId", recipeBoardContentsViewForm.getUserId());
+		
 		return modelAndView;
 	}
 
@@ -116,6 +118,8 @@ public class RecipeBoardContentsController {
 			@RequestParam(value = "recipeBoardNo", required = false) Integer recipeBoardNo, Integer page, String storeId, String userId) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+		
+		
 		boolean removeAuthority = false;
 		boolean modifyAuthority = false;
 		
@@ -127,7 +131,7 @@ public class RecipeBoardContentsController {
 			modifyAuthority = ((GeneralUser)authentication.getPrincipal()).getUserId().equals(userId);
 		}
 		
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		if (recipeBoardNo == null) {
 			modelAndView.setViewName("index.tiles");
@@ -147,9 +151,11 @@ public class RecipeBoardContentsController {
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("content", map.get("content"));
-		
+		modelAndView.addObject("userId", userId);
 		modelAndView.addObject("removeAuthority", removeAuthority);
 		modelAndView.addObject("modifyAuthority", modifyAuthority);
+		
+		
 		
 		return modelAndView;
 	}
@@ -181,8 +187,7 @@ public class RecipeBoardContentsController {
 		if(errors.hasErrors()){
 			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo + "&userId=" + recipeBoardContentsForm.getUserId(); //에러 발생
 		}
-		
-		
+				
 		RecipeBoardContents recipeBoardContents = new RecipeBoardContents();
 		BeanUtils.copyProperties(recipeBoardContentsForm, recipeBoardContents);
 		try {

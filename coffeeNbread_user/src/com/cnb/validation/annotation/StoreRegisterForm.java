@@ -40,10 +40,10 @@ public class StoreRegisterForm implements Serializable{
 	private String storeEmail; 
 	private int storeHits; 
 	@NotNull
-	@DateTimeFormat(pattern="hh:mm") 
+	@DateTimeFormat(pattern="HH:mm") 
 	private Date storeOpen;
 	@NotNull
-	@DateTimeFormat(pattern="hh:mm")
+	@DateTimeFormat(pattern="HH:mm")
 	private Date storeClose;
 	private String storePermission="N";
 	private List<MultipartFile> storePictureList = new ArrayList<>();

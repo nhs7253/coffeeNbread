@@ -81,6 +81,8 @@ public class StoreController {
 			BindingResult errors, HttpServletRequest request, ModelMap map) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		
+		System.out.println("매장 등록 : " + storeRegisterForm);
+		
 		if (errors.hasErrors()) {
 			modelAndView.setViewName("index.tiles"); 
 			return modelAndView;
