@@ -36,11 +36,6 @@
 		<association property="product"
 			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-store-productPicture-resultmap" />
 	</resultMap>
-	
-	<resultMap type="PaymentDetails" id="paymentOptionList-paymentDetails-product-store-resultmap" extends="paymentDetails-resultmap">
-		<association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-store-productPicture-resultmap" />
-		<association property="paymentOptionList" resultMap="com.cnb.config.mybatis.mapper.PaymentOptionListMapper.paymentOptionList-resultmap"/>
-	</resultMap>
 
 	<!-- insert -->
 	<insert id="insertPaymentDetails" parameterType="com.cnb.vo.PaymentDetails">
@@ -74,7 +69,7 @@
 	<!--결제내역 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회 매장아이디 있으면 매장별 조회- 매장없으면 매장없이 조회.유저의 
 		결제내역은 어디서든 볼수있게 . -->
 	<select id="findSelectPaymentDetailsListByUserId"
-		resultMap="paymentOptionList-paymentDetails-product-store-resultmap" parameterType="map">
+		resultMap="paymentDetails-product-store-resultmap" parameterType="map">
 
 	SELECT payment_no,
 		store_name,
@@ -83,8 +78,7 @@
 		payment_option,
 		reservation_order_count,
 		product_price,
-		trade_date,
-		payment_method
+		trade_date
 		FROM(
 		SELECT rownum rnum,
 		payment_no,
@@ -94,8 +88,7 @@
 		payment_option,
 		reservation_order_count,
 		product_price,
-		trade_date,
-		payment_method
+		trade_date
 		FROM(
 		SELECT
 		pd.payment_no,
@@ -105,13 +98,11 @@
 		pd.payment_option,
 		pd.reservation_order_count,
 		p.product_price,
-		pd.trade_date,
-		po.payment_method
-		FROM payment_details pd, product p, store s, payment_optionList po
-		where pd.product_id=p.product_id 
-		and s.store_id = p.store_id
-		and pd.payment_option = po.payment_id
+		pd.trade_date
+		FROM payment_details pd, product p, store s
+		where pd.product_id=p.product_id and s.store_id = p.store_id
 		and pd.user_id = #{userId}
+	    
 		)
 		WHERE rownum &lt;=#{endIndex}
 		)

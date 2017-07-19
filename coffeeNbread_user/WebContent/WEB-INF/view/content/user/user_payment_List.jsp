@@ -15,9 +15,14 @@ table {
 }
 
 td {
-	padding: 5px; /*td 간 간격 */
+	text-align:center/*td 간 간격 */
 }
 </style>
+
+
+
+
+
 
 	
 	
@@ -27,9 +32,14 @@ td {
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
 
+
 	<center><h2>${requestScope.userName }님의 결제 현황</h2></center>
 	<br><br><br>
 	<table class="table ">
+
+	
+	<table class="table table-hover">
+
 		<thead>
 			<tr >
 				<th>결제번호</th>
@@ -55,7 +65,7 @@ td {
 				 	<td>${list.store.storeName}</td>		
 					<td>${list.product.productName}</td>
 					<td>${list.sellMethod eq 'r' ? "예약" : "현장"}</td> 
-					<td>${list.paymentOptionList.paymentMethod }</td>
+					<td>${sessionScope.storeInfo.storePaymentOptionList[0].paymentOptionList.paymentMethod }</td>
 					<td>${list.reservationOrderCount}</td>
 					<td>${list.product.productPrice}</td>
 					<td>${list.tradeDate }</td>
@@ -66,9 +76,9 @@ td {
 	</table>
 	
 
+
+
 <center>
-
-
 	<p>
 		<%--######################################################
 															페이징 처리

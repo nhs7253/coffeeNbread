@@ -2,13 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+
 <style>
 form {
 	display: inline;
 }
 </style>
+
 </head>
 <body>
+
 
 
 
@@ -45,7 +48,7 @@ form {
 		</center>
 		
 
-<div style="float:right">
+<%-- 
 	<form
 		action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
 		<sec:csrfInput />
@@ -54,7 +57,7 @@ form {
 			type="hidden" name="recipeBoardPicture"
 			value="${requestScope.content.recipeBoardPicture }" /> <input
 			type="hidden" name="userId" value="${requestScope.content.userId }" />
-		<button type="submit" class="btn">
+		<button type="submit" class="btn-custom">
 			<i class="glyphicon glyphicon-pencil"></i>수정
 		</button>
 	</form>
@@ -67,12 +70,13 @@ form {
 			type="hidden" name="storeId" value="${requestScope.content.storeId }" />
 		<input type="hidden" name="userId"
 			value="${requestScope.content.userId }" />
-		<button type="submit" class="btn">
+		<button type="submit" class="btn-custom">
 			<i class="glyphicon glyphicon-trash"></i>삭제
 		</button>
 	</form>
+ --%>
 
-</div>
+
 		<table class="table table-hover">
 			<tbody>
 
@@ -137,12 +141,62 @@ form {
 					
 			</form>
 
-
 		
 		<div>
 		<center>
 			
 				<%--######################################################
+=======
+
+
+	<table class="table table-hover">
+		<tbody>
+
+			<c:forEach items="${requestScope.list }" var="list">
+				<tr>
+					<td>${list.replyNo}</td>
+					<td>${list.replyContent}</td>
+					<td>${list.replyName}</td>
+					<td>${list.replyRegDateFormat}</td>
+					<td>
+						<form
+							action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
+							<sec:csrfInput />
+							<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+							<input type="hidden" name="recipeBoardNo"
+								value="${requestScope.content.recipeBoardNo }" /> <input
+								type="hidden" name="storeId"
+								value=" ${requestScope.content.storeId }" /> <input
+								type="hidden" name="replyName" value="${list.replyName }" />
+							<button type="submit" class="btn-custom">
+								<i class="glyphicon glyphicon-pencil"></i>수정
+							</button>
+						</form>
+					</td>
+					<td>
+						<form
+							action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
+							<sec:csrfInput />
+							<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+							<input type="hidden" name="recipeBoardNo"
+								value="${requestScope.content.recipeBoardNo }" /> <input
+								type="hidden" name="storeId"
+								value="${requestScope.content.storeId }" /> <input
+								type="hidden" name="replyName" value="${list.replyName }" />
+							<button type="submit" class="btn-custom">
+								<i class="glyphicon glyphicon-trash"></i>삭제
+							</button>
+						</form>
+					</td>
+				</tr>
+			</c:forEach>
+
+		</tbody>
+	</table>
+
+	<p>
+		<%--######################################################
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 															페이징 처리
 				###################################################### --%>
 				<!-- 첫페이지로 이동 -->
@@ -217,3 +271,4 @@ form {
 		</center></div>
 	</div>
 	<div class="col-sm-2"></div>
+

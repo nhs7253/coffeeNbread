@@ -48,6 +48,7 @@
    <nav class="cd-side-nav">
    <br><br>
       <ul>
+
       
          <li class="cd-label">Main</li>
         
@@ -89,33 +90,27 @@
 			</ul></li>
 
 
+
+
       <li class="cd-label">Secondary</li>
-      <br>
-      <li class="has-children bookmarks"><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do" style="font-size:20px">RECIPE</a>
-
-        </li>
+         <br>
+         <li class="has-children bookmarks"><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do" style="font-size:20px"><span class="glyphicon glyphicon-cutlery"></span>&nbsp;&nbsp;RECIPE</a></li>
         <br>
-      <li class="has-children images"><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" style="font-size:20px">공지사항</a>
-
-        
-<br>
-      <li class="has-children users"><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" style="font-size:20px">QnA</a>
-
+         <li class="has-children images"><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" style="font-size:20px"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;&nbsp;공지사항</a>
+      <br>
+         <li class="has-children users"><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" style="font-size:20px">QnA</a></li>
+      <br>
+      
+      <li class="has-children users"><a href="#0" style="font-size:20px">ADMIN</a>
+      <ul>
+         <!-- 전체 관리자 권한 -->
+         <sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+             <li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
+               <li><a href="${initParam.rootPath }/admin/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
+               <li><a href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
+          </sec:authorize>
+       </ul>
        </li>
-     
-		<br>
-		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
-		<li class="has-children users"><a href="#0" style="font-size:20px">ADMIN</a>
-
-         <ul>
-    
-            
-	            <li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
-	            <li><a href="${initParam.rootPath }/admin/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
-	            <li><a href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
-            
-            
-         </ul></li></sec:authorize>
   
      </ul>
    </nav>

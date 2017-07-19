@@ -5,7 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
-
+table, td {
+   border: 1px solid black;
+}
 
 table {
    border-collapse: collapse;
