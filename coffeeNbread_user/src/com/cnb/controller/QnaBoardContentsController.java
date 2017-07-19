@@ -50,8 +50,6 @@ public class QnaBoardContentsController {
 	 * @return String 응답 경로
 	 */
 	public String addQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors){
-
-		
 	
 		GeneralUser generalUser = (GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
 		if(errors.hasErrors()){
@@ -147,7 +145,7 @@ public class QnaBoardContentsController {
 	 * @param errors 요청 파라미터 에러 검증 결과  
 	 * @return - 응답 경로, 페이징 결과 목록
 	 */
-	public ModelAndView findQnaBoardContentsBySelectToKeywordController(@ModelAttribute("generalUserView") @Valid QnaBoardContentsViewForm qnaBoardContentsViewForm, BindingResult errors){
+	public ModelAndView findQnaBoardContentsBySelectToKeywordController(@ModelAttribute("qnaBoardContentsView") @Valid QnaBoardContentsViewForm qnaBoardContentsViewForm, BindingResult errors){
 
 		ModelAndView modelAndView = new ModelAndView();
 				
@@ -155,13 +153,14 @@ public class QnaBoardContentsController {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
-			
+					
 		//storeId 속성으로 받을 시, 수정 필요
 		Map<String, Object> map = qnaBoardContentsService.findQnaBoardContentsBySelectToKeyword(qnaBoardContentsViewForm.getSelect(), qnaBoardContentsViewForm.getKeyword(), qnaBoardContentsViewForm.getStoreId(), qnaBoardContentsViewForm.getPage());
 		
 		
 		modelAndView.setViewName("common/qnaBoard.tiles"); //성공 시 이동할 경로
 		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("storeId", qnaBoardContentsViewForm.getStoreId());
 		modelAndView.addObject("pageBean", map.get("pageBean"));
 		modelAndView.addObject("keyword", qnaBoardContentsViewForm.getKeyword());
 		modelAndView.addObject("select", qnaBoardContentsViewForm.getSelect());
