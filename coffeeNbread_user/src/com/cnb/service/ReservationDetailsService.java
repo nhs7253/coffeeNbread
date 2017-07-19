@@ -41,6 +41,10 @@ public interface ReservationDetailsService {
 	void addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList, Date simpleDateFormat);
 	
 	
+	
+	void addReservationDetailsByPaymentDetails(PaymentDetails paymentDetails,Date productHopeTime);
+	
+	
 /*	
 	 int addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList);
 	
