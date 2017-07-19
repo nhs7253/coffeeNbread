@@ -18,9 +18,12 @@ table {
 	width: 500px;
 	border-collapse: collapse;
 }
-
+th{
+text-align:center;
+}
 td {
-	padding: 5px; /*td 간 간격 */
+	 /*td 간 간격 */
+	text-align:center;
 }
 </style>
 
@@ -29,15 +32,17 @@ td {
 
 </script>
 	
-	<h2>${requestScope.userName }님의 예약 현황</h2>
+	<center><h2>${requestScope.userName }님의 예약 현황</h2></center>
 
-  
+  <br><br><br>
 
 <br>
 
 	
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
+
+
 	<table class="table table-hover">
 		<tbody>
 			<tr>
@@ -51,10 +56,9 @@ td {
 				
 			</tr>
 			<%-- ######################################################
-															조회된 item 출력 
+								조회된 item 출력 
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
-
 				<tr>
 					<td align="center">${list.reservationNo}</td>
 				 	<td align="center">${list.store.storeName }</td>		
@@ -68,13 +72,10 @@ td {
 
 		</tbody>
 	</table>
-
+</div>
 	
+<center>
 
-
-
-
-	<p>
 		<%--######################################################
 															페이징 처리
 				###################################################### --%>
@@ -145,6 +146,6 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/user/findReservationDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
-			페이지</a>
+			페이지</a></center>
 </div>
 <div class="col-sm-1"></div>

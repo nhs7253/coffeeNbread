@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <style>
 form {
 	display: inline;
@@ -26,32 +25,34 @@ form {
 
 		<p />
 		<div style="float: right">
-			<form
-				action="${initParam.rootPath }/user/settingQnaBoardContentsController.do">
-				<sec:csrfInput />
-				<input type="hidden" name="qnaBoardNo"
-					value="${requestScope.content.qnaBoardNo }" /> <input
-					type="hidden" name="qnaBoardWriter"
-					value="${requestScope.content.qnaBoardWriter }" />
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-pencil"></i>수정
-				</button>
-			</form>
-
-			<form
-				action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
-				<sec:csrfInput />
-				<input type="hidden" name="qnaBoardNo"
-					value="${requestScope.content.qnaBoardNo }" /> <input
-					type="hidden" name="qnaStoreId"
-					value="${requestScope.content.qnaStoreId }" /> <input
-					type="hidden" name="qnaBoardWriter"
-					value="${requestScope.content.qnaBoardWriter }" />
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-trash"></i>삭제
-				</button>
-			</form>
-
+			<c:if test="${requestScope.modifyAuthority }">
+				<form
+					action="${initParam.rootPath }/user/settingQnaBoardContentsController.do">
+					<sec:csrfInput />
+					<input type="hidden" name="qnaBoardNo"
+						value="${requestScope.content.qnaBoardNo }" /> <input
+						type="hidden" name="qnaBoardWriter"
+						value="${requestScope.content.qnaBoardWriter }" />
+					<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-pencil"></i>수정
+					</button>
+				</form>
+			</c:if>
+			
+			<c:if test="${requestScope.removeAuthority }">
+				<form action="${initParam.rootPath }/user/removeQnaBoardContentsController.do">
+					<sec:csrfInput />
+					<input type="hidden" name="qnaBoardNo"
+						value="${requestScope.content.qnaBoardNo }" /> <input
+						type="hidden" name="qnaStoreId"
+						value="${requestScope.content.qnaStoreId }" /> <input
+						type="hidden" name="qnaBoardWriter"
+						value="${requestScope.content.qnaBoardWriter }" />
+					<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-trash"></i>삭제
+					</button>
+				</form>
+			</c:if>
 
 		</div>
 
@@ -70,36 +71,37 @@ form {
 						<td>${list.replyName}&nbsp;&nbsp;&nbsp;</td>
 						<td>${list.replyRegDateFormat}&nbsp;&nbsp;&nbsp;</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/modifyBoardReplySettigController.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="qnaBoardNo"
-									value="${requestScope.content.qnaBoardNo }" /> <input
-									type="hidden" name="qnaStoreId"
-									value=" ${requestScope.content.qnaStoreId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-pencil"></i>수정
-								</button>
-
-							</form>&nbsp;&nbsp;&nbsp;
+							<c:if test="${requestScope.modifyAuthority }">
+								<form action="${initParam.rootPath }/user/modifyBoardReplySettigController.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+									<input type="hidden" name="qnaBoardNo"
+										value="${requestScope.content.qnaBoardNo }" /> <input
+										type="hidden" name="qnaStoreId"
+										value=" ${requestScope.content.qnaStoreId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-pencil"></i>수정
+									</button>
+								</form>&nbsp;&nbsp;&nbsp;
+							</c:if>
 						</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/removeBoardReplyToQnaBoardNoController.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="qnaBoardNo"
-									value="${requestScope.content.qnaBoardNo }" /> <input
-									type="hidden" name="qnaStoreId"
-									value="${requestScope.content.qnaStoreId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-trash"></i>삭제
-								</button>
-
-							</form>
+							<c:if test="${requestScope.removeAuthority }">
+								<form action="${initParam.rootPath }/user/removeBoardReplyToQnaBoardNoController.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+									<input type="hidden" name="qnaBoardNo"
+										value="${requestScope.content.qnaBoardNo }" /> <input
+										type="hidden" name="qnaStoreId"
+										value="${requestScope.content.qnaStoreId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-trash"></i>삭제
+									</button>
+								</form>
+							</c:if>
+							
 						</td>
 					</tr>
 				</c:forEach>
@@ -188,19 +190,20 @@ form {
 					페이지</a>
 			<p />
 		</center>
-		<form
-			action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
-			<sec:csrfInput />
-			<textarea rows="5" cols="80" name="replyContent" required></textarea>
-			<input type="hidden" name="qnaBoardNo"
-				value=" ${requestScope.content.qnaBoardNo }" /> <input
-				type="hidden" name="qnaStoreId"
-				value=" ${requestScope.content.qnaStoreId }" />
-			<a><button type="submit" class="btn-custom">
-				<i class="glyphicon glyphicon-pencil"></i>댓글 쓰기
-			</button></a>
-
-
-		</form>
+		<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
+			<form
+				action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
+				<sec:csrfInput />
+				<textarea rows="5" cols="80" name="replyContent" required></textarea>
+				<input type="hidden" name="qnaBoardNo"
+					value=" ${requestScope.content.qnaBoardNo }" /> <input
+					type="hidden" name="qnaStoreId"
+					value=" ${requestScope.content.qnaStoreId }" />
+				<a><button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-pencil"></i>댓글 쓰기
+				</button></a>
+			</form>
+		</sec:authorize>
+		
 	</div>
 	<div class="col-sm-2"></div>

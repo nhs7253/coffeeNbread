@@ -15,7 +15,6 @@
 
 
 
-
 <style type="text/css">
 
   
@@ -34,7 +33,7 @@ table {
     border-top: 1px solid #444444;
     border-collapse: collapse;
   }
-  th, td {
+  th{
     border-bottom: 1px solid ;
     padding: 10px;
     text-align: center;
@@ -99,13 +98,10 @@ table {
 <body>
 
 
-	<h2>RECIPE LIST</h2>
-
-
-
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
+		<h2>RECIPE LIST</h2>
 	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"
@@ -136,11 +132,13 @@ table {
 				<%-- csrf 토큰 --%>
 			</form>
 	
-	<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
-		<button type="submit" class="btn">
-			<i class="glyphicon glyphicon-ok"></i>글쓰기
-		</button>
-	</a>
+		<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
+			<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
+				<button type="submit" class="btn">
+					<i class="glyphicon glyphicon-ok"></i>글쓰기
+				</button>
+			</a>
+		</sec:authorize>
 	
 	</div>
 	<br>
@@ -159,6 +157,7 @@ table {
 				<th>글번호</th>
 				<th>사진</th>
 				<th>제목</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
 				<th>추천순</th>
@@ -177,15 +176,14 @@ table {
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
 
-				<tr>
+				<tr >
 					<td>${list.recipeBoardNo}</td>
 					<c:forEach items="${list.recipeBoardPicture }" var="fileName">
 						<td><img src="${initParam.rootPath }/up_image/${fileName }"
 							width="100px" height="100px"></td>
 					</c:forEach>
-					<td><a
-						href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}">${list.recipeBoardTitle}</a></td>
-
+					<td ><a href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}&userId=${list.userId}">${list.recipeBoardTitle}</a></td>
+					<td>${list.userId}</td>
 					<td>${list.recipeBoardDate}</td>
 					<td>${list.recipeBoardHits}</td>
 					<td>${list.recommendCount}</td>

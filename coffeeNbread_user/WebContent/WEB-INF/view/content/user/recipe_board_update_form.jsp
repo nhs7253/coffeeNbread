@@ -26,7 +26,9 @@
 	<input type="file" name="recipeBoardPicture"> 제목 : <input
 		type="text" name="recipeBoardTitle"
 		value="${requestScope.content.recipeBoardTitle }"> 내용<br>
-	<textarea rows="20" cols="100" name="recipeBoardContent"> ${requestScope.content.recipeBoardContent } </textarea>
+	<textarea rows="20" cols="100" name="recipeBoardContent">
+	 	${requestScope.content.recipeBoardContent }
+	 </textarea>
 	<input type="hidden" name="recipeBoardNo"
 		value="${requestScope.content.recipeBoardNo }" />
 

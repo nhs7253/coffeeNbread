@@ -85,11 +85,12 @@ public class PaymentDetailsDaoImpl implements PaymentDetailsDao{
 	 * 유저아이디로 결제내역에 있는 제품들 조회 -매장아이디가 null이라면 빼고 조회 
 	 */
 	@Override
-	public List<PaymentDetails> findSelectPaymentDetailsListByUserId(String userId, int startIndex, int endIndex) {
+	public List<PaymentDetails> findSelectPaymentDetailsListByUserId(String userId,
+			int startIndex, int endIndex) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("userId", userId);
 		info.put("startIndex", String.valueOf(startIndex));
-		info.put("endIndex", String.valueOf(endIndex));		
+		info.put("endIndex", String.valueOf(endIndex));
 		return session.selectList(makeSqlId("findSelectPaymentDetailsListByUserId"), info);
 	}
 	

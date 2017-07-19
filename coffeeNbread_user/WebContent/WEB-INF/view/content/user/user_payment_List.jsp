@@ -16,20 +16,16 @@ table {
 }
 
 td {
-	padding: 5px; /*td 간 간격 */
+	text-align:center/*td 간 간격 */
 }
 </style>
 
-	
-	<h2>${requestScope.userName }님의 결제 현황</h2>
-
-  
-
+<br><br>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-<br>
-
-	<table class="table ">
+	<center><h2>${requestScope.userName }님의 결제 현황</h2></center>
+	<br><br><br>
+	<table class="table table-hover">
 		<tbody>
 			<tr >
 				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제번호</td>
@@ -42,7 +38,7 @@ td {
 				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품거래시간</td>
 			</tr>
 			<%-- ######################################################
-															조회된 item 출력 
+								조회된 item 출력 
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
 				<tr>
@@ -56,14 +52,10 @@ td {
 					<td align="center"><fmt:formatDate value="${list.tradeDate }" pattern="yyyy-MM-dd HH:mm"/></td>
 				</tr>
 			</c:forEach>	
-
 		</tbody>
 	</table>
-	
-
+</div>
 <center>
-
-
 	<p>
 		<%--######################################################
 															페이징 처리

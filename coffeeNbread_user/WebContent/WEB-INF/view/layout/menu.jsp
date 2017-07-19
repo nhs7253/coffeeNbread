@@ -48,6 +48,7 @@
    <nav class="cd-side-nav">
    <br><br>
       <ul>
+<<<<<<< HEAD
      	<li class="cd-label">Main</li>
 		<li class="has-children comments" ><a href="#0" style="font-size:20px"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;STORE</a>
         <ul>
@@ -60,7 +61,30 @@
 			<!-- 매장 관리자 권한 -->
 			<sec:authorize access="hasAnyRole('CNB_STORE')">
 				<%--<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
+=======
+
+      
+         <li class="cd-label">Main</li>
+        
+     
+      
+      <li class="has-children comments" ><a href="#0" style="font-size:20px">STORE</a>
+         <ul>
+            <!--             회원/관리자 공통 메뉴 /member로 시작
+ -->
+				   <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
+
+				<sec:authorize access="hasAnyRole( 'ROLE_CNB_USER')">
+					
+				  
+				   	<li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROLE_CNB_STORE')">
+<%-- 					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
+				
+>>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li> --%>
+
 				<li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
 				<li><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=<sec:authentication property='principal.storeId'/>">내 매장 보기</a></li>						
 				<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
@@ -73,9 +97,9 @@
 		</ul>
 		</li>
 
-		<li class="cd-label">Secondary</li>
-      	<br>
-      	<li class="has-children bookmarks"><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do" style="font-size:20px"><span class="glyphicon glyphicon-cutlery"></span>&nbsp;&nbsp;RECIPE</a></li>
+     	<li class="cd-label">Secondary</li>
+        <br>
+        <li class="has-children bookmarks"><a href="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do" style="font-size:20px"><span class="glyphicon glyphicon-cutlery"></span>&nbsp;&nbsp;RECIPE</a></li>
         <br>
       	<li class="has-children images"><a href="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" style="font-size:20px"><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;&nbsp;공지사항</a>
 		<br>
@@ -92,7 +116,6 @@
 		    </sec:authorize>
 	    </ul>
 	    </li>
-  
      </ul>
    </nav>
  

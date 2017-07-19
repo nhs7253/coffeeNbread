@@ -213,6 +213,7 @@ FROM payment_details
 				AND	  store_id = 's-1'
 				
 				
+
 				SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
 						product_id
 				FROM	payment_details 
@@ -256,3 +257,42 @@ FROM payment_details
 				AND 	user_id = 'u-1'
 				
 				("s1", "2017-07-18 20:42", "u-1"));
+
+				
+				
+				
+		SELECT recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		user_id,
+		store_id,
+		store_name
+		FROM(
+		SELECT rownum rnum,
+		recipe_board_no,
+		recipe_board_content,
+		recipe_board_title,
+		recipe_board_date,
+		recipe_board_hits,
+		recipe_board_picture,
+		recommend_count,
+		user_id,
+		store_id,
+		store_name
+		FROM(
+		select rbc.recipe_board_no,
+		rbc.recipe_board_content,
+		rbc.recipe_board_title,
+		rbc.recipe_board_date,
+		rbc.recipe_board_hits,
+		rbc.recipe_board_picture,
+		rbc.recommend_count,
+		rbc.user_id,
+		s.store_id,
+		s.store_name
+		FROM recipe_board_contents rbc, store s
+		WHERE rbc.store_id=s.store_id(+)))
