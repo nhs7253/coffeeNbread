@@ -16,7 +16,7 @@ public class QnaBoardContentsForm{
 	
 	@NotNull
 	private int qnaBoardNo;		//PRIMARY KEY
-	private String qnaStoreId = null;;
+	private String qnaStoreId = null;
 
 	private String qnaBoardWriter;
 	@NotEmpty

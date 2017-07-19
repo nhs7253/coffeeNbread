@@ -48,33 +48,33 @@ form {
 		</center>
 		
 
-<%-- 
-	<form
-		action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
-		<sec:csrfInput />
-		<input type="hidden" name="recipeBoardNo"
-			value="${requestScope.content.recipeBoardNo }" /> <input
-			type="hidden" name="recipeBoardPicture"
-			value="${requestScope.content.recipeBoardPicture }" /> <input
-			type="hidden" name="userId" value="${requestScope.content.userId }" />
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-pencil"></i>수정
-		</button>
-	</form>
-
-	<form
-		action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
-		<sec:csrfInput />
-		<input type="hidden" name="recipeBoardNo"
-			value="${requestScope.content.recipeBoardNo }" /> <input
-			type="hidden" name="storeId" value="${requestScope.content.storeId }" />
-		<input type="hidden" name="userId"
-			value="${requestScope.content.userId }" />
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-trash"></i>삭제
-		</button>
-	</form>
- --%>
+ 		<c:if test="${requestScope.modifyAuthority }">
+			<form action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
+				<sec:csrfInput />
+				<input type="hidden" name="recipeBoardNo"
+					value="${requestScope.content.recipeBoardNo }" /> <input
+					type="hidden" name="recipeBoardPicture"
+					value="${requestScope.content.recipeBoardPicture }" /> <input
+					type="hidden" name="userId" value="${requestScope.content.userId }" />
+				<button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-pencil"></i>수정
+				</button>
+			</form>
+		</c:if>
+	
+ 		<c:if test="${requestScope.removeAuthority }">
+			<form action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
+				<sec:csrfInput />
+				<input type="hidden" name="recipeBoardNo"
+					value="${requestScope.content.recipeBoardNo }" /> <input
+					type="hidden" name="storeId" value="${requestScope.content.storeId }" />
+				<input type="hidden" name="userId"
+					value="${requestScope.content.userId }" />
+				<button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-trash"></i>삭제
+				</button>
+			</form>
+		</c:if>
 
 
 		<table class="table table-hover">
@@ -87,34 +87,36 @@ form {
 						<td>${list.replyName}</td>
 						<td>${list.replyRegDateFormat}</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="recipeBoardNo"
-									value="${requestScope.content.recipeBoardNo }" /> <input
-									type="hidden" name="storeId"
-									value=" ${requestScope.content.storeId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-pencil"></i>수정
-								</button>
-							</form>
+							<c:if test="${requestScope.modifyAuthority }">
+								<form action="${initParam.rootPath }/user/modifyBoardReplySettigToRecipeController.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+									<input type="hidden" name="recipeBoardNo"
+										value="${requestScope.content.recipeBoardNo }" /> <input
+										type="hidden" name="storeId"
+										value=" ${requestScope.content.storeId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-pencil"></i>수정
+									</button>
+								</form>
+							</c:if>
 						</td>
 						<td>
-							<form
-								action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
-								<sec:csrfInput />
-								<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
-								<input type="hidden" name="recipeBoardNo"
-									value="${requestScope.content.recipeBoardNo }" /> <input
-									type="hidden" name="storeId"
-									value="${requestScope.content.storeId }" /> <input
-									type="hidden" name="replyName" value="${list.replyName }" />
-								<button type="submit" class="btn-custom">
-									<i class="glyphicon glyphicon-trash"></i>삭제
-								</button>
-							</form>
+							<c:if test="${requestScope.removeAuthority }">
+								<form action="${initParam.rootPath }/user/removeRecipeBoardContents.do">
+									<sec:csrfInput />
+									<input type="hidden" name="replyNo" value=" ${list.replyNo }" />
+									<input type="hidden" name="recipeBoardNo"
+										value="${requestScope.content.recipeBoardNo }" /> <input
+										type="hidden" name="storeId"
+										value="${requestScope.content.storeId }" /> <input
+										type="hidden" name="replyName" value="${list.replyName }" />
+									<button type="submit" class="btn-custom">
+										<i class="glyphicon glyphicon-trash"></i>삭제
+									</button>
+								</form>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
@@ -124,22 +126,21 @@ form {
 		
 <div>&nbsp;&nbsp;댓글</div>
 
-		
-			<form
-				action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
-				<sec:csrfInput />
-				
-				<textarea rows="2" cols="80" name="replyContent" required></textarea>
-				<input type="hidden" name="recipeBoardNo"
-					value=" ${requestScope.content.recipeBoardNo }" /> 
-					<div style="float: right">
-					<input
-					type="hidden" name="storeId"
-					value=" ${requestScope.content.storeId }" /> <input type="submit"
-					value="댓글 쓰기">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
+				<form
+					action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
+					<sec:csrfInput />
 					
-					
-			</form>
+					<textarea rows="2" cols="80" name="replyContent" required></textarea>
+					<input type="hidden" name="recipeBoardNo"
+						value=" ${requestScope.content.recipeBoardNo }" /> 
+						<div style="float: right">
+						<input
+						type="hidden" name="storeId"
+						value=" ${requestScope.content.storeId }" /> <input type="submit"
+						value="댓글 쓰기">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+				</form>
+			</sec:authorize>
 
 		
 		<div>
