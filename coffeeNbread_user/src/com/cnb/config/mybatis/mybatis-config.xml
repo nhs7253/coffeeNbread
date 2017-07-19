@@ -33,7 +33,6 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/StoreEventMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/EventProductMapper.xml" />
 				
-				
 		<!-- 장바구니, 결제, 예약 관련 -->
 		<mapper resource="com/cnb/config/mybatis/mapper/ShoppingBasketProductMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/PaymentDetailsMapper.xml" />
@@ -47,7 +46,7 @@
 		<mapper resource="com/cnb/config/mybatis/mapper/BoardReplyMapper.xml" />
 		
 		<!--결제 종류 관련  -->
-		<mapper resource="com/cnb/config/mybatis/mapper/PaymentOptionListMapper.xml" />
+		<mapper resource="com/cnb/config/mybaztis/mapper/PaymentOptionListMapper.xml" />
 		<mapper resource="com/cnb/config/mybatis/mapper/StorePaymentOptionListMapper.xml" />
 		
 		<!--추천수 관련  -->

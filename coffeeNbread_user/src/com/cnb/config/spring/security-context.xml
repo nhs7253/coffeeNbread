@@ -49,13 +49,16 @@
  * 일반 유저 - ROLE_CNB_USER
  --> 
  
- 
-	
+      <!--접근경로별로 권한설정  -->
+	    <!--매장  --> 
 		<intercept-url pattern="/store/**" access="hasRole('ROLE_CNB_STORE')"/>
-		<intercept-url pattern="/user/**" access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE', 'ROLE_CNB_ADMIN')"/>
+		<!--유저, 매장,관리자  -->
+		<intercept-url pattern="/user/**" access="hasAnyRole('ROLE_CNB_USER', 'ROLE_CNB_STORE', 
+		                                                    'ROLE_CNB_ADMIN')"/>
+		<!--관리자  -->
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_CNB_ADMIN')"/>
+		<!--모두 해당  -->
 		<intercept-url pattern="/**" access="permitAll"/>
-		
 		<form-login
 						login-page="/login_form.do"
 						login-processing-url="/login.do"
@@ -68,7 +71,7 @@
 		
 		<!-- 사용자가 권한이 없는 요청을 한 경우 이동할 url 등록 , 등록하지 않으면 403 에러페이지.-->
 		<access-denied-handler error-page="/error/access_denied.do"/>
-	</http>
+	 </http>
 	<!-- 인증(로그인) 처리를 담당할 bean 등록 => AuthenticationProvider -->
 	<authentication-manager>
 		<authentication-provider ref="userAuthenticationProvider"/>

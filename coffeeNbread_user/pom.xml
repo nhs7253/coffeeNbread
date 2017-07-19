@@ -53,7 +53,6 @@
 	Mybatis 라이브러리
 	Mybatis, mybatis-spring 연동
 	-->
-	
 	<dependency>
 	    <groupId>org.mybatis</groupId>
 	    <artifactId>mybatis</artifactId>
@@ -140,25 +139,17 @@
 	 <!-- Logging -->
 
 		<dependency>
-
 			<groupId>org.apache.logging.log4j</groupId>
-
 			<artifactId>log4j-core</artifactId>
-
 			<version>2.0</version>
-
 		</dependency>
 
 		<!-- Log4j2 SLF4J Bridge -->
 
 		<dependency>
-
 			<groupId>org.apache.logging.log4j</groupId>
-
 			<artifactId>log4j-slf4j-impl</artifactId>
-
 			<version>2.0</version>
-
 		</dependency>
 	
   </dependencies>
