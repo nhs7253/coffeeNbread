@@ -29,6 +29,8 @@ td {
 $(document).ready(function(){
 	$(".alarm").on("click", function(to, text){
 		var btn = this;
+		var to = $(".alarm").prev().prev().prev().val();
+		var text = $(".alarm").prev().prev().val();
 		$.ajax({
 			"url":"/coffeeNbread_user/changeReservationConfirmByClickButtonController.do",
 			"type":"GET",
@@ -36,8 +38,8 @@ $(document).ready(function(){
 			"success":function(value){
 				$(btn).parent().text(value);
 				$(btn).remove();
-				var url = "http://api.coolsms.co.kr/sendmsg?user=nhs7253&password=zhtmxk156&to=" + $(".alarm").prev().prev().prev().val() + "&from=01037962472&text=" + $(".alarm").prev().prev().val();
-				window.open(url,"alarmMessage","width=500, height=400 resizable=no");
+				var url = "http://api.coolsms.co.kr/sendmsg?user=nhs7253&password=zhtmxk156&to=" + to + "&from=01037962472&text=" + text;
+				window.open(url,"alarmMessage","width=500, height=400 resizable=no").close();
 			}
 		}); 
 	});
