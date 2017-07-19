@@ -36,6 +36,11 @@
 		<association property="product"
 			resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-store-productPicture-resultmap" />
 	</resultMap>
+	
+	<resultMap type="PaymentDetails" id="paymentOptionList-paymentDetails-product-store-resultmap" extends="paymentDetails-resultmap">
+		<association property="product" resultMap="com.cnb.config.mybatis.mapper.ProductMapper.product-store-productPicture-resultmap" />
+		<association property="paymentOptionList" resultMap="com.cnb.config.mybatis.mapper.PaymentOptionListMapper.paymentOptionList-resultmap"/>
+	</resultMap>
 
 	<!-- insert -->
 	<insert id="insertPaymentDetails" parameterType="com.cnb.vo.PaymentDetails">
@@ -69,7 +74,7 @@
 	<!--결제내역 목록 페이징으로 조회 - 유저아이디와 매장아이디로 조회 매장아이디 있으면 매장별 조회- 매장없으면 매장없이 조회.유저의 
 		결제내역은 어디서든 볼수있게 . -->
 	<select id="findSelectPaymentDetailsListByUserId"
-		resultMap="paymentDetails-product-store-resultmap" parameterType="map">
+		resultMap="paymentOptionList-paymentDetails-product-store-resultmap" parameterType="map">
 
 	SELECT payment_no,
 		store_name,
@@ -78,7 +83,8 @@
 		payment_option,
 		reservation_order_count,
 		product_price,
-		trade_date
+		trade_date,
+		payment_method
 		FROM(
 		SELECT rownum rnum,
 		payment_no,
@@ -88,7 +94,8 @@
 		payment_option,
 		reservation_order_count,
 		product_price,
-		trade_date
+		trade_date,
+		payment_method
 		FROM(
 		SELECT
 		pd.payment_no,
@@ -98,11 +105,13 @@
 		pd.payment_option,
 		pd.reservation_order_count,
 		p.product_price,
-		pd.trade_date
-		FROM payment_details pd, product p, store s
-		where pd.product_id=p.product_id and s.store_id = p.store_id
+		pd.trade_date,
+		po.payment_method
+		FROM payment_details pd, product p, store s, payment_optionList po
+		where pd.product_id=p.product_id 
+		and s.store_id = p.store_id
+		and pd.payment_option = po.payment_id
 		and pd.user_id = #{userId}
-	    
 		)
 		WHERE rownum &lt;=#{endIndex}
 		)
@@ -154,7 +163,7 @@
 		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count, product_id
 		FROM payment_details
 		WHERE store_id = #{storeId}
-		AND TRUNC(trade_date) = #{tradeDate}
+		AND trade_date = #{tradeDate}
 		GROUP BY product_id
 		ORDER BY product_id ASC
 	</select>
@@ -191,7 +200,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date <= TRUNC(SYSDATE)
 				AND	  trade_date >= (SELECT TRUNC(SYSDATE) - 7 FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC
@@ -203,7 +212,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date <= TRUNC(SYSDATE)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -1) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC
@@ -215,7 +224,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date <= TRUNC(SYSDATE)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -3) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC
@@ -227,7 +236,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date <= TRUNC(SYSDATE)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -6) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC				
@@ -239,7 +248,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
+				AND	  trade_date <= TRUNC(SYSDATE)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -12) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC				
@@ -290,7 +299,7 @@
 				WHERE pd.store_id = #{storeId}
 				AND	  p.product_category = #{productCategory}
 				AND	  pd.product_id = p.product_id
-				AND	  TRUNC(pd.trade_date) = TRUNC(SYSDATE)
+				AND	  pd.trade_date = TRUNC(SYSDATE)
 				GROUP BY pd.product_id, p.product_category
 				ORDER BY pd.product_id ASC					
 		]]>
@@ -307,7 +316,7 @@
 			WHERE pd.store_id = #{storeId}
 			AND	  p.product_name LIKE '%'||#{productName}||'%'
 			AND	  pd.product_id = p.product_id
-			AND	  TRUNC(pd.trade_date) = TRUNC(SYSDATE)
+			AND	  pd.trade_date = TRUNC(SYSDATE)
 			GROUP BY pd.product_id, p.product_name
 			ORDER BY pd.product_id ASC				
 		]]>
@@ -388,5 +397,4 @@
 	 			ORDER BY product_id
 		]]>
 	</select>
-
 </mapper>

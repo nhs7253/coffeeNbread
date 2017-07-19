@@ -20,6 +20,8 @@ td {
 }
 </style>
 
+
+
 <br><br>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
@@ -43,7 +45,7 @@ td {
 			<c:forEach items="${requestScope.list }" var="list">
 				<tr>
 					<td align="center">${list.paymentNo}</td>
-				 	<td align="center">${list.store.storeName}</td>		
+				 	<td align="center">${list.product.store.storeName}</td>		
 					<td align="center">${list.product.productName}</td>
 					<td align="center">${list.sellMethod eq 'r' ? "예약" : "현장"}</td> 
 					<td align="center">${list.paymentOptionList.paymentMethod }</td>
