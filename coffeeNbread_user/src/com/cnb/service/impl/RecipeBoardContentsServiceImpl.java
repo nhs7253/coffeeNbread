@@ -89,12 +89,9 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 
          /* 회원이든 비회원이든 방법에따라 전부다 조회 했을떄 나오는 개수 */
 		int totalCount = recipeDao.countSelectRecipeBoardContentsByMethod(method, methodContent);
-	    System.out.println("totalCount:"+totalCount);    
 		PagingBean pageBean = new PagingBean(totalCount, page);
 		map.put("pageBean", pageBean);
-		System.out.println("list전:");
 		List<RecipeBoardContents> list =recipeDao.selectRecipeBoardContentsListByMethod(method, methodContent, pageBean.getBeginItemInPage(),pageBean.getEndItemInPage());
-		System.out.println("방법에의해 조회:"+list);
 		map.put("list", list);
 		return map;
 	}

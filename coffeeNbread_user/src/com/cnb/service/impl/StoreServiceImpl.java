@@ -15,23 +15,19 @@ import com.cnb.dao.StorePaymentOptionListDao;
 import com.cnb.dao.StorePositionDao;
 import com.cnb.dao.StoreVisitHistoryDao;
 import com.cnb.dao.UserAuthorityDao;
-import com.cnb.dao.UserPreferenceStoreDao;
 import com.cnb.exception.DuplicatedOptionCategoryNameException;
 import com.cnb.exception.DuplicatedStoreCategorytNameException;
 import com.cnb.exception.DuplicatedStoreIdException;
 import com.cnb.exception.DuplicatedStorePictureException;
 import com.cnb.exception.StorePictureNotFoundException;
 import com.cnb.service.OptionCategoryService;
-import com.cnb.service.StoreCategoryService;
 import com.cnb.service.StorePictureService;
 import com.cnb.service.StoreService;
 import com.cnb.service.UserAndStoreService;
 import com.cnb.util.PagingBean;
 import com.cnb.vo.GeneralUser;
-import com.cnb.vo.NoticeBoardContents;
 import com.cnb.vo.OptionCategory;
 import com.cnb.vo.Store;
-import com.cnb.vo.StoreCategory;
 import com.cnb.vo.StorePaymentOptionList;
 import com.cnb.vo.StorePicture;
 import com.cnb.vo.StorePosition;
@@ -76,9 +72,13 @@ public class StoreServiceImpl implements StoreService{
 		if(storedao.selectStoreById(store.getStoreId())!=null){
 			throw new DuplicatedStoreIdException(store.getStoreId()+" 는 이미 등록된 ID입니다.");
 		}
+		
+		//store 추가
+		storedao.insertStore(store);
 
 		if(paymentIdList!=null){
 			//매장 지원 결제 내역
+						
 			StorePaymentOptionList storePaymentOptionList = new StorePaymentOptionList();
 			storePaymentOptionList.setStoreId(store.getStoreId());
 			for(int i=0;i<paymentIdList.size();i++){
@@ -89,10 +89,9 @@ public class StoreServiceImpl implements StoreService{
 		//매장 사진 추가 
 		storePictureService.addStorePicture(storePicture);
 		
+		
 		storePositionDao.insertStorePosition(storePosition);
 		
-		//store 추가
-		storedao.insertStore(store);
 				
 		//매장 분류 추가
 		optionCategoryService.addOptionCategory(optionCategory);

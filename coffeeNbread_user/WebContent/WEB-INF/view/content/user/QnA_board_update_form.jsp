@@ -27,7 +27,8 @@
 	 </textarea>
 	<input type="hidden" name="qnaBoardNo"
 		value="${requestScope.content.qnaBoardNo }" />
-
+	<input type="hidden" name="qnaBoardWriter"
+		value="${requestScope.content.qnaBoardWriter }" />
 	<p>
 		<button type="submit" class="btn btn-custom">
 			<i class="glyphicon glyphicon-pencil"></i>수정
