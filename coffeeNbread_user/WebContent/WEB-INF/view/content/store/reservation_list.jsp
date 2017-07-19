@@ -10,9 +10,7 @@
 	
 
 <style type="text/css">
-table, td {
-   border: 1px solid black;
-}
+
 
 table {
    width: 700px;
@@ -55,11 +53,18 @@ $(document).ready(function(){
 </head>
 	<body>
 	
-<h2 id="h2">예약 현황 조회</h2> 
+	<div class="col-sm-2"></div>
+<div class="col-sm-8">
+
 <br>
 
 <form action="${initParam.rootPath }/selectRemoveReservationDetailsController.do" method="post">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
+	
+		<div class="col-sm-1"></div>
+<div class="col-sm-10">
+<h2 id="h2">예약 현황 조회</h2> 
+<br><br><br><br>
 <table id="table">
 	<tbody>
 		<tr>
@@ -99,7 +104,7 @@ $(document).ready(function(){
 </form>
 
 <br><br>
-
+<center>
 	<%--######################################################
 						전체 조회 페이징 처리
 		###################################################### --%>
@@ -152,6 +157,10 @@ $(document).ready(function(){
 
 	<!-- 마지막 페이지로 이동 -->
 	<a href="${initParam.rootPath }/findReservationDetailsController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
+	
+	</center>
+</div>
+	<div class="col-sm-2"></div>
 
 
 </body>
