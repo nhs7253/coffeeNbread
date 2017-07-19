@@ -27,8 +27,8 @@ SELECT ADD_MONTHS(TRUNC(SYSDATE), -12) FROM DUAL /*12개월전*/
 SELECT  SUM(reservation_order_count + product_trade_count) reservation_order_count,
 		product_id			
 FROM	payment_details 
-WHERE store_id = 's-1'
-AND   trade_date = '2017-07-04'
+WHERE store_id = 's-100'
+AND   trade_date = '2017-07-10'
 GROUP BY product_id
 ORDER BY product_id ASC
 
@@ -115,7 +115,7 @@ FROM (SELECT  SUM(pd.reservation_order_count + pd.product_trade_count) reservati
 			  pd.product_id,
 			  p.product_category
 	  FROM	payment_details pd, product p
-	  WHERE pd.store_id = 's-1'
+	  WHERE pd.store_id = 's-100'
 	  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) -1  FROM DUAL)
 	  AND	  pd.trade_date >= (SELECT TRUNC(SYSDATE) - 6 FROM DUAL)
 	  AND	  pd.product_id = p.product_id
@@ -129,7 +129,7 @@ FROM (SELECT  SUM(pd.reservation_order_count + pd.product_trade_count) reservati
 			  pd.product_id,
 			  p.product_category
 	  FROM	payment_details pd, product p
-	  WHERE pd.store_id = 's-1'
+	  WHERE pd.store_id = 's-100'
 	  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) -1 FROM DUAL)
 	  AND	  pd.trade_date >= (SELECT MIN(trade_date)FROM payment_details)
 	  AND	  pd.product_id = p.product_id
@@ -138,6 +138,20 @@ FROM (SELECT  SUM(pd.reservation_order_count + pd.product_trade_count) reservati
 GROUP BY product_id
 ORDER BY product_id
 	  
+SELECT ROUND(RATIO_TO_REPORT(TRUNC(AVG(reservation_order_count))) OVER(), 2) reservation_order_count, product_id
+				FROM (SELECT SUM(pd.reservation_order_count + pd.product_trade_count) reservation_order_count,
+			 				 pd.product_id,
+			 				 p.product_category
+	 				  FROM	payment_details pd, product p
+	  				  WHERE pd.store_id = 's-100'
+					  AND	  pd.trade_date <= (SELECT TRUNC(SYSDATE) -1 FROM DUAL)
+					  AND	  pd.trade_date >= (SELECT TRUNC(SYSDATE) - 6 FROM DUAL)
+					  AND	  pd.product_id = p.product_id
+	 				  GROUP BY pd.product_id, p.product_category
+	 				  ORDER BY pd.product_id ASC)
+	 			GROUP BY product_id
+	 			ORDER BY product_id
+
 SELECT MIN(trade_date)
 FROM payment_details
 

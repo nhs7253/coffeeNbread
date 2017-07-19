@@ -43,7 +43,9 @@ table {
   form{
   display:inline;
   }
-  
+  td{
+  text-align:center;
+  }
   <html lang="ko">
   <head>
     <meta charset="utf-8">
