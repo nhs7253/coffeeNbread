@@ -24,7 +24,7 @@ td {
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
-		<h2>${sessionScope.storeName }Q&A BOARD</h2>
+		<h2>${sessionScope.storeName }Q&A BOARD__</h2>
 		
 	<div style="float:right">
 			<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
@@ -42,17 +42,18 @@ td {
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
-			</div>
-			<br>
-			<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
-				<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
-					<sec:csrfInput/>
-					<input type="hidden" name="storeId" value="${requestScope.storeId }"/>
-					<button type="submit" class="btn">
-							<i class="glyphicon glyphicon-pencil"></i>매장  Q&A 글쓰기
-					</button>
-				</form>
-			</sec:authorize>
+
+			
+			<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
+				<sec:csrfInput/>
+				<input type="hidden" name="storeId" value="${requestScope.storeId }"/>
+				<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-pencil"></i>매장  Q&A 글쓰기
+				</button>
+			</form>
+</div>
+
+		
 
 			<table class="table table-hover">
 				<thead>
