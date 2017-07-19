@@ -15,6 +15,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -278,6 +282,16 @@ public class StoreController {
 		storeService.removeStoretById(store.getStoreId(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());
 		session.removeAttribute("storeInfo");
 		//return "redirect:/user/callStoreRegisterController.do";
+		
+		SecurityContext context = SecurityContextHolder.getContext();
+		GeneralUser generalUser = null;
+		
+		generalUser = ((GeneralUser)context.getAuthentication().getPrincipal());
+		List<SimpleGrantedAuthority> authList = new ArrayList<>();
+		authList.add(new SimpleGrantedAuthority("ROLE_CNB_USER"));
+		context.setAuthentication(new UsernamePasswordAuthenticationToken(generalUser, null, authList));
+		
+		
 		return "index.tiles";
 	}
 	
