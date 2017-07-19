@@ -58,7 +58,7 @@ $(document).ready(function(){
 <table id="table">
 	<tbody>
 		<tr>
-			<td align="center" style="font-weight:bold; background-color:LemonChiffon"><input type="submit" value="삭제" /></td>
+			<td align="center" style="font-weight:bold; background-color:LemonChiffon"><button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-trash"></i></button></td>
 			<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약 번호</td>		
 			<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약자</td>		
 			<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약 시간</td>

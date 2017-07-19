@@ -5,30 +5,32 @@
 
 <h2>예약 상세 내용</h2>
 
-<table>	
-	<tr>
-		<th>예약자</th>
-		<td>&nbsp;&nbsp;${requestScope.userName }</td>
+<br>
+
+<table class="table">
+	<tr class="form-group">
+		<th style="font-weight:bold">예약자</th>
+		<td>${requestScope.userName }</td>
 	</tr>
-	<tr>
-		<th>예약 시간</th>
-		<td>&nbsp;&nbsp;<fmt:formatDate value="${requestScope.time }" pattern="yyyy-MM-dd HH:mm"/></td>
+	<tr class="form-group">
+		<th style="font-weight:bold">예약 시간</th>
+		<td><fmt:formatDate value="${requestScope.time}" pattern="yyyy-MM-dd HH:mm"/></td>
 	</tr>
-	<tr>
-		<th>제품명</th>
+	<tr class="form-group">
+		<th style="font-weight:bold">제품명</th>
 		<c:forEach items="${productNameList}" varStatus="status">
-			<td align="center">&nbsp;&nbsp;${productNameList[status.index]}</td>
+		<td>${productNameList[status.index]}</td>
 		</c:forEach>
 	</tr>			
-	<tr>
-		<th>제품 개수</th>
+	<tr class="form-group">
+		<th style="font-weight:bold">제품 개수</th>
 		<c:forEach items="${countList}" varStatus="status">
-			<td align="center">&nbsp;&nbsp;${countList[status.index]}</td>
+		<td>${countList[status.index]}</td>
 		</c:forEach>
 	</tr>		
-	<tr>
-		<th>수령 희망 시간</th>
-		<td>&nbsp;&nbsp;<fmt:formatDate value="${requestScope.hopeTime }" pattern="yyyy-MM-dd HH:mm"/></td>
+	<tr class="form-group">
+		<th style="font-weight:bold">수령 희망 시간</th>
+		<td><fmt:formatDate value="${requestScope.hopeTime}" pattern="yyyy-MM-dd HH:mm"/></td>
 	</tr>
 </table>
 
@@ -36,5 +38,5 @@
 
 <form method=get action="${initParam.rootPath }/findReservationDetailsController.do">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-	<input type="submit" value="되돌아가기" />
+	<button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-repeat"></i>&nbsp;목록으로</button>
 </form>

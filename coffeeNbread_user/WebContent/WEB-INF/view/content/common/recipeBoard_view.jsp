@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
+<style>
+form{
+display:inline;
+}
+</style>
 </head>
 <body>
 
@@ -10,22 +14,27 @@
 
 	<h1>RECIPE</h1>
 	<hr>
-	<br> 레시피게시판 사진
+	 
+	<div class="col-sm-2"></div>
+<div class="col-sm-8">
+		<div class="col-sm-2"></div>
+<div class="col-sm-8">
 	<c:forEach items="${requestScope.content.recipeBoardPicture }"
 		var="fileName">
-		<img src="${initParam.rootPath }/up_image/${fileName }" width="200px"
+		<img src="${initParam.rootPath }/up_image/${fileName }" width="350px"
 			height="200px">
 	</c:forEach>
-
+<br><br>
 	제목 :
 	<input type="text" value="${requestScope.content.recipeBoardTitle }"
 		disabled>
-	<br> 내용
+	<br> 
 	<br>
-	<textarea rows="20" cols="100" disabled>${requestScope.content.recipeBoardContent }</textarea>
+	<textarea rows="10" cols="50" disabled>${requestScope.content.recipeBoardContent }</textarea>
 
-	<p />
+	<p /></div>	<div class="col-sm-2"></div>
 
+<div style="float:right">
 	<form
 		action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
 		<sec:csrfInput />
@@ -34,7 +43,7 @@
 			type="hidden" name="recipeBoardPicture"
 			value="${requestScope.content.recipeBoardPicture }" /> <input
 			type="hidden" name="userId" value="${requestScope.content.userId }" />
-		<button type="submit" class="btn-custom">
+		<button type="submit" class="btn">
 			<i class="glyphicon glyphicon-pencil"></i>수정
 		</button>
 	</form>
@@ -47,12 +56,12 @@
 			type="hidden" name="storeId" value="${requestScope.content.storeId }" />
 		<input type="hidden" name="userId"
 			value="${requestScope.content.userId }" />
-		<button type="submit" class="btn-custom">
+		<button type="submit" class="btn">
 			<i class="glyphicon glyphicon-trash"></i>삭제
 		</button>
 	</form>
 
-
+</div>
 
 
 
@@ -101,7 +110,17 @@
 
 		</tbody>
 	</table>
-
+	<form
+		action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
+		<sec:csrfInput />
+		<textarea rows="2" cols="80" name="replyContent" required></textarea>
+		<input type="hidden" name="recipeBoardNo"
+			value=" ${requestScope.content.recipeBoardNo }" /> <input
+			type="hidden" name="storeId"
+			value=" ${requestScope.content.storeId }" /> <input type="submit"
+			value="댓글 쓰기">
+	</form>
+<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -174,14 +193,5 @@
 		<a
 			href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?page=${requestScope.pageBean.totalPage}&qnaBoardNo=${requestScope.content.recipeBoardNo}">마지막
 			페이지</a>
-	<p />
-	<form
-		action="${initParam.rootPath }/user/addBoardReplyToRecipeBoardNoController.do">
-		<sec:csrfInput />
-		<textarea rows="5" cols="80" name="replyContent" required></textarea>
-		<input type="hidden" name="recipeBoardNo"
-			value=" ${requestScope.content.recipeBoardNo }" /> <input
-			type="hidden" name="storeId"
-			value=" ${requestScope.content.storeId }" /> <input type="submit"
-			value="댓글 쓰기">
-	</form>
+	<p /></center>
+	</div><div class="col-sm-2"></div>

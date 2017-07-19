@@ -6,7 +6,7 @@
 
 <script type="text/javascript"> --%>
 
-<h1>게시글 작성</h1>
+<h1>게시글 작성_</h1>
 <hr>
 <br>
 

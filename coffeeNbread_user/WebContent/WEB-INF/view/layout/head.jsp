@@ -23,17 +23,17 @@
 		<nav class="cd-nav">
 
 			<ul class="cd-top-nav">
-				<li><a href="${initParam.rootPath }/index.do">HOME</a></li>
-				<li><a> <%-- sec:authoize - 현 사용자가 특정 권한이 있으면 몸체의 내용을 처리한다.
-	   access속성에 어떤 권한인지를 표현한다. - 스프링 시큐리티의 sprint EL  이용--%> <sec:authorize
-							access="isAuthenticated()">
+				<li><a href="${initParam.rootPath }/index.do"><span class="glyphicon glyphicon-home"></span>&nbsp;HOME</a></li>
+				<li><a> <%-- sec:authoize - 현 사용자가 특정 권한이 있으면 몸체의 내용을 처리한다. access속성에 어떤 권한인지를 표현한다. - 스프링 시큐리티의 sprint EL  이용--%>
+						<sec:authorize access="isAuthenticated()">
 							<!-- Authentication의 getPrincipal() 호출 - User 리턴 -->
+							<span class="glyphicon glyphicon-user"></span>&nbsp;
 							<sec:authentication property="principal.userName" /> 님 환영합니다.
-					</sec:authorize>(<sec:authentication property="authorities" />)
+						</sec:authorize>(<sec:authentication property="authorities" />)
 				</a></li>
-				<li><a href="${initParam.rootPath }/user/mypage.do">MY PAGE</a></li>
+				<li><a href="${initParam.rootPath }/user/mypage.do"><span class="glyphicon glyphicon-file"></span>&nbsp;MY PAGE</a></li>
 				<!-- 	<li><a href="#0">Support</a></li> -->
-				<li class="has-children account"><a>USER</a>
+				<li class="has-children account"><a><span class="glyphicon glyphicon-bell"></span>&nbsp;USER</a>
 
 					<ul>
 						<!--                인증 안된(로그인 안한) 사용자 메뉴 : 인증되면 안보여야 하는 메뉴
@@ -56,6 +56,17 @@
 							<li><a
 								href="${initParam.rootPath }/user/update_profile_form.do">내
 									정보 수정</a></li>
+							  
+               	<li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
+				
+					<li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
+              
+              		<li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do"> 회원 결제내역 조회</a></li>	
+				
+					<li><a href="${initParam.rootPath }/user/findReservationDetailsController.do"> 회원 예약내역 조회</a></li>	
+              
 
 						</sec:authorize>
 					</ul></li>

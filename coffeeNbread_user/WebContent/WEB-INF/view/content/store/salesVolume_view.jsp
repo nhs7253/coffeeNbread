@@ -1110,7 +1110,7 @@ $(document).ready(function(){
 
 </script>
 
-<h4 style="font-weight:bold">판매량</h4>
+<h4 style="font-weight:bold"><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;판매량</h4>
 
 <input type="checkbox" name="choice" id="total" value="total">오늘 전체&nbsp;&nbsp;<br id=br0>
 <input type="checkbox" name="choice" id="date" value="date">날짜별&nbsp;&nbsp;<br id=br1>
@@ -1141,12 +1141,12 @@ $(document).ready(function(){
 
 <br><br>
 
-<h4 style="font-weight:bold">상승세 / 하락세</h4>
+<h4 style="font-weight:bold"><span class="glyphicon glyphicon-sort"></span>&nbsp;&nbsp;상승세 / 하락세</h4>
 
 <table>
 	<tbody>
 		<tr>
-			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">상승세</td>
+			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">상승세<i class="glyphicon glyphicon-arrow-up"></i></td>
 			<c:forEach items="${requestScope.upProductList }" var="product">
 				<input type="hidden" value="${product.productId}"/>
 				<td class="up" align="center" style="cursor:pointer">
@@ -1162,7 +1162,7 @@ $(document).ready(function(){
 <table>
 	<tbody>
 		<tr>
-			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">하락세</td>
+			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">하락세<i class="glyphicon glyphicon-arrow-down"></i></td>
 			<c:forEach items="${requestScope.downProductList }" var="product">
 				<input type="hidden" value="${product.productId}"/>
 				<td class="down" align="center" style="cursor:pointer">
@@ -1178,7 +1178,7 @@ $(document).ready(function(){
 <table>
 	<tbody>
 		<tr>
-			<td width="70" align="center" style="font-weight:bold; background-color:LemonChiffon">유지중</td>
+			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">유지중<i class="glyphicon glyphicon-resize-horizontal"></i></td>
 			<c:forEach items="${requestScope.keepProductList }" var="product">
 				<input type="hidden" value="${product.productId}"/>
 				<td class="keep" align="center" style="cursor:pointer">
@@ -1194,7 +1194,7 @@ $(document).ready(function(){
 
 <br><br>
 
-<h4 style="font-weight:bold">예상 생산량</h4>
+<h4 style="font-weight:bold"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;예상 생산량</h4>
 
 <table>
 	<tbody>
