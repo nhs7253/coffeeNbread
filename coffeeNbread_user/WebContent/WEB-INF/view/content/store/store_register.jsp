@@ -42,47 +42,45 @@ body {
 	background-repeat: no-repeat;
 }
 </style>
-<body>
-<!-- 	<h2>STORE_REGISTER</h2> -->
-	<div class="col-sm-1"></div>
-	<div class="col-sm-10">
-		<div class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-sm-1"></div>
-					<div class="col-md-10">
-						<div class="card">
-									<div class="card-header" data-background-color="black">
-							<h4 class="title" style="text-align: center;">STORE_REGISTER</h4>
+
+<body><div class="col-sm-1"></div>
+<div class="col-sm-10">
+	<br>
+	<br>
+	<div class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header" data-background-color="purple">
+							<h4 class="title" style="text-align: center;">Edit Profile</h4>
 
 						</div>
-							<div class="card-content">
-								<form action="${initParam.rootPath }/addStoreController.do"
+						<div class="card-content">
+							<form action="${initParam.rootPath }/addStoreController.do"
 									method="post" enctype="multipart/form-data">
 									<sec:csrfInput />
 									<%-- csrf 토큰 --%>
-									<div class="row">
-										<div class="col-md-9">
-										<div class="col-md-9">
-											<div class="form-group label-floating">
+								<div class="row">
+									<div class="col-md-9">
+										<div class="form-group label-floating">
 												<label class="control-label">매장 분류</label> <input
 													type="text" name="optionCategoryList" id="optionCategory"
 													class="form-control" style="width: 200px">
 												<a class="form-group label-floating" id="selectSC" ></a>
 
-											</div></div>
-											<div class="col-md-3">
-											<button type="button" id="optionCategoryList"
+											</div>
+									</div>
+									<div class="col-md-3">
+										<button type="button" id="optionCategoryList"
 												class="btn btn-default btn-circle">
 												<i class="glyphicon glyphicon-plus"></i>
-											</button></div>
-										</div>
-
-									</div>
-
+											</button>
+									</div></div>
 									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group label-floating">
+									<div class="col-md-12">
+										<div class="form-group label-floating">
 												<label class="control-label">결제방식</label>
 												<c:forEach items="${requestScope.paymentOptionList }"
 													var="list">
@@ -90,28 +88,32 @@ body {
 														value="${list.paymentId }" />${list.paymentMethod }&nbsp;&nbsp;&nbsp;
 		</c:forEach>
 											</div>
-										</div>
-									</div>
+
+									</div></div>
 									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group label-floating">
+									<div class="col-md-4">
+									<div class="form-group label-floating">
 												<label class="control-label">매장 ID</label> <input
 													type="text" name="storeId" class="form-control">
-											</div></div>
-											<div class="col-md-4">
+											</div>
+
+									</div>
+									<div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">매장 이름</label> <input
 														type="text" name="storeName" class="form-control">
 												</div>
 											</div>
-											<div class="col-md-4">
+									<div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">매장 번호</label> <input
 														type="tel" name="storePhone" class="form-control">
 												</div>
-										</div></div>
+										</div>
+									
+								</div>
 
-										<div class="row">
+								<div class="row">
 											
 											<div class="col-md-4">
 												<div class="form-group label-floating">
@@ -132,13 +134,11 @@ body {
 												</div>
 											</div>
 										</div>
-
-
-										<div class="row">
+								<div class="row">
 											<div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">매장 사진</label>
-													 <input	type="file" name="storePictureList">
+													 <button>사진찾기</button><input	type="file" name="storePictureList" value="사진찾기">
 												</div>
 											</div>
 										</div>
@@ -176,17 +176,21 @@ body {
 													<i class="glyphicon glyphicon-ok"></i> 등록
 												</button>
 										</div>
-								</form>
-							</div>
+								<sec:csrfInput />
+								<%-- csrf 토큰 --%>
+							</form>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-1"></div>
 			</div>
+			<div class="col-sm-2"></div>
 		</div>
 	</div>
-	<div class="col-sm-1"></div>
+</div>
+<div class="col-sm-1"></div>
+
 </body>
+
 
 
 <script type="text/javascript"
