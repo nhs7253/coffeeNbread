@@ -81,8 +81,7 @@ td{
 				
 				<td>
 				<div class="col-xs-10">
-						<textarea rows="15" cols="55" disabled>
-		 					${requestScope.store.storeIntro }
+						<textarea rows="15" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }
 						</textarea>
 				</div>
 					</td>

@@ -37,9 +37,9 @@ form {
 			<br>
 			<br>
 			<br> 제목 : <input type="text"
-				value="${requestScope.content.recipeBoardTitle }" disabled>
+				value="${requestScope.content.recipeBoardTitle }" disabled style="background-color:#FFFFFF">
 			<br> <br>
-			<textarea rows="10" cols="50" disabled>${requestScope.content.recipeBoardContent }</textarea>
+			<textarea rows="10" cols="50" disabled style="background-color:#FFFFFF">${requestScope.content.recipeBoardContent }</textarea>
 
 			<p />
 		</div><br><br><br><br><br><br><br><br><br><br><br>
@@ -60,7 +60,7 @@ form {
 				</button>
 			</form>
 		</c:if>
-	
+	<div style="float:right">
  		<c:if test="${requestScope.removeAuthority }">
 			<form action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
 				<sec:csrfInput />
@@ -73,7 +73,7 @@ form {
 					<i class="glyphicon glyphicon-trash"></i>삭제
 				</button>
 			</form>
-		</c:if>
+		</c:if></div>
 
 
 		<table class="table table-hover">
