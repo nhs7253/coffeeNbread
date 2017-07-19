@@ -29,7 +29,7 @@ td {
 <br>
 
 	
-	<table class="table table-hover">
+	<table class="table ">
 		<thead>
 			<tr >
 				<th>결제번호</th>
@@ -66,7 +66,7 @@ td {
 	</table>
 	
 
-
+<center>
 
 
 	<p>
@@ -140,6 +140,6 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
-			페이지</a>
+			페이지</a></p></center>
 </div>
 <div class="col-sm-1"></div>

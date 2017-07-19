@@ -13,7 +13,10 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
+form{
+display:inline;
 
+}
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
@@ -27,8 +30,6 @@ td {
 <h2>POS</h2> 
 <div class="col-sm-2"></div>
 <div class="col-sm-8">
-<div class="container">
-	<div id="quick-access">
 	<div style="float:right;">
 <form action="${initParam.rootPath }/store/findProductListToPOSController.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
@@ -45,7 +46,6 @@ td {
    <button type="submit" class="btn "><i class="glyphicon glyphicon-search"></i>검색</button>
     
 </form>
-</div>
 </div>
 </div>
 
@@ -88,10 +88,10 @@ td {
 	</c:forEach>
 	
 
-	<div style="float:right,"clear:both">
-	<button type="submit" class="btn">결제</button></div>
+	<br>
+	<button type="submit" class="btn">결제</button>
 </form>
-	</div>
+	
 	<div class="col-sm-2"></div>
 
 </p>

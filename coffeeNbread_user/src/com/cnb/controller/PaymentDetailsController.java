@@ -73,28 +73,25 @@ public class PaymentDetailsController {
 			@ModelAttribute("paymentDetails") @Valid PaymentDetailsForm paymentDetailsform, BindingResult errors, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		
-		System.out.println("paymentDetailsform:" + paymentDetailsform);
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (errors.hasErrors()) {
 			System.out.println("에러 : " + errors.getAllErrors());
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; // 에러 발생
 		}
-		List<PaymentDetails> paymentDetailsList = new ArrayList<PaymentDetails>();
 
 		PaymentDetails paymentDetails = new PaymentDetails();
 		BeanUtils.copyProperties(paymentDetailsform, paymentDetails);
-		System.out.println("add-paymentDetailsform:" + paymentDetailsform);
-		System.out.println("add-paymentDetailsform:" + paymentDetailsform);
+		System.out.println("2.paymentDetails로 넘어온값들" + paymentDetails );
 		
 		String storeId = ((Store) session.getAttribute("storeInfo")).getStoreId();
         
-
+         
 		System.out.println("-------paymentDetailsform---:" + paymentDetailsform.getProductIdList().size());
 		for (int i = 0; i < paymentDetailsform.getProductIdList().size(); i++) {
 			paymentDetails.setUserId(generalUser.getUserId());
 			paymentDetails.setStoreId(storeId);
+			System.out.println("paymentDetailsform.getProductIdList().get(i):"+paymentDetailsform.getProductIdList().get(i));
 			paymentDetails.setProductId(paymentDetailsform.getProductIdList().get(i));
 			paymentDetails.setReservationOrderCount(paymentDetailsform.getReservationOrderCount().get(i));
 			paymentDetails.setProductTradeCount(0);
@@ -103,12 +100,9 @@ public class PaymentDetailsController {
 			paymentDetails.setUserId(generalUser.getUserId());
 			paymentDetails.setTradeDate(new Date());
 
-					
 			try {
-				System.out.println("----추가----");
-				paymentDetailsList.add(paymentDetails);
 				service.addPaymentDetails(paymentDetails);
-
+                rdService.addReservationDetailsByPaymentDetails(paymentDetails, paymentDetailsform.getProductHopeTime());
 			} catch (NullShoppingBasketProductException e) {
 				// TODO Auto-generated catch block
 				modelAndView.setViewName("user/user_payment_process.tiles");
@@ -116,10 +110,7 @@ public class PaymentDetailsController {
 			}
 
 		}
-           
-		rdService.addReservationDetailsByPaymentDetails(paymentDetailsList,paymentDetailsform.getProductHopeTime() );
-
-		List<ReservationDetails>reservationList= rdService.findReservationDetailsListNoPagingByUserIdAndStoreId(generalUser.getUserId(), storeId);
+        List<ReservationDetails>reservationList= rdService.findReservationDetailsListNoPagingByUserIdAndStoreId(generalUser.getUserId(), storeId);
 		modelAndView.addObject("userName", generalUserService.findUser(generalUser.getUserId()).getUserName());
 		modelAndView.addObject("reservationList", reservationList);
 		modelAndView.setViewName("user/payment_success.tiles");

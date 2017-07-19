@@ -57,6 +57,19 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 		
 	}
 	
+	
+	@Override
+	public void addReservationDetailsByPaymentDetails(PaymentDetails paymentDetails,Date productHopeTime) {
+		
+	
+			
+			dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetails.getReservationOrderCount(),null,productHopeTime,paymentDetails.getUserId(),paymentDetails.getProductId(),paymentDetails.getStoreId()));
+		
+		
+		
+	}
+	
+	
 
 /*	@Override
 	public int addReservationDetailsByPaymentDetails(List<PaymentDetails> paymentDetailsList) {
