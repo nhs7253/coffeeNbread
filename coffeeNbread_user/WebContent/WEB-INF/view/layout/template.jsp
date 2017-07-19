@@ -56,7 +56,7 @@
 	    
 	</header> 
 	<%--메인 body --%> <!-- style=background-color:#E6E6E6; -->
-	<section class="row content">
+	<section class="row content" >
 		<%-- 메뉴 --%>
 		<nav class="col-sm-2 ">
 			<tiles:insertAttribute name="menu"/>

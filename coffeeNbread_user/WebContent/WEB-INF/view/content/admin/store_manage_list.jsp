@@ -12,7 +12,9 @@ table {
 	width: 700px;
 	border-collapse: collapse;
 }
-
+th{
+text-align:center;
+}
 td {
 	padding: 5px; /* //td 간 간격 */
 }
@@ -22,11 +24,14 @@ td {
 </head>
 <body>
 
-	<h2>STORE_MANAGE_LIST</h2>
+	
+	<div class="col-sm-12">
+	<h2>STORE_MANAGE_LISTdd</h2>
 <br>
 	
 			<form action="${initParam.rootPath }/admin/userManagementListController.do"
 				method="post" class="form-inline quick-search-form" role="form">
+				<div style="float:right">
 				<div class="form-group">
 					<select name="select" class="form-control">
 						<option value="userId"
@@ -39,17 +44,20 @@ td {
 							${param.select eq "storeName" ? "selected" :""}>매장 이름</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
+				
+				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
-				</button>
-
+				</button>						<br>
+<br><br>
+</div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
+
 			</form>
 	
-	<br>
 
 	<table class="table">
+
 		<thead>
 			<tr class="form-group">
 				<th>유저 아이디</th>
@@ -104,7 +112,7 @@ td {
 
 
 
-
+<center>
 
 
 	<p>
@@ -178,4 +186,5 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/admin/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
+			페이지</a></p></center></div>
+	

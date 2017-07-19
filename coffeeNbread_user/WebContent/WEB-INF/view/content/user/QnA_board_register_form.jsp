@@ -3,8 +3,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-
-
 <h1>QnA 게시글 작성_</h1>
 <hr>
 <br>

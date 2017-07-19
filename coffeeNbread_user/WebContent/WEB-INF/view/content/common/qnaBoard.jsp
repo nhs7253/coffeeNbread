@@ -20,11 +20,12 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-	<h2>${sessionScope.storeName }Q&A BOARD</h2>
-
+	
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
+		<h2>${sessionScope.storeName }Q&A BOARD</h2>
+		
 	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
@@ -39,20 +40,18 @@ td {
 				<button type="submit" class="btn">
 					<i class="glyphicon glyphicon-search"></i>검색
 				</button>
-				<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.list[0].storeId }"/>
-			<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-pencil"></i>매장  Q&A 글쓰기
-				</button>
-	
-		</form>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
 			</div>
 			<br>
-
+			<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
+				<sec:csrfInput/>
+				<input type="hidden" name="storeId" value="${requestScope.storeId }"/>
+				<button type="submit" class="btn">
+						<i class="glyphicon glyphicon-pencil"></i>매장  Q&A 글쓰기
+				</button>
+			</form>
 
 
 			<table class="table table-hover">
@@ -72,11 +71,9 @@ td {
 															조회된 item 출력 
 				###################################################### --%>
 					<c:forEach items="${requestScope.list }" var="list">
-
 						<tr>
 							<td>${list.qnaBoardNo}</td>
-							<td><a
-								href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}&qnaStoreId=${list.qnaStoreId}">${list.qnaBoardTitle}</a></td>
+							<td><a href="${initParam.rootPath }/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=${list.qnaBoardNo}&qnaStoreId=${list.qnaStoreId}">${list.qnaBoardTitle}</a></td>
 							<td>${list.qnaBoardWriter}</td>
 							<td>${list.qnaBoardDateFormat}</td>
 							<td>${list.qnaBoardHits}</td>
