@@ -179,20 +179,21 @@ public class QnaBoardContentsController {
 	@RequestMapping("/common/viewQnaBoardContentsByReplyListController")
 	public ModelAndView ViewQnaBoardContentsByReplyListController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, Integer page, String qnaStoreId, String qnaBoardWriter){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
+						
 		boolean removeAuthority = false;
 		boolean modifyAuthority = false;
 		
 		//관리자, 매장 주인, 작성자라면 삭제 가능 // 본인만 수정 가능
 		if(!(authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]"))){
 			removeAuthority =  authentication.getAuthorities().toString().equals("[ROLE_CNB_ADMIN]") ||
-							   ((GeneralUser)authentication.getPrincipal()).getStoreId().equals(qnaStoreId) ||
-							   ((GeneralUser)authentication.getPrincipal()).getUserId().equals(qnaBoardWriter);
+							   ((GeneralUser)authentication.getPrincipal()).getUserId().equals(qnaBoardWriter) ||
+							  (((GeneralUser)authentication.getPrincipal()).getStoreId() != null &&((GeneralUser)authentication.getPrincipal()).getStoreId().equals(qnaStoreId));
+
 			
 			modifyAuthority = ((GeneralUser)authentication.getPrincipal()).getUserId().equals(qnaBoardWriter);
 		}
-
 		
+
 		ModelAndView modelAndView = new ModelAndView();
 
 		if(qnaBoardNo == null){
@@ -211,7 +212,7 @@ public class QnaBoardContentsController {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; //에러 발생 시 이동할 경로
 		} catch (QnaBoardContentsAuthenticationException e) {
-			modelAndView.setViewName("redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId);
+			modelAndView.setViewName("redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId+"&qnaBoardWriter="+qnaBoardWriter);
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
 
