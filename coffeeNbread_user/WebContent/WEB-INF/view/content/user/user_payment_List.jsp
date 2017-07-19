@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!--맨처음 제품 수령시간 적고  -->
 <!--그다음 카드 적고  -등록-->
 <!--결제하기 누르면 결제내역에 등록  -->
@@ -19,65 +20,41 @@ td {
 }
 </style>
 
-
-
-
-
-
-	
-	
-
-  
 <br><br>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-
-
 	<center><h2>${requestScope.userName }님의 결제 현황</h2></center>
 	<br><br><br>
-	<table class="table ">
-
-	
 	<table class="table table-hover">
-
-		<thead>
-			<tr >
-				<th>결제번호</th>
-				<th>매장이름 </th>
-				<th>제품이름</th>
-				<th>판매방식</th>
-				<th>결제방식</th>
-				<th>결제개수</th>
-				<th>제품가격</th>
-				<th>제품거래시간</th>
-				
-				
-			</tr>
-		</thead>
 		<tbody>
-
+			<tr >
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제번호</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">매장이름 </td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품이름</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">판매방식</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제방식</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제개수</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품가격</td>
+				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품거래시간</td>
+			</tr>
 			<%-- ######################################################
-															조회된 item 출력 
+								조회된 item 출력 
 				###################################################### --%>
 			<c:forEach items="${requestScope.list }" var="list">
 				<tr>
-					<td>${list.paymentNo}</td>
-				 	<td>${list.store.storeName}</td>		
-					<td>${list.product.productName}</td>
-					<td>${list.sellMethod eq 'r' ? "예약" : "현장"}</td> 
-					<td>${sessionScope.storeInfo.storePaymentOptionList[0].paymentOptionList.paymentMethod }</td>
-					<td>${list.reservationOrderCount}</td>
-					<td>${list.product.productPrice}</td>
-					<td>${list.tradeDate }</td>
+					<td align="center">${list.paymentNo}</td>
+				 	<td align="center">${list.store.storeName}</td>		
+					<td align="center">${list.product.productName}</td>
+					<td align="center">${list.sellMethod eq 'r' ? "예약" : "현장"}</td> 
+					<td align="center">${list.paymentOptionList.paymentMethod }</td>
+					<td align="center">${list.reservationOrderCount}</td>
+					<td align="center">${list.product.productPrice}</td>
+					<td align="center"><fmt:formatDate value="${list.tradeDate }" pattern="yyyy-MM-dd HH:mm"/></td>
 				</tr>
 			</c:forEach>	
-
 		</tbody>
 	</table>
-	
-
-
-
+</div>
 <center>
 	<p>
 		<%--######################################################

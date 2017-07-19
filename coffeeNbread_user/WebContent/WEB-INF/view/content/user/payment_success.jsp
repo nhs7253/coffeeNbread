@@ -37,15 +37,15 @@ select{
 
 
 
-<h2>결제성공</h2>
+
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-
+<br>
 
 <h2>${requestScope.userName }님의예약 현황</h2>
 
 
-
+<br>
 <br>
 
 

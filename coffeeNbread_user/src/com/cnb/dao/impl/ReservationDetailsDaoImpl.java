@@ -126,13 +126,15 @@ public class ReservationDetailsDaoImpl implements ReservationDetailsDao {
 	}
 	
 	@Override
-	public List<ReservationDetails> selectReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId,Date reservationTime, String userId) {
+	public List<ReservationDetails> selectReservationDetailByStoreIdAndReservationTimeAndUserId(String storeId, Date reservationTime, String userId) {
 		Map<String, Object> info = new HashMap<>();
 		info.put("storeId", storeId);
 		info.put("reservationTime", reservationTime);
 		info.put("userId", userId);
+				
 		return session.selectList(makeSqlId("selectReservationDetailByStoreIdAndReservationTimeAndUserId"), info);
 	}
+	
 	
 	@Override
 	public int deleteReservationDetails(String storeId, ReservationDetails reservation) {
