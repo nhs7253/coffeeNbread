@@ -4,9 +4,11 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
-table, td {
-	
+th{
+
+text-align:center;
 }
+
 
 table {
 	width: 700px;
@@ -23,9 +25,9 @@ td {
 </head>
 <body>
 
+<br>
+	<h2>방문 내역</h2>
 
-	<h2>USER_VISIT_HISTORY</h2>
-<br><br>
 
 	
 		<div class="col-sm-12">
@@ -36,8 +38,8 @@ td {
 				<div class="form-group">
 					<input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#FFCC33">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button></div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
@@ -71,16 +73,16 @@ td {
 					###################################################### --%>
 				<c:forEach items="${requestScope.list }" var="list">
 					<tr class="">
-						<td>${list.store.storeId}</td>
-						<td><a
+						<td style="text-align:center;">${list.store.storeId}</td>
+						<td style="text-align:center;"><a
 							href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
-						<td>${list.store.storePhone}</td>
+						<td style="text-align:center;">${list.store.storePhone}</td>
 						<td>${list.store.storeAddress}</td>
-						<td>${list.store.storeEmail}</td>
-						<td>${list.store.storeHits}</td>
-						<td>${list.store.storeOpenFormat}</td>
-						<td>${list.store.storeCloseFormat}</td>
-						<td><input type="checkbox" name="storeIdList"
+						<td style="text-align:center;">${list.store.storeEmail}</td>
+						<td style="text-align:center;">${list.store.storeHits}</td>
+						<td style="text-align:center;">${list.store.storeOpenFormat}</td>
+						<td style="text-align:center;">${list.store.storeCloseFormat}</td>
+						<td style="text-align:center;"><input type="checkbox" name="storeIdList"
 							value="${list.store.storeId}"></td>
 					</tr>
 				</c:forEach>
@@ -88,8 +90,8 @@ td {
 			</tbody>
 		</table>
 		<div style="float:right">
-		<button type="submit" class="btn">
-			<i class="glyphicon glyphicon-trash"></i>삭제
+		<button type="submit" class="btn btn-danger">
+			<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
 		</button>
 		</div>
 	</form>

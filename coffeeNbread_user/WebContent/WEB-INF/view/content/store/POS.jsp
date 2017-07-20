@@ -13,7 +13,9 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
-
+form {
+	display: inline
+}
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
@@ -24,11 +26,10 @@ td {
 				});
 			});//ready 
 		</script>
-<h2>POS</h2> 
-<div class="col-sm-2"></div>
-<div class="col-sm-8">
-<div class="container">
-	<div id="quick-access">
+
+<!-- <div class="col-sm-1"></div>
+<div class="col-sm-10"> -->
+<h2>판매 시스템</h2> 
 	<div style="float:right;">
 <form action="${initParam.rootPath }/store/findProductListToPOSController.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>
@@ -45,13 +46,13 @@ td {
    <button type="submit" class="btn "><i class="glyphicon glyphicon-search"></i>검색</button>
     
 </form>
-</div>
-</div>
-</div>
 
 
+
+
+
+<div style="float:right;">
 <p>
-
 <form action="${initParam.rootPath }/store/movePaymentPageController.do" method="post" class="form-inline quick-search-form" role="form">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
 
@@ -88,10 +89,11 @@ td {
 	</c:forEach>
 	
 
-	<div style="float:right,"clear:both">
-	<button type="submit" class="btn">결제</button></div>
-</form>
-	</div>
-	<div class="col-sm-2"></div>
+	
+	<button type="submit" class="btn">결제</button>
 
-</p>
+</form></div>
+	<!-- </div>
+	<div class="col-sm-1"></div> -->
+
+

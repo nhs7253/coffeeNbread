@@ -26,7 +26,7 @@
 						<br>
 
 						<div class="card-header" data-background-color="purple">
-							<h4 class="title" style="text-align: center;">MY PAGE</h4>
+							<h4 class="title" style="text-align: center;">내 정보 조회</h4>
 							
 						</div>
 					
