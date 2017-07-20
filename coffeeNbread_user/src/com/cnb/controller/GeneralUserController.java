@@ -85,7 +85,7 @@ public class GeneralUserController {
 			session.setAttribute("message", e.getMessage());
 			return "user/add_user_form.tiles"; //에러 발생 시 회원 가입 페이지로 이동
 		}
-		return "index.tiles"; //가입 성공 시 메인페이지로 이동
+		return "redirect:/login_form.do"; //처리 페이지 이동
 	}
 	
 	
