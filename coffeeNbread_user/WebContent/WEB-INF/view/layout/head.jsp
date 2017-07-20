@@ -7,14 +7,35 @@
 <head>
 <meta charset="utf-8">
 <title>Simplest jQuery Dropdown Nav Demo</title>
+<script type="text/javascript">
+	window.onload = function() {
+		var display = document.getElementById('display');
+		
+		setInterval(function () {
+			var time = new Date();
+			var hours = time.getHours();  // 시
+			var minutes = time.getMinutes();  // 분
+			var seconds = time.getSeconds();  // 초
+			
+			 // 삼항연산자를 이용하여 시, 분, 초를  두 자리로 유지
+			var clock = '';
+			clock += ((hours <10)? '0' : '') + hours;
+			clock += ((minutes <10)? ':0' : ':')+minutes;
+			clock += ((seconds <10)? ':0' : ':')+seconds;
+			
+			display.innerHTML = clock;
+		}, 1000);
+	}
 
+</script>
 </head>
 
 <body>
    <header class="cd-main-header">
-
+	&nbsp;&nbsp;&nbsp;&nbsp;<span id="display" style="font-size:16px; color:#ffffff"></span>
+		
       <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
-
+		
       <nav class="cd-nav">
 			<ul class="cd-top-nav">
 				<li><a href="${initParam.rootPath }/index.do"><span class="glyphicon glyphicon-home"></span>&nbsp;HOME</a></li>

@@ -43,7 +43,7 @@ td {
 <div class="col-sm-1"></div>
 
 <div class="col-sm-10">
-<h2>STORE LIST</h2>
+<h2>매장 목록</h2>
 <div style="float:right">
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 		<div style="flaot:right">

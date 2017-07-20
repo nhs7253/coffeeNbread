@@ -124,8 +124,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -271,8 +269,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -357,8 +353,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -443,8 +437,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -530,8 +522,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -617,8 +607,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -703,8 +691,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -790,8 +776,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -877,8 +861,6 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
-								min: 0,
-								max: 100,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -944,7 +926,7 @@ $(document).ready(function(){
 						},
 						yaxis: {
 							min: 0,
-							max: 100,
+							max: 50,
  							tickOptions: {
 								formatString: '%d'
 							},
@@ -1015,7 +997,7 @@ $(document).ready(function(){
 						},
 						yaxis: {
 							min: 0,
-							max: 100,
+							max: 50,
  							tickOptions: {
 								formatString: '%d'
 							},
@@ -1064,7 +1046,7 @@ $(document).ready(function(){
 					series: [
 						{
 							label: "유지중",
-							color : 'yellow',
+							color : 'green',
 							pointLabels: {
 								show: true
 							},
@@ -1086,7 +1068,7 @@ $(document).ready(function(){
 						},
 						yaxis: {
 							min: 0,
-							max: 100,
+							max: 50,
  							tickOptions: {
 								formatString: '%d'
 							},
@@ -1108,6 +1090,27 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$(".up").on("mouseover", function() {
+		 $(this).css("background-color", "LightSalmon");
+	});
+	$(".up").on("mouseout", function() {
+		 $(this).css("background-color", "white");
+	});
+	
+	$(".down").on("mouseover", function() {
+		 $(this).css("background-color", "LightSalmon");
+	});
+	$(".down").on("mouseout", function() {
+		 $(this).css("background-color", "white");
+	}); 
+	
+	$(".keep").on("mouseover", function() {
+		 $(this).css("background-color", "LightSalmon");
+	});
+	$(".keep").on("mouseout", function() {
+		 $(this).css("background-color", "white");
+	}); 
 });
 
 </script>
