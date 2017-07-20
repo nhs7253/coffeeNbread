@@ -198,46 +198,18 @@ DROP SEQUENCE reservation_no_seq;
 ----------------------------------------------------------------실 데이터-----------------------------------------------------------
 /* 유저 */
 
-INSERT INTO GENERAL_USER VALUES('u-1','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김형주',to_date('20170622', 'yyyy-mm-dd'),'남','khjsuccess6808@naver.com','01050166816','서울시 송파구 문정동','Y','s-101');
-INSERT INTO GENERAL_USER VALUES('u-2','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이진영',to_date('20170622', 'yyyy-mm-dd'),'여','jy@naver.com','01094080923','경기도 수원시 영통구','Y','s-102');
-INSERT INTO GENERAL_USER VALUES('us','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','최민희',to_date('20170622', 'yyyy-mm-dd'),'여','minimini@naver.com','01099506219','경기도 고양시 일산 서구 ','Y','s-100');
-INSERT INTO GENERAL_USER VALUES('admin','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','노현식',to_date('20160622', 'yyyy-mm-dd'),'남','hyungsik@naver.com','01037962472','경상남도 김해시 ','Y',null);
-/**/
-
-
-INSERT INTO GENERAL_USER VALUES('u-3','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김철수',to_date('20170622', 'yyyy-mm-dd'),'남','cjftn@naver.com','01015470214','서울시 서울동','Y','s-103');
-INSERT INTO GENERAL_USER VALUES('u-5','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이영희',to_date('20170622', 'yyyy-mm-dd'),'여','dudgml@naver.com','01002153142','경기도 고양시 일산 동구','Y','s-105');
-INSERT INTO GENERAL_USER VALUES('u-6','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','박찬수',to_date('20170622', 'yyyy-mm-dd'),'남','ckstnWKd@naver.com','01015155344','서울시 일산동','Y','s-106');
-INSERT INTO GENERAL_USER VALUES('u-7','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김순자',to_date('20170622', 'yyyy-mm-dd'),'여','tnstnswk@naver.com','01087411212','서울시 고양동 안산 시구','Y','s-107');
-INSERT INTO GENERAL_USER VALUES('u-8','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','고길동',to_date('20170622', 'yyyy-mm-dd'),'남','rlfehdWKdAks@naver.com','01078411414','김해시 길동구 문자동','Y','s-108');
-INSERT INTO GENERAL_USER VALUES('u-9','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김실순',to_date('20170622', 'yyyy-mm-dd'),'여','dsjkwni@naver.com','01012783242','경기도 고양시 일산 서구','Y','s-109');
-INSERT INTO GENERAL_USER VALUES('u-10','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김형남',to_date('20170622', 'yyyy-mm-dd'),'남','zhtmxkWKdWKaos@naver.com','01015970014','서울시 동문동','Y','s-110');
-INSERT INTO GENERAL_USER VALUES('u-11','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이시아',to_date('20170622', 'yyyy-mm-dd'),'여','fksdj@naver.com','01035413212','경기도 고양시 구산 지구','Y','s-111');
-
-INSERT INTO GENERAL_USER VALUES('u-12','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','노찬수',to_date('20170622', 'yyyy-mm-dd'),'남','sorkqkfhckstnslfk@naver.com','010789302361','서울시 갑구 남동','Y','s-112');
-INSERT INTO GENERAL_USER VALUES('u-13','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이지아',to_date('20170622', 'yyyy-mm-dd'),'여','rmrjwwlwl@naver.com','01041234152','경기도 북시 일시 나구','Y','s-113');
-INSERT INTO GENERAL_USER VALUES('u-14','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김지막',to_date('20170622', 'yyyy-mm-dd'),'남','wlwlakak@naver.com','01010167816','서울시 송구 문동','Y','s-114');
-
+INSERT INTO GENERAL_USER VALUES('u-1','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김형주',to_date('20170622', 'yyyy-mm-dd'),'남','khjsuccess6808@naver.com','010-5016-6816','서울시 송파구 문정동','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-2','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이진영',to_date('20170622', 'yyyy-mm-dd'),'여','jy@naver.com','010-1234-3242','경기도 고양시 일산 서구','Y',null);
+INSERT INTO GENERAL_USER VALUES('us','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','최민희',to_date('20170622', 'yyyy-mm-dd'),'여','minimini@naver.com','010-3453-3423','경기도 수원시 영통구 ','Y','s-100');
+INSERT INTO GENERAL_USER VALUES('admin','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','노현식',to_date('20160622', 'yyyy-mm-dd'),'남','hyungsik@naver.com','010-4564-2342','경상남도 김해시 ','Y',null);
 
 /* 권한 추가 
  * 관리자 - ROLE_CNB_ADMIN
  * 매점 - ROLE_CNB_STORE
  * 일반 유저 - ROLE_CNB_USER*/
 
-INSERT INTO user_authority VALUES('u-1', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-2', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-3', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-5', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-6', 'ROLE_CNB_USER');
-INSERT INTO user_authority VALUES('u-7', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-8', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-9', 'ROLE_CNB_USER');
-INSERT INTO user_authority VALUES('u-10', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-11', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('u-12', 'ROLE_CNB_USER');
-INSERT INTO user_authority VALUES('u-13', 'ROLE_CNB_USER');
-INSERT INTO user_authority VALUES('u-14', 'ROLE_CNB_USER');
-
+INSERT INTO user_authority VALUES('u-1', 'ROLE_CNB_USER');
+INSERT INTO user_authority VALUES('u-2', 'ROLE_CNB_USER');
 INSERT INTO user_authority VALUES('us', 'ROLE_CNB_STORE');
 INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
 
@@ -258,7 +230,7 @@ INSERT INTO STORE VALUES('s-103','판교 할리스','저희 매장을 방문해 
                     
                           
 
-INSERT INTO STORE VALUES('s-105','판교 코피아','안녕하세요 판교 코피아 입니다. 저렴한 가격에 맛있는 빵과 커피를 제공하고 있습니다. 많은 이용 부탁드립니다.'
+INSERT INTO STORE VALUES('s-105','판교 코피아','ㅇ'
                           , '062-372-4755','삼평동 691-1 1층 코피아','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');
                           
 INSERT INTO STORE VALUES('s-106','판교 파리바게트','시애틀에 본사를 두고 있고 간단한 스낵과 무료 Wi-Fi를 제공하는 유명 커피 체인점입니다.저희 문정체인점은 매월스페셜메뉴가있으니 많은관심 부탁드립니다.','02-758-8860','판교 백현동 578-5','Munjung@email.com',

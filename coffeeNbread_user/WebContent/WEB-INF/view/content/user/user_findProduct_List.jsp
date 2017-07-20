@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
 
@@ -110,15 +111,15 @@ form {
 		<div style="width: 25%; height: 320px; float: left;">
 			<table>
 				<tr>
-					<td align="center"><img
-						src="${initParam.rootPath }/up_image/${product.productPictureList[0].productPicture }"
+					<td align="center">
+					<img src="${initParam.rootPath }/up_image/${product.productPictureList[0].productPicture }"
 						alt="" width="150" height="150" /></td>
 				</tr>
 				<tr>
 					<td align="center">${product.productName }&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
-					<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
+					<td align="center"><fmt:formatNumber value="${product.productPrice }" pattern="#,###" /></td>
 				</tr>
 				<tr>
 					<td align="center">

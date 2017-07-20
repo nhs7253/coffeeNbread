@@ -102,7 +102,7 @@ table {
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
     </style>
 
@@ -110,11 +110,9 @@ h2 {
 <body>
 
 
-<div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
+		<div class="col-sm-11">
 		<br><br>
-		<h2>레시피</h2>
+		<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/recipe.png">&nbsp;레시피</h2>
 	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"

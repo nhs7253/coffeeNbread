@@ -12,7 +12,7 @@
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 
 table, td {
@@ -44,12 +44,14 @@ td {
     .info .link {color: #5085BB;}
 </style>
 
-<div class="col-sm-1"></div>
 
-<div class="col-sm-10">
+<div class="col-sm-11">
 <br><br>
 <h2>매장 목록</h2>
+<br>
 <div style="float:right">
+
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 		<div style="flaot:right">
 		<div class="form-group">
@@ -229,15 +231,15 @@ td {
 	
 
 
-	
+	<br><br>
 	<table class="table">
 		<thead>
 			<tr class="form-group">
-				<th>매장이름</th>
-				<th>주소</th>
-				<th>카테고리</th>
-				<th>여는 시간</th>
-				<th>닫는 시간</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">주소</th>
+				<th style="font-weight:bold; background-color:lightyellow">카테고리</th>
+				<th style="font-weight:bold; background-color:lightyellow">여는 시간</th>
+				<th style="font-weight:bold; background-color:lightyellow">닫는 시간</th>
 			</tr>
 		</thead>
 		<tbody>

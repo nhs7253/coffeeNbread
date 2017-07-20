@@ -14,32 +14,42 @@ table {
 	width: 500px;
 	border-collapse: collapse;
 }
-
+th{
+	text-align:center;
+}
 td {
 	text-align:center/*td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
-
-
-<br>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-
-	<center><h2>${requestScope.userName }님의 결제 현황</h2></center>
+<br><br>
+	<center><h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/credit-card.png">&nbsp;${requestScope.userName }님의 결제 현황</h2></center>
 	<br><br><br>
 	<table class="table table-hover">
-		<tbody>
+		<thead>
 			<tr >
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제번호</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">매장이름 </td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품이름</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">판매방식</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제방식</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">결제개수</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품가격</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품거래시간</td>
+				<th style="font-weight:bold; background-color:lightyellow">결제번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장이름 </th>
+				<th style="font-weight:bold; background-color:lightyellow">제품이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">판매방식</th>
+				<th style="font-weight:bold; background-color:lightyellow">결제방식</th>
+				<th style="font-weight:bold; background-color:lightyellow">결제개수</th>
+				<th style="font-weight:bold; background-color:lightyellow">제품가격</th>
+				<th style="font-weight:bold; background-color:lightyellow">제품거래시간</th>
 			</tr>
+		</thead>
+		<tbody>
 			<%-- ######################################################
 								조회된 item 출력 
 				###################################################### --%>

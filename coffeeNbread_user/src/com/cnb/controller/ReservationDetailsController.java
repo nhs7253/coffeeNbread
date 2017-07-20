@@ -67,7 +67,7 @@ public class ReservationDetailsController {
 		}
 		
 		Map<String, Object> map = service.findReservationDetailsListByStoreId(findReservationDetailsForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		
+
 		List reservationList = (List)map.get("list");
 		
 
