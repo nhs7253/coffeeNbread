@@ -187,9 +187,21 @@ public class RecipeBoardContentsController {
 		if(errors.hasErrors()){
 			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo + "&userId=" + recipeBoardContentsForm.getUserId(); //에러 발생
 		}
-				
+		
+		
 		RecipeBoardContents recipeBoardContents = new RecipeBoardContents();
 		BeanUtils.copyProperties(recipeBoardContentsForm, recipeBoardContents);
+		
+		System.out.println("recipeBoardContents = " + recipeBoardContents);
+		
+		if(recipeBoardContentsForm.getRecipeBoardPicture() != null){
+			System.out.println("recipeBoardContentsForm.getRecipeBoardPicture().getOriginalFilename() = " + recipeBoardContentsForm.getRecipeBoardPicture().getOriginalFilename());
+			recipeBoardContents.setRecipeBoardPicture(recipeBoardContentsForm.getRecipeBoardPicture().getOriginalFilename());
+		}
+		
+		System.out.println("1111recipeBoardContents = " + recipeBoardContents);
+
+		
 		try {
 			recipeBoardService.modifyRecipeBoardContents(recipeBoardNo,recipeBoardContents);
 		} catch (ContentsNotFoundException e) {

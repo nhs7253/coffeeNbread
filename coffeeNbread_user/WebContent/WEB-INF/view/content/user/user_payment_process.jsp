@@ -93,7 +93,8 @@ td {
 
 				<tr id="sbp_id">
 					<td>${list.product.productCategory}</td>
-					<td>${list.product.productPicture}</td>
+					<td><img src="${initParam.rootPath }/up_image/${list.product.productPictureList[0].productPicture}"
+						alt="" width="150" height="150" /></td>
 					<td>${list.product.productName}</td>
 					<td>${list.product.productPrice}</td>
 					<td>${list.productCount}</td>
