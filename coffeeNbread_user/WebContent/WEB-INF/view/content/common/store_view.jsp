@@ -156,13 +156,12 @@ td{
 	
 	<div class="col-sm-1"></div>
 
-	<script type="text/javascript"
-		src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=414b7d7551adbb016aef1956f977d20f"></script>
 	<script>
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
-		        center: new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표
+		        center: new daum.maps.LatLng(${requestScWope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨
 		    };
 		

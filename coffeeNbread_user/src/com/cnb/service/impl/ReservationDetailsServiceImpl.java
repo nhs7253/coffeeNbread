@@ -7,9 +7,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cnb.dao.PaymentDetailsDao;
 import com.cnb.dao.ReservationDetailsDao;
+import com.cnb.dao.ShoppingBasketProductDao;
 import com.cnb.dao.StoreDao;
 import com.cnb.exception.NotInsertTradeDateException;
 import com.cnb.service.ReservationDetailsService;
@@ -44,6 +46,9 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 
 	@Autowired
 	private StoreDao sDao;
+	
+	@Autowired
+	private ShoppingBasketProductDao shoppingBasketProductDao;
 
 
 	@Override
@@ -59,14 +64,12 @@ public class ReservationDetailsServiceImpl implements ReservationDetailsService 
 	
 	
 	@Override
+	@Transactional(rollbackFor=Exception.class)
 	public void addReservationDetailsByPaymentDetails(PaymentDetails paymentDetails,Date productHopeTime) {
-		
-	
-			
-			dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetails.getReservationOrderCount(),null,productHopeTime,paymentDetails.getUserId(),paymentDetails.getProductId(),paymentDetails.getStoreId()));
-		
-		
-		
+
+		dao.insertReservationDetails(new ReservationDetails(0,new Date(),paymentDetails.getReservationOrderCount(),null,productHopeTime,paymentDetails.getUserId(),paymentDetails.getProductId(),paymentDetails.getStoreId()));
+		shoppingBasketProductDao.deleteShoppingBasketProductToPaymentComplete(paymentDetails.getUserId(), paymentDetails.getStoreId());
+
 	}
 	
 	
