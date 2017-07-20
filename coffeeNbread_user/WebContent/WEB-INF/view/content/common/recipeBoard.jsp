@@ -9,23 +9,7 @@
 <script type="text/javascript"
 	src="${initParam.rootPath }/resource/jquery/jquery-3.2.1.js"></script>
 
-
-
-
-
-
-
-
 <style type="text/css">
-
-  
-/*   input {
-  border: 1px solid #bcbcbc;
-  border-radius: 0px;
-  -webkit-appearance: none; */
-}
-
-
 table {
 
      width: 100%;
@@ -33,19 +17,19 @@ table {
     
     border-top: 1px solid #444444;
     border-collapse: collapse;
-  }
-  th{
+}
+th{
     border-bottom: 1px solid ;
     padding: 10px;
     text-align: center;
-  }
+}
   
-  form{
+form{
   display:inline;
-  }
-  td{
+}
+td{
   text-align:center;
-  }
+}
   <html lang="ko">
   <head>
     <meta charset="utf-8">
@@ -163,12 +147,12 @@ h2 {
 	<table class="table">
 		<thead>
 			<tr >
-				<th>글번호</th>
-				<th>사진</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
+				<th style="font-weight:bold; background-color:lightyellow">글번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">사진</th>
+				<th style="font-weight:bold; background-color:lightyellow">제목</th>
+				<th style="font-weight:bold; background-color:lightyellow">작성자</th>
+				<th style="font-weight:bold; background-color:lightyellow">작성일</th>
+				<th style="font-weight:bold; background-color:lightyellow">조회수</th>
 				<%-- <c:choose>
                 <c:when test="${param.userId != null}">
                 <th>내가 쓴 글 조회</th>

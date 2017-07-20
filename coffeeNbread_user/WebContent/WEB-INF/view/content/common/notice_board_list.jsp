@@ -31,9 +31,8 @@ h2 {
 
 		
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
-					<div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-11">
 					<div style="float:right">
 						<div class="form-group">
 							<select name="select" class="form-control">
@@ -49,24 +48,33 @@ h2 {
 							<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 						</button>
 						<sec:csrfInput />
-						<%-- csrf 토큰 --%>
-					</div>
-		</div>
+						
+						<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
+						<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+							<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
+								<sec:csrfInput/>
+								<button type="submit" class="btn btn-default btn-circle" style="background-color:#01a207">
+									<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
+								</button>
+							</form>
+						</sec:authorize>
+					</div>		
+			</div>
 	</form>
+		
+	
+	
 	<br>
-	<br>
-	<br>
-	<br><br>
 
 
 	
 	<table class="table">
 		<thead>
 			<tr >
-				<th style="text-align: center">글번호</th>
-				<th style="text-align: center">제목</th>
-				<th >작성일시</th>
-				<th style="text-align: center">조회수</th>
+				<th style="text-align: center; font-weight:bold; background-color:lightyellow">글번호</th>
+				<th style="text-align: center; font-weight:bold; background-color:lightyellow">제목</th>
+				<th style="font-weight:bold; background-color:lightyellow">작성일시</th>
+				<th style="text-align: center; font-weight:bold; background-color:lightyellow">조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -167,15 +175,6 @@ h2 {
 
 		<p/>
 	
-		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
-		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
-			<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
-				<sec:csrfInput/>
-					<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-ok"></i>등록
-				</button>
-			</form>
-		</sec:authorize>
 </div><div class="col-sm-1"></div>
 	
 		

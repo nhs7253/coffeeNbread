@@ -4,8 +4,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
-th{
-text-align:center
+th, td{
+	text-align:center
 }
 
 table {
@@ -16,19 +16,23 @@ table {
 td {
 	padding: 5px; /* //td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 </head>
 <body>
 
-<br><br>
-	
-
-<div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
-		<h2>전체 회원 목록</h2>
+		<div class="col-sm-11">
 		<br><br>
+		<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/teamwork.png">&nbsp;회원 목록</h2>
 		<div style="float:right">
 			<form
 				action="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do"
@@ -54,16 +58,16 @@ td {
 	<table class="table">
 		<thead>
 			<tr>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>생년월일</th>
-				<th>성별</th>
-				<th>이메일</th>
-				<th>전화번호</th>
-				<th>주소</th>
-				<th>활동 상태</th>
-				<th>매장아이디</th>
-				<th>탈퇴</th>
+				<th style="font-weight:bold; background-color:lightyellow">아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">생년월일</th>
+				<th style="font-weight:bold; background-color:lightyellow">성별</th>
+				<th style="font-weight:bold; background-color:lightyellow">이메일</th>
+				<th style="font-weight:bold; background-color:lightyellow">전화번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">주소</th>
+				<th style="font-weight:bold; background-color:lightyellow">활동 상태</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">탈퇴</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -88,7 +92,7 @@ td {
 								<sec:csrfInput/>
 								<input type="hidden" name="storeId" value="${user.storeId }"/>
 								<input type="hidden" name="userId" value="${user.userId }"/>
-								<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+								<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
 						</form>
 					</td>
 				</tr>
