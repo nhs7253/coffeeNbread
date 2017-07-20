@@ -110,8 +110,8 @@ form {
 		<div style="width: 25%; height: 320px; float: left;">
 			<table>
 				<tr>
-					<td align="center"><img
-						src="${initParam.rootPath }/up_image/${product.productPictureList[0].productPicture }"
+					<td align="center">
+					<img src="${initParam.rootPath }/up_image/${product.productPictureList[0].productPicture }"
 						alt="" width="150" height="150" /></td>
 				</tr>
 				<tr>

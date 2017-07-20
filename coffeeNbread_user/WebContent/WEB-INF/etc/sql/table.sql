@@ -360,7 +360,7 @@ SELECT option_id_seq.nextval FROM dual;
 /* 매장 방문 기록 */
 SELECT store_visit_history_no_seq.nextval FROM dual;
 
-/* 삭제 */
+
 
 
 /* 매장 결제 종류 */
@@ -430,10 +430,8 @@ DROP SEQUENCE payment_no_seq;
 DROP SEQUENCE reservation_no_seq;
 /* 매장분류 */
 DROP SEQUENCE store_category_no_seq;
-
 /* 옵션카테고리 */
 DROP SEQUENCE option_id_seq;
 /* 매장 방문 기록 */
 DROP SEQUENCE store_visit_history_no_seq;
-
 
