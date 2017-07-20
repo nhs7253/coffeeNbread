@@ -163,19 +163,6 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915'
 /* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
 /* 예약 내역에는 날짜 뿐만 아니라 시간도 들어가있어야 하지 않나..? */  /* 결제 내역에있는 r -에 해당되는 내용만 가져와야 함 */
 
-CREATE TABLE reservation_details (
-	reservation_no NUMBER PRIMARY KEY, /* 예약번호 */
-	reservation_time DATE NOT NULL, /* 예약시간 */
-	reservation_count NUMBER(3) NOT NULL, /* 예약개수 */
-	reservation_confirm DATE  NULL, /* 예약확인유무   -null허용으로 수정(07-03) */
-	product_hope_time DATE NULL,/*제품수령희망시간*/
-	product_id VARCHAR2(30) NOT NULL, /* 제품아이디 */
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	user_id VARCHAR2(30), /* 유저아이디 */
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
-	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
-	FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE
-);
 
 
 INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170604', 'yyyy-mm-dd'),4,to_date('20170604', 'yyyy-mm-dd'),to_date('20170605','yyyy-mm-dd'),'p-100','s-101','u-1');
@@ -207,20 +194,6 @@ INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170
 
 CREATE SEQUENCE reservation_no_seq;
 DROP SEQUENCE reservation_no_seq;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                                      -- 2017-07-20 김형주 추가
 ----------------------------------------------------------------실 데이터-----------------------------------------------------------
 /* 유저 */
@@ -244,22 +217,22 @@ INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
 select*from store
 delete from store
 INSERT INTO STORE VALUES('s-100','판교 이디아','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
-                          , '062-372-4755','판교동 625에 위치한 판교 이디아점입니다.','PEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');
+                          , '062-372-4755','판교동 625에 위치한 판교 이디아점입니다.','PEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');
                           
 INSERT INTO STORE VALUES('s-101','판교 스타벅스','시애틀에 본사를 두고 있고 간단한 스낵과 무료 Wi-Fi를 제공하는 유명 커피 체인점입니다.저희 판교체인점은 매월스페셜메뉴가있으니 많은관심 부탁드립니다.','02-758-8860','판교 삼평동 분당내곡로 150','Munjung@email.com',
-                          '빵,커피',809,to_date('198009050800','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');                          
+                          '빵,커피',809,to_date('198009050800','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');                          
                                          
                           
 INSERT INTO STORE VALUES('s-102','판교 엔젤리너스','판교에서 제일맛있는 카페체인점으로 자부합니다.매주월요일마다 할인행사하고있습니다. 사이트를 참조하시면 더욱더 자세한내용을 얻으실수 있습니다.','051-314-3100',
                          '판교 삼평동 대왕판교로 660 유스페이스 1B-221호','BusanAngel@email.com','빵,커피',400,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052100','yyyy-mm-dd hh24:mi'),'Y');                          
                           
 INSERT INTO STORE VALUES('s-103','판교 할리스','저희 매장을 방문해 주셔서 진심으로 감사드립니다.영등포역 근처에 위치하고있어 아침 9시부터 11시까지는 사람들이 붐비므로 참고하시길 바랍니다.최근 조회수가 제일 많은 매장으로 뽑히기도 했는데요. 그만큼 저희만의 특색있는 메뉴가 있으므로 참고하시기바랍니다.'
-                          , '070-4159-8897','서울 영등포구 경인로 847에 위치한 영등포 할리스점입니다.','hollys@email.com','빵',10340,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');                          
+                          , '070-4159-8897','서울 영등포구 경인로 847에 위치한 영등포 할리스점입니다.','hollys@email.com','빵',10340,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'Y');                          
                     
                           
 
 INSERT INTO STORE VALUES('s-105','판교 코피아','ㅇ'
-                          , '062-372-4755','삼평동 691-1 1층 코피아','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');
+                          , '062-372-4755','삼평동 691-1 1층 코피아','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');
                           
 INSERT INTO STORE VALUES('s-106','판교 파리바게트','시애틀에 본사를 두고 있고 간단한 스낵과 무료 Wi-Fi를 제공하는 유명 커피 체인점입니다.저희 문정체인점은 매월스페셜메뉴가있으니 많은관심 부탁드립니다.','02-758-8860','판교 백현동 578-5','Munjung@email.com',
                           '빵,커피',809,to_date('198009050800','yyyy-mm-dd hh24:mi'),to_date('198009052100','yyyy-mm-dd hh24:mi'),'N');                          
@@ -270,17 +243,17 @@ INSERT INTO STORE VALUES('s-107','판교 뚜레주르','부산에서 제일맛�
                          '판교 삼평동 741','BusanAngel@email.com','빵,커피',400,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');                          
                           
 INSERT INTO STORE VALUES('s-108','판교 그래비티 ','저희 매장을 방문해 주셔서 진심으로 감사드립니다.영등포역 근처에 위치하고있어 아침 9시부터 11시까지는 사람들이 붐비므로 참고하시길 바랍니다.최근 조회수가 제일 많은 매장으로 뽑히기도 했는데요. 그만큼 저희만의 특색있는 메뉴가 있으므로 참고하시기바랍니다.'
-                          , '070-4159-8897','판교 삼평동 산29-16','hollys@email.com','빵',10340,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');                          
+                          , '070-4159-8897','판교 삼평동 산29-16','hollys@email.com','빵',10340,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');                          
                     
                           
 INSERT INTO STORE VALUES('s-109','판교 요거프레소','저희 매장을 방문해주셔서 감사합니다.판교테크노벨리에 위치해서 아침9시부터 11시까지는 직장인들이 많이 붐빕니다.그리고 저희 매출의 1등은 청포도에이드가 베스트에요',
                             '031-724-2520','경기 성남시 분당구 대왕판교로 660 ,삼평동 670 유스페이스1 1층 146호','theliter@email.com', '빵',500,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052100','yyyy-mm-dd hh24:mi'),'N');
 
 INSERT INTO STORE VALUES('s-110','판교 서브웨이','저희 매장을 방문해주셔서 감사합니다.판교테크노벨리에 위치해서 아침9시부터 11시까지는 직장인들이 많이 붐빕니다.그리고 저희 매출의 1등은 청포도에이드가 베스트에요',
-                            '031-724-2520','삼평동 판교역로 192번길 14-2','theliter@email.com', '빵',500,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052100','yyyy-mm-dd hh24:mi'),'N');
+                            '031-724-2520','삼평동 판교역로 192번길 14-2','theliter@email.com', '빵',500,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052100','yyyy-mm-dd hh24:mi'),'Y');
 
 INSERT INTO STORE VALUES('s-111','판교 빵커요','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
-                          , '062-372-4755','삼평동 판교역로 192번길 16','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052000','yyyy-mm-dd hh24:mi'),'N');
+                          , '062-372-4755','삼평동 판교역로 192번길 16','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052000','yyyy-mm-dd hh24:mi'),'Y');
                           
 INSERT INTO STORE VALUES('s-112','판교 커피후','시애틀에 본사를 두고 있고 간단한 스낵과 무료 Wi-Fi를 제공하는 유명 커피 체인점입니다.저희 문정체인점은 매월스페셜메뉴가있으니 많은관심 부탁드립니다.','02-758-8860','판교역로 145라 스트리트 2동 2층','Munjung@email.com',
                           '커피',809,to_date('198009050800','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');                          
@@ -323,7 +296,6 @@ INSERT INTO STORE_POSITION VALUES('s-100','37.40259704259263','127.1057937652882
 INSERT INTO STORE_POSITION VALUES('s-101','37.40213705665957','127.10631265336175');
 INSERT INTO STORE_POSITION VALUES('s-102','37.40272015725536','127.10912576307398');
 INSERT INTO STORE_POSITION VALUES('s-103','37.40070301355638','127.10788049604447');
-INSERT INTO STORE_POSITION VALUES('s-104','37.40209731129592','127.11035593064082');
 INSERT INTO STORE_POSITION VALUES('s-105','37.4000970162332','127.11038687919142');
 INSERT INTO STORE_POSITION VALUES('s-106','37.39922518638413','127.10804778459772');
 INSERT INTO STORE_POSITION VALUES('s-107','37.400402141869456','127.10170226130225');
@@ -388,7 +360,6 @@ INSERT INTO PRODUCT_PICTURE values('product_image/크로와상.jpg','p-95','s-10
 INSERT INTO PRODUCT_PICTURE values('product_image/크로켓.jpg','p-96','s-100');
 INSERT INTO PRODUCT_PICTURE values('product_image/호밀빵.jpg','p-97','s-100');
 INSERT INTO PRODUCT_PICTURE values('product_image/커피콩빵.jpg','p-98','s-100');
-
 /* -- 사진 더 추가해야 될듯- 결제 내역에 넣기 위해--*/
 INSERT INTO PRODUCT_PICTURE values('product_image/호두찹쌀.jpg','p-100','s-101');
 INSERT INTO PRODUCT_PICTURE values('product_image/프레즈.jpg ','p-101','s-101');
@@ -399,23 +370,23 @@ INSERT INTO PRODUCT_PICTURE values('product_image/월넛쿠키칩.jpg','p-105','
 
 
 /* 공지사항 */
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'서버상의 오류로 인하여 2017년 07월 22일 부득이하게 서버점검 할 예정이오니 이용에 불편함을끼쳐드려 죄송합니다.빠른시일내에 복구하겠습니다.','2017년 07월 22일 서버점검 예정이오니 양해부탁드립니다.',TO_DATE('2017-06-24', 'yyyy-mm-dd'),9);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'문정 스타벅스체인점이 내부공사로 인하여 2017년 07월 22일부터 29일까지 이용을 할수 없다고 합니다.','스타벅스 문정점 내부공사로 인하여 07월 22일~07월 29일까지 휴무',TO_DATE('2017-06-28', 'yyyy-mm-dd'),5);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'1.협약된 매장과 서버운영자간의 더 나은 소통을 위해 문자전송서비스 추가,2.회원이 매장에 레시피 게시판에 사진 여러장 넣을수 있는 기능 추가 ','2017년 말에 서버 업데이트 예정',TO_DATE('2017-07-30', 'yyyy-mm-dd'),10);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'최근에 탈퇴한 회원정보는 관리자가 갖고있는지에 관하여 많은 회원분들이 문의를 하였었는데요.저희는 회원이 탈퇴한 순간 정보를 바로지워지므로 걱정안하셔도 됩니다.','탈퇴한 회원 정보와 관련된 공지사항',TO_DATE('2017-09-30', 'yyyy-mm-dd'),50);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 더리터점에서 아이스 아메리카노가격 관련 공지사항',TO_DATE('2017-06-28', 'yyyy-mm-dd'),42);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'서버상의 오류로 인하여 2017년 07월 22일 부득이하게 서버점검 할 예정이오니 이용에 불편함을끼쳐드려 죄송합니다.빠른시일내에 복구하겠습니다.','2017년 07월 22일 서버점검 예정이오니 양해부탁드립니다.',TO_DATE('2016-06-24', 'yyyy-mm-dd'),9);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'문정 스타벅스체인점이 내부공사로 인하여 2017년 07월 22일부터 29일까지 이용을 할수 없다고 합니다.','스타벅스 문정점 내부공사로 인하여 07월 22일~07월 29일까지 휴무',TO_DATE('2016-06-28', 'yyyy-mm-dd'),5);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'1.협약된 매장과 서버운영자간의 더 나은 소통을 위해 문자전송서비스 추가,2.회원이 매장에 레시피 게시판에 사진 여러장 넣을수 있는 기능 추가 ','2017년 말에 서버 업데이트 예정',TO_DATE('2016-06-30', 'yyyy-mm-dd'),10);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'최근에 탈퇴한 회원정보는 관리자가 갖고있는지에 관하여 많은 회원분들이 문의를 하였었는데요.저희는 회원이 탈퇴한 순간 정보를 바로지워지므로 걱정안하셔도 됩니다.','탈퇴한 회원 정보와 관련된 공지사항',TO_DATE('2017-02-28', 'yyyy-mm-dd'),50);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 더리터점에서 아이스 아메리카노가격 관련 공지사항',TO_DATE('2017-03-02', 'yyyy-mm-dd'),42);
 
 INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'서버상의 오류로 인하여 2017년 07월 22일 부득이하게 서버점검 할 예정이오니 이용에 불편함을끼쳐드려 죄송합니다.빠른시일내에 복구하겠습니다.','2017년 9월부로 협약매장의 가입승인기준이 업데이트 됩니다.',TO_DATE('2017-05-22', 'yyyy-mm-dd'),9);
 INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'문정 스타벅스체인점이 내부공사로 인하여 2017년 07월 22일부터 29일까지 이용을 할수 없다고 합니다.','2017년 11월부로 서버 오류 점검',TO_DATE('2017-06-28', 'yyyy-mm-dd'),9);
 INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'1.협약된 매장과 서버운영자간의 더 나은 소통을 위해 문자전송서비스 추가,2.회원이 매장에 레시피 게시판에 사진 여러장 넣을수 있는 기능 추가 ','판교이디아점 임시 휴업',TO_DATE('2017-08-24', 'yyyy-mm-dd'),10);
 INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'최근에 탈퇴한 회원정보는 관리자가 갖고있는지에 관하여 많은 회원분들이 문의를 하였었는데요.저희는 회원이 탈퇴한 순간 정보를 바로지워지므로 걱정안하셔도 됩니다.','물가 상승으로 인한 전반적인 가격 상승 ',TO_DATE('2017-10-30', 'yyyy-mm-dd'),50);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 더리터점에서 아이스 아메리카노가격 관련 공지사항',TO_DATE('2017-08-01', 'yyyy-mm-dd'),5);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 더리터점에서 아이스 아메리카노가격 관련 공지사항',TO_DATE('2017-11-02', 'yyyy-mm-dd'),5);
 
 INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'서버상의 오류로 인하여 2017년 07월 22일 부득이하게 서버점검 할 예정이오니 이용에 불편함을끼쳐드려 죄송합니다.빠른시일내에 복구하겠습니다.','매장별 이벤트를 매월 1일에 실시합니다. 많은 참여바랍니다.',TO_DATE('2017-11-22', 'yyyy-mm-dd'),9);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'문정 스타벅스체인점이 내부공사로 인하여 2017년 07월 22일부터 29일까지 이용을 할수 없다고 합니다.','모든 협약 매장들에게 공지 . 필독!11',TO_DATE('2017-10-28', 'yyyy-mm-dd'),37);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'1.협약된 매장과 서버운영자간의 더 나은 소통을 위해 문자전송서비스 추가,2.회원이 매장에 레시피 게시판에 사진 여러장 넣을수 있는 기능 추가 ','판교 스타벅스 이벤트 실시!',TO_DATE('2017-08-24', 'yyyy-mm-dd'),13);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'최근에 탈퇴한 회원정보는 관리자가 갖고있는지에 관하여 많은 회원분들이 문의를 하였었는데요.저희는 회원이 탈퇴한 순간 정보를 바로지워지므로 걱정안하셔도 됩니다.','2017년 6월 24일부로 관리자 교체 ',TO_DATE('2017-10-30', 'yyyy-mm-dd'),21);
-INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 빵커요점 2018년 1월부로  신축공사로 인한 임시휴업',TO_DATE('2017-06-01', 'yyyy-mm-dd'),44);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'문정 스타벅스체인점이 내부공사로 인하여 2017년 07월 22일부터 29일까지 이용을 할수 없다고 합니다.','모든 협약 매장들에게 공지 . 필독!11',TO_DATE('2017-11-30', 'yyyy-mm-dd'),37);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'1.협약된 매장과 서버운영자간의 더 나은 소통을 위해 문자전송서비스 추가,2.회원이 매장에 레시피 게시판에 사진 여러장 넣을수 있는 기능 추가 ','판교 스타벅스 이벤트 실시!',TO_DATE('2017-12-02', 'yyyy-mm-dd'),13);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'최근에 탈퇴한 회원정보는 관리자가 갖고있는지에 관하여 많은 회원분들이 문의를 하였었는데요.저희는 회원이 탈퇴한 순간 정보를 바로지워지므로 걱정안하셔도 됩니다.','2017년 6월 24일부로 관리자 교체 ',TO_DATE('2017-12-20', 'yyyy-mm-dd'),21);
+INSERT INTO notice_board_contents VALUES (notice_board_no_seq.nextval,'판교 더리터점과 논의 끝에 기존가격유지하겠다고 하였으니 걱정안하셔도 됩니다.','판교 빵커요점 2018년 1월부로  신축공사로 인한 임시휴업',TO_DATE('2017-12-24', 'yyyy-mm-dd'),44);
 
 
 
@@ -446,11 +417,7 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-102','o');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-102','s');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','c');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','j');
-INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','k');
-INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-104','h');
-INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-104','c');                         
-INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-104','r');                         
-INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-104','k');                         
+INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','k');                     
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-105','c');                         
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-105','p');                         
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-105','m');                         
@@ -478,7 +445,7 @@ INSERT INTO PRODUCT_GAP VALUES('U','0.05','p-84','s-100');
 --delete FROM PAYMENT_DETAILS;
 
 /*검정깨 유지*/
-select*from PAYMENT_DETAILS
+
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',5,'u-1','p-80','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170711', 'yyyy-mm-dd'),'r',8,'u-1','p-80','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170712', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',10);
