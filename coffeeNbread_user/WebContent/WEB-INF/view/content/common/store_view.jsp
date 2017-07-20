@@ -15,7 +15,6 @@ td{
 }
 </style>
 
-
 </head>
 <body>
 	
@@ -161,7 +160,7 @@ td{
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
-		        center: new daum.maps.LatLng(${requestScWope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표
+		        center: new daum.maps.LatLng(${requestScope.store.storePosition.x }, ${requestScope.store.storePosition.y }), // 지도의 중심좌표
 		        level: 3 // 지도의 확대 레벨
 		    };
 		
