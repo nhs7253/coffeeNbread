@@ -640,8 +640,10 @@ keyframes buttonFadeInUp { 0% {
 									<div class="col-sm-4">
 
 										<div class="input-container">
-											<input type="text" id="gender" name=userGender
-												required="required" /> <label for="gender">gender</label>
+										<input type="radio" name="userGender"id="gender" value="남자" checked="checked">남자
+													<input type="radio" name="userGender" id="gender" value="여자">여자 
+												<label for="gender">gender</label>
+											
 											<div class="bar"></div>
 										</div>
 									</div>
