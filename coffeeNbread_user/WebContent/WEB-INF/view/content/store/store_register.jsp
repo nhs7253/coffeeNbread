@@ -138,7 +138,7 @@ body {
 											<div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">매장 사진</label>
-													 <input	type="file" name="storePictureList">
+													<button>사진 추가</button><input	type="file" name="storePictureList" >
 												</div>
 											</div>
 										</div>

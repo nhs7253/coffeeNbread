@@ -632,7 +632,7 @@ keyframes buttonFadeInUp { 0% {
 									<div class="col-sm-4">
 
 										<div class="input-container">
-											<input type="Date" id="birth" name="userBirth"
+											<input type="Date hidden" id="birth" name="userBirth"
 												required="required" /> <label for="birth">birth(YYYY-MM-DD)</label>
 											<div class="bar"></div>
 										</div>

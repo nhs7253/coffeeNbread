@@ -42,7 +42,7 @@ display:inline;
 <table>
 <tr>
 
-<td><textarea rows="20" cols="120" disabled>
+<td><textarea rows="20" cols="120" disabled style="background-color:#FFFFFF">
 		 	${requestScope.noticeBoardContents.noticeBoardContent }
 		 </textarea></td>
 </tr>
