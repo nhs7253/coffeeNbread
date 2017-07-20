@@ -9,7 +9,7 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 </style>
-<h2>product_detail_</h2>
+<h2>제품 상세 정보</h2>
 <br><br><br><br><br>
 <div class="col-sm-2"></div>
 <div class="col-sm-4">

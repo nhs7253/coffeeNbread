@@ -113,7 +113,7 @@ form {
 				<tr>
 					<td align="center">
 					<img src="${initParam.rootPath }/up_image/${product.productPictureList[0].productPicture }"
-						alt="" width="150" height="150" /></td>
+						alt="" width="150" height="150" title="${product.productDetail }"/></td>
 				</tr>
 				<tr>
 					<td align="center">${product.productName }&nbsp;&nbsp;</td>
