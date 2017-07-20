@@ -3,15 +3,15 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style type="text/css">
-table, td {
-   
-}
+
 
 table {
    width: 700px;
    border-collapse: collapse;
 }
-
+th{
+text-align:center;
+}
 td {
    padding: 5px; /* //td 간 간격 */
 }
@@ -20,8 +20,8 @@ td {
 </head>
 <body>
 	
-
-	<h2>유저 추천 가게 목록</h2>
+<br>
+	<h2>자주 방문하는 매장</h2>
 	<br><br><br>
 
 	
@@ -46,14 +46,14 @@ td {
 					###################################################### --%>
 				<c:forEach items="${requestScope.list }" var="list">
 					<tr>
-						<td>${list.store.storeId}</td>
-						<td><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
-						<td>${list.store.storePhone}</td>
+						<td style="text-align:center;">${list.store.storeId}</td>
+						<td style="text-align:center;"><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
+						<td style="text-align:center;">${list.store.storePhone}</td>
 						<td>${list.store.storeAddress}</td>
-						<td>${list.store.storeEmail}</td>
-						<td>${list.store.storeHits}</td>
-						<td>${list.store.storeOpenFormat}</td>
-						<td>${list.store.storeCloseFormat}</td>
+						<td style="text-align:center;">${list.store.storeEmail}</td>
+						<td style="text-align:center;">${list.store.storeHits}</td>
+						<td style="text-align:center;">${list.store.storeOpenFormat}</td>
+						<td style="text-align:center;">${list.store.storeCloseFormat}</td>
 					</tr>
 				</c:forEach>
 	

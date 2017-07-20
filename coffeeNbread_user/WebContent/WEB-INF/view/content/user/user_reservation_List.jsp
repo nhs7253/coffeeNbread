@@ -31,10 +31,10 @@ td {
 <script type="text/javascript">
 
 </script>
-	
+	<br>
 	<center><h2>${requestScope.userName }님의 예약 현황</h2></center>
 
-  <br><br><br>
+  <br><br>
 
 <br>
 
@@ -72,7 +72,7 @@ td {
 
 		</tbody>
 	</table>
-</div>
+<br><p>
 	
 <center>
 

@@ -113,16 +113,17 @@ li, a {
       	<li class="has-children users"><a href="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" style="font-size:20px"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;QnA</a></li>
 		<br>
 		
-		<li class="has-children users"><a href="#0" style="font-size:20px"><span class="glyphicon glyphicon-tower"></span>&nbsp;&nbsp;ADMIN</a>
-		<ul>
-			<!-- 전체 관리자 권한 -->
-			<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
-    			<li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
-	            <li><a href="${initParam.rootPath }/admin/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
-	            <li><a href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
-		    </sec:authorize>
-	    </ul>
-	    </li>
+		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
+			<li class="has-children users"><a href="#0" style="font-size:20px"><span class="glyphicon glyphicon-tower"></span>&nbsp;&nbsp;ADMIN</a>
+				<ul>
+					<!-- 전체 관리자 권한 -->
+					
+		    			<li><a href="${initParam.rootPath }/admin/userManagementListController.do">관리자 - 유저 매장 관리 목록</a></li>
+			            <li><a href="${initParam.rootPath }/admin/findpaymentOptionListController.do">플렛폼 지원 결제 목록</a></li>
+			            <li><a href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do">사용자 목록</a></li>
+			    </ul>
+		    </li>
+	    </sec:authorize>
      </ul>
    </nav>
  

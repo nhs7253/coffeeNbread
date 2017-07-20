@@ -353,9 +353,6 @@ public class SalesVolumeController {
 				service.modifyProductTodayCountByGap(storeIdList.get(i), productList.get(j).getProductId(), identifyCode);
 			}
 		}
-		System.out.println("productList" + productList);
-		System.out.println("storeIdList" + storeIdList);
-		System.out.println("예상생산량 변경");
 	}
 	
 	//*******************

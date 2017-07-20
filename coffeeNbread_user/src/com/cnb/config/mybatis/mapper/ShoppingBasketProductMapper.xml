@@ -372,7 +372,11 @@
 	</select>
 
 
-
+	<delete id="deleteShoppingBasketProductToPaymentComplete" parameterType="map">
+		DELETE FROM shopping_basket_product
+		WHERE store_id = #{storeId}
+		AND user_id=#{userId}
+	</delete>
 
 
 

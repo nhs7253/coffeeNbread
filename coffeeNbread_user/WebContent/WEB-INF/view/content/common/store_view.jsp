@@ -21,13 +21,11 @@ h1 {
 	font-family: 'title';
 	font-size: 45px
 }
-@font-face {
-	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
-}
-h1 {
-	font-family: 'title';
-	font-size: 45px
+
+textarea {
+
+  border-color:#FFFFFF;
+
 }
 </style>
 
@@ -35,24 +33,34 @@ h1 {
 <body>
 	
 	<div class="col-sm-1"></div>
+	<div class="col-sm-12">
 	<div class="col-sm-4">
 	<br><br>
-	<h1>매장 상세 정보</h1>
-
+	<h1>매장 정보</h1>
 	<br>
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
 			<img
 				src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }"
-				alt="" width="100%" />
+				alt="" style="width:380px; height: 350px;"/>
 			
 		</c:if>
-		<div id="map" style="width: 100%; height: 250px;"></div>
+		
 
 	</div>
-	
-	<div style="float:none">
+	<div class="col-sm-6">
+	<div style="float:right">
 
+		<c:if test="${requestScope.authority }">
+			<form action="${initParam.rootPath }/findProductListController.do" method="post">
+				<sec:csrfInput />
+				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
+				<button type="submit" class="btn btn btn-link btn-lg">
+					<i class="glyphicon glyphicon-list"></i>&nbsp;제품 관리
+				</button>
+			</form>
+		</c:if>
+		
 		<form
 			action="${initParam.rootPath }/user/userFindProductListController.do"
 			method="post">
@@ -72,10 +80,9 @@ h1 {
 			</button>
 		</form>
 		
-		
+		<br><br><br><br><br>
 	</div>
-	<div class="col-sm-6">
-	<br><br><br><br><br><br>
+	
 		<table class="table" width="100%">
 			<tr class="form-group">
 			<th>매장명</th>
@@ -117,15 +124,12 @@ h1 {
 
 			<tr class="form-group">
 			<th>매장 소개</th>
-				
 				<td>
-				<div class="col-xs-10">
-						<textarea rows="15" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }
-						</textarea>
-				</div>
-					</td>
+					<textarea rows="6" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }</textarea>
+				</td>
 			</tr>
 		</table>
+	
 	
 	<div style="float:right">
 		<!-- 회원만 보임 -->
@@ -148,7 +152,6 @@ h1 {
 		
 		<!-- 본인만 보임 -->
 		<c:if test="${requestScope.authority }">
-		
 			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
 				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>&nbsp;수정</button>
 			</form>
@@ -156,23 +159,17 @@ h1 {
 			<form action="${initParam.rootPath }/removeStoreController.do">
 					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;삭제</button>
 			</form>
-			
-			<form action="${initParam.rootPath }/findProductListController.do" method="post">
-				<sec:csrfInput />
-				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>&nbsp;제품 관리</button><br>
-			</form>
-			
 		</c:if>
-
 	</div>
+	
 
 </div>
-	
+<div id="map" style="width:850px; height: 250px;"></div>
+</div>
+
 	<div class="col-sm-1"></div>
 
-	<script type="text/javascript"
-		src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=414b7d7551adbb016aef1956f977d20f"></script>
 	<script>
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

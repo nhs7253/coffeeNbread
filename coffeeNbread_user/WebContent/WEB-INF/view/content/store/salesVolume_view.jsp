@@ -133,6 +133,8 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
+								min: 0,
+								max: 50,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -278,6 +280,8 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
+								min: 0,
+								max: 150,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -785,6 +789,8 @@ $(document).ready(function(){
 								label: "제품명"
 							},
 							yaxis: {
+								min: 0,
+								max: 50,
 	 							tickOptions: {
 									formatString: '%d'
 								},
@@ -935,7 +941,6 @@ $(document).ready(function(){
 						},
 						yaxis: {
 							min: 0,
-							max: 50,
  							tickOptions: {
 								formatString: '%d'
 							},

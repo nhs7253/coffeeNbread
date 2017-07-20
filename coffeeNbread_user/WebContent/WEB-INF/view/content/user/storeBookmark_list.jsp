@@ -9,6 +9,10 @@ table {
 	width: 700px;
 	border-collapse: collapse;
 }
+th,td{
+
+text-align:center;
+}
 
 td {
 	padding: 5px; /* //td 간 간격 */
@@ -18,8 +22,8 @@ td {
 </head>
 <body>
 
-
-	<h2>BOOKMARK</h2>
+<br>
+	<h2>즐겨찾기</h2>
 	
 
 <div class="col-sm-12">
@@ -30,7 +34,7 @@ td {
 				<div style="float:right">
 				<div class="form-group col-xs-8" >
 					<input type="text" name="keyword" class="form-control" /></div>
-				<button type="submit" class="btn form-group col-xs-4" >
+				<button type="submit" class="btn form-group col-xs-4" style="background-color:#FFCC33">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>
 				</div>
@@ -83,7 +87,7 @@ td {
 
 			</tbody>
 		</table>
-				<button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-trash"></i>&nbsp;삭제</button>
+				<button type="submit" class="btn btn-danger" style="float:right"><i class="glyphicon glyphicon-trash"></i>&nbsp;삭제</button>
 	</form>
 
 

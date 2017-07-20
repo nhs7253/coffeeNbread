@@ -163,5 +163,13 @@ public class ShoppingBasketProductDaoImpl implements ShoppingBasketProductDao {
 		return session.selectOne(makeSql("selectProductPriceByUserIdAndStoreId"), info);
 	}
 
+	@Override
+	public int deleteShoppingBasketProductToPaymentComplete(String userId, String storeId) {
+		Map<String, String> info = new HashMap<String, String>();
+		info.put("userId", userId);
+		info.put("storeId", storeId);
+		return session.delete(makeSql("deleteShoppingBasketProductToPaymentComplete"), info);
+	}
+
 
 }

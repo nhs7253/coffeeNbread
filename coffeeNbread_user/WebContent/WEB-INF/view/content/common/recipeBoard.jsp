@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -129,8 +130,6 @@ h2 {
 						날짜순</option>
 					<option value="recipeBoardHits"
 						${param.select eq "recipeBoardHits" ? "selected" :""}>조회순</option>
-					<option value="recommendCount"
-						${param.select eq "recommendCount" ? "selected" :""}>추천순</option>
 					<option value="userId" ${param.select eq "userId" ? "selected" :""}>내가
 						쓴글</option>
 
@@ -172,7 +171,6 @@ h2 {
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
-				<th>추천순</th>
 				<%-- <c:choose>
                 <c:when test="${param.userId != null}">
                 <th>내가 쓴 글 조회</th>
@@ -196,9 +194,10 @@ h2 {
 					</c:forEach>
 					<td ><a href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}&userId=${list.userId}">${list.recipeBoardTitle}</a></td>
 					<td>${list.userId}</td>
-					<td>${list.recipeBoardDate}</td>
+					<td><fmt:formatDate value="${list.recipeBoardDate}" pattern="yyyy-MM-dd "/></td>
+					
 					<td>${list.recipeBoardHits}</td>
-					<td>${list.recommendCount}</td>
+
 
 
 

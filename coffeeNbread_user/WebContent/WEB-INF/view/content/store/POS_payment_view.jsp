@@ -17,9 +17,6 @@
 <!--결제하기 누르면 결제내역에 등록  -->
 
 <style type="text/css">
-table, td {
-	border: 1px solid black;
-}
 
 table {
 	width: 500px;
@@ -32,19 +29,20 @@ td {
 </style>
 
 
-
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
 <h2>결제 페이지</h2>
-
+<br><br>
 <form
 	action="${initParam.rootPath }/user/findAllProductPriceController.do">
 	<input type="hidden" name="storeId"> <input type="hidden"
 		name="productId">
 	<sec:csrfInput />
 </form>
-결제할 목록
-<table class="w3-table-all">
+
+<table class="table">
 	<thead>
-		<tr class="w3-blue">
+		<tr>
 			<th>제품명</th>
 			<th>가격</th>
 			<th>개수</th>
@@ -71,11 +69,14 @@ td {
 
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
 
-<p>
+<div style="float:right">
+	총금액 : <input type="text" value="${sessionScope.posPaymentTotal }" disabled style="border-color:white;background-color:transparent;">
 
-	총금액<input type="text" value="${sessionScope.posPaymentTotal }">
-</p>
 
 
 
@@ -87,6 +88,11 @@ td {
 		</c:forEach>
 	</select>
 	<br>
-	<br>
-	<input type="submit" value="결제하기">
-</form>
+	
+	<div style="float:right">
+	<button type="submit" class="btn">
+					<i class="glyphicon glyphicon-card"></i>&nbsp;결제하기 
+			</button>
+</div>
+</form></div></div><div class="col-sm-2"></div>
+

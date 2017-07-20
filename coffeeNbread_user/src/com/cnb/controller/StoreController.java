@@ -85,7 +85,6 @@ public class StoreController {
 			BindingResult errors, HttpServletRequest request, ModelMap map) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		System.out.println("매장 등록 : " + storeRegisterForm);
 		
 		if (errors.hasErrors()) {
 			modelAndView.setViewName("index.tiles"); 
@@ -145,7 +144,7 @@ public class StoreController {
 			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | DuplicatedOptionCategoryNameException
 				| DuplicatedStoreCategorytNameException | DuplicatedStorePictureException e) {
-			System.out.println(e.getMessage());
+			session.setAttribute("message", e.getMessage());	
 			modelAndView.setViewName("redirect:/user/callStoreRegisterController.do"); 
 			return modelAndView;
 		}
@@ -251,7 +250,7 @@ public class StoreController {
 			storeRetrun = storeService.modifyStore(store, oclist, storePictureList, storeRegisterForm.getPaymentIdList(), new StorePosition(storeRegisterForm.getStoreId(),storeRegisterForm.getX() ,storeRegisterForm.getY()));
 			session.setAttribute("storeInfo", storeRetrun);
 		} catch (DuplicatedStoreIdException | StorePictureNotFoundException | DuplicatedOptionCategoryNameException e) {
-			System.out.println(e.getMessage());
+			session.setAttribute("message", e.getMessage());			
 			modelAndView.setViewName("redirect:/user/callStoreModifyController.do"); 
 			return modelAndView;
 		}	

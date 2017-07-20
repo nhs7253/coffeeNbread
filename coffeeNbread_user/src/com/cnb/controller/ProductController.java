@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -74,7 +75,7 @@ public class ProductController {
 	
 	//제품 등록 (+제품 사진 등록)
 	@RequestMapping("addProductController")
-	public String addProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors, HttpServletRequest request, ModelMap map) throws Exception {
+	public String addProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors, HttpServletRequest request, ModelMap map, HttpSession session) throws Exception {
 		if(errors.hasErrors()) {
 			return "store/product_register.tiles";
 		}
@@ -105,6 +106,7 @@ public class ProductController {
 		try {
 			service.addProduct(product, optionDetail);
 		} catch (DuplicatedProductIdOrProductNameException | DuplicatedProductPictureException e ) {
+			session.setAttribute("message", e.getMessage());
 			return "store/product_register.tiles";
 		}
 		return "store/product_success.tiles";
@@ -112,7 +114,7 @@ public class ProductController {
 
 	//제품 상세 수정
 	@RequestMapping("modifyProductController")
-	public ModelAndView modifyProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors, HttpServletRequest request, ModelMap map) throws ProductNotFoundException, Exception {
+	public ModelAndView modifyProductController(@ModelAttribute("product") @Valid ProductRegisterForm productRegisterForm, BindingResult errors, HttpServletRequest request, ModelMap map, HttpSession session) throws ProductNotFoundException, Exception {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -159,6 +161,7 @@ public class ProductController {
 			service.modifyProduct(product, optionDetail, fileName);
 			product = service.findProductById(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), productRegisterForm.getProductId());
 		} catch (DuplicatedProductPictureException e) {
+			session.setAttribute("message", e.getMessage());
 			modelAndView.setViewName("store/product_update.tiles");
 			return modelAndView;
 		}

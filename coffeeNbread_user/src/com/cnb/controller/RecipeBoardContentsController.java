@@ -115,7 +115,7 @@ public class RecipeBoardContentsController {
 	//---------------------------------------------게시글 내용과 댓글목록.---------------------------------------------------
 	@RequestMapping("/common/viewRecipeBoardContentsByReplyListController")
 	public ModelAndView ViewRecipeBoardContentsByReplyListController(
-			@RequestParam(value = "recipeBoardNo", required = false) Integer recipeBoardNo, Integer page, String storeId, String userId) {
+			@RequestParam(value = "recipeBoardNo", required = false) Integer recipeBoardNo, Integer page, String storeId, String userId, HttpSession session) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		
@@ -144,6 +144,7 @@ public class RecipeBoardContentsController {
 		try {
 			map = recipeBoardService.viewRecipeBoardContentsByReplyListService(recipeBoardNo, page);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			modelAndView.setViewName("redirect:/common/findRecipeBoardContentsByMethod.do?storeId="+storeId);
 			return modelAndView; // 에러 발생 시 이동할 경로
 		}
@@ -161,14 +162,16 @@ public class RecipeBoardContentsController {
 	}
 
 	@RequestMapping("/user/removeRecipeBoardContentsController")
-	public String removeRecipeBoardContentsController(Integer recipeBoardNo, String userId, @RequestParam(value="storeId",required=false) String storeId){
+	public String removeRecipeBoardContentsController(Integer recipeBoardNo, String userId, @RequestParam(value="storeId",required=false) String storeId, HttpSession session){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	
 		
 		try {
 			recipeBoardService.removeRecipeBoardContents(recipeBoardNo, authentication);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/findRecipeBoardContentsByMethod.do?storeId="+storeId;
 		} catch (QnaBoardContentsAuthenticationException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/findRecipeBoardContentsByMethod.do?storeId="+storeId;
 		}
 		
@@ -187,9 +190,16 @@ public class RecipeBoardContentsController {
 		if(errors.hasErrors()){
 			return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=" + recipeBoardNo + "&userId=" + recipeBoardContentsForm.getUserId(); //에러 발생
 		}
-				
+		
+		
 		RecipeBoardContents recipeBoardContents = new RecipeBoardContents();
 		BeanUtils.copyProperties(recipeBoardContentsForm, recipeBoardContents);
+				
+		if(recipeBoardContentsForm.getRecipeBoardPicture() != null){
+			recipeBoardContents.setRecipeBoardPicture(recipeBoardContentsForm.getRecipeBoardPicture().getOriginalFilename());
+		}
+		
+		
 		try {
 			recipeBoardService.modifyRecipeBoardContents(recipeBoardNo,recipeBoardContents);
 		} catch (ContentsNotFoundException e) {
