@@ -184,7 +184,7 @@
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
 			 p:order="2"/>
-	 
+	 <!-- p:prefix="/WEB-INF/view/" p:suffix=".jsp" -->
 			
 	<!-- etc -->
 	

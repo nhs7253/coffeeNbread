@@ -3,6 +3,7 @@ package com.cnb.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -151,17 +152,16 @@ public class adminController {
 	 * @return String - 응답 경로
 	 */
 	@RequestMapping("/admin/adminRemoveUserController")
-	public String adminRemoveUserController(@RequestParam(value="userId",required=false) String userId, String storeId){
+	public String adminRemoveUserController(@RequestParam(value="userId",required=false) String userId, String storeId, HttpSession session){
 		
 		if(userId == null){
-			
-			System.out.println("user = "+ userId);
 			return "redirect:/admin/findUserListBySelectToKeywordController.do"; //탈퇴 시도 실패
 		}
 
 		try {
 			generalUserService.removeUser(userId, storeId);
 		} catch (UserManageException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/admin/findUserListBySelectToKeywordController.do"; //에러 페이지 이동
 		}
 

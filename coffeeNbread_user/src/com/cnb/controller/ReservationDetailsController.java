@@ -67,18 +67,15 @@ public class ReservationDetailsController {
 		}
 		
 		Map<String, Object> map = service.findReservationDetailsListByStoreId(findReservationDetailsForm.getPage(), ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-	
+
 		List reservationList = (List)map.get("list");
 		
-		
-				
+
 		List<String> userNameList = new ArrayList<>();
 		List<String> phoneNumList = new ArrayList<>();
 		List<String> userIdList = new ArrayList<>();
 		
-		
 		for(int i=0; i<reservationList.size(); i++) {
-//			((ReservationDetails)reservationList.get(i)).setReservationConfirm(findReservationDetailsForm.getReservationConfirm());
 			
 			GeneralUser user = userService.findUser(((ReservationDetails)reservationList.get(i)).getUserId());
 			
@@ -112,8 +109,6 @@ public class ReservationDetailsController {
 			return modelAndView;
 		}
 		
-		System.out.println("예약상세 시간 : " + reservationTime);	//KST
-
 		List<ReservationDetails> reservationDetail = service.findReservationDetailByStoreIdAndReservationTimeAndUserId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), reservationTime, userId);
 
 		GeneralUser user = userService.findUser(reservationDetail.get(0).getUserId());
@@ -147,14 +142,9 @@ public class ReservationDetailsController {
 	@ResponseBody
 	public Object changeReservationConfirmByClickButtonController(@RequestParam(value="userId", required=false) String userId, @RequestParam(value="reservationTime", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date reservationTime) {
 		
-		System.out.println("알람전송 시간 : " + reservationTime);	//KST
-		System.out.println("알람전송 유저 : " + userId);
-		System.out.println("알람전송 매장 : " + ((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId());
-		
+			
 		List<ReservationDetails> reservationDetails = service.findReservationDetailByStoreIdAndReservationTimeAndUserId(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), reservationTime, userId);
-		
-		System.out.println("알람전송 : " + reservationDetails);
-		
+				
 		for(int i=0; i<reservationDetails.size(); i++) {
 			reservationDetails.get(i).setReservationConfirm(new Date());
 		}
@@ -172,21 +162,16 @@ public class ReservationDetailsController {
 	public String selectRemoveReservationDetailsController(@ModelAttribute("reservationDetailsSelectForDelete") @Valid ReservationDetailsSelectForDeleteForm reservationDetailsSelectForDeleteForm, BindingResult errors) {
 		
 		if(errors.hasErrors()) {
-			System.out.println(errors.getAllErrors());
 			return "redirect:/findReservationDetailsController.do";
 		}
-		
-		System.out.println("ReservationTimeList : " + reservationDetailsSelectForDeleteForm.getReservationNoList());
-		
+				
 		List list = reservationDetailsSelectForDeleteForm.getReservationNoList();
 		List<ReservationDetails> reservationList = new ArrayList<>();
 		
 		for(int i=0; i<list.size(); i++) {
 			ReservationDetails detail = service.findReservationDetailsByReservationNo(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), Integer.parseInt(String.valueOf(list.get(i))));
-			System.out.println("detail : " + detail);
 			reservationList.add(detail);
 		}
-		System.out.println("reservationList : " + reservationList);
 		
 		service.findRemoveReservationDetails(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getStoreId(), reservationList);
 		return "redirect:/findReservationDetailsController.do";
@@ -200,16 +185,13 @@ public class ReservationDetailsController {
 	public ModelAndView findReservationDetailsController(
 			@ModelAttribute("reservationDetails") @Valid ReservationDetailsViewForm reservationDetailsViewForm,
 			BindingResult errors, HttpServletRequest request)  {
-         System.out.println("-----------reservation---------------진입");
         ModelAndView modelAndView = new ModelAndView();
 		if (errors.hasErrors()) {
-			System.out.println("-----------------오류발생----------------");
 			modelAndView.setViewName("index.tiles"); // 임시로 해둠.
 			return modelAndView; // 에러 발생
 		}
 		Map<String, Object> map = new HashMap<>();
        map=rdService.findReservationDetailsListByUserId(reservationDetailsViewForm.getPage(), ((GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId());                
-		System.out.println("뽑으려는 것 :"+map.get("list"));
 	  modelAndView.setViewName("user/user_reservation_List.tiles");
 	modelAndView.addObject("list", map.get("list"));
 		//유저이름 보내기

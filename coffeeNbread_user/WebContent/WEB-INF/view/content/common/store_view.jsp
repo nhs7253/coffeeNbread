@@ -13,30 +13,39 @@ th{
 td{
 	 width:70%;
 }
-</style>
 
+
+
+textarea {
+
+  border-color:#FFFFFF;
+
+}
+
+
+</style>
 
 </head>
 <body>
 	
 	<div class="col-sm-1"></div>
-	
+	<div class="col-sm-12">
 	<div class="col-sm-4">
-	<h1>STORE_DETAIL</h1>
+	<h1>매장 정보</h1>
 	<hr>
-	<br>
+	
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
 			<img
 				src="${initParam.rootPath }/up_image/${requestScope.store.storePictureList[0].storePicture }"
-				alt="" width="100%" />
+				alt="" style="width:380px; height: 350px;"/>
 			
 		</c:if>
-		<div id="map" style="width: 100%; height: 250px;"></div>
+		
 
 	</div>
-	
-	<div style="float:none">
+	<div class="col-sm-6">
+	<div style="float:right">
 
 		<form
 			action="${initParam.rootPath }/user/userFindProductListController.do"
@@ -58,9 +67,10 @@ td{
 		</form>
 		
 		
+		<br><br><br>
 	</div>
-	<div class="col-sm-6">
-	<br><br><br><br><br><br>
+	
+	
 		<table class="table" width="100%">
 			<tr class="form-group">
 				<th>매장명</th>
@@ -104,13 +114,14 @@ td{
 			<th>매장 소개</th>
 				
 				<td>
-				<div class="col-xs-10">
-						<textarea rows="15" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }
+				
+						<textarea rows="6" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }
 						</textarea>
-				</div>
+				
 					</td>
 			</tr>
 		</table>
+	
 	
 	<div style="float:right">
 		<!-- 회원만 보임 -->
@@ -151,13 +162,15 @@ td{
 		</c:if>
 
 	</div>
+	
 
 </div>
-	
+<div id="map" style="width:850px; height: 250px;"></div>
+</div>
+
 	<div class="col-sm-1"></div>
 
-	<script type="text/javascript"
-		src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=414b7d7551adbb016aef1956f977d20f"></script>
 	<script>
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

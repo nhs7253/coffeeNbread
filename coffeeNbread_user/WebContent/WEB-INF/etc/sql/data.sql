@@ -241,6 +241,8 @@ INSERT INTO user_authority VALUES('us', 'ROLE_CNB_STORE');
 INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
 
 /* 매장 등록시 - 매장사진, 매장좌표 */
+select*from store
+delete from store
 INSERT INTO STORE VALUES('s-100','판교 이디아','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
                           , '062-372-4755','판교동 625에 위치한 판교 이디아점입니다.','PEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');
                           
@@ -255,8 +257,6 @@ INSERT INTO STORE VALUES('s-103','판교 할리스','저희 매장을 방문해 
                           , '070-4159-8897','서울 영등포구 경인로 847에 위치한 영등포 할리스점입니다.','hollys@email.com','빵',10340,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009051000','yyyy-mm-dd hh24:mi'),'N');                          
                     
                           
-INSERT INTO STORE VALUES('s-104','판교 더리터점','저희 매장을 방문해주셔서 감사합니다.판교테크노벨리에 위치해서 아침9시부터 11시까지는 직장인들이 많이 붐빕니다.그리고 저희 매출의 1등은 청포도에이드가 베스트에요',
-                            '031-724-2520','경기 성남시 분당구 대왕판교로 660 ,삼평동 670 유스페이스1 1층 146호','theliter@email.com', '빵,커피',500,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052100','yyyy-mm-dd hh24:mi'),'Y');
 
 INSERT INTO STORE VALUES('s-105','판교 코피아','ㅇ'
                           , '062-372-4755','삼평동 691-1 1층 코피아','GwangjuEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');
@@ -307,7 +307,6 @@ INSERT INTO STORE_PICTURE VALUES ('store_image/판교이디아.jpg','s-100');
 INSERT INTO STORE_PICTURE VALUES ('store_image/판교스타벅스.jpg', 's-101');
 INSERT INTO STORE_PICTURE VALUES ('store_image/판교엔젤리너스.jpg', 's-102');
 INSERT INTO STORE_PICTURE VALUES ('store_image/판교할리스.jpg',  's-103');
-INSERT INTO STORE_PICTURE VALUES ('store_image/판교더리터점.jpg', 's-104');
 INSERT INTO STORE_PICTURE VALUES ('store_image/판교코피아.jpg', 's-105');
 INSERT INTO STORE_PICTURE VALUES ('store_image/판교파리바게트.jpg','s-106');
 INSERT INTO STORE_PICTURE VALUES ('store_image/판교뚜레주르.jpg', 's-107');

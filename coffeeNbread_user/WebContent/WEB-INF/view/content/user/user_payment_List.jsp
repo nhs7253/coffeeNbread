@@ -22,9 +22,10 @@ td {
 
 
 
-<br><br>
+<br>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
+
 	<center><h2>${requestScope.userName }님의 결제 현황</h2></center>
 	<br><br><br>
 	<table class="table table-hover">
@@ -56,9 +57,10 @@ td {
 			</c:forEach>	
 		</tbody>
 	</table>
-</div>
+
+<p>
 <center>
-	<p>
+	
 		<%--######################################################
 															페이징 처리
 				###################################################### --%>
@@ -129,6 +131,6 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/user/findPaymentDetailsController.do?page=${requestScope.pageBean.totalPage}">마지막
-			페이지</a></p></center>
+			페이지</a></center>
 </div>
 <div class="col-sm-1"></div>

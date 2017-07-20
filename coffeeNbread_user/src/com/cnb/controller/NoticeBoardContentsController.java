@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -61,7 +62,7 @@ public class NoticeBoardContentsController {
 	 * @return 반환 경로
 	 */
 	@RequestMapping("/admin/modifyNoticeBoardContentsController")
-	public String modifyNoticeBoardContentsController(@ModelAttribute("noticeBoardContents") @Valid NoticeBoardContentsForm noticeBoardContentsForm, BindingResult errors){
+	public String modifyNoticeBoardContentsController(@ModelAttribute("noticeBoardContents") @Valid NoticeBoardContentsForm noticeBoardContentsForm, BindingResult errors, HttpSession session){
 		if(errors.hasErrors()){
 			return "redirect:/common/viewNoticeBoardContentsController.do?noticeBoardNo="+noticeBoardContentsForm.getNoticeBoardNo();
 		}
@@ -71,6 +72,7 @@ public class NoticeBoardContentsController {
 			noticeBoardContents.setNoticeBoardContent(noticeBoardContentsForm.getNoticeBoardContent());
 			noticeBoardContentsService.modifyNoticeBoardContentsService(noticeBoardContents);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/viewNoticeBoardContentsController.do?noticeBoardNo="+noticeBoardContentsForm.getNoticeBoardNo();
 		}
 		return "redirect:/common/viewNoticeBoardContentsController.do?noticeBoardNo="+noticeBoardContentsForm.getNoticeBoardNo();
@@ -83,13 +85,14 @@ public class NoticeBoardContentsController {
 	 * @return 반환 경로
 	 */
 	@RequestMapping("/admin/modifySettingNoticeBoardContentsController")
-	public String modifySettingNoticeBoardContentsController(@RequestParam(value="noticeBoardNo", required=false) Integer noticeBoardNo, HttpServletRequest request){
+	public String modifySettingNoticeBoardContentsController(@RequestParam(value="noticeBoardNo", required=false) Integer noticeBoardNo, HttpServletRequest request, HttpSession session){
 		if(noticeBoardNo == null){
 			return "redirect:/common/viewNoticeBoardContentsController.do?noticeBoardNo="+noticeBoardNo;
 		}
 		try {
 			request.setAttribute("noticeBoardContents", noticeBoardContentsService.findNoticeBoardContentsByNoticeBoardNoService(noticeBoardNo));
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/viewNoticeBoardContentsController.do?noticeBoardNo="+noticeBoardNo;
 		}
 	
@@ -143,7 +146,7 @@ public class NoticeBoardContentsController {
 	 * @return 반환 경로
 	 */
 	@RequestMapping("/common/viewNoticeBoardContentsController")
-	public ModelAndView viewNoticeBoardContentsController(@RequestParam(value="noticeBoardNo", required=false) Integer noticeBoardNo){
+	public ModelAndView viewNoticeBoardContentsController(@RequestParam(value="noticeBoardNo", required=false) Integer noticeBoardNo, HttpSession session){
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(noticeBoardNo == null){
@@ -154,6 +157,7 @@ public class NoticeBoardContentsController {
 		try {
 			noticeBoardContents = noticeBoardContentsService.viewNoticeBoardContentsByNoticeBoardNoService(noticeBoardNo);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			modelAndView.setViewName("redirect:/common/findNoticeBoardContentsPagingListController.do");
 			return modelAndView; //에러 발생 시 이동할 경로
 		}
