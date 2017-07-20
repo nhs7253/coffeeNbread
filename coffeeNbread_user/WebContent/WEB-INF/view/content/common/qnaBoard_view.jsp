@@ -13,28 +13,30 @@ form {
 
 
 
-	<h1>게시글 내용</h1>
-	<hr>
+	
+	
 	<br>
 	<div class="col-sm-2"></div>
 
 	<div class="col-sm-8">
+	<h1>Q&A</h1>
+	<br><br>
 		제목 : <input type="text" value="${requestScope.content.qnaBoardTitle }"
-			disabled style="background-color:transparent"><br> 내용<br>
-		<textarea style="background-color:transparent" rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
+			disabled style="background-color:transparent" size="60">
 
-		<p />
-		<div style="float: right">
+		
 			<c:if test="${requestScope.modifyAuthority }">
 				<form
 					action="${initParam.rootPath }/user/settingQnaBoardContentsController.do">
 					<sec:csrfInput />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
 					<input type="hidden" name="qnaBoardNo"
 						value="${requestScope.content.qnaBoardNo }" /> <input
 						type="hidden" name="qnaBoardWriter"
 						value="${requestScope.content.qnaBoardWriter }" />
-					<button type="submit" class="btn">
-						<i class="glyphicon glyphicon-pencil"></i>수정
+					<button type="submit" class="btn btn-info" >
+						<i class="glyphicon glyphicon-pencil"></i>&nbsp;수정
 					</button>
 				</form>
 			</c:if>
@@ -48,14 +50,15 @@ form {
 						value="${requestScope.content.qnaStoreId }" /> <input
 						type="hidden" name="qnaBoardWriter"
 						value="${requestScope.content.qnaBoardWriter }" />
-					<button type="submit" class="btn">
-						<i class="glyphicon glyphicon-trash"></i>삭제
+					<button type="submit" class="btn btn-danger" >
+						<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
 					</button>
 				</form>
 			</c:if>
 
-		</div>
-
+		
+<br> 내용<br>
+		<textarea style="background-color:transparent" rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
 
 
 		<table class="w3-table-all">
@@ -83,7 +86,7 @@ form {
 											type="hidden" name="qnaBoardWriter"
 										value="${requestScope.content.qnaBoardWriter }" />
 									<button type="submit" class="btn-custom">
-										<i class="glyphicon glyphicon-pencil"></i>수정
+										<i class="glyphicon glyphicon-pencil"></i>
 									</button>
 								</form>&nbsp;&nbsp;&nbsp;
 						</td>
@@ -100,7 +103,7 @@ form {
 											type="hidden" name="qnaBoardWriter"
 											value="${requestScope.content.qnaBoardWriter }" />
 									<button type="submit" class="btn-custom">
-										<i class="glyphicon glyphicon-trash"></i>삭제
+										<i class="glyphicon glyphicon-trash"></i>
 									</button>
 								</form>
 							
@@ -112,7 +115,24 @@ form {
 		</table>
 
 
-
+<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE,ROLE_CNB_ADMIN')">
+			<form
+				action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
+				<sec:csrfInput />
+				<textarea rows="5" cols="80" name="replyContent" required ></textarea>
+				<input type="hidden" name="qnaBoardNo"
+					value="${requestScope.content.qnaBoardNo }" /> 
+				<input
+					type="hidden" name="qnaStoreId"
+					value="${requestScope.content.qnaStoreId }" />
+				<input
+					type="hidden" name="qnaBoardWriter"
+					value="${requestScope.content.qnaBoardWriter }" />
+				<a><button type="submit" class="btn-custom">
+					<i class="glyphicon glyphicon-pencil"></i>댓글 쓰기
+				</button></a>
+			</form>
+		</sec:authorize>
 
 
 
@@ -192,24 +212,7 @@ form {
 					페이지</a>
 			<p />
 		</center>
-		<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
-			<form
-				action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
-				<sec:csrfInput />
-				<textarea rows="5" cols="80" name="replyContent" required ></textarea>
-				<input type="hidden" name="qnaBoardNo"
-					value="${requestScope.content.qnaBoardNo }" /> 
-				<input
-					type="hidden" name="qnaStoreId"
-					value="${requestScope.content.qnaStoreId }" />
-				<input
-					type="hidden" name="qnaBoardWriter"
-					value="${requestScope.content.qnaBoardWriter }" />
-				<a><button type="submit" class="btn-custom">
-					<i class="glyphicon glyphicon-pencil"></i>댓글 쓰기
-				</button></a>
-			</form>
-		</sec:authorize>
+		
 		
 	</div>
 	<div class="col-sm-2"></div>

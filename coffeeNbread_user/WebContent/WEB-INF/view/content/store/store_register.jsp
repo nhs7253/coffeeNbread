@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -42,6 +43,22 @@ body {
 	background-repeat: no-repeat;
 }
 </style>
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/demo.css">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/material-dashboard.css">  
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/reset.css">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/bootstrap/css/style.css">
+<link rel="stylesheet" href="${initParam.rootPath }/resource/css/background_style.css">
+
+ <script src="${initParam.rootPath }/resource/bootstrap/js/jquery-3.1.0.min.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/demo.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/material.min.js"></script>
+  <script src="${initParam.rootPath }/resource/bootstrap/js/material-dashboard.js"></script> 
+ <script src="${initParam.rootPath }/resource/bootstrap/js/bootstrap.min.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/jquery.menu-aim.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/main.js"></script>
+ <script src="${initParam.rootPath }/resource/bootstrap/js/modernizr.js"></script>
+
 <body>
 <!-- 	<h2>STORE_REGISTER</h2> -->
 	<div class="col-sm-1"></div>
@@ -62,14 +79,13 @@ body {
 									<sec:csrfInput />
 									<%-- csrf 토큰 --%>
 									<div class="row">
-										<div class="col-md-9">
+										<div class="col-md-5">
 										<div class="col-md-9">
 											<div class="form-group label-floating">
 												<label class="control-label">매장 분류</label> <input
 													type="text" name="optionCategoryList" id="optionCategory"
-													class="form-control" style="width: 200px">
+													class="form-control" style="width:200px">
 												<a class="form-group label-floating" id="selectSC" ></a>
-
 											</div></div>
 											<div class="col-md-3">
 											<button type="button" id="optionCategoryList"
@@ -168,7 +184,7 @@ body {
 												<div class="form-group label-floating">
 													<label class="control-label">매장 소개</label> 
 											
-											<textarea name="storeIntro" rows="5" cols="90"></textarea>
+											<textarea name="storeIntro" rows="5" cols="80"></textarea>
 											</div></div></div>
 		
 											<div style="float: right">

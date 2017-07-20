@@ -22,7 +22,7 @@ display:inline;
 	
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
-	<h1>공지사항 내용</h1>
+	<h1>공지사항</h1>
 	<hr>
 	<br>
 <table class="table">

@@ -12,21 +12,19 @@ table {
 	width: 700px;
 	border-collapse: collapse;
 }
-th{
+th,td{
 text-align:center;
 }
-td {
-	padding: 5px; /* //td 간 간격 */
-}
+
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
 </head>
 <body>
 
-	
+	<br><br>
 	<div class="col-sm-12">
-	<h2>STORE_MANAGE_LISTdd</h2>
+	<h2>매장 관리 목록</h2>
 <br>
 	
 			<form action="${initParam.rootPath }/admin/userManagementListController.do"
@@ -45,8 +43,8 @@ td {
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
 				
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#b6009f">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>						<br>
 <br><br>
 </div>
@@ -96,8 +94,8 @@ td {
 								type="hidden" value="${list.storeId }" name="storeId" /> <input
 								type="hidden" value="${list.store.storePermission }"
 								name="storePermission" />
-							<button type="submit" class="btn">
-								<i class="glyphicon glyphicon-pencil"></i>변경
+							<button type="submit" class="btn btn-info" >
+								<i class="glyphicon glyphicon-pencil"></i>&nbsp;변경
 							</button>
 
 							<sec:csrfInput />

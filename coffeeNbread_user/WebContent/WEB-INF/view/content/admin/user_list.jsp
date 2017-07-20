@@ -4,8 +4,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
-table, td {
-	
+th{
+text-align:center
 }
 
 table {
@@ -21,12 +21,15 @@ td {
 </head>
 <body>
 
-
-	<h2>전체 회원 정보</h2>
 <br><br>
+	
+
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
+		<h2>전체 회원 목록</h2>
+		<br><br>
+		<div style="float:right">
 			<form
 				action="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -38,14 +41,14 @@ td {
 							${param.select eq "userName" ? "selected" :""}>이름</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#b6009f">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
 		
-	
+	</div>
 	<br>
 
 	<table class="table">
@@ -78,14 +81,14 @@ td {
 					<td>${user.userEmail}</td>
 					<td>${user.userPhone}</td>
 					<td>${user.userAddress}</td>
-					<td>${user.userActiveState}</td>
+					<td style="text-align:center;">${user.userActiveState}</td>
 					<td>${user.storeId}</td>
-					<td>
+					<td style="text-align:center;">
 						<form action="${initParam.rootPath }/admin/adminRemoveUserController.do" method="post">
 								<sec:csrfInput/>
 								<input type="hidden" name="storeId" value="${user.storeId }"/>
 								<input type="hidden" name="userId" value="${user.userId }"/>
-								<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+								<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>삭제</button>
 						</form>
 					</td>
 				</tr>
@@ -98,7 +101,7 @@ td {
 
 
 
-
+<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -170,6 +173,6 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
+			페이지</a></center>
 			</div>
 			<div class="col-sm-1"></div>
