@@ -73,15 +73,14 @@ public class PaymentDetailsController {
 		
 		GeneralUser generalUser = (GeneralUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (errors.hasErrors()) {
-			System.out.println("에러 : " + errors.getAllErrors());
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; // 에러 발생
 		}
 		
-//		if(paymentDetailsform.getProductHopeTime() == null){
-//			modelAndView.setViewName("/user/paymentProcessController.do");
-//			return modelAndView; // 에러 발생
-//		}
+		if(paymentDetailsform.getProductHopeTime() == null){
+			modelAndView.setViewName("/user/paymentProcessController.do");
+			return modelAndView; // 에러 발생
+		}
 
 		PaymentDetails paymentDetails = new PaymentDetails();
 		BeanUtils.copyProperties(paymentDetailsform, paymentDetails);
@@ -108,6 +107,7 @@ public class PaymentDetailsController {
                 rdService.addReservationDetailsByPaymentDetails(paymentDetails, paymentDetailsform.getProductHopeTime());
 			} catch (NullShoppingBasketProductException e) {
 				// TODO Auto-generated catch block
+				session.setAttribute("message", e.getMessage());
 				modelAndView.setViewName("user/user_payment_process.tiles");
 				return modelAndView;
 			}
@@ -117,7 +117,6 @@ public class PaymentDetailsController {
 		modelAndView.addObject("userName", generalUserService.findUser(generalUser.getUserId()).getUserName());
 		modelAndView.addObject("reservationList", reservationList);
 		modelAndView.setViewName("user/payment_success.tiles");
-		
 		
 		return modelAndView; // 결제 성공페이지.
 	}

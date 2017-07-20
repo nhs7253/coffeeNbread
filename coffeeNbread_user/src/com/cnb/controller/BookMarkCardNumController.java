@@ -65,7 +65,7 @@ public class BookMarkCardNumController {
 			service.addBookMarkCardNum(bookMarkCardNum);
 		} catch (BookCardNumDuplicationException e) {
 
-			e.printStackTrace();
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/user/paymentProcessController.do?"; // 만약 중복된거 입력한다하더라도 결제폼으로 보여줌.
 		}
 		return "redirect:/user/paymentProcessController.do?cardNum="+cardNum;
@@ -73,7 +73,7 @@ public class BookMarkCardNumController {
 
 	@RequestMapping("/user/removeBookMarkCardNumController")
 
-	String removeBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum) {
+	String removeBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum, HttpSession session) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		GeneralUser generalUser = (GeneralUser) authentication.getPrincipal();
 
@@ -81,7 +81,7 @@ public class BookMarkCardNumController {
 			service.removeBookMarkCardNumByCardNumAndUserId(cardNum, generalUser.getUserId());
 		} catch (DeleteBookMarkException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			session.setAttribute("message", e.getMessage());
 			return "user/payment_form.tiles";
 		}
 
