@@ -16,6 +16,10 @@ table {
 	border-collapse: collapse;
 }
 
+th{
+  text-align:center;
+}
+
 td {
 	padding: 5px; /* //td 간 간격 */
 }
@@ -65,17 +69,15 @@ h2 {
 	<br>
 	<br><br>
 
-		
-
 			<table class="table table-hover">
 				<thead>
 					<tr >
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-						<th>비밀글</th>
+						<th style="font-weight:bold; background-color:lightyellow">글번호</th>
+						<th style="font-weight:bold; background-color:lightyellow">제목</th>
+						<th style="font-weight:bold; background-color:lightyellow">작성자</th>
+						<th style="font-weight:bold; background-color:lightyellow">작성일</th>
+						<th style="font-weight:bold; background-color:lightyellow">조회수</th>
+						<th style="font-weight:bold; background-color:lightyellow">비밀글</th>
 					</tr>
 				</thead>
 				<tbody>
