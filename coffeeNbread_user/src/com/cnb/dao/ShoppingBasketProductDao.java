@@ -102,6 +102,7 @@ public interface ShoppingBasketProductDao {
      
      
      
+
     	/**
     	 * 결제 완료 후 장바구니에 있는 제품들을 모두 삭제함 - (해당 유저가 결제 한 해당 매장의 전체 장바구니 품목)
     	 * @param userId
@@ -109,6 +110,7 @@ public interface ShoppingBasketProductDao {
     	 * @return
     	 */
     	int deleteShoppingBasketProductToPaymentComplete(String userId, String storeId);
+
      
      
      

@@ -37,7 +37,6 @@ h2 {
 		<table class="table table-hover">
 			<thead>
 				<tr > 
-					<th style="font-weight:bold; background-color:lightyellow">아이디</th>
 					<th style="font-weight:bold; background-color:lightyellow">이름</th>
 					<th style="font-weight:bold; background-color:lightyellow">전화번호</th>
 					<th style="font-weight:bold; background-color:lightyellow">주소</th>
@@ -54,7 +53,6 @@ h2 {
 					###################################################### --%>
 				<c:forEach items="${requestScope.list }" var="list">
 					<tr>
-						<td style="text-align:center;">${list.store.storeId}</td>
 						<td style="text-align:center;"><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
 						<td style="text-align:center;">${list.store.storePhone}</td>
 						<td>${list.store.storeAddress}</td>

@@ -46,7 +46,7 @@ $(document).ready(function(){
 				$(btn).parent().text(value);
 				$(btn).remove();
 				var url = "http://api.coolsms.co.kr/sendmsg?user=nhs7253&password=zhtmxk156&to=" + to + "&from=01037962472&text=" + text;
-				window.open(url,"alarmMessage","width=500, height=400 resizable=no").close();
+				window.open(url,"alarmMessage","width=500, height=400 resizable=no");
 			}
 		}); 
 	});

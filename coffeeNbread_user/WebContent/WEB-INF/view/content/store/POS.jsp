@@ -65,7 +65,7 @@ h2 {
 
 	
 	<c:forEach items="${requestScope.list }" var="product">
-		<div style="width: 25%; height: 300px; float: left; padding:5px">
+		<div style="width: 25%; height: 280px; float: left;">
 			<table>
 				<tr>
 					<td align="center">

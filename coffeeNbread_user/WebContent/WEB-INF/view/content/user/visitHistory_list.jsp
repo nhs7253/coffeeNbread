@@ -54,16 +54,9 @@ h2 {
 			</form>
 	
 	<br>
-	<form
-		action="${initParam.rootPath }/user/selectRemoveStoreVisitHistoryController.do"
-		method="post">
-		<sec:csrfInput />
-		<%-- csrf 토큰 --%>
-
 		<table class="table table-hover">
 			<thead>
 				<tr class="form-group">
-					<th>아이디</th>
 					<th>이름</th>
 					<th>전화번호</th>
 					<th>주소</th>
@@ -71,7 +64,6 @@ h2 {
 					<th>조회수</th>
 					<th>여는 시간</th>
 					<th>닫는 시간</th>
-					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -81,7 +73,6 @@ h2 {
 					###################################################### --%>
 				<c:forEach items="${requestScope.list }" var="list">
 					<tr class="">
-						<td style="text-align:center;">${list.store.storeId}</td>
 						<td style="text-align:center;"><a
 							href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
 						<td style="text-align:center;">${list.store.storePhone}</td>
@@ -90,19 +81,12 @@ h2 {
 						<td style="text-align:center;">${list.store.storeHits}</td>
 						<td style="text-align:center;">${list.store.storeOpenFormat}</td>
 						<td style="text-align:center;">${list.store.storeCloseFormat}</td>
-						<td style="text-align:center;"><input type="checkbox" name="storeIdList"
-							value="${list.store.storeId}"></td>
 					</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
-		<div style="float:right">
-		<button type="submit" class="btn btn-danger">
-			<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
-		</button>
-		</div>
-	</form>
+
 
 
 
