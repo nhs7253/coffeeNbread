@@ -198,10 +198,10 @@ DROP SEQUENCE reservation_no_seq;
 ----------------------------------------------------------------실 데이터-----------------------------------------------------------
 /* 유저 */
 
-INSERT INTO GENERAL_USER VALUES('u-1','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김형주',to_date('20170622', 'yyyy-mm-dd'),'남','khjsuccess6808@naver.com','010-5016-6816','서울시 송파구 문정동','Y',null);
-INSERT INTO GENERAL_USER VALUES('u-2','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이진영',to_date('20170622', 'yyyy-mm-dd'),'여','jy@naver.com','010-1234-3242','경기도 고양시 일산 서구','Y',null);
-INSERT INTO GENERAL_USER VALUES('us','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','최민희',to_date('20170622', 'yyyy-mm-dd'),'여','minimini@naver.com','010-3453-3423','경기도 수원시 영통구 ','Y','s-100');
-INSERT INTO GENERAL_USER VALUES('admin','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','노현식',to_date('20160622', 'yyyy-mm-dd'),'남','hyungsik@naver.com','010-4564-2342','경상남도 김해시 ','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-1','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김형주',to_date('20170622', 'yyyy-mm-dd'),'남','khjsuccess6808@naver.com','01050166816','서울시 송파구 문정동','Y',null);
+INSERT INTO GENERAL_USER VALUES('u-2','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이진영',to_date('20170622', 'yyyy-mm-dd'),'여','jy@naver.com','01094080923','경기도 수원시 영통구','Y',null);
+INSERT INTO GENERAL_USER VALUES('us','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','최민희',to_date('20170622', 'yyyy-mm-dd'),'여','minimini@naver.com','01099506219','경기도 고양시 일산 서구 ','Y','s-100');
+INSERT INTO GENERAL_USER VALUES('admin','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','노현식',to_date('20160622', 'yyyy-mm-dd'),'남','hyungsik@naver.com','01037962472','경상남도 김해시 ','Y',null);
 
 /* 권한 추가 
  * 관리자 - ROLE_CNB_ADMIN

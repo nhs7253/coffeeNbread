@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <script type="text/javascript"
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
@@ -96,7 +97,7 @@ hr.animated-gradient {
 					<td>${list.product.productCategory}</td>
 					<td><img src="${initParam.rootPath }/up_image/${list.product.productPictureList[0].productPicture }" alt="" width="100" height="100"/></td>
 					<td>${list.product.productName}</td>
-					<td>${list.product.productPrice}</td>
+					<td><fmt:formatNumber value="${list.product.productPrice}" pattern="#,###" /></td>
 					<td><input type="number" min="0" value="${list.productCount}" class="count"></td>
 					<td>
 						  <span style="display: none;">${list.product.productId }</span>
