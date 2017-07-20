@@ -3,6 +3,7 @@ package com.cnb.controller;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -73,7 +74,7 @@ public class BoardReplyController {
 	 * @param request
 	 * @return
 	 */
-	String modifyBoardReplySettigController(Integer replyNo, int qnaBoardNo, String replyName, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId, HttpServletRequest request, String qnaBoardWriter){
+	String modifyBoardReplySettigController(Integer replyNo, int qnaBoardNo, String replyName, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId, HttpServletRequest request, String qnaBoardWriter, HttpSession session){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 		GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
 		
@@ -81,6 +82,7 @@ public class BoardReplyController {
 			request.setAttribute("boardReply", boardReplyService.findBoardReplyModifySetting(replyNo, generalUser.getUserId(), replyName));
 			request.setAttribute("qnaBoardWriter", qnaBoardWriter);
 		} catch (BoardReplyException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+qnaBoardNo+"&qnaStoreId="+qnaStoreId+"&qnaBoardWriter="+qnaBoardWriter;
 		}
 
@@ -94,13 +96,14 @@ public class BoardReplyController {
 	 * Q&A 게시판의 1개의 댓글을 삭제해 주는 컨트롤러
 	 * @return String - 응답 경로
 	 */
-	String removeBoardReplyToQnaBoardNoController(Integer replyNo, int qnaBoardNo, String replyName, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId, String qnaBoardWriter){
+	String removeBoardReplyToQnaBoardNoController(Integer replyNo, int qnaBoardNo, String replyName, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId, String qnaBoardWriter, HttpSession session){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 		GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
 		
 		try {
 			boardReplyService.removeBoardReplyToQnaBoardNo(replyNo, qnaBoardNo, replyName, generalUser.getUserId());
 		} catch (BoardReplyException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo="+qnaBoardNo+"&qnaStoreId="+qnaStoreId+"&qnaBoardWriter="+qnaBoardWriter;
 		}
 		
@@ -155,7 +158,7 @@ public class BoardReplyController {
 		 * @param request
 		 * @return
 		 */
-		String modifyBoardReplySettigControllerToRecipeBoard(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId, HttpServletRequest request, String userId){
+		String modifyBoardReplySettigControllerToRecipeBoard(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId, HttpServletRequest request, String userId, HttpSession session){
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
 
@@ -163,6 +166,7 @@ public class BoardReplyController {
 				request.setAttribute("boardReply", boardReplyService.findBoardReplyModifySetting(replyNo, generalUser.getUserId(), replyName));
 				request.setAttribute("userId", userId);
 			} catch (BoardReplyException e) {
+				session.setAttribute("message", e.getMessage());
 				return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId + "&userId=" +generalUser.getUserId();
 			}
 
@@ -176,12 +180,13 @@ public class BoardReplyController {
 		 * Recipe게시판의 1개의 댓글을 삭제해 주는 컨트롤러
 		 * @return String - 응답 경로
 		 */
-		String removeBoardReplyToRecipeBoardNoController(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId, String userId){
+		String removeBoardReplyToRecipeBoardNoController(Integer replyNo, int recipeBoardNo, String replyName, @RequestParam(value="storeId",required=false) String storeId, String userId, HttpSession session){
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 			GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
 			try {
 				boardReplyService.removeBoardReplyToRecipeBoardNo(replyNo, recipeBoardNo, replyName, generalUser.getUserId());
 			} catch (BoardReplyException e) {
+				session.setAttribute("message", e.getMessage());
 				return "redirect:/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo="+recipeBoardNo+"&storeId="+storeId+"&userId=" + generalUser.getUserId();
 				
 			}

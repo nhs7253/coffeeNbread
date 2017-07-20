@@ -100,21 +100,21 @@ public class QnaBoardContentsServiceImpl implements QnaBoardContentsService{
 		QnaBoardContents qnaBoardContents = findQnaBoardContents(qnaBoardNo); //해당 게시글 객체 확인
 		if(qnaBoardContents.getQnaBoardSecret().equals("Y")){
 			if((authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]"))){
-				throw new QnaBoardContentsAuthenticationException("매장 비밀글 조회 권한이 없습니다.");
+				throw new QnaBoardContentsAuthenticationException("비밀글 조회 권한이 없습니다.");
 			}
 			if(!(authentication.getAuthorities().toString().equals("[ROLE_CNB_ADMIN]"))){ 
 				generalUser = (GeneralUser)authentication.getPrincipal(); //관리자가 아닐경우 유저 확인을 위해 로그인 정보 받음
 				//전체 비밀글일 떼 && 본인이나 관리자가 아니라면
 				if((qnaBoardContents.getQnaStoreId() == null) && !(qnaBoardContents.getQnaBoardWriter().equals(generalUser.getUserId()) )){
-					throw new QnaBoardContentsAuthenticationException("전체 비밀글 조회 권한이 없습니다.");
+					throw new QnaBoardContentsAuthenticationException("비밀글 조회 권한이 없습니다.");
 				}
 				//매장 비밀글일 때 && 본인이나 매장 주인이 아니라면		
 				if(    (qnaBoardContents.getQnaStoreId() != null) && !(   qnaBoardContents.getQnaBoardWriter().equals(generalUser.getUserId())  ) && !(  generalUser.getStoreId() != null && qnaBoardContents.getQnaStoreId().equals(generalUser.getStoreId())   )  ){
-								throw new QnaBoardContentsAuthenticationException("매장 비밀글 조회 권한이 없습니다.");
+								throw new QnaBoardContentsAuthenticationException("비밀글 조회 권한이 없습니다.");
 				}
 			}
 			else if(qnaBoardContents.getQnaStoreId() != null){
-				throw new QnaBoardContentsAuthenticationException("매장 비밀글 조회 권한이 없습니다.");
+				throw new QnaBoardContentsAuthenticationException("비밀글 조회 권한이 없습니다.");
 			}
 		}
 		
