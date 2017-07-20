@@ -3,14 +3,11 @@
 	GRANT ALL PRIVILEGES TO CNB_manager; 
 */
 
---테이블 : 28, 시퀀스 : 10 - 총합 : 38 */     --테이블 추가된거 하나 추가 해서 반영  -6.29
+--테이블 : 24, 시퀀스 : 9 - 총합 : 33 */     --7월 20일 최종 수정
 /* 테이블 및 시퀀스 생성 */
 
 /* 관리자 */
-CREATE TABLE admin (
-	admin_id VARCHAR2(30) PRIMARY KEY, /* 관리자 아이디 */
-	admin_pw VARCHAR2(50) NOT NULL /* 비밀번호 */
-);
+
 
 /* 사용자 권한 */
 CREATE TABLE user_authority (
@@ -70,23 +67,7 @@ CREATE TABLE product (
 );
 
 
-/* 매장 이벤트 */
-CREATE TABLE store_event (
-	event_no NUMBER PRIMARY KEY, /* 이벤트 번호 */             
-	store_id VARCHAR2(30) NOT NULL, /* 매장아이디 */
-	event_title VARCHAR2(300) NOT NULL, /* 이벤트 제목 */
-	event_option CHAR(1) NOT NULL, /* 이벤트여부 */
-	event_start_date DATE NOT NULL, /* 이벤트 시작일시 */       
-	event_end_date DATE,  /* 이벤트 종료 일시 */          
-	event_details CLOB NOT NULL, /* 이벤트설명 */
-	sale_option CHAR(1) NOT NULL, /* 할인여부 */
-	sale_rate NUMBER(3) NOT NULL, /* 할인률 */
-	new_menu_option CHAR(1) NOT NULL, /* 신메뉴여부 */
-	event_picture VARCHAR2(300) , /* 이벤트 사진 */
-    event_check   CHAR(1)  NOT NULL, /* 이벤트 알람여부  */
-	FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE
-);
-CREATE SEQUENCE event_no_seq;
+
 
 /* 매장 방문 기록 */
 CREATE TABLE store_visit_history (
@@ -164,14 +145,6 @@ CREATE TABLE board_reply (
 );
 CREATE SEQUENCE reply_no_seq;
 
-/* 추천수 */ --매장아이디 삭제( '김형주'- 0706수정)
-CREATE TABLE board_recommend (  
-	user_id VARCHAR2(30) NOT NULL, /* 유저아이디 */
-	recipe_board_no NUMBER NOT NULL, /* 레시피 글번호 */
-	PRIMARY KEY(user_id, recipe_board_no),
-	FOREIGN KEY(user_id) REFERENCES general_user(user_id) ON DELETE CASCADE,
-	FOREIGN KEY(recipe_board_no) REFERENCES recipe_board_contents(recipe_board_no) ON DELETE CASCADE
-);
 
 /* 결제 내역 */
 CREATE TABLE payment_details (
@@ -240,7 +213,7 @@ CREATE TABLE store_bookmark (
 );
 
 
-
+/* 매장위치 */
 CREATE TABLE store_position (
 	store_id VARCHAR2(30) PRIMARY KEY, /* 매장아이디 */
 	X VARCHAR2(50) NOT NULL, /* X좌표 */
@@ -281,16 +254,6 @@ CREATE TABLE product_picture (
 
 );
 
-/* 이벤트 제품 */
-CREATE TABLE event_product(
-    product_id  VARCHAR2(30) NOT NULL, /* 제품 아이디  */
-    store_id  VARCHAR2(30) NOT NULL, /* 매장 아이디  */
-    event_no NUMBER  NOT NULL, /* 이벤트 번호 */
-    PRIMARY KEY(product_id, store_id, event_no),
-    FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
-    FOREIGN KEY(store_id) REFERENCES store(store_id) ON DELETE CASCADE,
-    FOREIGN KEY(event_no) REFERENCES store_event(event_no) ON DELETE CASCADE
-);
 
 /* 옵션카테고리 */
 CREATE TABLE option_category (
@@ -323,7 +286,7 @@ CREATE TABLE store_payment_optionlist (
 	FOREIGN KEY(payment_id) REFERENCES payment_OptionList(payment_id) ON DELETE CASCADE
 );
 
-/* 생성후 이상 확인 */
+
 
 /* 관리자 */
 SELECT * FROM admin;
@@ -337,8 +300,7 @@ SELECT * FROM general_user;
 SELECT * FROM store;
 /* 제품 */
 SELECT * FROM product;
-/* 매장 이벤트 */
-SELECT * FROM store_event;
+
 /* 매장 방문 기록 */
 SELECT * FROM store_visit_history;
 /* 사용자 선호 매장 */
@@ -351,8 +313,7 @@ SELECT * FROM recipe_board_contents;
 SELECT * FROM qna_board_contents;
 /* 게시판 댓글 */
 SELECT * FROM board_reply;
-/* 추천수 */
-SELECT * FROM board_recommend;
+
 /* 결제 내역 */
 SELECT * FROM payment_details;
 /* 예약 내역 */
@@ -373,8 +334,7 @@ SELECT * FROM product_gap;
 SELECT * FROM store_picture;
 /* 제품 사진  */
 SELECT * FROM product_picture;
-/* 이벤트 제품 */
-SELECT * FROM event_product;
+
 /* 옵션카테고리 */
 SELECT * FROM option_category;
 /* 옵션 상세 */
@@ -396,8 +356,7 @@ SELECT payment_no_seq.nextval FROM dual;
 SELECT reservation_no_seq.nextval FROM dual;
 /* 매장분류 시퀀스 */
 SELECT store_category_no_seq.nextval FROM dual;
-/* 매장 이벤트 */
-SELECT event_no_seq.nextval FROM dual;
+
 /* 옵션카테고리 */
 SELECT option_id_seq.nextval FROM dual;
 /* 매장 방문 기록 */
@@ -412,8 +371,7 @@ DROP TABLE store_payment_optionlist;
 DROP TABLE option_detail;
 /* 옵션카테고리 */
 DROP TABLE option_category;
-/* 이벤트 제품 */
-DROP TABLE event_product;
+
 /* 매장 사진  */
 DROP TABLE store_picture;
 /* 제품 사진  */
@@ -434,8 +392,7 @@ DROP TABLE store_category;
 DROP TABLE reservation_details;
 /* 결제 내역 */
 DROP TABLE payment_details;
-/* 추천수 */
-DROP TABLE board_recommend;
+
 /* 게시판 댓글 */
 DROP TABLE board_reply;
 /* QNA게시글 */
@@ -448,8 +405,7 @@ DROP TABLE notice_board_contents;
 DROP TABLE user_preference_store;
 /* 매장 방문 기록 */
 DROP TABLE store_visit_history;
-/* 매장 이벤트 */
-DROP TABLE store_event;
+
 /* 제품 */
 DROP TABLE product;
 /* 매장 */
@@ -477,8 +433,7 @@ DROP SEQUENCE payment_no_seq;
 DROP SEQUENCE reservation_no_seq;
 /* 매장분류 */
 DROP SEQUENCE store_category_no_seq;
-/* 매장 이벤트 */
-DROP SEQUENCE event_no_seq;
+
 /* 옵션카테고리 */
 DROP SEQUENCE option_id_seq;
 /* 매장 방문 기록 */
