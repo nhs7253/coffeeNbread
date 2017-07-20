@@ -61,7 +61,7 @@ td {
 	</form>
 </div>
 	<div id="map" style="width:600px;height:300px;margin:auto;"></div>
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e734ba3c1ac8600bcc1f96d038d46ae6"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=414b7d7551adbb016aef1956f977d20f"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {

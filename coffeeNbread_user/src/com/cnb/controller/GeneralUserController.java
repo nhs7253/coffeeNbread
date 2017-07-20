@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -66,7 +67,7 @@ public class GeneralUserController {
 	 * @param errors 요청 파라미터 에러
 	 * @return String - 응답 경로
 	 */
-	public String addUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors){
+	public String addUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors, HttpSession session){
 		if(errors.hasErrors()){
 			return "user/add_user_form.tiles"; //에러 발생 시 회원 가입 페이지로 이동
 		}
@@ -81,7 +82,7 @@ public class GeneralUserController {
 		try {
 			service.addUser(generalUser);
 		} catch (UserManageException e) {
-			System.out.println(e.getMessage());
+			session.setAttribute("message", e.getMessage());
 			return "user/add_user_form.tiles"; //에러 발생 시 회원 가입 페이지로 이동
 		}
 		return "index.tiles"; //가입 성공 시 메인페이지로 이동
@@ -96,7 +97,7 @@ public class GeneralUserController {
 	 * @param oldUserPassword 이전 비밀번호
 	 * @return - 응답 경로
 	 */
-	public String modifyUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors, @RequestParam String oldUserPassword){
+	public String modifyUserController(@ModelAttribute("generalUser") @Valid GeneralUserForm generalUserForm, BindingResult errors, @RequestParam String oldUserPassword, HttpSession session){
 		SecurityContext context = SecurityContextHolder.getContext();
 
 		if(errors.hasErrors() && !passwordEncoder.matches(oldUserPassword, ((GeneralUser)context.getAuthentication().getPrincipal()).getUserPw())){
@@ -117,6 +118,7 @@ public class GeneralUserController {
 		try {
 			service.modifyUser(generalUser);
 		} catch (UserManageException e) {
+			session.setAttribute("message", e.getMessage());
 			return "user/update_profile_form.tiles"; //에러 페이지 이동
 		}
 		/*   //authorities 접근
@@ -143,7 +145,7 @@ public class GeneralUserController {
 	 * @return String - 응답 경로
 	 */
 	@RequestMapping("/user/removeUserController")
-	public String removeUserController(@RequestParam(value="password",required=false) String password){
+	public String removeUserController(@RequestParam(value="password",required=false) String password, HttpSession session){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //로그인 시 사용했던 유저 정보 받음
 		//GeneralUser generalUser = (GeneralUser)authentication.getPrincipal();
 		
@@ -158,6 +160,7 @@ public class GeneralUserController {
 		try {
 			service.removeUser(((GeneralUser)authentication.getPrincipal()).getUserId(), ((GeneralUser)authentication.getPrincipal()).getStoreId());
 		} catch (UserManageException e) {
+			session.setAttribute("message", e.getMessage());
 			return "index.tiles"; //에러 페이지 이동
 		}
 
