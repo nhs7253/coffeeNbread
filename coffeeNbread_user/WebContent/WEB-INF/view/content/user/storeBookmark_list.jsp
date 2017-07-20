@@ -17,13 +17,22 @@ text-align:center;
 td {
 	padding: 5px; /* //td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 </head>
 <body>
 
-<br>
-	<h2>즐겨찾기</h2>
+<br><br>
+	<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/bookmark.png">&nbsp;즐겨찾기</h2>
 	
 
 <div class="col-sm-12">

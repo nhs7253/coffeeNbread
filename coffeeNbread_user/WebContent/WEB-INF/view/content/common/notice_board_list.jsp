@@ -21,14 +21,13 @@ td {
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 </style>
 	
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+<div class="col-sm-11">
 <br><br>
-<h2>공지사항</h2>
+<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/megaphone.png">&nbsp;공지사항</h2>
 
 		
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
@@ -52,12 +51,12 @@ h2 {
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>
 					</div>
-					</div>
-				</form>
-		
-	
-	
+		</div>
+	</form>
 	<br>
+	<br>
+	<br>
+	<br><br>
 
 
 	

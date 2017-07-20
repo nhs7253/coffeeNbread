@@ -23,7 +23,7 @@ td {
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 @font-face {
 	font-family: 'table';
@@ -36,8 +36,8 @@ h2 {
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+
+<div class="col-sm-11">
 <br><br>
 <h2>제품 목록</h2>
 

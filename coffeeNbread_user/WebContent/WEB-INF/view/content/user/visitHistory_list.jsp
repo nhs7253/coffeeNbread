@@ -20,15 +20,22 @@ td {
 	padding: 5px; /* //td 간 간격 */
 }
 
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 </head>
 <body>
 
-<br>
-	<h2>방문 내역</h2>
-
-
+<br><br>
+	<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/shopping-store.png">&nbsp;방문 내역</h2>
 	
 		<div class="col-sm-12">
 			<form
@@ -40,7 +47,8 @@ td {
 				</div>
 				<button type="submit" class="btn" style="background-color:#FFCC33">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
-				</button></div>
+				</button>
+				</div>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>

@@ -19,42 +19,42 @@ table {
 	border-collapse: collapse;
 }
 th{
-text-align:center;
+	text-align:center;
 }
 td {
 	 /*td 간 간격 */
 	text-align:center;
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
-
-<script type="text/javascript">
-
-</script>
-	<br>
-	<center><h2>${requestScope.userName }님의 예약 현황</h2></center>
-
-  <br><br>
-
-<br>
-
-	
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-
-
+<br><br>
+	<center><h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/reserved.png">&nbsp;${requestScope.userName }님의 예약 현황</h2></center>
+  <br><br><br>
+	
 	<table class="table table-hover">
-		<tbody>
+		<thead>
 			<tr>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약번호</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약매장</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약시간</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약한 제품</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약개수</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">제품수령희망시간</td>
-				<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약확인유무</td>
-				
+				<th style="font-weight:bold; background-color:lightyellow">예약번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">예약매장</th>
+				<th style="font-weight:bold; background-color:lightyellow">예약시간</th>
+				<th style="font-weight:bold; background-color:lightyellow">예약한 제품</th>
+				<th style="font-weight:bold; background-color:lightyellow">예약개수</th>
+				<th style="font-weight:bold; background-color:lightyellow">제품수령희망시간</th>
+				<th style="font-weight:bold; background-color:lightyellow">예약확인유무</th>	
 			</tr>
+		</thead>
+		<tbody>
 			<%-- ######################################################
 								조회된 item 출력 
 				###################################################### --%>
@@ -69,7 +69,6 @@ td {
 					<td align="center">${list.reservationConfirm}</td>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 	</table>
 <br><p>

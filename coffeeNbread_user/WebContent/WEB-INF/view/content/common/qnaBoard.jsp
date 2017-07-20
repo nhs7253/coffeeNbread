@@ -26,14 +26,13 @@ td {
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 </style>
 	
-<div class="col-sm-1"></div>
-		<div class="col-sm-10">
+	<div class="col-sm-11">
 		<br><br>
-		<h2>${sessionScope.storeName }Q&A 게시판</h2>
+		<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/question.png">&nbsp;${sessionScope.storeName }Q&A 게시판</h2>
 		
 	<div style="float:right">
 			<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
@@ -60,7 +59,11 @@ h2 {
 						<i class="glyphicon glyphicon-pencil"></i>&nbsp;글쓰기
 				</button>
 			</form>
-</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br><br>
 
 		
 

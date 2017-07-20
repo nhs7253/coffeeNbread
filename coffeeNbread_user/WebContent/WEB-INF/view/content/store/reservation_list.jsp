@@ -27,7 +27,7 @@ td {
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 </style>
 
