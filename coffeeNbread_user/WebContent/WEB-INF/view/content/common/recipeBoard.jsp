@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -183,7 +184,8 @@ table {
 					</c:forEach>
 					<td ><a href="${initParam.rootPath }/common/viewRecipeBoardContentsByReplyListController.do?recipeBoardNo=${list.recipeBoardNo}&userId=${list.userId}">${list.recipeBoardTitle}</a></td>
 					<td>${list.userId}</td>
-					<td>${list.recipeBoardDate}</td>
+					<td><fmt:formatDate value="${list.recipeBoardDate}" pattern="yyyy-MM-dd "/></td>
+					
 					<td>${list.recipeBoardHits}</td>
 
 
