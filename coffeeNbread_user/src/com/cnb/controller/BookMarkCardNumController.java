@@ -2,6 +2,8 @@ package com.cnb.controller;
 
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +39,7 @@ public class BookMarkCardNumController {
 	 */
 
 	/* 유저가 매장에서 카드를 입력 --- 카드num */
-	String addBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum) {
+	String addBookMarkCardNumController(@RequestParam(value = "cardNum", required = false) String cardNum, HttpSession session) {
       
 		
 		/*
@@ -45,6 +47,10 @@ public class BookMarkCardNumController {
 		   System.err.println("-----오류 발생-----");	
 			return "redirect:/user/paymentProcessController.do"; // 에러 발생
 		}*/
+		if(cardNum == null || cardNum.trim().isEmpty()){
+			session.setAttribute("message", "카드번호를 입력해 주세요");
+			return "redirect:/user/paymentProcessController.do";
+		}
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
 		GeneralUser generalUser = (GeneralUser) authentication.getPrincipal();

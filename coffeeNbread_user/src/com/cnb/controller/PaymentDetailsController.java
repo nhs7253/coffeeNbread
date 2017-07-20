@@ -1,7 +1,5 @@
 package com.cnb.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +77,11 @@ public class PaymentDetailsController {
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; // 에러 발생
 		}
+		
+//		if(paymentDetailsform.getProductHopeTime() == null){
+//			modelAndView.setViewName("/user/paymentProcessController.do");
+//			return modelAndView; // 에러 발생
+//		}
 
 		PaymentDetails paymentDetails = new PaymentDetails();
 		BeanUtils.copyProperties(paymentDetailsform, paymentDetails);

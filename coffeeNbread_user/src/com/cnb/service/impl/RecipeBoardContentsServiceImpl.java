@@ -54,7 +54,9 @@ public class RecipeBoardContentsServiceImpl implements RecipeBoardContentsServic
 		
 		content.setRecipeBoardTitle(recipeBoardContents.getRecipeBoardTitle());
 		content.setRecipeBoardContent(recipeBoardContents.getRecipeBoardContent());
-	//	content.setRecipeBoardPicture(recipeBoardContents.getRecipeBoardPicture());
+		if(recipeBoardContents.getRecipeBoardPicture() != null && !recipeBoardContents.getRecipeBoardPicture().trim().isEmpty()){
+			content.setRecipeBoardPicture(recipeBoardContents.getRecipeBoardPicture());
+		}
 	     recipeDao.updateRecipeBoardContents(content);
 	    return recipeDao.updateRecipeBoardContents(content);
 

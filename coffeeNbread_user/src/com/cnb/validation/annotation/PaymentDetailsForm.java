@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class PaymentDetailsForm implements Serializable{
@@ -31,7 +33,6 @@ public class PaymentDetailsForm implements Serializable{
 	private List<String> productIdList;
 
 	private String storeId;
-
 
 
 

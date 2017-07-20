@@ -48,18 +48,20 @@
    <nav class="cd-side-nav">
    <br><br>
       <ul>
-<<<<<<< HEAD
+
      	<li class="cd-label">Main</li>
 		<li class="has-children comments" ><a href="#0" style="font-size:20px"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;STORE</a>
         <ul>
+                
+            <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
+        
         	<!-- 유저 권한 -->
-     		<sec:authorize access="hasAnyRole( 'CNB_USER')">
-           		<li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
+     		<sec:authorize access="hasRole('ROLE_CNB_USER')">
 				<li><a href="${initParam.rootPath }/user/callStoreRegisterController.do">매장 등록</a></li>
 			</sec:authorize>
 			
 			<!-- 매장 관리자 권한 -->
-			<sec:authorize access="hasAnyRole('CNB_STORE')">
+			<sec:authorize access="hasRole('ROLE_CNB_STORE')">
 				<%--<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do">Q&A 글쓰기</a></li>
 =======
 
@@ -84,8 +86,6 @@
 				
 >>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 					<li><a href="${initParam.rootPath }/user/QnA_board_register_form.do?storeId=s-1">매장 Q&A 글쓰기</a></li> --%>
-
-				<li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
 				<li><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=<sec:authentication property='principal.storeId'/>">내 매장 보기</a></li>						
 				<li><a href="${initParam.rootPath }/findOptionCategoryController.do">제품 등록</a></li>
                	<li><a href="${initParam.rootPath }/findProductListController.do?storeId=<sec:authentication property='principal.storeId'/>">제품  목록</a></li>

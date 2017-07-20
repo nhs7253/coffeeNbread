@@ -151,12 +151,12 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712'
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',5,'u-2','p-3','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',3,'u-2','p-1','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-4','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-4','p-2','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-4','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-4','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-4','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915', 'yyyy-mm-dd'),'r',5,'u-4','p-5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170720', 'yyyy-mm-dd'),'r',25,'u-1','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170719', 'yyyy-mm-dd'),'r',15,'u-2','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170718', 'yyyy-mm-dd'),'r',9,'u-3','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'r',7,'u-4','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',5,'u-1','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
+INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915', 'yyyy-mm-dd'),'r',1,'u-2','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
 
 
 /* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
@@ -404,6 +404,7 @@ INSERT INTO STORE VALUES('s-101','문정스타벅스','시애틀에 본사를 �
 ----------------------------------------------------------------실 데이터-----------------------------------------------------------
 
 /* 매장 등록시 - 매장사진, 매장좌표 */
+<<<<<<< HEAD
 INSERT INTO STORE VALUES('s-100','판교 이디아','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
                           , '062-372-4755','판교동 625에 위치한 판교 이디아점입니다.','PEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'N');
                           
@@ -703,4 +704,5 @@ INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803'
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'f',0,'u-1','p-115','s-101',3);                              
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'f',0,'u-1','p-116','s-101',6);                              
 INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'f',0,'u-1','p-117','s-101',11);                              
+
 

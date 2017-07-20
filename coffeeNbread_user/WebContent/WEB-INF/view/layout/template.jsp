@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +24,11 @@
  <script src="${initParam.rootPath }/resource/bootstrap/js/jquery.menu-aim.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/main.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/modernizr.js"></script>
+
+<c:if test="${sessionScope.message != null}">
+	<script>alert('${sessionScope.message}')</script>
+	<c:remove scope="session" var="message"/>
+</c:if>
 
 
 <title>Insert title here</title>
@@ -52,6 +59,7 @@
 <div >
 	
 	<header >
+	
 	    <tiles:insertAttribute name="head"/>
 	    
 	</header> 
@@ -64,7 +72,6 @@
 		<!-- 내용 -->
 		
 		<div  class="col-sm-10 " style="padding-top:75px;" >
-			
 			<tiles:insertAttribute name="content"/>
 		</div>
 		

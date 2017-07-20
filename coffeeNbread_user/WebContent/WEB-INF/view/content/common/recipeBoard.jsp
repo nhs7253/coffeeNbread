@@ -42,7 +42,9 @@ table {
   form{
   display:inline;
   }
-  
+  td{
+  text-align:center;
+  }
   <html lang="ko">
   <head>
     <meta charset="utf-8">
@@ -117,8 +119,6 @@ table {
 						날짜순</option>
 					<option value="recipeBoardHits"
 						${param.select eq "recipeBoardHits" ? "selected" :""}>조회순</option>
-					<option value="recommendCount"
-						${param.select eq "recommendCount" ? "selected" :""}>추천순</option>
 					<option value="userId" ${param.select eq "userId" ? "selected" :""}>내가
 						쓴글</option>
 
@@ -160,7 +160,6 @@ table {
 				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
-				<th>추천순</th>
 				<%-- <c:choose>
                 <c:when test="${param.userId != null}">
                 <th>내가 쓴 글 조회</th>
@@ -186,7 +185,7 @@ table {
 					<td>${list.userId}</td>
 					<td>${list.recipeBoardDate}</td>
 					<td>${list.recipeBoardHits}</td>
-					<td>${list.recommendCount}</td>
+
 
 
 
