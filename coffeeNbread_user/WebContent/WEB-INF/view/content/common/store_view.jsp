@@ -35,6 +35,30 @@ td{
 		<div id="map" style="width: 100%; height: 250px;"></div>
 
 	</div>
+	
+	<div style="float:none">
+
+		<form
+			action="${initParam.rootPath }/user/userFindProductListController.do"
+			method="post">
+			<sec:csrfInput />
+			<input type="hidden" name="storeId"
+				value="${requestScope.store.storeId }" />
+				<button type="submit" class="btn btn-link btn-lg">
+					<i class="glyphicon glyphicon-list"></i>&nbsp;제품 목록
+				</button>
+		</form>
+		
+		<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" method="post">
+			<sec:csrfInput/>
+			<input type="hidden" name="storeId" value="${requestScope.store.storeId }" />
+			<button type="submit" class="btn btn-link btn-lg">
+					<i class="glyphicon glyphicon-list"></i>&nbsp;매장  Q&A 
+			</button>
+		</form>
+		
+		
+	</div>
 	<div class="col-sm-6">
 	<br><br><br><br><br><br>
 		<table class="table" width="100%">
@@ -87,30 +111,8 @@ td{
 					</td>
 			</tr>
 		</table>
+	
 	<div style="float:right">
-	
-	
-
-	<!-- 본인만 보임 -->
-		<c:if test="${requestScope.authority }">
-		
-			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-pencil"></i>수정</button>
-			</form>
-			
-			<form action="${initParam.rootPath }/removeStoreController.do">
-					<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
-			</form>
-			
-			<form action="${initParam.rootPath }/findProductListController.do" method="post">
-				<sec:csrfInput />
-				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>제품 관리</button><br>
-			</form>
-			
-		</c:if>
-
-
 		<!-- 회원만 보임 -->
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
 			<form
@@ -121,35 +123,35 @@ td{
 					value="${requestScope.store.storeId }" /> <input type="hidden"
 					name="userId"
 					value="<sec:authentication property="principal.userId"/>" />
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-plus"></i>북마크추가
+				<button type="submit" class="btn btn-warning">
+					<i class="glyphicon glyphicon-plus"></i>&nbsp;북마크추가
 				</button>
 			</form>
 		</sec:authorize>
-
-
-
-		<form
-			action="${initParam.rootPath }/user/userFindProductListController.do"
-			method="post">
-			<sec:csrfInput />
-			<input type="hidden" name="storeId"
-				value="${requestScope.store.storeId }" />
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-list"></i>제품 목록
-				</button>
-		</form>
 		
-		<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do" method="post">
-			<sec:csrfInput/>
-			<input type="hidden" name="storeId" value="${requestScope.store.storeId }" />
-			<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-list"></i>매장  Q&A 
-			</button>
-		</form>
+		<br>
 		
+		<!-- 본인만 보임 -->
+		<c:if test="${requestScope.authority }">
 		
+			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>&nbsp;수정</button>
+			</form>
+			
+			<form action="${initParam.rootPath }/removeStoreController.do">
+					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;삭제</button>
+			</form>
+			
+			<form action="${initParam.rootPath }/findProductListController.do" method="post">
+				<sec:csrfInput />
+				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
+				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>&nbsp;제품 관리</button><br>
+			</form>
+			
+		</c:if>
+
 	</div>
+
 </div>
 	
 	<div class="col-sm-1"></div>

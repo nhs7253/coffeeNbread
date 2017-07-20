@@ -53,7 +53,7 @@ form {
 		*/
 	});
 </script>
-<h2>제품목록조회(예약)_</h2>
+<h2>제품목록조회(예약)</h2>
 
 <div class="col-sm-2"></div>
 <div class="col-sm-8">
@@ -77,7 +77,7 @@ form {
 					type="text" name="keyword" class="form-control" />
 			</div>
 			 <button type="submit" class="btn">
-				<i class="glyphicon glyphicon-search"></i>검색
+				<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 			</button>
 		</form>
 		<form
@@ -88,7 +88,7 @@ form {
 	<input type="hidden" value="${sessionScope.storeId }"
 		name="storeId" /> 
 	<button type="submit" class="btn">
-		<i class="glyphicon glyphicon-search"></i>장바구니 목록 조회
+		<i class="glyphicon glyphicon-search"></i>&nbsp;장바구니 목록 조회
 	</button>
    </form></div></div>
 
@@ -122,6 +122,7 @@ form {
 				</tr>
 				<tr>
 					<td align="center">
+
 					<input type="number" name="productCount" class="productCount" min="0"  value="0" />
 					</td>
 				</tr>
@@ -131,7 +132,7 @@ form {
 						<input  type="hidden" name="productId" value="${product.productId }"/>
 						<input  type="hidden" name="storeId" value="${product.storeId }"/>
 						<button type="submit" class="btn">
-							<i class="glyphicon glyphicon-shopping-cart"></i>장바구니
+							<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;장바구니
 						</button>
 
 					</td>

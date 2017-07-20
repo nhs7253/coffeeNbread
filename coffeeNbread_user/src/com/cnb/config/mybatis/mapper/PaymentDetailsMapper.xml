@@ -163,7 +163,7 @@
 		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count, product_id
 		FROM payment_details
 		WHERE store_id = #{storeId}
-		AND trade_date = #{tradeDate}
+		AND TRUNC(trade_date) = #{tradeDate}
 		GROUP BY product_id
 		ORDER BY product_id ASC
 	</select>
@@ -186,7 +186,7 @@
 		SELECT SUM(reservation_order_count + product_trade_count) reservation_order_count
 		FROM payment_details
 		WHERE store_id = #{storeId}
-		AND trade_date = #{tradeDate}
+		AND TRUNC(trade_date) = #{tradeDate}
 		AND product_id = #{productId}
 	</select>
 
@@ -212,7 +212,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= TRUNC(SYSDATE)
+				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -1) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC
@@ -224,7 +224,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= TRUNC(SYSDATE)
+				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -3) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC
@@ -236,7 +236,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= TRUNC(SYSDATE)
+				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -6) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC				
@@ -248,7 +248,7 @@
 						product_id
 				FROM	payment_details 
 				WHERE store_id = #{storeId}
-				AND	  trade_date <= TRUNC(SYSDATE)
+				AND	  trade_date <= (SELECT TRUNC(SYSDATE) + 1 FROM DUAL)
 				AND	  trade_date >= (SELECT ADD_MONTHS(TRUNC(SYSDATE), -12) FROM DUAL)
 				GROUP BY product_id
 				ORDER BY product_id ASC				
