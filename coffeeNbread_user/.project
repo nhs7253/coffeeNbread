@@ -40,11 +40,4 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>WebContent/up_image/store_image/판교빵커요.jpg</name>
-			<type>1</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Users/%EA%B9%80%ED%98%95%EC%A3%BC/Desktop/%EB%A7%A4%EC%9E%A5%EC%82%AC%EC%A7%84/%ED%8C%90%EA%B5%90%EB%B9%B5%EC%BB%A4%EC%9A%94.jpg</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
