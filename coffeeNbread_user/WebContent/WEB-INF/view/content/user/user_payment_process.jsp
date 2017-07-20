@@ -113,8 +113,7 @@ td {
 		<br> <br> <br> 
 		<hr> 
 		<input type="text"
-			size="20" name="cardNum" id="card" placeholder="카드번호를 입력해주세요."
-			value="">
+			size="20" name="cardNum" id="card" placeholder="카드번호를 입력해주세요." value="">
 		<button type="submit" id="registerBtn">
 			<i class="glyphicon glyphicon-plus"></i>카드번호 등록
 		</button>

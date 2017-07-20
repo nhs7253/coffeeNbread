@@ -75,15 +75,17 @@ public class QnaBoardContentsController {
 	 * @param qnaStoreId String 매장 ID - 에러 반환시 게시판 구분
 	 * @return String 응답 경로
 	 */
-	public String removeQnaBoardContentsController(Integer qnaBoardNo, String qnaBoardWriter, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId){
+	public String removeQnaBoardContentsController(Integer qnaBoardNo, String qnaBoardWriter, @RequestParam(value="qnaStoreId",required=false) String qnaStoreId, HttpSession session){
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();	
 		
 		try {
 			qnaBoardContentsService.removeQnaBoardContents(qnaBoardNo, authentication);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId;
 		} catch (QnaBoardContentsAuthenticationException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
 		}
 		
@@ -98,7 +100,8 @@ public class QnaBoardContentsController {
 	 * @param qnaBoardNo 글 번호
 	 * @return String 응답 경로
 	 */
-	public String modifyQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo, String qnaBoardWriter){
+	public String modifyQnaBoardContentsController(@ModelAttribute("qnaBoardContents") @Valid QnaBoardContentsForm qnaBoardContentsForm, BindingResult errors, Integer qnaBoardNo, String qnaBoardWriter, HttpSession session
+){
 		if(errors.hasErrors()){
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo + "&qnaBoardWriter=" + qnaBoardWriter; //에러 발생
 		}
@@ -109,6 +112,7 @@ public class QnaBoardContentsController {
 		try {
 			qnaBoardContentsService.modifyQnaBoardContents(qnaBoardNo, qnaBoardContents);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			return "/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo + "&qnaBoardWriter=" + qnaBoardWriter;
 		}
 		
@@ -123,7 +127,8 @@ public class QnaBoardContentsController {
 	 * @param request 게시글을 묶을 범위
 	 * @return  String 응답 경로
 	 */
-	public String settingQnaBoardContentsController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, String qnaBoardWriter, HttpServletRequest request){
+	public String settingQnaBoardContentsController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, String qnaBoardWriter, HttpServletRequest request, HttpSession session
+){
 		
 		if(!qnaBoardWriter.equals(((GeneralUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId())){
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
@@ -132,6 +137,7 @@ public class QnaBoardContentsController {
 		try {
 			request.setAttribute("content", qnaBoardContentsService.findQnaBoardContents(qnaBoardNo));
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			return "redirect:/common/viewQnaBoardContentsByReplyListController.do?qnaBoardNo=" + qnaBoardNo;
 		}
 		
@@ -177,7 +183,7 @@ public class QnaBoardContentsController {
 	 * @return ModelAndView -  응답 경로, 페이징 결과 목록
 	 */
 	@RequestMapping("/common/viewQnaBoardContentsByReplyListController")
-	public ModelAndView ViewQnaBoardContentsByReplyListController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, Integer page, String qnaStoreId, String qnaBoardWriter){
+	public ModelAndView ViewQnaBoardContentsByReplyListController(@RequestParam(value="qnaBoardNo", required=false) Integer qnaBoardNo, Integer page, String qnaStoreId, String qnaBoardWriter, HttpSession session){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 						
 		boolean removeAuthority = false;
@@ -209,9 +215,11 @@ public class QnaBoardContentsController {
 		try {
 			map = qnaBoardContentsService.viewQnaBoardContentsByReplyListService(qnaBoardNo, page, authentication);
 		} catch (ContentsNotFoundException e) {
+			session.setAttribute("message", e.getMessage());
 			modelAndView.setViewName("index.tiles");
 			return modelAndView; //에러 발생 시 이동할 경로
 		} catch (QnaBoardContentsAuthenticationException e) {
+			session.setAttribute("message", e.getMessage());
 			modelAndView.setViewName("redirect:/common/findQnaBoardContentsBySelectToKeywordController.do?storeId="+qnaStoreId+"&qnaBoardWriter="+qnaBoardWriter);
 			return modelAndView; //에러 발생 시 이동할 경로
 		}

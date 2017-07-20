@@ -76,7 +76,7 @@ td {
 				</tr>
 				<tr>
 					<td align="center">
-						<input type="number" name="productTradeCountList" class="curruntProductCount" value="0"/>
+						<input type="number" name="productTradeCountList" class="curruntProductCount" min="0" value="0"/>
 					</td>
 				</tr>
 				

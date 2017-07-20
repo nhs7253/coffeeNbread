@@ -20,8 +20,8 @@ form {
 
 	<div class="col-sm-8">
 		제목 : <input type="text" value="${requestScope.content.qnaBoardTitle }"
-			disabled><br> 내용<br>
-		<textarea rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
+			disabled style="background-color:transparent"><br> 내용<br>
+		<textarea style="background-color:transparent" rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
 
 		<p />
 		<div style="float: right">
@@ -196,7 +196,7 @@ form {
 			<form
 				action="${initParam.rootPath }/user/addBoardReplyToQnaBoardNoController.do">
 				<sec:csrfInput />
-				<textarea rows="5" cols="80" name="replyContent" required></textarea>
+				<textarea rows="5" cols="80" name="replyContent" required ></textarea>
 				<input type="hidden" name="qnaBoardNo"
 					value="${requestScope.content.qnaBoardNo }" /> 
 				<input
