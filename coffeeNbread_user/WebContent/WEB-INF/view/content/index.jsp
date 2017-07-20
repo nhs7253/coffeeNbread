@@ -21,7 +21,21 @@ background-repeat: no-repeat;
 }
 
 
+@font-face {
+	font-family: 'index';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/BLKCHCRY.woff) format('woff');
+}
+
+h2 {
+	font-family: 'index';
+	font-size: 170px;
+}
 </style>
+
+<body>
+<br><br><br><br><br><br><br><br><br><br>
+<h2 align="center" style="color:#FFFFFF">Coffee & Bread</h2>
+</body>
 
 
 

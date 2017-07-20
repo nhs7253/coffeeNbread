@@ -16,6 +16,15 @@ table {
 td {
    padding: 10px; /*td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h4 {
+	font-family: 'title';
+	font-size: 35px
+}
 </style>
 
 <!-- JQPLOT보다 jquery가 먼저 지정되야함 -->

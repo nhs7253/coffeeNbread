@@ -16,13 +16,30 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
+@font-face {
+	font-family: 'table';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/Daum_Regular.woff) format('woff');
+}
+
+.tr {
+	font-family: 'table';
+}
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
-<h2>PRODUCT LIST</h2>
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-
+<br><br>
+<h2>제품 목록</h2>
 
 	<div style="float: right">
 		<form action="${initParam.rootPath }/findProductListByMethod.do"
@@ -38,8 +55,8 @@ td {
 				</select> <input type="hidden" name="storeId" value="${param.storeId}" /> <input
 					type="text" name="methodContent" class="form-control" />
 			</div>
-			<button type="submit" class="btn">
-				<i class="glyphicon glyphicon-search"></i>검색
+			<button type="submit" class="btn" style="background-color:#FFCC33">
+				<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 			</button>
 
 		</form>
@@ -49,8 +66,8 @@ td {
 			method="post">
 			<sec:csrfInput />
 			<%-- csrf 토큰 --%>
-			<button type="submit" class="btn">
-				<i class="glyphicon glyphicon-list"></i>전체조회
+			<button type="submit" class="btn" style="background-color:#ffb6c1">
+				<i class="glyphicon glyphicon-list"></i>&nbsp;전체조회
 			</button>
 
 		</form>
@@ -63,7 +80,7 @@ td {
 		<%-- csrf 토큰 --%>
 		<table class="table table-hover">
 			<tbody>
-				<tr>
+				<tr class="tr">
 					<td align="center">종류</td>
 					<td align="center">제품명</td>
 					<td align="center">가격</td>
@@ -87,8 +104,8 @@ td {
 		</table>
 		<div style="float: right">
 
-			<button type="submit" class="btn">
-				<i class="glyphicon glyphicon-trash"></i>삭제
+			<button type="submit" class="btn btn-danger">
+				<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
 			</button>
 		</div>
 	</form>
@@ -220,4 +237,5 @@ td {
 			<a
 				href="${initParam.rootPath }/findProductListManagerController.do?page=${requestScope.pageBean.totalPage}&storeId=${requestScope.storeId}">마지막페이지</a>
 		</c:if></center>
+		</div>
 	<div class="col-sm-1"></div>

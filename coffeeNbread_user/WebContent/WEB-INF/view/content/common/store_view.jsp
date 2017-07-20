@@ -13,17 +13,32 @@ th{
 td{
 	 width:70%;
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+h1 {
+	font-family: 'title';
+	font-size: 45px
+}
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+h1 {
+	font-family: 'title';
+	font-size: 45px
+}
 </style>
-
 
 </head>
 <body>
 	
 	<div class="col-sm-1"></div>
-	
 	<div class="col-sm-4">
-	<h1>STORE_DETAIL</h1>
-	<hr>
+	<br><br>
+	<h1>매장 상세 정보</h1>
+
 	<br>
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
@@ -63,7 +78,7 @@ td{
 	<br><br><br><br><br><br>
 		<table class="table" width="100%">
 			<tr class="form-group">
-				<th>매장명</th>
+			<th>매장명</th>
 				<td><div class="col-xs-10">
 						${requestScope.store.storeName }
 					</div></td>

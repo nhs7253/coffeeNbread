@@ -94,6 +94,15 @@ table {
           width: auto;
         }
       }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
     </style>
 
 </head>
@@ -103,7 +112,8 @@ table {
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10">
-		<h2>RECIPE LIST</h2>
+		<br><br>
+		<h2>레시피</h2>
 	<div style="float:right">
 			<form
 				action="${initParam.rootPath }/common/findRecipeBoardContentsByMethod.do"
@@ -126,8 +136,8 @@ table {
 
 				</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#FFCC33">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>
 
 				<sec:csrfInput />
@@ -136,8 +146,8 @@ table {
 	
 		<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
 			<a href="${initParam.rootPath }/user/recipe_board_register_form.do">
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-ok"></i>글쓰기
+				<button type="submit" class="btn" style="background-color:#fa8072">
+					<i class="glyphicon glyphicon-ok"></i>&nbsp;글쓰기
 				</button>
 			</a>
 		</sec:authorize>

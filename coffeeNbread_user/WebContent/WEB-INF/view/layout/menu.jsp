@@ -33,8 +33,15 @@
 <link
    href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700'
    rel='stylesheet' type='text/css'>
-<style>
+<style type="text/css">
+@font-face {
+	font-family: 'menu';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a동네목욕탕.woff) format('woff');
+}
 
+li, a {
+	font-family: 'menu';
+}
 
 </style>
 
@@ -53,7 +60,7 @@
 		<li class="has-children comments" ><a href="#0" style="font-size:20px"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;STORE</a>
         <ul>
                 
-            <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">STORE LIST</a></li>
+            <li><a href="${initParam.rootPath }/common/findStorePagingListController.do">매장 목록</a></li>
         
         	<!-- 유저 권한 -->
      		<sec:authorize access="hasRole('ROLE_CNB_USER')">
