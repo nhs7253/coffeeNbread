@@ -1,23 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<style>
+form{
 
+display:inline;
+}
 
-<div class="col-sm-1"></div>
+</style>
+
+<div class="col-sm-2"></div>
 	
-		<div class="col-sm-10">
+		<div class="col-sm-8">
 
-<h1>공지사항 게시글 작성</h1><hr><br>
+<h1>공지사항<i class="glyphicon glyphicon-pencil"></i></h1><hr><br>
 
 
 <form action="${initParam.rootPath }/admin/addNoticeBoardContentsController.do" method="post">
-	<sec:csrfInput/>
-	제목 : <input type="text" name="noticeBoardTitle" required><br>
-	내용<br>
-	 <textarea rows="20" cols="100" name="noticeBoardContent" required ></textarea>
-	<p>
-	<input type="submit" value="등록">
-	</p>
-</form></div><div class="col-sm-1"></div>
+	<sec:csrfInput/><br>
+	제목 : <input type="text" name="noticeBoardTitle" required size="60">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<div  style="float:right">
+	<button type="submit" class="btn" style="background-color:#01a207" >
+			<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
+		</button>
+	</div>
+	<br><br><br>
+	 <textarea rows="18" cols="116" name="noticeBoardContent" required ></textarea>
+	
+	
+</form></div><div class="col-sm-2"></div>
 	
 	
 

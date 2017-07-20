@@ -6,38 +6,48 @@
 
 
 
-<h1>게시글 수정</h1>
-<hr>
-<br>
 
-<div class="col-sm-1"></div>
+<div class="col-sm-2"></div>
 	
-		<div class="col-sm-10">
+		<div class="col-sm-8">
+				
 
 <form action="${initParam.rootPath }/user/modifyRecipeBoardContents.do"
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />
-	대표 사진:
+	<div class="col-sm-6">
+		
+	<center><h1>레시피 수정&nbsp;<i class="glyphicon glyphicon-erase"></i></h1></center>
+	<hr>
+<br>
 	<c:forEach items="${requestScope.content.recipeBoardPicture }"
 		var="fileName">
-		<img src="${initParam.rootPath }/up_image/${fileName }" width="200px"
+		<img src="${initParam.rootPath }/up_image/${fileName }" width="350px"
 			height="200px">
 	</c:forEach>
-	<input type="file" name="recipeBoardPicture"> 제목 : <input
-		type="text" name="recipeBoardTitle"
+	
+	<input type="file" name="recipeBoardPicture">
+	</div>
+	<div class="col-sm-6">
+	<br>
+			<br>
+			<br><br>
+			
+	 제목 : <input	type="text" name="recipeBoardTitle"
 		value="${requestScope.content.recipeBoardTitle }"> 내용<br>
-	<textarea rows="20" cols="100" name="recipeBoardContent" style="background-color:transparent">${requestScope.content.recipeBoardContent }</textarea>
+	<br>
+	<textarea rows="10" cols="54" name="recipeBoardContent" style="background-color:transparent">${requestScope.content.recipeBoardContent }</textarea>
 	<input type="hidden" name="recipeBoardNo"
 		value="${requestScope.content.recipeBoardNo }" />
 	<input type="hidden" name="userId"
 	value="${requestScope.userId }" />
-
-	<p>
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-pencil"></i>수정
+</div><br><br><br><br><br><br><br><br><br><br><br>
+<div style="float:right">
+		<button type="submit" class="btn btn-info">
+			<i class="glyphicon glyphicon-pencil"></i>&nbsp;수정
 		</button>
-	</p>
+</div>
 </form>
 
 		</div>
-			<div class="col-sm-1"></div>
+			<div class="col-sm-2"></div>

@@ -15,7 +15,7 @@
 <br><div class="col-sm-2"></div>
 	
 		<div class="col-sm-8">
-		<h1>게시글 작성_</h1>
+		<h1>레시피&nbsp;<i class="glyphicon glyphicon-pencil"></i></h1>
 		<hr>
 <form action="${initParam.rootPath }/user/addRecipeBoardContents.do"
 	method="post" enctype="multipart/form-data">
@@ -27,8 +27,8 @@
 	<textarea rows="20" cols="92" name="recipeBoardContent" required></textarea>
 	<input type="hidden" name="storeId" value="${param.storeId }" />
 	<br>
-		<button type="submit" class="btn btn-custom" style="float:right">
-			<i class="glyphicon glyphicon-ok"></i>등록
+		<button type="submit" class="btn" style="float:right;background-color:#01A207;">
+			<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
 		</button>
 	
 	

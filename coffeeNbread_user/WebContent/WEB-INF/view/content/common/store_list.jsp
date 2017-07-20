@@ -263,10 +263,11 @@ td {
 
 	
 
-<center>
 
 
-	<p>
+
+	<p><div class="col-sm-2"></div>
+	<div class="col-sm-8"><center>
 		<%--######################################################
 															페이징 처리
 				###################################################### --%>
@@ -337,15 +338,20 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
-
-		<p/></center>
+			페이지</a></center>
+</div><div class="col-sm-2">
 		
+		
+		<!-- <div style="float:right"> -->
 		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
 		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
 			<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
 				<sec:csrfInput/>
-				<input type="submit" value="등록">
+				<button type="submit" class="btn" style="background-color:#01A207;float:right"
+>
+				<i class="glyphicon glyphicon-ok"></i>&nbsp;공지사항 등록</button>
+				
+			
 			</form>
-		</sec:authorize></div>
+		</sec:authorize></div><p/></div>
 <div class="col-sm-1"></div>

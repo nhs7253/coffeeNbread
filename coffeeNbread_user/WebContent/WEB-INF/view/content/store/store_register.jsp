@@ -187,11 +187,11 @@ body {
 											<textarea name="storeIntro" rows="5" cols="80"></textarea>
 											</div></div></div>
 		
-											<div style="float: right">
-												<button type="submit" class="btn btn-custom">
-													<i class="glyphicon glyphicon-ok"></i> 등록
+	
+												<button type="submit" class="btn" style="float: right;background-color:#01A207;">
+													<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
 												</button>
-										</div>
+										
 								</form>
 							</div>
 						</div>

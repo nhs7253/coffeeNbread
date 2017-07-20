@@ -46,9 +46,10 @@ border-bottom-color : purple;
  <script src="${initParam.rootPath }/resource/bootstrap/js/main.js"></script>
  <script src="${initParam.rootPath }/resource/bootstrap/js/modernizr.js"></script>
 
-<h2>제품 등록</h2>
+
 	<div class="col-sm-1"></div>
 <div class="col-sm-10">
+<h2>제품 등록&nbsp;<i class="glyphicon glyphicon-pencil"></i></h2>
 <div class="content">
 			<div class="container-fluid">
 				<div class="row">
@@ -63,12 +64,12 @@ border-bottom-color : purple;
 	<%-- csrf 토큰 --%>
 	<div class="row">
 	
-		<div class="col-md-6">
+		<div class="col-sm-6">
 		<div class="form-group label-floating">
 			<label class="control-label" >제품 ID</label>
 			<input type="text" name="productId" class="form-control">
 		</div></div>
-		<div class="col-md-6">
+		<div class="col-sm-6">
 		<div class="form-group label-floating">
 		<label class="control-label">제품 이름</label>
 			
@@ -76,7 +77,7 @@ border-bottom-color : purple;
 		</div></div></div>
 			<div class="row">
 	
-		<div class="col-md-6">
+		<div class="col-sm-6">
 		<div class="form-group label-floating">
 			<label class="control-label">제품 가격</label>
 			<input type="number" min="100" name="productPrice">
@@ -94,7 +95,7 @@ border-bottom-color : purple;
 			<label class="control-label">금일 생산량</label>
 			<input type="number" min="0" name="todayProductCount">
 		</div></div>
-		<div class="col-md-6">
+		<div class="col-sm-6">
 		<div class="form-group label-floating">
 			<label class="control-label">추천 제품 개수</label>
 			<input type="number" min="0" name="recommendProductCount">
@@ -102,7 +103,7 @@ border-bottom-color : purple;
 		
 		<div class="row">
 	
-		<div class="col-md-12">
+		<div class="col-sm-6">
 		<div class="form-group label-floating">
 		<label class="control-label">옵션</label>
 			
@@ -112,18 +113,24 @@ border-bottom-color : purple;
 						var="optionCategory">
 						<option value="${optionCategory.optionId}">${optionCategory.optionCategory }</option>
 					</c:forEach>
-			</select></div></div></div>
-		<div class="row">
+			</select></div></div>
+		
 	
-		<div class="col-md-12">
+		<div class="col-sm-6">
 		<div class="form-group label-floating">
 		<label class="control-label">제품 사진</label>
 		<button>사진 추가</button><input type="file" name="productPicture">
 		</div></div></div>
+			<div class="row">
+	
+		<div class="col-sm-6">
+		<label class="control-label">제품 상세</label>
+		<textarea rows="3" cols="80" name="productDetail"></textarea>
 		
+		</div></div>
 			<div style="float:right">
-				<button type="submit" class="btn btn-custom" >
-					<i class="glyphicon glyphicon-ok"></i> 등록
+				<button type="submit" class="btn" style="background-color:#01A207">
+					<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
 				</button>
 </div>
 </form>

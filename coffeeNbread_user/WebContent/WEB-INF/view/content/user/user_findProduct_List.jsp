@@ -54,7 +54,7 @@ form {
 		*/
 	});
 </script>
-<h2>제품목록조회(예약)</h2>
+<h2>제품 목록</h2>
 
 <div class="col-sm-2"></div>
 <div class="col-sm-8">
@@ -77,7 +77,7 @@ form {
 				</select> <input type="hidden" name="storeId" value="${param.storeId}" /> <input
 					type="text" name="keyword" class="form-control" />
 			</div>
-			 <button type="submit" class="btn">
+			 <button type="submit" class="btn" style="background-color:#FFCC33">
 				<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 			</button>
 		</form>
@@ -88,8 +88,8 @@ form {
 	<%-- csrf 토큰 --%>
 	<input type="hidden" value="${sessionScope.storeId }"
 		name="storeId" /> 
-	<button type="submit" class="btn">
-		<i class="glyphicon glyphicon-search"></i>&nbsp;장바구니 목록 조회
+	<button type="submit" class="btn" style="background-color:#ffb6c1">
+		<i class="glyphicon glyphicon-list"></i>&nbsp;장바구니 목록
 	</button>
    </form></div></div>
 
@@ -132,7 +132,8 @@ form {
 					<td align="center">
 						<input  type="hidden" name="productId" value="${product.productId }"/>
 						<input  type="hidden" name="storeId" value="${product.storeId }"/>
-						<button type="submit" class="btn">
+						<button type="submit" class="btn"
+						>
 							<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;장바구니
 						</button>
 

@@ -171,8 +171,8 @@ h2 {
 		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
 			<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
 				<sec:csrfInput/>
-					<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-ok"></i>등록
+					<button type="submit" class="btn" style="background-color:#01a207">
+					<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
 				</button>
 			</form>
 		</sec:authorize>
