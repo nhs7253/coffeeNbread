@@ -52,7 +52,6 @@ td {
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>아이디</th>
 					<th>이름</th>
 					<th>전화번호</th>
 					<th>주소</th>
@@ -71,7 +70,6 @@ td {
 				<c:forEach items="${requestScope.list }" var="list">
 
 					<tr>
-						<td>${list.store.storeId}</td>
 						<td><a
 							href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
 						<td>${list.store.storePhone}</td>
