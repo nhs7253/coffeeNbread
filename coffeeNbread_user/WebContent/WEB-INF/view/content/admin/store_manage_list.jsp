@@ -13,20 +13,26 @@ table {
 	border-collapse: collapse;
 }
 th,td{
-text-align:center;
+	text-align:center;
+}
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
 }
 
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
 
 </head>
 <body>
 
+<div class="col-sm-11">
 	<br><br>
-	<div class="col-sm-12">
-	<h2>매장 관리 목록</h2>
-<br>
-	
+	<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/management.png">&nbsp;매장 관리</h2>
 			<form action="${initParam.rootPath }/admin/userManagementListController.do"
 				method="post" class="form-inline quick-search-form" role="form">
 				<div style="float:right">
@@ -58,16 +64,16 @@ text-align:center;
 
 		<thead>
 			<tr class="form-group">
-				<th>유저 아이디</th>
-				<th>유저 이름</th>
-				<th>매장아이디</th>
-				<th>매장 이름</th>
-				<th>매장 전화번호</th>
-				<th>매장 주소</th>
-				<th>매장 이메일</th>
-				<th>매장 카테고리</th>
-				<th>매장 허가 여부</th>
-				<th>매장 관리</th>
+				<th style="font-weight:bold; background-color:lightyellow">유저 아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">유저 이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 전화번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 주소</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 이메일</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 카테고리</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 허가 여부</th>
+				<th style="font-weight:bold; background-color:lightyellow">권한 변경</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -185,4 +191,4 @@ text-align:center;
 		<a
 			href="${initParam.rootPath }/admin/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a></p></center></div>
-	
+	<div class="col-sm-1"></div>

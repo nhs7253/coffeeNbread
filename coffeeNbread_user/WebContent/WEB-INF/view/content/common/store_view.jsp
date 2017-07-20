@@ -36,7 +36,7 @@ textarea {
 	<div class="col-sm-12">
 	<div class="col-sm-4">
 	<br><br>
-	<h1>매장 정보</h1>
+	<h1><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/information.png">&nbsp;매장 정보</h1>
 	<br>
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
@@ -85,35 +85,35 @@ textarea {
 	
 		<table class="table" width="100%">
 			<tr class="form-group">
-			<th>매장명</th>
+			<th style="font-weight:bold">매장명</th>
 				<td><div class="col-xs-10">
 						${requestScope.store.storeName }
 					</div></td>
 			</tr>
 
 			<tr class="form-group">
-			<th>매장 주소</th>
+			<th style="font-weight:bold">매장 주소</th>
 				
 				<td><div class="col-xs-10">
 						${requestScope.store.storeAddress }
 					</div></td>
 			</tr>
 			<tr class="form-group">
-			<th>매장 이메일</th>
+			<th style="font-weight:bold">매장 이메일</th>
 				
 				<td><div class="col-xs-10">
 						${requestScope.store.storeEmail }
 					</div></td>
 			</tr>
 			<tr class="form-group">
-			<th>매장 여는 시간</th>
+			<th style="font-weight:bold">매장 여는 시간</th>
 				
 				<td><div class="col-xs-10">
 						${requestScope.store.storeOpenFormat }
 					</div></td>
 			</tr>
 			<tr class="form-group">
-			<th>매장 닫는 시간</th>
+			<th style="font-weight:bold">매장 닫는 시간</th>
 				
 				<td width="60%">
 					<div class="col-xs-10">
@@ -121,9 +121,8 @@ textarea {
 					</div>
 				</td>
 			</tr>
-
 			<tr class="form-group">
-			<th>매장 소개</th>
+			<th style="font-weight:bold">매장 소개</th>
 				<td>
 					<textarea rows="6" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }</textarea>
 				</td>

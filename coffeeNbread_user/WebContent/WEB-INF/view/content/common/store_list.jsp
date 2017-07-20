@@ -47,7 +47,7 @@ td {
 
 <div class="col-sm-11">
 <br><br>
-<h2>매장 목록</h2>
+<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/store.png">&nbsp;매장 목록</h2>
 <br>
 <div style="float:right">
 

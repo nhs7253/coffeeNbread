@@ -66,7 +66,7 @@ h2 {
 					<td align="center">${list.product.productName}</td> 
 					<td align="center">${list.reservationCount}</td>
 					<td align="center"><fmt:formatDate value="${list.productHopeTime}" pattern="yyyy-MM-dd HH:mm"/></td>
-					<td align="center">${list.reservationConfirm}</td>
+					<td align="center"><fmt:formatDate value="${list.reservationConfirm}" pattern="yyyy-MM-dd HH:mm"/></td>
 				</tr>
 			</c:forEach>
 		</tbody>

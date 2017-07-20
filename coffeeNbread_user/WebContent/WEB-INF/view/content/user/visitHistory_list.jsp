@@ -57,13 +57,13 @@ h2 {
 		<table class="table table-hover">
 			<thead>
 				<tr class="form-group">
-					<th>이름</th>
-					<th>전화번호</th>
-					<th>주소</th>
-					<th>이메일</th>
-					<th>조회수</th>
-					<th>여는 시간</th>
-					<th>닫는 시간</th>
+					<th style="font-weight:bold; background-color:lightyellow">이름</th>
+					<th style="font-weight:bold; background-color:lightyellow">전화번호</th>
+					<th style="font-weight:bold; background-color:lightyellow">주소</th>
+					<th style="font-weight:bold; background-color:lightyellow">이메일</th>
+					<th style="font-weight:bold; background-color:lightyellow">조회수</th>
+					<th style="font-weight:bold; background-color:lightyellow">여는 시간</th>
+					<th style="font-weight:bold; background-color:lightyellow">닫는 시간</th>
 				</tr>
 			</thead>
 			<tbody>

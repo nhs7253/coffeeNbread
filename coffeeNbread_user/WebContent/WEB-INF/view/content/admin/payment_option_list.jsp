@@ -10,30 +10,36 @@ table {
 	width: 700px;
 	border-collapse: collapse;
 }
-th{
-text-align:center;
+th, td{
+	text-align:center;
 }
 td {
 	padding: 5px; /* //td 간 간격 */
+}
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
 }
 </style>
 
 </head>
 <body>
-
-<br><br>
 	
-<div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
-		<h2>지원 결제 수단</h2>
-	<br><br><br>
+		<div class="col-sm-11">
+		<br><br>
+		<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/bank-check.png">&nbsp;지원 결제 수단</h2>
+	<br>
 	<table class="table">
 		<thead>
 			<tr >
-				<th>아이디</th>
-				<th>방법</th>
-				<th>삭제</th>
+				<th style="font-weight:bold; background-color:lightyellow">아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">방법</th>
+				<th style="font-weight:bold; background-color:lightyellow">삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,9 +56,8 @@ td {
 							action="${initParam.rootPath }/admin/removePaymentOptionListController.do"
 							method="post">
 							<input type="hidden" value="${list.paymentId }" name="paymentId" />
-							
-							<button type="submit" class="btn btn-danger" >
-								<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
+							<button type="submit" class="btn btn-danger">
+							<i class="glyphicon glyphicon-trash"></i>
 							</button>
 							<sec:csrfInput />
 							<%-- csrf 토큰 --%>
@@ -66,8 +71,7 @@ td {
 <center>
 	<form action="${initParam.rootPath }/admin/payment_option_register_form.do">
 
-		<button type="submit" class="btn btn-default btn-circle" style="background-color:#01a207"
-		>
+		<button type="submit" class="btn btn-default btn-circle" style="background-color:#01a207">
 			<i class="glyphicon glyphicon-ok"></i>&nbsp;등록
 		</button>
 		<sec:csrfInput />

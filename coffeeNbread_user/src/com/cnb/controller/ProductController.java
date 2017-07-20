@@ -165,8 +165,9 @@ public class ProductController {
 			modelAndView.setViewName("store/product_update.tiles");
 			return modelAndView;
 		}
-		modelAndView.setViewName("store/product_success.tiles");
-		modelAndView.addObject("product", product);
+		//modelAndView.setViewName("store/product_success.tiles");
+//		modelAndView.addObject("product", product);
+		modelAndView.setViewName("redirect:/findProductDetailController.do?productId="+product.getProductId()+"&storeId="+product.getStoreId());
 		return modelAndView;
 	}
 	
