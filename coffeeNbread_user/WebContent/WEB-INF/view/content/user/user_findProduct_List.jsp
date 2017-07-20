@@ -122,11 +122,8 @@ form {
 				</tr>
 				<tr>
 					<td align="center">
-<<<<<<< HEAD
-					<input type="number" min="0" name="productCount" class="productCount" value="0" />
-=======
+
 					<input type="number" name="productCount" class="productCount" min="0"  value="0" />
->>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 					</td>
 				</tr>
 
