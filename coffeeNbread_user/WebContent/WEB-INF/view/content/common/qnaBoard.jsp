@@ -19,12 +19,21 @@ table {
 td {
 	padding: 5px; /* //td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
 </style>
 	
 <div class="col-sm-1"></div>
-	
 		<div class="col-sm-10">
-		<h2>${sessionScope.storeName }Q&A BOARD__</h2>
+		<br><br>
+		<h2>${sessionScope.storeName }Q&A 게시판</h2>
 		
 	<div style="float:right">
 			<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
@@ -36,8 +45,8 @@ td {
 						<option value="titleAndcontent">제목+내용</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#FFCC33"> 
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
@@ -47,8 +56,8 @@ td {
 			<form action="${initParam.rootPath }/user/QnA_board_register_form.do">
 				<sec:csrfInput/>
 				<input type="hidden" name="storeId" value="${requestScope.storeId }"/>
-				<button type="submit" class="btn">
-						<i class="glyphicon glyphicon-pencil"></i>매장  Q&A 글쓰기
+				<button type="submit" class="btn" style="background-color:#fa8072">
+						<i class="glyphicon glyphicon-pencil"></i>&nbsp;글쓰기
 				</button>
 			</form>
 </div>

@@ -49,7 +49,7 @@ td {
 						<td style="text-align:center;">${list.store.storeId}</td>
 						<td style="text-align:center;"><a href="${initParam.rootPath }/common/viewStoreController.do?storeId=${list.store.storeId}">${list.store.storeName}</a></td>
 						<td style="text-align:center;">${list.store.storePhone}</td>
-						<td >${list.store.storeAddress}</td>
+						<td>${list.store.storeAddress}</td>
 						<td style="text-align:center;">${list.store.storeEmail}</td>
 						<td style="text-align:center;">${list.store.storeHits}</td>
 						<td style="text-align:center;">${list.store.storeOpenFormat}</td>

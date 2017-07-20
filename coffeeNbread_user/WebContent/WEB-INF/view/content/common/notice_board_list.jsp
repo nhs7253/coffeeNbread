@@ -6,8 +6,6 @@
 <body>
 	
 <style type="text/css">
-
-
 table {
    width: 700px;
    border-collapse: collapse;
@@ -16,12 +14,21 @@ table {
 td {
    padding: 5px; /* //td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
 </style>
 	
 <div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
-		<h2>공지사항 게시판</h2>
+<div class="col-sm-10">
+<br><br>
+<h2>공지사항</h2>
 
 		
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
@@ -39,8 +46,8 @@ td {
 									${param.select eq "titleAndcontent" ? "selected" :""}>제목+내용</option>
 							</select> <input type="text" name="keyword" class="form-control" />
 						</div>
-						<button type="submit" class="btn">
-							<i class="glyphicon glyphicon-search"></i>검색
+						<button type="submit" class="btn" style="background-color:#FFCC33">
+							<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 						</button>
 						<sec:csrfInput />
 						<%-- csrf 토큰 --%>

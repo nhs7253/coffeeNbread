@@ -2,6 +2,17 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<style type="text/css">
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
+</style>
 
 <script type="text/javascript"
 	src="/coffeeNbread_user/resource/jquery/jquery-3.2.1.js"></script>
@@ -14,9 +25,11 @@
 	});
 </script>
 
-<h2>PRODUCT_REGISTER_</h2>
-	<div class="col-sm-2"></div>
-<div class="col-sm-8">
+
+	<div class="col-sm-1"></div>
+<div class="col-sm-10">
+<br><br>
+<h2>제품 등록</h2>
 <form action="${initParam.rootPath }/addProductController.do"
 	method="post" enctype="multipart/form-data">
 	<sec:csrfInput />

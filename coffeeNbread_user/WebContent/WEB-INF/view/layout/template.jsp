@@ -51,7 +51,6 @@
 }
 
 
-
 </style>
 </head>
 <body>
@@ -77,6 +76,7 @@
 		
 	</section>
 </div>
+
 </body>
 
 </html>

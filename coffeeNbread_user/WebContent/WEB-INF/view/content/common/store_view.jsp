@@ -13,16 +13,20 @@ th{
 td{
 	 width:70%;
 }
-
-
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+h1 {
+	font-family: 'title';
+	font-size: 45px
+}
 
 textarea {
 
   border-color:#FFFFFF;
 
 }
-
-
 </style>
 
 </head>
@@ -31,9 +35,9 @@ textarea {
 	<div class="col-sm-1"></div>
 	<div class="col-sm-12">
 	<div class="col-sm-4">
+	<br><br>
 	<h1>매장 정보</h1>
-	<hr>
-	
+	<br>
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
 			<img
@@ -47,6 +51,16 @@ textarea {
 	<div class="col-sm-6">
 	<div style="float:right">
 
+		<c:if test="${requestScope.authority }">
+			<form action="${initParam.rootPath }/findProductListController.do" method="post">
+				<sec:csrfInput />
+				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
+				<button type="submit" class="btn btn btn-link btn-lg">
+					<i class="glyphicon glyphicon-list"></i>&nbsp;제품 관리
+				</button>
+			</form>
+		</c:if>
+		
 		<form
 			action="${initParam.rootPath }/user/userFindProductListController.do"
 			method="post">
@@ -66,14 +80,12 @@ textarea {
 			</button>
 		</form>
 		
-		
-		<br><br><br>
+		<br><br><br><br><br>
 	</div>
-	
 	
 		<table class="table" width="100%">
 			<tr class="form-group">
-				<th>매장명</th>
+			<th>매장명</th>
 				<td><div class="col-xs-10">
 						${requestScope.store.storeName }
 					</div></td>
@@ -112,13 +124,9 @@ textarea {
 
 			<tr class="form-group">
 			<th>매장 소개</th>
-				
 				<td>
-				
-						<textarea rows="6" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }
-						</textarea>
-				
-					</td>
+					<textarea rows="6" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }</textarea>
+				</td>
 			</tr>
 		</table>
 	
@@ -144,7 +152,6 @@ textarea {
 		
 		<!-- 본인만 보임 -->
 		<c:if test="${requestScope.authority }">
-		
 			<form action="${initParam.rootPath}/user/callStoreModifyController.do"  >
 				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>&nbsp;수정</button>
 			</form>
@@ -152,15 +159,7 @@ textarea {
 			<form action="${initParam.rootPath }/removeStoreController.do">
 					<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>&nbsp;삭제</button>
 			</form>
-			
-			<form action="${initParam.rootPath }/findProductListController.do" method="post">
-				<sec:csrfInput />
-				<input type="hidden" name="storeId" value="${requestScope.store.storeId }" /> 
-				<button type="submit" class="btn"><i class="glyphicon glyphicon-list"></i>&nbsp;제품 관리</button><br>
-			</form>
-			
 		</c:if>
-
 	</div>
 	
 

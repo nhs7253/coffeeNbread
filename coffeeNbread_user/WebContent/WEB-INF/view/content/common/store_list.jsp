@@ -5,6 +5,16 @@
 
 	
 <style type="text/css">
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
+
 table, td {
    
 }
@@ -34,15 +44,10 @@ td {
     .info .link {color: #5085BB;}
 </style>
 
-
-
-	
-
-
-
 <div class="col-sm-1"></div>
 
 <div class="col-sm-10">
+<br><br>
 <h2>매장 목록</h2>
 <div style="float:right">
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
@@ -55,7 +60,7 @@ td {
 			<option value="storeCategory" ${param.select eq "storeCategory" ? "selected" :""}>카테고리</option>
 		</select>
 		 <input type="text" name="keyword" class="form-control"/></div>
-		 <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i>검색</button>
+		 <button type="submit" class="btn" style="background-color:#b6009f"><i class="glyphicon glyphicon-search"></i>&nbsp;검색</button>
 		</div>
 		<sec:csrfInput/><%-- csrf 토큰 --%>
 	</form>
