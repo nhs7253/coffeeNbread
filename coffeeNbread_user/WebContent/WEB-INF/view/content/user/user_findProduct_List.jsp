@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style type="text/css">
 
@@ -118,7 +119,7 @@ form {
 					<td align="center">${product.productName }&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
-					<td align="center">${product.productPrice }&nbsp;&nbsp;</td>
+					<td align="center"><fmt:formatNumber value="${product.productPrice }" pattern="#,###" /></td>
 				</tr>
 				<tr>
 					<td align="center">
