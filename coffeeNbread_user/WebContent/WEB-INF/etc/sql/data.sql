@@ -214,8 +214,7 @@ INSERT INTO user_authority VALUES('us', 'ROLE_CNB_STORE');
 INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
 
 /* 매장 등록시 - 매장사진, 매장좌표 */
-select*from store
-delete from store
+
 INSERT INTO STORE VALUES('s-100','판교 이디아','저희 매장을 방문해 주셔서 진심으로 감사드립니다.저희 매장은 다른 매장과 다르게 매일 신선한재료로 여러분들을 맞이하고있습니다. 아침마다 추천메뉴바뀌니 많은 관심부탁드립니다.'
                           , '062-372-4755','판교동 625에 위치한 판교 이디아점입니다.','PEdiya@email.com','빵,커피',504,to_date('198009050900','yyyy-mm-dd hh24:mi'),to_date('198009052200','yyyy-mm-dd hh24:mi'),'Y');
                           
@@ -417,7 +416,9 @@ INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-102','o');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-102','s');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','c');
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','j');
+
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-103','k');                     
+
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-105','c');                         
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-105','p');                         
 INSERT INTO STORE_PAYMENT_OPTIONLIST VALUES('s-105','m');                         

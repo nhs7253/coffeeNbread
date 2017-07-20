@@ -6,8 +6,6 @@
 --테이블 : 24, 시퀀스 : 9 - 총합 : 33 */     --7월 20일 최종 수정
 /* 테이블 및 시퀀스 생성 */
 
-/* 관리자 */
-
 
 /* 사용자 권한 */
 CREATE TABLE user_authority (
@@ -436,6 +434,4 @@ DROP SEQUENCE store_category_no_seq;
 DROP SEQUENCE option_id_seq;
 /* 매장 방문 기록 */
 DROP SEQUENCE store_visit_history_no_seq;
-
-
 
