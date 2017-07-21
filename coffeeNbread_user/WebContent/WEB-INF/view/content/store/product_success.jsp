@@ -4,25 +4,29 @@
 .th {
 	text-ailgn: center;
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
-<br>
-<br>
-<br><br>
-<br>
-<br>
-<div class="col-sm-2"></div>
 
-<div class="col-sm-4">
-<h2>수정된 제품</h2>
-	<br>
+<br><br>
+<div class="col-sm-2"></div>
+<div class="col-sm-5">
+<h2><img src="${initParam.rootPath }/resource/css/information.png">&nbsp;제품 정보</h2>
+<br>
 	<br> <img
 		src="/coffeeNbread_user/up_image/${requestScope.fileName}"
 		width="300px">
 </div>
 <div class="col-sm-4">
-	<br>
-	<br>
+<br><br><br><br><br>
 	<table class="table">
 		
 		<tr>
@@ -63,5 +67,5 @@
 		</tr>
 	</table>
 </div>
-<div class="col-sm-2"></div>
+<div class="col-sm-1"></div>
 
