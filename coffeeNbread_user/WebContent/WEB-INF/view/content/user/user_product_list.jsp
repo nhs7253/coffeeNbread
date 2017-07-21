@@ -16,6 +16,15 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 <h2>PRODUCT_LIST</h2>
