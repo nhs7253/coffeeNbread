@@ -16,14 +16,25 @@ table {
 td {
    padding: 10px; /*td 간 간격 */
 }
+
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h4 {
 	font-family: 'title';
-	font-size: 35px
+	font-size: 40px
+}
+
+@font-face {
+	font-family: 'checkbox';
+	src: local(※), url(${initParam.rootPath }/resource/font/BMJUA_ttf.woff) format('woff');
+}
+
+.menu {
+	font-family: 'checkbox';
+	font-size: 16px
 }
 </style>
 
@@ -160,7 +171,7 @@ $(document).ready(function(){
 		$("#br1").prevAll('input[type="button"]').remove();
 		$("#br1").prevAll('input[type="date"]').remove();
 		
-		$("#br1").before("<input type='button' value='1주일' id='1주일'/> ");
+		$("#br1").before("<input type='button' value='1주일' id='1주일' background-color='lavenderblush'/> ");
 		$("#br1").before("<input type='button' value='1개월' id='1개월'/> ");
 		$("#br1").before("<input type='button' value='3개월' id='3개월'/> ");
 		$("#br1").before("<input type='button' value='6개월' id='6개월'/> ");
@@ -1129,12 +1140,12 @@ $(document).ready(function(){
 
 </script>
 
-<h4 style="font-weight:bold"><span class="glyphicon glyphicon-stats"></span>&nbsp;&nbsp;판매량</h4>
+<h4 style="font-weight:bold"><img src="${initParam.rootPath }/resource/css/graph.png">&nbsp;&nbsp;판매량</h4>
 
-<input type="checkbox" name="choice" id="total" value="total">오늘 전체&nbsp;&nbsp;<br id=br0>
-<input type="checkbox" name="choice" id="date" value="date">날짜별&nbsp;&nbsp;<br id=br1>
-<input type="checkbox" name="choice" id="category" value="category">종류별&nbsp;&nbsp;<br id=br2>
-<input type="checkbox" name="choice" id="name" value="name">제품명&nbsp;&nbsp;<br id=br3>
+<input type="checkbox" name="choice" id="total" value="total">&nbsp;<input class="menu" type="text" value="오늘 전체" disabled style="border:0; background-color:transparent;"><br id=br0>
+<input type="checkbox" name="choice" id="date" value="date">&nbsp;<input class="menu" type="text" value="날짜별" disabled style="border:0; background-color:transparent;"><br id=br1>
+<input type="checkbox" name="choice" id="category" value="category">&nbsp;<input class="menu" type="text" value="종류별" disabled style="border:0; background-color:transparent;"><br id=br2>
+<input type="checkbox" name="choice" id="name" value="name">&nbsp;<input class="menu" type="text" value="제품명" disabled style="border:0; background-color:transparent;"><br id=br3>
 <p><p>
 
 <table id="table">
@@ -1160,12 +1171,12 @@ $(document).ready(function(){
 
 <br><br>
 
-<h4 style="font-weight:bold"><span class="glyphicon glyphicon-sort"></span>&nbsp;&nbsp;상승세 / 하락세</h4>
+<h4 style="font-weight:bold"><img src="${initParam.rootPath }/resource/css/currency-value.png">&nbsp;&nbsp;상승세 / 하락세</h4>
 
 <table>
 	<tbody>
 		<tr>
-			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">상승세<i class="glyphicon glyphicon-arrow-up"></i></td>
+			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">상승세<i class="glyphicon glyphicon-arrow-up" style="color:blue"></i></td>
 			<c:forEach items="${requestScope.upProductList }" var="product">
 				<input type="hidden" value="${product.productId}"/>
 				<td class="up" align="center" style="cursor:pointer">
@@ -1181,7 +1192,7 @@ $(document).ready(function(){
 <table>
 	<tbody>
 		<tr>
-			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">하락세<i class="glyphicon glyphicon-arrow-down"></i></td>
+			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">하락세<i class="glyphicon glyphicon-arrow-down" style="color:red"></i></td>
 			<c:forEach items="${requestScope.downProductList }" var="product">
 				<input type="hidden" value="${product.productId}"/>
 				<td class="down" align="center" style="cursor:pointer">
@@ -1197,7 +1208,7 @@ $(document).ready(function(){
 <table>
 	<tbody>
 		<tr>
-			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">유지중<i class="glyphicon glyphicon-resize-horizontal"></i></td>
+			<td width="80" align="center" style="font-weight:bold; background-color:LemonChiffon">유지중<i class="glyphicon glyphicon-resize-horizontal" style="color:green"></i></td>
 			<c:forEach items="${requestScope.keepProductList }" var="product">
 				<input type="hidden" value="${product.productId}"/>
 				<td class="keep" align="center" style="cursor:pointer">
@@ -1213,7 +1224,7 @@ $(document).ready(function(){
 
 <br><br>
 
-<h4 style="font-weight:bold"><span class="glyphicon glyphicon-th"></span>&nbsp;&nbsp;예상 생산량</h4>
+<h4 style="font-weight:bold"><img src="${initParam.rootPath }/resource/css/analytics.png">&nbsp;&nbsp;예상 생산량</h4>
 
 <table>
 	<tbody>

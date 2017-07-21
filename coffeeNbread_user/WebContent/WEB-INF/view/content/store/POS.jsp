@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-
-
 table {
 	/* width: 500px; */
 	border-collapse: collapse;
@@ -15,6 +13,15 @@ td {
 }
 form {
 	display: inline
+}
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
 }
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
@@ -43,7 +50,7 @@ form {
    <input type="text" name="keyword" class="form-control"/>
    </div>
    
-   <button type="submit" class="btn "><i class="glyphicon glyphicon-search"></i>검색</button>
+   <button type="submit" class="btn" style="background-color:#b6009f"><i class="glyphicon glyphicon-search"></i>&nbsp;검색</button>
     
 </form>
 
@@ -90,7 +97,7 @@ form {
 	
 
 	
-	<button type="submit" class="btn">결제</button>
+	<button type="submit" class="btn glyphicon glyphicon-credit-card" style="background-color:#4682b4">&nbsp;결제</button>
 
 </form></div>
 	<!-- </div>

@@ -17,13 +17,22 @@ text-align:center;
 td {
 	padding: 5px; /* //td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 </head>
 <body>
 
-<br>
-	<h2>즐겨찾기</h2>
+<br><br>
+	<h2><img src="${initParam.rootPath }/resource/css/bookmark.png">&nbsp;즐겨찾기</h2>
 	
 
 <div class="col-sm-12">
@@ -52,14 +61,14 @@ td {
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>이름</th>
-					<th>전화번호</th>
-					<th>주소</th>
-					<th>이메일</th>
-					<th>조회수</th>
-					<th>여는 시간</th>
-					<th>닫는 시간</th>
-					<th>삭제</th>
+					<th style="font-weight:bold; background-color:lightyellow">이름</th>
+					<th style="font-weight:bold; background-color:lightyellow">전화번호</th>
+					<th style="font-weight:bold; background-color:lightyellow">주소</th>
+					<th style="font-weight:bold; background-color:lightyellow">이메일</th>
+					<th style="font-weight:bold; background-color:lightyellow">조회수</th>
+					<th style="font-weight:bold; background-color:lightyellow">여는 시간</th>
+					<th style="font-weight:bold; background-color:lightyellow">닫는 시간</th>
+					<th style="font-weight:bold; background-color:lightyellow">삭제</th>
 				</tr>
 			</thead>
 			<tbody>

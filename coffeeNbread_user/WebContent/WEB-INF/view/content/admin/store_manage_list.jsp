@@ -12,11 +12,17 @@ table {
 	width: 700px;
 	border-collapse: collapse;
 }
-th{
-text-align:center;
+th,td{
+	text-align:center;
 }
-td {
-	padding: 5px; /* //td 간 간격 */
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
 }
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/resource/css/search_style.css">
@@ -24,11 +30,9 @@ td {
 </head>
 <body>
 
-	
-	<div class="col-sm-12">
-	<h2>STORE_MANAGE_LISTdd</h2>
-<br>
-	
+<div class="col-sm-11">
+	<br><br>
+	<h2><img src="${initParam.rootPath }/resource/css/management.png">&nbsp;매장 관리</h2>
 			<form action="${initParam.rootPath }/admin/userManagementListController.do"
 				method="post" class="form-inline quick-search-form" role="form">
 				<div style="float:right">
@@ -45,8 +49,8 @@ td {
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
 				
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#b6009f">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>						<br>
 <br><br>
 </div>
@@ -60,16 +64,16 @@ td {
 
 		<thead>
 			<tr class="form-group">
-				<th>유저 아이디</th>
-				<th>유저 이름</th>
-				<th>매장아이디</th>
-				<th>매장 이름</th>
-				<th>매장 전화번호</th>
-				<th>매장 주소</th>
-				<th>매장 이메일</th>
-				<th>매장 카테고리</th>
-				<th>매장 허가 여부</th>
-				<th>매장 관리</th>
+				<th style="font-weight:bold; background-color:lightyellow">유저 아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">유저 이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 전화번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 주소</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 이메일</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 카테고리</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장 허가 여부</th>
+				<th style="font-weight:bold; background-color:lightyellow">권한 변경</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -96,8 +100,8 @@ td {
 								type="hidden" value="${list.storeId }" name="storeId" /> <input
 								type="hidden" value="${list.store.storePermission }"
 								name="storePermission" />
-							<button type="submit" class="btn">
-								<i class="glyphicon glyphicon-pencil"></i>변경
+							<button type="submit" class="btn btn-info" >
+								<i class="glyphicon glyphicon-pencil"></i>&nbsp;변경
 							</button>
 
 							<sec:csrfInput />
@@ -187,4 +191,4 @@ td {
 		<a
 			href="${initParam.rootPath }/admin/userManagementListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
 			페이지</a></p></center></div>
-	
+	<div class="col-sm-1"></div>

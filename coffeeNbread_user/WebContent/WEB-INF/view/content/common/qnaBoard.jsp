@@ -16,24 +16,27 @@ table {
 	border-collapse: collapse;
 }
 
+th{
+  text-align:center;
+}
+
 td {
 	padding: 5px; /* //td 간 간격 */
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 </style>
 	
-<div class="col-sm-1"></div>
-		<div class="col-sm-10">
+	<div class="col-sm-11">
 		<br><br>
-		<h2>${sessionScope.storeName }Q&A 게시판</h2>
+		<h2><img src="${initParam.rootPath }/resource/css/question.png">&nbsp;${sessionScope.storeName }Q&A 게시판</h2>
 		
 	<div style="float:right">
 			<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"
@@ -60,19 +63,21 @@ h2 {
 						<i class="glyphicon glyphicon-pencil"></i>&nbsp;글쓰기
 				</button>
 			</form>
-</div>
-
-		
+	</div>
+	<br>
+	<br>
+	<br>
+	<br><br>
 
 			<table class="table table-hover">
 				<thead>
 					<tr >
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-						<th>비밀글</th>
+						<th style="font-weight:bold; background-color:lightyellow">글번호</th>
+						<th style="font-weight:bold; background-color:lightyellow">제목</th>
+						<th style="font-weight:bold; background-color:lightyellow">작성자</th>
+						<th style="font-weight:bold; background-color:lightyellow">작성일</th>
+						<th style="font-weight:bold; background-color:lightyellow">조회수</th>
+						<th style="font-weight:bold; background-color:lightyellow">비밀글</th>
 					</tr>
 				</thead>
 				<tbody>

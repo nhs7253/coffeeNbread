@@ -22,12 +22,12 @@ td {
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 </style>
 

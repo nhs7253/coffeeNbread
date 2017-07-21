@@ -4,14 +4,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
-
-
-
-
-
-
-
-
 <!--맨처음 제품 수령시간 적고  -->
 <!--그다음 카드 적고  -등록-->
 <!--결제하기 누르면 결제내역에 등록  -->
@@ -26,11 +18,24 @@ table {
 td {
 	padding: 5px; /*td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
+th {
+	align: center;
+	background-color:#dcdcdc
+}
 </style>
 
 
-<div class="col-sm-2"></div>
-<div class="col-sm-8">
+<div class="col-sm-11">
+<br><br>
 <h2>결제 페이지</h2>
 <br><br>
 <form
@@ -75,8 +80,7 @@ td {
 <br>
 
 <div style="float:right">
-	총금액 : <input type="text" value="${sessionScope.posPaymentTotal }" disabled style="border-color:white;background-color:transparent;">
-
+	<span class="glyphicon glyphicon-piggy-bank">&nbsp;<input type="text" value="총 금액 : " disabled style="border:0; background-color:transparent; font-size:20px"> <input type="text" value="${sessionScope.posPaymentTotal }" disabled style="border:0; background-color:transparent; font-size:20px"></span>
 
 
 
@@ -90,9 +94,9 @@ td {
 	<br>
 	
 	<div style="float:right">
-	<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-card"></i>&nbsp;결제하기 
+	<button type="submit" class="btn glyphicon glyphicon-credit-card" style="background-color:#4682b4">&nbsp;결제</button>
 			</button>
 </div>
-</form></div></div><div class="col-sm-2"></div>
+</form></div></div>
+<div class="col-sm-1"></div>
 

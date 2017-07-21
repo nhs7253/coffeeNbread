@@ -7,12 +7,12 @@
 <style type="text/css">
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 
 table, td {
@@ -44,12 +44,14 @@ td {
     .info .link {color: #5085BB;}
 </style>
 
-<div class="col-sm-1"></div>
 
-<div class="col-sm-10">
+<div class="col-sm-11">
 <br><br>
-<h2>매장 목록</h2>
+<h2><img src="${initParam.rootPath }/resource/css/store.png">&nbsp;매장 목록</h2>
+<br>
 <div style="float:right">
+
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<form action="${initParam.rootPath }/common/findStorePagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 		<div style="flaot:right">
 		<div class="form-group">
@@ -229,15 +231,15 @@ td {
 	
 
 
-	
+	<br><br>
 	<table class="table">
 		<thead>
 			<tr class="form-group">
-				<th>매장이름</th>
-				<th>주소</th>
-				<th>카테고리</th>
-				<th>여는 시간</th>
-				<th>닫는 시간</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">주소</th>
+				<th style="font-weight:bold; background-color:lightyellow">카테고리</th>
+				<th style="font-weight:bold; background-color:lightyellow">여는 시간</th>
+				<th style="font-weight:bold; background-color:lightyellow">닫는 시간</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -261,10 +263,11 @@ td {
 
 	
 
-<center>
 
 
-	<p>
+
+	<p><div class="col-sm-2"></div>
+	<div class="col-sm-8"><center>
 		<%--######################################################
 															페이징 처리
 				###################################################### --%>
@@ -335,15 +338,20 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/common/findStorePagingListController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
-
-		<p/></center>
+			페이지</a></center>
+</div><div class="col-sm-2">
 		
+		
+		<!-- <div style="float:right"> -->
 		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
 		<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
 			<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
 				<sec:csrfInput/>
-				<input type="submit" value="등록">
+				<button type="submit" class="btn" style="background-color:#01A207;float:right"
+>
+				<i class="glyphicon glyphicon-ok"></i>&nbsp;공지사항 등록</button>
+				
+			
 			</form>
-		</sec:authorize></div>
+		</sec:authorize></div><p/></div>
 <div class="col-sm-1"></div>

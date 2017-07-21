@@ -10,13 +10,19 @@
 <style type="text/css">
 @font-face {
 	font-family: 'menu';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a동네목욕탕.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a동네목욕탕.woff) format('woff');
 }
 
 li {
 	font-family: 'menu';
 }
-
+@font-face {
+	font-family: 'headTitle';
+	src: local(※), url(${initParam.rootPath }/resource/font/MASQUE.woff) format('woff');
+}
+.headTitle{
+	font-family: 'headTitle';
+}
 </style>
 
 <script type="text/javascript">
@@ -45,8 +51,9 @@ li {
 
 <body>
    <header class="cd-main-header">
-	&nbsp;&nbsp;&nbsp;&nbsp;<span id="display" style="font-size:16px; color:#ffffff"></span>
-		
+	<img src="${initParam.rootPath }/resource/css/Coffee-Cup-icon.png" width="40" height="50">
+	<input class="headTitle" size=14 type="text" value=" Coffee&Bread" disabled style="border:0; background-color:transparent; font-size:20px; color:#ffffff">
+	<img src="${initParam.rootPath }/resource/css/bread.png" width="30" height="40">
       <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 		
       <nav class="cd-nav">
@@ -75,14 +82,14 @@ li {
                      <li><a href="javascript:logout()">로그아웃</a>
                   </sec:authorize>
                   <sec:authorize access="hasAnyRole('ROLE_CNB_USER', 'CNB_STORE')">
-                     <li><a href="${initParam.rootPath }/user/mypage.do">사용자 정보조회</a></li>
-                     <li><a href="${initParam.rootPath }/user/remove_user_form.do">사용자 탈퇴</a></li>
+                     <li><a href="${initParam.rootPath }/user/mypage.do">내 정보 조회</a></li>
                      <li><a href="${initParam.rootPath }/user/update_profile_form.do">내 정보 수정</a></li>
-                  	 <li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">북마크 목록 조회</a></li>
-            		 <li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">유저 방문 내역 조회</a></li>
-            		 <li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">유저 추천 매장 조회</a></li>
-              		 <li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do"> 회원 결제내역 조회</a></li>   
-            		 <li><a href="${initParam.rootPath }/user/findReservationDetailsController.do"> 회원 예약내역 조회</a></li>   
+                  	 <li><a href="${initParam.rootPath }/user/findStoreBookmarkListByKeywordController.do">즐겨찾기</a></li>
+            		 <li><a href="${initParam.rootPath }/user/findStoreVisitHistoryListByKeywordController.do">매장 방문 내역</a></li>
+            		 <li><a href="${initParam.rootPath }/user/viewUserPreferenceStoreListController.do">자주 방문하는 매장</a></li>
+              		 <li><a href="${initParam.rootPath }/user/findPaymentDetailsController.do">결제내역 조회</a></li>   
+            		 <li><a href="${initParam.rootPath }/user/findReservationDetailsController.do">예약내역 조회</a></li>   
+                     <li><a href="${initParam.rootPath }/user/remove_user_form.do">탈퇴하기</a></li>
                   </sec:authorize>
                </ul></li>
          </ul>

@@ -660,7 +660,7 @@ keyframes buttonFadeInUp { 0% {
 									<div class="col-sm-6">
 										<div class="input-container">
 											<input type="text" id="phone" name="userPhone"
-												required="required" /> <label for="phone">phone_Number</label>
+												required="required" /> <label for="phone">phone(-빼고 입력해주세요)</label>
 											<div class="bar"></div>
 										</div>
 									</div>

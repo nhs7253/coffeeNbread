@@ -22,7 +22,7 @@ display:inline;
 	
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
-	<h1>공지사항 내용</h1>
+	<h1>공지사항</h1>
 	<hr>
 	<br>
 <table class="table">
@@ -42,7 +42,7 @@ display:inline;
 <table>
 <tr>
 
-<td><textarea rows="20" cols="120" disabled style="background-color:#FFFFFF">${requestScope.noticeBoardContents.noticeBoardContent }</textarea></td>
+<td><textarea rows="18" cols="112" disabled style="background-color:#FFFFFF">${requestScope.noticeBoardContents.noticeBoardContent }</textarea></td>
 </tr>
 
 
@@ -57,8 +57,8 @@ display:inline;
 		<sec:csrfInput />
 		<input type="hidden" name="noticeBoardNo"
 			value="${requestScope.noticeBoardContents.noticeBoardNo }" />
-		<button type="submit" class="btn">
-			<i class="glyphicon glyphicon-pencil"></i>수정
+		<button type="submit" class="btn btn-info">
+			<i class="glyphicon glyphicon-pencil"></i>&nbsp;수정
 		</button>
 
 	</form>
@@ -69,8 +69,8 @@ display:inline;
 		<sec:csrfInput />
 		<input type="hidden" name="noticeBoardNo"
 			value="${requestScope.noticeBoardContents.noticeBoardNo }" />
-		<button type="submit" class="btn">
-			<i class="glyphicon glyphicon-trash"></i>삭제
+		<button type="submit" class="btn btn-danger">
+			<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
 		</button>
 	</form>&nbsp;&nbsp;&nbsp;&nbsp;</div></sec:authorize>	</div><div class="col-sm-2"></div>
 	

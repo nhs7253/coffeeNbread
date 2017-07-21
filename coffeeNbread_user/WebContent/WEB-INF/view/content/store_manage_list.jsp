@@ -39,8 +39,8 @@ td {
 							${param.select eq "storeName" ? "selected" :""}>매장 이름</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#b6009f">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 				<sec:csrfInput />

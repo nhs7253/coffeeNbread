@@ -18,16 +18,16 @@ td {
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
 	font-family: 'title';
-	font-size: 45px
+	font-size: 60px
 }
 @font-face {
 	font-family: 'table';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/Daum_Regular.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/Daum_Regular.woff) format('woff');
 }
 
 .tr {
@@ -36,8 +36,8 @@ h2 {
 </style>
 <link rel="stylesheet" href="/coffeeNbread_user/css/search_style.css">
 
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
+
+<div class="col-sm-11">
 <br><br>
 <h2>제품 목록</h2>
 

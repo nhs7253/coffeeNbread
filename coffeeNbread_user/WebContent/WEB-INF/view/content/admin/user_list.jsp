@@ -4,8 +4,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <style type="text/css">
-table, td {
-	
+th, td{
+	text-align:center
 }
 
 table {
@@ -16,17 +16,24 @@ table {
 td {
 	padding: 5px; /* //td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 </head>
 <body>
 
-
-	<h2>전체 회원 정보</h2>
-<br><br>
-<div class="col-sm-1"></div>
-	
-		<div class="col-sm-10">
+		<div class="col-sm-11">
+		<br><br>
+		<h2><img src="${initParam.rootPath }/resource/css/teamwork.png">&nbsp;회원 목록</h2>
+		<div style="float:right">
 			<form
 				action="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do"
 				method="post" class="form-inline quick-search-form" role="form">
@@ -38,29 +45,29 @@ td {
 							${param.select eq "userName" ? "selected" :""}>이름</option>
 					</select> <input type="text" name="keyword" class="form-control" />
 				</div>
-				<button type="submit" class="btn btn-custom">
-					<i class="glyphicon glyphicon-search"></i>검색
+				<button type="submit" class="btn" style="background-color:#b6009f">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;검색
 				</button>
 				<sec:csrfInput />
 				<%-- csrf 토큰 --%>
 			</form>
 		
-	
+	</div>
 	<br>
 
 	<table class="table">
 		<thead>
 			<tr>
-				<th>아이디</th>
-				<th>이름</th>
-				<th>생년월일</th>
-				<th>성별</th>
-				<th>이메일</th>
-				<th>전화번호</th>
-				<th>주소</th>
-				<th>활동 상태</th>
-				<th>매장아이디</th>
-				<th>탈퇴</th>
+				<th style="font-weight:bold; background-color:lightyellow">아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">이름</th>
+				<th style="font-weight:bold; background-color:lightyellow">생년월일</th>
+				<th style="font-weight:bold; background-color:lightyellow">성별</th>
+				<th style="font-weight:bold; background-color:lightyellow">이메일</th>
+				<th style="font-weight:bold; background-color:lightyellow">전화번호</th>
+				<th style="font-weight:bold; background-color:lightyellow">주소</th>
+				<th style="font-weight:bold; background-color:lightyellow">활동 상태</th>
+				<th style="font-weight:bold; background-color:lightyellow">매장아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">탈퇴</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -78,14 +85,14 @@ td {
 					<td>${user.userEmail}</td>
 					<td>${user.userPhone}</td>
 					<td>${user.userAddress}</td>
-					<td>${user.userActiveState}</td>
+					<td style="text-align:center;">${user.userActiveState}</td>
 					<td>${user.storeId}</td>
-					<td>
+					<td style="text-align:center;">
 						<form action="${initParam.rootPath }/admin/adminRemoveUserController.do" method="post">
 								<sec:csrfInput/>
 								<input type="hidden" name="storeId" value="${user.storeId }"/>
 								<input type="hidden" name="userId" value="${user.userId }"/>
-								<button type="submit" class="btn"><i class="glyphicon glyphicon-trash"></i>삭제</button>
+								<button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
 						</form>
 					</td>
 				</tr>
@@ -98,7 +105,7 @@ td {
 
 
 
-
+<center>
 	<p>
 		<%--######################################################
 															페이징 처리
@@ -170,6 +177,6 @@ td {
 		<!-- 마지막 페이지로 이동 -->
 		<a
 			href="${initParam.rootPath }/admin/findUserListBySelectToKeywordController.do?page=${requestScope.pageBean.totalPage}&select=${requestScope.select}&keyword=${requestScope.keyword}">마지막
-			페이지</a>
+			페이지</a></center>
 			</div>
 			<div class="col-sm-1"></div>

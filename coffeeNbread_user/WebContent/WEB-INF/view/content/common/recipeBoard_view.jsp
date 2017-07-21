@@ -21,7 +21,7 @@ form {
 
 		<div class="col-sm-6">
 			<center>
-				<h1>RECIPE</h1>
+				<h1>레시피</h1>
 				<hr>
 				<br>
 				<c:forEach items="${requestScope.content.recipeBoardPicture }"
@@ -38,14 +38,14 @@ form {
 			<br> 제목 : <input type="text"
 				value="${requestScope.content.recipeBoardTitle }" disabled style="background-color:#FFFFFF">
 			<br> <br>
-			<textarea rows="10" cols="50" disabled style="background-color:#FFFFFF">${requestScope.content.recipeBoardContent }</textarea>
+			<textarea rows="10" cols="54" disabled style="background-color:#FFFFFF">${requestScope.content.recipeBoardContent }</textarea>
 
 			<p />
 		</div><br><br><br><br><br><br><br><br><br><br><br>
 		
 		</center>
 		
-
+<div style="float:right">
  		<c:if test="${requestScope.modifyAuthority }">
 			<form action="${initParam.rootPath }/user/settingRecipeBoardContentsController.do">
 				<sec:csrfInput />
@@ -54,12 +54,12 @@ form {
 					type="hidden" name="recipeBoardPicture"
 					value="${requestScope.content.recipeBoardPicture }" /> <input
 					type="hidden" name="userId" value="${requestScope.content.userId }" />
-				<button type="submit" class="btn-custom">
-					<i class="glyphicon glyphicon-pencil"></i>수정
+				<button type="submit" class="btn btn-info">
+					<i class="glyphicon glyphicon-pencil"></i>&nbsp;수정
 				</button>
 			</form>
 		</c:if>
-	<div style="float:right">
+	
  		<c:if test="${requestScope.removeAuthority }">
 			<form action="${initParam.rootPath }/user/removeRecipeBoardContentsController.do">
 				<sec:csrfInput />
@@ -68,14 +68,16 @@ form {
 					type="hidden" name="storeId" value="${requestScope.content.storeId }" />
 				<input type="hidden" name="userId"
 					value="${requestScope.content.userId }" />
-				<button type="submit" class="btn-custom">
-					<i class="glyphicon glyphicon-trash"></i>삭제
+				<button type="submit" class="btn btn-danger">
+					<i class="glyphicon glyphicon-trash"></i>&nbsp;삭제
 				</button>
 			</form>
-		</c:if></div>
+		</c:if>
+		</div>
 
-
+<br><br><br><br><br><br><br><br><br><br>
 		<table class="table table-hover">
+		
 			<tbody>
 
 				<c:forEach items="${requestScope.list }" var="list">
@@ -96,7 +98,7 @@ form {
 										value="${requestScope.content.storeId }" /> <input
 										type="hidden" name="replyName" value="${list.replyName }" />
 									<button type="submit" class="btn-custom">
-										<i class="glyphicon glyphicon-pencil"></i>수정
+										<i class="glyphicon glyphicon-pencil"></i>
 									</button>
 								</form>
 						</td>
@@ -111,7 +113,7 @@ form {
 										value="${requestScope.content.storeId }" /> <input
 										type="hidden" name="replyName" value="${list.replyName }" />
 									<button type="submit" class="btn-custom">
-										<i class="glyphicon glyphicon-trash"></i>삭제
+										<i class="glyphicon glyphicon-trash"></i>
 									</button>
 								</form>
 						</td>
@@ -121,7 +123,7 @@ form {
 			</tbody>
 		</table>
 		
-<div>&nbsp;&nbsp;댓글</div>
+<!-- <div>&nbsp;&nbsp;댓글</div> -->
 
 			<sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE')">
 				<form

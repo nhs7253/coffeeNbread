@@ -5,7 +5,7 @@
 	text-ailgn: center;
 }
 </style>
-<h2>PRODUCT_SUCCESS</h2>
+
 <br>
 <br>
 <br><br>
@@ -14,6 +14,7 @@
 <div class="col-sm-2"></div>
 
 <div class="col-sm-4">
+<h2>수정된 제품</h2>
 	<br>
 	<br> <img
 		src="/coffeeNbread_user/up_image/${requestScope.fileName}"
