@@ -23,7 +23,7 @@ background-repeat: no-repeat;
 
 @font-face {
 	font-family: 'index';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/BLKCHCRY.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/BLKCHCRY.woff) format('woff');
 }
 
 h2 {
