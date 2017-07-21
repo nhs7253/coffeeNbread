@@ -124,7 +124,7 @@ textarea {
 			<tr class="form-group">
 			<th style="font-weight:bold">매장 소개</th>
 				<td>
-					<textarea rows="6" cols="55" disabled style="background-color:transparent">${requestScope.store.storeIntro }</textarea>
+					<textarea rows="6" cols="55" disabled style="background-color:transparent; border:0">${requestScope.store.storeIntro }</textarea>
 				</td>
 			</tr>
 		</table>

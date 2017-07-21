@@ -27,9 +27,6 @@ th {
 </head>
 <body>
 
-
-
-	
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
 	<h1><img src="${initParam.rootPath }/resource/css/mega.png">&nbsp;공지사항</h1>
@@ -51,7 +48,7 @@ th {
 <table>
 <tr>
 
-<td><textarea rows="18" cols="112" disabled style="background-color:#FFFFFF">${requestScope.noticeBoardContents.noticeBoardContent }</textarea></td>
+<td><textarea rows="18" cols="112" disabled style="background-color:#FFFFFF; border:0">${requestScope.noticeBoardContents.noticeBoardContent }</textarea></td>
 </tr>
 
 

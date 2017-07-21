@@ -5,6 +5,15 @@
 form {
 	display: inline;
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h1 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 
@@ -19,10 +28,10 @@ form {
 	<div class="col-sm-2"></div>
 
 	<div class="col-sm-8">
-	<h1>Q&A</h1>
+	<h1><img src="${initParam.rootPath }/resource/css/qa.png">&nbsp;Q&A</h1>
 	<br><br>
 		제목 : <input type="text" value="${requestScope.content.qnaBoardTitle }"
-			disabled style="background-color:transparent" size="60">
+			disabled style="background-color:transparent; border:0" size="60">
 
 		
 			<c:if test="${requestScope.modifyAuthority }">
@@ -57,13 +66,14 @@ form {
 			</c:if>
 
 		
-<br> 내용<br>
-		<textarea style="background-color:transparent" rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
+<br>내용<br>
 
-
+		<textarea style="background-color:transparent; border:0" rows="15" cols="100" disabled>${requestScope.content.qnaBoardContent }</textarea>
+		
 		<table class="w3-table-all">
+		
 			<tbody>
-
+				<br>댓글 <br>
 				<%-- ######################################################
 															조회된 item 출력 
 				###################################################### --%>
@@ -114,6 +124,7 @@ form {
 			</tbody>
 		</table>
 
+<br><br>
 
 <sec:authorize access="hasAnyRole('ROLE_CNB_USER,ROLE_CNB_STORE,ROLE_CNB_ADMIN')">
 			<form
@@ -135,7 +146,7 @@ form {
 		</sec:authorize>
 
 
-
+<br><br>
 		<center>
 
 			<p>

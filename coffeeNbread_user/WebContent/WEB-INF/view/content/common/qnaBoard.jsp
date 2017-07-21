@@ -6,7 +6,7 @@
 </head>
 <body>
 
-	<style type="text/css">
+<style type="text/css">
 form{
 display:inline;
 }
@@ -16,7 +16,7 @@ table {
 	border-collapse: collapse;
 }
 
-th{
+th, td{
   text-align:center;
 }
 
