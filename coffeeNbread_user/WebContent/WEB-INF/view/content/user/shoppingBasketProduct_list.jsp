@@ -43,7 +43,15 @@ td {
 	padding: 5px; /*td 간 간격 */
 }
 
+@font-face {
+	font-family: 'title';
+	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+}
 
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 
 hr.animated-gradient {
    height: 3px;
@@ -61,11 +69,12 @@ hr.animated-gradient {
 
 </style>
 <body>
+	<div class="col-sm-11">
+	<br><br>
+	<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/shopping-cart.png">&nbsp;장바구니 목록</h2>
 	
-	<center><h2>SHOPPING_LIST</h2></center>
 	<br>
 	<br>
-  <hr color="red" size="10" class="animated-gradient">
 
 <div class="col-sm-1"></div>
 	

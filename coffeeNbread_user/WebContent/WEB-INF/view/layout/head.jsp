@@ -51,9 +51,9 @@ li {
 
 <body>
    <header class="cd-main-header">
-	<img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/Coffee-Cup-icon.png" width="30" height="30">
-	<input class="headTitle" size=14 type="text" value=" Coffee&Bread" disabled style="border:0; background-color:transparent; font-size:20px; color:#ffffff">
-	<img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/bread.png" width="30" height="30">
+	<img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/Coffee-Cup-icon.png" width="40" height="50">
+	<input class="headTitle" size=14 type="text" value=" Coffee&Bread" disabled style="border:0; background-color:transparent; font-size:30px; color:#ffffff">
+	<img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/bread.png" width="30" height="40">
       <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 		
       <nav class="cd-nav">
