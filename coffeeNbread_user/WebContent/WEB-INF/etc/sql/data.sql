@@ -482,11 +482,11 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',10,'u-1','p-80','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',9,'u-1','p-80','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',11,'u-1','p-80','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',12);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',13);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',10);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',11);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',2,'u-1','p-80','s-100',12);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',4,'u-1','p-80','s-100',13);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',5,'u-1','p-80','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',7,'u-1','p-80','s-100',11);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',8,'u-1','p-80','s-100',10);
 
 /*돌체라떼 하락*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170710', 'yyyy-mm-dd'),'r',2,'u-1','p-81','s-100',0);
@@ -496,11 +496,11 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',13,'u-1','p-81','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',8,'u-1','p-81','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',11,'u-1','p-81','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',8);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',5);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',1);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',3,'u-1','p-81','s-100',8);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',4,'u-1','p-81','s-100',5);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-81','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',6,'u-1','p-81','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-81','s-100',1);
 
 /*마늘 바게트 하락*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',6,'u-1','p-82','s-100',0);
@@ -510,26 +510,26 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',11,'u-1','p-82','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',8,'u-1','p-82','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',6,'u-1','p-82','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',4);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',7);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',2);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170717', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',4);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',7);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',2);
 
 
 /*소보루 유지*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',15,'u-1','p-83','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170711', 'yyyy-mm-dd'),'r',13,'u-1','p-83','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170712', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',10);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170713', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',12);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170714', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',15);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170715', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',13);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170716', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',15);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',14);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',13);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',15);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',10);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170712', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170713', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',12);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170714', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',15);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170715', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',13);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170716', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',15);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',14);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',13);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',15);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',10);
 
 /*아메리카노상승*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',3,'u-1','p-84','s-100',0);
@@ -539,11 +539,11 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',10,'u-1','p-84','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',20,'u-1','p-84','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',10,'u-1','p-84','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',14);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',20);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',30);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',35);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',36);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',14);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',20);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',30);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',35);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',36);
 
 
 
@@ -553,35 +553,35 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '자바칩
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '초코크림 프라푸치노 + 헤이즐넛 시럽 1펌프 추가 + 휘핑크림 위에 초코 드리즐+ 자바칩 갈지 않은 것을 뿌려주면 끝~~ ',
                                                                          '고디바 프라푸치노', TO_DATE('2017-07-05', 'yyyy-mm-dd'),30,'/recipe_image/고디바_실사.jpg',30,'u-1','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '그린티 프라푸치노 + 샷추가 + 자바칩 반만 간 걸 추가 + 휘핑크림 위에 초코 드리즐+ 자바칩 나머지 통으로 얹어주면 되욧 ',
-                                                                         '슈렉 프라푸치노', TO_DATE('2017-07-07', 'yyyy-mm-dd'),40,'/recipe_image/슈렉_실사.jpg',40,'u-1','s-101');
+                                                                         '슈렉 프라푸치노', TO_DATE('2017-07-07', 'yyyy-mm-dd'),40,'/recipe_image/슈렉_실사.jpg',40,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '딸기 크림 프라푸치노 + 자바칩 갈아서 추가 + 휘핑크림 위에 초코 드리즐을 뿌려주면 돼지바를 먹는 기분이에요~',
-                                                                         '돼지바 프라푸치노', TO_DATE('2017-07-11', 'yyyy-mm-dd'),60,'/recipe_image/돼지바_실사.jpg',60,'u-1','s-101');
+                                                                         '돼지바 프라푸치노', TO_DATE('2017-07-11', 'yyyy-mm-dd'),60,'/recipe_image/돼지바_실사.jpg',60,'u-4','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '바닐라 크림파이 프라푸치노는 바나나 덕후들이 사랑하는 바로 그 메뉴다. 바닐라 크림파이 프라푸치노는 먼저 바닐라빈 프라푸치노를 주문한 다음, 바닐라 시럽 1 펌프와 헤이즐넛 시럽 1펌프를 넣고 바나나를 추가해 갈아달아고 하면 된다. 바닐라빈 프라푸치노가 없을 경우 바닐라크림 프라푸치노를 주문하면 된다. 하지만 바나나가 들어간 커스텀 메뉴는 아쉽게도 한국 스타벅스에서는 불가능 하다는 사실. 해외여행을 갈 기회가 생긴다면 영어로 주문법을 외워가서 도전해보는건 어떨까?',
-                                                                         '비어버터 프라푸치노', TO_DATE('2017-07-13', 'yyyy-mm-dd'),70,'/recipe_image/비어버터_실사.jpg',70,'u-1','s-101');
+                                                                         '비어버터 프라푸치노', TO_DATE('2017-07-13', 'yyyy-mm-dd'),70,'/recipe_image/비어버터_실사.jpg',70,'u-4','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '오레오 과자든, 오레오 아이스크림이든, 오레오라면 죽고 못하는 이들이 즐겨 찾는 메뉴가 바로 스타벅스의 오레오 프라푸치노다. 바닐라크림 프라푸치노에 자바칩을 2번 추가하고, 에스프레소 휘핑을 올리면, 오레오의 우유와 초코칩이 뒤섞인 달달한 그 맛을 시원한 음료로 즐길 수 있다.',
-                                                                         '쿠앤크프라푸치노', TO_DATE('2017-07-15', 'yyyy-mm-dd'),80,'/recipe_image/쿠앤크_실사.jpg',80,'u-1','s-101');
+                                                                         '쿠앤크프라푸치노', TO_DATE('2017-07-15', 'yyyy-mm-dd'),80,'/recipe_image/쿠앤크_실사.jpg',80,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '본래 스타벅스 메뉴에 돌체라떼가 있지만, 돌체라떼를 보다 더 맛있게 먹기 위한 커스텀 레시피가 인기다. 돌체라떼를 맛있게 먹으려면 일단 아이스로 주문한 다음, 일반 우유와 에스프레소휩을 추가하면 된다. 더 달게 먹고 싶다면 연유를 추가하는 것도 좋다. 이 음료는 배변활동을 활발하게 해준다고 해서 일명 관장라떼라고도 불린다.',
                                                                          '돌체라떼 커스텀', TO_DATE('2017-07-17', 'yyyy-mm-dd'),90,'/recipe_image/돌체라떼.PNG',90,'u-1','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '프라푸치노가 주를 이루는 인기 커스텀 메뉴 중 당당히 자리를 하고 있는 것이 더블샷이다. 두터운 매니아층을 갖고 있는 이 메뉴는 더블샷에 에스프레소 더블샷과 시럽을 얼음과 함께 넣어달라고 하면 된다. 시럽은 커피, 바닐라, 캐러멜, 헤이즐넛 중에 선택하면 된다. 시럽을 얼음과 함께 넣고 흔들어서 만드는데, 나올 땐 얼음은 빼로 음료만 작은 컵에 담겨 나온다.',
-                                                                         '페레로로쉐프라푸치노', TO_DATE('2017-07-17', 'yyyy-mm-dd'),100,'/recipe_image/페레로로쉐_실사.jpg',100,'u-1','s-101');
+                                                                         '페레로로쉐프라푸치노', TO_DATE('2017-07-17', 'yyyy-mm-dd'),100,'/recipe_image/페레로로쉐_실사.jpg',100,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '터키2장 + 햄1장 + 로스트비프 1장 + 치즈2장 빵은 허니오트 소스는 바베큐+스위트칠리를 넣으면 완성입니다~ 가격은 5300원 정도에요',
-                                                                         '서브웨이클럽', TO_DATE('2017-07-19', 'yyyy-mm-dd'),101,'/recipe_image/서브웨이클럽.jpg',101,'u-1','s-110');
+                                                                         '서브웨이클럽', TO_DATE('2017-07-19', 'yyyy-mm-dd'),101,'/recipe_image/서브웨이클럽.jpg',101,'u-5','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '계란 + 베이컨 + 치즈 빵은 플랫 브래드 소스는 렌치+스윗어니언을 넣으면 완성입니다',
-                                                                         '에그마요', TO_DATE('2017-07-16', 'yyyy-mm-dd'),120,'/recipe_image/에그.jpg',120,'u-1','s-110');
+                                                                         '에그마요', TO_DATE('2017-07-16', 'yyyy-mm-dd'),120,'/recipe_image/에그.jpg',120,'u-7','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '저의 비엘티 꿀 조합입니다 허니 오트에 야채는 다넣고 소스를 달달한 스위트 어니언과 홀스 레디 쉬를 넣었어요~ 이렇게 먹음 매콤하고 달달해요',
-                                                                         '비엘티', TO_DATE('2017-06-24', 'yyyy-mm-dd'),110,'/recipe_image/비엘티.jpg',110,'u-1','s-110');
+                                                                         '비엘티', TO_DATE('2017-06-24', 'yyyy-mm-dd'),110,'/recipe_image/비엘티.jpg',110,'u-9','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '서브웨이 멜티는 사우스 웻트랑 렌지드레싱으로 고소하고 매콤해요 저는 항상 야채를 다 넣어달라고 하고 많이 넣어 달라고 합니다 여러분도 해보세요',
-                                                                         '멜티', TO_DATE('2017-06-22', 'yyyy-mm-dd'),130,'/recipe_image/멜티.jpg',130,'u-1','s-110');
+                                                                         '멜티', TO_DATE('2017-06-22', 'yyyy-mm-dd'),130,'/recipe_image/멜티.jpg',130,'u-10','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '서브웨이 이탈리안 꿀조합은 플랫브래드 + 야채는 취향존중 + 마요네즈 + 스위트칠리 + 랜치드레싱을 넣으면 완성!',
-                                                                         '스파이시 이탈리안', TO_DATE('2017-06-22', 'yyyy-mm-dd'),140,'/recipe_image/스파이시.jpg',140,'u-1','s-110');
+                                                                         '스파이시 이탈리안', TO_DATE('2017-06-22', 'yyyy-mm-dd'),140,'/recipe_image/스파이시.jpg',140,'u-4','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '하하 시그니처 써브 베스트 조합 : 비엠티빵은 오레가노를 선택 핫칠리+할라피뇨추가! ,제노바 살라미, 페퍼로니햄, 에그마요가 듬뿍 올라감 정말 맛있음',
-                                                                         '하하 시그니처 써브', TO_DATE('2017-06-17', 'yyyy-mm-dd'),160,'/recipe_image/하하.jpg',160,'u-1','s-110');
+                                                                         '하하 시그니처 써브', TO_DATE('2017-06-17', 'yyyy-mm-dd'),160,'/recipe_image/하하.jpg',160,'u-5','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '돼지고기 맛이지만 소스에 따라 맛이 바뀜 사우스웨스트 소스를 뿌리면 멕시코 바비큐 먹는 기분! 바비큐 소스와 마요네즈를 섞어서 뿌려 먹으면 전통 바베큐 돼지고기 맛이 나요~ 한번 먹어봐요',
-                                                                         '폴드 포크 세트', TO_DATE('2017-06-15', 'yyyy-mm-dd'),180,'/recipe_image/폴드.jpg',180,'u-1','s-110');
+                                                                         '폴드 포크 세트', TO_DATE('2017-06-15', 'yyyy-mm-dd'),180,'/recipe_image/폴드.jpg',180,'u-7','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '핫칠리 + 마요네즈 + 렌치드레싱으로 소스 뿌려보세요 이게 젤 괜찮은듯 ',
-                                                                         '스파이시 이탈리안', TO_DATE('2017-06-13', 'yyyy-mm-dd'),190,'/recipe_image/스파이시2.jpg',190,'u-1','s-110');
+                                                                         '스파이시 이탈리안', TO_DATE('2017-06-13', 'yyyy-mm-dd'),190,'/recipe_image/스파이시2.jpg',190,'u-3','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '스위트어니언+바베큐+ 렌치드레싱 소스 뿌리면 단짠단짠을 맛볼수 있는 치킨데리야끼가 될거에요~ 시도해봐요',
-                                                                         '치킨데리야끼 이탈리안', TO_DATE('2017-06-11', 'yyyy-mm-dd'),200,'/recipe_image/치킨데리야끼.jpg',200,'u-1','s-110');
+                                                                         '치킨데리야끼 이탈리안', TO_DATE('2017-06-11', 'yyyy-mm-dd'),200,'/recipe_image/치킨데리야끼.jpg',200,'u-12','s-110');
 
 
 /* qna board 목록 */		
