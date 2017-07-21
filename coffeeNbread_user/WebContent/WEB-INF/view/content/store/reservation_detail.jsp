@@ -3,7 +3,19 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<h2>예약 상세 내용</h2>
+<style type="text/css">
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 45px
+}
+</style>
+
+<h2><img src="${initParam.rootPath }/resource/css/information.png">&nbsp;예약 상세 내용</h2>
 
 <br>
 
@@ -38,5 +50,5 @@
 
 <form method=get action="${initParam.rootPath }/findReservationDetailsController.do">
 	<sec:csrfInput/><%-- csrf 토큰 --%>
-	<button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-repeat"></i>&nbsp;목록으로</button>
+	<button type="submit" class="btn" style="float:right; background-color:#ffb6c1"><i class="glyphicon glyphicon-repeat"></i>&nbsp;목록으로</button>
 </form>
