@@ -8,8 +8,18 @@ display:inline;
 
 
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
 
-
+h1 {
+	font-family: 'title';
+	font-size: 60px
+}
+th {
+	font-weight: bold;
+}
 
 </style>
 
@@ -22,8 +32,7 @@ display:inline;
 	
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
-	<h1>공지사항</h1>
-	<hr>
+	<h1><img src="${initParam.rootPath }/resource/css/mega.png">&nbsp;공지사항</h1>
 	<br>
 <table class="table">
 <tr>
@@ -32,9 +41,9 @@ display:inline;
 <td></td>
 </tr>
 <tr>
-<td width="25%">작성일시</td>
+<th width="25%">작성일시</th>
 <td width="25%">${requestScope.noticeBoardContents.noticeBoardDateFormat}</td>
-<td width="25%">조회수</td>
+<th width="25%">조회수</th>
 <td width="25%">${requestScope.noticeBoardContents.noticeBoardHits}</td>
 
 </tr>
