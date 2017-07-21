@@ -36,7 +36,7 @@ th {
 
 <div class="col-sm-11">
 <br><br>
-<h2>결제 페이지</h2>
+<h2><img src="${initParam.rootPath }/resource/css/credit.png">&nbsp;결제 페이지</h2>
 <br><br>
 <form
 	action="${initParam.rootPath }/user/findAllProductPriceController.do">
@@ -48,9 +48,9 @@ th {
 <table class="table">
 	<thead>
 		<tr>
-			<th>제품명</th>
-			<th>가격</th>
-			<th>개수</th>
+			<th style="font-weight:bold; background-color:lightyellow">제품명</th>
+			<th style="font-weight:bold; background-color:lightyellow">가격</th>
+			<th style="font-weight:bold; background-color:lightyellow">개수</th>
 
 		</tr>
 	</thead>
@@ -80,7 +80,8 @@ th {
 <br>
 
 <div style="float:right">
-	<span class="glyphicon glyphicon-piggy-bank">&nbsp;<input type="text" value="총 금액 : " disabled style="border:0; background-color:transparent; font-size:20px"> <input type="text" value="${sessionScope.posPaymentTotal }" disabled style="border:0; background-color:transparent; font-size:20px"></span>
+	
+<img src="${initParam.rootPath }/resource/css/piggy-bank.png">&nbsp;<input type="text" value=" 총 금액 : " disabled style="border:0; background-color:transparent; font-size:20px"> <input type="text" value="${sessionScope.posPaymentTotal }" disabled style="border:0; background-color:transparent; font-size:20px"></span>
 
 
 

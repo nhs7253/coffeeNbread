@@ -5,7 +5,15 @@ form{
 
 display:inline;
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
 
+h1 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 <div class="col-sm-2"></div>

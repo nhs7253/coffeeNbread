@@ -39,7 +39,7 @@ h2 {
 
 <div class="col-sm-11">
 <br><br>
-<h2>제품 목록</h2>
+<h2><img src="${initParam.rootPath }/resource/css/bread1.png">&nbsp;제품 목록</h2>
 
 	<div style="float: right">
 		<form action="${initParam.rootPath }/findProductListByMethod.do"
@@ -81,11 +81,11 @@ h2 {
 		<table class="table table-hover">
 			<tbody>
 				<tr class="tr">
-					<td align="center">종류</td>
-					<td align="center">제품명</td>
-					<td align="center">가격</td>
-					<td align="center">판매여부</td>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td align="center" style="font-weight:bold; background-color:lightyellow">종류</td>
+					<td align="center" style="font-weight:bold; background-color:lightyellow">제품명</td>
+					<td align="center" style="font-weight:bold; background-color:lightyellow">가격</td>
+					<td align="center" style="font-weight:bold; background-color:lightyellow">판매여부</td>
+					<td style="font-weight:bold; background-color:lightyellow">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 
 				<%-- 전체 제품 목록 --%>

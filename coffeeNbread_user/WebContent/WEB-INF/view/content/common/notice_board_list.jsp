@@ -29,7 +29,6 @@ h2 {
 <br><br>
 <h2><img src="${initParam.rootPath }/resource/css/megaphone.png">&nbsp;공지사항</h2>
 
-		
 	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-11">
@@ -63,14 +62,16 @@ h2 {
 	</form>
 		
 	
-	
 	<br>
+	<br>
+	<br>
+	<br><br>
 
 
 	
 	<table class="table">
 		<thead>
-			<tr >
+			<tr>
 				<th style="text-align: center; font-weight:bold; background-color:lightyellow">글번호</th>
 				<th style="text-align: center; font-weight:bold; background-color:lightyellow">제목</th>
 				<th style="font-weight:bold; background-color:lightyellow">작성일시</th>

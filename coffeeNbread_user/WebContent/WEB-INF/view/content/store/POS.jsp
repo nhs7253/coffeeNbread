@@ -34,9 +34,9 @@ h2 {
 			});//ready 
 		</script>
 
-<!-- <div class="col-sm-1"></div>
-<div class="col-sm-10"> -->
-<h2>판매 시스템</h2> 
+<div class="col-sm-11">
+		<br><br>
+<h2><img src="${initParam.rootPath }/resource/css/for-sale.png">&nbsp;판매 시스템</h2> 
 	<div style="float:right;">
 <form action="${initParam.rootPath }/store/findProductListToPOSController.do" method="post" class="form-inline quick-search-form" role="form">
    <sec:csrfInput/><%-- csrf 토큰 --%>

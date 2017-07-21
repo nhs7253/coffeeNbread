@@ -33,18 +33,23 @@ select{
 	height: 35px;
 	padding: 5px;
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
-
-
-
 
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
+<br><br>
+<center><h2><img src="${initParam.rootPath }/resource/css/reserved.png">&nbsp;${requestScope.userName }님의 예약 현황</h2></center>
+
 <br>
-
-<h2>${requestScope.userName }님의예약 현황</h2>
-
-
 <br>
 <br>
 
@@ -52,13 +57,13 @@ select{
 <table class="table" width="90%" border="1" align="center" >
 	<thead>
 		<tr >
-			<th>예약번호</th>
-			<th>예약매장</th>
-			<th>예약시간</th>
-			<th>예약한 제품</th>
-			<th>예약개수</th>
-			<th>제품수령희망시간</th>
-			<th>예약확인유무</th>
+			<th style="font-weight:bold; background-color:lightyellow">예약번호</th>
+			<th style="font-weight:bold; background-color:lightyellow">예약매장</th>
+			<th style="font-weight:bold; background-color:lightyellow">예약시간</th>
+			<th style="font-weight:bold; background-color:lightyellow">예약한 제품</th>
+			<th style="font-weight:bold; background-color:lightyellow">예약개수</th>
+			<th style="font-weight:bold; background-color:lightyellow">제품수령희망시간</th>
+			<th style="font-weight:bold; background-color:lightyellow">예약확인유무</th>
 
 		</tr>
 	</thead>
