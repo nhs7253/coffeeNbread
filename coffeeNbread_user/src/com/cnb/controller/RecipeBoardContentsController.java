@@ -109,7 +109,7 @@ public class RecipeBoardContentsController {
 		map.addAttribute("recipeBoardContent", recipeBoardContentsForm.getRecipeBoardContent());
 		recipeBoardService.addRecipeBoardContents(recipeBoardContents);
 
-		return "index.tiles";
+		return "/common/findRecipeBoardContentsByMethod.do";
 	}
    
 	//---------------------------------------------게시글 내용과 댓글목록.---------------------------------------------------
