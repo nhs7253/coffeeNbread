@@ -59,31 +59,47 @@ table {
 	width: 500px;
 	border-collapse: collapse;
 }
-
+td, th{
+  text-align:center;
+}
 td {
 	padding: 5px; /*td 간 간격 */
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
+@font-face {
+	font-family: 'method';
+	src: local(※), url(${initParam.rootPath }/resource/font/HoonTop_Bold.woff) format('woff');
+}
+
+.method {
+	font-family: 'method';
+}
 </style>
 
-<div class="col-sm-1"></div>
-<div class="col-sm-10">
-
+<div class="col-sm-11">
+		<br><br>
 
 	<center>
-		<h2>${requestScope.userName }의결제페이지</h2>
+		<h2><img src="${initParam.rootPath }/resource/css/payment.png">&nbsp;${requestScope.userName }의 결제페이지</h2>
 	</center>
 
-	<hr>
-
+<br><br>
 	<table class="table">
 		<thead>
 			<tr>
-				<th>제품카테고리</th>
-				<th>제품사진</th>
-				<th>제품명</th>
-				<th>가격</th>
-				<th>개수</th>
-
+				<th style="font-weight:bold; background-color:lightyellow">제품카테고리</th>
+				<th style="font-weight:bold; background-color:lightyellow">제품사진</th>
+				<th style="font-weight:bold; background-color:lightyellow">제품명</th>
+				<th style="font-weight:bold; background-color:lightyellow">가격</th>
+				<th style="font-weight:bold; background-color:lightyellow">개수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -115,8 +131,8 @@ td {
 		<hr> 
 		<input type="text"
 			size="20" name="cardNum" id="card" placeholder="카드번호를 입력해주세요." value="">
-		<button type="submit" id="registerBtn">
-			<i class="glyphicon glyphicon-plus"></i>카드번호 등록
+		<button type="submit" id="registerBtn" style="background-color:#01a207">
+			<i class="glyphicon glyphicon-plus"></i>&nbsp;카드번호 등록
 		</button>
 	
 	
@@ -128,28 +144,27 @@ td {
 	</c:forEach>
      </select>
   
-        <button type="submit" name="findCardNumList" id="findCardNum">		
-         <i class="glyphicon glyphicon-list"></i>등록한 카드번호 목록
+        <button type="submit" name="findCardNumList" id="findCardNum" style="background-color:#10e69c">		
+         <i class="glyphicon glyphicon-list"></i>&nbsp;등록한 카드번호 목록
         </button> 
+        
    <div style="float: right">
-		총금액 :<input type="text" value="${requestScope.totalPrice }" disabled>
+<img src="${initParam.rootPath }/resource/css/piggy-bank.png">&nbsp;<input type="text" value=" 총 금액 : " size=8 disabled style="border:0; background-color:transparent; font-size:20px"> <input type="text" value="${requestScope.totalPrice }" disabled style="border:0; background-color:transparent; font-size:20px"></span>		
 </div></div>
     
 
-   
+<br><br>
 
-   
 
-<form  	action="${initParam.rootPath }/user/addPaymentDetailsController.do"
-		id="payForm">
+<div style="float: right">
+<form action="${initParam.rootPath }/user/addPaymentDetailsController.do" id="payForm">
 	<sec:csrfInput />
-		<div style="float: right">
-	결제 방법 선택 <select id="payment_method" name="paymentOption">
+	<input class="method" type="text" value="결제 방법 선택 " disabled style="border:0; background-color:transparent; font-size:20px">
+	<select id="payment_method" name="paymentOption">
 				<c:forEach var="list" items="${requestScope.spoList }">
 					<option value="${list.paymentOptionList.paymentId }">${list.paymentOptionList.paymentMethod}</option>
 				</c:forEach>
-			</select></div>
-     </div>
+	</select>
 	
 	
 	<c:forEach items="${requestScope.sbpList }" var="list">
@@ -162,19 +177,19 @@ td {
 	     <br>
  
 
- <div style="float: right">
-	 제품수령 희망시간
+
+	 <input class="method" type="text" value="제품수령 희망시간" disabled style="border:0; background-color:transparent; font-size:20px">
 	  <label> <input type="text" name="productHopeTime"
 			id="paytime" placeholder="ex)2017-07-21 10:30"></label>
-			</div>
 	    <br>
 	    <hr>
 	  
 		<button type="submit" id="payment" class="btn"
-			onclick="myFunction()" style="float: right">
-		<i class="glyphicon glyphicon-credit-card"></i>결제
+			onclick="myFunction()" style="float: right; background-color:#ffb6c1">
+		<i class="glyphicon glyphicon-credit-card"></i>&nbsp;결제
 	   </button>
 	   <br><br>
+</div>
 </form>	
         
 

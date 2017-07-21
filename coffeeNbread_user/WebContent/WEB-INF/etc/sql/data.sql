@@ -1,199 +1,4 @@
-/* 유저 */
-SELECT *FROM GENERAL_USER
-DELETE FROM GENERAL_USER
-                            
-/* 노현식 - 2017-07-03 수정 */  /* 비밀번호 1111 */
-INSERT INTO GENERAL_USER VALUES('u-1','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','김형주',to_date('20170622', 'yyyy-mm-dd'),'남','khjsuccess6808@naver.com','01050166816','서울시 송파구 문정동','Y',null);
-INSERT INTO GENERAL_USER VALUES('u-2','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','이진영',to_date('20170622', 'yyyy-mm-dd'),'여','jy@naver.com','01094080923','경기도 수원시 영통구','Y',null);
-INSERT INTO GENERAL_USER VALUES('us','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','최민희',to_date('20170622', 'yyyy-mm-dd'),'여','minimini@naver.com','01099506219','경기도 고양시 일산 서구 ','Y','s-100');
-INSERT INTO GENERAL_USER VALUES('admin','$2a$10$60vYdQzTq.zJ3JDn3HL5xOkLvSMtHX0givzaBXOPAeXQvJs6BOwCe','노현식',to_date('20160622', 'yyyy-mm-dd'),'남','hyungsik@naver.com','01037962472','경상남도 김해시 ','Y',null);
 
-/* 권한 추가 
- * 관리자 - ROLE_CNB_ADMIN
- * 매점 - ROLE_CNB_STORE
- * 일반 유저 - ROLE_CNB_USER*/
-select *from USER_AUTHORITY
-delete from USER_AUTHORITY
-INSERT INTO user_authority VALUES('u-1', 'ROLE_CNB_USER');
-INSERT INTO user_authority VALUES('u-2', 'ROLE_CNB_USER');
-INSERT INTO user_authority VALUES('us', 'ROLE_CNB_STORE');
-INSERT INTO user_authority VALUES('admin', 'ROLE_CNB_ADMIN');
-
-/* 매장 */
-SELECT *FROM STORE
-DELETE FROM STORE
-/* 노현식 - 2017-07-10 수정 */ 
-INSERT INTO STORE VALUES('s-1','매장1','매장소개글1','010-0000-0000','매장주소1','매장1@email.com', '빵',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-2','매장2','매장소개글2','010-0000-0000','매장주소2','매장2@email.com', '커피',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-3','매장3','매장소개글3','010-0000-0000','매장주소3','매장3@email.com', '커피, 빵',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-4','매장4','매장소개글4','010-0000-0000','매장주소4','매장4@email.com', '빵, 커피',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-5','매장5','매장소개글5','010-0000-0000','매장주소5','매장5@email.com', '커피',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-6','매장6','매장소개글6','010-0000-0000','매장주소6','매장6@email.com', '빵',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-INSERT INTO STORE VALUES('s-7','매장7','매장소개글7','010-0000-0000','매장주소7','매장7@email.com', '빵, 커피, 쿠키',1000,to_date('20160803', 'yyyy-mm-dd'),to_date('20160903', 'yyyy-mm-dd'),'Y');
-
-
-/* 제품 */
-SELECT*FROM PRODUCT
-DELETE FROM PRODUCT
-
-INSERT INTO PRODUCT VALUES('p-1','s-1','제품1',5000,'빵','제품설명글1','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-2','s-1','제품2',5000,'빵','제품설명글2','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-3','s-1','제품3',5000,'빵','제품설명글3','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-4','s-1','제품4',5000,'빵','제품설명글4','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-5','s-1','제품5',5000,'빵','제품설명글5','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-6','s-1','제품6',5000,'빵','제품설명글6','Y',500,1000); --s-1- > p-6까지
-INSERT INTO PRODUCT VALUES('p-7','s-2','제품7',5000,'빵','제품설명글7','Y',500,1000); 
-INSERT INTO PRODUCT VALUES('p-8','s-2','제품8',5000,'빵','제품설명글8','Y',500,1000);--s-2- > p-8까지
-INSERT INTO PRODUCT VALUES('p-9','s-3','제품9',5000,'빵','제품설명글9','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-10','s-3','제품10',5000,'빵','제품설명글10','Y',500,1000); 
-INSERT INTO PRODUCT VALUES('p-11','s-3','제품11',5000,'빵','제품설명글11','Y',500,1000); --s-3-> p-10까지
-INSERT INTO PRODUCT VALUES('p-12','s-4','제품12',5000,'빵','제품설명글12','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-13','s-4','제품13',5000,'빵','제품설명글13','Y',500,1000); --s-4-> p-13까지
-INSERT INTO PRODUCT VALUES('p-14','s-5','제품14',5000,'빵','제품설명글14','Y',500,1000); --s-5-> p-14까지
-INSERT INTO PRODUCT VALUES('p-15','s-6','제품15',5000,'빵','제품설명글15','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-16','s-6','제품16',5000,'빵','제품설명글16','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-17','s-6','제품17',5000,'빵','제품설명글17','Y',500,1000); --s-6-> p-17까지
-INSERT INTO PRODUCT VALUES('p-18','s-7','제품18',5000,'빵','제품설명글18','Y',500,1000);
-INSERT INTO PRODUCT VALUES('p-19','s-7','제품19',5000,'빵','제품설명글19','Y',500,1000); --s-7-> p-19까지
-/* 김형주 - 2017-07-01 수정 */
-INSERT INTO PRODUCT VALUES('p-20','s-7','제품20',5000,'빵','제품설명글20','Y',500,1000); 
-/* 김형주 - 2017-07-01 추가 */
-INSERT INTO PRODUCT VALUES('p-21','s-7','제품21',5000,'빵','제품설명글20','Y',500,1000);--s-7 -> p-21까지
-
- * 관리자 - ROLE_CNB_ADMIN
- * 매점 - ROLE_CNB_STORE
- * 일반 유저 - ROLE_CNB_USER
-
-/* 장바구니 물품 */
-select*from SHOPPING_BASKET_PRODUCT
-delete from SHOPPING_BASKET_PRODUCT
-
-
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-1','u-1','s-1',4,'s-1');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-2','u-1','s-1',4,'s-1');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-3','u-1','s-1',4,'s-1');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-4','u-1','s-1',4,'s-1');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-5','u-1','s-1',4,'s-1');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-7','u-1','s-2',4,'s-2');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-8','u-1','s-2',4,'s-2');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-9','u-1','s-3',4,'s-3');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-10','u-1','s-3',4,'s-3');
-INSERT INTO SHOPPING_BASKET_PRODUCT VALUES('p-12','u-1','s-4',4,'s-4');  -- 여기까지가  결제내역에 들어가는 내용이랑 같은부분  
-
-
-/* 제품 사진 */
-select*from PRODUCT_PICTURE
-delete from PRODUCT_PICTURE
-
-INSERT INTO PRODUCT_PICTURE values('제품사진1','p-1','s-1');
-INSERT INTO PRODUCT_PICTURE values('제품사진2','p-2','s-1');
-INSERT INTO PRODUCT_PICTURE values('제품사진3','p-3','s-1');
-INSERT INTO PRODUCT_PICTURE values('제품사진4','p-4','s-1');
-INSERT INTO PRODUCT_PICTURE values('제품사진5','p-5','s-1');
-INSERT INTO PRODUCT_PICTURE values('제품사진6','p-6','s-1');
-INSERT INTO PRODUCT_PICTURE values('제품사진7','p-7','s-2');
-INSERT INTO PRODUCT_PICTURE values('제품사진8','p-8','s-2');
-INSERT INTO PRODUCT_PICTURE values('제품사진9','p-9','s-3');
-INSERT INTO PRODUCT_PICTURE values('제품사진10','p-10','s-3');
-INSERT INTO PRODUCT_PICTURE values('제품사진20','p-20','s-1');
-
-
-/* 결제 내역 */
-select*from PAYMENT_DETAILS
-delete from PAYMENT_DETAILS
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-1','s-1',0);   -- s-1 /r,f모두 가능 /예약/ 카드                            
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-2','s-1',0);   -- s-1   -> 같은유저가 여러제품살경우 어떻게 나올지 보여주기위함.
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-3','s-1',0);   -- s-1 /r,f모두 가능 /예약/카드                            
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'p',to_date('20160803', 'yyyy-mm-dd'),'f',4,'u-1','p-4','s-1',0);   --s-1 / r,f모두 가능/현장/현금                           
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'f',4,'u-1','p-5','s-1',0);  -- s-1 / r,f모두 가능/현장/카드  
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-7','s-2',0);  -- s-2 / r,f모두 가능/ 예약/카드  
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'p',to_date('20160803', 'yyyy-mm-dd'),'f',4,'u-1','p-8','s-2',0);  -- s-2 / r,f 모두 가능 /현장/현금                                   
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'f',4,'u-1','p-9','s-3',0); --  s-3  / f(현장)만 가능/ 카드
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'p',to_date('20160803', 'yyyy-mm-dd'),'f',4,'u-1','p-10','s-3',0);  -- s-3 / f(현장)만 가능  /현장
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160803', 'yyyy-mm-dd'),'r',4,'u-1','p-12','s-4',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',4,'u-1','b1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',2,'u-1','c1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',1,'u-1','b3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',10,'u-1','b4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170710', 'yyyy-mm-dd'),'r',20,'u-1','c2','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170710', 'yyyy-mm-dd'),'r',20,'u-1','b5','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170706', 'yyyy-mm-dd'),'r',5,'u-1','ck1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160906', 'yyyy-mm-dd'),'f',10,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170625', 'yyyy-mm-dd'),'r',20,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170506', 'yyyy-mm-dd'),'r',15,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                              
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170306', 'yyyy-mm-dd'),'f',0,'u-10','p-1','s-1',5);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170306', 'yyyy-mm-dd'),'f',0,'u-10','p-3','s-1',20);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160810', 'yyyy-mm-dd'),'f',0,'u-10','p-4','s-1',5);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160910', 'yyyy-mm-dd'),'r',5,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20161110', 'yyyy-mm-dd'),'r',5,'u-10','p-1','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170210', 'yyyy-mm-dd'),'r',5,'u-10','p-3','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170404', 'yyyy-mm-dd'),'r',5,'u-10','p-4','s-1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',4,'u-1','p-6','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-1','p-7','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',1,'u-1','p-8','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',5,'u-2','p-6','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',6,'u-2','p-7','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915', 'yyyy-mm-dd'),'r',15,'u-2','p-8','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170713', 'yyyy-mm-dd'),'r',5,'u-1','p-3','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',5,'u-1','p-4','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',5,'u-2','p-5','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',8,'u-1','p-1','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',25,'u-1','p-2','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',5,'u-1','p-3','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',15,'u-2','p-4','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170712', 'yyyy-mm-dd'),'r',5,'u-2','p-3','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170711', 'yyyy-mm-dd'),'r',3,'u-2','p-1','s1',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170720', 'yyyy-mm-dd'),'r',25,'u-1','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170719', 'yyyy-mm-dd'),'r',15,'u-2','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170718', 'yyyy-mm-dd'),'r',9,'u-3','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'r',7,'u-4','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',5,'u-1','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-INSERT INTO PAYMENT_DETAILS values(payment_no_seq.nextval,'c',to_date('20160915', 'yyyy-mm-dd'),'r',1,'u-2','p11','s5',0);  -- s-4 /  r(예약)만 가능 / 예약/ 카드                                
-
-
-/* 예약 내역 - 결제내역에 있는 유저아이디와 매장아이디  제품아이디 참조해서 받아왔다는 가정하에 값 넣음.즉 원칙적으로는  결제내역 넣고 예약내역 넣는순서여야 함.  */
-/* 예약 내역에는 날짜 뿐만 아니라 시간도 들어가있어야 하지 않나..? */  /* 결제 내역에있는 r -에 해당되는 내용만 가져와야 함 */
-
-
-
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170604', 'yyyy-mm-dd'),4,to_date('20170604', 'yyyy-mm-dd'),to_date('20170605','yyyy-mm-dd'),'p-100','s-101','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170604', 'yyyy-mm-dd'),6,to_date('20170604', 'yyyy-mm-dd'),to_date('20170605','yyyy-mm-dd'),'p-101','s-101','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170703', 'yyyy-mm-dd'),4,to_date('20170704', 'yyyy-mm-dd'),to_date('20170712','yyyy-mm-dd'),'p-102','s-101','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170703', 'yyyy-mm-dd'),4,to_date('20170704', 'yyyy-mm-dd'),to_date('20170713','yyyy-mm-dd'),'p-103','s-102','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170705', 'yyyy-mm-dd'),7,to_date('20170706', 'yyyy-mm-dd'),to_date('20170714','yyyy-mm-dd'),'p-104','s-102','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170705', 'yyyy-mm-dd'),10,to_date('20170707', 'yyyy-mm-dd'),to_date('20170707','yyyy-mm-dd'),'p-105','s-103','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170710', 'yyyy-mm-dd'),4,to_date('20170712', 'yyyy-mm-dd'),to_date('20170713','yyyy-mm-dd'),'p-106','s-104','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170710', 'yyyy-mm-dd'),12,to_date('20170711', 'yyyy-mm-dd'),to_date('20170713','yyyy-mm-dd'),'p-107','s-104','u-1');
-
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170720', 'yyyy-mm-dd'),10,null,to_date('20170720','yyyy-mm-dd'),'p-108','s-101','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170719', 'yyyy-mm-dd'),20,null,to_date('20170721','yyyy-mm-dd'),'p-109','s-102','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170719', 'yyyy-mm-dd'),15,null,to_date('20170722','yyyy-mm-dd'),'p-110','s-102','u-1');
-INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20170720', 'yyyy-mm-dd'),4,null,to_date('20170725','yyyy-mm-dd'),'p-111','s-102','u-1');
-
-
-
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201507041108', 'yyyy-MM-dd HH:mi'),15,null,to_date('201507041108', 'yyyy-MM-dd HH:mi'),'p-1','s1','u-1');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201506042308', 'yyyy-MM-dd HH:mi'),6,null,to_date('201506042308', 'yyyy-MM-dd HH:mi'),'p-2','s1','u-1');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201605040908', 'yyyy-MM-dd HH:mi'),2,null,to_date('201605040908', 'yyyy-MM-dd HH:mi'),'p-7','s1','u-1');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201710040708', 'yyyy-MM-dd HH:mi'),7,null,to_date('201710040708', 'yyyy-MM-dd HH:mi'),'p-6','s1','u-1');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201804041308', 'yyyy-MM-dd HH24:mi'),25,null,to_date('201804041308', 'yyyy-MM-dd HH24:mi'),'p-5','s1','u-2');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('201205041508', 'yyyy-MM-dd HH24:mi'),5,null,to_date('201205041508', 'yyyy-MM-dd HH24:mi'),'p-6','s1','u-2');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20181004', 'yyyy-mm-dd'),9,null,to_date('20170712','yyyy-mm-dd'),'p-7','s1','u-2');
---INSERT INTO RESERVATION_DETAILS VALUES(reservation_no_seq.nextval,to_date('20110504', 'yyyy-mm-dd'),3,null,to_date('20170712','yyyy-mm-dd'),'p-8','s1','u-2');
-
-
-
-CREATE SEQUENCE reservation_no_seq;
-DROP SEQUENCE reservation_no_seq;
                                                      -- 2017-07-20 김형주 추가
 ----------------------------------------------------------------실 데이터-----------------------------------------------------------
 /* 유저 */
@@ -482,11 +287,11 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',10,'u-1','p-80','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',9,'u-1','p-80','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',11,'u-1','p-80','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',12);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',13);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',10);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',11);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-80','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',2,'u-1','p-80','s-100',12);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',4,'u-1','p-80','s-100',13);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',5,'u-1','p-80','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',7,'u-1','p-80','s-100',11);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',8,'u-1','p-80','s-100',10);
 
 /*돌체라떼 하락*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170710', 'yyyy-mm-dd'),'r',2,'u-1','p-81','s-100',0);
@@ -496,11 +301,11 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',13,'u-1','p-81','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',8,'u-1','p-81','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',11,'u-1','p-81','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',8);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',5);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-81','s-100',1);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',3,'u-1','p-81','s-100',8);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',4,'u-1','p-81','s-100',5);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-81','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',6,'u-1','p-81','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-81','s-100',1);
 
 /*마늘 바게트 하락*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',6,'u-1','p-82','s-100',0);
@@ -510,26 +315,26 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',11,'u-1','p-82','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',8,'u-1','p-82','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',6,'u-1','p-82','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',4);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',7);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',3);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-82','s-100',2);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170717', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',4);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',7);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',3);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-82','s-100',2);
 
 
 /*소보루 유지*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',15,'u-1','p-83','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170711', 'yyyy-mm-dd'),'r',13,'u-1','p-83','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170712', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',10);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170713', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',12);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170714', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',15);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170715', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',13);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170716', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',15);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',14);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',13);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',15);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',10);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-83','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170712', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170713', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',12);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170714', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',15);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170715', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',13);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170716', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',15);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',14);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',13);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',15);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',10);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-83','s-100',10);
 
 /*아메리카노상승*/
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',3,'u-1','p-84','s-100',0);
@@ -539,11 +344,11 @@ INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170713'
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170714', 'yyyy-mm-dd'),'r',10,'u-1','p-84','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170715', 'yyyy-mm-dd'),'r',20,'u-1','p-84','s-100',0);
 INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170716', 'yyyy-mm-dd'),'r',10,'u-1','p-84','s-100',0);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',14);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',20);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',30);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',35);
-INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',0,'u-1','p-84','s-100',36);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'c',to_date('20170717', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',14);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170718', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',20);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170719', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',30);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170720', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',35);
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170721', 'yyyy-mm-dd'),'f',1,'u-1','p-84','s-100',36);
 
 
 
@@ -553,35 +358,35 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '자바칩
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '초코크림 프라푸치노 + 헤이즐넛 시럽 1펌프 추가 + 휘핑크림 위에 초코 드리즐+ 자바칩 갈지 않은 것을 뿌려주면 끝~~ ',
                                                                          '고디바 프라푸치노', TO_DATE('2017-07-05', 'yyyy-mm-dd'),30,'/recipe_image/고디바_실사.jpg',30,'u-1','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '그린티 프라푸치노 + 샷추가 + 자바칩 반만 간 걸 추가 + 휘핑크림 위에 초코 드리즐+ 자바칩 나머지 통으로 얹어주면 되욧 ',
-                                                                         '슈렉 프라푸치노', TO_DATE('2017-07-07', 'yyyy-mm-dd'),40,'/recipe_image/슈렉_실사.jpg',40,'u-1','s-101');
+                                                                         '슈렉 프라푸치노', TO_DATE('2017-07-07', 'yyyy-mm-dd'),40,'/recipe_image/슈렉_실사.jpg',40,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '딸기 크림 프라푸치노 + 자바칩 갈아서 추가 + 휘핑크림 위에 초코 드리즐을 뿌려주면 돼지바를 먹는 기분이에요~',
-                                                                         '돼지바 프라푸치노', TO_DATE('2017-07-11', 'yyyy-mm-dd'),60,'/recipe_image/돼지바_실사.jpg',60,'u-1','s-101');
+                                                                         '돼지바 프라푸치노', TO_DATE('2017-07-11', 'yyyy-mm-dd'),60,'/recipe_image/돼지바_실사.jpg',60,'u-4','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '바닐라 크림파이 프라푸치노는 바나나 덕후들이 사랑하는 바로 그 메뉴다. 바닐라 크림파이 프라푸치노는 먼저 바닐라빈 프라푸치노를 주문한 다음, 바닐라 시럽 1 펌프와 헤이즐넛 시럽 1펌프를 넣고 바나나를 추가해 갈아달아고 하면 된다. 바닐라빈 프라푸치노가 없을 경우 바닐라크림 프라푸치노를 주문하면 된다. 하지만 바나나가 들어간 커스텀 메뉴는 아쉽게도 한국 스타벅스에서는 불가능 하다는 사실. 해외여행을 갈 기회가 생긴다면 영어로 주문법을 외워가서 도전해보는건 어떨까?',
-                                                                         '비어버터 프라푸치노', TO_DATE('2017-07-13', 'yyyy-mm-dd'),70,'/recipe_image/비어버터_실사.jpg',70,'u-1','s-101');
+                                                                         '비어버터 프라푸치노', TO_DATE('2017-07-13', 'yyyy-mm-dd'),70,'/recipe_image/비어버터_실사.jpg',70,'u-4','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '오레오 과자든, 오레오 아이스크림이든, 오레오라면 죽고 못하는 이들이 즐겨 찾는 메뉴가 바로 스타벅스의 오레오 프라푸치노다. 바닐라크림 프라푸치노에 자바칩을 2번 추가하고, 에스프레소 휘핑을 올리면, 오레오의 우유와 초코칩이 뒤섞인 달달한 그 맛을 시원한 음료로 즐길 수 있다.',
-                                                                         '쿠앤크프라푸치노', TO_DATE('2017-07-15', 'yyyy-mm-dd'),80,'/recipe_image/쿠앤크_실사.jpg',80,'u-1','s-101');
+                                                                         '쿠앤크프라푸치노', TO_DATE('2017-07-15', 'yyyy-mm-dd'),80,'/recipe_image/쿠앤크_실사.jpg',80,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '본래 스타벅스 메뉴에 돌체라떼가 있지만, 돌체라떼를 보다 더 맛있게 먹기 위한 커스텀 레시피가 인기다. 돌체라떼를 맛있게 먹으려면 일단 아이스로 주문한 다음, 일반 우유와 에스프레소휩을 추가하면 된다. 더 달게 먹고 싶다면 연유를 추가하는 것도 좋다. 이 음료는 배변활동을 활발하게 해준다고 해서 일명 관장라떼라고도 불린다.',
                                                                          '돌체라떼 커스텀', TO_DATE('2017-07-17', 'yyyy-mm-dd'),90,'/recipe_image/돌체라떼.PNG',90,'u-1','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '프라푸치노가 주를 이루는 인기 커스텀 메뉴 중 당당히 자리를 하고 있는 것이 더블샷이다. 두터운 매니아층을 갖고 있는 이 메뉴는 더블샷에 에스프레소 더블샷과 시럽을 얼음과 함께 넣어달라고 하면 된다. 시럽은 커피, 바닐라, 캐러멜, 헤이즐넛 중에 선택하면 된다. 시럽을 얼음과 함께 넣고 흔들어서 만드는데, 나올 땐 얼음은 빼로 음료만 작은 컵에 담겨 나온다.',
-                                                                         '페레로로쉐프라푸치노', TO_DATE('2017-07-17', 'yyyy-mm-dd'),100,'/recipe_image/페레로로쉐_실사.jpg',100,'u-1','s-101');
+                                                                         '페레로로쉐프라푸치노', TO_DATE('2017-07-17', 'yyyy-mm-dd'),100,'/recipe_image/페레로로쉐_실사.jpg',100,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '터키2장 + 햄1장 + 로스트비프 1장 + 치즈2장 빵은 허니오트 소스는 바베큐+스위트칠리를 넣으면 완성입니다~ 가격은 5300원 정도에요',
-                                                                         '서브웨이클럽', TO_DATE('2017-07-19', 'yyyy-mm-dd'),101,'/recipe_image/서브웨이클럽.jpg',101,'u-1','s-110');
+                                                                         '서브웨이클럽', TO_DATE('2017-07-19', 'yyyy-mm-dd'),101,'/recipe_image/서브웨이클럽.jpg',101,'u-5','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '계란 + 베이컨 + 치즈 빵은 플랫 브래드 소스는 렌치+스윗어니언을 넣으면 완성입니다',
-                                                                         '에그마요', TO_DATE('2017-07-16', 'yyyy-mm-dd'),120,'/recipe_image/에그.jpg',120,'u-1','s-110');
+                                                                         '에그마요', TO_DATE('2017-07-16', 'yyyy-mm-dd'),120,'/recipe_image/에그.jpg',120,'u-7','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '저의 비엘티 꿀 조합입니다 허니 오트에 야채는 다넣고 소스를 달달한 스위트 어니언과 홀스 레디 쉬를 넣었어요~ 이렇게 먹음 매콤하고 달달해요',
-                                                                         '비엘티', TO_DATE('2017-06-24', 'yyyy-mm-dd'),110,'/recipe_image/비엘티.jpg',110,'u-1','s-110');
+                                                                         '비엘티', TO_DATE('2017-06-24', 'yyyy-mm-dd'),110,'/recipe_image/비엘티.jpg',110,'u-9','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '서브웨이 멜티는 사우스 웻트랑 렌지드레싱으로 고소하고 매콤해요 저는 항상 야채를 다 넣어달라고 하고 많이 넣어 달라고 합니다 여러분도 해보세요',
-                                                                         '멜티', TO_DATE('2017-06-22', 'yyyy-mm-dd'),130,'/recipe_image/멜티.jpg',130,'u-1','s-110');
+                                                                         '멜티', TO_DATE('2017-06-22', 'yyyy-mm-dd'),130,'/recipe_image/멜티.jpg',130,'u-10','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '서브웨이 이탈리안 꿀조합은 플랫브래드 + 야채는 취향존중 + 마요네즈 + 스위트칠리 + 랜치드레싱을 넣으면 완성!',
-                                                                         '스파이시 이탈리안', TO_DATE('2017-06-22', 'yyyy-mm-dd'),140,'/recipe_image/스파이시.jpg',140,'u-1','s-110');
+                                                                         '스파이시 이탈리안', TO_DATE('2017-06-22', 'yyyy-mm-dd'),140,'/recipe_image/스파이시.jpg',140,'u-4','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '하하 시그니처 써브 베스트 조합 : 비엠티빵은 오레가노를 선택 핫칠리+할라피뇨추가! ,제노바 살라미, 페퍼로니햄, 에그마요가 듬뿍 올라감 정말 맛있음',
-                                                                         '하하 시그니처 써브', TO_DATE('2017-06-17', 'yyyy-mm-dd'),160,'/recipe_image/하하.jpg',160,'u-1','s-110');
+                                                                         '하하 시그니처 써브', TO_DATE('2017-06-17', 'yyyy-mm-dd'),160,'/recipe_image/하하.jpg',160,'u-5','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '돼지고기 맛이지만 소스에 따라 맛이 바뀜 사우스웨스트 소스를 뿌리면 멕시코 바비큐 먹는 기분! 바비큐 소스와 마요네즈를 섞어서 뿌려 먹으면 전통 바베큐 돼지고기 맛이 나요~ 한번 먹어봐요',
-                                                                         '폴드 포크 세트', TO_DATE('2017-06-15', 'yyyy-mm-dd'),180,'/recipe_image/폴드.jpg',180,'u-1','s-110');
+                                                                         '폴드 포크 세트', TO_DATE('2017-06-15', 'yyyy-mm-dd'),180,'/recipe_image/폴드.jpg',180,'u-7','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '핫칠리 + 마요네즈 + 렌치드레싱으로 소스 뿌려보세요 이게 젤 괜찮은듯 ',
-                                                                         '스파이시 이탈리안', TO_DATE('2017-06-13', 'yyyy-mm-dd'),190,'/recipe_image/스파이시2.jpg',190,'u-1','s-110');
+                                                                         '스파이시 이탈리안', TO_DATE('2017-06-13', 'yyyy-mm-dd'),190,'/recipe_image/스파이시2.jpg',190,'u-3','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '스위트어니언+바베큐+ 렌치드레싱 소스 뿌리면 단짠단짠을 맛볼수 있는 치킨데리야끼가 될거에요~ 시도해봐요',
-                                                                         '치킨데리야끼 이탈리안', TO_DATE('2017-06-11', 'yyyy-mm-dd'),200,'/recipe_image/치킨데리야끼.jpg',200,'u-1','s-110');
+                                                                         '치킨데리야끼 이탈리안', TO_DATE('2017-06-11', 'yyyy-mm-dd'),200,'/recipe_image/치킨데리야끼.jpg',200,'u-12','s-110');
 
 
 /* qna board 목록 */		

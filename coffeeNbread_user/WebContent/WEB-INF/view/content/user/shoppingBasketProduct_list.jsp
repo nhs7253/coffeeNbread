@@ -52,7 +52,9 @@ h2 {
 	font-family: 'title';
 	font-size: 60px
 }
-
+th, td {
+	text-align: center;
+}
 hr.animated-gradient {
    height: 3px;
    border: 3px inset #d2d0d1;
@@ -84,14 +86,13 @@ hr.animated-gradient {
 		<thead>
    
 			<tr >
-				<td>제품카테고리</td>
-				<td>제품사진</td>
-				<td>제품명</td>
-				<td>가격</td>
-				<td>개수</td>
-				<td>수정</td>
-				<td>삭제</td>
-
+				<th style="font-weight:bold; background-color:lightyellow">제품카테고리</td>
+				<th style="font-weight:bold; background-color:lightyellow">제품사진</td>
+				<th style="font-weight:bold; background-color:lightyellow">제품명</td>
+				<th style="font-weight:bold; background-color:lightyellow">가격</td>
+				<th style="font-weight:bold; background-color:lightyellow">개수</td>
+				<th style="font-weight:bold; background-color:lightyellow">수정</td>
+				<th style="font-weight:bold; background-color:lightyellow">삭제</td>
 			</tr>
 		</thead>
 		<tbody id="tbody">
@@ -110,7 +111,7 @@ hr.animated-gradient {
 					<td><input type="number" min="0" value="${list.productCount}" class="count"></td>
 					<td>
 						  <span style="display: none;">${list.product.productId }</span>
-						  <button type="button" class="updateBtn">
+						  <button type="button" class="updateBtn btn-info">
 						  	<i class="glyphicon glyphicon-pencil"></i>
 						  </button>
 					</td>
@@ -122,7 +123,7 @@ hr.animated-gradient {
 							<sec:csrfInput />
 							<%-- csrf 토큰 --%>
 						<input  type="hidden" name="productId" value="${list.product.productId }"/>
-						<button type="submit" class="submitBtn" onclick="button_event()">
+						<button type="submit" class="submitBtn btn-danger" onclick="button_event()">
 						<i class="glyphicon glyphicon-trash"></i>
 						
 						</button>
@@ -140,15 +141,15 @@ hr.animated-gradient {
   <br>
   
 	<div style="float:right">
-   총금액 <input type="text" value="${requestScope.totalPrice }" disabled>
+	<img src="${initParam.rootPath }/resource/css/piggy-bank.png">&nbsp;<input type="text" value=" 총 금액 : " disabled style="border:0; background-color:transparent; font-size:20px"> <input type="text" value="${requestScope.totalPrice }" disabled style="border:0; background-color:transparent; font-size:20px"></span>
     
     <hr>
     <br>
        
            <div style="float:right">
        <a href="${initParam.rootPath }/user/paymentProcessController.do">
-		<button type="submit" class="btn-custom">
-			<i class="glyphicon glyphicon-ok"></i>결제페이지로 이동
+		<button type="submit" class="btn-custom btn-link">
+			<i class="glyphicon glyphicon-ok"></i>&nbsp;결제페이지로 이동
 		</button>
 	   </a>   
  </div>

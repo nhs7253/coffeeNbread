@@ -18,6 +18,15 @@ td {
 form {
 	display: inline
 }
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h2 {
+	font-family: 'title';
+	font-size: 60px
+}
 </style>
 
 
@@ -55,10 +64,9 @@ form {
 	});
 </script>
 
-<h2>제품 목록</h2>
-
-<div class="col-sm-2"></div>
-<div class="col-sm-8">
+<div class="col-sm-11">
+<br><br>
+<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/list.png">&nbsp;제품 목록</h2>
 		
 <div style="float:right">
  <form
@@ -133,8 +141,7 @@ form {
 					<td align="center">
 						<input  type="hidden" name="productId" value="${product.productId }"/>
 						<input  type="hidden" name="storeId" value="${product.storeId }"/>
-						<button type="submit" class="btn"
-						>
+						<button type="submit" class="btn" style="background-color:#ff4500">
 							<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;장바구니
 						</button>
 
@@ -152,7 +159,7 @@ form {
   
 
 </div>
-<div class="col-sm-2"></div>
+<div class="col-sm-1"></div>
 
 
 

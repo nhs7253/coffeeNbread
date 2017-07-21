@@ -1,6 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<style type="text/css">
 
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
+
+h1 {
+	font-family: 'title';
+	font-size: 60px
+}
+</style>
 
 
 <div class="col-sm-2"></div>
