@@ -19,7 +19,7 @@ td {
 
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h4 {
@@ -29,7 +29,7 @@ h4 {
 
 @font-face {
 	font-family: 'checkbox';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/BMJUA_ttf.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/BMJUA_ttf.woff) format('woff');
 }
 
 .menu {
@@ -1140,7 +1140,7 @@ $(document).ready(function(){
 
 </script>
 
-<h4 style="font-weight:bold"><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/graph.png">&nbsp;&nbsp;판매량</h4>
+<h4 style="font-weight:bold"><img src="${initParam.rootPath }/resource/css/graph.png">&nbsp;&nbsp;판매량</h4>
 
 <input type="checkbox" name="choice" id="total" value="total">&nbsp;<input class="menu" type="text" value="오늘 전체" disabled style="border:0; background-color:transparent;"><br id=br0>
 <input type="checkbox" name="choice" id="date" value="date">&nbsp;<input class="menu" type="text" value="날짜별" disabled style="border:0; background-color:transparent;"><br id=br1>
@@ -1171,7 +1171,7 @@ $(document).ready(function(){
 
 <br><br>
 
-<h4 style="font-weight:bold"><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/currency-value.png">&nbsp;&nbsp;상승세 / 하락세</h4>
+<h4 style="font-weight:bold"><img src="${initParam.rootPath }/resource/css/currency-value.png">&nbsp;&nbsp;상승세 / 하락세</h4>
 
 <table>
 	<tbody>
@@ -1224,7 +1224,7 @@ $(document).ready(function(){
 
 <br><br>
 
-<h4 style="font-weight:bold"><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/analytics.png">&nbsp;&nbsp;예상 생산량</h4>
+<h4 style="font-weight:bold"><img src="${initParam.rootPath }/resource/css/analytics.png">&nbsp;&nbsp;예상 생산량</h4>
 
 <table>
 	<tbody>

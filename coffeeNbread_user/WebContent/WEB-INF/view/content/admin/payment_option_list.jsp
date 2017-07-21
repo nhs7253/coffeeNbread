@@ -18,7 +18,7 @@ td {
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
@@ -32,7 +32,7 @@ h2 {
 	
 		<div class="col-sm-11">
 		<br><br>
-		<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/bank-check.png">&nbsp;지원 결제 수단</h2>
+		<h2><img src="${initParam.rootPath }/resource/css/bank-check.png">&nbsp;지원 결제 수단</h2>
 	<br>
 	<table class="table">
 		<thead>

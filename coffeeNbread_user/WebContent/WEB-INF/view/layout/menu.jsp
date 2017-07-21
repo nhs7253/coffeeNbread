@@ -36,7 +36,7 @@
 <style type="text/css">
 @font-face {
 	font-family: 'menu';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a동네목욕탕.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a동네목욕탕.woff) format('woff');
 }
 
 li, a {

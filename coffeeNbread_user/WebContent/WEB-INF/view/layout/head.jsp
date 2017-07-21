@@ -10,7 +10,7 @@
 <style type="text/css">
 @font-face {
 	font-family: 'menu';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a동네목욕탕.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a동네목욕탕.woff) format('woff');
 }
 
 li {
@@ -18,7 +18,7 @@ li {
 }
 @font-face {
 	font-family: 'headTitle';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/MASQUE.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/MASQUE.woff) format('woff');
 }
 .headTitle{
 	font-family: 'headTitle';
@@ -51,9 +51,9 @@ li {
 
 <body>
    <header class="cd-main-header">
-	<img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/Coffee-Cup-icon.png" width="40" height="50">
-	<input class="headTitle" size=14 type="text" value=" Coffee&Bread" disabled style="border:0; background-color:transparent; font-size:30px; color:#ffffff">
-	<img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/bread.png" width="30" height="40">
+	<img src="${initParam.rootPath }/resource/css/Coffee-Cup-icon.png" width="40" height="50">
+	<input class="headTitle" size=14 type="text" value=" Coffee&Bread" disabled style="border:0; background-color:transparent; font-size:20px; color:#ffffff">
+	<img src="${initParam.rootPath }/resource/css/bread.png" width="30" height="40">
       <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 		
       <nav class="cd-nav">

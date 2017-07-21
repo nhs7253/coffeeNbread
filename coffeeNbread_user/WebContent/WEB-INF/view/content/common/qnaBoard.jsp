@@ -25,7 +25,7 @@ td {
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
@@ -36,7 +36,7 @@ h2 {
 	
 	<div class="col-sm-11">
 		<br><br>
-		<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/question.png">&nbsp;${sessionScope.storeName }Q&A 게시판</h2>
+		<h2><img src="${initParam.rootPath }/resource/css/question.png">&nbsp;${sessionScope.storeName }Q&A 게시판</h2>
 		
 	<div style="float:right">
 			<form action="${initParam.rootPath }/common/findQnaBoardContentsBySelectToKeywordController.do"

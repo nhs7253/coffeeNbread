@@ -17,7 +17,7 @@ th,td{
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
@@ -32,7 +32,7 @@ h2 {
 
 <div class="col-sm-11">
 	<br><br>
-	<h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/management.png">&nbsp;매장 관리</h2>
+	<h2><img src="${initParam.rootPath }/resource/css/management.png">&nbsp;매장 관리</h2>
 			<form action="${initParam.rootPath }/admin/userManagementListController.do"
 				method="post" class="form-inline quick-search-form" role="form">
 				<div style="float:right">

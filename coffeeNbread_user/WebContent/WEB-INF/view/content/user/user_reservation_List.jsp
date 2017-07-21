@@ -27,7 +27,7 @@ td {
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 
 h2 {
@@ -39,7 +39,7 @@ h2 {
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
 <br><br>
-	<center><h2><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/reserved.png">&nbsp;${requestScope.userName }님의 예약 현황</h2></center>
+	<center><h2><img src="${initParam.rootPath }/resource/css/reserved.png">&nbsp;${requestScope.userName }님의 예약 현황</h2></center>
   <br><br><br>
 	
 	<table class="table table-hover">
