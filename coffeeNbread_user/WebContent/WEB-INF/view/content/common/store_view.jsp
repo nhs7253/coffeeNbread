@@ -15,7 +15,7 @@ td{
 }
 @font-face {
 	font-family: 'title';
-	src: local(※), url(http://127.0.0.1:8088/coffeeNbread_user/resource/font/a시나리오.woff) format('woff');
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
 }
 h1 {
 	font-family: 'title';
@@ -36,7 +36,7 @@ textarea {
 	<div class="col-sm-12">
 	<div class="col-sm-4">
 	<br><br>
-	<h1><img src="http://127.0.0.1:8088/coffeeNbread_user/resource/css/information.png">&nbsp;매장 정보</h1>
+	<h1><img src="${initParam.rootPath }/resource/css/information.png">&nbsp;매장 정보</h1>
 	<br>
 		<c:if
 			test="${!empty requestScope.store.storePictureList[0].storePicture }">
