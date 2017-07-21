@@ -10,7 +10,10 @@ table {
    width: 700px;
    border-collapse: collapse;
 }
+form{
+display:inline
 
+}
 td {
    padding: 5px; /* //td 간 간격 */
 }
@@ -25,14 +28,17 @@ h2 {
 }
 </style>
 	
-<div class="col-sm-11">
+
 <br><br>
 <h2><img src="${initParam.rootPath }/resource/css/megaphone.png">&nbsp;공지사항</h2>
 
-	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
-			<div class="col-sm-1"></div>
+<div class="col-sm-1"></div>
+
 			<div class="col-sm-11">
-					<div style="float:right">
+		<div style="float:right">
+	<form action="${initParam.rootPath }/common/findNoticeBoardContentsPagingListController.do" method="post" class="form-inline quick-search-form" role="form">
+			
+					
 						<div class="form-group">
 							<select name="select" class="form-control">
 								<option value="title"
@@ -48,7 +54,11 @@ h2 {
 						</button>
 						<sec:csrfInput />
 						
-						<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
+						
+					
+			
+	</form>
+		<!-- mvc 로 등록한 뷰패턴은 get 방식으로만 이동이 가능함 -->
 						<sec:authorize access="hasRole('ROLE_CNB_ADMIN')">
 							<form action="${initParam.rootPath }/admin/notice_board_register_form.do">
 								<sec:csrfInput/>
@@ -57,9 +67,10 @@ h2 {
 								</button>
 							</form>
 						</sec:authorize>
+
 					</div>		
 			</div>
-	</form>
+	
 		
 	
 	<br>
