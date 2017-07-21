@@ -359,10 +359,10 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '초코크
                                                                          '고디바 프라푸치노', TO_DATE('2017-07-05', 'yyyy-mm-dd'),30,'/recipe_image/고디바_실사.jpg',30,'u-1','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '그린티 프라푸치노 + 샷추가 + 자바칩 반만 간 걸 추가 + 휘핑크림 위에 초코 드리즐+ 자바칩 나머지 통으로 얹어주면 되욧 ',
                                                                          '슈렉 프라푸치노', TO_DATE('2017-07-07', 'yyyy-mm-dd'),40,'/recipe_image/슈렉_실사.jpg',40,'u-3','s-101');
-INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '딸기 크림 프라푸치노 + 자바칩 갈아서 추가 + 휘핑크림 위에 초코 드리즐을 뿌려주면 돼지바를 먹는 기분이에요~',
-                                                                         '돼지바 프라푸치노', TO_DATE('2017-07-11', 'yyyy-mm-dd'),60,'/recipe_image/돼지바_실사.jpg',60,'u-4','s-101');
-INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '바닐라 크림파이 프라푸치노는 바나나 덕후들이 사랑하는 바로 그 메뉴다. 바닐라 크림파이 프라푸치노는 먼저 바닐라빈 프라푸치노를 주문한 다음, 바닐라 시럽 1 펌프와 헤이즐넛 시럽 1펌프를 넣고 바나나를 추가해 갈아달아고 하면 된다. 바닐라빈 프라푸치노가 없을 경우 바닐라크림 프라푸치노를 주문하면 된다. 하지만 바나나가 들어간 커스텀 메뉴는 아쉽게도 한국 스타벅스에서는 불가능 하다는 사실. 해외여행을 갈 기회가 생긴다면 영어로 주문법을 외워가서 도전해보는건 어떨까?',
-                                                                         '비어버터 프라푸치노', TO_DATE('2017-07-13', 'yyyy-mm-dd'),70,'/recipe_image/비어버터_실사.jpg',70,'u-4','s-101');
+
+                                                                         
+                                                                         
+
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '오레오 과자든, 오레오 아이스크림이든, 오레오라면 죽고 못하는 이들이 즐겨 찾는 메뉴가 바로 스타벅스의 오레오 프라푸치노다. 바닐라크림 프라푸치노에 자바칩을 2번 추가하고, 에스프레소 휘핑을 올리면, 오레오의 우유와 초코칩이 뒤섞인 달달한 그 맛을 시원한 음료로 즐길 수 있다.',
                                                                          '쿠앤크프라푸치노', TO_DATE('2017-07-15', 'yyyy-mm-dd'),80,'/recipe_image/쿠앤크_실사.jpg',80,'u-3','s-101');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '본래 스타벅스 메뉴에 돌체라떼가 있지만, 돌체라떼를 보다 더 맛있게 먹기 위한 커스텀 레시피가 인기다. 돌체라떼를 맛있게 먹으려면 일단 아이스로 주문한 다음, 일반 우유와 에스프레소휩을 추가하면 된다. 더 달게 먹고 싶다면 연유를 추가하는 것도 좋다. 이 음료는 배변활동을 활발하게 해준다고 해서 일명 관장라떼라고도 불린다.',
@@ -377,8 +377,7 @@ INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '저의 �
                                                                          '비엘티', TO_DATE('2017-06-24', 'yyyy-mm-dd'),110,'/recipe_image/비엘티.jpg',110,'u-9','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '서브웨이 멜티는 사우스 웻트랑 렌지드레싱으로 고소하고 매콤해요 저는 항상 야채를 다 넣어달라고 하고 많이 넣어 달라고 합니다 여러분도 해보세요',
                                                                          '멜티', TO_DATE('2017-06-22', 'yyyy-mm-dd'),130,'/recipe_image/멜티.jpg',130,'u-10','s-110');
-INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '서브웨이 이탈리안 꿀조합은 플랫브래드 + 야채는 취향존중 + 마요네즈 + 스위트칠리 + 랜치드레싱을 넣으면 완성!',
-                                                                         '스파이시 이탈리안', TO_DATE('2017-06-22', 'yyyy-mm-dd'),140,'/recipe_image/스파이시.jpg',140,'u-4','s-110');
+
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '하하 시그니처 써브 베스트 조합 : 비엠티빵은 오레가노를 선택 핫칠리+할라피뇨추가! ,제노바 살라미, 페퍼로니햄, 에그마요가 듬뿍 올라감 정말 맛있음',
                                                                          '하하 시그니처 써브', TO_DATE('2017-06-17', 'yyyy-mm-dd'),160,'/recipe_image/하하.jpg',160,'u-5','s-110');
 INSERT INTO recipe_board_contents VALUES(recipe_board_no_seq.nextval, '돼지고기 맛이지만 소스에 따라 맛이 바뀜 사우스웨스트 소스를 뿌리면 멕시코 바비큐 먹는 기분! 바비큐 소스와 마요네즈를 섞어서 뿌려 먹으면 전통 바베큐 돼지고기 맛이 나요~ 한번 먹어봐요',
@@ -415,3 +414,6 @@ INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, 's-100','백진�
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, 's-102','장규현', '서버점검시간', '서버접속이 안되는데  언제쯤 점검 끝나나요?', TO_DATE('2017-07-06', 'yyyy-mm-dd'),150,'N');
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, 's-102','조새롬', '포인트사용', '포인트사용을 언제까지 쓸수있가요?', TO_DATE('2017-07-06', 'yyyy-mm-dd'),150,'Y');
 INSERT INTO qna_board_contents VALUES(qna_board_no_seq.nextval, 's-102','이진우', '폐점시간', '빵이맛있는집 폐점시간이 언제인가요?', TO_DATE('2017-07-06', 'yyyy-mm-dd'),150,'Y');
+
+
+INSERT INTO PAYMENT_DETAILS VALUES(payment_no_seq.nextval,'p',to_date('20170710', 'yyyy-mm-dd'),'r',1,'u-14','p-84','s-100',0);
