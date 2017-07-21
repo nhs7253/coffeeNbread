@@ -2,34 +2,50 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
+<style type="text/css">
+@font-face {
+	font-family: 'title';
+	src: local(※), url(${initParam.rootPath }/resource/font/a시나리오.woff) format('woff');
+}
 
+h1 {
+	font-family: 'title';
+	font-size: 60px
+}
+</style>
 
-<br><br>
-<h1>지원 결제 수단 등록</h1>
-<hr>
+	
+		<div class="col-sm-11">
+		<br><br>
+<h1><img src="${initParam.rootPath }/resource/css/note.png">&nbsp;지원 결제 수단 등록</h1>
+
 <br><br><br>
 <div class="col-sm-1"></div>
 	
 		<div class="col-sm-10"><div class="col-sm-2"></div>
 	<div class="col-sm-8">
-<form action="${initParam.rootPath }/admin/addPaymentOptionListController.do"
-	method="post">
+	<center>
+	<form action="${initParam.rootPath }/admin/addPaymentOptionListController.do" method="post">
 	<sec:csrfInput />
 	
 	<table>	
-	<tr  class="form-group">
-	<th>아이디 </th>
+	<tr class="form-group">
+	<th>코드&nbsp;&nbsp;</th>
 	<td><input type="text" name="paymentId" required class="form-control"></td>
 	</tr>
-	 <tr  class="form-group">
-	 <th>방법</th>
+	 <tr class="form-group">
+	 <th>방법&nbsp;&nbsp;</th>
 	  <td><input type="text" name="paymentMethod" required class="form-control"></td>
 	  </tr>
 	</table>
-	<button type="submit" class="btn btn-default btn-circle">
-		<i class="glyphicon glyphicon-ok"></i> 등록
+	<br>
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+	<button type="submit" class="btn btn-default btn-circle" style="background-color:#01a207">
+		<i class="glyphicon glyphicon-ok"></i>등록
 	</button>
-</form></div><div class="col-sm-2"></div>
+	</div>
+</form></center></div><div class="col-sm-2"></div>
 
 </div>
 

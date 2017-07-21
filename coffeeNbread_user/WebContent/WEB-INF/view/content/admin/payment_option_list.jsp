@@ -37,7 +37,7 @@ h2 {
 	<table class="table">
 		<thead>
 			<tr >
-				<th style="font-weight:bold; background-color:lightyellow">아이디</th>
+				<th style="font-weight:bold; background-color:lightyellow">코드</th>
 				<th style="font-weight:bold; background-color:lightyellow">방법</th>
 				<th style="font-weight:bold; background-color:lightyellow">삭제</th>
 			</tr>

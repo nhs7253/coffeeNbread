@@ -146,7 +146,7 @@ h2 {
 
 	<table class="table">
 		<thead>
-			<tr >
+			<tr>
 				<th style="font-weight:bold; background-color:lightyellow">글번호</th>
 				<th style="font-weight:bold; background-color:lightyellow">사진</th>
 				<th style="font-weight:bold; background-color:lightyellow">제목</th>
