@@ -36,9 +36,9 @@ form {
 			<br>
 			<br>
 			<br> 제목 : <input type="text"
-				value="${requestScope.content.recipeBoardTitle }" disabled style="background-color:#FFFFFF">
+				value="${requestScope.content.recipeBoardTitle }" disabled style="background-color:#FFFFFF; border:0">
 			<br> <br>
-			<textarea rows="10" cols="54" disabled style="background-color:#FFFFFF">${requestScope.content.recipeBoardContent }</textarea>
+			<textarea rows="10" cols="54" disabled style="background-color:#FFFFFF; border:0">${requestScope.content.recipeBoardContent }</textarea>
 
 			<p />
 		</div><br><br><br><br><br><br><br><br><br><br><br>
@@ -79,7 +79,7 @@ form {
 		<table class="table table-hover">
 		
 			<tbody>
-
+			<br>댓글<br>
 				<c:forEach items="${requestScope.list }" var="list">
 					<tr>
 						<td>${list.replyNo}</td>
@@ -194,6 +194,7 @@ form {
 	</table>
 
 	<p>
+	<br><br>
 		<%--######################################################
 >>>>>>> branch 'master' of https://github.com/nhs7253/coffeeNbread.git
 															페이징 처리

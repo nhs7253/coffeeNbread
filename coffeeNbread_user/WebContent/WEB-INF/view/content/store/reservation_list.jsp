@@ -61,7 +61,7 @@ $(document).ready(function(){
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
 <br><br>
-<h2 id="h2">예약 현황 조회</h2> 
+<h2 id="h2"><img src="${initParam.rootPath }/resource/css/list.png">&nbsp;예약 현황 조회</h2> 
 
 <br>
 
@@ -70,7 +70,7 @@ $(document).ready(function(){
 <table id="table">
 	<tbody>
 		<tr>
-			<td align="center" style="font-weight:bold; background-color:LemonChiffon"><button type="submit" class="btn" style="float:right"><i class="glyphicon glyphicon-trash"></i></button></td>
+			<td align="center" style="font-weight:bold; background-color:LemonChiffon"><button type="submit" class="btn" style="float:right; background-color:#ff0000"><i class="glyphicon glyphicon-trash"></i></button></td>
 			<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약 번호</td>		
 			<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약자</td>		
 			<td align="center" style="font-weight:bold; background-color:LemonChiffon">예약 시간</td>
